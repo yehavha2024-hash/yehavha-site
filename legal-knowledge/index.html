@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="법리·판례 연구 — 변호사시험·법무사·변리사·LEET 수준의 실정법, 판례, 학설, 사례분석과 법적 추론을 체계화하는 전문 법률지식 플랫폼" />
+  <meta name="description" content="법리·판례 연구 — 변호사시험·법무사·변리사·LEET 수준의 실정법, 판례, 학설, AI·디지털 법제, 사례분석과 법적 추론을 체계화하는 전문 법률지식 플랫폼" />
   <title>법리·판례 연구 | Advanced Legal Studies</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,7 @@
       <a class="back-link" href="https://yehavha-nexus.pages.dev/" aria-label="예하바 넥서스로 돌아가기">← YEHAVHA NEXUS</a>
       <div class="eyebrow">ADVANCED LEGAL STUDIES</div>
       <h1>법리·판례 연구</h1>
-      <p class="hero-copy">일반 생활법률이나 초보자용 문제풀이가 아니라 변호사시험·법무사·변리사 등 전문 법률영역과 LEET식 법적 추론·논증 수준을 기준으로 실정법과 판례를 체계화합니다.</p>
+      <p class="hero-copy">일반 생활법률이나 초보자용 문제풀이가 아니라 변호사시험·법무사·변리사 등 전문 법률영역과 LEET식 법적 추론·논증 수준을 기준으로 실정법·판례·학설과 AI·디지털 전환 법제를 체계화합니다.</p>
       <div class="hero-meta">
         <span>운영: 주제 단위 누적형</span>
         <span id="contentCount">연구 항목 0</span>
@@ -53,34 +53,38 @@
         <article><strong>15 관련 시험</strong><span>변호사시험·법무사·변리사·LEET 등</span></article><article><strong>16 기준일·검토일</strong><span>법령·판례 기준과 최종 검토일</span></article>
       </div>
       <p class="standard-note">시험 태그는 학습 관련성을 표시하기 위한 것이며 실제 출제과목·범위는 해당 연도 시행기관 공고가 우선합니다.</p>
-      <p class="completion-policy"><strong>현재 운영 우선순위:</strong> 신규 카드 확대보다 기존 49개 연구노트의 16개 표준형 완성과 판례 원문 검증을 우선합니다. 판례형은 공식 판결 원문을 사실관계·판단·논증까지 대조한 뒤에만 완성 처리합니다.</p>
+      <p class="completion-policy"><strong>운영 품질기준:</strong> 기존 49개 연구노트는 그대로 유지하면서 계속 정교화하고, AI·디지털 전환에서 반드시 숙지할 핵심 법령은 동일한 16개 표준형을 내부 품질기준으로 적용해 확장합니다. 개별 연구노트에는 충족 체크리스트를 노출하지 않고 부족한 항목을 직접 보강합니다. 판례형은 공식 판결 원문을 사실관계·판단·논증까지 대조한 경우에만 원문 검증 완료로 처리합니다.</p>
     </section>
 
     <section class="controls" aria-label="검색 및 필터">
       <div class="control-stack">
-        <label class="search-box"><span>통합 검색</span><input id="searchInput" type="search" placeholder="법리, 판례, 조문, 학설, 시험, 키워드 검색" autocomplete="off" /></label>
-        <div class="filter-row"><span class="filter-label">연구축</span><div class="filters" id="areaFilters" aria-label="분야 필터"></div></div>
+        <label class="search-box"><span>통합 검색</span><input id="searchInput" type="search" placeholder="법리, 판례, 조문, 학설, AI 법제, 시험, 키워드 검색" autocomplete="off" /></label>
+        <div class="filter-row"><span class="filter-label">법체계</span><div class="filters" id="areaFilters" aria-label="법체계 필터"></div></div>
         <div class="filter-row"><span class="filter-label">시험</span><div class="filters" id="examFilters" aria-label="시험 필터"></div></div>
         <div class="filter-row"><span class="filter-label">세부분야</span><select id="subfieldSelect" class="subfield-select" aria-label="세부분야 선택"></select></div>
       </div>
     </section>
 
-    <section class="stats" id="stats" aria-label="분야별 연구 현황"></section>
+    <section class="stats" id="stats" aria-label="법체계별 연구 현황"></section>
 
     <section class="content-section" aria-labelledby="content-title">
-      <div class="section-heading"><div><div class="section-kicker">KNOWLEDGE BASE</div><h2 id="content-title">전문 법률지식</h2></div><p>각 항목은 독립적인 연구 단위입니다. 개념·조문·판례의 암기보다 사실관계, 법원의 논증, 반대논리와 사례변형까지 연결해 하나의 주제를 완결적으로 이해하도록 구성합니다.</p></div>
+      <div class="section-heading"><div><div class="section-kicker">KNOWLEDGE BASE</div><h2 id="content-title">전문 법률지식</h2></div><p>각 항목은 독립적인 연구 단위입니다. 개념·조문·판례의 암기보다 사실관계, 법원의 논증, 학설의 대립, 반대논리와 고난도 사례변형까지 연결해 하나의 주제를 완결적으로 이해하도록 구성합니다.</p></div>
       <div id="cards" class="cards"></div><div id="emptyState" class="empty" hidden>조건에 맞는 연구 항목이 없습니다.</div>
     </section>
 
     <section class="roadmap" aria-labelledby="roadmap-title">
-      <div class="section-heading"><div><div class="section-kicker">RESEARCH AXES</div><h2 id="roadmap-title">확장 연구축</h2></div><p>시험별 문제은행이 아니라 법 분야 중심으로 구축하며, 시험은 각 콘텐츠의 관련 태그로 연결합니다.</p></div>
+      <div class="section-heading"><div><div class="section-kicker">RESEARCH AXES</div><h2 id="roadmap-title">법체계별 확장 연구축</h2></div><p>시험별 문제은행이 아니라 법체계와 규율대상 중심으로 구성하고, 시험은 각 콘텐츠의 관련 태그로 연결합니다. AI 법제는 기존 민사·공법·지식재산과 분리되지 않도록 각 법영역의 책임·절차·산업규제와 함께 교차 분석합니다.</p></div>
       <div class="roadmap-grid six">
-        <article><strong>민사법</strong><span>민법 총칙·물권·채권·상법·민사소송·민사집행/보전</span></article>
-        <article><strong>공법</strong><span>헌법·행정법·행정쟁송·국가책임</span></article>
-        <article><strong>형사법</strong><span>형법 총론·각론·형사소송·증거법</span></article>
-        <article><strong>지식재산법</strong><span>특허·상표·디자인·저작권·부정경쟁</span></article>
-        <article><strong>조세·전문법</strong><span>세법·조세쟁송·부동산등기·상업등기·공탁 등</span></article>
-        <article><strong>법적 추론</strong><span>전제·조건·규칙/예외·해석·포섭·논증·반례·요건사실·증명책임</span></article>
+        <article><strong>헌법·공법</strong><span>헌법 기본권·AI기본법·행정법·자동적 처분·행정쟁송·국가책임</span></article>
+        <article><strong>민사·상사·책임법</strong><span>민법·상법·민사소송·제조물책임·AI 과실·인과관계·다수주체 책임</span></article>
+        <article><strong>형사법</strong><span>형법 총론·각론·형사소송·증거법과 디지털·자동화 환경의 책임문제</span></article>
+        <article><strong>데이터·플랫폼·소비자법</strong><span>개인정보·신용정보·위치정보·데이터산업·전자상거래·표시광고·공정거래</span></article>
+        <article><strong>모빌리티·로봇·항공법</strong><span>자율주행차·실외이동로봇·드론·UAM·Physical AI·산업안전</span></article>
+        <article><strong>보건의료법</strong><span>디지털의료제품·의료기기·AI 보조진료·진료기록·의료과실</span></article>
+        <article><strong>지식재산법</strong><span>특허·상표·디자인·저작권·부정경쟁·AI 학습·AI 보조발명</span></article>
+        <article><strong>AI 산업·융합법</strong><span>소프트웨어 진흥·정보통신산업·ICT 규제샌드박스·신기술 실증</span></article>
+        <article><strong>조세·전문법</strong><span>세법·조세쟁송·부동산등기·상업등기·공탁 등 전문 실무법</span></article>
+        <article><strong>법적 추론</strong><span>전제·조건·규칙/예외·법해석·포섭·논증·반례·요건사실·증명책임</span></article>
       </div>
     </section>
   </main>
@@ -96,6 +100,12 @@
   <script src="data-reasoning.js"></script>
   <script src="data-reasoning-advanced.js"></script>
   <script src="data-special.js"></script>
+
+  <script src="data-ai-foundation.js"></script>
+  <script src="data-ai-data-consumer.js"></script>
+  <script src="data-ai-mobility.js"></script>
+  <script src="data-ai-industry-medical-ip.js"></script>
+
   <script src="data-verification-cases.js"></script>
   <script src="data-verification-cases-02.js"></script>
   <script src="data-verification-cases-03.js"></script>
