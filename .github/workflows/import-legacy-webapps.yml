@@ -1,0 +1,159 @@
+name: Import legacy webapps into GitHub
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-legacy-webapps.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: legacy-webapp-import
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Import current Cloudflare Pages sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf three-minute-break toeic-human-100
+          mkdir -p three-minute-break/{icons,images} toeic-human-100/{icons,images}
+
+          get() {
+            local base="$1" src="$2" dest="$3"
+            curl --fail --location --retry 3 --silent --show-error "${base}${src}" -o "$dest"
+          }
+
+          THREE="https://3min-5so.pages.dev/"
+          get "$THREE" "" three-minute-break/index.html
+          get "$THREE" "style.css" three-minute-break/style.css
+          get "$THREE" "app.js" three-minute-break/app.js
+          get "$THREE" "manifest.webmanifest" three-minute-break/manifest.webmanifest
+          get "$THREE" "sw.js" three-minute-break/sw.js
+          get "$THREE" "icons/icon-192.png" three-minute-break/icons/icon-192.png
+          get "$THREE" "icons/icon-512.png" three-minute-break/icons/icon-512.png
+          get "$THREE" "images/bg-quote.webp" three-minute-break/images/bg-quote.webp
+          get "$THREE" "images/bg-english.webp" three-minute-break/images/bg-english.webp
+          get "$THREE" "images/bg-bible.webp" three-minute-break/images/bg-bible.webp
+          get "$THREE" "images/bg-quiz.webp" three-minute-break/images/bg-quiz.webp
+
+          TOEIC="https://toeicman.pages.dev/"
+          get "$TOEIC" "" toeic-human-100/index.html
+          get "$TOEIC" "style.css" toeic-human-100/style.css
+          get "$TOEIC" "app.js" toeic-human-100/app.js
+          get "$TOEIC" "content.js" toeic-human-100/content.js
+          get "$TOEIC" "manifest.webmanifest" toeic-human-100/manifest.webmanifest
+          get "$TOEIC" "sw.js" toeic-human-100/sw.js
+          get "$TOEIC" "icons/icon-192.png" toeic-human-100/icons/icon-192.png
+          get "$TOEIC" "icons/icon-512.png" toeic-human-100/icons/icon-512.png
+          get "$TOEIC" "images/toeic-bg.webp" toeic-human-100/images/toeic-bg.webp
+          curl --fail --location --silent "${TOEIC}content.json" -o toeic-human-100/content.json || true
+
+      - name: Apply YEHAVHA common navigation and footer
+        shell: python
+        run: |
+          from pathlib import Path
+          import json
+
+          nexus = 'https://yehavha-nexus-hub.pages.dev/'
+          mail = 'kimbrighth@gmail.com'
+          copyright_text = 'Copyright © 이명훈 2026. All rights reserved.'
+
+          def inject_three_minute():
+              p = Path('three-minute-break/index.html')
+              s = p.read_text(encoding='utf-8')
+              if 'class="nexus-link"' not in s:
+                  s = s.replace('<main class="app-shell">', f'<main class="app-shell">\n    <a class="nexus-link" href="{nexus}" aria-label="예하바 넥서스로 돌아가기">← YEHAVHA NEXUS</a>', 1)
+              old = '<footer>\n      <p>성경 문장은 특정 번역본의 전문 인용이 아니라 핵심 의미를 요약한 예시입니다.</p>\n    </footer>'
+              new = f'<footer class="site-footer">\n      <p>성경 문장은 특정 번역본의 전문 인용이 아니라 핵심 의미를 요약한 예시입니다.</p>\n      <div class="footer-meta"><p>{copyright_text}</p><p>문의 <a href="mailto:{mail}">{mail}</a></p></div>\n    </footer>'
+              s = s.replace(old, new)
+              p.write_text(s, encoding='utf-8')
+
+              css = Path('three-minute-break/style.css')
+              c = css.read_text(encoding='utf-8')
+              if '.nexus-link {' not in c:
+                  c += '\n.nexus-link{display:inline-block;margin:2px 2px 14px;color:rgba(255,255,255,.94);font-size:.78rem;font-weight:800;letter-spacing:.04em;text-decoration:none;text-shadow:0 1px 10px rgba(0,0,0,.25)}.site-footer>.footer-meta{margin-top:12px;padding-top:11px;border-top:1px solid rgba(49,67,62,.12)}.footer-meta p{margin:3px 0;line-height:1.55}.footer-meta a{color:#315f55;font-weight:750;text-decoration:none}\n'
+              css.write_text(c, encoding='utf-8')
+
+              sw = Path('three-minute-break/sw.js')
+              sw.write_text(sw.read_text(encoding='utf-8').replace('three-minute-break-v4-backgrounds','three-minute-break-v5-github'), encoding='utf-8')
+
+              Path('three-minute-break/README.md').write_text('''# 3분 쉼표\n\nGitHub 관리형 원본입니다. 명언 50개, 생활영어 50개, 성경 핵심 의미 50개, 미니퀴즈 50개를 한국시간 기준으로 순환합니다.\n\n## 운영\nCloudflare Pages에서 `yehavha2024-hash/yehavha-site`의 `main` 브랜치를 연결하고 Root directory를 `three-minute-break`로 지정합니다. Framework preset은 `None`, Build command는 `exit 0`, Build output directory는 `.`을 사용합니다. GitHub 커밋 후 자동 배포됩니다.\n\nCopyright © 이명훈 2026. All rights reserved.\n\n문의: kimbrighth@gmail.com\n''', encoding='utf-8')
+
+              manifest = {
+                'id':'three-min-rest','publish':False,
+                'project':{'category':'apps','meta':'Web App','title':'3분 쉼표','description':'명언·생활영어·성경 핵심 의미·미니퀴즈를 짧게 이용하는 200개 콘텐츠 기반의 일일 순환 웹앱입니다.','url':'https://yehavha-3min-rest.pages.dev/','actionLabel':'앱 실행'},
+                'tracking':{'paths':['three-minute-break'],'freshDays':7,'staleDays':30,'count':{'type':'regex','file':'three-minute-break/app.js','pattern':'"meta"\\s*:','label':'콘텐츠'}}
+              }
+              Path('three-minute-break/nexus.project.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          def inject_toeic():
+              p = Path('toeic-human-100/index.html')
+              s = p.read_text(encoding='utf-8')
+              if 'class="nexus-link"' not in s:
+                  s = s.replace('<main class="app-shell">', f'<main class="app-shell">\n    <a class="nexus-link" href="{nexus}" aria-label="예하바 넥서스로 돌아가기">← YEHAVHA NEXUS</a>', 1)
+              old = '<footer class="glass">\n      <p>이 앱의 문항은 TOEIC 출제 유형과 업무 영어 문맥을 반영해 자체 제작한 학습문제입니다. ETS 또는 YBM의 공식 기출문제를 복제한 자료가 아닙니다.</p>\n    </footer>'
+              new = f'<footer class="glass site-footer">\n      <p>이 앱의 문항은 TOEIC 출제 유형과 업무 영어 문맥을 반영해 자체 제작한 학습문제입니다. ETS 또는 YBM의 공식 기출문제를 복제한 자료가 아닙니다.</p>\n      <div class="footer-meta"><p>{copyright_text}</p><p>문의 <a href="mailto:{mail}">{mail}</a></p></div>\n    </footer>'
+              s = s.replace(old, new)
+              p.write_text(s, encoding='utf-8')
+
+              css = Path('toeic-human-100/style.css')
+              c = css.read_text(encoding='utf-8')
+              if '.nexus-link {' not in c:
+                  c += '\n.nexus-link{display:inline-block;margin:2px 4px 12px;color:rgba(255,255,255,.94);font-size:.78rem;font-weight:850;letter-spacing:.04em;text-decoration:none;text-shadow:0 1px 10px rgba(0,0,0,.28)}.site-footer>.footer-meta{margin-top:12px;padding-top:11px;border-top:1px solid var(--line)}.footer-meta p{margin:3px 0;color:#66768a}.footer-meta a{color:var(--navy);font-weight:800;text-decoration:none}\n'
+              css.write_text(c, encoding='utf-8')
+
+              sw = Path('toeic-human-100/sw.js')
+              sw.write_text(sw.read_text(encoding='utf-8').replace('toeic-human-100-v1','toeic-human-100-v2-github'), encoding='utf-8')
+
+              Path('toeic-human-100/README.md').write_text('''# 토익인간 100일 프로젝트\n\nGitHub 관리형 원본입니다. 100일 동안 핵심어휘, 숙어·연어, 문장암기, 문법함정, 실전문제를 학습하는 모바일 웹앱입니다.\n\n## 운영\nCloudflare Pages에서 `yehavha2024-hash/yehavha-site`의 `main` 브랜치를 연결하고 Root directory를 `toeic-human-100`으로 지정합니다. Framework preset은 `None`, Build command는 `exit 0`, Build output directory는 `.`을 사용합니다. GitHub 커밋 후 자동 배포됩니다.\n\nCopyright © 이명훈 2026. All rights reserved.\n\n문의: kimbrighth@gmail.com\n''', encoding='utf-8')
+
+              manifest = {
+                'id':'toeicman','publish':False,
+                'project':{'category':'apps','meta':'100-Day Web App','title':'토익인간 100일 프로젝트','description':'100일 동안 핵심어휘·숙어와 연어·문장암기·문법함정·실전문제를 매일 학습하는 모바일 중심 토익 웹앱입니다.','url':'https://yehavha-toeicman.pages.dev/','actionLabel':'앱 실행'},
+                'tracking':{'paths':['toeic-human-100'],'freshDays':7,'staleDays':30,'count':{'type':'regex','file':'toeic-human-100/content.js','pattern':'"day"\\s*:','label':'학습카드'}}
+              }
+              Path('toeic-human-100/nexus.project.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          inject_three_minute()
+          inject_toeic()
+
+      - name: Validate imported sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check three-minute-break/app.js
+          node --check three-minute-break/sw.js
+          node --check toeic-human-100/app.js
+          node --check toeic-human-100/content.js
+          node --check toeic-human-100/sw.js
+          python -m json.tool three-minute-break/manifest.webmanifest >/dev/null
+          python -m json.tool toeic-human-100/manifest.webmanifest >/dev/null
+          python -m json.tool three-minute-break/nexus.project.json >/dev/null
+          python -m json.tool toeic-human-100/nexus.project.json >/dev/null
+
+      - name: Commit migrated applications
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add three-minute-break toeic-human-100
+          if git diff --cached --quiet; then
+            echo "Nothing to import."
+            exit 0
+          fi
+          git commit -m "Migrate 3 Minute Break and TOEIC Human to GitHub"
+          git pull --rebase origin main
+          git push origin HEAD:main
