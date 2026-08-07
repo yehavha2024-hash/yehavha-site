@@ -19,7 +19,7 @@ function writeJson(file, value) {
 
 function findManifests(dir = ROOT, found = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (['.git', 'node_modules', '.next', '.wrangler'].includes(entry.name)) continue;
+    if (['.git', 'node_modules', '.next', '.wrangler', 'dist'].includes(entry.name)) continue;
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) findManifests(full, found);
     else if (entry.isFile() && entry.name === 'nexus.project.json') found.push(full);
@@ -40,10 +40,44 @@ function gitDateForPath(relativePath) {
   }
 }
 
-function latestDate(paths = []) {
+function latestLocalDate(paths = []) {
   const dates = paths.map(gitDateForPath).filter(Boolean);
   if (!dates.length) return null;
   return dates.sort((a, b) => new Date(b) - new Date(a))[0];
+}
+
+function fetchText(url) {
+  const args = ['-fsSL', '-H', 'User-Agent: YEHAVHA-Nexus'];
+  if (process.env.GITHUB_TOKEN) args.push('-H', `Authorization: Bearer ${process.env.GITHUB_TOKEN}`);
+  args.push(url);
+  return execFileSync('curl', args, { encoding: 'utf8', maxBuffer: 20 * 1024 * 1024 });
+}
+
+function externalCommitDate(repository, branch, relativePath) {
+  try {
+    const params = new URLSearchParams({ sha: branch || 'main', path: relativePath, per_page: '1' });
+    const url = `https://api.github.com/repos/${repository}/commits?${params}`;
+    const rows = JSON.parse(fetchText(url));
+    return rows?.[0]?.commit?.committer?.date || rows?.[0]?.commit?.author?.date || null;
+  } catch (error) {
+    console.warn(`External GitHub date lookup failed for ${repository}/${relativePath}: ${error.message}`);
+    return null;
+  }
+}
+
+function latestExternalDate(tracking = {}) {
+  const repository = tracking.externalRepository;
+  if (!repository) return null;
+  const branch = tracking.externalBranch || 'main';
+  const paths = tracking.externalPaths || ['index.html'];
+  const dates = paths.map(item => externalCommitDate(repository, branch, item)).filter(Boolean);
+  if (!dates.length) return null;
+  return dates.sort((a, b) => new Date(b) - new Date(a))[0];
+}
+
+function latestDate(tracking, fallbackPaths = []) {
+  if (tracking.externalRepository) return latestExternalDate(tracking);
+  return latestLocalDate(tracking.paths || fallbackPaths);
 }
 
 function dateOnly(iso) {
@@ -66,8 +100,9 @@ function statusFor(latest, tracking = {}) {
 }
 
 function countRegex(config) {
-  const file = path.join(ROOT, config.file);
-  const text = fs.readFileSync(file, 'utf8');
+  const text = config.url
+    ? fetchText(config.url)
+    : fs.readFileSync(path.join(ROOT, config.file), 'utf8');
   return [...text.matchAll(new RegExp(config.pattern, 'g'))].length;
 }
 
@@ -98,11 +133,17 @@ const statusMap = {};
 for (const { file, data } of manifests) {
   if (!data?.id || !data?.project || data.publish === false) continue;
   const tracking = data.tracking || {};
-  const latest = latestDate(tracking.paths || [path.relative(ROOT, path.dirname(file)) || '.']);
-  const count = contentCount(tracking.count);
+  const fallbackPaths = [path.relative(ROOT, path.dirname(file)) || '.'];
+  const latest = latestDate(tracking, fallbackPaths);
+  let count = null;
+  try {
+    count = contentCount(tracking.count);
+  } catch (error) {
+    console.warn(`Content count failed for ${data.id}: ${error.message}`);
+  }
   const dynamic = {
     id: data.id,
-    managedBy: 'github',
+    managedBy: tracking.externalRepository ? 'github-external' : 'github',
     ...statusFor(latest, tracking),
     lastUpdated: dateOnly(latest),
     contentCount: count,
@@ -131,6 +172,6 @@ writeJson(GENERATED_FILE, generated);
 writeJson(STATUS_FILE, statusMap);
 
 console.log(`YEHAVHA Nexus status refreshed: ${Object.keys(statusMap).length} GitHub-managed project(s).`);
-for (const project of projects.filter(item => item.managedBy === 'github')) {
+for (const project of projects.filter(item => String(item.managedBy || '').startsWith('github'))) {
   console.log(`- ${project.title}: ${project.status}, ${project.contentLabel} ${project.contentCount ?? '-'}, ${project.lastUpdated ?? '-'}`);
 }
