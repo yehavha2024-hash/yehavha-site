@@ -16,7 +16,7 @@
     "count": {
       "type": "regex",
       "file": "toeic-human-100/content.js",
-      "pattern": "day\\s*:",
+      "pattern": "\\\"day\\\"\\s*:",
       "label": "학습카드"
     }
   }
