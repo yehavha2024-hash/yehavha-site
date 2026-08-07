@@ -9,12 +9,12 @@
     "actionLabel": "연구소 방문"
   },
   "tracking": {
-    "paths": ["index.html", "style.css", "script.js"],
+    "paths": ["ai-law-institute"],
     "freshDays": 7,
     "staleDays": 30,
     "count": {
       "type": "regex",
-      "file": "index.html",
+      "file": "ai-law-institute/index.html",
       "pattern": "class=\\\"research-card\\\"",
       "label": "핵심 연구"
     }
