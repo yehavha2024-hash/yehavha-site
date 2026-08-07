@@ -47,6 +47,11 @@
     return el;
   }
 
+  function formatDate(value) {
+    if (!value) return '';
+    return String(value).replaceAll('-', '.');
+  }
+
   function renderQuickLinks(categories) {
     quickLinks.replaceChildren();
     categories.forEach((category) => {
@@ -61,6 +66,13 @@
     const article = make('article', 'item-card');
     const top = make('div', 'item-top');
     top.append(make('span', 'item-meta', project.meta || 'Project'));
+
+    if (project.status) {
+      const tone = ['fresh', 'active', 'stable', 'unknown'].includes(project.statusTone)
+        ? project.statusTone
+        : 'active';
+      top.append(make('span', `project-status status-${tone}`, project.status));
+    }
 
     const title = make('h3', '', project.title);
     const description = make('p', '', project.description);
@@ -80,7 +92,20 @@
     copy.dataset.url = project.url;
 
     actions.append(visit, copy);
-    article.append(top, title, description, actions);
+    article.append(top, title, description);
+
+    if (project.managedBy === 'github') {
+      const info = make('div', 'project-live-meta');
+      if (Number.isFinite(project.contentCount)) {
+        info.append(make('span', '', `${project.contentLabel || '콘텐츠'} ${project.contentCount}`));
+      }
+      if (project.lastUpdated) {
+        info.append(make('span', '', `업데이트 ${formatDate(project.lastUpdated)}`));
+      }
+      if (info.childElementCount) article.append(info);
+    }
+
+    article.append(actions);
     return article;
   }
 
@@ -121,11 +146,21 @@
     });
   }
 
+  async function fetchJson(url) {
+    const response = await fetch(url, { cache: 'no-cache' });
+    if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
+    return response.json();
+  }
+
   async function loadPortal() {
     try {
-      const response = await fetch('./projects.json', { cache: 'no-cache' });
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const data = await response.json();
+      let data;
+      try {
+        data = await fetchJson('./projects.generated.json');
+      } catch (generatedError) {
+        console.warn('Generated Nexus data unavailable; using base projects.json.', generatedError);
+        data = await fetchJson('./projects.json');
+      }
       renderPortal(data);
     } catch (error) {
       console.error('YEHAVHA Nexus data load failed:', error);
