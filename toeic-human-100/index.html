@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#163b6d" />
+  <meta name="description" content="토익 800점대를 목표로 100일 동안 핵심어휘, 숙어·연어, 문장, 문법, 실전문제를 학습하는 모바일 웹앱" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="style.css" />
+  <title>토익인간 100일 프로젝트</title>
+</head>
+<body>
+  <main class="app-shell">
+    <a class="nexus-link" href="https://yehavha-nexus-hub.pages.dev/" aria-label="예하바 넥서스로 돌아가기">← YEHAVHA NEXUS</a>
+    <header class="hero glass">
+      <div class="brand-row">
+        <div>
+          <p class="eyebrow">TOEIC HUMAN · 800+ TARGET</p>
+          <h1>토익인간<br><span>100일 프로젝트</span></h1>
+        </div>
+        <button id="installBtn" class="icon-button" hidden aria-label="홈 화면에 추가">＋</button>
+      </div>
+      <div class="day-dashboard">
+        <div class="day-copy">
+          <span id="dayLabel">DAY 1</span>
+          <strong id="dayHeadline">오늘의 5개 학습</strong>
+          <small id="dateLabel"></small>
+        </div>
+        <div class="progress-ring" id="progressRing" aria-label="100일 진행률">
+          <span id="progressNumber">1</span>
+          <small>/100</small>
+        </div>
+      </div>
+      <div class="day-progress" aria-label="오늘 학습 진행률">
+        <div><span>오늘 완료</span><strong id="dailyProgressText">0 / 5</strong></div>
+        <div class="progress-track"><span id="dailyProgressBar"></span></div>
+      </div>
+    </header>
+
+    <nav class="category-tabs glass" aria-label="학습 카테고리">
+      <button class="category active" data-category="vocab"><span>Ａ</span>핵심어휘</button>
+      <button class="category" data-category="expression"><span>↔</span>숙어·연어</button>
+      <button class="category" data-category="sentence"><span>◉</span>문장암기</button>
+      <button class="category" data-category="grammar"><span>✓</span>문법함정</button>
+      <button class="category" data-category="practice"><span>?</span>실전문제</button>
+    </nav>
+
+    <section id="learningCard" class="learning-card glass" aria-live="polite">
+      <div class="card-head">
+        <span id="badge" class="badge">핵심어휘</span>
+        <span id="partBadge" class="part-badge">800+ CORE</span>
+      </div>
+      <div id="cardContent"></div>
+      <div id="quizArea" class="quiz-area" hidden></div>
+    </section>
+
+    <div class="learning-actions">
+      <button id="speakBtn" class="secondary-button">발음 듣기</button>
+      <button id="completeBtn" class="primary-button">오늘 학습 완료</button>
+    </div>
+
+    <div class="navigation-row glass">
+      <button id="prevDayBtn" aria-label="이전 학습일">‹</button>
+      <div>
+        <strong id="navDay">DAY 1</strong>
+        <small>복습하려면 날짜를 이동하세요</small>
+      </div>
+      <button id="nextDayBtn" aria-label="다음 학습일">›</button>
+    </div>
+
+    <section class="stats glass" aria-label="학습 기록">
+      <div><span>완료 카드</span><strong id="totalCompleted">0</strong></div>
+      <div><span>완료한 날</span><strong id="completedDays">0</strong></div>
+      <div><span>오답 문제</span><strong id="wrongCount">0</strong></div>
+    </section>
+
+    <div class="footer-actions">
+      <button id="shareBtn" class="text-button">현재 학습 공유</button>
+      <button id="resetBtn" class="text-button">시작일 재설정</button>
+    </div>
+
+    <footer class="glass site-footer">
+      <p>이 앱의 문항은 TOEIC 출제 유형과 업무 영어 문맥을 반영해 자체 제작한 학습문제입니다. ETS 또는 YBM의 공식 기출문제를 복제한 자료가 아닙니다.</p>
+      <div class="footer-meta"><p>Copyright © 이명훈 2026. All rights reserved.</p><p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p></div>
+    </footer>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="content.js"></script>
+  <script src="app.js" defer></script>
+</body>
+</html>

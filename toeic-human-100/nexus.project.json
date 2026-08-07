@@ -1,0 +1,25 @@
+{
+  "id": "toeicman",
+  "publish": false,
+  "project": {
+    "category": "apps",
+    "meta": "100-Day Web App",
+    "title": "토익인간 100일 프로젝트",
+    "description": "100일 동안 핵심어휘·숙어와 연어·문장암기·문법함정·실전문제를 매일 학습하는 모바일 중심 토익 웹앱입니다.",
+    "url": "https://yehavha-toeicman.pages.dev/",
+    "actionLabel": "앱 실행"
+  },
+  "tracking": {
+    "paths": [
+      "toeic-human-100"
+    ],
+    "freshDays": 7,
+    "staleDays": 30,
+    "count": {
+      "type": "regex",
+      "file": "toeic-human-100/content.js",
+      "pattern": "\"day\"\\s*:",
+      "label": "학습카드"
+    }
+  }
+}
