@@ -17,11 +17,10 @@ const areas = ['전체', ...new Set(data.map(item => item.area))];
 const exams = ['전체', ...new Set(data.flatMap(item => item.examTags || []))];
 const subfields = ['전체', ...new Set(data.map(item => item.subfield).filter(Boolean))];
 const completeCount = data.filter(item => item.qualityStatus === '16항목 완성').length;
-const caseVerifyCount = data.filter(item => item.qualityStatus === '원문 검증 필요').length;
 countEl.textContent = `연구 항목 ${data.length} · 16항목 완성 ${completeCount}`;
 
 function esc(s='') {
-  return String(s).replace(/[&<>'\"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','\"':'&quot;'}[c]));
+  return String(s).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 }
 function list(arr=[], cls='detail-list') {
   if (!arr.length) return '';
