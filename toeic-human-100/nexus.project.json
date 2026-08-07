@@ -1,6 +1,6 @@
 {
   "id": "toeicman",
-  "publish": false,
+  "publish": true,
   "project": {
     "category": "apps",
     "meta": "100-Day Web App",
