@@ -15,16 +15,7 @@ let activeSubfield = '전체';
 
 const areaOf = item => item.systemArea || item.area;
 const preferredAreaOrder = [
-  '헌법·공법',
-  '민사·상사·책임법',
-  '형사법',
-  '데이터·플랫폼·소비자법',
-  '모빌리티·로봇·항공법',
-  '보건의료법',
-  '지식재산법',
-  'AI 산업·융합법',
-  '조세·전문법',
-  '법적 추론'
+  '헌법·공법','민사·상사·책임법','형사법','데이터·플랫폼·소비자법','모빌리티·로봇·항공법','보건의료법','지식재산법','AI 산업·융합법','조세·전문법','법적 추론'
 ];
 const areaSet = new Set(data.map(areaOf));
 const orderedAreas = preferredAreaOrder.filter(a => areaSet.has(a));
@@ -57,18 +48,40 @@ function matrix(rows=[]) {
   if (!rows.length) return '';
   return `<div class="fact-matrix">${rows.map(row => `<div class="fact-row"><strong>${esc(row[0])}</strong><p>${esc(row[1])}</p></div>`).join('')}</div>`;
 }
+function analysisRow(label, value) {
+  if (!value) return '';
+  return `<div class="analysis-row"><strong>${esc(label)}</strong><p>${esc(value)}</p></div>`;
+}
+function variationCases(item, hard=false) {
+  const cases = hard ? (item.hardVariations || []) : (item.variations || []);
+  if (!cases.length) return '';
+  const answers = hard ? (item.hardVariationAnalyses || []) : (item.variationAnalyses || []);
+  return `<div class="variation-cases ${hard ? 'hard' : ''}">${cases.map((v,i)=>{
+    const a = answers[i] || {};
+    const body = a.analysis
+      ? `<p class="direct-analysis">${esc(a.analysis)}</p>`
+      : [
+          analysisRow('쟁점',a.issue),
+          analysisRow('적용 법리',a.rule),
+          analysisRow('포섭·논증',a.application),
+          hard ? analysisRow('증명·로그',a.proof || a.evidence) : analysisRow('증거·확인사항',a.evidence),
+          analysisRow('반대논리',a.counter),
+          analysisRow('결론 방향',a.conclusion)
+        ].join('');
+    return `<article class="variation-case">
+      <div class="variation-question"><span>${hard ? '고난도 사례' : '사례변형'} ${i+1}</span><p>${esc(v)}</p></div>
+      <div class="variation-answer"><div class="answer-title">${hard ? '법리적 논증·해결' : '법리적 해결'}</div>${body}</div>
+    </article>`;
+  }).join('')}</div>`;
+}
 
 function renderAreaFilters() {
   filtersEl.innerHTML = areas.map(area => `<button class="filter-btn ${area === activeArea ? 'active':''}" data-area="${esc(area)}">${esc(area)}</button>`).join('');
-  filtersEl.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => {
-    activeArea = btn.dataset.area; renderAreaFilters(); renderCards();
-  }));
+  filtersEl.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => { activeArea = btn.dataset.area; renderAreaFilters(); renderCards(); }));
 }
 function renderExamFilters() {
   examFiltersEl.innerHTML = exams.map(exam => `<button class="filter-btn exam ${exam === activeExam ? 'active':''}" data-exam="${esc(exam)}">${esc(exam)}</button>`).join('');
-  examFiltersEl.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => {
-    activeExam = btn.dataset.exam; renderExamFilters(); renderCards();
-  }));
+  examFiltersEl.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => { activeExam = btn.dataset.exam; renderExamFilters(); renderCards(); }));
 }
 function renderSubfields() {
   subfieldEl.innerHTML = subfields.map(s=>`<option value="${esc(s)}">${esc(s)}</option>`).join('');
@@ -85,10 +98,11 @@ function searchableText(item) {
   const deep = (item.deepDive || []).flatMap(x => [x.title, x.body]);
   const matrixText = (item.factMatrix || []).flat();
   const guidanceText = (item.officialGuidance || []).flatMap(x => [x.label, x.url]);
+  const solutionText = [...(item.variationAnalyses||[]),...(item.hardVariationAnalyses||[])].flatMap(a => Object.values(a||{}));
   const fields = [
     item.title,item.area,item.systemArea,item.subfield,item.type,item.summary,item.concept,item.issue,item.rule,item.coreRule,item.analysis,item.effect,item.theories,
     item.doctrineDebate,item.comparativeLaw,item.crossLawConflict,item.adjacentCaseLaw,item.precedentLineage,item.methodLineage,item.caseFacts,item.courtHolding,item.courtReasoning,item.counter,item.refinementStage,
-    ...(item.keywords||[]),...(item.examTags||[]),...(item.requirements||[]),...(item.relatedRules||[]),...(item.variations||[]),...(item.hardVariations||[]),...(item.proofIssues||[]),...guidanceText,...matrixText,...deep,...(item.application||[])
+    ...(item.keywords||[]),...(item.examTags||[]),...(item.requirements||[]),...(item.relatedRules||[]),...(item.variations||[]),...(item.hardVariations||[]),...(item.proofIssues||[]),...solutionText,...guidanceText,...matrixText,...deep,...(item.application||[])
   ];
   return fields.filter(Boolean).join(' ').toLowerCase();
 }
@@ -124,13 +138,11 @@ function openDetail(id) {
   const allSources = links(item.sources || []);
   const deep = (item.deepDive || []).map(x => `<div class="deep-item"><strong>${esc(x.title)}</strong><p>${esc(x.body)}</p></div>`).join('');
   const application = (item.application || []).length ? `<ol class="detail-list application-list">${item.application.map(x=>`<li>${esc(x)}</li>`).join('')}</ol>` : '';
-  const variation = list(item.variations || []);
-  const hardVariation = list(item.hardVariations || [], 'detail-list hard-variation-list');
+  const variation = variationCases(item,false);
+  const hardVariation = variationCases(item,true);
   const proofIssues = list(item.proofIssues || [], 'detail-list proof-list');
   const factMatrix = matrix(item.factMatrix || []);
-  const caseVerification = item.isCaseNote && item.caseOriginalVerified
-    ? `<p class="case-verification ok">판결 원문 대조 완료</p>`
-    : '';
+  const caseVerification = item.isCaseNote && item.caseOriginalVerified ? `<p class="case-verification ok">판결 원문 대조 완료</p>` : '';
   detailEl.innerHTML = `
     <div class="section-kicker">${esc(areaOf(item))} · ${esc(item.subfield || '')} · ${esc(item.type)} · ${esc(item.level)}</div>
     <h3 class="detail-title">${esc(item.title)}</h3>
@@ -159,8 +171,8 @@ function openDetail(id) {
     ${section('전문 해설', `<p>${esc(item.analysis)}</p>`)}
     ${section('심화 쟁점 해설', deep)}
     ${section('사례 적용·논증 순서', application)}
-    ${section('사례변형', variation)}
-    ${section('고난도 사례변형', hardVariation)}
+    ${section('사례변형 및 해설', variation)}
+    ${section('고난도 사례변형 및 논증', hardVariation)}
     ${section('관련 법리', chips(item.relatedRules || []))}
     ${section('관련 판례', caseLinks)}
     ${section('공식 가이드라인·비교자료', guidanceLinks)}
