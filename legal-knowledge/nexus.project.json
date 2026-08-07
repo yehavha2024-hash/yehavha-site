@@ -1,0 +1,36 @@
+{
+  "id": "legal-knowledge",
+  "project": {
+    "category": "research",
+    "meta": "Advanced Legal Studies",
+    "title": "법리·판례 연구",
+    "description": "실정법·판례·법적 추론과 논증을 전문적으로 체계화한 고급 법률지식 아카이브입니다.",
+    "url": "https://yehavha-legal-knowledge.danielie.workers.dev",
+    "actionLabel": "연구자료 보기"
+  },
+  "tracking": {
+    "paths": ["legal-knowledge"],
+    "freshDays": 7,
+    "staleDays": 30,
+    "count": {
+      "type": "window-array",
+      "global": "LEGAL_KNOWLEDGE",
+      "label": "연구노트",
+      "files": [
+        "legal-knowledge/data.js",
+        "legal-knowledge/data-civil.js",
+        "legal-knowledge/data-public.js",
+        "legal-knowledge/data-criminal.js",
+        "legal-knowledge/data-ip.js",
+        "legal-knowledge/data-reasoning.js",
+        "legal-knowledge/data-reasoning-advanced.js",
+        "legal-knowledge/data-special.js",
+        "legal-knowledge/data-ai-foundation.js",
+        "legal-knowledge/data-ai-foundation-advanced.js",
+        "legal-knowledge/data-ai-data-consumer.js",
+        "legal-knowledge/data-ai-mobility.js",
+        "legal-knowledge/data-ai-industry-medical-ip.js"
+      ]
+    }
+  }
+}
