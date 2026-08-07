@@ -10,15 +10,13 @@
     "actionLabel": "앱 실행"
   },
   "tracking": {
-    "paths": [
-      "toeic-human-100"
-    ],
+    "paths": ["toeic-human-100"],
     "freshDays": 7,
     "staleDays": 30,
     "count": {
       "type": "regex",
       "file": "toeic-human-100/content.js",
-      "pattern": "\"day\"\\s*:",
+      "pattern": "day\\s*:",
       "label": "학습카드"
     }
   }
