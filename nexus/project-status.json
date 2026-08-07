@@ -26,15 +26,6 @@
     "contentCount": 8,
     "contentLabel": "연구축"
   },
-  "three-min-rest": {
-    "id": "three-min-rest",
-    "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
-    "lastUpdated": "2026-08-07",
-    "contentCount": 200,
-    "contentLabel": "콘텐츠"
-  },
   "toeicman": {
     "id": "toeicman",
     "managedBy": "github",
