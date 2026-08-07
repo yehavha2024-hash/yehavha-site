@@ -96,7 +96,7 @@ const managed = new Map();
 const statusMap = {};
 
 for (const { file, data } of manifests) {
-  if (!data?.id || !data?.project) continue;
+  if (!data?.id || !data?.project || data.publish === false) continue;
   const tracking = data.tracking || {};
   const latest = latestDate(tracking.paths || [path.relative(ROOT, path.dirname(file)) || '.']);
   const count = contentCount(tracking.count);
