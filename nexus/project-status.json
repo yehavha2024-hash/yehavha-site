@@ -16,14 +16,5 @@
     "lastUpdated": "2026-08-07",
     "contentCount": 85,
     "contentLabel": "연구노트"
-  },
-  "ai-law-institute": {
-    "id": "ai-law-institute",
-    "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
-    "lastUpdated": "2026-08-07",
-    "contentCount": 8,
-    "contentLabel": "핵심 연구"
   }
 }
