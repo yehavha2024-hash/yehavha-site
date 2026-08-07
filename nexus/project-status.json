@@ -16,5 +16,14 @@
     "lastUpdated": "2026-08-07",
     "contentCount": 85,
     "contentLabel": "연구노트"
+  },
+  "three-min-rest": {
+    "id": "three-min-rest",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-07",
+    "contentCount": 200,
+    "contentLabel": "콘텐츠"
   }
 }
