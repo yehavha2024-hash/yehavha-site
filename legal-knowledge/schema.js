@@ -13,6 +13,7 @@
   const data = window.LEGAL_KNOWLEDGE || [];
   const hasText = value => typeof value === 'string' && value.trim().length > 0;
   const hasList = value => Array.isArray(value) && value.length > 0;
+  const hasAnalysis = value => value && (hasText(value.analysis) || hasText(value.application) || hasText(value.conclusion));
 
   function systemArea(item){
     if (item.area === '공법' || item.area === '헌법·AI 기본규제') return '헌법·공법';
@@ -33,6 +34,17 @@
     return item.area;
   }
 
+  function variationSolutionsComplete(item,isReasoning){
+    const normal = Array.isArray(item.variations) ? item.variations : [];
+    const hard = Array.isArray(item.hardVariations) ? item.hardVariations : [];
+    if (!normal.length && !hard.length) return isReasoning && hasList(item.application);
+    const normalAnswers = Array.isArray(item.variationAnalyses) ? item.variationAnalyses : [];
+    const hardAnswers = Array.isArray(item.hardVariationAnalyses) ? item.hardVariationAnalyses : [];
+    const normalOk = normal.length === 0 || (normalAnswers.length === normal.length && normalAnswers.every(hasAnalysis));
+    const hardOk = hard.length === 0 || (hardAnswers.length === hard.length && hardAnswers.every(hasAnalysis));
+    return normalOk && hardOk;
+  }
+
   data.forEach(item => {
     item.systemArea = systemArea(item);
     item.examTags = item.examTags || examMap[item.subfield] || ['기타 전문 법률시험'];
@@ -47,8 +59,8 @@
     const isReasoning = item.area === '법적 추론';
     const isCaseNote = item.noteModel === '판례·법리형' || hasText(item.caseFacts) || hasText(item.courtHolding) || hasText(item.courtReasoning);
     item.isCaseNote = isCaseNote;
+    item.variationSolutionsComplete = variationSolutionsComplete(item,isReasoning);
 
-    // 16개 표준형은 내부 품질검증 기준으로 유지한다. 공개 연구노트에는 충족 체크리스트를 노출하지 않는다.
     const checks = [
       {key:'concept', label:'주제·개념', ok:hasText(item.concept)},
       {key:'statutes', label:'관련 조문', ok:isReasoning || hasList(item.statuteSources)},
@@ -61,7 +73,7 @@
       {key:'courtReasoning', label:'법원의 논증', ok:!isCaseNote || hasText(item.courtReasoning), conditional:!isCaseNote},
       {key:'coreRule', label:'핵심 법리', ok:hasText(item.coreRule)},
       {key:'counter', label:'반대논리·한계', ok:hasText(item.counter) || (isReasoning && hasList(item.deepDive))},
-      {key:'variations', label:'사례변형', ok:hasList(item.variations) || (isReasoning && hasList(item.application))},
+      {key:'variations', label:'사례변형·법리적 해설', ok:item.variationSolutionsComplete},
       {key:'relatedRules', label:'관련 법리', ok:hasList(item.relatedRules)},
       {key:'relatedCases', label:'관련 판례', ok:!isCaseNote || hasList(item.relatedCases), conditional:!isCaseNote},
       {key:'examTags', label:'관련 시험', ok:hasList(item.examTags)},
@@ -73,7 +85,6 @@
     item.standard16Total = 16;
     item.standard16Missing = checks.filter(x => !x.ok).map(x => x.label);
 
-    // 판례형은 공식 원문 링크의 존재가 아니라 실제 원문 대조 후에만 검증 완료로 처리한다.
     item.caseOriginalVerified = !isCaseNote || item.caseOriginalChecked === true;
 
     if (isCaseNote && !item.caseOriginalVerified) {
