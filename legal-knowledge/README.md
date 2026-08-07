@@ -53,20 +53,16 @@ AI·디지털 법제 확장:
 기존 카드의 전문화는 신규 카드를 복제하지 않고 patch 파일에서 같은 `id`의 필드를 보강합니다.
 
 - `data-verification-*.js` : 공식 판결 원문 대조가 끝난 판례형 보강
-- `data-enrichment-*.js` : 법리·조문형 및 법적 추론형의 표준필드 보강
+- `data-enrichment-*.js` : 법리·조문형 및 법적 추론형의 16개 표준필드 보강
+- `data-refinement-round2-civil.js` : 기존 민사·상사 9개에 학설 대립·판례 연결·고난도 사례 보강
+- `data-refinement-round2-public-criminal.js` : 공법 5개·형사법 6개 심화
+- `data-refinement-round2-ip-special.js` : 지식재산 9개·조세/전문법 7개 심화
+- `data-refinement-round2-reasoning.js` : 법적 추론 13개 방법론 심화
 - `data-corrections.js` : 출처·메타데이터 등 소규모 정정
 
-`schema.js`는 각 연구노트의 16개 표준형 충족상태와 판례 원문검증 상태를 내부적으로 계산하고, 법체계별 `systemArea`를 부여합니다. `app.js`는 법체계·시험·세부분야 검색/필터와 연구노트 상세내용을 표시합니다. `status-ui.js`는 공개 화면에 전체 연구항목 수와 판례 원문검증 현황만 집계합니다.
+제2차 심화 패치는 기존 49개 전체에 적용되어 `doctrineDebate`, `precedentLineage` 또는 `methodLineage`, 판례형의 `factMatrix`, `hardVariations`를 추가합니다. 공식 원문검증이 끝난 8개 판례형은 사실관계를 당사자·행위·시간·절차·결정적 사실로 더 세분화합니다.
 
-## 주요 파일
-
-- `index.html` : 화면 구조 및 데이터 로딩 순서
-- `styles.css`, `enhancements.css` : 디자인
-- `schema.js` : 내부 16개 표준형·품질상태 계산 및 법체계 분류
-- `app.js` : 검색·필터·상세보기
-- `status-ui.js` : 전체 항목/판례 원문검증 현황
-- `QUALITY_POLICY.md` : 콘텐츠 품질 운영기준
-- `wrangler.jsonc` : Cloudflare Workers 배포 설정
+`schema.js`는 각 연구노트의 16개 표준형 충족상태와 판례 원문검증 상태를 내부적으로 계산하고, 법체계별 `systemArea`를 부여합니다. `app.js`는 법체계·시험·세부분야 검색/필터와 연구노트 상세내용을 표시하며 내부 완성도 체크리스트는 노출하지 않습니다. `status-ui.js`는 공개 화면에 전체 연구항목 수와 판례 원문검증 현황만 집계합니다.
 
 ## 콘텐츠 정교화 원칙
 
