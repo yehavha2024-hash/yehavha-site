@@ -1,27 +1,24 @@
 {
   "id": "ai-law-institute",
-  "publish": false,
+  "publish": true,
   "project": {
     "category": "research",
     "meta": "Research Institute",
     "title": "AI 법률연구소",
     "description": "AI의 행위효과·책임귀속, Agentic AI·Multi-Agent, 증명위험, 기능적 단위의 법적 지위와 비교법·입법론을 연결하는 전문 연구 허브입니다.",
-    "url": "https://cold-rice-9d49.danielie.workers.dev/#top",
+    "url": "https://yehavha-ai-law-institute.pages.dev/",
     "actionLabel": "연구소 방문"
   },
-  "migration": {
-    "canonicalRepository": "yehavha2024-hash/ai-law-research-institute",
-    "canonicalBranch": "master",
-    "status": "Git-connected Cloudflare Pages 주소 확정 후 공개 전환"
-  },
   "tracking": {
-    "paths": ["ai-law-institute"],
+    "externalRepository": "yehavha2024-hash/ai-law-research-institute",
+    "externalBranch": "master",
+    "externalPaths": ["index.html", "style.css", "script.js"],
     "freshDays": 7,
     "staleDays": 30,
     "count": {
       "type": "regex",
-      "file": "ai-law-institute/index.html",
-      "pattern": "class=\\\"research-card\\\"",
+      "url": "https://raw.githubusercontent.com/yehavha2024-hash/ai-law-research-institute/master/index.html",
+      "pattern": "<article>\\s*<span>0[1-4]</span>",
       "label": "핵심 연구"
     }
   }
