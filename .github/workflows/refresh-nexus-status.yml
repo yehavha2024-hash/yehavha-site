@@ -31,6 +31,9 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Validate AI foresight academic depth
+        run: node ai-law-tech-foresight/scripts/validate-academic.mjs
+
       - name: Generate Nexus project status
         run: node nexus/scripts/update-status.mjs
 
