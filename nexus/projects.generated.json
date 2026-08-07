@@ -79,17 +79,11 @@
     {
       "id": "ai-law-institute",
       "category": "research",
-      "meta": "Research Institute",
+      "meta": "Research Site",
       "title": "AI 법률연구소",
-      "description": "인공지능의 시대에 행위효과·책임귀속, Agentic AI·Multi-Agent, 증명위험, 기능적 법적 지위, 비교법과 입법론을 통합적으로 연구하는 법학 연구 허브입니다.",
-      "url": "https://yehavha-ai-law-institute.pages.dev/",
-      "actionLabel": "연구소 방문",
-      "managedBy": "github-external",
-      "status": "최근 업데이트",
-      "statusTone": "fresh",
-      "lastUpdated": "2026-08-07",
-      "contentCount": 8,
-      "contentLabel": "연구축"
+      "description": "AI와 법률의 접점에서 연구, 강의, 출판과 지식 자료를 연결하는 전문 연구 사이트입니다.",
+      "url": "https://cold-rice-9d49.danielie.workers.dev/#top",
+      "actionLabel": "연구소 방문"
     },
     {
       "id": "legal-knowledge",
