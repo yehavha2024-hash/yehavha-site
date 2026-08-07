@@ -1,0 +1,1 @@
+(function(){ const data=window.LEGAL_KNOWLEDGE||[]; const item=data.find(x=>x.id==='criminal-dolus-eventualis'); if(!item)return; Object.assign(item,{}); })();
