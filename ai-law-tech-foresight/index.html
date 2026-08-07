@@ -3,117 +3,100 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="AI 기술 발전을 선제적으로 추적하고 현행법, 법적 공백, 비교법, 정책, 거버넌스와 입법대안을 연결하는 AI 법·기술 선제연구 아카이브" />
-  <meta name="theme-color" content="#071529" />
+  <meta name="description" content="AI 기술의 발전단계별로 기술구조, 현행법, 법적 쟁점, 법적 공백, 비교법, 책임·증명, 정책과 입법대안을 연구하는 AI 법·기술 선제연구 아카이브" />
+  <meta name="theme-color" content="#091522" />
   <title>AI 법·기술 선제연구 아카이브</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <a class="skip-link" href="#technologyArchive">기술 연구 목록으로 이동</a>
-  <header class="hero" id="top">
+
+  <header class="site-header" id="top">
     <div class="wrap">
       <a class="nexus-link" href="https://yehavha-nexus-hub.pages.dev/">← YEHAVHA NEXUS</a>
-      <div class="hero-grid">
-        <div>
-          <p class="eyebrow">AI LAW · TECHNOLOGY · FORESIGHT</p>
-          <h1>AI 법·기술<br><span>선제연구 아카이브</span></h1>
-          <p class="lead">기술이 등장한 뒤 법이 뒤따라가는 방식이 아니라, 기술의 다음 단계를 먼저 연구하고 발생 가능한 법률문제·법적 공백·거버넌스와 입법대안을 선제적으로 축적합니다.</p>
-          <div class="hero-tags"><span>기술예측</span><span>법적 공백</span><span>비교법</span><span>정책·입법</span><span>박사논문 연구축</span></div>
-        </div>
-        <aside class="principle-card">
-          <small>CORE PRINCIPLE</small>
-          <strong>예측은 사실과 구분하고,<br>법적 공백에는 해결방법을 연결합니다.</strong>
-          <p>AGI·ASI와 같이 시기가 불확실한 영역은 기술예측·시나리오로 표시하며, 판례·법령·정책은 확인 가능한 자료와 구별하여 관리합니다.</p>
-        </aside>
+      <div class="hero-copy">
+        <p class="eyebrow">AI LAW · TECHNOLOGY · FORESIGHT ARCHIVE</p>
+        <h1>AI 법·기술 선제연구 아카이브</h1>
+        <p class="lead">기술이 사회에 정착한 뒤 법적 문제를 수습하는 방식에서 벗어나, 기술의 작동구조와 발전방향을 먼저 분석하고 현행법의 적용가능성·법적 공백·책임과 증명·비교법·정책·입법대안을 선제적으로 축적합니다.</p>
+        <div class="principle-line"><span>학술 연구</span><span>기술예측과 사실 구분</span><span>법적 공백에는 해결대안 제시</span><span>박사논문 연구축 연계</span></div>
       </div>
     </div>
   </header>
 
   <main>
-    <section class="section flow-section">
+    <section class="method-bar" aria-labelledby="method-title">
       <div class="wrap">
-        <div class="section-head"><div><p class="eyebrow">RESEARCH PIPELINE</p><h2>선제연구의 기본 구조</h2></div><p>모든 연구노트는 문제 제기에서 끝나지 않고 가능한 해결방향까지 연결합니다.</p></div>
+        <div class="method-head"><div><p class="eyebrow">RESEARCH METHOD</p><h2 id="method-title">연구 구조</h2></div><p>각 기술을 동일한 분석틀로 검토하되, 기술예측 영역은 현재 사실과 명시적으로 구분합니다.</p></div>
         <div class="flow" id="researchFlow"></div>
       </div>
     </section>
 
-    <section class="section dashboard-section">
+    <section class="browser-section" id="technologyArchive">
       <div class="wrap">
-        <div class="stats" id="stats"></div>
-        <div class="controls">
-          <label><span>통합 검색</span><input id="searchInput" type="search" placeholder="기술, 법률, 쟁점, 법적 공백, 박사논문 태그 검색" /></label>
+        <div class="browser-head">
+          <div><p class="eyebrow">TECHNOLOGY RESEARCH</p><h2>기술별 선제연구</h2><p>카드를 열면 목록형 메모가 아니라 연구논문형 본문을 확인할 수 있습니다.</p></div>
+          <div class="stats" id="stats"></div>
+        </div>
+
+        <div class="controls" aria-label="연구자료 검색 및 필터">
+          <label class="search-control"><span>통합 검색</span><input id="searchInput" type="search" placeholder="Agentic AI, 책임귀속, 제조물책임, 로그, AGI 등" /></label>
           <label><span>기술단계</span><select id="stageFilter"></select></label>
           <label><span>법률 연구축</span><select id="lawFilter"></select></label>
           <label><span>박사논문 태그</span><select id="phdFilter"></select></label>
         </div>
-      </div>
-    </section>
 
-    <section class="section archive-section" id="technologyArchive">
-      <div class="wrap">
-        <div class="section-head"><div><p class="eyebrow">TECHNOLOGY ARCHIVE</p><h2>AI 기술 발전 아카이브</h2></div><p>기술 발전을 순차적으로 추적하되 AGI·ASI 등은 예상 시기를 사실로 단정하지 않습니다.</p></div>
-        <div class="timeline" id="techCards"></div>
+        <div class="research-list" id="techCards"></div>
         <p class="empty" id="emptyState" hidden>조건에 맞는 연구항목이 없습니다.</p>
       </div>
     </section>
 
-    <section class="section axes-section">
+    <section class="index-section">
       <div class="wrap">
-        <div class="section-head"><div><p class="eyebrow">CROSS-LAW RESEARCH</p><h2>AI 관련 법률 연구축</h2></div><p>기술 하나를 특정 법률 하나에 가두지 않고 관련 법률을 횡단적으로 연결합니다.</p></div>
-        <div class="chip-grid" id="lawAxes"></div>
+        <div class="section-title"><p class="eyebrow">RESEARCH INDEX</p><h2>횡단 연구 인덱스</h2><p>기술별 본문과 별도로 비교법·법적 공백·정책수단을 축적합니다. 필요한 영역만 펼쳐볼 수 있습니다.</p></div>
+
+        <details class="research-index">
+          <summary><span>비교법·해외판례</span><small>대한민국 · EU · 미국 · 영국 · 일본 · 중국 · 기타 주요 국가</small></summary>
+          <div class="index-body"><div class="research-grid" id="comparativeCards"></div><div class="taxonomy-row"><strong>자료 분류</strong><div class="chip-grid compact" id="sourceTypes"></div></div></div>
+        </details>
+
+        <details class="research-index">
+          <summary><span>법적 공백 분석</span><small>행위귀속 · 책임귀속 · 인과관계 · 증명곤란 · 로그 접근 · 책임재산</small></summary>
+          <div class="index-body"><div class="research-grid" id="gapCards"></div></div>
+        </details>
+
+        <details class="research-index">
+          <summary><span>정책·입법 대안</span><small>현행법 해석 · 법률개정 · 특별법 · 보험 · 공탁 · 증명책임 · 기능적 법적 지위</small></summary>
+          <div class="index-body"><div class="research-grid" id="policyCards"></div></div>
+        </details>
       </div>
     </section>
 
-    <section class="section comparative-section">
-      <div class="wrap">
-        <div class="section-head"><div><p class="eyebrow">COMPARATIVE LAW</p><h2>AI 비교법·해외판례 아카이브</h2></div><p>국가별 자료의 법적 성격을 구분하고, 해외 판례는 사실관계 → 쟁점 → 판단 → 법리 → AI법적 의미까지 분석합니다.</p></div>
-        <div class="research-grid" id="comparativeCards"></div>
-        <div class="taxonomy-row"><strong>자료 분류</strong><div class="chip-grid compact" id="sourceTypes"></div></div>
-      </div>
-    </section>
-
-    <section class="section gap-section">
-      <div class="wrap">
-        <div class="section-head"><div><p class="eyebrow">LEGAL GAP</p><h2>법적 공백 분석</h2></div><p>법적 공백은 문제목록으로 끝내지 않고 기존 법리 적용가능성과 구체적 해결수단을 함께 축적합니다.</p></div>
-        <div class="research-grid" id="gapCards"></div>
-      </div>
-    </section>
-
-    <section class="section policy-section">
-      <div class="wrap">
-        <div class="section-head"><div><p class="eyebrow">POLICY & LEGISLATION</p><h2>정책·입법 제안</h2></div><p>현행법 해석부터 특별법, 로그보존, 증명책임, 보험·공탁, 기능적 단위의 법적 지위까지 해결수단을 설계합니다.</p></div>
-        <div class="research-grid" id="policyCards"></div>
-      </div>
-    </section>
-
-    <section class="section thesis-section">
-      <div class="wrap">
-        <div class="section-head"><div><p class="eyebrow">DOCTORAL RESEARCH LINK</p><h2>박사논문 연구와 아카이브 연결</h2></div><p>자료를 작성하는 순간부터 논문 재료로 다시 찾을 수 있도록 모든 연구항목에 박사논문 태그를 부여합니다.</p></div>
-        <div class="chip-grid" id="phdTags"></div>
-        <div class="lineage" id="thesisLineage"></div>
+    <section class="thesis-section">
+      <div class="wrap thesis-box">
+        <div><p class="eyebrow">DOCTORAL RESEARCH LINK</p><h2>박사논문 연구와 연결</h2><p>연구자료는 행위효과·책임귀속·Agentic AI·Multi-Agent·창발적 손해·계층적 책임귀속·증명위험·기능적 단위·입법론 태그로 다시 검색할 수 있습니다.</p></div>
+        <div class="thesis-meta"><div class="chip-grid" id="phdTags"></div><div class="lineage" id="thesisLineage"></div></div>
       </div>
     </section>
   </main>
 
-  <footer>
+  <footer class="site-footer">
     <div class="wrap footer-inner">
-      <div>
-        <strong>AI 법·기술 선제연구 아카이브</strong>
-        <p>Technology foresight · legal gap analysis · comparative law · policy & legislation</p>
-        <p class="copyright">Copyright © 이명훈 2026. All rights reserved.</p>
-      </div>
-      <a href="#top">맨 위로 이동 ↑</a>
+      <div><strong>AI 법·기술 선제연구 아카이브</strong><p>Technology foresight · legal analysis · comparative law · policy & legislation</p></div>
+      <div class="footer-meta"><p>Copyright © 이명훈 2026. All rights reserved.</p><p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p><a class="top-link" href="#top">맨 위로 이동 ↑</a></div>
     </div>
   </footer>
 
-  <dialog id="detailDialog">
+  <dialog id="detailDialog" class="research-dialog">
     <form method="dialog" class="dialog-shell">
       <button class="close" aria-label="닫기">×</button>
-      <div id="detailContent"></div>
+      <article id="detailContent" class="research-article"></article>
     </form>
   </dialog>
 
   <script src="data.js"></script>
+  <script src="academic-data-1.js"></script>
+  <script src="academic-data-2.js"></script>
+  <script src="academic-data-3.js"></script>
   <script src="research-data.js"></script>
   <script src="app.js"></script>
 </body>
