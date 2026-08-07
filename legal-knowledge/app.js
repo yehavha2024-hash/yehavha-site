@@ -53,6 +53,10 @@ function section(title, body) {
   if (!body) return '';
   return `<section class="detail-section"><h4>${esc(title)}</h4>${body}</section>`;
 }
+function matrix(rows=[]) {
+  if (!rows.length) return '';
+  return `<div class="fact-matrix">${rows.map(row => `<div class="fact-row"><strong>${esc(row[0])}</strong><p>${esc(row[1])}</p></div>`).join('')}</div>`;
+}
 
 function renderAreaFilters() {
   filtersEl.innerHTML = areas.map(area => `<button class="filter-btn ${area === activeArea ? 'active':''}" data-area="${esc(area)}">${esc(area)}</button>`).join('');
@@ -79,8 +83,9 @@ function renderStats() {
 }
 function searchableText(item) {
   const deep = (item.deepDive || []).flatMap(x => [x.title, x.body]);
-  const fields = [item.title,item.area,item.systemArea,item.subfield,item.type,item.summary,item.concept,item.issue,item.rule,item.coreRule,item.analysis,item.effect,item.theories,item.caseFacts,item.courtHolding,item.courtReasoning,item.counter,
-    ...(item.keywords||[]),...(item.examTags||[]),...(item.requirements||[]),...(item.relatedRules||[]),...(item.variations||[]),...deep,...(item.application||[])];
+  const matrixText = (item.factMatrix || []).flat();
+  const fields = [item.title,item.area,item.systemArea,item.subfield,item.type,item.summary,item.concept,item.issue,item.rule,item.coreRule,item.analysis,item.effect,item.theories,item.doctrineDebate,item.precedentLineage,item.methodLineage,item.caseFacts,item.courtHolding,item.courtReasoning,item.counter,
+    ...(item.keywords||[]),...(item.examTags||[]),...(item.requirements||[]),...(item.relatedRules||[]),...(item.variations||[]),...(item.hardVariations||[]),...matrixText,...deep,...(item.application||[])];
   return fields.filter(Boolean).join(' ').toLowerCase();
 }
 function filteredData() {
@@ -115,6 +120,8 @@ function openDetail(id) {
   const deep = (item.deepDive || []).map(x => `<div class="deep-item"><strong>${esc(x.title)}</strong><p>${esc(x.body)}</p></div>`).join('');
   const application = (item.application || []).length ? `<ol class="detail-list application-list">${item.application.map(x=>`<li>${esc(x)}</li>`).join('')}</ol>` : '';
   const variation = list(item.variations || []);
+  const hardVariation = list(item.hardVariations || [], 'detail-list hard-variation-list');
+  const factMatrix = matrix(item.factMatrix || []);
   const caseVerification = item.isCaseNote && item.caseOriginalVerified
     ? `<p class="case-verification ok">판결 원문 대조 완료</p>`
     : '';
@@ -130,7 +137,11 @@ function openDetail(id) {
     ${section('법적 효과', item.effect ? `<p>${esc(item.effect)}</p>` : '')}
     ${section('주요 쟁점', `<p>${esc(item.issue)}</p>`)}
     ${section('학설·해석론', item.theories ? `<p>${esc(item.theories)}</p>` : '')}
+    ${section('학설 대립구조', item.doctrineDebate ? `<p>${esc(item.doctrineDebate)}</p>` : '')}
+    ${section('판례의 선행·후속 관계', item.precedentLineage ? `<p>${esc(item.precedentLineage)}</p>` : '')}
+    ${section('방법론의 연결구조', item.methodLineage ? `<p>${esc(item.methodLineage)}</p>` : '')}
     ${section('판례 사실관계', item.caseFacts ? `<p>${esc(item.caseFacts)}</p>` : '')}
+    ${section('판례 사실관계 세분화', factMatrix)}
     ${section('법원의 판단', item.courtHolding ? `<p>${esc(item.courtHolding)}</p>` : '')}
     ${section('법원의 논증', item.courtReasoning ? `<p>${esc(item.courtReasoning)}</p>` : '')}
     ${section('핵심 법리·규범 구조', `<p>${esc(item.coreRule || item.rule)}</p>`)}
@@ -139,6 +150,7 @@ function openDetail(id) {
     ${section('심화 쟁점 해설', deep)}
     ${section('사례 적용·논증 순서', application)}
     ${section('사례변형', variation)}
+    ${section('고난도 사례변형', hardVariation)}
     ${section('관련 법리', chips(item.relatedRules || []))}
     ${section('관련 판례', caseLinks)}
     ${section('공식·주요 출처', allSources || '<p>법적 추론 방법론 항목은 특정 조문에 종속되지 않으며, 법학 방법론과 사례분석을 중심으로 구성합니다.</p>')}
