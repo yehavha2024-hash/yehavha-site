@@ -14,7 +14,27 @@
   const hasText = value => typeof value === 'string' && value.trim().length > 0;
   const hasList = value => Array.isArray(value) && value.length > 0;
 
+  function systemArea(item){
+    if (item.area === '공법' || item.area === '헌법·AI 기본규제') return '헌법·공법';
+    if (item.area === '민사법') return '민사·상사·책임법';
+    if (item.area === '형사법') return '형사법';
+    if (item.area === '지식재산법' || item.area === '지식재산·AI') return '지식재산법';
+    if (item.area === '조세·전문법') return '조세·전문법';
+    if (item.area === '법적 추론') return '법적 추론';
+    if (item.area === '데이터·플랫폼법') return '데이터·플랫폼·소비자법';
+    if (item.area === '모빌리티·로봇법') return '모빌리티·로봇·항공법';
+    if (item.area === '보건의료·AI') return '보건의료법';
+    if (item.area === 'AI 산업·융합법') return 'AI 산업·융합법';
+    if (item.area === '민사책임·소비자법') {
+      return ['제조물 책임법','민법·AI 책임'].includes(item.subfield)
+        ? '민사·상사·책임법'
+        : '데이터·플랫폼·소비자법';
+    }
+    return item.area;
+  }
+
   data.forEach(item => {
+    item.systemArea = systemArea(item);
     item.examTags = item.examTags || examMap[item.subfield] || ['기타 전문 법률시험'];
     item.lawDate = item.lawDate || item.reviewed || '2026.08.07';
     item.concept = item.concept || item.summary;
@@ -28,7 +48,7 @@
     const isCaseNote = item.noteModel === '판례·법리형' || hasText(item.caseFacts) || hasText(item.courtHolding) || hasText(item.courtReasoning);
     item.isCaseNote = isCaseNote;
 
-    // 16개 표준형. 주제 성격상 판례가 중심이 아닌 항목은 7·8·9·14를 적용 제외로 처리한다.
+    // 16개 표준형은 내부 품질검증 기준으로 유지한다. 공개 연구노트에는 충족 체크리스트를 노출하지 않는다.
     const checks = [
       {key:'concept', label:'주제·개념', ok:hasText(item.concept)},
       {key:'statutes', label:'관련 조문', ok:isReasoning || hasList(item.statuteSources)},
@@ -53,8 +73,7 @@
     item.standard16Total = 16;
     item.standard16Missing = checks.filter(x => !x.ok).map(x => x.label);
 
-    // 판례형은 원문 URL 존재만으로 검증 완료로 보지 않는다.
-    // 실제 판결 원문을 읽고 사실관계·판단·논증을 대조한 뒤 데이터에 caseOriginalChecked:true를 명시해야 한다.
+    // 판례형은 공식 원문 링크의 존재가 아니라 실제 원문 대조 후에만 검증 완료로 처리한다.
     item.caseOriginalVerified = !isCaseNote || item.caseOriginalChecked === true;
 
     if (isCaseNote && !item.caseOriginalVerified) {
