@@ -1,0 +1,41 @@
+.project-status {
+  padding: 8px 10px;
+  border: 1px solid rgba(255,255,255,.11);
+  border-radius: 999px;
+  font-size: .79rem;
+  font-weight: 800;
+  letter-spacing: -.01em;
+}
+.status-fresh {
+  background: rgba(73, 175, 255, .15);
+  border-color: rgba(111, 197, 255, .3);
+  color: #bfe5ff;
+}
+.status-active {
+  background: rgba(122, 184, 255, .1);
+  color: #cfe2ff;
+}
+.status-stable {
+  background: rgba(255,255,255,.065);
+  color: #d6e1ef;
+}
+.status-unknown {
+  background: rgba(255, 196, 110, .09);
+  color: #f2d4a5;
+}
+.project-live-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.project-live-meta span {
+  padding: 7px 9px;
+  border-radius: 10px;
+  background: rgba(255,255,255,.045);
+  color: #bcd0e9;
+  font-size: .79rem;
+  font-weight: 700;
+}
