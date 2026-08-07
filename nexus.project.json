@@ -1,0 +1,22 @@
+{
+  "id": "ai-law-institute",
+  "project": {
+    "category": "research",
+    "meta": "Research Site",
+    "title": "AI 법률연구소",
+    "description": "AI와 법률의 접점에서 연구, 강의, 출판과 지식 자료를 연결하는 전문 연구 사이트입니다.",
+    "url": "https://cold-rice-9d49.danielie.workers.dev/#top",
+    "actionLabel": "연구소 방문"
+  },
+  "tracking": {
+    "paths": ["index.html", "style.css", "script.js"],
+    "freshDays": 7,
+    "staleDays": 30,
+    "count": {
+      "type": "regex",
+      "file": "index.html",
+      "pattern": "<article><span>0[1-9]</span><h3>",
+      "label": "핵심 연구"
+    }
+  }
+}
