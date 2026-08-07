@@ -126,6 +126,21 @@
       "description": "영어와 히브리어 찬양, 신앙 고백과 관련 미디어 콘텐츠를 제공하는 공식 유튜브 채널입니다.",
       "url": "https://www.youtube.com/@yehavha",
       "actionLabel": "바로가기"
+    },
+    {
+      "id": "ai-law-tech-foresight",
+      "category": "research",
+      "meta": "AI Law & Technology Foresight",
+      "title": "AI 법·기술 선제연구 아카이브",
+      "description": "AI 기술의 다음 단계를 선제적으로 추적하고 현행법·법적 공백·비교법·정책·거버넌스·입법대안을 연결하는 독립 연구 아카이브입니다.",
+      "url": "https://yehavha-ai-foresight.pages.dev/",
+      "actionLabel": "선제연구 보기",
+      "managedBy": "github",
+      "status": "최근 업데이트",
+      "statusTone": "fresh",
+      "lastUpdated": "2026-08-07",
+      "contentCount": 14,
+      "contentLabel": "기술연구"
     }
   ]
 }

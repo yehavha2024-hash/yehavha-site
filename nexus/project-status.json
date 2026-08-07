@@ -1,4 +1,13 @@
 {
+  "ai-law-tech-foresight": {
+    "id": "ai-law-tech-foresight",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-07",
+    "contentCount": 14,
+    "contentLabel": "기술연구"
+  },
   "legal-knowledge": {
     "id": "legal-knowledge",
     "managedBy": "github",
