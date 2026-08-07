@@ -1,6 +1,6 @@
 {
   "id": "ai-law-institute",
-  "publish": false,
+  "publish": true,
   "project": {
     "category": "research",
     "meta": "Research Institute",
