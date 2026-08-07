@@ -3,6 +3,9 @@
 
   const meta = window.AI_FORESIGHT_META || {};
   const data = Array.isArray(window.AI_FORESIGHT_RECORDS) ? window.AI_FORESIGHT_RECORDS : [];
+  const comparative = Array.isArray(window.AI_FORESIGHT_COMPARATIVE) ? window.AI_FORESIGHT_COMPARATIVE : [];
+  const gaps = Array.isArray(window.AI_FORESIGHT_GAPS) ? window.AI_FORESIGHT_GAPS : [];
+  const policies = Array.isArray(window.AI_FORESIGHT_POLICIES) ? window.AI_FORESIGHT_POLICIES : [];
   const $ = (id) => document.getElementById(id);
   const searchInput = $('searchInput');
   const stageFilter = $('stageFilter');
@@ -17,14 +20,27 @@
   const list = (items=[]) => items.length ? `<ul>${items.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '<p class="muted">추가 연구 예정</p>';
   const chips = (items=[]) => items.map(x => `<span>${esc(x)}</span>`).join('');
   const section = (title, body) => `<section class="detail-section"><h4>${esc(title)}</h4>${body}</section>`;
+  const textOf = (values=[]) => values.flat(Infinity).filter(Boolean).join(' ').toLowerCase();
+
+  const lawAxisKeywords = {
+    '인공지능법':['인공지능','ai 기본','고영향','위험기반'],
+    '민사책임법':['민법','불법행위','민사책임','과실','인과관계'],
+    '제조물책임법':['제조물','제품책임','결함'],
+    '소프트웨어법':['소프트웨어','업데이트','코드'],
+    '개인정보·데이터법':['개인정보','데이터','신용정보','위치정보','민감정보'],
+    '저작권법':['저작권','공정이용','저작물'],
+    '지식재산법':['특허','지식재산','영업비밀','발명'],
+    '자율주행자동차법':['자율주행','자동차','도로교통','ads','adas'],
+    '로봇법':['로봇','휴머노이드','physical ai'],
+    '보험법':['보험','공탁','책임기금'],
+    '회사법·법인론':['회사','법인','내부통제','책임관리인','기능적 법적 지위'],
+    '증명책임·소송법':['증명','소송','문서제출','로그','입증','증거']
+  };
 
   function renderStatic() {
     $('researchFlow').innerHTML = (meta.researchFlow || []).map((item, i, arr) => `<span>${esc(item)}</span>${i < arr.length - 1 ? '<b>→</b>' : ''}`).join('');
     $('lawAxes').innerHTML = chips(meta.lawAxes || []);
-    $('jurisdictions').innerHTML = chips(meta.jurisdictions || []);
     $('sourceTypes').innerHTML = chips(meta.sourceTypes || []);
-    $('gapTaxonomy').innerHTML = chips(meta.gapTaxonomy || []);
-    $('policyOptions').innerHTML = chips(meta.policyOptions || []);
     $('phdTags').innerHTML = chips(meta.phdTags || []);
 
     const lineage = meta.thesisLineage || {};
@@ -36,9 +52,9 @@
 
     $('stats').innerHTML = [
       [data.length, '기술 연구'],
-      [(meta.lawAxes || []).length, '법률 연구축'],
-      [(meta.jurisdictions || []).length, '비교법 권역'],
-      [(meta.phdTags || []).length, '박사논문 태그']
+      [comparative.length, '비교법 권역'],
+      [gaps.length, '법적 공백'],
+      [policies.length, '정책·입법 수단']
     ].map(([n,label]) => `<div class="stat"><strong>${n}</strong><span>${esc(label)}</span></div>`).join('');
   }
 
@@ -50,10 +66,13 @@
   }
 
   function searchable(item) {
-    return [item.title,item.en,item.stage,item.maturity,item.summary,item.scenarioNote,
-      ...(item.tech||[]),...(item.currentLaw||[]),...(item.issues||[]),...(item.doctrine||[]),...(item.gaps||[]),
-      ...(item.comparative||[]),...(item.policy||[]),...(item.governance||[]),...(item.legislation||[]),...(item.phdTags||[])
-    ].filter(Boolean).join(' ').toLowerCase();
+    return textOf([item.title,item.en,item.stage,item.maturity,item.summary,item.scenarioNote,item.tech,item.currentLaw,item.issues,item.doctrine,item.gaps,item.comparative,item.policy,item.governance,item.legislation,item.phdTags]);
+  }
+
+  function matchesLawAxis(item, axis) {
+    if (axis === '전체') return true;
+    const haystack = searchable(item);
+    return (lawAxisKeywords[axis] || [axis]).some(keyword => haystack.includes(keyword.toLowerCase()));
   }
 
   function filtered() {
@@ -63,7 +82,7 @@
     const phd = phdFilter.value;
     return data.filter(item => {
       const stageOk = stage === '전체' || item.stage === stage;
-      const lawOk = law === '전체' || (item.currentLaw || []).some(x => x.includes(law.replace('법','')) || x === law);
+      const lawOk = matchesLawAxis(item, law);
       const phdOk = phd === '전체' || (item.phdTags || []).includes(phd);
       return stageOk && lawOk && phdOk && (!q || searchable(item).includes(q));
     }).sort((a,b) => a.order - b.order);
@@ -90,6 +109,23 @@
     });
   }
 
+  function renderResearchUnits() {
+    const q = searchInput.value.trim().toLowerCase();
+    const qMatch = values => !q || textOf(values).includes(q);
+
+    const comp = comparative.filter(x => qMatch([x.jurisdiction,x.priority,x.focus,x.materials,x.caseMethod]));
+    $('comparativeCards').innerHTML = comp.map(x => `
+      <article class="research-card"><div class="research-card-top"><strong>${esc(x.jurisdiction)}</strong><span>${esc(x.priority)}</span></div><div class="card-chips">${chips(x.focus || [])}</div><h4>축적자료</h4>${list(x.materials || [])}<p class="method"><strong>판례 분석:</strong> ${esc(x.caseMethod)}</p></article>`).join('');
+
+    const gapItems = gaps.filter(x => qMatch([x.title,x.problem,x.existing,x.solutions]));
+    $('gapCards').innerHTML = gapItems.map(x => `
+      <article class="research-card gap-card"><strong>${esc(x.title)}</strong><p>${esc(x.problem)}</p><h4>기존 법리 검토</h4><p>${esc(x.existing)}</p><h4>가능한 해결방법</h4>${list(x.solutions || [])}</article>`).join('');
+
+    const policyItems = policies.filter(x => qMatch([x.title,x.role,x.trigger,x.caution]));
+    $('policyCards').innerHTML = policyItems.map(x => `
+      <article class="research-card policy-card"><strong>${esc(x.title)}</strong><p>${esc(x.role)}</p><h4>적용 검토 시점</h4><p>${esc(x.trigger)}</p><h4>설계상 주의</h4><p>${esc(x.caution)}</p></article>`).join('');
+  }
+
   function openDetail(id) {
     const item = data.find(x => x.id === id);
     if (!item) return;
@@ -112,9 +148,15 @@
     dialog.showModal();
   }
 
-  [searchInput, stageFilter, lawFilter, phdFilter].forEach(el => el.addEventListener(el === searchInput ? 'input' : 'change', renderCards));
+  function rerender() {
+    renderCards();
+    renderResearchUnits();
+  }
+
+  searchInput.addEventListener('input', rerender);
+  [stageFilter, lawFilter, phdFilter].forEach(el => el.addEventListener('change', renderCards));
 
   renderStatic();
   populateFilters();
-  renderCards();
+  rerender();
 })();
