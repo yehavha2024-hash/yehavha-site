@@ -1,0 +1,23 @@
+{
+  "id": "ai-law-tech-foresight",
+  "publish": false,
+  "project": {
+    "category": "research",
+    "meta": "AI Law & Technology Foresight",
+    "title": "AI 법·기술 선제연구 아카이브",
+    "description": "AI 기술의 다음 단계를 선제적으로 추적하고 현행법·법적 공백·비교법·정책·거버넌스·입법대안을 연결하는 독립 연구 아카이브입니다.",
+    "url": "https://yehavha-ai-foresight.pages.dev/",
+    "actionLabel": "선제연구 보기"
+  },
+  "tracking": {
+    "paths": ["ai-law-tech-foresight"],
+    "freshDays": 7,
+    "staleDays": 30,
+    "count": {
+      "type": "window-array",
+      "global": "AI_FORESIGHT_RECORDS",
+      "label": "기술연구",
+      "files": ["ai-law-tech-foresight/data.js"]
+    }
+  }
+}
