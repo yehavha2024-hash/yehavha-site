@@ -1,6 +1,6 @@
 {
   "id": "three-min-rest",
-  "publish": false,
+  "publish": true,
   "project": {
     "category": "apps",
     "meta": "Web App",
