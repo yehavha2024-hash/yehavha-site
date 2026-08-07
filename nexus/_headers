@@ -1,0 +1,12 @@
+/
+  Cache-Control: no-cache, no-store, must-revalidate
+/index.html
+  Cache-Control: no-cache, no-store, must-revalidate
+/projects.json
+  Cache-Control: no-cache, no-store, must-revalidate
+/portal-v2.css
+  Cache-Control: public, max-age=3600
+/portal-v2.js
+  Cache-Control: public, max-age=3600
+/assets/*
+  Cache-Control: public, max-age=86400
