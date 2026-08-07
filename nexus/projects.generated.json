@@ -10,14 +10,6 @@
       "description": "설치 없이 바로 이용할 수 있는 모바일 중심 웹서비스입니다."
     },
     {
-      "id": "education",
-      "eyebrow": "EDUCATION & COURSES",
-      "title": "교육·강좌",
-      "icon": "🎓",
-      "iconClass": "education-icon",
-      "description": "생성형 AI를 실제 결과물로 연결하는 소규모 실습형 교육 과정입니다."
-    },
-    {
       "id": "research",
       "eyebrow": "RESEARCH & KNOWLEDGE",
       "title": "연구·지식",
@@ -40,6 +32,14 @@
       "icon": "🎬",
       "iconClass": "media-icon",
       "description": "찬양, 영상, 음원과 디지털 미디어 콘텐츠를 소개합니다."
+    },
+    {
+      "id": "education",
+      "eyebrow": "EDUCATION & COURSES",
+      "title": "교육·강좌",
+      "icon": "🎓",
+      "iconClass": "education-icon",
+      "description": "생성형 AI를 실제 결과물로 연결하는 소규모 실습형 교육 과정입니다."
     }
   ],
   "projects": [
