@@ -35,7 +35,7 @@ const subfields = ['전체', ...new Set(data.map(item => item.subfield).filter(B
 countEl.textContent = `연구 항목 ${data.length}`;
 
 function esc(s='') {
-  return String(s).replace(/[&<>'\"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','\"':'&quot;'}[c]));
+  return String(s).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 }
 function list(arr=[], cls='detail-list') {
   if (!arr.length) return '';
