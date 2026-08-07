@@ -16,10 +16,12 @@ let activeSubfield = '전체';
 const areas = ['전체', ...new Set(data.map(item => item.area))];
 const exams = ['전체', ...new Set(data.flatMap(item => item.examTags || []))];
 const subfields = ['전체', ...new Set(data.map(item => item.subfield).filter(Boolean))];
-countEl.textContent = `연구 항목 ${data.length}`;
+const completeCount = data.filter(item => item.qualityStatus === '16항목 완성').length;
+const caseVerifyCount = data.filter(item => item.qualityStatus === '원문 검증 필요').length;
+countEl.textContent = `연구 항목 ${data.length} · 16항목 완성 ${completeCount}`;
 
 function esc(s='') {
-  return String(s).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+  return String(s).replace(/[&<>'\"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','\"':'&quot;'}[c]));
 }
 function list(arr=[], cls='detail-list') {
   if (!arr.length) return '';
@@ -36,6 +38,18 @@ function links(arr=[]) {
 function section(title, body) {
   if (!body) return '';
   return `<section class="detail-section"><h4>${esc(title)}</h4>${body}</section>`;
+}
+function qualityClass(status='') {
+  if (status === '16항목 완성') return 'complete';
+  if (status === '원문 검증 필요') return 'verify';
+  return 'progress';
+}
+function qualityChecklist(item) {
+  const rows = (item.standard16 || []).map(x => `
+    <li class="${x.ok ? 'ok' : 'missing'}">
+      <span>${x.ok ? '✓' : '•'}</span><strong>${esc(x.label)}</strong><em>${x.ok ? (x.conditional ? '적용 제외/충족' : '충족') : '보강 필요'}</em>
+    </li>`).join('');
+  return `<div class="quality-summary"><strong>${esc(item.qualityStatus || '보강 중')}</strong><span>${item.standard16Done || 0}/16</span></div><ul class="quality-checklist">${rows}</ul>`;
 }
 
 function renderAreaFilters() {
@@ -63,7 +77,7 @@ function renderStats() {
 }
 function searchableText(item) {
   const deep = (item.deepDive || []).flatMap(x => [x.title, x.body]);
-  const fields = [item.title,item.area,item.subfield,item.type,item.summary,item.concept,item.issue,item.rule,item.coreRule,item.analysis,item.effect,item.theories,item.caseFacts,item.courtHolding,item.courtReasoning,item.counter,
+  const fields = [item.title,item.area,item.subfield,item.type,item.summary,item.concept,item.issue,item.rule,item.coreRule,item.analysis,item.effect,item.theories,item.caseFacts,item.courtHolding,item.courtReasoning,item.counter,item.qualityStatus,
     ...(item.keywords||[]),...(item.examTags||[]),...(item.requirements||[]),...(item.relatedRules||[]),...(item.variations||[]),...deep,...(item.application||[])];
   return fields.filter(Boolean).join(' ').toLowerCase();
 }
@@ -82,6 +96,7 @@ function renderCards() {
   cardsEl.innerHTML = items.map(item => `
     <article class="card">
       <div class="card-top"><span class="badge">${esc(item.area)} · ${esc(item.subfield || item.type)}</span><span class="level">${esc(item.level)}</span></div>
+      <div class="quality-badge ${qualityClass(item.qualityStatus)}">${esc(item.qualityStatus || '보강 중')} · ${item.standard16Done || 0}/16</div>
       <h3>${esc(item.title)}</h3>
       <p class="summary">${esc(item.summary)}</p>
       ${chips((item.examTags||[]).slice(0,3),'exam-chips')}
@@ -99,10 +114,15 @@ function openDetail(id) {
   const deep = (item.deepDive || []).map(x => `<div class="deep-item"><strong>${esc(x.title)}</strong><p>${esc(x.body)}</p></div>`).join('');
   const application = (item.application || []).length ? `<ol class="detail-list application-list">${item.application.map(x=>`<li>${esc(x)}</li>`).join('')}</ol>` : '';
   const variation = list(item.variations || []);
+  const caseVerification = item.isCaseNote
+    ? `<p class="case-verification ${item.caseOriginalVerified ? 'ok' : 'pending'}">${item.caseOriginalVerified ? '판결 원문 대조 완료' : '판결 원문 사실관계·판단·논증 대조 필요'}</p>`
+    : '';
   detailEl.innerHTML = `
     <div class="section-kicker">${esc(item.area)} · ${esc(item.subfield || '')} · ${esc(item.type)} · ${esc(item.level)}</div>
     <h3 class="detail-title">${esc(item.title)}</h3>
     <div class="detail-meta-row"><span>연구모형 ${esc(item.noteModel || '')}</span><span>법령·판례 기준 ${esc(item.lawDate || item.reviewed)}</span><span>최종 검토 ${esc(item.reviewed)}</span></div>
+    ${caseVerification}
+    ${section('16개 표준형 완성도', qualityChecklist(item))}
     ${section('관련 시험', chips(item.examTags || []))}
     ${section('개념·핵심정의', `<p>${esc(item.concept || item.summary)}</p>`)}
     ${section('관련 조문·공식 근거', statuteLinks)}
