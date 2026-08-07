@@ -1,5 +1,7 @@
 # YEHAVHA Nexus — GitHub 자동배포형
 
+운영 주소: https://yehavha-nexus-hub.pages.dev/
+
 기존 YEHAVHA Nexus의 화면 디자인, 배경, 카테고리 구조와 카드 스타일을 유지하면서 배포 방식을 GitHub → Cloudflare Pages 자동배포 구조로 변경한 버전입니다.
 
 ## 핵심 구조
@@ -26,7 +28,7 @@ GitHub의 `main` 브랜치에 커밋하면 Cloudflare Pages Git 연동 프로젝
 - Production branch: `main`
 - Framework preset: None
 - Root directory: `nexus`
-- Build command: 비움
 - Build output directory: `.`
+- 현재 정상 배포 중인 Build command 설정은 그대로 유지
 
-기존 Direct Upload 방식의 `yehavha-nexus` 프로젝트는 Git 연동으로 전환할 수 없으므로 새 Pages 프로젝트를 만들어야 합니다.
+기존 Direct Upload 방식의 `yehavha-nexus` 프로젝트는 백업용으로 유지할 수 있으며, 신규 운영 기준 주소는 `https://yehavha-nexus-hub.pages.dev/`입니다.
