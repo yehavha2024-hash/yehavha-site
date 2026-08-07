@@ -13,7 +13,7 @@ const areas = ['전체', ...new Set(data.map(item => item.area))];
 countEl.textContent = `연구 항목 ${data.length}`;
 
 function esc(s='') {
-  return String(s).replace(/[&<>'\"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','\"':'&quot;'}[c]));
+  return String(s).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 }
 
 function renderFilters() {
