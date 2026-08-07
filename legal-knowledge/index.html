@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="법리·판례 연구 — 실정법, 판례, 법적 추론을 전문적으로 체계화하는 연구형 지식 플랫폼" />
+  <meta name="description" content="법리·판례 연구 — 변호사시험·법무사·변리사·LEET 수준의 실정법, 판례, 학설, 사례분석과 법적 추론을 체계화하는 전문 법률지식 플랫폼" />
   <title>법리·판례 연구 | Advanced Legal Studies</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="enhancements.css" />
 </head>
 <body>
   <header class="hero">
@@ -16,94 +17,76 @@
       <a class="back-link" href="https://yehavha-nexus.pages.dev/" aria-label="예하바 넥서스로 돌아가기">← YEHAVHA NEXUS</a>
       <div class="eyebrow">ADVANCED LEGAL STUDIES</div>
       <h1>법리·판례 연구</h1>
-      <p class="hero-copy">변호사시험·법무사·변리사 등 전문 법률영역에서 요구되는 수준을 기준으로 실정법, 판례, 법적 추론과 논증을 체계화합니다.</p>
+      <p class="hero-copy">일반 생활법률이나 초보자용 문제풀이가 아니라 변호사시험·법무사·변리사 등 전문 법률영역과 LEET식 법적 추론·논증 수준을 기준으로 실정법과 판례를 체계화합니다.</p>
       <div class="hero-meta">
         <span>운영: 주제 단위 누적형</span>
         <span id="contentCount">연구 항목 0</span>
-        <span>최종 기준일 2026.08.07</span>
+        <span>법령·판례 기준 2026.08.07</span>
       </div>
     </div>
   </header>
 
   <main>
     <section class="notice" aria-labelledby="notice-title">
-      <div>
-        <div class="section-kicker">LEGAL NOTICE</div>
-        <h2 id="notice-title">법률정보 이용안내</h2>
-      </div>
-      <p>본 자료는 전문적인 연구·학습을 위한 참고자료이며 개별 사건에 대한 법률자문, 시험 정답 또는 결과를 보장하지 않습니다. 법령·판례·제도는 작성 이후 변경될 수 있고 최신 내용이 즉시 반영되지 않을 수 있습니다. 실제 사건·시험·업무에 적용하기 전 국가법령정보센터, 대법원 등 공식 자료를 통해 최신 내용을 확인하십시오.</p>
+      <div><div class="section-kicker">LEGAL NOTICE</div><h2 id="notice-title">법률정보 이용안내</h2></div>
+      <p>본 자료는 전문적인 연구·학습을 위한 참고자료이며 개별 사건에 대한 법률자문, 시험 정답·합격 또는 특정 결과를 보장하지 않습니다. 법령·판례·학설·시험범위는 작성 이후 변경될 수 있고 최신 내용이 즉시 반영되지 않을 수 있습니다. 판례 요약과 해설은 원문을 대체하지 않습니다. 실제 사건·시험·업무에 적용하기 전 국가법령정보센터, 대법원·헌법재판소 및 해당 시험 시행기관의 최신 공식 자료를 반드시 확인하십시오.</p>
     </section>
 
     <section class="research-model" aria-labelledby="model-title">
+      <div class="section-heading"><div><div class="section-kicker">RESEARCH MODEL</div><h2 id="model-title">문제풀이가 아니라 법률가적 사고를 축적합니다</h2></div></div>
+      <div class="flow" aria-label="연구 흐름"><span>개념</span><b>→</b><span>실정법·조문</span><b>→</b><span>학설·법리</span><b>→</b><span>판례·사실관계</span><b>→</b><span>법원의 논증</span><b>→</b><span>사례분석</span><b>→</b><span>법적 추론</span></div>
+    </section>
+
+    <section class="standard-section" aria-labelledby="standard-title">
       <div class="section-heading">
-        <div>
-          <div class="section-kicker">RESEARCH MODEL</div>
-          <h2 id="model-title">문제풀이가 아니라 법률가적 사고를 축적합니다</h2>
-        </div>
+        <div><div class="section-kicker">STANDARD NOTE MODEL</div><h2 id="standard-title">전문 연구노트 표준 형식</h2></div>
+        <p>모든 항목은 주제 성격에 따라 아래 요소를 적용합니다. 판례형은 사실관계·판단·논증을, 법리형은 요건·효과·학설을, 추론형은 논증구조와 사례변형을 중점적으로 제시합니다.</p>
       </div>
-      <div class="flow" aria-label="연구 흐름">
-        <span>개념</span><b>→</b><span>조문</span><b>→</b><span>요건사실</span><b>→</b><span>판례</span><b>→</b><span>논증</span><b>→</b><span>사례변형</span>
+      <div class="standard-grid">
+        <article><strong>01 주제·개념</strong><span>핵심 정의와 문제영역</span></article><article><strong>02 관련 조문</strong><span>현행 실정법과 공식 근거</span></article>
+        <article><strong>03 성립요건</strong><span>요건·판단요소·요건사실</span></article><article><strong>04 법적 효과</strong><span>권리·의무·책임의 귀결</span></article>
+        <article><strong>05 주요 쟁점</strong><span>사례에서 결론을 가르는 지점</span></article><article><strong>06 학설·해석론</strong><span>대립 견해와 해석의 근거</span></article>
+        <article><strong>07 판례 사실관계</strong><span>당사자·행위·시간·절차</span></article><article><strong>08 법원의 판단</strong><span>결론과 주문의 방향</span></article>
+        <article><strong>09 법원의 논증</strong><span>규범전제와 사실평가의 연결</span></article><article><strong>10 핵심 법리</strong><span>판례·조문에서 추출한 규칙</span></article>
+        <article><strong>11 반대논리·한계</strong><span>반론·예외·적용범위</span></article><article><strong>12 사례변형</strong><span>결정적 사실을 바꾼 적용훈련</span></article>
+        <article><strong>13 관련 법리</strong><span>인접 제도와 규범충돌</span></article><article><strong>14 관련 판례</strong><span>선행·후속·유사 판례</span></article>
+        <article><strong>15 관련 시험</strong><span>변호사시험·법무사·변리사·LEET 등</span></article><article><strong>16 기준일·검토일</strong><span>법령·판례 기준과 최종 검토일</span></article>
       </div>
+      <p class="standard-note">시험 태그는 학습 관련성을 표시하기 위한 것이며 실제 출제과목·범위는 해당 연도 시행기관 공고가 우선합니다.</p>
     </section>
 
     <section class="controls" aria-label="검색 및 필터">
-      <label class="search-box">
-        <span>검색</span>
-        <input id="searchInput" type="search" placeholder="법리, 판례, 조문, 키워드 검색" autocomplete="off" />
-      </label>
-      <div class="filters" id="areaFilters" aria-label="분야 필터"></div>
+      <div class="control-stack">
+        <label class="search-box"><span>통합 검색</span><input id="searchInput" type="search" placeholder="법리, 판례, 조문, 학설, 시험, 키워드 검색" autocomplete="off" /></label>
+        <div class="filter-row"><span class="filter-label">연구축</span><div class="filters" id="areaFilters" aria-label="분야 필터"></div></div>
+        <div class="filter-row"><span class="filter-label">시험</span><div class="filters" id="examFilters" aria-label="시험 필터"></div></div>
+        <div class="filter-row"><span class="filter-label">세부분야</span><select id="subfieldSelect" class="subfield-select" aria-label="세부분야 선택"></select></div>
+      </div>
     </section>
 
     <section class="stats" id="stats" aria-label="분야별 연구 현황"></section>
 
     <section class="content-section" aria-labelledby="content-title">
-      <div class="section-heading">
-        <div>
-          <div class="section-kicker">KNOWLEDGE BASE</div>
-          <h2 id="content-title">전문 법률지식</h2>
-        </div>
-        <p>각 항목은 독립적인 연구 단위입니다. 개념·조문·판례 구조에서 심화 쟁점과 사례 적용까지 한 연구노트 안에서 완결하도록 구성합니다.</p>
-      </div>
-      <div id="cards" class="cards"></div>
-      <div id="emptyState" class="empty" hidden>조건에 맞는 연구 항목이 없습니다.</div>
+      <div class="section-heading"><div><div class="section-kicker">KNOWLEDGE BASE</div><h2 id="content-title">전문 법률지식</h2></div><p>각 항목은 독립적인 연구 단위입니다. 개념·조문·판례의 암기보다 사실관계, 법원의 논증, 반대논리와 사례변형까지 연결해 하나의 주제를 완결적으로 이해하도록 구성합니다.</p></div>
+      <div id="cards" class="cards"></div><div id="emptyState" class="empty" hidden>조건에 맞는 연구 항목이 없습니다.</div>
     </section>
 
     <section class="roadmap" aria-labelledby="roadmap-title">
-      <div class="section-heading">
-        <div>
-          <div class="section-kicker">RESEARCH AXES</div>
-          <h2 id="roadmap-title">확장 연구축</h2>
-        </div>
-        <p>아래 5개 연구축은 모두 현재 운영 중이며, 검증된 주제 단위로 계속 축적합니다.</p>
-      </div>
-      <div class="roadmap-grid">
-        <article><strong>민사법</strong><span>민법 총칙·물권·채권·상법·민사소송·집행/보전</span></article>
+      <div class="section-heading"><div><div class="section-kicker">RESEARCH AXES</div><h2 id="roadmap-title">확장 연구축</h2></div><p>시험별 문제은행이 아니라 법 분야 중심으로 구축하며, 시험은 각 콘텐츠의 관련 태그로 연결합니다.</p></div>
+      <div class="roadmap-grid six">
+        <article><strong>민사법</strong><span>민법 총칙·물권·채권·상법·민사소송·민사집행/보전</span></article>
         <article><strong>공법</strong><span>헌법·행정법·행정쟁송·국가책임</span></article>
         <article><strong>형사법</strong><span>형법 총론·각론·형사소송·증거법</span></article>
         <article><strong>지식재산법</strong><span>특허·상표·디자인·저작권·부정경쟁</span></article>
-        <article><strong>법적 추론</strong><span>해석·포섭·논증·요건사실·증명책임·판례분석</span></article>
+        <article><strong>조세·전문법</strong><span>세법·조세쟁송·부동산등기·상업등기·공탁 등</span></article>
+        <article><strong>법적 추론</strong><span>전제·조건·규칙/예외·해석·포섭·논증·반례·요건사실·증명책임</span></article>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div>Copyright © 이명훈 2026. All rights reserved.</div>
-    <div class="footer-note">Research archive · Updated by verified topic units</div>
-  </footer>
+  <footer><div>Copyright © 이명훈 2026. All rights reserved.</div><div class="footer-note">Research archive · Updated by verified topic units</div></footer>
+  <dialog id="detailDialog" class="detail-dialog"><form method="dialog" class="dialog-shell"><button class="close" aria-label="닫기">×</button><div id="detailContent"></div></form></dialog>
 
-  <dialog id="detailDialog" class="detail-dialog">
-    <form method="dialog" class="dialog-shell">
-      <button class="close" aria-label="닫기">×</button>
-      <div id="detailContent"></div>
-    </form>
-  </dialog>
-
-  <script src="data.js"></script>
-  <script src="data-civil.js"></script>
-  <script src="data-public.js"></script>
-  <script src="data-criminal.js"></script>
-  <script src="data-ip.js"></script>
-  <script src="data-reasoning.js"></script>
-  <script src="app.js"></script>
+  <script src="data.js"></script><script src="data-civil.js"></script><script src="data-public.js"></script><script src="data-criminal.js"></script><script src="data-ip.js"></script><script src="data-reasoning.js"></script><script src="data-reasoning-advanced.js"></script><script src="data-special.js"></script><script src="schema.js"></script><script src="app.js"></script>
 </body>
 </html>
