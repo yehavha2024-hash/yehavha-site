@@ -1,5 +1,6 @@
 {
   "id": "ai-law-institute",
+  "publish": false,
   "project": {
     "category": "research",
     "meta": "Research Institute",
@@ -7,6 +8,11 @@
     "description": "AI의 행위효과·책임귀속, Agentic AI·Multi-Agent, 증명위험, 기능적 단위의 법적 지위와 비교법·입법론을 연결하는 전문 연구 허브입니다.",
     "url": "https://cold-rice-9d49.danielie.workers.dev/#top",
     "actionLabel": "연구소 방문"
+  },
+  "migration": {
+    "canonicalRepository": "yehavha2024-hash/ai-law-research-institute",
+    "canonicalBranch": "master",
+    "status": "Git-connected Cloudflare Pages 주소 확정 후 공개 전환"
   },
   "tracking": {
     "paths": ["ai-law-institute"],
