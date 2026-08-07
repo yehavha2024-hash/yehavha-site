@@ -22,6 +22,45 @@ document.querySelector('#contact-form')?.addEventListener('submit', (event) => {
 });
 
 (() => {
+  if (document.getElementById('project-ui-standard')) return;
+  const style = document.createElement('style');
+  style.id = 'project-ui-standard';
+  style.textContent = `
+    :root{--project-font:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-apple-system,sans-serif;--project-body:16px;--project-h1:clamp(40px,5vw,64px);--project-h2:clamp(30px,3.5vw,40px);--project-h3:20px;--project-max:1180px}
+    html,body,button,input,select,textarea{font-family:var(--project-font)!important}
+    body{font-size:var(--project-body)!important;line-height:1.82!important;letter-spacing:-.018em!important;word-break:keep-all}
+    .wrap{width:min(var(--project-max),calc(100% - 48px))!important}
+    .header-inner{width:min(1240px,calc(100% - 48px))!important}
+    h1,h2,h3,h4,.brand-mark,.brand strong,.focus-card strong,.contact-mail a{font-family:var(--project-font)!important}
+    .hero h1{font-size:var(--project-h1)!important;font-weight:780!important;line-height:1.16!important;letter-spacing:-.045em!important}
+    .section-head h2,.contact h2{font-size:var(--project-h2)!important;font-weight:760!important;line-height:1.3!important;letter-spacing:-.038em!important}
+    .intro-grid h3,.research-card h3,.program-card h3,.resource-card h3{font-size:var(--project-h3)!important;font-weight:750!important;line-height:1.45!important}
+    .lead{font-size:17px!important;line-height:1.88!important}
+    .focus-card p,.section-head>p,.intro-grid p,.research-card p,.program-card p,.resource-card p,.standard-grid p,.contact-grid>div>p{font-size:15px!important;line-height:1.82!important}
+    .eyebrow,.section-kicker,.program-card small,.resource-card small{font-size:11px!important}
+    .section{padding:72px 0!important}
+    .intro-grid,.research-grid,.program-grid,.resource-grid,.standard-grid{gap:16px!important}
+    @media(max-width:680px){
+      body{font-size:16px!important;line-height:1.86!important}
+      .wrap,.header-inner{width:calc(100% - 32px)!important}
+      .section{padding:56px 0!important}
+      .lead{font-size:17px!important}
+      .focus-card p,.section-head>p,.intro-grid p,.research-card p,.program-card p,.resource-card p,.standard-grid p,.contact-grid>div>p{font-size:16px!important;line-height:1.84!important}
+      .intro-grid,.research-grid,.program-grid,.resource-grid,.standard-grid,.contact-grid{grid-template-columns:1fr!important}
+    }
+  `;
+  document.head.appendChild(style);
+
+  const stripTrailingPeriod = (element) => {
+    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+    let last = null;
+    while (walker.nextNode()) if (walker.currentNode.nodeValue.trim()) last = walker.currentNode;
+    if (last) last.nodeValue = last.nodeValue.replace(/[.。．]+(\s*)$/, '$1');
+  };
+  document.querySelectorAll('h1,h2,h3,h4').forEach(stripTrailingPeriod);
+})();
+
+(() => {
   const footer = document.querySelector('body > footer');
   if (!footer) return;
   if (!document.getElementById('top')) document.body.id = 'top';
