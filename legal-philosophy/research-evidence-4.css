@@ -1,0 +1,20 @@
+.argument-label{padding:13px 0 7px;color:#365d7e;font-size:11.5px;font-weight:850;letter-spacing:.02em}
+.research-conclusion{margin-top:12px;padding:14px 15px;border:1px solid #c9d9e7;border-radius:9px;background:#f2f7fb;min-width:0}
+.research-conclusion strong{display:block;margin-bottom:6px;color:#214f78;font-size:11.5px}
+.research-conclusion p{margin:0;color:#405b72;font-size:13.2px;line-height:1.82;overflow-wrap:anywhere}
+.citation-section{margin-top:15px;padding-top:14px;border-top:1px solid #e6edf3;min-width:0}
+.citation-heading{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:9px;min-width:0}
+.citation-heading strong{color:#365d7e;font-size:11.5px;flex:0 0 auto}
+.citation-heading span{max-width:430px;color:#788a9b;font-size:10.5px;line-height:1.55;text-align:right}
+.citation-list{display:grid;gap:8px;margin:0;padding:0;list-style:none;counter-reset:citation}
+.citation-item{counter-increment:citation;min-width:0;padding:11px 12px;border:1px solid #e1e8ee;border-radius:8px;background:#fbfcfd}
+.citation-item::before{content:counter(citation,decimal-leading-zero);float:left;width:25px;padding-top:2px;color:#8297aa;font-size:9.5px;font-weight:850}
+.citation-meta,.citation-text,.citation-pinpoint{margin-left:25px;min-width:0}
+.citation-meta{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.citation-type{display:inline-block;padding:3px 6px;border-radius:5px;background:#e8f0f7;color:#325f84;font-size:9.5px;font-weight:850}
+.citation-link{color:#2f6796;text-decoration:none;font-size:10px;font-weight:750;overflow-wrap:anywhere}
+.citation-link-muted{color:#8a98a6;font-weight:650}
+.citation-text{margin-top:7px;margin-bottom:0;color:#42586d;font-size:12.5px;line-height:1.7;overflow-wrap:anywhere;word-break:normal}
+.citation-pinpoint{margin-top:5px;margin-bottom:0;color:#65788a;font-size:11.3px;line-height:1.68;overflow-wrap:anywhere}
+.citation-pinpoint strong{margin-right:4px;color:#526b82;font-size:10.5px}
+@media(max-width:620px){.citation-heading{display:block}.citation-heading span{display:block;margin-top:5px;text-align:left}.citation-item{padding:10px}.citation-meta{align-items:flex-start}.citation-link{max-width:46%;text-align:right}.citation-text{font-size:12.3px}.research-conclusion{padding:12px 13px}}
