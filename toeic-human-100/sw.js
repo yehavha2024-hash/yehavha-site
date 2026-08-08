@@ -1,11 +1,10 @@
-const CACHE = "toeic-human-100-v3-progress";
+const CACHE = "toeic-human-100-v4-progress-integrated";
 const ASSETS = [
   "./",
   "index.html",
   "style.css",
   "nexus-shell.css",
   "app.js",
-  "progress-fix.js",
   "content.js",
   "manifest.webmanifest",
   "images/toeic-bg.webp",
