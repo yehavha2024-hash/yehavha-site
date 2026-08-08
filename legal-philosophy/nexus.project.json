@@ -19,7 +19,8 @@
       "label": "핵심 연구",
       "files": [
         "legal-philosophy/data.js",
-        "legal-philosophy/data-core-axes-2.js"
+        "legal-philosophy/data-core-axes-2.js",
+        "legal-philosophy/data-debates-3.js"
       ]
     }
   }
