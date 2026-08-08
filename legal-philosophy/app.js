@@ -122,10 +122,10 @@
   function renderCitationEvidence(cite) {
     if (!cite) return '';
     return `
-      <div class="citation-status"><span>${esc(cite.status || '인용근거 보강')}</span><p>원저·후속논문·대립학설을 구분하여 제시합니다. 직접 인용문은 최종 논문 작성 시 해당 판본의 원문과 pinpoint를 다시 대조합니다.</p></div>
+      <div class="citation-status"><span>${esc(cite.status || '인용근거 보강')}</span><p>원저·후속문헌·대립학설 및 경쟁이론을 구분하여 제시합니다. 직접 인용문은 최종 논문 작성 시 해당 판본의 원문과 pinpoint를 다시 대조합니다.</p></div>
       ${citationRows(cite.primary,'원저 · 정확 위치')}
-      ${citationRows(cite.followUp,'대표 후속논문')}
-      ${citationRows(cite.opposition,'직접 대립학설 · 반대축')}
+      ${citationRows(cite.followUp,'대표 후속문헌')}
+      ${citationRows(cite.opposition,'대립학설 · 경쟁축')}
       ${cite.usableClaim ? `<div class="citation-boundary usable"><strong>논문에서 안전하게 사용할 수 있는 명제 범위</strong><p>${esc(cite.usableClaim)}</p></div>` : ''}
       ${cite.caution ? `<div class="citation-boundary caution"><strong>인용·적용상 주의</strong><p>${esc(cite.caution)}</p></div>` : ''}
     `;
@@ -142,7 +142,7 @@
     const source = item.sourceUrl
       ? `<div class="verification-note"><p>아래 자료는 해당 항목의 대표적 검증자료입니다. 논문에 직접 인용할 때에는 원저 또는 학술논문의 해당 판본·권호·쪽수를 다시 확인해야 합니다.</p><a class="source-link" href="${esc(item.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(item.sourceLabel || '검증자료 보기')} ↗</a></div>`
       : `<div class="verification-note"><p>대표 저작을 1차 자료로 확인하고, 직접 인용할 문장은 학술 DB 또는 사용 판본에서 정확한 원문·권호·쪽수를 재검증합니다. 현재 상세해설은 학설의 연구범위와 접목점을 학습하기 위한 연구노트입니다.</p></div>`;
-    const evidenceSection = cite ? section('07','원저·후속논문·직접 대립학설',renderCitationEvidence(cite)) : '';
+    const evidenceSection = cite ? section('07','원저·후속문헌·대립학설',renderCitationEvidence(cite)) : '';
     const verificationNo = cite ? '08' : '07';
 
     detailContent.innerHTML = `
