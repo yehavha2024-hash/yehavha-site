@@ -1,7 +1,92 @@
-.detail-dialog{scroll-behavior:smooth}
-.detail-dialog .close{position:sticky!important;float:right!important;top:12px!important;right:12px!important;z-index:8!important;margin:-20px -8px 0 0!important;box-shadow:0 4px 14px rgba(8,25,48,.12)}
-.document-footer{display:flex;justify-content:space-between;align-items:flex-end;gap:22px;margin-top:28px;padding:20px 0 2px;border-top:1px solid var(--line)}
-.document-footer-copy strong{display:block;color:var(--navy-800);font-size:13px;margin-bottom:5px}.document-footer-copy p{margin:2px 0!important;color:#718096!important;font-size:11px!important;line-height:1.6!important}.document-footer-copy a{color:var(--navy-700);text-decoration:none}
-.document-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.document-action{min-height:38px;padding:0 13px;border:1px solid var(--line);border-radius:9px;background:#f7f9fb;color:var(--navy-700);font:inherit;font-size:12px;font-weight:700;cursor:pointer}.document-action:hover{background:#eef3f7}.document-action.close-action{background:var(--navy-900);border-color:var(--navy-900);color:#fff}.document-action.close-action:hover{background:var(--navy-800)}
-.footer-top-link{display:inline-block;margin-top:8px;color:#9fb6ce;text-decoration:none;font-size:11px;font-weight:700}
-@media(max-width:620px){.detail-dialog .close{margin:-12px -8px 0 0!important}.document-footer{display:block;padding-top:18px}.document-actions{margin-top:14px;justify-content:stretch}.document-action{flex:1}.document-footer-copy p{font-size:10px!important}}
+/* YEHAVHA NEXUS Research Document Standard v1.0 — Legal Knowledge */
+:root{
+  --nxs-navy-950:#071627;
+  --nxs-navy-900:#081a30;
+  --nxs-navy-800:#0d2948;
+  --nxs-blue:#2e679d;
+  --nxs-blue-soft:#eaf1f7;
+  --nxs-ink:#172335;
+  --nxs-muted:#5e6f82;
+  --nxs-line:#dbe3eb;
+  --nxs-paper:#f5f7f9;
+  --nxs-white:#fff;
+  --nxs-radius:12px;
+  --nxs-content:850px;
+  --accent:#2e679d;
+  --accent-soft:#eaf1f7;
+}
+
+html{scrollbar-gutter:stable;scroll-behavior:smooth}
+html:has(dialog[open]),body:has(dialog[open]){overflow:hidden}
+body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-apple-system,sans-serif;letter-spacing:-.018em;word-break:keep-all}
+button,input,select,a{font-family:inherit}
+h1,h2,.detail-title{font-family:inherit!important}
+
+/* Nexus return/navigation language */
+.back-link,.nexus-link{display:inline-flex!important;align-items:center;min-height:34px;margin-bottom:18px!important;padding:0 10px;border:1px solid rgba(155,194,231,.20);border-radius:8px;color:#b8cce0!important;background:rgba(255,255,255,.035);text-decoration:none!important;font-size:11px!important;font-weight:800!important;letter-spacing:.07em!important;line-height:1!important}
+.back-link:hover,.nexus-link:hover{background:rgba(255,255,255,.07);border-color:rgba(155,194,231,.34)}
+
+/* Main page rhythm */
+.hero-inner{max-width:1160px;padding:42px 28px 44px}
+.hero .eyebrow,.section-kicker{color:#9bc2e7}
+.hero-copy{font-size:16px;line-height:1.78;margin:17px 0 22px}
+main{max-width:1160px;padding:32px 28px 58px}
+.research-model,.content-section,.roadmap{margin-top:44px}
+.section-heading{margin-bottom:17px}.section-heading h2{font-size:clamp(1.55rem,2.6vw,2rem);line-height:1.25}.section-heading p{font-size:13px;line-height:1.65}
+.notice{border-radius:12px;padding:22px 24px;box-shadow:0 8px 24px rgba(8,25,48,.05)}
+.controls{margin-top:30px}
+.card{min-height:290px;border-radius:12px;padding:18px;transition:border-color .14s ease,box-shadow .14s ease;transform:none!important}.card:hover{transform:none!important;box-shadow:0 10px 28px rgba(8,25,48,.07)}
+.open-detail,.filter-btn,.subfield-select,.search-box input{min-height:40px}
+
+/* Fixed numbered flow, no horizontal wobble */
+.research-model .flow{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:8px!important;overflow:visible!important;width:100%!important;margin-top:16px!important;padding:0!important;background:transparent!important;counter-reset:nxs-flow}
+.research-model .flow>b{display:none!important}
+.research-model .flow>span{position:relative!important;display:flex!important;align-items:center!important;min-width:0!important;min-height:66px!important;padding:23px 11px 10px!important;border:1px solid #cedae6!important;border-radius:10px!important;background:var(--nxs-navy-900)!important;color:#eaf2fb!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:keep-all!important;line-height:1.45!important;font-size:13px!important;counter-increment:nxs-flow}
+.research-model .flow>span::before{content:counter(nxs-flow,decimal-leading-zero);position:absolute;top:8px;left:10px;color:#9bc2e7;font-size:10px;font-weight:900;letter-spacing:.05em;line-height:1}
+
+/* One dialog, one scroll container */
+.detail-dialog{width:min(960px,calc(100% - 24px))!important;height:min(92dvh,900px)!important;max-height:92dvh!important;margin:auto!important;padding:0!important;border:1px solid #cbd6e1!important;border-radius:14px!important;background:var(--nxs-white)!important;color:var(--nxs-ink)!important;box-shadow:0 30px 80px rgba(3,12,23,.32)!important;overflow:hidden!important}
+.detail-dialog::backdrop{background:rgba(3,12,23,.70)!important;backdrop-filter:blur(2px)}
+.detail-dialog .dialog-shell{position:relative!important;width:100%!important;height:100%!important;margin:0!important;padding:0!important;background:var(--nxs-white)!important;overflow:hidden!important}
+.detail-dialog .close{position:absolute!important;float:none!important;top:14px!important;right:14px!important;z-index:20!important;width:38px!important;height:38px!important;margin:0!important;padding:0!important;display:grid!important;place-items:center!important;border:1px solid var(--nxs-line)!important;border-radius:9px!important;background:#f3f6f9!important;color:var(--nxs-navy-900)!important;box-shadow:none!important;font-size:20px!important;line-height:1!important;cursor:pointer!important}
+.detail-dialog .close:hover{background:#eaf0f5!important}
+.detail-dialog #detailContent{height:100%!important;max-height:none!important;overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain;scrollbar-gutter:stable;padding:32px 36px 36px!important;background:var(--nxs-white)!important;color:var(--nxs-ink)!important;scroll-behavior:smooth;counter-reset:nxs-doc-section}
+
+/* Document header */
+.detail-dialog .section-kicker{display:block;max-width:var(--nxs-content);margin:0 auto;color:var(--nxs-blue)!important;font-size:11px!important;font-weight:900!important;letter-spacing:.08em!important}
+.detail-title{max-width:var(--nxs-content);margin:8px auto 0!important;padding-right:48px;color:var(--nxs-ink)!important;font-size:clamp(1.65rem,3vw,2.15rem)!important;line-height:1.3!important;letter-spacing:-.035em!important}
+.detail-meta-row{display:flex;flex-wrap:wrap;gap:6px;max-width:var(--nxs-content);margin:12px auto 0!important;padding:0 0 20px;border-bottom:1px solid var(--nxs-line)}
+.detail-meta-row span{padding:5px 8px;border:1px solid var(--nxs-line);border-radius:7px;background:#f7f9fb;color:#65768a;font-size:11px}
+.case-verification{max-width:var(--nxs-content);margin:12px auto 0!important}
+
+/* Uniform automatic 01/02 numbering */
+.detail-dialog .detail-section{position:relative!important;max-width:var(--nxs-content)!important;margin:0 auto!important;padding:24px 0 24px 58px!important;border-top:0!important;border-bottom:1px solid var(--nxs-line)!important;counter-increment:nxs-doc-section;scroll-margin-top:18px}
+.detail-dialog .detail-section::before{content:counter(nxs-doc-section,decimal-leading-zero);position:absolute;left:0;top:27px;width:42px;color:var(--nxs-blue);font-size:11px;font-weight:900;letter-spacing:.04em}
+.detail-dialog .detail-section h4{margin:0 0 10px!important;color:var(--nxs-navy-800)!important;font-size:17px!important;line-height:1.45!important}
+.detail-dialog .detail-section p,.detail-dialog .detail-list{color:#34465a!important;font-size:15px!important;line-height:1.82!important}
+.detail-dialog .detail-list{padding-left:20px!important}
+.meta-chips,.exam-chips,.card-keywords,.source-links{display:flex;flex-wrap:wrap;gap:6px}
+.meta-chips span,.exam-chips span,.card-keywords span{border:1px solid var(--nxs-line)!important;border-radius:7px!important;background:#f8fafc!important;color:#61768b!important}
+.source-links a{border-color:var(--nxs-line)!important;background:#f8fafc!important;color:var(--nxs-blue)!important;border-radius:8px!important}
+
+/* Standard document TOC */
+.document-toc{max-width:var(--nxs-content);margin:18px auto 2px;padding:14px 15px;border:1px solid var(--nxs-line);border-radius:10px;background:#f7f9fb}
+.document-toc-title{display:block;margin-bottom:9px;color:var(--nxs-navy-800);font-size:12px;font-weight:900;letter-spacing:.04em}
+.document-toc-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 12px}
+.document-toc button{display:flex;align-items:flex-start;gap:7px;width:100%;padding:5px 0;border:0;background:transparent;color:#536579;text-align:left;font:inherit;font-size:12px;line-height:1.45;cursor:pointer}
+.document-toc button span{flex:0 0 24px;color:var(--nxs-blue);font-size:10px;font-weight:900}
+.document-toc button:hover{color:var(--nxs-blue)}
+
+/* Copyright/footer belongs to every opened document */
+.document-footer{display:flex!important;justify-content:space-between!important;align-items:flex-end!important;gap:22px!important;max-width:var(--nxs-content)!important;margin:30px auto 0!important;padding:20px 0 2px!important;border-top:1px solid #bfcbd7!important}
+.document-footer-copy strong{display:block!important;margin-bottom:6px!important;color:var(--nxs-navy-800)!important;font-size:13px!important}.document-footer-copy p{margin:2px 0!important;color:#718096!important;font-size:11px!important;line-height:1.6!important}.document-footer-copy a{color:var(--nxs-blue)!important;text-decoration:none!important}
+.document-actions{display:flex!important;gap:8px!important;flex-wrap:wrap!important;justify-content:flex-end!important}.document-action{min-height:40px!important;padding:0 13px!important;border:1px solid var(--nxs-line)!important;border-radius:8px!important;background:#f7f9fb!important;color:var(--nxs-blue)!important;font:inherit!important;font-size:12px!important;font-weight:800!important;cursor:pointer!important}.document-action:hover{background:#edf3f8!important}.document-action.close-action{background:var(--nxs-navy-900)!important;border-color:var(--nxs-navy-900)!important;color:#fff!important}.document-action.close-action:hover{background:var(--nxs-navy-800)!important}
+.footer-top-link{display:inline-block;margin-top:8px;color:#9fb6ce;text-decoration:none;font-size:11px;font-weight:800}
+
+@media(max-width:900px){.research-model .flow{grid-template-columns:repeat(3,minmax(0,1fr))!important}.detail-dialog #detailContent{padding:28px 26px 30px!important}}
+@media(max-width:620px){
+  .hero-inner{padding:28px 18px 32px}.hero-copy{font-size:15px}.back-link{margin-bottom:16px!important}main{padding:24px 16px 48px}.research-model,.content-section,.roadmap{margin-top:34px}.notice{padding:18px}.section-heading h2{font-size:1.55rem}
+  .research-model .flow{grid-template-columns:repeat(2,minmax(0,1fr))!important}.research-model .flow>span{min-height:62px!important;padding:23px 9px 9px!important;font-size:12px!important}
+  .detail-dialog{width:calc(100% - 12px)!important;height:94dvh!important;max-height:94dvh!important;border-radius:12px!important}.detail-dialog #detailContent{padding:26px 18px 28px!important}.detail-dialog .close{top:10px!important;right:10px!important;width:36px!important;height:36px!important}.detail-title{padding-right:42px;font-size:1.55rem!important}.detail-dialog .detail-section{padding:22px 0 22px 44px!important}.detail-dialog .detail-section::before{top:25px;width:34px}.detail-dialog .detail-section h4{font-size:16px!important}.detail-dialog .detail-section p,.detail-dialog .detail-list{font-size:14.5px!important;line-height:1.78!important}
+  .document-toc-list{grid-template-columns:1fr}.document-footer{display:block!important;padding-top:18px!important}.document-actions{margin-top:14px!important;justify-content:stretch!important}.document-action{flex:1!important}.document-footer-copy p{font-size:10.5px!important}
+}
