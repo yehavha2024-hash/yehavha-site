@@ -16,7 +16,8 @@ const MANIFEST_FILES = [
   'three-minute-break/nexus.project.json',
   'toeic-human-100/nexus.project.json',
   'legal-knowledge/nexus.project.json',
-  'ai-law-tech-foresight/nexus.project.json'
+  'ai-law-tech-foresight/nexus.project.json',
+  'legal-philosophy/nexus.project.json'
 ];
 
 function readJson(file) {
