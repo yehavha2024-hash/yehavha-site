@@ -8,6 +8,28 @@ Thumbs.db
 **/.cache/
 *.zip
 
+# Deprecated root application / duplicated AI Law structures
+/ai-law-institute/
+/app/
+/build/
+/db/
+/drizzle/
+/examples/
+/public/
+/tests/
+/worker/
+/index.html
+/style.css
+/script.js
+/package.json
+/package-lock.json
+/pnpm-lock.yaml
+/next.config.*
+/postcss.config.*
+/tsconfig.json
+/vite.config.*
+/eslint.config.*
+
 # Validation/export outputs are generated on demand, not source of truth
 three-minute-break/CONTENT_CATALOG.csv
 three-minute-break/VALIDATION_REPORT.md
