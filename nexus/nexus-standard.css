@@ -1,0 +1,14 @@
+/* YEHAVHA NEXUS Portal Standard v1.0 */
+:root{--nxs-navy-950:#071627;--nxs-navy-900:#081a30;--nxs-navy-800:#0d2948;--nxs-blue:#7ab8ff;--nxs-line:rgba(255,255,255,.10);--nxs-radius:14px}
+html{scrollbar-gutter:stable;scroll-behavior:smooth}
+body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-apple-system,sans-serif;letter-spacing:-.015em;word-break:keep-all}
+.container{width:min(1160px,calc(100% - 32px))}
+.hero{padding:28px 0 16px}.hero-card{margin-top:12px;padding:28px 30px;border-radius:16px}.hero-card h1{font-size:clamp(2.2rem,4.8vw,3.8rem)}
+.quick-links{gap:7px;margin-top:18px}.quick-link{min-height:38px;display:inline-flex;align-items:center;padding:0 11px;border-radius:8px;font-size:12px}
+.main{padding:8px 0 34px}.portal-grid{gap:12px}.category-card{padding:20px;border-radius:16px;scroll-margin-top:14px}.category-head{grid-template-columns:46px minmax(0,1fr);gap:13px;margin-bottom:15px}.category-icon{width:46px;height:46px;border-radius:10px!important;border:1px solid rgba(122,184,255,.28)!important;background:rgba(122,184,255,.10)!important;color:#a9d0ff!important;box-shadow:none!important;font-size:11px!important;font-weight:900!important;letter-spacing:.08em!important}.media-icon,.publishing-icon,.research-icon,.apps-icon,.education-icon{background:rgba(122,184,255,.10)!important}
+.category-head h2{font-size:1.4rem}.category-description{font-size:13px;line-height:1.65}
+.items-grid{gap:10px}.item-card{min-height:208px;padding:17px;border-radius:12px;box-shadow:none;transform:none!important;transition:background .14s ease,border-color .14s ease}.item-card:hover{transform:none!important}.item-card h3{margin:12px 0 7px;font-size:18px}.item-card p{font-size:13.5px;line-height:1.7}.item-meta,.item-domain,.project-status{font-size:10.5px!important}.project-live-meta{margin-top:12px!important;font-size:10.5px!important}
+.item-actions{gap:7px;margin-top:15px}.visit-link,.copy-btn{min-height:40px;padding:0 12px;border-radius:8px;font-size:12px}.visit-link{background:#356fae}.copy-btn{background:rgba(255,255,255,.035)}
+.footer{padding-bottom:30px}.footer-card{padding:18px 10px}.footer-card p{font-size:12px}.footer-meta p,.footer-card a{font-size:11px}
+@media(max-width:700px){.container{width:calc(100% - 20px)}.hero{padding-top:20px}.hero-card{padding:22px 18px}.items-grid{grid-template-columns:1fr}.items-grid.one-item{grid-template-columns:1fr}.category-card{padding:17px}.category-head{grid-template-columns:40px minmax(0,1fr);gap:11px}.category-icon{width:40px;height:40px}.item-card{min-height:0}.quick-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.quick-link{justify-content:center;text-align:center}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
