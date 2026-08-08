@@ -102,12 +102,11 @@
     const replacements = [];
 
     ordered.forEach(([foreign, korean]) => {
-      const tokenIndex = replacements.length;
       const pattern = new RegExp(`(^|[^A-Za-z])(${escapeRegex(foreign)})(?![A-Za-z]|\\s*\\()`, 'gi');
       text = text.replace(pattern, (full, prefix, match) => {
-        const token = `\uE000${tokenIndex}\uE001`;
+        const index = replacements.length;
         replacements.push(`${match} (${korean})`);
-        return `${prefix}${token}`;
+        return `${prefix}\uE000${index}\uE001`;
       });
     });
 
