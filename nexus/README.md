@@ -2,86 +2,75 @@
 
 운영 주소: https://yehavha-nexus-hub.pages.dev/
 
-기존 YEHAVHA Nexus의 화면 디자인, 배경, 카테고리 구조와 카드 스타일을 유지하면서 배포 방식을 GitHub → Cloudflare Pages 자동배포 구조로 변경한 버전입니다.
+YEHAVHA Nexus는 웹앱·연구·출판·미디어·교육 프로젝트의 공식 진입점을 한곳에 모아 관리하는 통합 포털입니다.
 
-## 핵심 구조
+## 운영 원본
 
-- `index.html`: 기존 화면 구조의 셸
-- `portal-v2.css`: 기존 디자인 그대로 유지
-- `status.css`: GitHub 자동관리 프로젝트의 상태정보 표시
-- `assets/portal-bg.webp`: 기존 배경 이미지 그대로 유지
-- `projects.json`: 카테고리와 외부·기본 프로젝트의 기준 데이터
-- `projects.generated.json`: GitHub 자동관리 정보를 합쳐 생성되는 실제 표시 데이터
-- `project-status.json`: GitHub 관리 프로젝트의 최근 업데이트일·콘텐츠 수·상태
-- `portal-v2.js`: 생성 데이터를 읽어 카드와 카테고리를 자동 렌더링
-- `scripts/update-status.mjs`: 프로젝트 매니페스트를 탐색하고 상태·콘텐츠 수를 계산
-- `.github/workflows/refresh-nexus-status.yml`: GitHub 변경 및 일일 점검을 자동 실행
-- `_headers`: HTML과 프로젝트 데이터의 캐시 제어
+Cloudflare Pages는 이 저장소의 `nexus/` 디렉터리만 Nexus 운영 원본으로 사용합니다.
 
-## 자동관리 프로젝트 등록 규칙
+- `nexus/index.html`: 포털 화면 구조
+- `nexus/portal-v2.css`: 공통 디자인
+- `nexus/status.css`: 자동관리 상태 표시
+- `nexus/portal-v2.js`: 카테고리·프로젝트 렌더링
+- `nexus/projects.json`: 기본 프로젝트 기준 데이터
+- `nexus/projects.generated.json`: GitHub 관리정보를 합친 실제 표시 데이터
+- `nexus/project-status.json`: 최근 업데이트일·콘텐츠 수·운영상태
+- `nexus/scripts/update-status.mjs`: 승인된 프로젝트만 상태정보 갱신
+- `nexus/assets/portal-bg.webp`: 포털 배경
+- `nexus/_headers`: 캐시 제어
 
-GitHub 저장소에서 넥서스가 자동관리해야 하는 프로젝트에는 해당 프로젝트 위치에 `nexus.project.json` 파일을 둡니다.
+## 승인된 자동관리 프로젝트
 
-이 매니페스트에는 다음 정보를 정의합니다.
+Nexus 자동갱신은 저장소 전체를 재귀 탐색하지 않습니다. 아래 다섯 개 매니페스트만 승인된 관리원본으로 읽습니다.
 
-- 넥서스 카드의 카테고리·제목·설명·URL
-- 최근 수정일을 추적할 GitHub 경로
-- `최근 업데이트 / 운영 중 / 안정 운영` 상태 전환 기준
-- 콘텐츠 수를 계산하는 방법과 표시 단위
+1. `nexus.project.json` — AI 법률연구소
+2. `three-minute-break/nexus.project.json` — 3분 쉼표
+3. `toeic-human-100/nexus.project.json` — 토익인간 100일 프로젝트
+4. `legal-knowledge/nexus.project.json` — 법리·판례 연구
+5. `ai-law-tech-foresight/nexus.project.json` — AI 법·기술 선제연구 아카이브
 
-현재 자동관리 대상:
+새 프로젝트를 Nexus 자동관리 대상으로 추가할 때에는 매니페스트 파일을 임의의 폴더에 만드는 방식이 아니라 `nexus/scripts/update-status.mjs`의 승인 목록에도 명시적으로 등록해야 합니다. 이 규칙으로 구버전 폴더나 잘못된 매니페스트가 포털에 자동 노출되는 것을 방지합니다.
 
-- 저장소 루트 `nexus.project.json` → AI 법률연구소
-- `legal-knowledge/nexus.project.json` → 법리·판례 연구
+## 데이터 생성 규칙
 
-앞으로 새 GitHub 프로젝트에 `nexus.project.json`을 추가하면 `projects.json`을 직접 편집하지 않아도 새 카드가 자동으로 `projects.generated.json`에 추가됩니다.
+`projects.json`은 기본 카드와 카테고리의 기준 데이터입니다. `update-status.mjs`는 승인된 매니페스트에서 최근 수정일과 콘텐츠 수를 계산하여 `projects.generated.json`과 `project-status.json`을 갱신합니다.
 
-## 상태 자동 갱신
+검증 항목:
 
-GitHub Actions는 다음 경우 `node nexus/scripts/update-status.mjs`를 실행합니다.
+- 프로젝트 ID 중복 여부
+- 카테고리 존재 여부
+- 프로젝트 URL의 HTTP/HTTPS 형식
+- 승인 매니페스트 누락 여부
+- 콘텐츠 집계 규칙의 실행 가능 여부
 
-1. `main` 브랜치에 실제 프로젝트 변경이 들어온 경우
-2. 매일 1회 정기 점검
-3. GitHub Actions 화면에서 수동 실행한 경우
+`projects.generated.json`을 읽지 못할 경우 화면은 `projects.json`으로 안전하게 폴백합니다.
 
-상태 기준 기본값:
+## 상태 기준
 
 - 최근 수정 후 7일 이내: `최근 업데이트`
 - 8~30일: `운영 중`
 - 31일 이상: `안정 운영`
 
-각 프로젝트 매니페스트에서 기간을 별도로 변경할 수 있습니다.
+프로젝트별 기준은 각 매니페스트에서 조정할 수 있습니다.
 
-상태 생성 결과가 달라진 경우 GitHub Actions가 `project-status.json`과 `projects.generated.json`만 자동 커밋합니다. 이 자동 커밋은 Cloudflare Pages의 Git 연동에 의해 다시 배포되므로 Cloudflare에 ZIP을 수동 업로드할 필요가 없습니다.
+## GitHub Actions
 
-## 콘텐츠 수 자동 계산
+`.github/workflows/refresh-nexus-status.yml`은 Nexus 상태 갱신만 담당합니다. 다른 프로젝트의 학술자료 검증이나 콘텐츠 내보내기 작업과 분리하여, 하위 프로젝트의 별도 오류 때문에 Nexus 데이터 갱신이 멈추지 않도록 구성합니다.
 
-자동화 스크립트는 프로젝트별 매니페스트의 `tracking.count` 규칙을 사용합니다.
+실행 시점:
 
-현재 예시:
+- 승인된 Nexus 관련 경로가 `main`에 변경될 때
+- 매일 1회 정기 점검
+- GitHub Actions에서 수동 실행할 때
 
-- AI 법률연구소: 메인 페이지의 핵심 연구영역 수를 자동 집계
-- 법리·판례 연구: 기본 연구데이터 파일들을 실행하여 `window.LEGAL_KNOWLEDGE`의 실제 연구노트 수를 자동 집계
+변경이 있을 경우 `nexus/project-status.json`과 `nexus/projects.generated.json`만 자동 커밋합니다.
 
-따라서 법리·판례 연구에 연구노트가 추가되면 다음 GitHub 커밋 후 넥서스 카드의 `연구노트 N` 값도 자동으로 변경됩니다.
-
-## 화면 표시
-
-GitHub 자동관리 프로젝트에는 기존 디자인을 유지하면서 다음 정보만 추가 표시합니다.
-
-- 최근 업데이트 상태
-- 콘텐츠 수
-- 마지막 업데이트 날짜
-
-GitHub에서 직접 관리하지 않는 외부 전자책·유튜브·기타 서비스 카드는 기존 디자인 그대로 유지합니다.
-
-## Cloudflare Pages 설정
+## Cloudflare Pages
 
 - Git repository: `yehavha2024-hash/yehavha-site`
 - Production branch: `main`
 - Framework preset: None
 - Root directory: `nexus`
 - Build output directory: `.`
-- 현재 정상 배포 중인 Build command 설정은 그대로 유지
 
-기존 Direct Upload 방식의 `yehavha-nexus` 프로젝트는 백업용으로 유지할 수 있으며, 신규 운영 기준 주소는 `https://yehavha-nexus-hub.pages.dev/`입니다.
+운영 기준 주소는 `https://yehavha-nexus-hub.pages.dev/`입니다.
