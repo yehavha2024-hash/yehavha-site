@@ -5,6 +5,8 @@
   const axes = Array.isArray(window.LEGAL_PHILOSOPHY_AXES) ? window.LEGAL_PHILOSOPHY_AXES : ['전체'];
   const depthMap = window.LEGAL_PHILOSOPHY_DEPTH || {};
   const citationMap = window.LEGAL_PHILOSOPHY_CITATIONS || {};
+  const terminology = window.LEGAL_PHILOSOPHY_TERMINOLOGY || {};
+  const localize = value => typeof terminology.localize === 'function' ? terminology.localize(value) : String(value ?? '');
   const axisMeaning = {
     '법의 본질·정당성':'무엇이 법을 유효한 규범으로 만들고, 법적 권위와 도덕적 정당성이 어떤 관계를 가지는지 검토하는 축이다.',
     '권리·청구권·기본권':'누가 어떤 법익에 대해 권리·청구권·자유·권능을 가지며 상대방에게 어떤 의무가 발생하는지 분석하는 축이다.',
@@ -27,7 +29,8 @@
   const detailContent = $('detailContent');
 
   const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-  const list = (items, cls='') => `<ul class="${esc(cls)}">${(items || []).filter(Boolean).map(item => `<li>${esc(item)}</li>`).join('')}</ul>`;
+  const txt = value => esc(localize(value));
+  const list = (items, cls='') => `<ul class="${esc(cls)}">${(items || []).filter(Boolean).map(item => `<li>${txt(item)}</li>`).join('')}</ul>`;
   const flattenText = value => {
     if (value == null) return [];
     if (Array.isArray(value)) return value.flatMap(flattenText);
@@ -38,7 +41,7 @@
   const searchable = item => {
     const depth = depthMap[item.id] || {};
     const citations = citationMap[item.id] || {};
-    return flattenText([item.thinker,item.en,item.period,item.priority,item.axes,item.keywords,item.thesis,item.concepts,item.relevance,item.works,depth,citations]).join(' ').toLowerCase();
+    return flattenText([item.thinker,item.en,item.period,item.priority,item.axes,item.keywords,item.thesis,item.concepts,item.relevance,item.works,depth,citations,localize(flattenText(depth).join(' '))]).join(' ').toLowerCase();
   };
 
   function populateAxis() {
@@ -70,8 +73,8 @@
         <div class="card-main">
           <div class="card-top"><span class="badge priority-${esc(item.priority)}">${esc(item.priority)}</span><span class="badge">${esc(item.period)}</span>${(item.axes || []).slice(0,2).map(axis => `<span class="badge">${esc(axis)}</span>`).join('')}${evidenceBadge}</div>
           <h3>${esc(item.thinker)}<small>${esc(item.en)}</small></h3>
-          <p class="thesis">${esc(item.thesis)}</p>
-          <div class="keywords">${(item.keywords || []).map(x => `<span>${esc(x)}</span>`).join('')}</div>
+          <p class="thesis">${txt(item.thesis)}</p>
+          <div class="keywords">${(item.keywords || []).map(x => `<span>${txt(x)}</span>`).join('')}</div>
         </div>
         <button type="button" class="open-btn" data-id="${esc(item.id)}">연구내용 보기</button>
       </article>`;
@@ -87,10 +90,10 @@
     const rows = (item.axes || []).map(axis => `
       <div class="axis-explain-row">
         <strong>${esc(axis)}</strong>
-        <p>${esc(axisMeaning[axis] || '이 항목의 주장을 해당 법철학 연구영역과 연결하여 검토하는 분석축이다.')}</p>
+        <p>${txt(axisMeaning[axis] || '이 항목의 주장을 해당 법철학 연구영역과 연결하여 검토하는 분석축이다.')}</p>
       </div>
     `).join('');
-    return `<p class="detail-focus">${esc(depth.axisFocus || item.thesis)}</p><div class="axis-explain-list">${rows}</div>`;
+    return `<p class="detail-focus">${txt(depth.axisFocus || item.thesis)}</p><div class="axis-explain-list">${rows}</div>`;
   }
 
   function renderTerms(item, depth) {
@@ -98,7 +101,7 @@
       ? depth.terms
       : (item.keywords || []).map(term => [term, `${item.thinker}의 핵심 명제와 연결되는 개념이다. 대표 저작에서 정의·범위·예외를 확인해야 한다.`]);
     return `<div class="term-list">${terms.map(([term, explanation]) => `
-      <div class="term-row"><strong>${esc(term)}</strong><p>${esc(explanation)}</p></div>
+      <div class="term-row"><strong>${txt(term)}</strong><p>${txt(explanation)}</p></div>
     `).join('')}</div>`;
   }
 
@@ -113,7 +116,7 @@
     return `<div class="citation-group"><p class="citation-group-title">${esc(label)}</p>${rows.map(row => `
       <article class="citation-row">
         <p class="citation-title">${esc(row.citation)}</p>
-        ${row.pinpoint ? `<p class="citation-pinpoint"><strong>인용 위치</strong>${esc(row.pinpoint)}</p>` : ''}
+        ${row.pinpoint ? `<p class="citation-pinpoint"><strong>인용 위치</strong>${txt(row.pinpoint)}</p>` : ''}
         ${row.url ? `<a class="citation-link" href="${esc(row.url)}" target="_blank" rel="noopener noreferrer">자료 확인 ↗</a>` : ''}
       </article>
     `).join('')}</div>`;
@@ -126,8 +129,8 @@
       ${citationRows(cite.primary,'원저 · 정확 위치')}
       ${citationRows(cite.followUp,'대표 후속문헌')}
       ${citationRows(cite.opposition,'대립학설 · 경쟁축')}
-      ${cite.usableClaim ? `<div class="citation-boundary usable"><strong>논문에서 안전하게 사용할 수 있는 명제 범위</strong><p>${esc(cite.usableClaim)}</p></div>` : ''}
-      ${cite.caution ? `<div class="citation-boundary caution"><strong>인용·적용상 주의</strong><p>${esc(cite.caution)}</p></div>` : ''}
+      ${cite.usableClaim ? `<div class="citation-boundary usable"><strong>논문에서 안전하게 사용할 수 있는 명제 범위</strong><p>${txt(cite.usableClaim)}</p></div>` : ''}
+      ${cite.caution ? `<div class="citation-boundary caution"><strong>인용·적용상 주의</strong><p>${txt(cite.caution)}</p></div>` : ''}
     `;
   }
 
@@ -149,7 +152,7 @@
       <header class="detail-head">
         <div class="meta">${String(item.order).padStart(2,'0')} · ${esc(item.period)} · ${esc(item.priority)}${cite ? ` · ${esc(cite.status || '인용근거 보강')}` : ''}</div>
         <h3>${esc(item.thinker)}<small>${esc(item.en)}</small></h3>
-        <p class="lead-detail">${esc(item.thesis)}</p>
+        <p class="lead-detail">${txt(item.thesis)}</p>
       </header>
       <div class="detail-body">
         ${section('01','연구축과 문제의식',renderAxes(item, depth))}
