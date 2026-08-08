@@ -24,6 +24,39 @@
   const list = (items=[]) => items.length ? `<ul>${items.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '<p class="muted">추가 연구 예정</p>';
   const articleSection = (number, title, body) => `<section class="article-section"><div class="section-number">${esc(number)}</div><div class="article-section-body"><h4>${esc(title)}</h4>${body}</div></section>`;
 
+  function ensureDocumentControlsStyles() {
+    if (document.querySelector('link[data-document-controls]')) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'document-controls.css?v=20260808-2135';
+    link.dataset.documentControls = 'true';
+    document.head.appendChild(link);
+  }
+
+  function documentFooter() {
+    return `<footer class="document-footer" aria-label="연구본문 문서 하단">
+      <div class="document-footer-copy">
+        <strong>AI 법·기술 선제연구 아카이브</strong>
+        <p>Copyright © 이명훈 2026. All rights reserved.</p>
+        <p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p>
+      </div>
+      <div class="document-actions">
+        <button type="button" class="document-action" data-document-top aria-label="이 연구본문의 맨 위로 이동">맨 위로 ↑</button>
+        <button type="button" class="document-action close-action" data-document-close aria-label="연구본문 창 닫기">창 닫기 ×</button>
+      </div>
+    </footer>`;
+  }
+
+  function scrollDetailTop(behavior = 'smooth') {
+    if (typeof dialog.scrollTo === 'function') dialog.scrollTo({ top: 0, behavior });
+    if (typeof detailContent.scrollTo === 'function') detailContent.scrollTo({ top: 0, behavior });
+  }
+
+  function bindDocumentControls() {
+    detailContent.querySelector('[data-document-top]')?.addEventListener('click', () => scrollDetailTop('smooth'));
+    detailContent.querySelector('[data-document-close]')?.addEventListener('click', () => dialog.close());
+  }
+
   const lawAxisKeywords = {
     '인공지능법':['인공지능','ai act','고영향','범용 ai','frontier','위험기반'],
     '민사책임법':['민법','불법행위','민사책임','과실','인과관계','손해배상'],
@@ -169,10 +202,12 @@
         ${articleSection('11','공식·비교자료', sourceLinks(item.sources || []))}
       </div>
 
-      <div class="article-note"><strong>연구방법상 주의</strong><p>법령·판례·정책자료와 기술예측을 구분하고, 신설 기술영역에 존재하지 않는 판례를 임의로 만들지 않습니다. 법적 공백을 지적한 경우에는 현행법 해석 또는 제도적 해결대안을 함께 검토합니다.</p></div>`;
+      <div class="article-note"><strong>연구방법상 주의</strong><p>법령·판례·정책자료와 기술예측을 구분하고, 신설 기술영역에 존재하지 않는 판례를 임의로 만들지 않습니다. 법적 공백을 지적한 경우에는 현행법 해석 또는 제도적 해결대안을 함께 검토합니다.</p></div>
+      ${documentFooter()}`;
 
+    bindDocumentControls();
     dialog.showModal();
-    detailContent.scrollTop = 0;
+    requestAnimationFrame(() => scrollDetailTop('auto'));
   }
 
   function rerender() {
@@ -180,9 +215,16 @@
     renderResearchUnits();
   }
 
+  dialog.addEventListener('click', event => {
+    const rect = dialog.getBoundingClientRect();
+    const outside = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
+    if (outside) dialog.close();
+  });
+
   searchInput.addEventListener('input', rerender);
   [stageFilter, lawFilter, phdFilter].forEach(el => el.addEventListener('change', renderCards));
 
+  ensureDocumentControlsStyles();
   renderStatic();
   populateFilters();
   rerender();
