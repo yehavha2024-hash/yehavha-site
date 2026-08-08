@@ -7,7 +7,7 @@
   const accessCount = document.getElementById('accessCount');
   let toastTimer;
 
-  const COUNTER_BASE = 'https://api.counterapi.dev/v1/yehavha-nexus-6f2a9c1d/network-access';
+  const COUNTER_ENDPOINT = './api/access';
 
   const categoryIcons = {
     apps: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/></svg>',
@@ -67,38 +67,25 @@
     return project.category === 'publishing' || project.category === 'media' || /upaper\.kr|youtube\.com|youtu\.be/i.test(url);
   }
 
-  function extractCount(payload) {
-    const candidates = [
-      payload?.count,
-      payload?.value,
-      payload?.data?.count,
-      payload?.data?.value,
-      payload?.counter?.count,
-      payload?.counter?.value
-    ];
-    const found = candidates.find((value) => Number.isFinite(Number(value)));
-    return found === undefined ? null : Number(found);
-  }
-
   function showAccessCount(value) {
-    if (!accessCount || !Number.isFinite(value)) return;
-    accessCount.textContent = new Intl.NumberFormat('ko-KR').format(value);
+    if (!accessCount || !Number.isFinite(Number(value))) return;
+    accessCount.textContent = new Intl.NumberFormat('ko-KR').format(Number(value));
     accessCount.hidden = false;
   }
 
-  async function bumpAccessCount() {
+  async function requestAccessCount(op = 'up') {
     try {
-      const response = await fetch(`${COUNTER_BASE}/up`, {
+      const response = await fetch(`${COUNTER_ENDPOINT}?op=${encodeURIComponent(op)}`, {
         method: 'GET',
-        mode: 'cors',
         cache: 'no-store',
-        keepalive: true,
+        credentials: 'same-origin',
         headers: { Accept: 'application/json' }
       });
       if (!response.ok) throw new Error(`counter HTTP ${response.status}`);
       const payload = await response.json();
-      const value = extractCount(payload);
-      if (value !== null) showAccessCount(value);
+      const value = Number(payload?.count);
+      if (!payload?.ok || !Number.isFinite(value)) throw new Error('counter value missing');
+      showAccessCount(value);
       return value;
     } catch (error) {
       console.warn('Nexus access counter unavailable:', error);
@@ -247,15 +234,15 @@
     if (projectLink) {
       const newTab = projectLink.target === '_blank' || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
       if (newTab) {
-        void bumpAccessCount();
+        void requestAccessCount('up');
         return;
       }
 
       event.preventDefault();
       const href = projectLink.href;
       await Promise.race([
-        bumpAccessCount(),
-        new Promise((resolve) => window.setTimeout(resolve, 220))
+        requestAccessCount('up'),
+        new Promise((resolve) => window.setTimeout(resolve, 350))
       ]);
       window.location.assign(href);
       return;
@@ -270,6 +257,6 @@
     }
   });
 
-  void bumpAccessCount();
+  void requestAccessCount('up');
   loadPortal();
 })();
