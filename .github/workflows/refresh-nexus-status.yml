@@ -5,14 +5,13 @@ on:
     branches: [main]
     paths:
       - 'nexus/**'
+      - '!nexus/project-status.json'
+      - '!nexus/projects.generated.json'
       - 'nexus.project.json'
       - 'three-minute-break/**'
       - 'toeic-human-100/**'
       - 'legal-knowledge/**'
       - 'ai-law-tech-foresight/**'
-    paths-ignore:
-      - 'nexus/project-status.json'
-      - 'nexus/projects.generated.json'
   schedule:
     - cron: '15 15 * * *'
   workflow_dispatch:
