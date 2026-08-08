@@ -1,6 +1,20 @@
 # 토익인간 100일 프로젝트
 
-기존 Direct Upload 원본 ZIP의 전체 학습자료를 이관한 GitHub 관리형 기준본입니다.
+GitHub에서 관리하는 100일 모바일 토익 학습 웹앱입니다.
+
+## 운영 원본
+
+실제 서비스 원본은 다음 파일과 자산입니다.
+
+- `index.html` — 화면 구조
+- `style.css` — 디자인
+- `app.js` — 학습 진행·기록·음성·문제 상호작용
+- `content.js` — 100일 × 5개 영역, 총 500개 학습카드의 단일 데이터 원본
+- `manifest.webmanifest`, `sw.js`, `icons/` — PWA 구성
+- `images/` — 배경 이미지
+- `nexus.project.json` — Nexus 상태 추적 매니페스트
+
+서비스는 `content.js`를 직접 읽습니다. `content.json`, CSV 카탈로그와 검증보고서는 실행 원본이 아닙니다.
 
 ## 콘텐츠 구성
 
@@ -13,11 +27,12 @@
 - 첫 접속일을 DAY 1로 저장하고 한국 날짜 기준으로 자동 진행
 - 학습완료·완료일·오답문제 기록을 브라우저에 저장
 - 브라우저 영어 TTS를 이용한 발음·문장 듣기
-- PWA 설치 및 서비스워커 캐시 지원
-
-실제 학습데이터 원본은 `content.js`입니다. `content.js`를 수정하면 GitHub Actions가 `content.json`, `CONTENT_CATALOG.csv`, `VALIDATION_REPORT.md`를 다시 생성하고 100일 누락·중복·실전문제 정답·해설을 자동 검증합니다.
 
 실전문제는 TOEIC의 일반적인 출제 형식과 업무 영어 문맥을 반영한 자체 제작 문항이며 ETS 또는 YBM의 공식 기출문제를 복제한 자료가 아닙니다.
+
+## 검증·내보내기
+
+`scripts/export-content.mjs`는 필요할 때 `content.js`의 100일 누락·중복·실전문제 정답·해설을 검증하고 JSON·CSV·검증보고서를 로컬에서 생성하는 보조 도구입니다. 이 결과물은 실행 원본이 아니며 `.gitignore`로 Git 재등록을 차단합니다.
 
 ## GitHub → Cloudflare Pages
 
@@ -27,8 +42,7 @@
 - Framework preset: `None`
 - Build command: `exit 0`
 - Build output directory: `.`
-
-새 Git-connected Pages 주소가 검증될 때까지 기존 Direct Upload 주소는 유지합니다. 새 주소가 확정되면 `nexus.project.json`을 공개 전환하여 YEHAVHA Nexus 링크를 자동 교체합니다.
+- 운영 주소: https://yehavha-toeicman.pages.dev/
 
 ## 통합 정보
 
