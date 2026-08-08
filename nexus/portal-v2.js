@@ -7,7 +7,13 @@
   const accessCount = document.getElementById('accessCount');
   let toastTimer;
 
-  const COUNTER_ENDPOINT = './api/access';
+  const COUNTER_ENDPOINT = '/api/access';
+
+  // API 응답 전에도 숫자 영역은 항상 보이게 유지합니다.
+  if (accessCount) {
+    accessCount.textContent = '0';
+    accessCount.hidden = false;
+  }
 
   const categoryIcons = {
     apps: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/></svg>',
@@ -68,7 +74,7 @@
   }
 
   function trackedProjectUrl(url) {
-    return `./go?to=${encodeURIComponent(url)}`;
+    return `/go?to=${encodeURIComponent(url)}`;
   }
 
   function showAccessCount(value) {
@@ -92,7 +98,7 @@
       showAccessCount(value);
       return value;
     } catch (error) {
-      console.warn('Nexus access counter unavailable:', error);
+      console.warn('Nexus D1 access counter unavailable:', error);
       return null;
     }
   }
@@ -235,7 +241,7 @@
     }
 
     // 프로젝트 이동은 /go 서버 라우트를 통과합니다. middleware가 사람·봇 구분 없이
-    // 요청 자체를 카운트하므로 브라우저에서 별도로 증가시키지 않습니다.
+    // 요청 자체를 D1 누적 접속횟수에 기록하므로 브라우저에서 별도로 증가시키지 않습니다.
     const projectLink = event.target.closest('a[data-track-access="project"]');
     if (projectLink) return;
 
@@ -248,8 +254,14 @@
     }
   });
 
-  // 실제 접속 증가 처리는 Cloudflare Pages middleware가 서버측에서 수행합니다.
-  // 브라우저는 숫자 표시를 위해 현재 누적값만 조회하여 사람/봇의 이중집계를 방지합니다.
-  window.setTimeout(() => { void requestAccessCount('get'); }, 300);
+  // 접속 증가는 Cloudflare Pages middleware가 D1에서 수행합니다.
+  // 브라우저는 누적값 조회만 하므로 사람·봇 요청을 이중 집계하지 않습니다.
+  window.setTimeout(async () => {
+    const value = await requestAccessCount('get');
+    if (value === null) {
+      window.setTimeout(() => { void requestAccessCount('get'); }, 1800);
+    }
+  }, 250);
+
   loadPortal();
 })();
