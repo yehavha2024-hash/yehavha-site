@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#081a30" />
+  <meta name="description" content="AI 책임귀속·법적 지위·기본권·정의론·법적 논증을 연결하는 법철학 연구 아카이브" />
+  <title>법철학·기본권 연구</title>
+  <link rel="stylesheet" href="styles.css?v=20260808-2318" />
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="wrap">
+      <a class="nexus-link" href="https://yehavha-nexus-hub.pages.dev/">← YEHAVHA NEXUS</a>
+      <p class="eyebrow">LEGAL PHILOSOPHY · RIGHTS · PERSONHOOD · RESPONSIBILITY</p>
+      <h1>법철학·기본권 연구</h1>
+      <p class="lead">AI의 행위효과와 민사책임 귀속, 기능적 단위의 법적 지위, 기본권·비례성, 권리와 청구권, 정의와 법적 논증을 연구하기 위해 반드시 필요한 법철학자와 이론을 연구축별로 정리합니다.</p>
+      <div class="hero-points" aria-label="핵심 연구축">
+        <span>법의 정당성</span><span>권리·청구권</span><span>책임귀속</span><span>법인격</span><span>정의론</span><span>기본권·비례성</span><span>법적 논증</span><span>AI 적용</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="orientation">
+      <div class="wrap orientation-grid">
+        <div>
+          <p class="eyebrow">RESEARCH ORIENTATION</p>
+          <h2>인물사가 아니라 연구도구로 읽기</h2>
+        </div>
+        <div class="orientation-copy">
+          <p>각 항목은 생애나 사상사를 길게 소개하지 않습니다. 핵심 명제, 법적 개념, 대표 저작, 그리고 현재 연구에서 어떤 논증에 사용할 수 있는지를 중심으로 정리합니다.</p>
+          <p>특히 법인격은 사비니·기르케·켈젠·호펠드·쿠르키를 연결하고, 책임은 아리스토텔레스·하트·케인·와인립·칼라브레시를 비교하며, 기본권은 칸트·옐리네크·롤스·드워킨·알렉시·바라크를 중심축으로 구성합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="archive" aria-labelledby="archive-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div><p class="eyebrow">RESEARCH ARCHIVE</p><h2 id="archive-title">핵심 법철학 연구항목</h2></div>
+          <div class="count" id="count"></div>
+        </div>
+        <div class="controls">
+          <label class="search"><span>통합 검색</span><input id="searchInput" type="search" placeholder="칸트, 쿠르키, 청구권, 법인격, 책임귀속, 정의론 등" /></label>
+          <label><span>연구축</span><select id="axisFilter"></select></label>
+          <label><span>우선순위</span><select id="priorityFilter"><option value="전체">전체</option><option value="최핵심">최핵심</option><option value="핵심필수">핵심필수</option><option value="기초필수">기초필수</option><option value="심화">심화</option></select></label>
+        </div>
+        <div class="cards" id="cards"></div>
+        <p class="empty" id="empty" hidden>조건에 맞는 연구항목이 없습니다.</p>
+      </div>
+    </section>
+
+    <section class="research-map">
+      <div class="wrap">
+        <p class="eyebrow">DOCTORAL RESEARCH MAP</p>
+        <h2>박사연구와 직접 연결되는 읽기 순서</h2>
+        <div class="map-grid">
+          <div><strong>01 권리 구조</strong><p>빈트샤이트 → 호펠드 → 옐리네크 → 드워킨</p></div>
+          <div><strong>02 책임귀속</strong><p>아리스토텔레스 → 하트 → 케인 → 와인립 → 칼라브레시</p></div>
+          <div><strong>03 법인격</strong><p>사비니 → 기르케 → 켈젠 → 호펠드 → 쿠르키</p></div>
+          <div><strong>04 기본권</strong><p>칸트 → 롤스 → 드워킨 → 알렉시 → 바라크</p></div>
+          <div><strong>05 법적 논증</strong><p>풀러 → 드워킨 → 알렉시 → 매코믹 → 샤우어</p></div>
+          <div><strong>06 AI 규범설계</strong><p>하트 → 알렉시 → 쿠르키 → 케인 → 칼라브레시</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div><strong>법철학·기본권 연구</strong><p>Legal Philosophy & Fundamental Rights Research</p></div>
+      <div class="footer-meta"><p>Copyright © 이명훈 2026. All rights reserved.</p><p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p><a href="#top">맨 위로 이동 ↑</a></div>
+    </div>
+  </footer>
+
+  <dialog id="detailDialog" class="detail-dialog">
+    <button class="dialog-close" id="dialogClose" type="button" aria-label="닫기">×</button>
+    <article id="detailContent"></article>
+  </dialog>
+
+  <script src="data.js?v=20260808-2318"></script>
+  <script src="app.js?v=20260808-2318" defer></script>
+</body>
+</html>
