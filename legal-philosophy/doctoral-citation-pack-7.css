@@ -1,0 +1,33 @@
+.doctoral-citation-section{padding:72px 0;background:#f3f6f8;border-top:1px solid #dfe7ed;border-bottom:1px solid #dfe7ed}
+.doctoral-citation-section .section-head{align-items:flex-start}
+.doctoral-citation-summary{display:flex;flex-wrap:wrap;gap:7px;margin:18px 0 22px}
+.doctoral-citation-summary span{display:inline-flex;align-items:center;min-height:28px;padding:5px 9px;border:1px solid #d4e0e8;border-radius:999px;background:#fff;color:#425d72;font-size:11px;font-weight:800}
+.doctoral-citation-summary .strong{background:#e3eee9;border-color:#cbded4;color:#285d49}
+.doctoral-citation-list{display:grid;gap:10px}
+.doctoral-citation-card{border:1px solid #dbe4ea;border-radius:11px;background:#fff;overflow:hidden;box-shadow:0 6px 20px rgba(22,43,61,.04)}
+.doctoral-citation-card summary{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:13px;align-items:center;padding:15px 16px;cursor:pointer;list-style:none}
+.doctoral-citation-card summary::-webkit-details-marker{display:none}
+.doctoral-citation-card summary::after{content:'＋';display:grid;place-items:center;width:27px;height:27px;border:1px solid #d5e0e7;border-radius:50%;color:#557189;font-size:16px;font-weight:600}
+.doctoral-citation-card[open] summary::after{content:'−'}
+.doctoral-rank{display:inline-grid;place-items:center;min-width:39px;height:30px;padding:0 8px;border-radius:7px;background:#173f60;color:#fff;font-size:11px;font-weight:900;letter-spacing:.04em}
+.doctoral-summary-copy{min-width:0}
+.doctoral-summary-copy strong{display:block;color:#233e55;font-size:14px;line-height:1.45}
+.doctoral-summary-copy small{display:block;margin-top:3px;color:#718493;font-size:11.5px;line-height:1.5}
+.doctoral-citation-body{padding:0 16px 18px;border-top:1px solid #edf1f4}
+.doctoral-source-head{padding:15px 0 12px}
+.doctoral-source-head h4{margin:0;color:#24465f;font-size:15px;line-height:1.55}
+.doctoral-source-head p{margin:4px 0 0;color:#718392;font-size:12px;line-height:1.65}
+.doctoral-meta-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.doctoral-meta-row span{padding:4px 7px;border-radius:5px;background:#eef3f6;color:#50697c;font-size:10.5px;font-weight:800}
+.doctoral-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.doctoral-block{min-width:0;padding:12px 13px;border:1px solid #e1e8ed;border-radius:8px;background:#fbfcfd}
+.doctoral-block.wide{grid-column:1/-1}
+.doctoral-block>strong{display:block;margin-bottom:6px;color:#41617a;font-size:10.5px;letter-spacing:.02em}
+.doctoral-block p{margin:0;color:#4d6375;font-size:12.7px;line-height:1.75;overflow-wrap:anywhere}
+.doctoral-quote{margin:0;padding:12px 13px;border-left:3px solid #6689a5;background:#f3f7fa;color:#243f56;font-family:Georgia,'Times New Roman',serif;font-size:14px;line-height:1.72}
+.doctoral-quote-ko{margin:7px 0 0!important;color:#667987!important;font-size:12px!important}
+.doctoral-footnote{font-family:Georgia,'Times New Roman',serif;color:#344f65!important}
+.doctoral-draft{background:#f6faf8;border-color:#dbe9e1}
+.doctoral-caution{background:#faf8f4;border-color:#eadfcd}
+.doctoral-source-link{display:inline-block;margin-top:12px;color:#2c6795;text-decoration:none;font-size:11.5px;font-weight:850}
+@media(max-width:720px){.doctoral-citation-section{padding:54px 0}.doctoral-citation-card summary{grid-template-columns:auto minmax(0,1fr) auto;gap:9px;padding:13px 12px}.doctoral-rank{min-width:35px;height:28px}.doctoral-summary-copy strong{font-size:13px}.doctoral-grid{grid-template-columns:1fr}.doctoral-block.wide{grid-column:auto}.doctoral-citation-body{padding:0 12px 14px}.doctoral-quote{font-size:13.2px}.doctoral-block p{font-size:12.5px}}
