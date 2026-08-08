@@ -12,6 +12,7 @@ on:
       - 'toeic-human-100/**'
       - 'legal-knowledge/**'
       - 'ai-law-tech-foresight/**'
+      - 'legal-philosophy/**'
   schedule:
     - cron: '15 15 * * *'
   workflow_dispatch:
