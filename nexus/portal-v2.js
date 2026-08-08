@@ -4,14 +4,17 @@
   const toast = document.getElementById('toast');
   const quickLinks = document.getElementById('quickLinks');
   const portalGrid = document.getElementById('portalGrid');
+  const accessCount = document.getElementById('accessCount');
   let toastTimer;
 
-  const categoryNumber = {
-    apps: '01',
-    research: '02',
-    publishing: '03',
-    media: '04',
-    education: '05'
+  const COUNTER_BASE = 'https://api.counterapi.dev/v1/yehavha-nexus-6f2a9c1d/network-access';
+
+  const categoryIcons = {
+    apps: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/></svg>',
+    research: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 7.2 10 10M17 7.2 14 10M7 16.8 10 14M17 16.8 14 14"/></svg>',
+    publishing: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5c3.2-.7 5.8 0 8 2v11c-2.2-2-4.8-2.7-8-2V5.5Z"/><path d="M20 5.5c-3.2-.7-5.8 0-8 2v11c2.2-2 4.8-2.7 8-2V5.5Z"/></svg>',
+    media: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="m10 8.7 5.4 3.3-5.4 3.3V8.7Z"/></svg>',
+    education: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-4 9 4-9 4-9-4Z"/><path d="M6.5 11v4.5c3.5 2.3 7.5 2.3 11 0V11"/><path d="M21 9v5"/></svg>'
   };
 
   function showToast(message) {
@@ -47,6 +50,13 @@
     return el;
   }
 
+  function makeCategoryIcon(categoryId, className = '') {
+    const icon = make('span', className);
+    icon.innerHTML = categoryIcons[categoryId] || categoryIcons.apps;
+    icon.setAttribute('aria-hidden', 'true');
+    return icon;
+  }
+
   function formatDate(value) {
     if (!value) return '';
     return String(value).replaceAll('-', '.');
@@ -57,12 +67,51 @@
     return project.category === 'publishing' || project.category === 'media' || /upaper\.kr|youtube\.com|youtu\.be/i.test(url);
   }
 
+  function extractCount(payload) {
+    const candidates = [
+      payload?.count,
+      payload?.value,
+      payload?.data?.count,
+      payload?.data?.value,
+      payload?.counter?.count,
+      payload?.counter?.value
+    ];
+    const found = candidates.find((value) => Number.isFinite(Number(value)));
+    return found === undefined ? null : Number(found);
+  }
+
+  function showAccessCount(value) {
+    if (!accessCount || !Number.isFinite(value)) return;
+    accessCount.textContent = new Intl.NumberFormat('ko-KR').format(value);
+    accessCount.hidden = false;
+  }
+
+  async function bumpAccessCount() {
+    try {
+      const response = await fetch(`${COUNTER_BASE}/up`, {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'no-store',
+        keepalive: true,
+        headers: { Accept: 'application/json' }
+      });
+      if (!response.ok) throw new Error(`counter HTTP ${response.status}`);
+      const payload = await response.json();
+      const value = extractCount(payload);
+      if (value !== null) showAccessCount(value);
+      return value;
+    } catch (error) {
+      console.warn('Nexus access counter unavailable:', error);
+      return null;
+    }
+  }
+
   function renderQuickLinks(categories) {
     quickLinks.replaceChildren();
     categories.forEach((category) => {
       const link = make('a', 'quick-link');
       link.href = `#${category.id}`;
-      link.append(`${categoryNumber[category.id] || '00'} ${category.title}`);
+      link.append(makeCategoryIcon(category.id, 'quick-icon'), make('span', 'quick-label', category.title));
       quickLinks.append(link);
     });
   }
@@ -85,6 +134,7 @@
 
     const visit = make('a', 'visit-link');
     visit.href = project.url;
+    visit.dataset.trackAccess = 'project';
     const external = isExternalProject(project);
     visit.target = external ? '_blank' : '_self';
     if (external) visit.rel = 'noopener noreferrer';
@@ -121,10 +171,11 @@
     section.setAttribute('aria-labelledby', `${category.id}-title`);
 
     const head = make('div', 'category-head');
-    const icon = make('div', `category-icon ${category.iconClass || ''}`, categoryNumber[category.id] || '00');
+    const icon = make('div', `category-icon ${category.iconClass || ''}`);
+    icon.append(makeCategoryIcon(category.id, 'category-icon-glyph'));
     icon.setAttribute('aria-hidden', 'true');
 
-    const headText = make('div');
+    const headText = make('div', 'category-copy');
     headText.append(
       make('p', 'eyebrow', category.eyebrow),
       make('h2', '', category.title),
@@ -192,6 +243,24 @@
       return;
     }
 
+    const projectLink = event.target.closest('a[data-track-access="project"]');
+    if (projectLink) {
+      const newTab = projectLink.target === '_blank' || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+      if (newTab) {
+        void bumpAccessCount();
+        return;
+      }
+
+      event.preventDefault();
+      const href = projectLink.href;
+      await Promise.race([
+        bumpAccessCount(),
+        new Promise((resolve) => window.setTimeout(resolve, 220))
+      ]);
+      window.location.assign(href);
+      return;
+    }
+
     const link = event.target.closest('a[href^="#"]');
     if (link) {
       const targetId = link.getAttribute('href');
@@ -201,5 +270,6 @@
     }
   });
 
+  void bumpAccessCount();
   loadPortal();
 })();
