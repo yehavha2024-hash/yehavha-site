@@ -1,0 +1,18 @@
+.evidence-ready{background:#e2efe9!important;color:#285c49!important}
+.citation-status{padding:13px 14px;border:1px solid #d9e5df;border-radius:9px;background:#f7fbf9;margin-bottom:15px}
+.citation-status span{display:inline-block;padding:4px 7px;border-radius:5px;background:#e1efe8;color:#2d624f;font-size:10.5px;font-weight:850}
+.citation-status p{margin:8px 0 0;color:#607468;font-size:12.8px;line-height:1.75}
+.citation-group{margin-top:18px}
+.citation-group-title{margin:0 0 8px!important;color:#315f82!important;font-size:12px!important;font-weight:850;letter-spacing:.01em}
+.citation-row{min-width:0;padding:13px 14px;border:1px solid #e2e9ef;border-radius:9px;background:#fbfcfd}
+.citation-row+.citation-row{margin-top:8px}
+.citation-title{margin:0!important;color:#334b61!important;font-size:13.5px!important;font-weight:750;line-height:1.75!important;overflow-wrap:anywhere}
+.citation-pinpoint{display:grid;grid-template-columns:68px minmax(0,1fr);gap:8px;margin:7px 0 0!important;color:#617587!important;font-size:12.5px!important;line-height:1.7!important;overflow-wrap:anywhere}
+.citation-pinpoint strong{color:#7890a5;font-size:10.5px;letter-spacing:.02em}
+.citation-link{display:inline-block;margin-top:7px;color:#2d6797;text-decoration:none;font-size:11.5px;font-weight:800}
+.citation-boundary{margin-top:14px;padding:13px 14px;border-left:3px solid #9db8d0;background:#f5f8fb}
+.citation-boundary.caution{border-left-color:#baa989;background:#faf8f4}
+.citation-boundary strong{display:block;color:#365d7e;font-size:11.5px}
+.citation-boundary.caution strong{color:#725f3e}
+.citation-boundary p{margin:6px 0 0!important;color:#596d80!important;font-size:13px!important;line-height:1.8!important}
+@media(max-width:620px){.citation-row{padding:12px}.citation-pinpoint{grid-template-columns:1fr;gap:2px}.citation-group{margin-top:15px}}
