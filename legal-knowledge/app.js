@@ -24,6 +24,51 @@ const exams = ['전체', ...new Set(data.flatMap(item => item.examTags || []))];
 const subfields = ['전체', ...new Set(data.map(item => item.subfield).filter(Boolean))];
 countEl.textContent = `연구 항목 ${data.length}`;
 
+function ensureDocumentControlsStyles() {
+  if (document.querySelector('link[data-document-controls]')) return;
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'document-controls.css?v=20260808-2135';
+  link.dataset.documentControls = 'true';
+  document.head.appendChild(link);
+}
+
+function ensureMainTopLink() {
+  const hero = document.querySelector('.hero');
+  if (hero && !hero.id) hero.id = 'top';
+  const footer = document.querySelector('body > footer');
+  if (!footer || footer.querySelector('.footer-top-link')) return;
+  const link = document.createElement('a');
+  link.className = 'footer-top-link';
+  link.href = '#top';
+  link.textContent = '맨 위로 이동 ↑';
+  footer.appendChild(link);
+}
+
+function documentFooter() {
+  return `<footer class="document-footer" aria-label="연구노트 문서 하단">
+    <div class="document-footer-copy">
+      <strong>법리·판례 연구</strong>
+      <p>Copyright © 이명훈 2026. All rights reserved.</p>
+      <p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p>
+    </div>
+    <div class="document-actions">
+      <button type="button" class="document-action" data-document-top aria-label="이 연구노트의 맨 위로 이동">맨 위로 ↑</button>
+      <button type="button" class="document-action close-action" data-document-close aria-label="연구노트 창 닫기">창 닫기 ×</button>
+    </div>
+  </footer>`;
+}
+
+function scrollDetailTop(behavior = 'smooth') {
+  if (typeof dialog.scrollTo === 'function') dialog.scrollTo({ top: 0, behavior });
+  if (typeof detailEl.scrollTo === 'function') detailEl.scrollTo({ top: 0, behavior });
+}
+
+function bindDocumentControls() {
+  detailEl.querySelector('[data-document-top]')?.addEventListener('click', () => scrollDetailTop('smooth'));
+  detailEl.querySelector('[data-document-close]')?.addEventListener('click', () => dialog.close());
+}
+
 function esc(s='') {
   return String(s).replace(/[&<>'\"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','\"':'&quot;'}[c]));
 }
@@ -169,11 +214,22 @@ function openDetail(id) {
     ${section('관련 판례', caseLinks)}
     ${section('공식 가이드라인·비교자료', guidanceLinks)}
     ${section('공식·주요 출처', allSources || '<p>법적 추론 방법론 항목은 특정 조문에 종속되지 않으며, 법학 방법론과 사례분석을 중심으로 구성합니다.</p>')}
+    ${documentFooter()}
   `;
+  bindDocumentControls();
   dialog.showModal();
+  requestAnimationFrame(() => scrollDetailTop('auto'));
 }
 
+dialog.addEventListener('click', event => {
+  const rect = dialog.getBoundingClientRect();
+  const outside = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
+  if (outside) dialog.close();
+});
+
 searchEl.addEventListener('input', renderCards);
+ensureDocumentControlsStyles();
+ensureMainTopLink();
 renderAreaFilters();
 renderExamFilters();
 renderSubfields();
