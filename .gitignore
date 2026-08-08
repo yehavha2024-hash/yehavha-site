@@ -1,0 +1,16 @@
+# OS / editor artifacts
+.DS_Store
+**/.DS_Store
+Thumbs.db
+
+# Local build and archive artifacts
+**/dist/
+**/.cache/
+*.zip
+
+# Validation/export outputs are generated on demand, not source of truth
+three-minute-break/CONTENT_CATALOG.csv
+three-minute-break/VALIDATION_REPORT.md
+toeic-human-100/content.json
+toeic-human-100/CONTENT_CATALOG.csv
+toeic-human-100/VALIDATION_REPORT.md
