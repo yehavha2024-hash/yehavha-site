@@ -1,6 +1,6 @@
 {
   "id": "legal-philosophy",
-  "publish": true,
+  "publish": false,
   "project": {
     "category": "research",
     "meta": "Legal Philosophy & Fundamental Rights",
