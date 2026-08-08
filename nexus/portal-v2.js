@@ -67,13 +67,17 @@
     return project.category === 'publishing' || project.category === 'media' || /upaper\.kr|youtube\.com|youtu\.be/i.test(url);
   }
 
+  function trackedProjectUrl(url) {
+    return `./go?to=${encodeURIComponent(url)}`;
+  }
+
   function showAccessCount(value) {
     if (!accessCount || !Number.isFinite(Number(value))) return;
     accessCount.textContent = new Intl.NumberFormat('ko-KR').format(Number(value));
     accessCount.hidden = false;
   }
 
-  async function requestAccessCount(op = 'up') {
+  async function requestAccessCount(op = 'get') {
     try {
       const response = await fetch(`${COUNTER_ENDPOINT}?op=${encodeURIComponent(op)}`, {
         method: 'GET',
@@ -120,7 +124,7 @@
     const actions = make('div', 'item-actions');
 
     const visit = make('a', 'visit-link');
-    visit.href = project.url;
+    visit.href = trackedProjectUrl(project.url);
     visit.dataset.trackAccess = 'project';
     const external = isExternalProject(project);
     visit.target = external ? '_blank' : '_self';
@@ -230,23 +234,10 @@
       return;
     }
 
+    // 프로젝트 이동은 /go 서버 라우트를 통과합니다. middleware가 사람·봇 구분 없이
+    // 요청 자체를 카운트하므로 브라우저에서 별도로 증가시키지 않습니다.
     const projectLink = event.target.closest('a[data-track-access="project"]');
-    if (projectLink) {
-      const newTab = projectLink.target === '_blank' || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
-      if (newTab) {
-        void requestAccessCount('up');
-        return;
-      }
-
-      event.preventDefault();
-      const href = projectLink.href;
-      await Promise.race([
-        requestAccessCount('up'),
-        new Promise((resolve) => window.setTimeout(resolve, 350))
-      ]);
-      window.location.assign(href);
-      return;
-    }
+    if (projectLink) return;
 
     const link = event.target.closest('a[href^="#"]');
     if (link) {
