@@ -43,14 +43,5 @@
     "lastUpdated": "2026-08-08",
     "contentCount": 14,
     "contentLabel": "기술연구"
-  },
-  "legal-philosophy": {
-    "id": "legal-philosophy",
-    "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
-    "lastUpdated": "2026-08-08",
-    "contentCount": 32,
-    "contentLabel": "핵심 연구"
   }
 }
