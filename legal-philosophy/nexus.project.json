@@ -1,6 +1,6 @@
 {
   "id": "legal-philosophy",
-  "publish": false,
+  "publish": true,
   "project": {
     "category": "research",
     "meta": "Legal Philosophy & Fundamental Rights",
@@ -17,7 +17,10 @@
       "type": "window-array",
       "global": "LEGAL_PHILOSOPHY",
       "label": "핵심 연구",
-      "files": ["legal-philosophy/data.js"]
+      "files": [
+        "legal-philosophy/data.js",
+        "legal-philosophy/data-core-axes-2.js"
+      ]
     }
   }
 }
