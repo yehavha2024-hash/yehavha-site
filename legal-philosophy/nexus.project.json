@@ -1,0 +1,23 @@
+{
+  "id": "legal-philosophy",
+  "publish": true,
+  "project": {
+    "category": "research",
+    "meta": "Legal Philosophy & Fundamental Rights",
+    "title": "법철학·기본권 연구",
+    "description": "AI 책임귀속·법적 지위·기본권·정의론·법적 논증에 직접 필요한 법철학자와 이론을 연구축별로 정리한 아카이브입니다.",
+    "url": "https://yehavha-legal-philosophy.pages.dev/",
+    "actionLabel": "법철학 연구 보기"
+  },
+  "tracking": {
+    "paths": ["legal-philosophy"],
+    "freshDays": 7,
+    "staleDays": 30,
+    "count": {
+      "type": "window-array",
+      "global": "LEGAL_PHILOSOPHY",
+      "label": "핵심 연구",
+      "files": ["legal-philosophy/data.js"]
+    }
+  }
+}
