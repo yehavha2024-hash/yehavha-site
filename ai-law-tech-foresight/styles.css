@@ -85,4 +85,50 @@ h1{margin:0;font-size:clamp(2.25rem,5vw,4.55rem);line-height:1.04;letter-spacing
 
 @media(max-width:900px){.browser-head{display:block}.stats{grid-template-columns:repeat(4,1fr);margin-top:16px}.controls{grid-template-columns:1fr 1fr}.research-grid{grid-template-columns:1fr}.thesis-box{grid-template-columns:1fr}.method-head{display:block}.method-head>p{margin-top:8px}.research-row{grid-template-columns:42px 1fr}.row-action{grid-column:2}.detail-button{width:100%}}
 @media(max-width:620px){.wrap{width:calc(100% - 20px)}.site-header{padding-top:22px}.controls,.stats{grid-template-columns:1fr 1fr}.search-control{grid-column:1/-1}.research-row{grid-template-columns:30px 1fr;gap:10px;padding:14px}.row-main h3 small{display:block;margin:3px 0 0}.row-tags{display:none}.research-question{font-size:.82rem}.research-index summary{align-items:flex-start}.research-index summary small{display:none}.footer-inner{display:block}.footer-meta{text-align:left;margin-top:16px}.research-article{padding:0 18px 24px}.article-header h3{font-size:1.55rem}.article-section{grid-template-columns:1fr;gap:7px}.section-number{padding:0}.article-section-body p{font-size:.91rem}.taxonomy-row{display:block}.taxonomy-row .chip-grid{margin-top:9px}}
+
+/* Forced mobile/tablet research-flow grid. Desktop remains the original horizontal sequence. */
+@media(max-width:900px){
+  .method-bar .flow{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:8px!important;
+    overflow:visible!important;
+    width:100%!important;
+    margin-top:16px!important;
+    padding:0!important;
+    counter-reset:research-flow-step;
+  }
+  .method-bar .flow>b{display:none!important}
+  .method-bar .flow>span{
+    position:relative!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    min-width:0!important;
+    width:auto!important;
+    min-height:86px!important;
+    padding:28px 8px 10px!important;
+    text-align:center!important;
+    white-space:normal!important;
+    overflow-wrap:anywhere!important;
+    word-break:keep-all!important;
+    line-height:1.42!important;
+    font-size:12px!important;
+    counter-increment:research-flow-step;
+  }
+  .method-bar .flow>span::before{
+    content:counter(research-flow-step,decimal-leading-zero);
+    position:absolute;
+    top:8px;
+    left:9px;
+    color:#8bbfff;
+    font-size:10px;
+    font-weight:800;
+    line-height:1;
+    letter-spacing:.04em;
+  }
+}
+@media(max-width:380px){
+  .method-bar .flow{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
