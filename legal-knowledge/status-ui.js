@@ -7,6 +7,9 @@
     countEl.textContent=`연구 항목 ${data.length} · 판례 원문검증 ${verified}/${cases.length}`;
   }
 
+  const stats=document.getElementById('stats');
+  if(stats)stats.remove();
+
   if(!document.getElementById('project-ui-standard')){
     const ui=document.createElement('style');
     ui.id='project-ui-standard';
@@ -31,7 +34,6 @@
         main{padding-left:16px!important;padding-right:16px!important}
         .notice p,.section-heading p,.card .summary,.roadmap-grid span,.detail-sub,.detail-section p,.detail-list{font-size:16px!important;line-height:1.84!important}
         .cards,.roadmap-grid{grid-template-columns:1fr!important}
-        .stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}
         .notice{grid-template-columns:1fr!important}
       }
     `;
