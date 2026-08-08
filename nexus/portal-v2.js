@@ -6,12 +6,12 @@
   const portalGrid = document.getElementById('portalGrid');
   let toastTimer;
 
-  const iconMap = {
-    apps: '📱',
-    education: '🎓',
-    research: '⚖️',
-    publishing: '📚',
-    media: '🎬'
+  const categoryNumber = {
+    apps: '01',
+    research: '02',
+    publishing: '03',
+    media: '04',
+    education: '05'
   };
 
   function showToast(message) {
@@ -52,12 +52,17 @@
     return String(value).replaceAll('-', '.');
   }
 
+  function isExternalProject(project) {
+    const url = project.url || '';
+    return project.category === 'publishing' || project.category === 'media' || /upaper\.kr|youtube\.com|youtu\.be/i.test(url);
+  }
+
   function renderQuickLinks(categories) {
     quickLinks.replaceChildren();
     categories.forEach((category) => {
       const link = make('a', 'quick-link');
       link.href = `#${category.id}`;
-      link.append(`${category.icon || iconMap[category.id] || '•'} ${category.title}`);
+      link.append(`${categoryNumber[category.id] || '00'} ${category.title}`);
       quickLinks.append(link);
     });
   }
@@ -80,10 +85,11 @@
 
     const visit = make('a', 'visit-link');
     visit.href = project.url;
-    visit.target = '_blank';
-    visit.rel = 'noopener noreferrer';
+    const external = isExternalProject(project);
+    visit.target = external ? '_blank' : '_self';
+    if (external) visit.rel = 'noopener noreferrer';
     visit.append(`${project.actionLabel || '바로가기'} `);
-    const arrow = make('span', '', '↗');
+    const arrow = make('span', '', external ? '↗' : '→');
     arrow.setAttribute('aria-hidden', 'true');
     visit.append(arrow);
 
@@ -94,7 +100,7 @@
     actions.append(visit, copy);
     article.append(top, title, description);
 
-    if (project.managedBy === 'github') {
+    if (project.managedBy === 'github' || project.managedBy === 'github-external') {
       const info = make('div', 'project-live-meta');
       if (Number.isFinite(project.contentCount)) {
         info.append(make('span', '', `${project.contentLabel || '콘텐츠'} ${project.contentCount}`));
@@ -115,7 +121,7 @@
     section.setAttribute('aria-labelledby', `${category.id}-title`);
 
     const head = make('div', 'category-head');
-    const icon = make('div', `category-icon ${category.iconClass || ''}`, category.icon || iconMap[category.id] || '•');
+    const icon = make('div', `category-icon ${category.iconClass || ''}`, categoryNumber[category.id] || '00');
     icon.setAttribute('aria-hidden', 'true');
 
     const headText = make('div');
