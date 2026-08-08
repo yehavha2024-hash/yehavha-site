@@ -8,7 +8,6 @@ const dialog = document.getElementById('detailDialog');
 const detailEl = document.getElementById('detailContent');
 const emptyEl = document.getElementById('emptyState');
 const countEl = document.getElementById('contentCount');
-const statsEl = document.getElementById('stats');
 let activeArea = '전체';
 let activeExam = '전체';
 let activeSubfield = '전체';
@@ -26,7 +25,7 @@ const subfields = ['전체', ...new Set(data.map(item => item.subfield).filter(B
 countEl.textContent = `연구 항목 ${data.length}`;
 
 function esc(s='') {
-  return String(s).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+  return String(s).replace(/[&<>'\"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','\"':'&quot;'}[c]));
 }
 function list(arr=[], cls='detail-list') {
   if (!arr.length) return '';
@@ -86,13 +85,6 @@ function renderExamFilters() {
 function renderSubfields() {
   subfieldEl.innerHTML = subfields.map(s=>`<option value="${esc(s)}">${esc(s)}</option>`).join('');
   subfieldEl.addEventListener('change',()=>{activeSubfield=subfieldEl.value; renderCards();});
-}
-function renderStats() {
-  const realAreas = areas.filter(a => a !== '전체');
-  statsEl.innerHTML = realAreas.map(area => {
-    const n = data.filter(i => areaOf(i) === area).length;
-    return `<div class="stat"><strong>${n}</strong><span>${esc(area)}</span></div>`;
-  }).join('');
 }
 function searchableText(item) {
   const deep = (item.deepDive || []).flatMap(x => [x.title, x.body]);
@@ -185,5 +177,4 @@ searchEl.addEventListener('input', renderCards);
 renderAreaFilters();
 renderExamFilters();
 renderSubfields();
-renderStats();
 renderCards();
