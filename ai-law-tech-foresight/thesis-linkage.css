@@ -1,0 +1,148 @@
+.thesis-box,
+.thesis-box > *,
+.thesis-meta,
+.lineage,
+#phdTags{
+  min-width:0;
+}
+
+.thesis-box{
+  overflow:hidden;
+}
+
+.thesis-meta{
+  width:100%;
+  max-width:100%;
+}
+
+#phdTags{
+  width:100%;
+  max-width:100%;
+}
+
+#phdTags span{
+  min-width:0;
+  max-width:100%;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  word-break:keep-all;
+}
+
+.lineage{
+  width:100%;
+  max-width:100%;
+  overflow:hidden;
+  padding:12px;
+}
+
+.lineage-grid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:7px;
+  width:100%;
+  max-width:100%;
+}
+
+.lineage-step{
+  min-width:0;
+  padding:10px 8px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:7px;
+  background:#102235;
+}
+
+.lineage-step-number{
+  display:block;
+  margin-bottom:4px;
+  color:#7fa7cf;
+  font-size:10px;
+  font-weight:800;
+  line-height:1.2;
+  letter-spacing:.08em;
+}
+
+.lineage-step-title{
+  display:block;
+  min-width:0;
+  color:#c4d2df;
+  font-size:12px;
+  font-weight:700;
+  line-height:1.45;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  word-break:keep-all;
+}
+
+.master-link-status{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:4px 7px;
+  width:100%;
+  max-width:100%;
+  margin:10px 0 0;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.55;
+  overflow-wrap:anywhere;
+  word-break:keep-all;
+}
+
+.master-link-status strong,
+.master-link-status a{
+  min-width:0;
+  max-width:100%;
+}
+
+@media(max-width:900px){
+  .lineage-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+}
+
+@media(max-width:620px){
+  .thesis-section{
+    padding:28px 0;
+  }
+
+  .thesis-box{
+    gap:18px;
+    padding:16px;
+  }
+
+  .thesis-meta{
+    gap:9px;
+  }
+
+  .lineage{
+    padding:9px;
+  }
+
+  .lineage-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:6px;
+  }
+
+  .lineage-step{
+    padding:9px 8px;
+  }
+
+  .lineage-step:last-child:nth-child(odd){
+    grid-column:1 / -1;
+  }
+
+  .lineage-step-title{
+    font-size:11.5px;
+  }
+
+  .master-link-status{
+    display:block;
+    margin-top:9px;
+    font-size:11.5px;
+  }
+
+  .master-link-status strong{
+    display:block;
+    margin-bottom:2px;
+  }
+}
