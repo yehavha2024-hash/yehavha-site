@@ -5,7 +5,7 @@
     "category": "research",
     "meta": "Research Institute",
     "title": "AI 법률연구소",
-    "description": "AI 민사책임을 중심으로 Agentic AI·Multi-Agent Systems, 제조물책임, 증명위험, 책임배분과 제한적 법적 지위를 연구하는 법학 연구 허브입니다.",
+    "description": "인공지능의 기술적 작동과 법적 책임 사이의 연결구조를 연구합니다. AI 민사책임, Agentic AI·Multi-Agent Systems, 제조물책임, 증명위험, 책임배분과 제한적 법적 지위를 중심으로 연구합니다.",
     "url": "https://yehavha-ai-law-institute.pages.dev/",
     "actionLabel": "연구소 방문"
   },
@@ -18,7 +18,7 @@
     "count": {
       "type": "regex",
       "url": "https://raw.githubusercontent.com/yehavha2024-hash/ai-law-research-institute/master/index.html",
-      "pattern": "<article><span>0[1-8]</span><h3>(AI 행위효과와 책임귀속|Agentic AI의 자율적 행위|Multi-Agent 상호작용|증명책임·로그·설명가능성|AI 제품·서비스 책임|법적 지위·책임재산|비교법과 국제 규제|정책·거버넌스·입법론)</h3>",
+      "pattern": "class=\\\"num\\\">0[1-8]</span><h3>(AI 행위효과와 책임귀속|Agentic AI의 자율적 행위|Multi-Agent 상호작용|증명책임·로그·설명가능성|AI 제품·서비스 책임|법적 지위·책임재산|비교법과 국제 규제|정책·거버넌스·입법론)</h3>",
       "label": "연구축"
     }
   }
