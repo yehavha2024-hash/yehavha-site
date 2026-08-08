@@ -257,6 +257,8 @@
     }
   });
 
-  void requestAccessCount('up');
+  // 실제 접속 증가 처리는 Cloudflare Pages middleware가 서버측에서 수행합니다.
+  // 브라우저는 숫자 표시를 위해 현재 누적값만 조회하여 사람/봇의 이중집계를 방지합니다.
+  window.setTimeout(() => { void requestAccessCount('get'); }, 300);
   loadPortal();
 })();
