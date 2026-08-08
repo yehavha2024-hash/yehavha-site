@@ -1,5 +1,6 @@
 {
   "id": "legal-knowledge",
+  "publish": true,
   "project": {
     "category": "research",
     "meta": "Advanced Legal Studies",
