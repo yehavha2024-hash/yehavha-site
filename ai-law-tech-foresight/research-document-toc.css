@@ -1,0 +1,8 @@
+.document-toc{max-width:850px;margin:18px auto 2px;padding:14px 15px;border:1px solid #dbe3eb;border-radius:10px;background:#f7f9fb;color:#172335}
+.document-toc-title{display:block;margin-bottom:9px;color:#0d2948;font-size:12px;font-weight:900;letter-spacing:.04em}
+.document-toc-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 12px}
+.document-toc button{display:flex;align-items:flex-start;gap:7px;width:100%;padding:5px 0;border:0;background:transparent;color:#536579;text-align:left;font:inherit;font-size:12px;line-height:1.45;cursor:pointer}
+.document-toc button span{flex:0 0 24px;color:#2e679d;font-size:10px;font-weight:900}
+.document-toc button b{font-weight:700}
+.document-toc button:hover,.document-toc button:focus-visible{color:#2e679d;outline:none}
+@media(max-width:620px){.document-toc-list{grid-template-columns:1fr}}
