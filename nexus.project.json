@@ -18,7 +18,7 @@
     "count": {
       "type": "regex",
       "url": "https://raw.githubusercontent.com/yehavha2024-hash/ai-law-research-institute/master/index.html",
-      "pattern": "<section class=\\\"section dark-section\\\" id=\\\"research\\\">",
+      "pattern": "<article><span>0[1-8]</span><h3>(AI 행위효과와 책임귀속|Agentic AI의 자율적 행위|Multi-Agent 상호작용|증명책임·로그·설명가능성|AI 제품·서비스 책임|법적 지위·책임재산|비교법과 국제 규제|정책·거버넌스·입법론)</h3>",
       "label": "연구축"
     }
   }
