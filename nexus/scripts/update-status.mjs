@@ -9,6 +9,16 @@ const BASE_FILE = path.join(NEXUS, 'projects.json');
 const GENERATED_FILE = path.join(NEXUS, 'projects.generated.json');
 const STATUS_FILE = path.join(NEXUS, 'project-status.json');
 
+// Nexus에 노출할 GitHub 관리 프로젝트는 이 승인 목록만 읽습니다.
+// 저장소 어딘가에 예전 nexus.project.json이 남더라도 자동으로 카드가 추가되지 않습니다.
+const MANIFEST_FILES = [
+  'nexus.project.json',
+  'three-minute-break/nexus.project.json',
+  'toeic-human-100/nexus.project.json',
+  'legal-knowledge/nexus.project.json',
+  'ai-law-tech-foresight/nexus.project.json'
+];
+
 function readJson(file) {
   return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
@@ -17,14 +27,40 @@ function writeJson(file, value) {
   fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
 }
 
-function findManifests(dir = ROOT, found = []) {
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (['.git', 'node_modules', '.next', '.wrangler', 'dist'].includes(entry.name)) continue;
-    const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) findManifests(full, found);
-    else if (entry.isFile() && entry.name === 'nexus.project.json') found.push(full);
+function loadApprovedManifests() {
+  const manifests = [];
+  const seenIds = new Set();
+
+  for (const relative of MANIFEST_FILES) {
+    const file = path.join(ROOT, relative);
+    if (!fs.existsSync(file)) {
+      throw new Error(`Approved Nexus manifest is missing: ${relative}`);
+    }
+
+    const data = readJson(file);
+    if (!data?.id || !data?.project) {
+      throw new Error(`Invalid Nexus manifest: ${relative}`);
+    }
+    if (data.publish === false) continue;
+    if (seenIds.has(data.id)) {
+      throw new Error(`Duplicate Nexus project id: ${data.id}`);
+    }
+    seenIds.add(data.id);
+    manifests.push({ file, relative, data });
   }
-  return found;
+
+  return manifests;
+}
+
+function validateProject(project, source, categoryIds) {
+  if (!project?.id) throw new Error(`Project id is missing: ${source}`);
+  if (!project?.title) throw new Error(`Project title is missing: ${source}`);
+  if (!categoryIds.has(project.category)) {
+    throw new Error(`Unknown Nexus category '${project.category}' in ${source}`);
+  }
+  if (!/^https?:\/\//i.test(project.url || '')) {
+    throw new Error(`Invalid project URL in ${source}: ${project.url || '(empty)'}`);
+  }
 }
 
 function gitDateForPath(relativePath) {
@@ -122,25 +158,34 @@ function contentCount(config) {
   if (!config) return null;
   if (config.type === 'regex') return countRegex(config);
   if (config.type === 'window-array') return countWindowArray(config);
-  return null;
+  throw new Error(`Unsupported content count type: ${config.type}`);
 }
 
 const base = readJson(BASE_FILE);
-const manifests = findManifests().map(file => ({ file, data: readJson(file) }));
+const categoryIds = new Set((base.categories || []).map(item => item.id));
+const baseIds = new Set();
+for (const project of base.projects || []) {
+  validateProject(project, 'nexus/projects.json', categoryIds);
+  if (baseIds.has(project.id)) throw new Error(`Duplicate base project id: ${project.id}`);
+  baseIds.add(project.id);
+}
+
+const manifests = loadApprovedManifests();
 const managed = new Map();
 const statusMap = {};
 
-for (const { file, data } of manifests) {
-  if (!data?.id || !data?.project || data.publish === false) continue;
+for (const { file, relative, data } of manifests) {
   const tracking = data.tracking || {};
   const fallbackPaths = [path.relative(ROOT, path.dirname(file)) || '.'];
   const latest = latestDate(tracking, fallbackPaths);
   let count = null;
+
   try {
     count = contentCount(tracking.count);
   } catch (error) {
     console.warn(`Content count failed for ${data.id}: ${error.message}`);
   }
+
   const dynamic = {
     id: data.id,
     managedBy: tracking.externalRepository ? 'github-external' : 'github',
@@ -150,6 +195,7 @@ for (const { file, data } of manifests) {
     contentLabel: tracking.count?.label || '콘텐츠'
   };
   const project = { id: data.id, ...data.project, ...dynamic };
+  validateProject(project, relative, categoryIds);
   managed.set(data.id, project);
   statusMap[data.id] = dynamic;
 }
@@ -171,7 +217,7 @@ const generated = {
 writeJson(GENERATED_FILE, generated);
 writeJson(STATUS_FILE, statusMap);
 
-console.log(`YEHAVHA Nexus status refreshed: ${Object.keys(statusMap).length} GitHub-managed project(s).`);
+console.log(`YEHAVHA Nexus status refreshed: ${Object.keys(statusMap).length} approved GitHub-managed project(s).`);
 for (const project of projects.filter(item => String(item.managedBy || '').startsWith('github'))) {
   console.log(`- ${project.title}: ${project.status}, ${project.contentLabel} ${project.contentCount ?? '-'}, ${project.lastUpdated ?? '-'}`);
 }
