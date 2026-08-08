@@ -4,6 +4,7 @@
   const data = Array.isArray(window.LEGAL_PHILOSOPHY) ? window.LEGAL_PHILOSOPHY : [];
   const axes = Array.isArray(window.LEGAL_PHILOSOPHY_AXES) ? window.LEGAL_PHILOSOPHY_AXES : ['전체'];
   const depthMap = window.LEGAL_PHILOSOPHY_DEPTH || {};
+  const citationMap = window.LEGAL_PHILOSOPHY_CITATIONS || {};
   const axisMeaning = {
     '법의 본질·정당성':'무엇이 법을 유효한 규범으로 만들고, 법적 권위와 도덕적 정당성이 어떤 관계를 가지는지 검토하는 축이다.',
     '권리·청구권·기본권':'누가 어떤 법익에 대해 권리·청구권·자유·권능을 가지며 상대방에게 어떤 의무가 발생하는지 분석하는 축이다.',
@@ -25,7 +26,7 @@
   const dialog = $('detailDialog');
   const detailContent = $('detailContent');
 
-  const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[ch]));
+  const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
   const list = (items, cls='') => `<ul class="${esc(cls)}">${(items || []).filter(Boolean).map(item => `<li>${esc(item)}</li>`).join('')}</ul>`;
   const flattenText = value => {
     if (value == null) return [];
@@ -36,7 +37,8 @@
   const unique = items => [...new Set((items || []).filter(Boolean))];
   const searchable = item => {
     const depth = depthMap[item.id] || {};
-    return flattenText([item.thinker,item.en,item.period,item.priority,item.axes,item.keywords,item.thesis,item.concepts,item.relevance,item.works,depth]).join(' ').toLowerCase();
+    const citations = citationMap[item.id] || {};
+    return flattenText([item.thinker,item.en,item.period,item.priority,item.axes,item.keywords,item.thesis,item.concepts,item.relevance,item.works,depth,citations]).join(' ').toLowerCase();
   };
 
   function populateAxis() {
@@ -59,18 +61,21 @@
     const items = filtered();
     count.textContent = `전체 ${data.length}개 · 표시 ${items.length}개`;
     empty.hidden = items.length > 0;
-    cards.innerHTML = items.map(item => `
+    cards.innerHTML = items.map(item => {
+      const cite = citationMap[item.id];
+      const evidenceBadge = cite ? `<span class="badge evidence-ready">${esc(cite.status || '인용근거 보강')}</span>` : '';
+      return `
       <article class="card">
         <div class="number">${String(item.order).padStart(2,'0')}</div>
         <div class="card-main">
-          <div class="card-top"><span class="badge priority-${esc(item.priority)}">${esc(item.priority)}</span><span class="badge">${esc(item.period)}</span>${(item.axes || []).slice(0,2).map(axis => `<span class="badge">${esc(axis)}</span>`).join('')}</div>
+          <div class="card-top"><span class="badge priority-${esc(item.priority)}">${esc(item.priority)}</span><span class="badge">${esc(item.period)}</span>${(item.axes || []).slice(0,2).map(axis => `<span class="badge">${esc(axis)}</span>`).join('')}${evidenceBadge}</div>
           <h3>${esc(item.thinker)}<small>${esc(item.en)}</small></h3>
           <p class="thesis">${esc(item.thesis)}</p>
           <div class="keywords">${(item.keywords || []).map(x => `<span>${esc(x)}</span>`).join('')}</div>
         </div>
         <button type="button" class="open-btn" data-id="${esc(item.id)}">연구내용 보기</button>
-      </article>
-    `).join('');
+      </article>`;
+    }).join('');
     cards.querySelectorAll('.open-btn').forEach(button => button.addEventListener('click', () => openDetail(button.dataset.id)));
   }
 
@@ -103,20 +108,46 @@
     return `<div class="works-block"><p class="subhead">대표 저작</p><ul class="work-list">${works}</ul><p class="subhead">읽기 포인트</p>${reading}</div>`;
   }
 
+  function citationRows(rows, label) {
+    if (!Array.isArray(rows) || !rows.length) return '';
+    return `<div class="citation-group"><p class="citation-group-title">${esc(label)}</p>${rows.map(row => `
+      <article class="citation-row">
+        <p class="citation-title">${esc(row.citation)}</p>
+        ${row.pinpoint ? `<p class="citation-pinpoint"><strong>인용 위치</strong>${esc(row.pinpoint)}</p>` : ''}
+        ${row.url ? `<a class="citation-link" href="${esc(row.url)}" target="_blank" rel="noopener noreferrer">자료 확인 ↗</a>` : ''}
+      </article>
+    `).join('')}</div>`;
+  }
+
+  function renderCitationEvidence(cite) {
+    if (!cite) return '';
+    return `
+      <div class="citation-status"><span>${esc(cite.status || '인용근거 보강')}</span><p>원저·후속논문·대립학설을 구분하여 제시합니다. 직접 인용문은 최종 논문 작성 시 해당 판본의 원문과 pinpoint를 다시 대조합니다.</p></div>
+      ${citationRows(cite.primary,'원저 · 정확 위치')}
+      ${citationRows(cite.followUp,'대표 후속논문')}
+      ${citationRows(cite.opposition,'직접 대립학설 · 반대축')}
+      ${cite.usableClaim ? `<div class="citation-boundary usable"><strong>논문에서 안전하게 사용할 수 있는 명제 범위</strong><p>${esc(cite.usableClaim)}</p></div>` : ''}
+      ${cite.caution ? `<div class="citation-boundary caution"><strong>인용·적용상 주의</strong><p>${esc(cite.caution)}</p></div>` : ''}
+    `;
+  }
+
   function openDetail(id) {
     const item = data.find(row => row.id === id);
     if (!item) return;
     const depth = depthMap[item.id] || {};
+    const cite = citationMap[item.id];
     const mustKnow = depth.mustKnow || item.concepts || [];
     const debate = depth.debate || ['이 학설의 적용범위와 반대학설을 대표 저작 및 후속 연구에서 함께 검토해야 합니다.'];
     const application = unique([...(depth.application || []), ...(item.relevance || [])]);
     const source = item.sourceUrl
       ? `<div class="verification-note"><p>아래 자료는 해당 항목의 대표적 검증자료입니다. 논문에 직접 인용할 때에는 원저 또는 학술논문의 해당 판본·권호·쪽수를 다시 확인해야 합니다.</p><a class="source-link" href="${esc(item.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(item.sourceLabel || '검증자료 보기')} ↗</a></div>`
       : `<div class="verification-note"><p>대표 저작을 1차 자료로 확인하고, 직접 인용할 문장은 학술 DB 또는 사용 판본에서 정확한 원문·권호·쪽수를 재검증합니다. 현재 상세해설은 학설의 연구범위와 접목점을 학습하기 위한 연구노트입니다.</p></div>`;
+    const evidenceSection = cite ? section('07','원저·후속논문·직접 대립학설',renderCitationEvidence(cite)) : '';
+    const verificationNo = cite ? '08' : '07';
 
     detailContent.innerHTML = `
       <header class="detail-head">
-        <div class="meta">${String(item.order).padStart(2,'0')} · ${esc(item.period)} · ${esc(item.priority)}</div>
+        <div class="meta">${String(item.order).padStart(2,'0')} · ${esc(item.period)} · ${esc(item.priority)}${cite ? ` · ${esc(cite.status || '인용근거 보강')}` : ''}</div>
         <h3>${esc(item.thinker)}<small>${esc(item.en)}</small></h3>
         <p class="lead-detail">${esc(item.thesis)}</p>
       </header>
@@ -127,7 +158,8 @@
         ${section('04','쟁점·반론·구별',list(debate, 'debate-list'))}
         ${section('05','현재 연구와의 구체적 접목',list(application, 'application-list'))}
         ${section('06','대표 저작과 읽기 포인트',renderWorks(item, depth))}
-        ${section('07','검증자료와 인용 원칙',source)}
+        ${evidenceSection}
+        ${section(verificationNo,'검증자료와 인용 원칙',source)}
       </div>
       <footer class="detail-footer">
         <div><strong>법철학·기본권 연구</strong><br>Copyright © 이명훈 2026. All rights reserved.<br>문의 kimbrighth@gmail.com</div>
