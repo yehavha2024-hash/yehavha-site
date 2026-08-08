@@ -1,0 +1,15 @@
+/* YEHAVHA NEXUS Owned App Shell v1.0 */
+:root{--nexus-navy:#081a30;--nexus-blue:#2e679d;--nexus-line:#dbe3eb;--nexus-paper:rgba(255,255,255,.90);--nexus-muted:#64748b}
+html{scrollbar-gutter:stable;scroll-behavior:smooth}
+body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-apple-system,sans-serif;letter-spacing:-.015em;word-break:keep-all}
+.app-shell{width:min(100%,620px)!important;margin:0 auto!important;padding:18px 14px 32px!important}
+.nexus-link{display:inline-flex!important;align-items:center!important;min-height:34px!important;margin:0 0 12px 2px!important;padding:0 10px!important;border:1px solid rgba(255,255,255,.22)!important;border-radius:8px!important;background:rgba(7,22,39,.76)!important;color:#eef6ff!important;text-decoration:none!important;text-shadow:none!important;font-size:11px!important;font-weight:850!important;letter-spacing:.07em!important;line-height:1!important;backdrop-filter:blur(8px)}
+.nexus-link:hover,.nexus-link:focus-visible{background:rgba(7,22,39,.90)!important;border-color:rgba(155,194,231,.45)!important;outline:none!important}
+button{min-height:40px;transform:none!important}
+button:hover{transform:none!important}
+.site-footer{margin-top:16px!important;padding:16px!important;border:1px solid rgba(219,227,235,.72)!important;border-radius:12px!important;background:var(--nexus-paper)!important;box-shadow:none!important;backdrop-filter:blur(12px)}
+.site-footer>p{margin:0!important;color:#5f6f7f!important;font-size:12px!important;line-height:1.65!important}
+.site-footer>.footer-meta{margin-top:12px!important;padding-top:11px!important;border-top:1px solid var(--nexus-line)!important}
+.footer-meta p{margin:3px 0!important;color:#718096!important;font-size:11px!important;line-height:1.55!important}.footer-meta a{color:var(--nexus-blue)!important;font-weight:800!important;text-decoration:none!important}
+@media(max-width:460px){.app-shell{padding-left:10px!important;padding-right:10px!important}.nexus-link{margin-left:0!important}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
