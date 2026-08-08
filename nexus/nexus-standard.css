@@ -43,7 +43,7 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
 .items-grid{gap:10px}
 .item-card{min-height:208px;padding:17px;border-radius:12px;box-shadow:none;transform:none!important;transition:background .14s ease,border-color .14s ease;text-align:left;align-items:stretch}
 .item-card:hover{transform:none!important}
-.item-top{justify-content:space-between;text-align:left}
+.item-top{justify-content:flex-start!important;align-items:center;gap:7px;text-align:left}
 .item-card h3{margin:12px 0 7px;font-size:18px;text-align:left}
 .item-card p{font-size:13.5px;line-height:1.7;text-align:left}
 .item-meta,.item-domain,.project-status{font-size:10.5px!important;text-align:left}
