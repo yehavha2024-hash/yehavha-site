@@ -1,26 +1,4 @@
-const COUNTER_BASE = 'https://api.counterapi.dev/v1/yehavha-nexus-6f2a9c1d/network-access';
-
-function extractCount(payload) {
-  const candidates = [
-    payload?.count,
-    payload?.value,
-    payload?.data,
-    payload?.data?.count,
-    payload?.data?.value,
-    payload?.counter?.count,
-    payload?.counter?.value,
-    payload?.result?.count,
-    payload?.result?.value
-  ];
-
-  for (const candidate of candidates) {
-    if (candidate === null || candidate === undefined || typeof candidate === 'object') continue;
-    const number = Number(candidate);
-    if (Number.isFinite(number)) return number;
-  }
-
-  return null;
-}
+let schemaReady = false;
 
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -33,40 +11,67 @@ function json(body, status = 200) {
   });
 }
 
-export async function onRequestGet({ request }) {
+async function ensureSchema(db) {
+  if (schemaReady) return;
+
+  await db.prepare(`
+    CREATE TABLE IF NOT EXISTS nexus_access_counter (
+      id INTEGER PRIMARY KEY CHECK (id = 1),
+      count INTEGER NOT NULL DEFAULT 0,
+      updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )
+  `).run();
+
+  await db.prepare(`
+    INSERT INTO nexus_access_counter (id, count)
+    VALUES (1, 0)
+    ON CONFLICT(id) DO NOTHING
+  `).run();
+
+  schemaReady = true;
+}
+
+async function readCount(db) {
+  await ensureSchema(db);
+  const row = await db.prepare(`
+    SELECT count
+    FROM nexus_access_counter
+    WHERE id = 1
+  `).first();
+
+  return Number(row?.count ?? 0);
+}
+
+async function incrementAndRead(db) {
+  await ensureSchema(db);
+  await db.prepare(`
+    UPDATE nexus_access_counter
+    SET count = count + 1,
+        updated_at = CURRENT_TIMESTAMP
+    WHERE id = 1
+  `).run();
+  return readCount(db);
+}
+
+export async function onRequestGet({ request, env }) {
+  if (!env?.NEXUS_DB) {
+    return json({ ok: false, error: 'nexus_db_binding_missing' }, 500);
+  }
+
   const url = new URL(request.url);
-  const op = url.searchParams.get('op') === 'get' ? 'get' : 'up';
-  const endpoint = op === 'get' ? COUNTER_BASE : `${COUNTER_BASE}/up`;
+  const op = url.searchParams.get('op') === 'up' ? 'up' : 'get';
 
   try {
-    const response = await fetch(endpoint, {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        'user-agent': 'YEHAVHA-Nexus/1.0'
-      },
-      cf: { cacheTtl: 0, cacheEverything: false }
-    });
-
-    const text = await response.text();
-    let payload = null;
-    try {
-      payload = JSON.parse(text);
-    } catch {
-      payload = text;
-    }
-
-    if (!response.ok) {
-      return json({ ok: false, status: response.status, error: 'counter_upstream_error' }, 502);
-    }
-
-    const count = extractCount(payload);
-    if (count === null) {
-      return json({ ok: false, error: 'counter_value_missing' }, 502);
-    }
+    const count = op === 'up'
+      ? await incrementAndRead(env.NEXUS_DB)
+      : await readCount(env.NEXUS_DB);
 
     return json({ ok: true, count });
   } catch (error) {
-    return json({ ok: false, error: 'counter_request_failed' }, 502);
+    return json({
+      ok: false,
+      error: 'nexus_db_query_failed',
+      detail: String(error?.message || error)
+    }, 500);
   }
 }
