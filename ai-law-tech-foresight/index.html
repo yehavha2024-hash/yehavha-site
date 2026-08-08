@@ -6,14 +6,54 @@
   <meta name="description" content="AI 기술의 발전단계별로 기술구조, 현행법, 법적 쟁점, 법적 공백, 비교법, 책임·증명, 정책과 입법대안을 연구하는 AI 법·기술 선제연구 아카이브" />
   <meta name="theme-color" content="#091522" />
   <title>AI 법·기술 선제연구 아카이브</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="mobile-flow.css?v=20260808-1302" />
+  <link rel="stylesheet" href="styles.css?v=20260808-1305" />
   <style>
     .stats{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px}
     .stat{min-width:0;padding:6px 9px;border-radius:8px}
     .stat strong{display:none}
     .stat span{display:block;margin:0;font-size:.72rem}
-    @media(max-width:900px){.stats{justify-content:flex-start}}
+    @media(max-width:900px){
+      .stats{justify-content:flex-start}
+      #researchFlow.flow{
+        display:grid!important;
+        grid-template-columns:repeat(3,minmax(0,1fr))!important;
+        gap:8px!important;
+        overflow:visible!important;
+        width:100%!important;
+        margin-top:16px!important;
+        padding:0!important;
+        counter-reset:research-flow-step;
+      }
+      #researchFlow.flow>b{display:none!important}
+      #researchFlow.flow>span{
+        position:relative!important;
+        display:flex!important;
+        align-items:center!important;
+        justify-content:center!important;
+        min-width:0!important;
+        width:auto!important;
+        min-height:86px!important;
+        padding:28px 8px 10px!important;
+        text-align:center!important;
+        white-space:normal!important;
+        overflow-wrap:anywhere!important;
+        word-break:keep-all!important;
+        line-height:1.42!important;
+        font-size:12px!important;
+        counter-increment:research-flow-step;
+      }
+      #researchFlow.flow>span::before{
+        content:counter(research-flow-step,decimal-leading-zero);
+        position:absolute;
+        top:8px;
+        left:9px;
+        color:#8bbfff;
+        font-size:10px;
+        font-weight:800;
+        line-height:1;
+      }
+    }
+    @media(max-width:380px){#researchFlow.flow{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
   </style>
 </head>
 <body>
