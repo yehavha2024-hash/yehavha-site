@@ -5,7 +5,7 @@
 - 출처 D/C: 0
 - 출처 B1 포함 카드: 0
 - 조문 C: 0
-- 조문 B/B+: 2
+- 조문 B/B+: 0
 
 ## 1순위 — 출처 D/C (0)
 
@@ -19,12 +19,7 @@
 
 - 없음
 
-## 4순위 — 조문 B/B+ (2)
+## 4순위 — 조문 B/B+ (0)
 
-1. **public-constitutional-proportionality — 헌법상 과잉금지원칙**
-   - 등급 B: 공식 법률 출처는 확인되나 특정 조문번호 직접성은 낮음. 광범위 법리카드는 허용하되 사례 적용 전 조문 특정 필요
-   - 대한민국헌법 · 국가법령정보센터 → https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD%ED%97%8C%EB%B2%95
-2. **public-state-liability-protective-norm — 국가배상책임의 위법성·보호규범**
-   - 등급 B: 공식 법률 출처는 확인되나 특정 조문번호 직접성은 낮음. 광범위 법리카드는 허용하되 사례 적용 전 조문 특정 필요
-   - 국가배상법 · 국가법령정보센터 → https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EA%B5%AD%EA%B0%80%EB%B0%B0%EC%83%81%EB%B2%95
+- 없음
 

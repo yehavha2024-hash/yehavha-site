@@ -7,14 +7,13 @@
     "total": 105,
     "checked": "2026.08.09",
     "sourceGrades": {
-      "A": 81,
-      "A-": 11,
+      "A": 82,
+      "A-": 10,
       "N": 13
     },
     "articleGrades": {
       "A-": 40,
-      "A": 50,
-      "B": 2,
+      "A": 52,
       "N": 13
     },
     "precedentGrades": {
@@ -33,77 +32,6 @@
     "sourceDC": [],
     "sourceB1": [],
     "articleC": [],
-    "articleB_Bplus": [
-      {
-        "id": "public-constitutional-proportionality",
-        "title": "헌법상 과잉금지원칙",
-        "area": "헌법·공법",
-        "subfield": "헌법",
-        "sourceLinkGrade": "A-",
-        "sourceCounts": {
-          "A1": 0,
-          "A2": 1,
-          "B1": 0,
-          "C": 0,
-          "D": 0
-        },
-        "weakOrFragileSources": [],
-        "articleAccuracyGrade": "B",
-        "articleNote": "공식 법률 출처는 확인되나 특정 조문번호 직접성은 낮음. 광범위 법리카드는 허용하되 사례 적용 전 조문 특정 필요",
-        "articleRefs": [
-          {
-            "label": "대한민국헌법 · 국가법령정보센터",
-            "url": "https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD%ED%97%8C%EB%B2%95",
-            "hasArticle": false,
-            "direct": false,
-            "sourceGrade": "A2"
-          }
-        ],
-        "precedentCitationGrade": "P4",
-        "precedentNote": "직접 판례 인용 없이 법령·학설 중심. 신설법·정책법에서는 정상적인 상태",
-        "statuteSources": [
-          {
-            "label": "대한민국헌법 · 국가법령정보센터",
-            "url": "https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD%ED%97%8C%EB%B2%95"
-          }
-        ],
-        "relatedCases": []
-      },
-      {
-        "id": "public-state-liability-protective-norm",
-        "title": "국가배상책임의 위법성·보호규범",
-        "area": "헌법·공법",
-        "subfield": "국가책임",
-        "sourceLinkGrade": "A-",
-        "sourceCounts": {
-          "A1": 0,
-          "A2": 1,
-          "B1": 0,
-          "C": 0,
-          "D": 0
-        },
-        "weakOrFragileSources": [],
-        "articleAccuracyGrade": "B",
-        "articleNote": "공식 법률 출처는 확인되나 특정 조문번호 직접성은 낮음. 광범위 법리카드는 허용하되 사례 적용 전 조문 특정 필요",
-        "articleRefs": [
-          {
-            "label": "국가배상법 · 국가법령정보센터",
-            "url": "https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EA%B5%AD%EA%B0%80%EB%B0%B0%EC%83%81%EB%B2%95",
-            "hasArticle": false,
-            "direct": false,
-            "sourceGrade": "A2"
-          }
-        ],
-        "precedentCitationGrade": "P4",
-        "precedentNote": "직접 판례 인용 없이 법령·학설 중심. 신설법·정책법에서는 정상적인 상태",
-        "statuteSources": [
-          {
-            "label": "국가배상법 · 국가법령정보센터",
-            "url": "https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EA%B5%AD%EA%B0%80%EB%B0%B0%EC%83%81%EB%B2%95"
-          }
-        ],
-        "relatedCases": []
-      }
-    ]
+    "articleB_Bplus": []
   }
 }
