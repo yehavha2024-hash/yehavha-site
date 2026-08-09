@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-08",
+  "updatedAt": "2026-08-09",
   "categories": [
     {
       "id": "apps",
@@ -113,33 +113,6 @@
       "contentLabel": "연구노트"
     },
     {
-      "id": "ebook-yhwh",
-      "category": "publishing",
-      "meta": "U-Paper eBook",
-      "title": "사람으로 오신 YHWH",
-      "description": "이스라엘 언약의 성취와 부활·성도 집결·천년 왕국을 다룬 신앙 연구 전자책입니다.",
-      "url": "https://yehavha.upaper.kr/content/1221622",
-      "actionLabel": "전자책 보기"
-    },
-    {
-      "id": "ebook-toeic-day001",
-      "category": "publishing",
-      "meta": "U-Paper eBook",
-      "title": "토익 인간 100일 프로젝트 DAY 001",
-      "description": "100일 동안 토익 실력을 단계적으로 높이는 학습 프로젝트의 첫 번째 전자책입니다.",
-      "url": "https://yehavha.upaper.kr/content/1221195",
-      "actionLabel": "전자책 보기"
-    },
-    {
-      "id": "youtube-hashem-yeshua",
-      "category": "media",
-      "meta": "YouTube Channel",
-      "title": "HASHEM YESHUA",
-      "description": "영어와 히브리어 찬양, 신앙 고백과 관련 미디어 콘텐츠를 제공하는 공식 유튜브 채널입니다.",
-      "url": "https://www.youtube.com/@yehavha",
-      "actionLabel": "바로가기"
-    },
-    {
       "id": "ai-law-tech-foresight",
       "category": "research",
       "meta": "AI Law & Technology Foresight",
@@ -168,6 +141,33 @@
       "lastUpdated": "2026-08-09",
       "contentCount": 56,
       "contentLabel": "핵심 연구"
+    },
+    {
+      "id": "ebook-yhwh",
+      "category": "publishing",
+      "meta": "U-Paper eBook",
+      "title": "사람으로 오신 YHWH",
+      "description": "이스라엘 언약의 성취와 부활·성도 집결·천년 왕국을 다룬 신앙 연구 전자책입니다.",
+      "url": "https://yehavha.upaper.kr/content/1221622",
+      "actionLabel": "전자책 보기"
+    },
+    {
+      "id": "ebook-toeic-day001",
+      "category": "publishing",
+      "meta": "U-Paper eBook",
+      "title": "토익 인간 100일 프로젝트 DAY 001",
+      "description": "100일 동안 토익 실력을 단계적으로 높이는 학습 프로젝트의 첫 번째 전자책입니다.",
+      "url": "https://yehavha.upaper.kr/content/1221195",
+      "actionLabel": "전자책 보기"
+    },
+    {
+      "id": "youtube-hashem-yeshua",
+      "category": "media",
+      "meta": "YouTube Channel",
+      "title": "HASHEM YESHUA",
+      "description": "영어와 히브리어 찬양, 신앙 고백과 관련 미디어 콘텐츠를 제공하는 공식 유튜브 채널입니다.",
+      "url": "https://www.youtube.com/@yehavha",
+      "actionLabel": "바로가기"
     }
   ]
 }
