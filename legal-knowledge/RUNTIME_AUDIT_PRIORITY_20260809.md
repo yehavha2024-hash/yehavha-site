@@ -2,7 +2,7 @@
 
 - 전체 카드: 105
 - 출처 D/C: 0
-- 출처 B1 포함 카드: 40
+- 출처 B1 포함 카드: 3
 - 조문 C: 0
 - 조문 B/B+: 24
 
@@ -10,136 +10,17 @@
 
 - 없음
 
-## 2순위 — 출처 B1 (40)
+## 2순위 — 출처 B1 (3)
 
-1. **civil-simultaneous-performance — 동시이행항변권**
-   - 동시이행항변권 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EB%8F%99%EC%8B%9C%EC%9D%B4%ED%96%89%EC%9D%98%20%ED%95%AD%EB%B3%80%EA%B6%8C
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-2. **civil-creditor-revocation — 채권자취소권**
-   - 채권자취소권 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EC%B1%84%EA%B6%8C%EC%9E%90%EC%B7%A8%EC%86%8C%EA%B6%8C
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-3. **civil-unjust-enrichment — 부당이득의 성립과 반환범위**
-   - 부당이득 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EB%B6%80%EB%8B%B9%EC%9D%B4%EB%93%9D%20%EB%B2%95%EB%A5%A0%EC%83%81%20%EC%9B%90%EC%9D%B8
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-4. **civil-extinctive-prescription — 소멸시효의 기산점·완성·원용**
-   - 소멸시효 기산점 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EC%86%8C%EB%A9%B8%EC%8B%9C%ED%9A%A8%20%EA%B8%B0%EC%82%B0%EC%A0%90
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-5. **civil-rescission-restitution — 계약해제와 원상회복**
-   - 계약해제·원상회복 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EA%B3%84%EC%95%BD%ED%95%B4%EC%A0%9C%20%EC%9B%90%EC%83%81%ED%9A%8C%EB%B3%B5
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-6. **public-legitimate-expectation — 신뢰보호의 원칙**
-   - 신뢰보호원칙 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EC%8B%A0%EB%A2%B0%EB%B3%B4%ED%98%B8%EC%9D%98%20%EC%9B%90%EC%B9%99
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-7. **public-invalid-voidable-act — 행정행위의 무효와 취소**
-   - 행정처분 무효·중대명백 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EC%A4%91%EB%8C%80%ED%95%98%EA%B3%A0%20%EB%AA%85%EB%B0%B1%20%ED%96%89%EC%A0%95%EC%B2%98%EB%B6%84
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-8. **public-state-liability — 공무원의 위법한 직무집행과 국가배상**
-   - 국가배상법 제2조 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EA%B5%AD%EA%B0%80%EB%B0%B0%EC%83%81%EB%B2%95%20%EC%A0%9C2%EC%A1%B0
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-9. **criminal-omission — 부작위범과 보증인지위**
-   - 부작위범·작위의무 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EB%B6%80%EC%9E%91%EC%9C%84%EB%B2%94%20%EC%9E%91%EC%9C%84%EC%9D%98%EB%AC%B4
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-10. **criminal-causation-attribution — 형법상 인과관계와 객관적 귀속**
-   - 형법상 인과관계 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%ED%98%95%EB%B2%95%20%EC%9D%B8%EA%B3%BC%EA%B4%80%EA%B3%84
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-11. **criminal-joint-principal — 공동정범과 기능적 행위지배**
-   - 공동정범 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EA%B3%B5%EB%8F%99%EC%A0%95%EB%B2%94%20%EA%B3%B5%EB%AA%A8
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-12. **criminal-exclusionary-rule — 위법수집증거배제법칙**
-   - 위법수집증거 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EC%9C%84%EB%B2%95%EC%88%98%EC%A7%91%EC%A6%9D%EA%B1%B0
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-13. **ip-patent-claim-scope — 특허발명의 보호범위와 청구범위 해석**
-   - 특허 청구범위 해석 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%ED%8A%B9%ED%97%88%20%EC%B2%AD%EA%B5%AC%EB%B2%94%EC%9C%84%20%EB%B3%B4%ED%98%B8%EB%B2%94%EC%9C%84
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-14. **ip-copyright-fair-use — 저작물의 공정한 이용**
-   - 공정이용 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EC%A0%80%EC%9E%91%EB%AC%BC%20%EA%B3%B5%EC%A0%95%ED%95%9C%20%EC%9D%B4%EC%9A%A9
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-15. **special-tax-legality — 조세법률주의**
-   - 조세법률주의 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EC%A1%B0%EC%84%B8%EB%B2%95%EB%A5%A0%EC%A3%BC%EC%9D%98%20%EC%97%84%EA%B2%A9%ED%95%B4%EC%84%9D
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-16. **special-substance-over-form — 실질과세의 원칙**
-   - 실질과세원칙 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EC%8B%A4%EC%A7%88%EA%B3%BC%EC%84%B8%20%EA%B5%AD%EC%84%B8%EA%B8%B0%EB%B3%B8%EB%B2%95%20%EC%A0%9C14%EC%A1%B0
-   - 판례강도 P3+: 대법원·헌재 인접판례를 법리 보강에 사용하지만 이 카드 자체의 직접 판시사건은 아님
-17. **civil-apparent-agency — 권한을 넘은 표현대리**
-   - 대법원 2003. 12. 12. 선고 2001다29896 판결 → https://www.law.go.kr/LSW/precSc.do?query=2001다29896
-   - 대법원 2014. 5. 29. 선고 2012다66303 판결 → https://www.law.go.kr/LSW/precSc.do?query=2012다66303
-   - 판례강도 P1: 대법원 2023다232526 직접 판시·원문대조 카드
-18. **civil-mistake — 착오로 인한 의사표시**
-   - 착오 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EC%B0%A9%EC%98%A4%20%EC%A4%91%EC%9A%94%EB%B6%80%EB%B6%84
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-19. **civil-adverse-possession — 점유취득시효**
-   - 점유취득시효 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EC%A0%90%EC%9C%A0%EC%B7%A8%EB%93%9D%EC%8B%9C%ED%9A%A8
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-20. **civil-contract-termination — 계약해제와 원상회복**
-   - 계약해제 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EA%B3%84%EC%95%BD%ED%95%B4%EC%A0%9C%20%EC%9B%90%EC%83%81%ED%9A%8C%EB%B3%B5
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-21. **commercial-director-duty — 이사의 선관주의·충실의무와 경영판단**
-   - 대법원 2007. 10. 11. 선고 2006다33333 판결 → https://www.law.go.kr/LSW/precSc.do?query=2006다33333
-   - 대법원 2010. 1. 14. 선고 2007다35787 판결 → https://www.law.go.kr/LSW/precSc.do?query=2007다35787
+1. **commercial-director-duty — 이사의 선관주의·충실의무와 경영판단**
    - 대법원 2019다280481 · 주요판결 → https://scourt.go.kr/supreme/news/NewsViewAction2.work?gubun=4&searchOption=&searchWord=&seqnum=9129
    - 판례강도 P1: 대법원 2019다280481 직접 판시·원문대조 카드
-22. **civil-procedure-res-judicata — 기판력의 객관적 범위**
-   - 기판력 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EA%B8%B0%ED%8C%90%EB%A0%A5%20%EA%B0%9D%EA%B4%80%EC%A0%81%20%EB%B2%94%EC%9C%84
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-23. **civil-enforcement-provisional — 가압류와 보전처분**
-   - 가압류 보전필요성 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EA%B0%80%EC%95%95%EB%A5%98%20%EB%B3%B4%EC%A0%84%EC%9D%98%20%ED%95%84%EC%9A%94%EC%84%B1
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-24. **public-rule-of-law — 법률유보와 법치행정**
-   - 법률유보 관련 판례·결정 검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EB%B2%95%EB%A5%A0%EC%9C%A0%EB%B3%B4
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-25. **public-admin-litigation — 처분성·원고적격**
-   - 처분성 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EC%B2%98%EB%B6%84%EC%84%B1%20%EC%9B%90%EA%B3%A0%EC%A0%81%EA%B2%A9
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-26. **criminal-dolus-eventualis — 고의와 미필적 고의**
-   - 대법원 2024. 9. 12. 선고 2024도4824 판결 · 판례속보 → https://www.scourt.go.kr/portal/news/NewsViewAction.work?gubun=4&seqnum=10054
-   - 대법원 2024도4824 보도자료 → https://www.scourt.go.kr/portal/news/NewsViewAction.work?gubun=6&searchOption=&searchWord=&seqnum=2689
+2. **criminal-dolus-eventualis — 고의와 미필적 고의**
+   - 대법원 2024도4824 · 공식 보도자료 → https://www.scourt.go.kr/portal/news/NewsViewAction.work?gubun=6&searchOption=&searchWord=&seqnum=2689
    - 판례강도 P1: 대법원 2024도4824 직접 판시·원문대조 카드
-27. **criminal-co-principal — 공동정범과 기능적 행위지배**
-   - 공동정범 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EA%B3%B5%EB%8F%99%EC%A0%95%EB%B2%94%20%EA%B3%B5%EB%AA%A8%EA%B3%B5%EB%8F%99%EC%A0%95%EB%B2%94
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-28. **criminal-self-defense — 정당방위와 과잉방위**
-   - 정당방위 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EC%A0%95%EB%8B%B9%EB%B0%A9%EC%9C%84%20%EC%83%81%EB%8B%B9%ED%95%9C%20%EC%9D%B4%EC%9C%A0
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-29. **criminal-fraud — 사기죄의 기망·착오·처분행위**
-   - 사기죄 기망·처분행위 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EC%82%AC%EA%B8%B0%EC%A3%84%20%EA%B8%B0%EB%A7%9D%20%EC%B2%98%EB%B6%84%ED%96%89%EC%9C%84
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-30. **criminal-illegal-evidence — 위법수집증거배제법칙**
-   - 위법수집증거배제 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EC%9C%84%EB%B2%95%EC%88%98%EC%A7%91%EC%A6%9D%EA%B1%B0%20%EC%A0%9C308%EC%A1%B0%EC%9D%982
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-31. **criminal-hearsay — 전문법칙과 전문증거**
-   - 전문법칙 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EC%A0%84%EB%AC%B8%EB%B2%95%EC%B9%99%20%EC%A0%9C310%EC%A1%B0%EC%9D%982
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-32. **ip-equivalents — 균등침해**
-   - 대법원 2026. 1. 29. 선고 2022후10722 · 균등 관련 중요판결 → https://www.scourt.go.kr/supreme/news/NewsViewAction2.work?gubun=4&searchWord=2022후10722
-   - 대법원 2026. 1. 15. 선고 2024후11590 · 균등 관련 중요판결 → https://www.scourt.go.kr/supreme/news/NewsViewAction2.work?gubun=4&searchWord=2024후11590
-   - 판례강도 P3+: 대법원·헌재 인접판례를 법리 보강에 사용하지만 이 카드 자체의 직접 판시사건은 아님
-33. **ip-selected-invention — 선택발명**
-   - 특허법원 2006. 11. 1. 선고 2005허10107 · 공식 주요판결 → https://www.scourt.go.kr/portal/dcboard/DcNewsViewAction.work?cbub_code=000700&gubun=44&seqnum=1245
-   - 대법원 2003. 4. 25. 선고 2001후2740 판결 · 관련 판례검색 → https://www.law.go.kr/precSc.do?query=2001후2740
-   - 판례강도 P2: 특허법원 2005허10107 직접 판시 카드. 상급심·후속판례와 함께 사용
-34. **ip-novelty — 특허 신규성**
-   - 신규성 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%ED%8A%B9%ED%97%88%20%EC%8B%A0%EA%B7%9C%EC%84%B1%20%EC%84%A0%ED%96%89%EB%B0%9C%EB%AA%85
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-35. **ip-inventive-step — 특허 진보성**
-   - 대법원 2026. 1. 15. 선고 2024후10641 · 공식 중요판결 → https://sc.scourt.go.kr/supreme/news/NewsViewAction2.work?gubun=4&seqnum=10877
-   - 대법원 2026. 6. 25. 선고 2023후10965 · 관련 최신판결 → https://lawclerk.scourt.go.kr/supreme/news/NewsViewAction2.work?gubun=4&seqnum=11191
-   - 대법원 2007. 8. 24. 선고 2006후138 · 관련 판례검색 → https://www.law.go.kr/precSc.do?query=2006후138
+3. **ip-inventive-step — 특허 진보성**
+   - 대법원 2024후10641 · 대한민국 법원 → https://sc.scourt.go.kr/supreme/news/NewsViewAction2.work?gubun=4&seqnum=10877
    - 판례강도 P1: 대법원 2018후12004 직접 판시·원문대조 카드
-36. **ip-trademark-similarity — 상표의 유사 판단**
-   - 대법원 2018. 8. 30. 선고 2017후981 · 관련 판례검색 → https://www.law.go.kr/precSc.do?query=2017후981
-   - 판례강도 P1: 대법원 2019후11121 직접 판시·원문대조 카드
-37. **ip-design-similarity — 디자인 유사와 심미감**
-   - 대법원 2026. 1. 8. 선고 2025후10235 · 최신 관련판결 → https://lawclerk.scourt.go.kr/portal/news/NewsViewAction.work?gubun=4&seqnum=10849
-   - 판례강도 P1: 대법원 2016후1710 직접 판시·원문대조 카드
-38. **ip-fair-use — 공정이용**
-   - 공정이용 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EC%A0%80%EC%9E%91%EA%B6%8C%EB%B2%95%20%EA%B3%B5%EC%A0%95%EC%9D%B4%EC%9A%A9
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-39. **ip-copyright-originality — 저작물성과 창작성**
-   - 저작물성·창작성 관련 판례검색 · 국가법령정보센터 → https://www.law.go.kr/precSc.do?menuId=7&query=%EC%A0%80%EC%9E%91%EB%AC%BC%EC%84%B1%20%EC%B0%BD%EC%9E%91%EC%84%B1
-   - 판례강도 P3: 인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인
-40. **ip-unfair-competition — 성과물 도용과 부정경쟁**
-   - 대법원 2026. 7. 9. 선고 2023다290355·290362 · 최신 중요판결 → https://www.scourt.go.kr/supreme/news/NewsViewAction2.work?gubun=4&seqnum=11202
-   - 판례강도 P3+: 대법원·헌재 인접판례를 법리 보강에 사용하지만 이 카드 자체의 직접 판시사건은 아님
 
 ## 3순위 — 조문 C (0)
 
