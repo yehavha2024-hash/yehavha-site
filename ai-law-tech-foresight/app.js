@@ -17,21 +17,12 @@
   const dialog = $('detailDialog');
   const detailContent = $('detailContent');
 
-  const esc = (value='') => String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  const esc = (value='') => String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[ch]));
   const chips = (items=[]) => items.map(x => `<span>${esc(x)}</span>`).join('');
   const textOf = (values=[]) => values.flat(Infinity).filter(Boolean).join(' ').toLowerCase();
   const paragraphs = (items=[]) => items.length ? items.map(x => `<p>${esc(x)}</p>`).join('') : '<p class="muted">추가 연구 예정</p>';
   const list = (items=[]) => items.length ? `<ul>${items.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '<p class="muted">추가 연구 예정</p>';
   const articleSection = (number, title, body) => `<section class="article-section"><div class="section-number">${esc(number)}</div><div class="article-section-body"><h4>${esc(title)}</h4>${body}</div></section>`;
-
-  function ensureDocumentControlsStyles() {
-    if (document.querySelector('link[data-document-controls]')) return;
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'document-controls.css?v=20260808-2135';
-    link.dataset.documentControls = 'true';
-    document.head.appendChild(link);
-  }
 
   function documentFooter() {
     return `<footer class="document-footer" aria-label="연구본문 문서 하단">
@@ -39,6 +30,7 @@
         <strong>AI 법·기술 선제연구 아카이브</strong>
         <p>Copyright © 이명훈 2026. All rights reserved.</p>
         <p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p>
+        <p class="ai-disclosure">AI 활용 안내: 일부 기술·법률 연구자료의 탐색·구조화·초안 작성에 생성형 AI를 활용했으며, 사실과 전망의 구분, 법적 분석, 출처 검토와 최종 편집은 운영자가 관리합니다.</p>
       </div>
       <div class="document-actions">
         <button type="button" class="document-action" data-document-top aria-label="이 연구본문의 맨 위로 이동">맨 위로 ↑</button>
@@ -224,7 +216,6 @@
   searchInput.addEventListener('input', rerender);
   [stageFilter, lawFilter, phdFilter].forEach(el => el.addEventListener('change', renderCards));
 
-  ensureDocumentControlsStyles();
   renderStatic();
   populateFilters();
   rerender();
