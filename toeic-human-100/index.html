@@ -4,11 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#081a30" />
-  <meta name="description" content="토익 800점대를 목표로 100일 동안 핵심어휘, 숙어·연어, 문장, 문법, 실전문제를 학습하는 모바일 웹앱" />
+  <meta name="description" content="매일 긴 영어 본문을 읽으며 TOEIC 핵심어휘, 숙어, 문법, 구문과 문제유형을 반복해 익히는 100일 장문 독해 웹앱" />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" href="icons/icon-192.png" />
-  <link rel="stylesheet" href="style.css?v=20260808-2300" />
-  <link rel="stylesheet" href="nexus-shell.css?v=20260808-2300" />
+  <link rel="stylesheet" href="style.css?v=20260809-v2" />
+  <link rel="stylesheet" href="reading-v2.css?v=20260809-v2" />
+  <link rel="stylesheet" href="nexus-shell.css?v=20260809-v2" />
   <title>토익인간 100일 프로젝트</title>
 </head>
 <body>
@@ -17,7 +18,7 @@
     <header class="hero glass">
       <div class="brand-row">
         <div>
-          <p class="eyebrow">TOEIC HUMAN · 800+ TARGET</p>
+          <p class="eyebrow">TOEIC READING IMMERSION · 100 DAYS</p>
           <h1>토익인간<br><span>100일 프로젝트</span></h1>
         </div>
         <button id="installBtn" class="icon-button" hidden aria-label="홈 화면에 추가">＋</button>
@@ -25,7 +26,7 @@
       <div class="day-dashboard">
         <div class="day-copy">
           <span id="dayLabel">DAY 1</span>
-          <strong id="dayHeadline">오늘의 5개 학습</strong>
+          <strong id="dayHeadline">장문독해 · 3단계 학습</strong>
           <small id="dateLabel"></small>
         </div>
         <div class="progress-ring" id="progressRing" aria-label="100일 진행률">
@@ -34,31 +35,29 @@
         </div>
       </div>
       <div class="day-progress" aria-label="오늘 학습 진행률">
-        <div><span>오늘 완료</span><strong id="dailyProgressText">0 / 5</strong></div>
+        <div><span>오늘 완료</span><strong id="dailyProgressText">0 / 3</strong></div>
         <div class="progress-track"><span id="dailyProgressBar"></span></div>
       </div>
     </header>
 
-    <nav class="category-tabs glass" aria-label="학습 카테고리">
-      <button class="category active" data-category="vocab"><span>Ａ</span>핵심어휘</button>
-      <button class="category" data-category="expression"><span>↔</span>숙어·연어</button>
-      <button class="category" data-category="sentence"><span>◉</span>문장암기</button>
-      <button class="category" data-category="grammar"><span>✓</span>문법함정</button>
-      <button class="category" data-category="practice"><span>?</span>실전문제</button>
+    <nav class="category-tabs glass" aria-label="학습 단계">
+      <button class="category active" data-category="read"><span>01</span>장문읽기</button>
+      <button class="category" data-category="analyze"><span>02</span>해부·학습</button>
+      <button class="category" data-category="apply"><span>03</span>문제·복습</button>
     </nav>
 
     <section id="learningCard" class="learning-card glass" aria-live="polite">
       <div class="card-head">
-        <span id="badge" class="badge">핵심어휘</span>
-        <span id="partBadge" class="part-badge">800+ CORE</span>
+        <span id="badge" class="badge">장문읽기</span>
+        <span id="partBadge" class="part-badge">LONG READING</span>
       </div>
       <div id="cardContent"></div>
       <div id="quizArea" class="quiz-area" hidden></div>
     </section>
 
     <div class="learning-actions">
-      <button id="speakBtn" class="secondary-button">발음 듣기</button>
-      <button id="completeBtn" class="primary-button">오늘 학습 완료</button>
+      <button id="speakBtn" class="secondary-button">영어 듣기</button>
+      <button id="completeBtn" class="primary-button">이 단계 완료</button>
     </div>
 
     <div class="navigation-row glass">
@@ -71,7 +70,7 @@
     </div>
 
     <section class="stats glass" aria-label="학습 기록">
-      <div><span>완료 카드</span><strong id="totalCompleted">0</strong></div>
+      <div><span>완료 단계</span><strong id="totalCompleted">0</strong></div>
       <div><span>완료한 날</span><strong id="completedDays">0</strong></div>
       <div><span>오답 문제</span><strong id="wrongCount">0</strong></div>
     </section>
@@ -82,12 +81,14 @@
     </div>
 
     <footer class="glass site-footer">
-      <p>이 앱의 문항은 TOEIC 출제 유형과 업무 영어 문맥을 반영해 자체 제작한 학습문제입니다. ETS 또는 YBM의 공식 기출문제를 복제한 자료가 아닙니다.</p>
+      <p><strong>학습 원칙</strong> 긴 영어 본문을 먼저 끝까지 읽고, 그 안에서 어휘·숙어·문법·문장구조를 분석한 뒤 TOEIC형 문제로 적용하고 다시 읽습니다.</p>
+      <p>이 앱의 문항과 본문은 TOEIC의 일반적인 출제 유형과 업무 영어 문맥을 반영해 자체 제작한 학습자료이며 ETS 또는 YBM의 공식 기출문제를 복제한 자료가 아닙니다.</p>
       <div class="footer-meta"><p>Copyright © 이명훈 2026. All rights reserved.</p><p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p></div>
     </footer>
   </main>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="content.js?v=20260808-2300"></script>
-  <script src="app.js?v=20260808-2300" defer></script>
+  <script src="content.js?v=20260809-v2"></script>
+  <script src="reading-content-v2.js?v=20260809-v2"></script>
+  <script src="app.js?v=20260809-v2" defer></script>
 </body>
 </html>
