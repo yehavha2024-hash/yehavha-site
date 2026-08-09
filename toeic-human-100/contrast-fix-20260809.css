@@ -1,0 +1,4 @@
+/* Targeted readability fix for quiz status text. */
+.practice-item .quiz-result {
+  color: #e3edf7 !important;
+}
