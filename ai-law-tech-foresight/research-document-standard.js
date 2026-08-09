@@ -8,17 +8,10 @@
 
   function makeVisible(notice) {
     if (!notice) return;
-    notice.textContent = aiNotice;
-    notice.style.setProperty('display', 'block', 'important');
-    notice.style.setProperty('visibility', 'visible', 'important');
-    notice.style.setProperty('opacity', '1', 'important');
-    notice.style.setProperty('height', 'auto', 'important');
-    notice.style.setProperty('max-height', 'none', 'important');
-    notice.style.setProperty('overflow', 'visible', 'important');
-    notice.style.setProperty('position', 'static', 'important');
-    notice.style.setProperty('clip', 'auto', 'important');
-    notice.style.setProperty('clip-path', 'none', 'important');
-    notice.style.setProperty('white-space', 'normal', 'important');
+    if (notice.textContent.trim() !== aiNotice) notice.textContent = aiNotice;
+    notice.style.display = 'block';
+    notice.style.visibility = 'visible';
+    notice.style.opacity = '1';
   }
 
   function insertAfterContact(scope, contactLink) {
@@ -28,6 +21,7 @@
       notice = document.createElement('p');
       notice.className = 'ai-disclosure';
       notice.dataset.aiDisclosure = 'main';
+      notice.textContent = aiNotice;
       const contactRow = contactLink.closest('p, li, div') || contactLink.parentElement;
       if (contactRow && contactRow.parentElement) contactRow.insertAdjacentElement('afterend', notice);
       else scope.appendChild(notice);
@@ -36,10 +30,10 @@
   }
 
   function ensureSiteFooterDisclosure() {
+    const footers = [...document.querySelectorAll('footer')].filter(footer => !footer.classList.contains('document-footer'));
     let handled = false;
 
-    document.querySelectorAll('footer').forEach(footer => {
-      if (footer.classList.contains('document-footer')) return;
+    footers.forEach(footer => {
       const contactLink = footer.querySelector('a[href^="mailto:"]');
       if (!contactLink) return;
       insertAfterContact(footer, contactLink);
@@ -48,21 +42,17 @@
 
     if (handled) return;
 
-    document.querySelectorAll('a[href^="mailto:"]').forEach(contactLink => {
-      if (contactLink.closest('.document-footer, dialog')) return;
-      const scope = contactLink.closest('footer, section, div') || document.body;
-      insertAfterContact(scope, contactLink);
-    });
+    const contactLink = [...document.querySelectorAll('a[href^="mailto:"]')]
+      .find(link => !link.closest('.document-footer, dialog'));
+    if (!contactLink) return;
+    const scope = contactLink.closest('footer, section, div') || document.body;
+    insertAfterContact(scope, contactLink);
   }
 
   ensureSiteFooterDisclosure();
+  window.addEventListener('load', ensureSiteFooterDisclosure, { once: true });
 
-  if (!dialog || !content) {
-    window.addEventListener('load', ensureSiteFooterDisclosure, { once: true });
-    new MutationObserver(() => queueMicrotask(ensureSiteFooterDisclosure))
-      .observe(document.documentElement, { childList: true, subtree: true });
-    return;
-  }
+  if (!dialog || !content) return;
 
   function ensureFooter() {
     let footer = content.querySelector('.document-footer');
@@ -130,8 +120,7 @@
     }).join('')}</div>`;
   }
 
-  function standardize() {
-    ensureSiteFooterDisclosure();
+  function standardizeDetail() {
     if (!content.childElementCount) return;
     ensureToc();
     ensureFooter();
@@ -151,13 +140,9 @@
     if (event.target.closest('[data-standard-close]')) dialog.close();
   });
 
-  const detailObserver = new MutationObserver(() => queueMicrotask(standardize));
+  const detailObserver = new MutationObserver(() => queueMicrotask(standardizeDetail));
   detailObserver.observe(content, { childList: true, subtree: false });
 
-  const pageObserver = new MutationObserver(() => queueMicrotask(ensureSiteFooterDisclosure));
-  pageObserver.observe(document.documentElement, { childList: true, subtree: true });
-
   dialog.addEventListener('close', () => content.scrollTo({ top: 0, behavior: 'auto' }));
-  window.addEventListener('load', ensureSiteFooterDisclosure, { once: true });
-  standardize();
+  standardizeDetail();
 })();
