@@ -54,7 +54,7 @@ const cardView=item=>({
 });
 
 const out={
-  generatedAt:new Date().toISOString(),
+  generatedAt:'2026-08-09',
   expectedTotal:105,
   actualTotal:data.length,
   summary,
