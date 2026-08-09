@@ -1,0 +1,34 @@
+name: Legal Knowledge Runtime Audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'legal-knowledge/**'
+      - '.github/workflows/legal-knowledge-runtime-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run legal knowledge runtime audit
+        run: node legal-knowledge/run-runtime-audit.mjs
+      - name: Commit runtime audit output
+        run: |
+          if git diff --quiet -- legal-knowledge/RUNTIME_AUDIT_OUTPUT_20260809.json; then
+            echo 'No audit output change.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add legal-knowledge/RUNTIME_AUDIT_OUTPUT_20260809.json
+          git commit -m 'Update legal knowledge runtime audit output'
+          git push
