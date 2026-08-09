@@ -1,4 +1,4 @@
-const CACHE = "toeic-human-100-v6-toeic-teps-reading";
+const CACHE = "toeic-human-100-v7-full-100-days";
 const ASSETS = [
   "./",
   "index.html",
@@ -8,6 +8,7 @@ const ASSETS = [
   "nexus-shell.css",
   "app-v2.js",
   "teps-extension-ui-v2.js",
+  "reading-content-v2-ready-rerender.js",
   "content.js",
   "reading-content-v2.js",
   "reading-content-v2-days02-04.js",
@@ -16,6 +17,8 @@ const ASSETS = [
   "reading-content-v2-length-patch.js",
   "teps-extension-v2.js",
   "teps-extension-length-patch.js",
+  "reading-content-v2-days11-100-builder.js",
+  "master-lexicon-v2.json",
   "manifest.webmanifest",
   "images/toeic-bg.webp",
   "icons/icon-192.png",
@@ -40,7 +43,7 @@ self.addEventListener("activate", event => {
 
 function isCodeRequest(request) {
   const url = new URL(request.url);
-  return request.mode === "navigate" || /\.(?:html|js|css|webmanifest)$/.test(url.pathname);
+  return request.mode === "navigate" || /\.(?:html|js|css|webmanifest|json)$/.test(url.pathname);
 }
 
 self.addEventListener("fetch", event => {
