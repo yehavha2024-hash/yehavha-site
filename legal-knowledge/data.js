@@ -22,10 +22,25 @@ document.addEventListener('DOMContentLoaded', () => {
           const dedupData = document.createElement('script');
           dedupData.src = 'data-dedup-round6-ai-20260809.js';
           dedupData.onload = () => {
-            const caseUi = document.createElement('script');
-            caseUi.src = 'case-verification-ui-20260809.js';
-            document.body.appendChild(caseUi);
-            if (typeof renderCards === 'function') renderCards();
+            const sourceHotfix = document.createElement('script');
+            sourceHotfix.src = 'data-source-link-hotfix-20260809.js';
+            sourceHotfix.onload = () => {
+              const auditData = document.createElement('script');
+              auditData.src = 'data-source-article-citation-audit-20260809.js';
+              auditData.onload = () => {
+                const caseUi = document.createElement('script');
+                caseUi.src = 'case-verification-ui-20260809.js';
+                caseUi.onload = () => {
+                  const auditUi = document.createElement('script');
+                  auditUi.src = 'source-article-citation-audit-ui-20260809.js';
+                  document.body.appendChild(auditUi);
+                  if (typeof renderCards === 'function') renderCards();
+                };
+                document.body.appendChild(caseUi);
+              };
+              document.body.appendChild(auditData);
+            };
+            document.body.appendChild(sourceHotfix);
           };
           document.body.appendChild(dedupData);
         };
