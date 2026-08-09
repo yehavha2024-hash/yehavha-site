@@ -36,11 +36,12 @@ jobs:
           node --check toeic-human-100/teps-extension-length-patch.js
           node --check toeic-human-100/teps-extension-ui-v2.js
 
-      - name: Check validators
+      - name: Check validators and planner
         run: |
           node --check toeic-human-100/scripts/validate-reading-v2.mjs
           node --check toeic-human-100/scripts/validate-reading-v2-expanded.mjs
           node --check toeic-human-100/scripts/audit-reading-coverage-v2.mjs
+          node --check toeic-human-100/scripts/plan-coverage-correction-v2.mjs
 
       - name: Run original staged validation
         run: node toeic-human-100/scripts/validate-reading-v2.mjs
@@ -52,6 +53,10 @@ jobs:
         if: always()
         run: node toeic-human-100/scripts/audit-reading-coverage-v2.mjs
 
+      - name: Plan next 10-day coverage correction
+        if: always()
+        run: node toeic-human-100/scripts/plan-coverage-correction-v2.mjs
+
       - name: Upload validation diagnostics
         if: always()
         uses: actions/upload-artifact@v4
@@ -62,3 +67,6 @@ jobs:
             toeic-human-100/READING_V2_EXPANDED_VALIDATION.json
             toeic-human-100/READING_V2_COVERAGE.json
             toeic-human-100/READING_V2_COVERAGE.md
+            toeic-human-100/NEXT_10_DAY_TARGETS.json
+            toeic-human-100/NEXT_10_DAY_TARGETS.md
+            toeic-human-100/coverage-policy-v2.json
