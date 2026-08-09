@@ -12,10 +12,17 @@
 .doctoral-rank{display:inline-grid;place-items:center;min-width:39px;height:30px;padding:0 8px;border-radius:7px;background:#173f60;color:#fff;font-size:11px;font-weight:900;letter-spacing:.04em}
 .doctoral-summary-copy{min-width:0}
 .doctoral-summary-copy strong{display:block;color:#233e55;font-size:14px;line-height:1.45}
-.doctoral-summary-copy small{display:block;margin-top:3px;color:#718493;font-size:11.5px;line-height:1.5}
+.doctoral-author-ko{display:inline}
+.doctoral-author-en{display:inline;margin-left:6px;color:#647b8d;font-size:.88em;font-weight:650}
+.doctoral-summary-copy small{display:block;margin-top:5px;color:#718493;font-size:11.5px;line-height:1.52}
+.doctoral-summary-copy small>span:first-child{display:block;margin-bottom:2px;color:#60788a;font-weight:700}
+.doctoral-title-ko{display:block;color:#506c80;font-weight:700}
+.doctoral-title-en{display:block;margin-top:1px;color:#81919e;font-weight:500}
 .doctoral-citation-body{padding:0 16px 18px;border-top:1px solid #edf1f4}
 .doctoral-source-head{padding:15px 0 12px}
 .doctoral-source-head h4{margin:0;color:#24465f;font-size:15px;line-height:1.55}
+.doctoral-source-head h4 .doctoral-title-ko{color:#24465f;font-weight:800}
+.doctoral-source-head h4 .doctoral-title-en{margin-top:2px;color:#667f91;font-size:12.5px;font-weight:600}
 .doctoral-source-head p{margin:4px 0 0;color:#718392;font-size:12px;line-height:1.65}
 .doctoral-meta-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
 .doctoral-meta-row span{padding:4px 7px;border-radius:5px;background:#eef3f6;color:#50697c;font-size:10.5px;font-weight:800}
@@ -30,4 +37,4 @@
 .doctoral-draft{background:#f6faf8;border-color:#dbe9e1}
 .doctoral-caution{background:#faf8f4;border-color:#eadfcd}
 .doctoral-source-link{display:inline-block;margin-top:12px;color:#2c6795;text-decoration:none;font-size:11.5px;font-weight:850}
-@media(max-width:720px){.doctoral-citation-section{padding:54px 0}.doctoral-citation-card summary{grid-template-columns:auto minmax(0,1fr) auto;gap:9px;padding:13px 12px}.doctoral-rank{min-width:35px;height:28px}.doctoral-summary-copy strong{font-size:13px}.doctoral-grid{grid-template-columns:1fr}.doctoral-block.wide{grid-column:auto}.doctoral-citation-body{padding:0 12px 14px}.doctoral-quote{font-size:13.2px}.doctoral-block p{font-size:12.5px}}
+@media(max-width:720px){.doctoral-citation-section{padding:54px 0}.doctoral-citation-card summary{grid-template-columns:auto minmax(0,1fr) auto;gap:9px;padding:13px 12px}.doctoral-rank{min-width:35px;height:28px}.doctoral-summary-copy strong{font-size:13px}.doctoral-author-en{display:block;margin:2px 0 0;font-size:11px;line-height:1.4}.doctoral-summary-copy small{font-size:11.2px}.doctoral-grid{grid-template-columns:1fr}.doctoral-block.wide{grid-column:auto}.doctoral-citation-body{padding:0 12px 14px}.doctoral-quote{font-size:13.2px}.doctoral-block p{font-size:12.5px}}
