@@ -13,7 +13,7 @@
   const txt = value => esc(localize(value));
 
   const renderReference = ref => {
-    const type = esc(ref?.type || '자료');
+    const type = txt(ref?.type || '자료');
     const citation = esc(ref?.citation || '');
     const pinpoint = txt(ref?.pinpoint || '');
     const url = String(ref?.url || '').trim();
@@ -45,7 +45,7 @@
       <article class="synthesis-card">
         <div class="synthesis-head">
           <span class="synthesis-no">${esc(item.no)}</span>
-          <div><h3>${esc(item.title)}</h3><p class="synthesis-chain">${esc(item.chain)}</p></div>
+          <div><h3>${txt(item.title)}</h3><p class="synthesis-chain">${txt(item.chain)}</p></div>
         </div>
         <p class="synthesis-proposition">${txt(item.proposition)}</p>
         <details class="synthesis-detail">
@@ -77,7 +77,7 @@
 
   debateGrid.innerHTML = debates.map((item, idx) => `
     <article class="debate-card">
-      <div class="debate-top"><span>${String(idx + 1).padStart(2,'0')}</span><h3>${esc(item.title)}</h3></div>
+      <div class="debate-top"><span>${String(idx + 1).padStart(2,'0')}</span><h3>${txt(item.title)}</h3></div>
       <p class="debate-thesis">${txt(item.thesis)}</p>
       <div class="debate-sides">
         ${(item.sides || []).map(([title,text]) => `<div><strong>${txt(title)}</strong><p>${txt(text)}</p></div>`).join('')}
