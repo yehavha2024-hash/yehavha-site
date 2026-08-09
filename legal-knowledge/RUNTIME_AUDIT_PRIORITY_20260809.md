@@ -1,6 +1,11 @@
 # 런타임 취약 인용 우선검증 목록 — 2026-08-09
 
 - 전체 카드: 105
+- 중복 ID: 4
+  - civil-creditor-revocation × 2: 채권자취소권 / 채권자취소권
+  - public-proportionality × 2: 비례의 원칙 / 과잉금지원칙
+  - public-state-liability × 2: 공무원의 위법한 직무집행과 국가배상 / 공무원의 위법한 직무행위와 국가배상
+  - special-tax-legality × 2: 조세법률주의 / 조세법률주의와 세법해석
 - 출처 D/C: 0
 - 출처 B1 포함 카드: 0
 - 조문 C: 0

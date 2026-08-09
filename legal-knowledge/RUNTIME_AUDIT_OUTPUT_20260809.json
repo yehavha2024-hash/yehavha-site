@@ -2,6 +2,40 @@
   "generatedAt": "2026-08-09",
   "expectedTotal": 105,
   "actualTotal": 105,
+  "duplicateIds": [
+    {
+      "id": "civil-creditor-revocation",
+      "count": 2,
+      "titles": [
+        "채권자취소권",
+        "채권자취소권"
+      ]
+    },
+    {
+      "id": "public-proportionality",
+      "count": 2,
+      "titles": [
+        "비례의 원칙",
+        "과잉금지원칙"
+      ]
+    },
+    {
+      "id": "public-state-liability",
+      "count": 2,
+      "titles": [
+        "공무원의 위법한 직무집행과 국가배상",
+        "공무원의 위법한 직무행위와 국가배상"
+      ]
+    },
+    {
+      "id": "special-tax-legality",
+      "count": 2,
+      "titles": [
+        "조세법률주의",
+        "조세법률주의와 세법해석"
+      ]
+    }
+  ],
   "summary": {
     "total": 105,
     "checked": "2026.08.09",
