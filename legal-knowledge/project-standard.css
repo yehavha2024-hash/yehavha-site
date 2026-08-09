@@ -64,3 +64,85 @@ h1{font-size:var(--project-h1)!important;font-weight:780!important;line-height:1
 .site-footer>div:first-child strong{display:block;font-size:14px!important;font-weight:650!important;color:#d7e1ea!important}.site-footer>div:first-child p,.site-footer .footer-note p{margin:4px 0 0!important;font-size:13px!important;color:var(--nxs-subtle)!important}.site-footer .footer-note{text-align:right!important;max-width:660px}.site-footer .ai-disclosure{margin-top:8px!important}.site-footer a{color:#c3ddf4!important;text-decoration:none!important}.site-footer .footer-note>a{display:inline-block;margin-top:9px!important;font-size:13px!important;font-weight:700!important}
 .detail-dialog{background:var(--nxs-reading)!important;color:var(--nxs-reading-text)!important;border-color:#cbd6e1!important}.detail-dialog .dialog-shell,.detail-dialog #detailContent{background:var(--nxs-reading)!important;color:var(--nxs-reading-text)!important}.detail-dialog .detail-title,.detail-dialog .detail-section h4,.document-toc-title,.document-footer-copy strong{color:#17324d!important}.detail-dialog .detail-sub,.detail-dialog .detail-section p,.detail-dialog .detail-list,.fact-row p,.analysis-row p,.direct-analysis,.document-footer-copy p{color:var(--nxs-reading-muted)!important;font-size:16px!important;line-height:1.82!important}.detail-dialog .detail-section,.document-footer{border-color:#d7e0e9!important}.document-toc,.fact-row,.variation-case,.variation-question,.variation-answer,.source-links a,.document-action{background:var(--nxs-reading-2)!important;color:var(--nxs-reading-text)!important;border-color:#d7e0e9!important}.document-toc button{color:#42586d!important;font-size:15px!important}.document-toc button span,.detail-dialog .section-kicker,.detail-dialog .detail-section::before,.source-links a{color:#2e679d!important}.detail-dialog .close{background:#eef3f8!important;color:#17324d!important;border-color:#d7e0e9!important}.document-action.close-action{background:#173f60!important;color:#fff!important;border-color:#173f60!important}
 @media(max-width:680px){body{font-size:16px!important;line-height:1.8!important}.hero-inner{padding-left:16px!important;padding-right:16px!important}main{padding-left:16px!important;padding-right:16px!important}.notice p,.card .summary,.completion-policy,.section-heading p{font-size:16px!important;line-height:1.82!important}.cards,.roadmap-grid{grid-template-columns:1fr!important}.notice{grid-template-columns:1fr!important}.standard-grid strong{font-size:16px!important}.standard-grid span{font-size:15.5px!important}.filter-btn{font-size:14px!important;border-radius:9px!important}.badge,.level,.card-keywords span,.exam-chips span,.meta-chips span{font-size:14px!important;border-radius:8px!important}.site-footer{display:block;padding:26px 16px!important}.site-footer .footer-note{text-align:left!important;margin-top:18px;padding-top:16px;border-top:1px solid var(--nxs-line)}}
+
+/* 2026-08-09 page readability hotfix: beats document-controls.css without altering light research dialogs */
+body > main .section-heading p,
+body > main .notice p,
+body > main .completion-policy,
+body > main .card .summary,
+body > main .roadmap-grid article span,
+body > main .standard-grid article span,
+body > main .standard-note,
+body > main .reviewed,
+body > main .empty{
+  color:#d2dde8!important;
+}
+body > main .section-heading p,
+body > main .notice p,
+body > main .completion-policy,
+body > main .card .summary,
+body > main .standard-note{
+  font-size:16px!important;
+  line-height:1.82!important;
+}
+body > main .roadmap-grid article span,
+body > main .standard-grid article span{
+  font-size:16px!important;
+  line-height:1.78!important;
+}
+body > main .roadmap-grid article strong,
+body > main .standard-grid article strong,
+body > main .card h3{
+  color:#f3f7ff!important;
+}
+body > main .roadmap-grid article,
+body > main .standard-grid article,
+body > main .card,
+body > main .controls,
+body > main .notice{
+  background:#0b1d33!important;
+  border-color:rgba(255,255,255,.18)!important;
+}
+body > main .card-keywords span,
+body > main .exam-chips span,
+body > main .meta-chips span,
+body > main .badge,
+body > main .level{
+  background:#102f52!important;
+  color:#dcecff!important;
+  border-color:rgba(122,184,255,.30)!important;
+  font-size:14px!important;
+}
+body > main .search-box,
+body > main .search-box span,
+body > main .filter-label{
+  color:#c9d6e4!important;
+  font-size:15px!important;
+}
+body > main .search-box input,
+body > main .subfield-select,
+body > main .filter-btn{
+  background:#0d2948!important;
+  color:#f2f6ff!important;
+  border-color:rgba(255,255,255,.22)!important;
+}
+body > main .search-box input::placeholder{color:#b5c5d5!important}
+body > main .filter-btn{font-size:15px!important;min-height:44px!important}
+body > main .filter-btn.active{background:#337ab5!important;color:#fff!important;border-color:#78acd6!important}
+body > main .open-detail{color:#9ed0ff!important;font-size:16px!important}
+body > main .reviewed{font-size:14px!important;color:#9fb2c5!important}
+.site-footer{border-top-color:rgba(255,255,255,.16)!important}
+.site-footer>div:first-child p,.site-footer .footer-note p{color:#aebfd0!important;font-size:13px!important;line-height:1.72!important}
+.site-footer a{color:#cfe5f8!important;font-size:13px!important}
+.site-footer > .footer-top-link{display:none!important}
+@media(max-width:680px){
+  body > main .section-heading p,
+  body > main .notice p,
+  body > main .completion-policy,
+  body > main .card .summary,
+  body > main .roadmap-grid article span,
+  body > main .standard-grid article span,
+  body > main .standard-note{font-size:16px!important;line-height:1.82!important}
+  body > main .card h3{font-size:20px!important;line-height:1.45!important}
+  body > main .filter-btn{font-size:15px!important}
+}
