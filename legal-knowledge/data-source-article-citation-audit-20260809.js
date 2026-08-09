@@ -3,10 +3,9 @@
   const CHECKED='2026.08.09';
   const sourceFields=['statuteSources','relatedCases','officialGuidance','sources'];
 
-  const articleDirectPath=/lsLinkCommonInfo|lsLawLinkInfo|LsiJoLinkP|lsLinkProc/i;
+  const articleDirectPath=/lsLinkCommonInfo|lsLawLinkInfo|LsiJoLinkP|lsLinkProc|lsSideInfoP/i;
   const precedentDirectPath=/precInfoP|precStmdInfoP/i;
   const articleLabel=/제\s*\d+(?:조(?:의\d+)?)?(?:\s*제\d+항)?/;
-  const lawOrStatuteLabel=/법|헌법|규칙|시행령|고시|Act|Regulation|Directive/i;
 
   const manuallyVerifiedArticles=new Set([
     'public-proportionality','public-legitimate-expectation','public-invalid-voidable-act','public-state-liability',
@@ -18,9 +17,7 @@
     'ai-road-traffic-autonomous-driver','ai-outdoor-mobile-robot','ai-physical-robot-workplace-safety'
   ]);
 
-  function safeUrl(raw){
-    try{return new URL(raw);}catch{return null;}
-  }
+  function safeUrl(raw){try{return new URL(raw);}catch{return null;}}
 
   function sourceClass(src){
     const raw=src?.url||'';
@@ -48,7 +45,6 @@
     if(h.endsWith('.go.kr')||h==='www.nia.or.kr'||h==='nia.or.kr') return {code:'A2',rank:2,kind:'국내 정부·공공기관',note:'정부·공공기관 공식 출처'};
     if(h==='eur-lex.europa.eu'||h==='data.europa.eu'||h.endsWith('.edpb.europa.eu')) return {code:'A2',rank:2,kind:'EU 공식',note:'EU 기관 공식 출처'};
     if(h.endsWith('.gov')||h==='www.copyright.gov'||h==='copyright.gov') return {code:'A2',rank:2,kind:'미국 정부 공식',note:'미국 연방기관 공식 출처'};
-
     if(h.includes('wipo.int')||h.includes('oecd.org')) return {code:'A2',rank:2,kind:'국제기구 공식',note:'국제기구 공식 출처'};
     if(h.includes('doi.org')||h.includes('ssrn.com')||h.includes('springer.com')||h.includes('oup.com')||h.includes('cambridge.org')) return {code:'C',rank:4,kind:'학술·2차 자료',note:'법적 권위는 1차 법원보다 낮음'};
     return {code:'C',rank:4,kind:'기타 보조자료',note:'공식 1차 법원 여부 별도 확인'};
@@ -57,18 +53,23 @@
   function collectSources(item){
     const out=[];
     const seen=new Set();
+    const verified=new Set(item.sourceManuallyVerifiedOfficialUrls||[]);
     sourceFields.forEach(field=>{
       (item[field]||[]).forEach(src=>{
         if(!src||!src.url) return;
         const key=src.url.trim();
         if(seen.has(key)) return;
         seen.add(key);
-        out.push({...src,field,...sourceClass(src)});
+        let cls=sourceClass(src);
+        if(cls.code==='B1' && verified.has(key)) cls={code:'A2',rank:2,kind:'수동검증 공식 판결페이지',note:'2026-08-09 판결내용·사건번호 수동 대조 완료. 검색경로가 아닌 특정 공식 판결페이지로 유지'};
+        out.push({...src,field,...cls});
       });
     });
     if(item.caseOfficialUrl && !seen.has(item.caseOfficialUrl)){
       const src={label:`${item.caseNo||''} 공식 판례`,url:item.caseOfficialUrl,field:'caseOfficialUrl'};
-      out.push({...src,...sourceClass(src)});
+      let cls=sourceClass(src);
+      if(cls.code==='B1' && verified.has(item.caseOfficialUrl)) cls={code:'A2',rank:2,kind:'수동검증 공식 판결페이지',note:'2026-08-09 판결내용·사건번호 수동 대조 완료'};
+      out.push({...src,...cls});
     }
     return out;
   }
@@ -98,12 +99,12 @@
       const direct=hasArticle && cls.code==='A1' && /law\.go\.kr/i.test(src.url||'');
       return {label:src.label,url:src.url,hasArticle,direct,sourceGrade:cls.code};
     });
-    const manual=manuallyVerifiedArticles.has(item.id);
+    const manual=manuallyVerifiedArticles.has(item.id) || item.articleManualReviewChecked==='2026.08.09';
     const directCount=parsed.filter(x=>x.direct).length;
     const numbered=parsed.filter(x=>x.hasArticle).length;
     const official=parsed.filter(x=>/^A/.test(x.sourceGrade)||x.sourceGrade==='B1').length;
 
-    if(manual) return {grade:'A',note:'2026-08-09 공식 조문·판례 참조조문과 개별 대조 완료',refs:parsed};
+    if(manual) return {grade:'A',note:'2026-08-09 공식 현행 조문과 개별 대조 완료',refs:parsed};
     if(directCount && numbered===parsed.length) return {grade:'A-',note:'국가법령정보센터 직접 조문경로와 조문번호가 연결됨. 의미범위는 카드 적용 시 별도 해석 필요',refs:parsed};
     if(numbered && official===parsed.length) return {grade:'B+',note:'조문번호는 명시되어 있으나 일부 링크가 법률 전체·연혁 페이지이므로 직접 조문 고정링크 보강 권장',refs:parsed};
     if(official===parsed.length) return {grade:'B',note:'공식 법률 출처는 확인되나 특정 조문번호 직접성은 낮음. 광범위 법리카드는 허용하되 사례 적용 전 조문 특정 필요',refs:parsed};
@@ -117,7 +118,7 @@
       return {grade:'P2',note:`${item.caseCourt||'전문·하급심'} ${item.caseNo} 직접 판시 카드. 상급심·후속판례와 함께 사용`};
     }
     const related=item.relatedCases||[];
-    const supreme=related.filter(x=>/대법원|헌법재판소|헌재/.test(x.label||''));
+    const supreme=related.filter(x=>/대법원|헌법재판소|헌재|\d{4}[다도후두]/.test(x.label||''));
     if(supreme.length) return {grade:'P3+',note:'대법원·헌재 인접판례를 법리 보강에 사용하지만 이 카드 자체의 직접 판시사건은 아님'};
     if(related.length) return {grade:'P3',note:'인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인'};
     if(item.adjacentCaseLaw) return {grade:'P4+',note:'직접 판례 미축적 또는 비판례형 주제. 인접법리·공식 해석을 보조적으로 사용'};
