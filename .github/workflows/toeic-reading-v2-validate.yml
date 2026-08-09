@@ -47,4 +47,16 @@ jobs:
         run: node toeic-human-100/scripts/validate-reading-v2-expanded.mjs
 
       - name: Run master lexicon coverage audit
+        if: always()
         run: node toeic-human-100/scripts/audit-reading-coverage-v2.mjs
+
+      - name: Upload validation diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: toeic-reading-v2-validation
+          if-no-files-found: warn
+          path: |
+            toeic-human-100/READING_V2_EXPANDED_VALIDATION.json
+            toeic-human-100/READING_V2_COVERAGE.json
+            toeic-human-100/READING_V2_COVERAGE.md
