@@ -1,4 +1,4 @@
-const CACHE = "toeic-human-100-v7-full-100-days";
+const CACHE = "toeic-human-100-v8-final-100-days";
 const ASSETS = [
   "./",
   "index.html",
@@ -18,6 +18,7 @@ const ASSETS = [
   "teps-extension-v2.js",
   "teps-extension-length-patch.js",
   "reading-content-v2-days11-100-builder.js",
+  "reading-content-v2-generated-compact-patch.js",
   "master-lexicon-v2.json",
   "manifest.webmanifest",
   "images/toeic-bg.webp",
