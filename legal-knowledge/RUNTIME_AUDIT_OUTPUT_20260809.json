@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-09T06:10:08.883Z",
+  "generatedAt": "2026-08-09T06:10:48.897Z",
   "expectedTotal": 105,
   "actualTotal": 105,
   "summary": {
@@ -12,10 +12,10 @@
       "N": 13
     },
     "articleGrades": {
-      "A-": 35,
-      "B+": 17,
+      "A-": 41,
       "B": 13,
       "A": 27,
+      "B+": 11,
       "N": 13
     },
     "precedentGrades": {
@@ -426,8 +426,8 @@
         "subfield": "채권법",
         "sourceLinkGrade": "B+",
         "sourceCounts": {
-          "A1": 0,
-          "A2": 2,
+          "A1": 1,
+          "A2": 1,
           "B1": 1,
           "C": 0,
           "D": 0
@@ -441,15 +441,15 @@
             "field": "relatedCases"
           }
         ],
-        "articleAccuracyGrade": "B+",
-        "articleNote": "조문번호는 명시되어 있으나 일부 링크가 법률 전체·연혁 페이지이므로 직접 조문 고정링크 보강 권장",
+        "articleAccuracyGrade": "A-",
+        "articleNote": "국가법령정보센터 직접 조문경로와 조문번호가 연결됨. 의미범위는 카드 적용 시 별도 해석 필요",
         "articleRefs": [
           {
             "label": "민법 제741조 부당이득의 내용 · 국가법령정보센터",
             "url": "https://law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0741&lsiSeq=284415&urlMode=lsScJoRltInfoR",
             "hasArticle": true,
-            "direct": false,
-            "sourceGrade": "A2"
+            "direct": true,
+            "sourceGrade": "A1"
           }
         ],
         "precedentCitationGrade": "P3",
@@ -474,8 +474,8 @@
         "subfield": "민법 총칙",
         "sourceLinkGrade": "B+",
         "sourceCounts": {
-          "A1": 0,
-          "A2": 2,
+          "A1": 1,
+          "A2": 1,
           "B1": 1,
           "C": 0,
           "D": 0
@@ -489,15 +489,15 @@
             "field": "relatedCases"
           }
         ],
-        "articleAccuracyGrade": "B+",
-        "articleNote": "조문번호는 명시되어 있으나 일부 링크가 법률 전체·연혁 페이지이므로 직접 조문 고정링크 보강 권장",
+        "articleAccuracyGrade": "A-",
+        "articleNote": "국가법령정보센터 직접 조문경로와 조문번호가 연결됨. 의미범위는 카드 적용 시 별도 해석 필요",
         "articleRefs": [
           {
             "label": "민법 제162조 채권·재산권의 소멸시효 · 국가법령정보센터",
             "url": "https://law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0162&lsiSeq=284415&urlMode=lsScJoRltInfoR",
             "hasArticle": true,
-            "direct": false,
-            "sourceGrade": "A2"
+            "direct": true,
+            "sourceGrade": "A1"
           }
         ],
         "precedentCitationGrade": "P3",
@@ -586,7 +586,7 @@
           }
         ],
         "articleAccuracyGrade": "A",
-        "articleNote": "2026-08-09 공식 조문·판례 참조조문과 개별 대조 완료",
+        "articleNote": "2026-08-09 공식 현행 조문과 개별 대조 완료",
         "articleRefs": [
           {
             "label": "행정기본법 제12조 신뢰보호의 원칙 · 국가법령정보센터",
@@ -634,7 +634,7 @@
           }
         ],
         "articleAccuracyGrade": "A",
-        "articleNote": "2026-08-09 공식 조문·판례 참조조문과 개별 대조 완료",
+        "articleNote": "2026-08-09 공식 현행 조문과 개별 대조 완료",
         "articleRefs": [
           {
             "label": "행정기본법 제18조 위법 또는 부당한 처분의 취소 · 국가법령정보센터",
@@ -682,7 +682,7 @@
           }
         ],
         "articleAccuracyGrade": "A",
-        "articleNote": "2026-08-09 공식 조문·판례 참조조문과 개별 대조 완료",
+        "articleNote": "2026-08-09 공식 현행 조문과 개별 대조 완료",
         "articleRefs": [
           {
             "label": "국가배상법 제2조 배상책임 · 국가법령정보센터",
@@ -730,7 +730,7 @@
           }
         ],
         "articleAccuracyGrade": "A",
-        "articleNote": "2026-08-09 공식 조문·판례 참조조문과 개별 대조 완료",
+        "articleNote": "2026-08-09 공식 현행 조문과 개별 대조 완료",
         "articleRefs": [
           {
             "label": "형법 제18조 부작위범 · 국가법령정보센터",
@@ -778,7 +778,7 @@
           }
         ],
         "articleAccuracyGrade": "A",
-        "articleNote": "2026-08-09 공식 조문·판례 참조조문과 개별 대조 완료",
+        "articleNote": "2026-08-09 공식 현행 조문과 개별 대조 완료",
         "articleRefs": [
           {
             "label": "형법 제17조 인과관계 · 국가법령정보센터",
@@ -826,7 +826,7 @@
           }
         ],
         "articleAccuracyGrade": "A",
-        "articleNote": "2026-08-09 공식 조문·판례 참조조문과 개별 대조 완료",
+        "articleNote": "2026-08-09 공식 현행 조문과 개별 대조 완료",
         "articleRefs": [
           {
             "label": "형법 제30조 공동정범 · 국가법령정보센터",
@@ -874,7 +874,7 @@
           }
         ],
         "articleAccuracyGrade": "A",
-        "articleNote": "2026-08-09 공식 조문·판례 참조조문과 개별 대조 완료",
+        "articleNote": "2026-08-09 공식 현행 조문과 개별 대조 완료",
         "articleRefs": [
           {
             "label": "형사소송법 제308조의2 위법수집증거의 배제 · 국가법령정보센터",
@@ -906,8 +906,8 @@
         "subfield": "특허법",
         "sourceLinkGrade": "B+",
         "sourceCounts": {
-          "A1": 0,
-          "A2": 2,
+          "A1": 1,
+          "A2": 1,
           "B1": 1,
           "C": 0,
           "D": 0
@@ -921,15 +921,15 @@
             "field": "relatedCases"
           }
         ],
-        "articleAccuracyGrade": "B+",
-        "articleNote": "조문번호는 명시되어 있으나 일부 링크가 법률 전체·연혁 페이지이므로 직접 조문 고정링크 보강 권장",
+        "articleAccuracyGrade": "A-",
+        "articleNote": "국가법령정보센터 직접 조문경로와 조문번호가 연결됨. 의미범위는 카드 적용 시 별도 해석 필요",
         "articleRefs": [
           {
             "label": "특허법 제97조 특허발명의 보호범위 · 국가법령정보센터",
             "url": "https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0097&lsiSeq=279827&urlMode=lsScJoRltInfoR",
             "hasArticle": true,
-            "direct": false,
-            "sourceGrade": "A2"
+            "direct": true,
+            "sourceGrade": "A1"
           }
         ],
         "precedentCitationGrade": "P3",
@@ -1002,8 +1002,8 @@
         "subfield": "조세법",
         "sourceLinkGrade": "B+",
         "sourceCounts": {
-          "A1": 0,
-          "A2": 2,
+          "A1": 1,
+          "A2": 1,
           "B1": 1,
           "C": 0,
           "D": 0
@@ -1017,15 +1017,15 @@
             "field": "relatedCases"
           }
         ],
-        "articleAccuracyGrade": "B+",
-        "articleNote": "조문번호는 명시되어 있으나 일부 링크가 법률 전체·연혁 페이지이므로 직접 조문 고정링크 보강 권장",
+        "articleAccuracyGrade": "A-",
+        "articleNote": "국가법령정보센터 직접 조문경로와 조문번호가 연결됨. 의미범위는 카드 적용 시 별도 해석 필요",
         "articleRefs": [
           {
             "label": "대한민국헌법 제59조 · 국가법령정보센터",
             "url": "https://law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0059&lsiSeq=61603&urlMode=lsScJoRltInfoR",
             "hasArticle": true,
-            "direct": false,
-            "sourceGrade": "A2"
+            "direct": true,
+            "sourceGrade": "A1"
           }
         ],
         "precedentCitationGrade": "P3",
@@ -1125,7 +1125,7 @@
           }
         ],
         "articleAccuracyGrade": "A",
-        "articleNote": "2026-08-09 공식 조문·판례 참조조문과 개별 대조 완료",
+        "articleNote": "2026-08-09 공식 현행 조문과 개별 대조 완료",
         "articleRefs": [
           {
             "label": "민법 제126조 · 국가법령정보센터",
@@ -1165,8 +1165,8 @@
         "subfield": "민법 총칙",
         "sourceLinkGrade": "B+",
         "sourceCounts": {
-          "A1": 0,
-          "A2": 2,
+          "A1": 1,
+          "A2": 1,
           "B1": 1,
           "C": 0,
           "D": 0
@@ -1180,15 +1180,15 @@
             "field": "relatedCases"
           }
         ],
-        "articleAccuracyGrade": "B+",
-        "articleNote": "조문번호는 명시되어 있으나 일부 링크가 법률 전체·연혁 페이지이므로 직접 조문 고정링크 보강 권장",
+        "articleAccuracyGrade": "A-",
+        "articleNote": "국가법령정보센터 직접 조문경로와 조문번호가 연결됨. 의미범위는 카드 적용 시 별도 해석 필요",
         "articleRefs": [
           {
             "label": "민법 제109조 · 국가법령정보센터",
             "url": "https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0109&lsiSeq=284415&urlMode=lsScJoRltInfoR",
             "hasArticle": true,
-            "direct": false,
-            "sourceGrade": "A2"
+            "direct": true,
+            "sourceGrade": "A1"
           }
         ],
         "precedentCitationGrade": "P3",
@@ -1261,8 +1261,8 @@
         "subfield": "채권법",
         "sourceLinkGrade": "B+",
         "sourceCounts": {
-          "A1": 1,
-          "A2": 2,
+          "A1": 2,
+          "A2": 1,
           "B1": 1,
           "C": 0,
           "D": 0
@@ -1290,8 +1290,8 @@
             "label": "민법 제548조 · 국가법령정보센터",
             "url": "https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0548&lsiSeq=284415&urlMode=lsScJoRltInfoR",
             "hasArticle": true,
-            "direct": false,
-            "sourceGrade": "A2"
+            "direct": true,
+            "sourceGrade": "A1"
           }
         ],
         "precedentCitationGrade": "P3",
@@ -1350,7 +1350,7 @@
           }
         ],
         "articleAccuracyGrade": "A",
-        "articleNote": "2026-08-09 공식 조문·판례 참조조문과 개별 대조 완료",
+        "articleNote": "2026-08-09 공식 현행 조문과 개별 대조 완료",
         "articleRefs": [
           {
             "label": "상법 제382조 · 국가법령정보센터",
@@ -1653,7 +1653,7 @@
           }
         ],
         "articleAccuracyGrade": "A",
-        "articleNote": "2026-08-09 공식 조문·판례 참조조문과 개별 대조 완료",
+        "articleNote": "2026-08-09 공식 현행 조문과 개별 대조 완료",
         "articleRefs": [
           {
             "label": "형법 제13조 · 국가법령정보센터",
@@ -1844,8 +1844,8 @@
         "subfield": "형사소송·증거법",
         "sourceLinkGrade": "B+",
         "sourceCounts": {
-          "A1": 0,
-          "A2": 2,
+          "A1": 1,
+          "A2": 1,
           "B1": 1,
           "C": 0,
           "D": 0
@@ -1859,15 +1859,15 @@
             "field": "relatedCases"
           }
         ],
-        "articleAccuracyGrade": "B+",
-        "articleNote": "조문번호는 명시되어 있으나 일부 링크가 법률 전체·연혁 페이지이므로 직접 조문 고정링크 보강 권장",
+        "articleAccuracyGrade": "A-",
+        "articleNote": "국가법령정보센터 직접 조문경로와 조문번호가 연결됨. 의미범위는 카드 적용 시 별도 해석 필요",
         "articleRefs": [
           {
             "label": "형사소송법 제308조의2 · 국가법령정보센터",
             "url": "https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=02&joNo=0308&lsiSeq=280441&urlMode=lsScJoRltInfoR",
             "hasArticle": true,
-            "direct": false,
-            "sourceGrade": "A2"
+            "direct": true,
+            "sourceGrade": "A1"
           }
         ],
         "precedentCitationGrade": "P3",
@@ -2158,7 +2158,7 @@
           }
         ],
         "articleAccuracyGrade": "A",
-        "articleNote": "2026-08-09 공식 조문·판례 참조조문과 개별 대조 완료",
+        "articleNote": "2026-08-09 공식 현행 조문과 개별 대조 완료",
         "articleRefs": [
           {
             "label": "특허법 제29조 제2항 · 국가법령정보센터",
@@ -2214,7 +2214,7 @@
           }
         ],
         "articleAccuracyGrade": "A",
-        "articleNote": "2026-08-09 공식 조문·판례 참조조문과 개별 대조 완료",
+        "articleNote": "2026-08-09 공식 현행 조문과 개별 대조 완료",
         "articleRefs": [
           {
             "label": "상표법 제34조 제1항 제7호 · 선등록상표와의 유사·등록배제 · 국가법령정보센터",
@@ -2277,7 +2277,7 @@
           }
         ],
         "articleAccuracyGrade": "A",
-        "articleNote": "2026-08-09 공식 조문·판례 참조조문과 개별 대조 완료",
+        "articleNote": "2026-08-09 공식 현행 조문과 개별 대조 완료",
         "articleRefs": [
           {
             "label": "디자인보호법 제33조 · 국가법령정보센터",
@@ -2454,102 +2454,6 @@
     "articleC": [],
     "articleB_Bplus": [
       {
-        "id": "civil-unjust-enrichment",
-        "title": "부당이득의 성립과 반환범위",
-        "area": "민사·상사·책임법",
-        "subfield": "채권법",
-        "sourceLinkGrade": "B+",
-        "sourceCounts": {
-          "A1": 0,
-          "A2": 2,
-          "B1": 1,
-          "C": 0,
-          "D": 0
-        },
-        "weakOrFragileSources": [
-          {
-            "label": "부당이득 관련 판례검색 · 국가법령정보센터",
-            "url": "https://www.law.go.kr/precSc.do?menuId=7&query=%EB%B6%80%EB%8B%B9%EC%9D%B4%EB%93%9D%20%EB%B2%95%EB%A5%A0%EC%83%81%20%EC%9B%90%EC%9D%B8",
-            "code": "B1",
-            "note": "공식이나 판례 직접고정링크보다 안정성이 낮음",
-            "field": "relatedCases"
-          }
-        ],
-        "articleAccuracyGrade": "B+",
-        "articleNote": "조문번호는 명시되어 있으나 일부 링크가 법률 전체·연혁 페이지이므로 직접 조문 고정링크 보강 권장",
-        "articleRefs": [
-          {
-            "label": "민법 제741조 부당이득의 내용 · 국가법령정보센터",
-            "url": "https://law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0741&lsiSeq=284415&urlMode=lsScJoRltInfoR",
-            "hasArticle": true,
-            "direct": false,
-            "sourceGrade": "A2"
-          }
-        ],
-        "precedentCitationGrade": "P3",
-        "precedentNote": "인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인",
-        "statuteSources": [
-          {
-            "label": "민법 제741조 부당이득의 내용 · 국가법령정보센터",
-            "url": "https://law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0741&lsiSeq=284415&urlMode=lsScJoRltInfoR"
-          }
-        ],
-        "relatedCases": [
-          {
-            "label": "부당이득 관련 판례검색 · 국가법령정보센터",
-            "url": "https://www.law.go.kr/precSc.do?menuId=7&query=%EB%B6%80%EB%8B%B9%EC%9D%B4%EB%93%9D%20%EB%B2%95%EB%A5%A0%EC%83%81%20%EC%9B%90%EC%9D%B8"
-          }
-        ]
-      },
-      {
-        "id": "civil-extinctive-prescription",
-        "title": "소멸시효의 기산점·완성·원용",
-        "area": "민사·상사·책임법",
-        "subfield": "민법 총칙",
-        "sourceLinkGrade": "B+",
-        "sourceCounts": {
-          "A1": 0,
-          "A2": 2,
-          "B1": 1,
-          "C": 0,
-          "D": 0
-        },
-        "weakOrFragileSources": [
-          {
-            "label": "소멸시효 기산점 관련 판례검색 · 국가법령정보센터",
-            "url": "https://www.law.go.kr/precSc.do?menuId=7&query=%EC%86%8C%EB%A9%B8%EC%8B%9C%ED%9A%A8%20%EA%B8%B0%EC%82%B0%EC%A0%90",
-            "code": "B1",
-            "note": "공식이나 판례 직접고정링크보다 안정성이 낮음",
-            "field": "relatedCases"
-          }
-        ],
-        "articleAccuracyGrade": "B+",
-        "articleNote": "조문번호는 명시되어 있으나 일부 링크가 법률 전체·연혁 페이지이므로 직접 조문 고정링크 보강 권장",
-        "articleRefs": [
-          {
-            "label": "민법 제162조 채권·재산권의 소멸시효 · 국가법령정보센터",
-            "url": "https://law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0162&lsiSeq=284415&urlMode=lsScJoRltInfoR",
-            "hasArticle": true,
-            "direct": false,
-            "sourceGrade": "A2"
-          }
-        ],
-        "precedentCitationGrade": "P3",
-        "precedentNote": "인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인",
-        "statuteSources": [
-          {
-            "label": "민법 제162조 채권·재산권의 소멸시효 · 국가법령정보센터",
-            "url": "https://law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0162&lsiSeq=284415&urlMode=lsScJoRltInfoR"
-          }
-        ],
-        "relatedCases": [
-          {
-            "label": "소멸시효 기산점 관련 판례검색 · 국가법령정보센터",
-            "url": "https://www.law.go.kr/precSc.do?menuId=7&query=%EC%86%8C%EB%A9%B8%EC%8B%9C%ED%9A%A8%20%EA%B8%B0%EC%82%B0%EC%A0%90"
-          }
-        ]
-      },
-      {
         "id": "civil-rescission-restitution",
         "title": "계약해제와 원상회복",
         "area": "민사·상사·책임법",
@@ -2598,110 +2502,14 @@
         ]
       },
       {
-        "id": "ip-patent-claim-scope",
-        "title": "특허발명의 보호범위와 청구범위 해석",
-        "area": "지식재산법",
-        "subfield": "특허법",
-        "sourceLinkGrade": "B+",
-        "sourceCounts": {
-          "A1": 0,
-          "A2": 2,
-          "B1": 1,
-          "C": 0,
-          "D": 0
-        },
-        "weakOrFragileSources": [
-          {
-            "label": "특허 청구범위 해석 관련 판례검색 · 국가법령정보센터",
-            "url": "https://www.law.go.kr/precSc.do?menuId=7&query=%ED%8A%B9%ED%97%88%20%EC%B2%AD%EA%B5%AC%EB%B2%94%EC%9C%84%20%EB%B3%B4%ED%98%B8%EB%B2%94%EC%9C%84",
-            "code": "B1",
-            "note": "공식이나 판례 직접고정링크보다 안정성이 낮음",
-            "field": "relatedCases"
-          }
-        ],
-        "articleAccuracyGrade": "B+",
-        "articleNote": "조문번호는 명시되어 있으나 일부 링크가 법률 전체·연혁 페이지이므로 직접 조문 고정링크 보강 권장",
-        "articleRefs": [
-          {
-            "label": "특허법 제97조 특허발명의 보호범위 · 국가법령정보센터",
-            "url": "https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0097&lsiSeq=279827&urlMode=lsScJoRltInfoR",
-            "hasArticle": true,
-            "direct": false,
-            "sourceGrade": "A2"
-          }
-        ],
-        "precedentCitationGrade": "P3",
-        "precedentNote": "인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인",
-        "statuteSources": [
-          {
-            "label": "특허법 제97조 특허발명의 보호범위 · 국가법령정보센터",
-            "url": "https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0097&lsiSeq=279827&urlMode=lsScJoRltInfoR"
-          }
-        ],
-        "relatedCases": [
-          {
-            "label": "특허 청구범위 해석 관련 판례검색 · 국가법령정보센터",
-            "url": "https://www.law.go.kr/precSc.do?menuId=7&query=%ED%8A%B9%ED%97%88%20%EC%B2%AD%EA%B5%AC%EB%B2%94%EC%9C%84%20%EB%B3%B4%ED%98%B8%EB%B2%94%EC%9C%84"
-          }
-        ]
-      },
-      {
-        "id": "special-tax-legality",
-        "title": "조세법률주의",
-        "area": "조세·전문법",
-        "subfield": "조세법",
-        "sourceLinkGrade": "B+",
-        "sourceCounts": {
-          "A1": 0,
-          "A2": 2,
-          "B1": 1,
-          "C": 0,
-          "D": 0
-        },
-        "weakOrFragileSources": [
-          {
-            "label": "조세법률주의 관련 판례검색 · 국가법령정보센터",
-            "url": "https://www.law.go.kr/precSc.do?menuId=7&query=%EC%A1%B0%EC%84%B8%EB%B2%95%EB%A5%A0%EC%A3%BC%EC%9D%98%20%EC%97%84%EA%B2%A9%ED%95%B4%EC%84%9D",
-            "code": "B1",
-            "note": "공식이나 판례 직접고정링크보다 안정성이 낮음",
-            "field": "relatedCases"
-          }
-        ],
-        "articleAccuracyGrade": "B+",
-        "articleNote": "조문번호는 명시되어 있으나 일부 링크가 법률 전체·연혁 페이지이므로 직접 조문 고정링크 보강 권장",
-        "articleRefs": [
-          {
-            "label": "대한민국헌법 제59조 · 국가법령정보센터",
-            "url": "https://law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0059&lsiSeq=61603&urlMode=lsScJoRltInfoR",
-            "hasArticle": true,
-            "direct": false,
-            "sourceGrade": "A2"
-          }
-        ],
-        "precedentCitationGrade": "P3",
-        "precedentNote": "인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인",
-        "statuteSources": [
-          {
-            "label": "대한민국헌법 제59조 · 국가법령정보센터",
-            "url": "https://law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0059&lsiSeq=61603&urlMode=lsScJoRltInfoR"
-          }
-        ],
-        "relatedCases": [
-          {
-            "label": "조세법률주의 관련 판례검색 · 국가법령정보센터",
-            "url": "https://www.law.go.kr/precSc.do?menuId=7&query=%EC%A1%B0%EC%84%B8%EB%B2%95%EB%A5%A0%EC%A3%BC%EC%9D%98%20%EC%97%84%EA%B2%A9%ED%95%B4%EC%84%9D"
-          }
-        ]
-      },
-      {
         "id": "special-registration-public-faith",
         "title": "부동산등기의 대항력과 공신력 부정",
         "area": "조세·전문법",
         "subfield": "부동산등기",
         "sourceLinkGrade": "A",
         "sourceCounts": {
-          "A1": 1,
-          "A2": 4,
+          "A1": 2,
+          "A2": 3,
           "B1": 0,
           "C": 0,
           "D": 0
@@ -2714,8 +2522,8 @@
             "label": "민법 제186조 부동산물권변동의 효력 · 국가법령정보센터",
             "url": "https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0186&lsiSeq=284415&urlMode=lsScJoRltInfoR",
             "hasArticle": true,
-            "direct": false,
-            "sourceGrade": "A2"
+            "direct": true,
+            "sourceGrade": "A1"
           },
           {
             "label": "부동산등기법 · 국가법령정보센터",
@@ -2741,54 +2549,6 @@
           {
             "label": "대법원 1997. 6. 24. 선고 97다2993 · 국가법령정보센터",
             "url": "https://www.law.go.kr/LSW/precInfoP.do?evtNo=97%EB%8B%A42993"
-          }
-        ]
-      },
-      {
-        "id": "civil-mistake",
-        "title": "착오로 인한 의사표시",
-        "area": "민사·상사·책임법",
-        "subfield": "민법 총칙",
-        "sourceLinkGrade": "B+",
-        "sourceCounts": {
-          "A1": 0,
-          "A2": 2,
-          "B1": 1,
-          "C": 0,
-          "D": 0
-        },
-        "weakOrFragileSources": [
-          {
-            "label": "착오 관련 판례검색 · 국가법령정보센터",
-            "url": "https://www.law.go.kr/precSc.do?menuId=7&query=%EC%B0%A9%EC%98%A4%20%EC%A4%91%EC%9A%94%EB%B6%80%EB%B6%84",
-            "code": "B1",
-            "note": "공식이나 판례 직접고정링크보다 안정성이 낮음",
-            "field": "relatedCases"
-          }
-        ],
-        "articleAccuracyGrade": "B+",
-        "articleNote": "조문번호는 명시되어 있으나 일부 링크가 법률 전체·연혁 페이지이므로 직접 조문 고정링크 보강 권장",
-        "articleRefs": [
-          {
-            "label": "민법 제109조 · 국가법령정보센터",
-            "url": "https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0109&lsiSeq=284415&urlMode=lsScJoRltInfoR",
-            "hasArticle": true,
-            "direct": false,
-            "sourceGrade": "A2"
-          }
-        ],
-        "precedentCitationGrade": "P3",
-        "precedentNote": "인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인",
-        "statuteSources": [
-          {
-            "label": "민법 제109조 · 국가법령정보센터",
-            "url": "https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0109&lsiSeq=284415&urlMode=lsScJoRltInfoR"
-          }
-        ],
-        "relatedCases": [
-          {
-            "label": "착오 관련 판례검색 · 국가법령정보센터",
-            "url": "https://www.law.go.kr/precSc.do?menuId=7&query=%EC%B0%A9%EC%98%A4%20%EC%A4%91%EC%9A%94%EB%B6%80%EB%B6%84"
           }
         ]
       },
@@ -3067,54 +2827,6 @@
           {
             "label": "사기죄 기망·처분행위 관련 판례검색 · 국가법령정보센터",
             "url": "https://www.law.go.kr/precSc.do?menuId=7&query=%EC%82%AC%EA%B8%B0%EC%A3%84%20%EA%B8%B0%EB%A7%9D%20%EC%B2%98%EB%B6%84%ED%96%89%EC%9C%84"
-          }
-        ]
-      },
-      {
-        "id": "criminal-illegal-evidence",
-        "title": "위법수집증거배제법칙",
-        "area": "형사법",
-        "subfield": "형사소송·증거법",
-        "sourceLinkGrade": "B+",
-        "sourceCounts": {
-          "A1": 0,
-          "A2": 2,
-          "B1": 1,
-          "C": 0,
-          "D": 0
-        },
-        "weakOrFragileSources": [
-          {
-            "label": "위법수집증거배제 관련 판례검색 · 국가법령정보센터",
-            "url": "https://www.law.go.kr/precSc.do?menuId=7&query=%EC%9C%84%EB%B2%95%EC%88%98%EC%A7%91%EC%A6%9D%EA%B1%B0%20%EC%A0%9C308%EC%A1%B0%EC%9D%982",
-            "code": "B1",
-            "note": "공식이나 판례 직접고정링크보다 안정성이 낮음",
-            "field": "relatedCases"
-          }
-        ],
-        "articleAccuracyGrade": "B+",
-        "articleNote": "조문번호는 명시되어 있으나 일부 링크가 법률 전체·연혁 페이지이므로 직접 조문 고정링크 보강 권장",
-        "articleRefs": [
-          {
-            "label": "형사소송법 제308조의2 · 국가법령정보센터",
-            "url": "https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=02&joNo=0308&lsiSeq=280441&urlMode=lsScJoRltInfoR",
-            "hasArticle": true,
-            "direct": false,
-            "sourceGrade": "A2"
-          }
-        ],
-        "precedentCitationGrade": "P3",
-        "precedentNote": "인접·유사 판례를 보조적으로 사용. 직접 ratio와 사실관계 일치 여부를 사례별 확인",
-        "statuteSources": [
-          {
-            "label": "형사소송법 제308조의2 · 국가법령정보센터",
-            "url": "https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=02&joNo=0308&lsiSeq=280441&urlMode=lsScJoRltInfoR"
-          }
-        ],
-        "relatedCases": [
-          {
-            "label": "위법수집증거배제 관련 판례검색 · 국가법령정보센터",
-            "url": "https://www.law.go.kr/precSc.do?menuId=7&query=%EC%9C%84%EB%B2%95%EC%88%98%EC%A7%91%EC%A6%9D%EA%B1%B0%20%EC%A0%9C308%EC%A1%B0%EC%9D%982"
           }
         ]
       },
