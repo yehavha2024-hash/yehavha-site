@@ -11,7 +11,8 @@ const readingFiles = [
   'reading-content-v2.js',
   'reading-content-v2-days02-04.js',
   'reading-content-v2-days05-07.js',
-  'reading-content-v2-days08-10.js'
+  'reading-content-v2-days08-10.js',
+  'reading-content-v2-length-patch.js'
 ].filter(file => fs.existsSync(path.join(DIR,file)));
 
 if (!readingFiles.length) throw new Error('V2 reading files missing');
@@ -26,6 +27,8 @@ let teps = {days:[]};
 const tepsFile = path.join(DIR,'teps-extension-v2.js');
 if (fs.existsSync(tepsFile)) {
   vm.runInContext(fs.readFileSync(tepsFile,'utf8'), context, {filename:'teps-extension-v2.js'});
+  const tepsPatch = path.join(DIR,'teps-extension-length-patch.js');
+  if (fs.existsSync(tepsPatch)) vm.runInContext(fs.readFileSync(tepsPatch,'utf8'), context, {filename:'teps-extension-length-patch.js'});
   vm.runInContext('globalThis.__TEPS_V2__ = TEPS_READING_EXTENSION_V2;', context);
   teps = context.__TEPS_V2__;
 }
