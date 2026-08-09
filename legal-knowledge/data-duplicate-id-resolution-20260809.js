@@ -20,6 +20,11 @@
     proportionality.id='public-constitutional-proportionality';
     proportionality.title='헌법상 과잉금지원칙';
     proportionality.summary='헌법 제37조 제2항을 중심으로 목적의 정당성·수단의 적합성·침해최소성·법익균형성의 기본권 제한 심사구조를 정리한다.';
+    proportionality.statuteSources=[
+      {label:'대한민국헌법 제37조 제2항 기본권 제한의 한계 · 국가법령정보센터',url:'https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0037&lsiSeq=61603&urlMode=lsScJoRltInfoR'}
+    ];
+    proportionality.articleManualReviewChecked='2026.08.09';
+    proportionality.articleManualReviewNote='헌법상 과잉금지원칙의 직접 헌법근거를 제37조 제2항으로 재대조하고 행정법상 비례원칙과 분리.';
     proportionality.relatedRules=Array.from(new Set([...(proportionality.relatedRules||[]),'행정기본법 제10조 비례의 원칙']));
   }
 
@@ -28,6 +33,11 @@
     state.id='public-state-liability-protective-norm';
     state.title='국가배상책임의 위법성·보호규범';
     state.summary='국가배상법 제2조의 법령위반을 단순한 객관적 법규위반과 구별하고, 직무상 의무의 보호목적·개인적 법익 보호 여부·부작위의 작위의무를 중심으로 위법성 구조를 정리한다.';
+    state.statuteSources=[
+      {label:'국가배상법 제2조 배상책임 · 국가법령정보센터',url:'https://www.law.go.kr/법령/국가배상법'}
+    ];
+    state.articleManualReviewChecked='2026.08.09';
+    state.articleManualReviewNote='국가배상책임의 위법성·보호규범 논점을 국가배상법 제2조 현행문언과 재대조.';
     state.relatedRules=Array.from(new Set([...(state.relatedRules||[]),'보호규범','부작위의 작위의무']));
   }
 
