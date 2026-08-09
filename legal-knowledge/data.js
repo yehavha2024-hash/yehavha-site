@@ -10,9 +10,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const currentness = document.createElement('script');
   currentness.src = 'data-law-currentness-20260809.js';
   currentness.onload = () => {
-    const ui = document.createElement('script');
-    ui.src = 'law-currentness-ui-20260809.js';
-    document.body.appendChild(ui);
+    const currentnessUi = document.createElement('script');
+    currentnessUi.src = 'law-currentness-ui-20260809.js';
+    currentnessUi.onload = () => {
+      const caseData = document.createElement('script');
+      caseData.src = 'data-case-verification-round2-20260809.js';
+      caseData.onload = () => {
+        const caseUi = document.createElement('script');
+        caseUi.src = 'case-verification-ui-20260809.js';
+        document.body.appendChild(caseUi);
+      };
+      document.body.appendChild(caseData);
+    };
+    document.body.appendChild(currentnessUi);
   };
   document.body.appendChild(currentness);
 });
