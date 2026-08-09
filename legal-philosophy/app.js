@@ -165,7 +165,12 @@
         ${section(verificationNo,'검증자료와 인용 원칙',source)}
       </div>
       <footer class="detail-footer">
-        <div><strong>법철학·기본권 연구</strong><br>Copyright © 이명훈 2026. All rights reserved.<br>문의 kimbrighth@gmail.com</div>
+        <div>
+          <strong>법철학·기본권 연구</strong><br>
+          Copyright © 이명훈 2026. All rights reserved.<br>
+          문의 kimbrighth@gmail.com
+          <p class="ai-disclosure">AI 활용 안내: 일부 법철학 연구자료의 정리·비교·초안 작성에 생성형 AI를 활용했으며, 연구구조와 논증, 인용·출처 검토 및 최종 편집은 운영자가 관리합니다. 원전 인용은 연구·논문 사용 전 원문 재확인이 필요합니다.</p>
+        </div>
         <button type="button" data-close>창 닫기 ×</button>
       </footer>
     `;
