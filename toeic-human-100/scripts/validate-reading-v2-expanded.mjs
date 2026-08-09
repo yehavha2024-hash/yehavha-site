@@ -18,6 +18,7 @@ for (const file of readingFiles) {
 vm.runInContext(fs.readFileSync(path.join(DIR,'teps-extension-v2.js'),'utf8'), context, {filename:'teps-extension-v2.js'});
 vm.runInContext(fs.readFileSync(path.join(DIR,'teps-extension-length-patch.js'),'utf8'), context, {filename:'teps-extension-length-patch.js'});
 vm.runInContext(fs.readFileSync(path.join(DIR,'reading-content-v2-days11-100-builder.js'),'utf8'), context, {filename:'reading-content-v2-days11-100-builder.js'});
+vm.runInContext(fs.readFileSync(path.join(DIR,'reading-content-v2-generated-compact-patch.js'),'utf8'), context, {filename:'reading-content-v2-generated-compact-patch.js'});
 context.__MASTER__ = JSON.parse(fs.readFileSync(path.join(DIR,'master-lexicon-v2.json'),'utf8'));
 vm.runInContext('TOEIC_READING_V2_BUILDER.attach(TOEIC_READING_V2_BUILDER.build(__MASTER__));', context);
 vm.runInContext('globalThis.__PROGRAM__ = TOEIC_READING_V2; globalThis.__TEPS__ = TEPS_READING_EXTENSION_V2;', context);
