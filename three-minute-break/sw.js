@@ -1,10 +1,11 @@
-const CACHE_NAME = "three-minute-break-v9-nexus-theme";
+const CACHE_NAME = "three-minute-break-v10-nexus-unified";
 const ASSETS = [
   "./",
   "./index.html",
   "./style.css",
   "./nexus-shell.css",
   "./app.js",
+  "./top-navigation.js",
   "./manifest.webmanifest",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
