@@ -4,6 +4,9 @@ import path from 'node:path';
 const projects = [
   { dir: 'ai-law-tech-foresight', detailFiles: ['app.js', 'research-document-standard.js'] },
   { dir: 'legal-philosophy', detailFiles: ['app.js'] },
+  { dir: 'legal-knowledge', detailFiles: ['research-document-standard.js'] },
+  { dir: 'three-minute-break', detailFiles: [] },
+  { dir: 'toeic-human-100', detailFiles: [] },
 ];
 
 let errors = 0;
@@ -52,14 +55,14 @@ for (const project of projects) {
   const configPath = path.join(root, 'config.js');
   if (fs.existsSync(configPath)) {
     const config = read(configPath);
-    if (/\bdocument\.|createElement\(|addEventListener\(/.test(config)) {
+    if (/\bdocument\.|createElement\(|addEventListener\(|innerHTML/.test(config)) {
       report('ERROR', `${root}/config.js`, 'config.js에 DOM/동작 코드 존재');
     }
   }
 
-  for (const temp of ['home-v2.html', '_worker.js', 'deploy-version.txt']) {
+  for (const temp of ['home-v2.html', '_worker.js', 'deploy-version.txt', 'ai-disclosure.js']) {
     if (fs.existsSync(path.join(root, temp))) {
-      report('WARNING', root, `임시 파일 잔존: ${temp}`);
+      report('WARNING', root, `임시·중복 파일 잔존: ${temp}`);
     }
   }
 
