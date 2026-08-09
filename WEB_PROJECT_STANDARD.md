@@ -65,10 +65,28 @@
 - 임시 redirect/worker는 문제 해결 후 제거한다.
 - 자산 변경 시 명시적 버전 문자열을 사용하되, 임시 버전 파일을 별도로 누적하지 않는다.
 
-## 6. 현재 우선 적용 프로젝트
+## 6. 규격 적용 완료 프로젝트
 
-- `ai-law-tech-foresight/`
+### 메인 저장소 `yehavha2024-hash/yehavha-site`
+- `nexus/`
+- `three-minute-break/`
+- `toeic-human-100/`
+- `legal-knowledge/`
 - `legal-philosophy/`
-- 별도 저장소 `ai-song-studio`
+- `ai-law-tech-foresight/`
 
-이 규격을 기준으로 나머지 Nexus 연결 프로젝트도 순차적으로 정리한다.
+위 6개 프로젝트는 `scripts/audit-web-architecture.mjs`와 `Web Architecture Audit` workflow로 지속 검사한다.
+
+### 별도 저장소
+- `yehavha2024-hash/ai-song-studio`
+- `yehavha2024-hash/ai-law-research-institute`
+
+각 별도 저장소는 자체 `scripts/audit-architecture.mjs`와 `Architecture Audit` workflow로 지속 검사한다.
+
+## 7. 유지관리 기준
+
+- 새 기능을 추가할 때 기존 소유 파일을 수정하고 보정용 JavaScript를 별도로 덧붙이지 않는다.
+- footer·AI 고지·Copyright 변경은 정적 HTML 원본에서 처리한다.
+- 상세문서 footer는 해당 상세문서 생성 모듈만 수정한다.
+- 감사 workflow가 실패하면 새 패치를 추가하기 전에 중복 소유·전역 감시·런타임 스타일 생성 여부부터 제거한다.
+- 임시 배포 우회파일은 원인 해결 후 반드시 삭제한다.
