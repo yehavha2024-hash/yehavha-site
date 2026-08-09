@@ -63,7 +63,7 @@
       "category": "apps",
       "meta": "100-Day Web App",
       "title": "토익인간 100일 프로젝트",
-      "description": "100일 동안 핵심어휘·숙어와 연어·문장암기·문법함정·실전문제를 매일 학습하는 모바일 중심 토익 웹앱입니다.",
+      "description": "매일 긴 영어 본문을 끝까지 읽으며 TOEIC 핵심어휘·숙어·문법·문장구조와 문제유형을 문맥 속에서 반복해 익히고, 영어 원서 독해까지 연결하는 100일 장문독해 웹앱입니다.",
       "url": "https://yehavha-toeicman.pages.dev/",
       "actionLabel": "앱 실행",
       "managedBy": "github",
@@ -71,7 +71,7 @@
       "statusTone": "fresh",
       "lastUpdated": "2026-08-09",
       "contentCount": 500,
-      "contentLabel": "학습카드"
+      "contentLabel": "기존 학습카드"
     },
     {
       "id": "ai-song-course",
