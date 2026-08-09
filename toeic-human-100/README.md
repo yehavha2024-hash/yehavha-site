@@ -1,19 +1,21 @@
 # 토익인간 100일 프로젝트
 
-GitHub에서 관리하는 100일 모바일 영어 학습 웹앱입니다. V2부터는 TOEIC을 단순 문제풀이 과목으로 다루지 않고, 긴 영어 본문을 매일 읽으면서 어휘·숙어·문법·문장구조를 문맥 속에서 반복해 익혀 영어 원서 독해까지 연결하는 장문독해 프로젝트로 재구성합니다.
+GitHub에서 관리하는 100일 모바일 영어 학습 웹앱입니다. V2부터는 TOEIC을 단순 문제풀이 과목으로 다루지 않고, 긴 영어 본문을 매일 읽으면서 어휘·숙어·문법·문장구조를 문맥 속에서 반복해 익히고, 각 날짜 하단의 TEPS 독해 확장으로 추상어휘·논리·추론을 넓혀 영어 원서 독해까지 연결합니다.
 
 ## V2 핵심 구조
 
-- DAY 1~100의 장문 분량을 동일 수준으로 유지
+- DAY 1~100의 TOEIC 장문 분량을 동일 수준으로 유지
 - 기준 약 1,500 words, 허용범위 1,350~1,650 words
 - 완료 체크는 5개가 아니라 3개
   - 장문읽기
   - 해부·학습
   - 문제·복습
 - TOEIC 핵심어휘·숙어·연어·문법·구문·질문유형을 장문 안에서 반복노출
+- 각 날짜 TOEIC 본문 하단에 `TEPS READING EXTENSION` 배치
+- TEPS 확장에서는 더 높은 추상도와 논리밀도의 독해, 고급어휘, 빈칸·문맥·주제·추론 훈련을 추가
 - 문장 단위 해석을 넘어 문단 기능, 지칭관계, 논리표지, 전체 맥락을 추적
-- Part 5·6·7 문제를 당일 본문과 직접 연결
-- 실제 공식 기출문장 복제가 아니라 출제요소를 분석해 자체 제작한 학습자료 사용
+- Part 5·6·7 문제를 당일 TOEIC 본문과 직접 연결
+- TOEIC·TEPS 공식 기출문장을 복제하지 않고 평가영역과 독해유형을 참고해 자체 제작
 
 전체 설계기준은 `READING_PROGRAM_V2.md`에 있습니다.
 
@@ -24,44 +26,51 @@ GitHub에서 관리하는 100일 모바일 영어 학습 웹앱입니다. V2부�
 - `index.html` — 화면 구조
 - `style.css` — 기존 공통 디자인
 - `reading-v2.css` — 장문독해 V2 디자인
+- `teps-extension-v2.css` — TEPS 확장 디자인
 - `app-v2.js` — V2 3단계 학습·진행·음성·문제 상호작용
-- `reading-content-v2.js` — V2 장문 콘텐츠 원본
+- `teps-extension-ui-v2.js` — TOEIC 3단계 화면에 TEPS 확장을 결합
+- `reading-content-v2.js` — DAY 001 V2 장문
+- `reading-content-v2-days02-04.js`, `reading-content-v2-days05-07.js`, `reading-content-v2-days08-10.js` — DAY 002~010 V2 장문
+- `teps-extension-v2.js` — DAY 001~010 TEPS 독해 확장
+- `reading-content-v2-length-patch.js`, `teps-extension-length-patch.js` — 고정 분량 규격 보정
 - `content.js` — 기존 100일 × 5영역 데이터. V2 전환 중 호환용으로 유지
+- `master-lexicon-v2.json` — TOEIC·일반영어·학술 확장 마스터 어휘
 - `manifest.webmanifest`, `sw.js`, `icons/` — PWA 구성
 - `images/` — 배경 이미지
 - `nexus.project.json` — Nexus 상태 추적 매니페스트
 
 ## 현재 전환 상태
 
-- DAY 001: V2 완성형 장문 샘플 적용
-- DAY 002~100: 기존 콘텐츠를 3단계 UI로 묶어 표시하며 V2 장문 콘텐츠로 순차 교체
+- DAY 001~010: TOEIC 장문 V2 + TEPS 독해 확장 적용 완료
+- DAY 011~100: 기존 콘텐츠를 3단계 UI로 묶어 표시하며 V2 장문 + TEPS 확장으로 순차 교체
 - 기존 브라우저 진행기록은 V2의 3단계 구조로 가능한 범위에서 자동 이관
 
-## DAY 001 V2 구성
+## DAY 001~010 검증 기준
 
-- 약 1,600단어 수준의 장문
-- 10개 문단
-- 핵심어휘 40개
-- 숙어·연어·고정결합 18개
-- 핵심 문법 8개
-- 문장구조 패턴 8개
-- 긴 문장 집중해부 6개
-- Part 5 4문항
-- Part 6 2문항
-- Part 7 8문항
-- 최종 재독 및 자기점검
+- TOEIC 장문: 각 DAY 1,350~1,650 words
+- TEPS 확장: 각 DAY 최소 180 words
+- TOEIC 장문 최소 8문단
+- TEPS 확장 문제 최소 3문항
+- 완료축 `read / analyze / apply` 3개 유지
+- 어휘 노출은 TOEIC 본문·분석·문제와 TEPS 확장을 함께 계산
+
+## 누적 어휘관리
+
+마스터 어휘는 NGSL 1.2, TSL 1.2, NAWL 1.2를 통합해 관리합니다.
+
+- 고유 headword: 4,786
+- 활용·표면형: 13,428
+- TOEIC 특화 headword: 1,250
+- 학술·원서 확장 headword: 959
+
+`scripts/audit-reading-coverage-v2.mjs`가 실제 100일 학습 콘텐츠를 스캔해 미등장 단어와 반복노출 횟수를 계산합니다. 100일 완성 시 마스터 필수항목이 누락되어 있으면 완료로 판정하지 않는 구조입니다.
 
 ## 검증
 
-`scripts/validate-reading-v2.mjs`는 다음을 검사하도록 설계되어 있습니다.
-
-- 100일 누락·중복
-- 하루 본문 분량
-- 최소 문단 수
-- 완료축 3개 유지
-- 어휘·문법·문장구조·질문유형 커버리지
-- 실전문제 해설 및 본문근거
-- 장르 분포
+- `scripts/validate-reading-v2.mjs` — 기본 V2 구조검증
+- `scripts/validate-reading-v2-expanded.mjs` — TOEIC 장문·TEPS 확장 분량 및 DAY 구조검증
+- `scripts/audit-reading-coverage-v2.mjs` — 마스터 어휘 누적 커버리지·반복노출 검사
+- `.github/workflows/toeic-reading-v2-validate.yml` — GitHub Actions 자동검증
 
 기존 `scripts/export-content.mjs`는 V1 `content.js` 검증용으로 유지합니다.
 
