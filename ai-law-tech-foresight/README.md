@@ -47,14 +47,15 @@ AGI·ASI 및 장기 기술전망은 사실로 단정하지 않고 `기술예측�
 
 석사논문은 공식 공개 URL이 확인되기 전까지 임의 링크를 만들지 않습니다. 공개 후 `석사논문 → 후속 연구 → Agentic AI → Multi-Agent AI → 박사논문 연구` 흐름으로 연결합니다.
 
-## Cloudflare Pages 배포 예정 설정
+## Cloudflare Pages 운영 설정
 
 - Repository: `yehavha2024-hash/yehavha-site`
 - Production branch: `main`
 - Root directory: `ai-law-tech-foresight`
 - Framework preset: None
-- Build command: 현재 Nexus와 동일한 정적 HTML 설정 사용
+- Build command: `exit 0`
 - Build output directory: `.`
-- 권장 프로젝트 이름: `yehavha-ai-foresight`
+- 운영 프로젝트 이름: `yehavha-ai-foresight-v2`
+- 운영 주소: `https://yehavha-ai-foresight-v2.pages.dev/`
 
-현재 `nexus.project.json`은 `publish: false`입니다. 실제 Pages URL이 확정된 뒤 URL을 확인하고 `publish: true`로 바꾸면 YEHAVHA Nexus 자동화가 새 연구 프로젝트를 메인 포털에 자동 등록합니다.
+`nexus.project.json`은 `publish: true` 상태이며, YEHAVHA Nexus는 위 운영 주소를 사용합니다. 기존 `yehavha-ai-foresight.pages.dev` 프로젝트는 폐기 대상입니다.
