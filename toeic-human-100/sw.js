@@ -1,13 +1,21 @@
-const CACHE = "toeic-human-100-v5-reading-v2";
+const CACHE = "toeic-human-100-v6-toeic-teps-reading";
 const ASSETS = [
   "./",
   "index.html",
   "style.css",
   "reading-v2.css",
+  "teps-extension-v2.css",
   "nexus-shell.css",
   "app-v2.js",
+  "teps-extension-ui-v2.js",
   "content.js",
   "reading-content-v2.js",
+  "reading-content-v2-days02-04.js",
+  "reading-content-v2-days05-07.js",
+  "reading-content-v2-days08-10.js",
+  "reading-content-v2-length-patch.js",
+  "teps-extension-v2.js",
+  "teps-extension-length-patch.js",
   "manifest.webmanifest",
   "images/toeic-bg.webp",
   "icons/icon-192.png",
@@ -37,7 +45,6 @@ function isCodeRequest(request) {
 
 self.addEventListener("fetch", event => {
   if (event.request.method !== "GET") return;
-
   if (isCodeRequest(event.request)) {
     event.respondWith(
       fetch(event.request)
@@ -55,15 +62,11 @@ self.addEventListener("fetch", event => {
     );
     return;
   }
-
   event.respondWith(
-    caches.match(event.request).then(cached => {
-      if (cached) return cached;
-      return fetch(event.request).then(response => {
-        const copy = response.clone();
-        caches.open(CACHE).then(cache => cache.put(event.request, copy));
-        return response;
-      });
-    })
+    caches.match(event.request).then(cached => cached || fetch(event.request).then(response => {
+      const copy = response.clone();
+      caches.open(CACHE).then(cache => cache.put(event.request, copy));
+      return response;
+    }))
   );
 });
