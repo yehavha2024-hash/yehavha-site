@@ -36,7 +36,20 @@ const b1=data.filter(x=>(x.sourceLinkAudit?.counts?.B1||0)>0);
 const articleC=data.filter(x=>x.articleAccuracyGrade==='C');
 const articleB=data.filter(x=>['B','B+'].includes(x.articleAccuracyGrade));
 const idCounts=data.reduce((m,x)=>{m[x.id]=(m[x.id]||0)+1;return m;},{});
-const duplicateIds=Object.entries(idCounts).filter(([,count])=>count>1).map(([id,count])=>({id,count,titles:data.filter(x=>x.id===id).map(x=>x.title)}));
+const duplicateIds=Object.entries(idCounts).filter(([,count])=>count>1).map(([id,count])=>({
+  id,count,
+  cards:data.filter(x=>x.id===id).map((x,index)=>({
+    index,
+    title:x.title,
+    area:x.systemArea||x.area,
+    subfield:x.subfield,
+    type:x.type,
+    summary:x.summary,
+    refinementStage:x.refinementStage||'',
+    articleGrade:x.articleAccuracyGrade||'',
+    statuteSources:x.statuteSources||[]
+  }))
+}));
 
 const cardView=item=>({
   id:item.id,
@@ -76,7 +89,10 @@ const md=[];
 md.push('# 런타임 취약 인용 우선검증 목록 — 2026-08-09','');
 md.push(`- 전체 카드: ${data.length}`);
 md.push(`- 중복 ID: ${duplicateIds.length}`);
-duplicateIds.forEach(x=>md.push(`  - ${x.id} × ${x.count}: ${x.titles.join(' / ')}`));
+duplicateIds.forEach(x=>{
+  md.push(`  - ${x.id} × ${x.count}`);
+  x.cards.forEach(c=>md.push(`    - [${c.index}] ${c.title} · ${c.area} · ${c.subfield} · ${c.type} · 조문 ${c.articleGrade}`));
+});
 md.push(`- 출처 D/C: ${weakSource.length}`);
 md.push(`- 출처 B1 포함 카드: ${b1.length}`);
 md.push(`- 조문 C: ${articleC.length}`);
