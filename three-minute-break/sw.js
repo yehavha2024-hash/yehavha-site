@@ -1,4 +1,4 @@
-const CACHE_NAME = "three-minute-break-v8-standard";
+const CACHE_NAME = "three-minute-break-v9-nexus-theme";
 const ASSETS = [
   "./",
   "./index.html",
