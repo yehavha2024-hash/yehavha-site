@@ -7,6 +7,7 @@ const projects = [
   { dir: 'legal-knowledge', detailFiles: ['research-document-standard.js'] },
   { dir: 'three-minute-break', detailFiles: [] },
   { dir: 'toeic-human-100', detailFiles: [] },
+  { dir: 'nexus', detailFiles: [] },
 ];
 
 let errors = 0;
@@ -60,7 +61,7 @@ for (const project of projects) {
     }
   }
 
-  for (const temp of ['home-v2.html', '_worker.js', 'deploy-version.txt', 'ai-disclosure.js']) {
+  for (const temp of ['home-v2.html', '_worker.js', 'deploy-version.txt', 'deploy-counter-version.txt', 'ai-disclosure.js']) {
     if (fs.existsSync(path.join(root, temp))) {
       report('WARNING', root, `임시·중복 파일 잔존: ${temp}`);
     }
