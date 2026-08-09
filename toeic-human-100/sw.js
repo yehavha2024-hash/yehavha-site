@@ -1,4 +1,4 @@
-const CACHE = "toeic-human-100-v8-final-100-days";
+const CACHE = "toeic-human-100-v9-nexus-theme";
 const ASSETS = [
   "./",
   "index.html",
