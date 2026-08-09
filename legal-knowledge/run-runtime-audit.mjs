@@ -68,4 +68,39 @@ const out={
 if(data.length!==105) out.warning=`Expected 105 cards but got ${data.length}`;
 const outPath=path.join(here,'RUNTIME_AUDIT_OUTPUT_20260809.json');
 fs.writeFileSync(outPath,JSON.stringify(out,null,2)+'\n','utf8');
+
+const md=[];
+md.push('# 런타임 취약 인용 우선검증 목록 — 2026-08-09','');
+md.push(`- 전체 카드: ${data.length}`);
+md.push(`- 출처 D/C: ${weakSource.length}`);
+md.push(`- 출처 B1 포함 카드: ${b1.length}`);
+md.push(`- 조문 C: ${articleC.length}`);
+md.push(`- 조문 B/B+: ${articleB.length}`,'');
+
+const section=(title,items,formatter)=>{
+  md.push(`## ${title} (${items.length})`,'');
+  if(!items.length){md.push('- 없음','');return;}
+  items.forEach((item,i)=>{
+    md.push(`${i+1}. **${item.id} — ${item.title}**`);
+    formatter(item).forEach(line=>md.push(`   - ${line}`));
+  });
+  md.push('');
+};
+section('1순위 — 출처 D/C',weakSource,item=>[
+  ...(item.sourceLinkAudit?.entries||[]).filter(x=>['D','C'].includes(x.code)).map(x=>`${x.code} ${x.label} → ${x.url}`)
+]);
+section('2순위 — 출처 B1',b1,item=>[
+  ...(item.sourceLinkAudit?.entries||[]).filter(x=>x.code==='B1').map(x=>`${x.label} → ${x.url}`),
+  `판례강도 ${item.precedentCitationGrade}: ${item.precedentCitationAudit?.note||''}`
+]);
+section('3순위 — 조문 C',articleC,item=>[
+  item.articleAccuracyAudit?.note||'',
+  ...(item.statuteSources||[]).map(x=>`${x.label} → ${x.url}`)
+]);
+section('4순위 — 조문 B/B+',articleB,item=>[
+  `등급 ${item.articleAccuracyGrade}: ${item.articleAccuracyAudit?.note||''}`,
+  ...(item.statuteSources||[]).map(x=>`${x.label} → ${x.url}`)
+]);
+fs.writeFileSync(path.join(here,'RUNTIME_AUDIT_PRIORITY_20260809.md'),md.join('\n')+'\n','utf8');
+
 console.log(JSON.stringify({actualTotal:data.length,sourceGrades:summary.sourceGrades,articleGrades:summary.articleGrades,precedentGrades:summary.precedentGrades,priorityCounts:{sourceDC:weakSource.length,sourceB1:b1.length,articleC:articleC.length,articleB_Bplus:articleB.length}},null,2));
