@@ -2,7 +2,7 @@
 
 - 전체 카드: 105
 - 출처 D/C: 0
-- 출처 B1 포함 카드: 3
+- 출처 B1 포함 카드: 0
 - 조문 C: 0
 - 조문 B/B+: 24
 
@@ -10,17 +10,9 @@
 
 - 없음
 
-## 2순위 — 출처 B1 (3)
+## 2순위 — 출처 B1 (0)
 
-1. **commercial-director-duty — 이사의 선관주의·충실의무와 경영판단**
-   - 대법원 2019다280481 · 주요판결 → https://scourt.go.kr/supreme/news/NewsViewAction2.work?gubun=4&searchOption=&searchWord=&seqnum=9129
-   - 판례강도 P1: 대법원 2019다280481 직접 판시·원문대조 카드
-2. **criminal-dolus-eventualis — 고의와 미필적 고의**
-   - 대법원 2024도4824 · 공식 보도자료 → https://www.scourt.go.kr/portal/news/NewsViewAction.work?gubun=6&searchOption=&searchWord=&seqnum=2689
-   - 판례강도 P1: 대법원 2024도4824 직접 판시·원문대조 카드
-3. **ip-inventive-step — 특허 진보성**
-   - 대법원 2024후10641 · 대한민국 법원 → https://sc.scourt.go.kr/supreme/news/NewsViewAction2.work?gubun=4&seqnum=10877
-   - 판례강도 P1: 대법원 2018후12004 직접 판시·원문대조 카드
+- 없음
 
 ## 3순위 — 조문 C (0)
 
