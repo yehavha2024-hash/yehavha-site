@@ -6,6 +6,7 @@
   if (!dialog || !content) return;
 
   const siteTitle = (document.querySelector('h1')?.textContent || document.title || 'YEHAVHA NEXUS').trim();
+  const aiNotice = 'AI 활용 안내: 일부 기술·법률 연구자료의 탐색·구조화·초안 작성에 생성형 AI를 활용했으며, 사실과 전망의 구분, 법적 분석, 출처 검토와 최종 편집은 운영자가 관리합니다.';
 
   function ensureFooter() {
     if (content.querySelector('.document-footer')) return;
@@ -17,6 +18,7 @@
         <strong>${siteTitle}</strong>
         <p>Copyright © 이명훈 2026. All rights reserved.</p>
         <p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p>
+        <p class="ai-disclosure">${aiNotice}</p>
       </div>
       <div class="document-actions">
         <button type="button" class="document-action" data-standard-top>맨 위로 ↑</button>
