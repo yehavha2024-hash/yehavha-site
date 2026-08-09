@@ -35,6 +35,8 @@ const weakSource=data.filter(x=>['D','C'].includes(x.sourceLinkGrade));
 const b1=data.filter(x=>(x.sourceLinkAudit?.counts?.B1||0)>0);
 const articleC=data.filter(x=>x.articleAccuracyGrade==='C');
 const articleB=data.filter(x=>['B','B+'].includes(x.articleAccuracyGrade));
+const idCounts=data.reduce((m,x)=>{m[x.id]=(m[x.id]||0)+1;return m;},{});
+const duplicateIds=Object.entries(idCounts).filter(([,count])=>count>1).map(([id,count])=>({id,count,titles:data.filter(x=>x.id===id).map(x=>x.title)}));
 
 const cardView=item=>({
   id:item.id,
@@ -57,6 +59,7 @@ const out={
   generatedAt:'2026-08-09',
   expectedTotal:105,
   actualTotal:data.length,
+  duplicateIds,
   summary,
   priority:{
     sourceDC:weakSource.map(cardView),
@@ -72,6 +75,8 @@ fs.writeFileSync(outPath,JSON.stringify(out,null,2)+'\n','utf8');
 const md=[];
 md.push('# 런타임 취약 인용 우선검증 목록 — 2026-08-09','');
 md.push(`- 전체 카드: ${data.length}`);
+md.push(`- 중복 ID: ${duplicateIds.length}`);
+duplicateIds.forEach(x=>md.push(`  - ${x.id} × ${x.count}: ${x.titles.join(' / ')}`));
 md.push(`- 출처 D/C: ${weakSource.length}`);
 md.push(`- 출처 B1 포함 카드: ${b1.length}`);
 md.push(`- 조문 C: ${articleC.length}`);
@@ -103,4 +108,4 @@ section('4순위 — 조문 B/B+',articleB,item=>[
 ]);
 fs.writeFileSync(path.join(here,'RUNTIME_AUDIT_PRIORITY_20260809.md'),md.join('\n')+'\n','utf8');
 
-console.log(JSON.stringify({actualTotal:data.length,sourceGrades:summary.sourceGrades,articleGrades:summary.articleGrades,precedentGrades:summary.precedentGrades,priorityCounts:{sourceDC:weakSource.length,sourceB1:b1.length,articleC:articleC.length,articleB_Bplus:articleB.length}},null,2));
+console.log(JSON.stringify({actualTotal:data.length,duplicateIds,sourceGrades:summary.sourceGrades,articleGrades:summary.articleGrades,precedentGrades:summary.precedentGrades,priorityCounts:{sourceDC:weakSource.length,sourceB1:b1.length,articleC:articleC.length,articleB_Bplus:articleB.length}},null,2));
