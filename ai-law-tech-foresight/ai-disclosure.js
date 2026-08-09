@@ -29,5 +29,4 @@
   }
 
   window.addEventListener('load', ensureAiDisclosure, { once: true });
-  new MutationObserver(ensureAiDisclosure).observe(document.documentElement, { childList: true, subtree: true });
 })();
