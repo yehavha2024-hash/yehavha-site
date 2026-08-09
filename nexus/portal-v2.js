@@ -200,6 +200,15 @@
     });
   }
 
+  function ensureAiDisclosure() {
+    const footerMeta = document.querySelector('footer .footer-meta');
+    if (!footerMeta || footerMeta.querySelector('.ai-disclosure')) return;
+    const contact = footerMeta.querySelector('a[href^="mailto:"]')?.closest('p');
+    if (!contact) return;
+    const notice = make('p', 'ai-disclosure', 'AI 활용 안내: 일부 프로젝트의 콘텐츠·문안·연구자료 제작과 정리에 생성형 AI를 활용하며, 각 프로젝트의 기획·검토·편집·운영은 운영자가 관리합니다.');
+    contact.insertAdjacentElement('afterend', notice);
+  }
+
   async function fetchJson(url) {
     const response = await fetch(url, { cache: 'no-cache' });
     if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
@@ -263,5 +272,6 @@
     }
   }, 250);
 
+  ensureAiDisclosure();
   loadPortal();
 })();
