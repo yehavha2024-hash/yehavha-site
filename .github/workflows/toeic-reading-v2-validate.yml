@@ -35,6 +35,7 @@ jobs:
           node --check toeic-human-100/teps-extension-v2.js
           node --check toeic-human-100/teps-extension-length-patch.js
           node --check toeic-human-100/reading-content-v2-days11-100-builder.js
+          node --check toeic-human-100/reading-content-v2-generated-compact-patch.js
           node --check toeic-human-100/reading-content-v2-ready-rerender.js
           node --check toeic-human-100/teps-extension-ui-v2.js
 
