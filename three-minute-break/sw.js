@@ -1,4 +1,4 @@
-const CACHE_NAME = "three-minute-break-v5-github";
+const CACHE_NAME = "three-minute-break-v6-ai-disclosure";
 const ASSETS = [
   "./",
   "./index.html",
