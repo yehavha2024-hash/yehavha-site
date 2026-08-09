@@ -4,7 +4,7 @@ const ALLOWED_HOSTS = new Set([
   'ai-song-studio.pages.dev',
   'yehavha-ai-law-institute.pages.dev',
   'yehavha-legal-knowledge.danielie.workers.dev',
-  'yehavha-ai-foresight.pages.dev',
+  'yehavha-ai-foresight-v2.pages.dev',
   'yehavha-legal-philosophy.pages.dev',
   'yehavha.upaper.kr',
   'www.youtube.com',
