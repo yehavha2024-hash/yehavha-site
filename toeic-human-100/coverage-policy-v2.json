@@ -1,0 +1,52 @@
+{
+  "version": "2.1",
+  "description": "10일 단위 TOEIC+TEPS 장문독해 어휘 커버리지 보정 정책",
+  "totalDays": 100,
+  "blockSize": 10,
+  "completionTargetDay": 80,
+  "milestones": [
+    {"day": 10, "maxMissingHeadwords": 3200},
+    {"day": 20, "maxMissingHeadwords": 2600},
+    {"day": 30, "maxMissingHeadwords": 2150},
+    {"day": 40, "maxMissingHeadwords": 1700},
+    {"day": 50, "maxMissingHeadwords": 1250},
+    {"day": 60, "maxMissingHeadwords": 850},
+    {"day": 70, "maxMissingHeadwords": 450},
+    {"day": 80, "maxMissingHeadwords": 0},
+    {"day": 90, "maxMissingHeadwords": 0},
+    {"day": 100, "maxMissingHeadwords": 0}
+  ],
+  "nextBlockPlanning": {
+    "coverageBufferRatio": 1.08,
+    "minNewHeadwordsPerDay": 40,
+    "maxNewHeadwordsPerDay": 55,
+    "repeatTargetsPerDay": 20,
+    "newRoleShares": {
+      "toeic-specific": 0.32,
+      "academic-book-extension": 0.24,
+      "general-core": 0.44
+    },
+    "priorityOrder": [
+      "toeic-specific+academic-book-extension",
+      "toeic-specific",
+      "academic-book-extension",
+      "general-core"
+    ]
+  },
+  "finalMinimumExposureByRole": {
+    "toeic-specific": 4,
+    "general-core": 3,
+    "academic-book-extension": 2
+  },
+  "contentRules": {
+    "toeicReadingWordsMin": 1350,
+    "toeicReadingWordsMax": 1650,
+    "tepsExtensionWordsMin": 180,
+    "doNotForceUnnaturalVocabulary": true,
+    "semanticPlacementRequired": true,
+    "countToeicReading": true,
+    "countToeicPractice": true,
+    "countSentenceAnalysis": true,
+    "countTepsExtension": true
+  }
+}
