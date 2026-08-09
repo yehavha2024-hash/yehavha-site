@@ -1,0 +1,35 @@
+name: TOEIC Reading V2 Validate
+
+on:
+  push:
+    paths:
+      - 'toeic-human-100/**'
+      - '.github/workflows/toeic-reading-v2-validate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Check V2 runtime syntax
+        run: node --check toeic-human-100/app-v2.js
+
+      - name: Check V2 content syntax
+        run: node --check toeic-human-100/reading-content-v2.js
+
+      - name: Check V2 validator syntax
+        run: node --check toeic-human-100/scripts/validate-reading-v2.mjs
+
+      - name: Run staged V2 content validation
+        run: node toeic-human-100/scripts/validate-reading-v2.mjs
