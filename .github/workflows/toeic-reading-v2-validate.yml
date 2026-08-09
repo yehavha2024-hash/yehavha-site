@@ -34,6 +34,8 @@ jobs:
           node --check toeic-human-100/reading-content-v2-length-patch.js
           node --check toeic-human-100/teps-extension-v2.js
           node --check toeic-human-100/teps-extension-length-patch.js
+          node --check toeic-human-100/reading-content-v2-days11-100-builder.js
+          node --check toeic-human-100/reading-content-v2-ready-rerender.js
           node --check toeic-human-100/teps-extension-ui-v2.js
 
       - name: Check validators and planner
@@ -46,14 +48,14 @@ jobs:
       - name: Run original staged validation
         run: node toeic-human-100/scripts/validate-reading-v2.mjs
 
-      - name: Run expanded TOEIC and TEPS validation
+      - name: Run expanded 100-day TOEIC and TEPS validation
         run: node toeic-human-100/scripts/validate-reading-v2-expanded.mjs
 
-      - name: Run master lexicon coverage audit
+      - name: Run final master lexicon coverage audit
         if: always()
         run: node toeic-human-100/scripts/audit-reading-coverage-v2.mjs
 
-      - name: Plan next 10-day coverage correction
+      - name: Evaluate coverage policy and next-block state
         if: always()
         run: node toeic-human-100/scripts/plan-coverage-correction-v2.mjs
 
