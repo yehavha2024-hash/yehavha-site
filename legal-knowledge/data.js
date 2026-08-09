@@ -25,20 +25,25 @@ document.addEventListener('DOMContentLoaded', () => {
             const sourceHotfix = document.createElement('script');
             sourceHotfix.src = 'data-source-link-hotfix-20260809.js';
             sourceHotfix.onload = () => {
-              const auditData = document.createElement('script');
-              auditData.src = 'data-source-article-citation-audit-20260809.js';
-              auditData.onload = () => {
-                const caseUi = document.createElement('script');
-                caseUi.src = 'case-verification-ui-20260809.js';
-                caseUi.onload = () => {
-                  const auditUi = document.createElement('script');
-                  auditUi.src = 'source-article-citation-audit-ui-20260809.js';
-                  document.body.appendChild(auditUi);
-                  if (typeof renderCards === 'function') renderCards();
+              const manualSourceReview = document.createElement('script');
+              manualSourceReview.src = 'data-source-manual-review-round2-20260809.js';
+              manualSourceReview.onload = () => {
+                const auditData = document.createElement('script');
+                auditData.src = 'data-source-article-citation-audit-20260809.js';
+                auditData.onload = () => {
+                  const caseUi = document.createElement('script');
+                  caseUi.src = 'case-verification-ui-20260809.js';
+                  caseUi.onload = () => {
+                    const auditUi = document.createElement('script');
+                    auditUi.src = 'source-article-citation-audit-ui-20260809.js';
+                    document.body.appendChild(auditUi);
+                    if (typeof renderCards === 'function') renderCards();
+                  };
+                  document.body.appendChild(caseUi);
                 };
-                document.body.appendChild(caseUi);
+                document.body.appendChild(auditData);
               };
-              document.body.appendChild(auditData);
+              document.body.appendChild(manualSourceReview);
             };
             document.body.appendChild(sourceHotfix);
           };
