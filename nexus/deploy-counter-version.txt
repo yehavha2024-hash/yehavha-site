@@ -1,8 +1,0 @@
-YEHAVHA Nexus access counter deployment
-2026-08-09 01:52 KST
-mode: Cloudflare D1 Pages Function
-binding: NEXUS_DB
-endpoint: /api/access
-middleware: nexus/functions/_middleware.js
-counter store: nexus_access_counter
-status: D1 migration ready
