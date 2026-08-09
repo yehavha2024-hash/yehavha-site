@@ -1,0 +1,41 @@
+:root{
+  --project-font:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-apple-system,sans-serif;
+  --project-max:1180px;
+  --project-h1:clamp(40px,5vw,64px);
+  --project-h2:clamp(30px,3.5vw,40px);
+  --project-h3:20px;
+}
+
+html,body,button,input,select,textarea{font-family:var(--project-font)!important}
+body{font-size:16px!important;line-height:1.82!important;letter-spacing:-.018em!important;word-break:keep-all}
+.hero-inner,main{max-width:var(--project-max)!important}
+h1,h2,h3,h4,.detail-title,.brand-mark,.brand strong{font-family:var(--project-font)!important}
+h1{font-size:var(--project-h1)!important;font-weight:780!important;line-height:1.16!important;letter-spacing:-.045em!important}
+.section-heading h2,.notice h2{font-size:var(--project-h2)!important;font-weight:760!important;line-height:1.3!important;letter-spacing:-.038em!important}
+.card h3{font-size:var(--project-h3)!important;font-weight:750!important;line-height:1.45!important}
+.hero-copy{font-size:17px!important;line-height:1.88!important}
+.notice p,.section-heading p,.card .summary,.program-card p,.roadmap-grid span,.detail-sub,.detail-section p,.detail-list{font-size:15px!important;line-height:1.82!important}
+.eyebrow,.section-kicker,.badge,.level,.card-keywords span,.reviewed{font-size:11px!important}
+.flow span{font-size:14px!important;line-height:1.65!important}
+.research-model,.content-section,.roadmap{margin-top:64px!important}
+.cards{gap:16px!important}
+
+.site-footer{font-family:var(--project-font)!important;background:#06111d!important;color:#8fa1b3!important;border-top:1px solid rgba(255,255,255,.10)!important;padding:32px max(24px,calc((100% - 1180px)/2))!important;font-size:12px!important;line-height:1.7!important;letter-spacing:0!important;text-align:left!important;display:flex;justify-content:space-between;align-items:flex-start;gap:28px}
+.site-footer>div:first-child strong{display:block;font-size:13px!important;font-weight:600!important;color:#d7e1ea!important}
+.site-footer>div:first-child p,.site-footer .footer-note p{margin:4px 0 0!important;font-size:12px!important;color:#8fa1b3!important}
+.site-footer>div:first-child p{font-size:11px!important}
+.site-footer .footer-note{text-align:right!important;max-width:660px}
+.site-footer .ai-disclosure{margin-top:8px!important}
+.site-footer a{color:#a9bfd2!important;text-decoration:none!important}
+.site-footer .footer-note>a{display:inline-block;margin-top:7px!important;font-size:11px!important;font-weight:600!important}
+
+@media(max-width:680px){
+  body{font-size:16px!important;line-height:1.86!important}
+  .hero-inner{padding-left:16px!important;padding-right:16px!important}
+  main{padding-left:16px!important;padding-right:16px!important}
+  .notice p,.section-heading p,.card .summary,.roadmap-grid span,.detail-sub,.detail-section p,.detail-list{font-size:16px!important;line-height:1.84!important}
+  .cards,.roadmap-grid{grid-template-columns:1fr!important}
+  .notice{grid-template-columns:1fr!important}
+  .site-footer{display:block;padding:28px 16px!important}
+  .site-footer .footer-note{text-align:left!important;margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08)}
+}
