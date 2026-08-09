@@ -7,7 +7,8 @@ const readingFiles = [
   'reading-content-v2.js',
   'reading-content-v2-days02-04.js',
   'reading-content-v2-days05-07.js',
-  'reading-content-v2-days08-10.js'
+  'reading-content-v2-days08-10.js',
+  'reading-content-v2-length-patch.js'
 ];
 const context = {};
 vm.createContext(context);
@@ -18,8 +19,9 @@ for (const file of readingFiles) {
 vm.runInContext('globalThis.__PROGRAM__ = TOEIC_READING_V2;', context);
 const program = context.__PROGRAM__;
 
-const tepsSrc = fs.readFileSync(path.join(DIR,'teps-extension-v2.js'),'utf8');
-vm.runInContext(`${tepsSrc}\nglobalThis.__TEPS__ = TEPS_READING_EXTENSION_V2;`, context, {filename:'teps-extension-v2.js'});
+vm.runInContext(fs.readFileSync(path.join(DIR,'teps-extension-v2.js'),'utf8'), context, {filename:'teps-extension-v2.js'});
+vm.runInContext(fs.readFileSync(path.join(DIR,'teps-extension-length-patch.js'),'utf8'), context, {filename:'teps-extension-length-patch.js'});
+vm.runInContext('globalThis.__TEPS__ = TEPS_READING_EXTENSION_V2;', context);
 const teps = context.__TEPS__;
 
 const countWords = text => String(text || '').trim().split(/\s+/).filter(Boolean).length;
