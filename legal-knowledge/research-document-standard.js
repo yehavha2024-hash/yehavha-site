@@ -6,10 +6,20 @@
   if (!dialog || !content) return;
 
   const siteTitle = (document.querySelector('h1')?.textContent || document.title || 'YEHAVHA NEXUS').trim();
-  const aiNotice = 'AI 활용 안내: 일부 법률 연구노트·사례·요약의 초안 작성과 구조화에 생성형 AI를 활용했으며, 법령·판례·공식자료의 확인과 내용 검토·편집은 운영자가 관리합니다. 본 자료는 개별 법률자문을 대체하지 않습니다.';
+  const aiNotice = '인공지능 활용 안내: 일부 법률 연구노트·사례·요약의 초안 작성과 구조화 과정에서 생성형 인공지능을 보조적으로 활용했습니다. 법령·판례·공식자료의 확인, 법적 판단, 내용 검토 및 최종 편집은 운영자가 수행·관리합니다. 본 자료는 개별 사건에 대한 법률자문을 대체하지 않습니다.';
+
+  function syncSiteFooterNotice() {
+    const siteNotice = document.querySelector('.site-footer .ai-disclosure');
+    if (siteNotice) siteNotice.textContent = aiNotice;
+  }
 
   function ensureFooter() {
-    if (content.querySelector('.document-footer')) return;
+    const existing = content.querySelector('.document-footer');
+    if (existing) {
+      const notice = existing.querySelector('.ai-disclosure');
+      if (notice) notice.textContent = aiNotice;
+      return;
+    }
     const footer = document.createElement('footer');
     footer.className = 'document-footer';
     footer.setAttribute('aria-label', '연구문서 하단');
@@ -81,5 +91,6 @@
   const observer = new MutationObserver(() => queueMicrotask(standardize));
   observer.observe(content, { childList: true, subtree: false });
   dialog.addEventListener('close', () => content.scrollTo({ top: 0, behavior: 'auto' }));
+  syncSiteFooterNotice();
   standardize();
 })();
