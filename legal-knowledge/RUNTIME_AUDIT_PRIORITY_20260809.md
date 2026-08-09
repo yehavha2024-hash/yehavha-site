@@ -56,7 +56,7 @@
    - 등급 B: 공식 법률 출처는 확인되나 특정 조문번호 직접성은 낮음. 광범위 법리카드는 허용하되 사례 적용 전 조문 특정 필요
    - 지능정보화 기본법 · 국가법령정보센터 → https://law.go.kr/LSW/lsInfoP.do?ancYnChk=0&chrClsCd=010202&efYd=20250327&lsiSeq=261435&urlMode=lsInfoP
    - 2026 시행 개정내용 · 국가법령정보센터 → https://www.law.go.kr/lsInfoP.do?lsiSeq=268535&viewCls=lsRvsDocInfoR
-12. **ai-public-sector-impact-assessment — 공공분야 AI 영향평가·공표와 위험관리 — 2026.08.28 시행 예정**
+12. **ai-public-sector-impact-assessment — 공공분야 AI 영향평가·공표와 위험관리 — 2027.02.28 시행 예정**
    - 등급 B: 공식 법률 출처는 확인되나 특정 조문번호 직접성은 낮음. 광범위 법리카드는 허용하되 사례 적용 전 조문 특정 필요
    - 공공분야 AI 영향평가 신설 규정 · 국가법령정보센터 → https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=283735
 13. **ai-location-mobility-data — AI 모빌리티·로봇의 위치정보 처리**
