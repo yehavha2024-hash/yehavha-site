@@ -17,7 +17,7 @@ const files=[
   'data-variation-solutions-manual-round1.js','data-variation-solutions-manual-round2.js','data-variation-solutions-manual-round3.js','data-variation-solutions-manual-round4-civil.js','data-variation-solutions-manual-round5-public.js','data-variation-solutions-manual-round6-criminal.js','data-variation-solutions-manual-round7-ip.js','data-variation-solutions-manual-round8-special.js','data-variation-solutions-manual-round9-reasoning-a.js','data-variation-solutions-manual-round9-reasoning-b.js','manual-solution-audit.js','data-variation-solutions.js',
   'data-density-round4-foundation-data.js','data-density-round4-mobility.js','data-density-round4-industry.js','data-density-round5-high-impact-duties.js',
   'schema.js',
-  'data-law-currentness-20260809.js','data-law-currentness-hotfix-20260809.js','data-case-verification-round2-20260809.js','data-dedup-round6-ai-20260809.js','data-source-link-hotfix-20260809.js','data-source-article-citation-audit-20260809.js'
+  'data-law-currentness-20260809.js','data-law-currentness-hotfix-20260809.js','data-case-verification-round2-20260809.js','data-dedup-round6-ai-20260809.js','data-source-link-hotfix-20260809.js','data-source-manual-review-round2-20260809.js','data-source-article-citation-audit-20260809.js'
 ];
 
 const sandbox={window:{LEGAL_KNOWLEDGE:[]},console,URL};
