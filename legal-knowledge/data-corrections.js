@@ -3,7 +3,10 @@
   const patchSource=(id,label,url)=>{const item=data.find(x=>x.id===id);if(item)item.statuteSources=[{label,url}];};
 
   const trademark=data.find(x=>x.id==='ip-trademark-similarity');
-  if(trademark) trademark.statuteSources=[{label:'상표법 제108조 침해로 보는 행위 · 국가법령정보센터',url:'https://www.law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1029423587'.replace('1029423587','1016361677')}];
+  if(trademark) trademark.statuteSources=[
+    {label:'상표법 제34조 제1항 제7호 · 선등록상표와의 유사·등록배제 · 국가법령정보센터',url:'https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1030464713'},
+    {label:'상표법 제108조 · 침해로 보는 행위 · 국가법령정보센터',url:'https://www.law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1016361677'}
+  ];
 
   patchSource('public-proportionality','행정기본법 제10조 비례의 원칙 · 국가법령정보센터','https://www.law.go.kr/법령/행정기본법');
   patchSource('public-legitimate-expectation','행정기본법 제12조 신뢰보호의 원칙 · 국가법령정보센터','https://www.law.go.kr/법령/행정기본법');
