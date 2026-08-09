@@ -51,6 +51,7 @@ function documentFooter() {
       <strong>법리·판례 연구</strong>
       <p>Copyright © 이명훈 2026. All rights reserved.</p>
       <p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p>
+      <p class="ai-disclosure">AI 활용 안내: 일부 법률 연구노트·사례·요약의 초안 작성과 구조화에 생성형 AI를 활용했으며, 법령·판례·공식자료의 확인과 내용 검토·편집은 운영자가 관리합니다. 본 자료는 개별 법률자문을 대체하지 않습니다.</p>
     </div>
     <div class="document-actions">
       <button type="button" class="document-action" data-document-top aria-label="이 연구노트의 맨 위로 이동">맨 위로 ↑</button>
