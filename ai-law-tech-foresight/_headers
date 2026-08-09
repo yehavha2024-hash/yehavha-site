@@ -11,3 +11,12 @@
 
 /app.js
   Cache-Control: no-cache
+
+/thesis-linkage.js
+  Cache-Control: no-cache
+
+/research-document-standard.js
+  Cache-Control: no-cache
+
+/ai-disclosure.js
+  Cache-Control: no-cache
