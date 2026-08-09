@@ -20,6 +20,23 @@ const report = (kind, project, message) => {
   else warnings += 1;
 };
 
+const auditAnchors = (root, index) => {
+  const ids = new Set([...index.matchAll(/\bid=["']([^"']+)["']/g)].map(match => match[1]));
+  const idList = [...index.matchAll(/\bid=["']([^"']+)["']/g)].map(match => match[1]);
+  const duplicates = [...new Set(idList.filter((id, i) => idList.indexOf(id) !== i))];
+  duplicates.forEach(id => report('ERROR', root, `중복 id 발견: #${id}`));
+
+  const hrefTargets = [...index.matchAll(/\bhref=["']#([^"']+)["']/g)].map(match => match[1]);
+  for (const target of new Set(hrefTargets)) {
+    if (!ids.has(target)) report('ERROR', root, `내부 링크 #${target}의 대상 id 없음`);
+  }
+
+  if (/맨 위로/.test(index)) {
+    const hasTopControl = /href=["']#top["']/.test(index) || /data-(?:standard-)?top/.test(index);
+    if (!hasTopControl) report('ERROR', root, '맨 위로 UI는 있으나 스크롤 대상/동작 표식 없음');
+  }
+};
+
 for (const project of projects) {
   const root = project.dir;
   const indexPath = path.join(root, 'index.html');
@@ -36,6 +53,8 @@ for (const project of projects) {
   if (!index.includes('Copyright ©')) report('ERROR', root, 'Copyright 없음');
   if (!index.includes('mailto:')) report('ERROR', root, '문의 mailto 없음');
   if (!index.includes('AI 활용 안내')) report('ERROR', root, '메인 AI 활용 안내 없음');
+
+  auditAnchors(root, index);
 
   for (const file of fs.readdirSync(root)) {
     if (!file.endsWith('.js')) continue;
