@@ -25,17 +25,26 @@ jobs:
       - name: Check V2 runtime syntax
         run: node --check toeic-human-100/app-v2.js
 
-      - name: Check V2 content syntax
-        run: node --check toeic-human-100/reading-content-v2.js
+      - name: Check V2 extension syntax
+        run: |
+          node --check toeic-human-100/reading-content-v2.js
+          node --check toeic-human-100/reading-content-v2-days02-04.js
+          node --check toeic-human-100/reading-content-v2-days05-07.js
+          node --check toeic-human-100/reading-content-v2-days08-10.js
+          node --check toeic-human-100/teps-extension-v2.js
+          node --check toeic-human-100/teps-extension-ui-v2.js
 
-      - name: Check V2 validator syntax
-        run: node --check toeic-human-100/scripts/validate-reading-v2.mjs
+      - name: Check validators
+        run: |
+          node --check toeic-human-100/scripts/validate-reading-v2.mjs
+          node --check toeic-human-100/scripts/validate-reading-v2-expanded.mjs
+          node --check toeic-human-100/scripts/audit-reading-coverage-v2.mjs
 
-      - name: Check master coverage auditor syntax
-        run: node --check toeic-human-100/scripts/audit-reading-coverage-v2.mjs
-
-      - name: Run staged V2 content validation
+      - name: Run original staged validation
         run: node toeic-human-100/scripts/validate-reading-v2.mjs
 
-      - name: Run staged master lexicon coverage audit
+      - name: Run expanded TOEIC and TEPS validation
+        run: node toeic-human-100/scripts/validate-reading-v2-expanded.mjs
+
+      - name: Run master lexicon coverage audit
         run: node toeic-human-100/scripts/audit-reading-coverage-v2.mjs
