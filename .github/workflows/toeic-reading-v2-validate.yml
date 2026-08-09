@@ -31,5 +31,11 @@ jobs:
       - name: Check V2 validator syntax
         run: node --check toeic-human-100/scripts/validate-reading-v2.mjs
 
+      - name: Check master coverage auditor syntax
+        run: node --check toeic-human-100/scripts/audit-reading-coverage-v2.mjs
+
       - name: Run staged V2 content validation
         run: node toeic-human-100/scripts/validate-reading-v2.mjs
+
+      - name: Run staged master lexicon coverage audit
+        run: node toeic-human-100/scripts/audit-reading-coverage-v2.mjs
