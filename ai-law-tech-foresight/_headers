@@ -3,20 +3,27 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
+/
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  Pragma: no-cache
+  Expires: 0
+
 /index.html
-  Cache-Control: no-cache
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  Pragma: no-cache
+  Expires: 0
 
 /data.js
-  Cache-Control: no-cache
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
 
 /app.js
-  Cache-Control: no-cache
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
 
 /thesis-linkage.js
-  Cache-Control: no-cache
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
 
 /research-document-standard.js
-  Cache-Control: no-cache
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
 
 /ai-disclosure.js
-  Cache-Control: no-cache
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
