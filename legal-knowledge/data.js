@@ -16,9 +16,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const caseData = document.createElement('script');
       caseData.src = 'data-case-verification-round2-20260809.js';
       caseData.onload = () => {
-        const caseUi = document.createElement('script');
-        caseUi.src = 'case-verification-ui-20260809.js';
-        document.body.appendChild(caseUi);
+        const dedupData = document.createElement('script');
+        dedupData.src = 'data-dedup-round6-ai-20260809.js';
+        dedupData.onload = () => {
+          const caseUi = document.createElement('script');
+          caseUi.src = 'case-verification-ui-20260809.js';
+          document.body.appendChild(caseUi);
+          if (typeof renderCards === 'function') renderCards();
+        };
+        document.body.appendChild(dedupData);
       };
       document.body.appendChild(caseData);
     };
