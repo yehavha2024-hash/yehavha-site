@@ -17,7 +17,7 @@
   const dialog = $('detailDialog');
   const detailContent = $('detailContent');
 
-  const esc = (value='') => String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[ch]));
+  const esc = (value='') => String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
   const chips = (items=[]) => items.map(x => `<span>${esc(x)}</span>`).join('');
   const textOf = (values=[]) => values.flat(Infinity).filter(Boolean).join(' ').toLowerCase();
   const paragraphs = (items=[]) => items.length ? items.map(x => `<p>${esc(x)}</p>`).join('') : '<p class="muted">추가 연구 예정</p>';
