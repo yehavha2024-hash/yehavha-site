@@ -23,12 +23,12 @@ jobs:
         run: node legal-knowledge/run-runtime-audit.mjs
       - name: Commit runtime audit output
         run: |
-          if [ -z "$(git status --porcelain -- legal-knowledge/RUNTIME_AUDIT_OUTPUT_20260809.json)" ]; then
+          if [ -z "$(git status --porcelain -- legal-knowledge/RUNTIME_AUDIT_OUTPUT_20260809.json legal-knowledge/RUNTIME_AUDIT_PRIORITY_20260809.md)" ]; then
             echo 'No audit output change.'
             exit 0
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add legal-knowledge/RUNTIME_AUDIT_OUTPUT_20260809.json
+          git add legal-knowledge/RUNTIME_AUDIT_OUTPUT_20260809.json legal-knowledge/RUNTIME_AUDIT_PRIORITY_20260809.md
           git commit -m 'Update legal knowledge runtime audit output'
           git push
