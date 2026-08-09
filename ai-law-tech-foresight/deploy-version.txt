@@ -1,6 +1,0 @@
-AI law technology foresight archive deployment refresh
-2026-08-09 19:40 KST
-Target project: https://yehavha-ai-foresight-v2.pages.dev/
-Force production alias refresh after stalled rollback state.
-Expected footer: Copyright -> contact -> AI disclosure -> back to top
-Expected Nexus return: https://yehavha-nexus-hub.pages.dev/
