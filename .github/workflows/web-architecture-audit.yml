@@ -8,6 +8,7 @@ on:
       - 'legal-knowledge/**'
       - 'three-minute-break/**'
       - 'toeic-human-100/**'
+      - 'nexus/**'
       - 'scripts/audit-web-architecture.mjs'
       - 'WEB_PROJECT_STANDARD.md'
       - '.github/workflows/web-architecture-audit.yml'
@@ -18,6 +19,7 @@ on:
       - 'legal-knowledge/**'
       - 'three-minute-break/**'
       - 'toeic-human-100/**'
+      - 'nexus/**'
       - 'scripts/audit-web-architecture.mjs'
       - 'WEB_PROJECT_STANDARD.md'
 
