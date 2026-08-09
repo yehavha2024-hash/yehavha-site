@@ -3,56 +3,10 @@
 
   const dialog = document.getElementById('detailDialog');
   const content = document.getElementById('detailContent');
-  const siteTitle = (document.querySelector('h1')?.textContent || document.title || 'YEHAVHA NEXUS').trim();
-  const aiNotice = 'AI 활용 안내: 일부 기술·법률 연구자료의 탐색·구조화·초안 작성에 생성형 AI를 활용했으며, 사실과 전망의 구분, 법적 분석, 출처 검토와 최종 편집은 운영자가 관리합니다.';
-
-  function makeVisible(notice) {
-    if (!notice) return;
-    if (notice.textContent.trim() !== aiNotice) notice.textContent = aiNotice;
-    notice.style.display = 'block';
-    notice.style.visibility = 'visible';
-    notice.style.opacity = '1';
-  }
-
-  function insertAfterContact(scope, contactLink) {
-    if (!scope || !contactLink) return;
-    let notice = scope.querySelector('.ai-disclosure, [data-ai-disclosure="main"]');
-    if (!notice) {
-      notice = document.createElement('p');
-      notice.className = 'ai-disclosure';
-      notice.dataset.aiDisclosure = 'main';
-      notice.textContent = aiNotice;
-      const contactRow = contactLink.closest('p, li, div') || contactLink.parentElement;
-      if (contactRow && contactRow.parentElement) contactRow.insertAdjacentElement('afterend', notice);
-      else scope.appendChild(notice);
-    }
-    makeVisible(notice);
-  }
-
-  function ensureSiteFooterDisclosure() {
-    const footers = [...document.querySelectorAll('footer')].filter(footer => !footer.classList.contains('document-footer'));
-    let handled = false;
-
-    footers.forEach(footer => {
-      const contactLink = footer.querySelector('a[href^="mailto:"]');
-      if (!contactLink) return;
-      insertAfterContact(footer, contactLink);
-      handled = true;
-    });
-
-    if (handled) return;
-
-    const contactLink = [...document.querySelectorAll('a[href^="mailto:"]')]
-      .find(link => !link.closest('.document-footer, dialog'));
-    if (!contactLink) return;
-    const scope = contactLink.closest('footer, section, div') || document.body;
-    insertAfterContact(scope, contactLink);
-  }
-
-  ensureSiteFooterDisclosure();
-  window.addEventListener('load', ensureSiteFooterDisclosure, { once: true });
-
   if (!dialog || !content) return;
+
+  const siteTitle = (document.querySelector('h1')?.textContent || document.title || 'AI 법·기술 선제연구 아카이브').trim();
+  const aiNotice = 'AI 활용 안내: 일부 기술·법률 연구자료의 탐색·구조화·초안 작성에 생성형 AI를 활용했으며, 사실과 전망의 구분, 법적 분석, 출처 검토와 최종 편집은 운영자가 관리합니다.';
 
   function ensureFooter() {
     let footer = content.querySelector('.document-footer');
@@ -85,8 +39,9 @@
       const contact = footerCopy.querySelector('a[href^="mailto:"]')?.closest('p');
       if (contact) contact.insertAdjacentElement('afterend', notice);
       else footerCopy.appendChild(notice);
+    } else if (notice.textContent.trim() !== aiNotice) {
+      notice.textContent = aiNotice;
     }
-    makeVisible(notice);
   }
 
   function ensureToc() {
@@ -120,7 +75,7 @@
     }).join('')}</div>`;
   }
 
-  function standardizeDetail() {
+  function standardize() {
     if (!content.childElementCount) return;
     ensureToc();
     ensureFooter();
@@ -140,9 +95,9 @@
     if (event.target.closest('[data-standard-close]')) dialog.close();
   });
 
-  const detailObserver = new MutationObserver(() => queueMicrotask(standardizeDetail));
+  const detailObserver = new MutationObserver(() => queueMicrotask(standardize));
   detailObserver.observe(content, { childList: true, subtree: false });
 
   dialog.addEventListener('close', () => content.scrollTo({ top: 0, behavior: 'auto' }));
-  standardizeDetail();
+  standardize();
 })();
