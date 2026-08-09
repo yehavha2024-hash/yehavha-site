@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="AI 기술의 발전단계별로 기술구조, 현행법, 법적 쟁점, 법적 공백, 비교법, 책임·증명, 정책과 입법대안을 연구하는 AI 법·기술 선제연구 아카이브" />
+  <meta name="theme-color" content="#081a30" />
+  <title>AI 법·기술 선제연구 아카이브</title>
+  <link rel="stylesheet" href="styles.css?v=20260808-2304" />
+  <link rel="stylesheet" href="document-controls.css?v=20260808-2304" data-document-controls />
+  <link rel="stylesheet" href="research-document-toc.css?v=20260808-2304" />
+  <link rel="stylesheet" href="thesis-linkage.css?v=20260808-2304" />
+  <style>
+    .stats{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px}
+    .stat{min-width:0;padding:6px 9px;border-radius:8px}
+    .stat strong{display:none}
+    .stat span{display:block;margin:0;font-size:.72rem}
+    @media(max-width:900px){.stats{justify-content:flex-start}}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#technologyArchive">기술 연구 목록으로 이동</a>
+
+  <header class="site-header" id="top">
+    <div class="wrap">
+      <a class="nexus-link" href="https://yehavha-nexus-hub.pages.dev/">← YEHAVHA NEXUS</a>
+      <div class="hero-copy">
+        <p class="eyebrow">AI LAW · TECHNOLOGY · FORESIGHT ARCHIVE</p>
+        <h1>AI 법·기술 선제연구 아카이브</h1>
+        <p class="lead">기술이 사회에 정착한 뒤 법적 문제를 수습하는 방식에서 벗어나, 기술의 작동구조와 발전방향을 먼저 분석하고 현행법의 적용가능성·법적 공백·책임과 증명·비교법·정책·입법대안을 선제적으로 축적합니다.</p>
+        <div class="principle-line"><span>학술 연구</span><span>기술예측과 사실 구분</span><span>법적 공백에는 해결대안 제시</span><span>박사논문 연구축 연계</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="method-bar" aria-labelledby="method-title">
+      <div class="wrap">
+        <div class="method-head"><div><p class="eyebrow">RESEARCH METHOD</p><h2 id="method-title">연구 구조</h2></div><p>각 기술을 동일한 분석틀로 검토하되, 기술예측 영역은 현재 사실과 명시적으로 구분합니다.</p></div>
+        <div class="flow" id="researchFlow"></div>
+      </div>
+    </section>
+
+    <section class="browser-section" id="technologyArchive">
+      <div class="wrap">
+        <div class="browser-head">
+          <div><p class="eyebrow">TECHNOLOGY RESEARCH</p><h2>기술별 선제연구</h2><p>카드를 열면 목록형 메모가 아니라 연구논문형 본문을 확인할 수 있습니다.</p></div>
+          <div class="stats" id="stats"></div>
+        </div>
+
+        <div class="controls" aria-label="연구자료 검색 및 필터">
+          <label class="search-control"><span>통합 검색</span><input id="searchInput" type="search" placeholder="Agentic AI, 책임귀속, 제조물책임, 로그, AGI 등" /></label>
+          <label><span>기술단계</span><select id="stageFilter"></select></label>
+          <label><span>법률 연구축</span><select id="lawFilter"></select></label>
+          <label><span>박사논문 태그</span><select id="phdFilter"></select></label>
+        </div>
+
+        <div class="research-list" id="techCards"></div>
+        <p class="empty" id="emptyState" hidden>조건에 맞는 연구항목이 없습니다.</p>
+      </div>
+    </section>
+
+    <section class="index-section">
+      <div class="wrap">
+        <div class="section-title"><p class="eyebrow">RESEARCH INDEX</p><h2>횡단 연구 인덱스</h2><p>기술별 본문과 별도로 비교법·법적 공백·정책수단을 축적합니다. 필요한 영역만 펼쳐볼 수 있습니다.</p></div>
+
+        <details class="research-index">
+          <summary><span>비교법·해외판례</span><small>대한민국 · EU · 미국 · 영국 · 일본 · 중국 · 기타 주요 국가</small></summary>
+          <div class="index-body"><div class="research-grid" id="comparativeCards"></div><div class="taxonomy-row"><strong>자료 분류</strong><div class="chip-grid compact" id="sourceTypes"></div></div></div>
+        </details>
+
+        <details class="research-index">
+          <summary><span>법적 공백 분석</span><small>행위귀속 · 책임귀속 · 인과관계 · 증명곤란 · 로그 접근 · 책임재산</small></summary>
+          <div class="index-body"><div class="research-grid" id="gapCards"></div></div>
+        </details>
+
+        <details class="research-index">
+          <summary><span>정책·입법 대안</span><small>현행법 해석 · 법률개정 · 특별법 · 보험 · 공탁 · 증명책임 · 기능적 법적 지위</small></summary>
+          <div class="index-body"><div class="research-grid" id="policyCards"></div></div>
+        </details>
+      </div>
+    </section>
+
+    <section class="thesis-section">
+      <div class="wrap thesis-box">
+        <div><p class="eyebrow">DOCTORAL RESEARCH LINK</p><h2>박사논문 연구와 연결</h2><p>연구자료는 행위효과·책임귀속·Agentic AI·Multi-Agent·창발적 손해·계층적 책임귀속·증명위험·기능적 단위·입법론 태그로 다시 검색할 수 있습니다.</p></div>
+        <div class="thesis-meta"><div class="chip-grid" id="phdTags"></div><div class="lineage" id="thesisLineage"></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div><strong>AI 법·기술 선제연구 아카이브</strong><p>Technology foresight · legal analysis · comparative law · policy & legislation</p></div>
+      <div class="footer-meta"><p>Copyright © 이명훈 2026. All rights reserved.</p><p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p><p class="ai-disclosure">AI 활용 안내: 일부 기술·법률 연구자료의 탐색·구조화·초안 작성에 생성형 AI를 활용했으며, 사실과 전망의 구분, 법적 분석, 출처 검토와 최종 편집은 운영자가 관리합니다.</p><a class="top-link" href="#top">맨 위로 이동 ↑</a></div>
+    </div>
+  </footer>
+
+  <dialog id="detailDialog" class="research-dialog">
+    <form method="dialog" class="dialog-shell">
+      <button class="close" aria-label="닫기">×</button>
+      <article id="detailContent" class="research-article"></article>
+    </form>
+  </dialog>
+
+  <script src="data.js"></script>
+  <script src="academic-meta.js"></script>
+  <script src="academic-data-1.js"></script>
+  <script src="academic-data-2.js"></script>
+  <script src="academic-data-3.js"></script>
+  <script src="research-data.js"></script>
+  <script src="app.js?v=20260809-1829"></script>
+  <script src="thesis-linkage.js?v=20260809-1829"></script>
+  <script src="research-document-standard.js?v=20260809-1829"></script>
+  <script src="ai-disclosure.js?v=20260809-1829"></script>
+</body>
+</html>
