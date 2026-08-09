@@ -6,33 +6,157 @@
     {
       "id": "civil-creditor-revocation",
       "count": 2,
-      "titles": [
-        "채권자취소권",
-        "채권자취소권"
+      "cards": [
+        {
+          "index": 0,
+          "title": "채권자취소권",
+          "area": "민사·상사·책임법",
+          "subfield": "채권법",
+          "type": "법리·조문",
+          "summary": "채무자의 책임재산 감소행위를 취소하고 원상회복하는 민법 제406조의 요건과 상대효 구조를 정리한다.",
+          "refinementStage": "핵심법리 심화 2026-08-09",
+          "articleGrade": "A",
+          "statuteSources": [
+            {
+              "label": "민법 제406조 채권자취소권 · 국가법령정보센터",
+              "url": "https://www.law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=900140979"
+            },
+            {
+              "label": "민법 제407조 채권자취소의 효력 · 국가법령정보센터",
+              "url": "https://www.law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1032053257"
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "title": "채권자취소권",
+          "area": "민사·상사·책임법",
+          "subfield": "채권법",
+          "type": "법리·조문",
+          "summary": "피보전채권, 사해성, 사해의사, 수익자·전득자와 원상회복을 책임재산 보전 구조로 분석한다.",
+          "refinementStage": "",
+          "articleGrade": "B",
+          "statuteSources": [
+            {
+              "label": "민법 · 국가법령정보센터",
+              "url": "https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EB%AF%BC%EB%B2%95"
+            }
+          ]
+        }
       ]
     },
     {
       "id": "public-proportionality",
       "count": 2,
-      "titles": [
-        "비례의 원칙",
-        "과잉금지원칙"
+      "cards": [
+        {
+          "index": 0,
+          "title": "비례의 원칙",
+          "area": "헌법·공법",
+          "subfield": "행정법",
+          "type": "법리·조문",
+          "summary": "행정작용의 적합성·필요성·법익균형을 행정기본법 제10조와 기본권 제한 심사구조에서 정리한다.",
+          "refinementStage": "핵심법리 심화 2026-08-09",
+          "articleGrade": "A",
+          "statuteSources": [
+            {
+              "label": "행정기본법 제10조 비례의 원칙 · 국가법령정보센터",
+              "url": "https://www.law.go.kr/법령/행정기본법"
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "title": "과잉금지원칙",
+          "area": "헌법·공법",
+          "subfield": "헌법",
+          "type": "법리·심사기준",
+          "summary": "기본권 제한의 목적·수단·침해 최소성·법익균형성을 단계별로 검토하는 헌법적 심사구조를 정리한다.",
+          "refinementStage": "",
+          "articleGrade": "A",
+          "statuteSources": [
+            {
+              "label": "대한민국헌법 · 국가법령정보센터",
+              "url": "https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD%ED%97%8C%EB%B2%95"
+            }
+          ]
+        }
       ]
     },
     {
       "id": "public-state-liability",
       "count": 2,
-      "titles": [
-        "공무원의 위법한 직무집행과 국가배상",
-        "공무원의 위법한 직무행위와 국가배상"
+      "cards": [
+        {
+          "index": 0,
+          "title": "공무원의 위법한 직무집행과 국가배상",
+          "area": "헌법·공법",
+          "subfield": "국가책임",
+          "type": "법리·조문",
+          "summary": "국가배상법 제2조의 직무행위·위법성·고의과실·손해·인과관계를 민사책임 구조와 연결한다.",
+          "refinementStage": "핵심법리 심화 2026-08-09",
+          "articleGrade": "A",
+          "statuteSources": [
+            {
+              "label": "국가배상법 제2조 배상책임 · 국가법령정보센터",
+              "url": "https://www.law.go.kr/법령/국가배상법"
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "title": "공무원의 위법한 직무행위와 국가배상",
+          "area": "헌법·공법",
+          "subfield": "국가책임",
+          "type": "법리·조문",
+          "summary": "공무원의 직무행위, 위법성, 고의·과실, 손해와 인과관계를 국가배상법 제2조 구조로 정리한다.",
+          "refinementStage": "",
+          "articleGrade": "A",
+          "statuteSources": [
+            {
+              "label": "국가배상법 · 국가법령정보센터",
+              "url": "https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EA%B5%AD%EA%B0%80%EB%B0%B0%EC%83%81%EB%B2%95"
+            }
+          ]
+        }
       ]
     },
     {
       "id": "special-tax-legality",
       "count": 2,
-      "titles": [
-        "조세법률주의",
-        "조세법률주의와 세법해석"
+      "cards": [
+        {
+          "index": 0,
+          "title": "조세법률주의",
+          "area": "조세·전문법",
+          "subfield": "조세법",
+          "type": "법리·조문",
+          "summary": "헌법 제59조를 중심으로 과세요건 법정주의·명확주의와 조세법규 엄격해석의 구조를 정리한다.",
+          "refinementStage": "핵심법리 심화 2026-08-09",
+          "articleGrade": "A-",
+          "statuteSources": [
+            {
+              "label": "대한민국헌법 제59조 · 국가법령정보센터",
+              "url": "https://law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0059&lsiSeq=61603&urlMode=lsScJoRltInfoR"
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "title": "조세법률주의와 세법해석",
+          "area": "조세·전문법",
+          "subfield": "조세법",
+          "type": "법리·조문",
+          "summary": "과세요건과 세율의 법정, 엄격한 조세법규 해석, 소급과세 금지와 납세자 재산권 보호를 하나의 구조로 정리한다.",
+          "refinementStage": "",
+          "articleGrade": "A-",
+          "statuteSources": [
+            {
+              "label": "국세기본법 제18조 · 국가법령정보센터",
+              "url": "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1031024519"
+            }
+          ]
+        }
       ]
     }
   ],
