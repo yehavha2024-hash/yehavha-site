@@ -42,30 +42,13 @@ async function readCount(db) {
   return Number(row?.count ?? 0);
 }
 
-async function incrementAndRead(db) {
-  await ensureSchema(db);
-  await db.prepare(`
-    UPDATE nexus_access_counter
-    SET count = count + 1,
-        updated_at = CURRENT_TIMESTAMP
-    WHERE id = 1
-  `).run();
-  return readCount(db);
-}
-
-export async function onRequestGet({ request, env }) {
+export async function onRequestGet({ env }) {
   if (!env?.NEXUS_DB) {
     return json({ ok: false, error: 'nexus_db_binding_missing' }, 500);
   }
 
-  const url = new URL(request.url);
-  const op = url.searchParams.get('op') === 'up' ? 'up' : 'get';
-
   try {
-    const count = op === 'up'
-      ? await incrementAndRead(env.NEXUS_DB)
-      : await readCount(env.NEXUS_DB);
-
+    const count = await readCount(env.NEXUS_DB);
     return json({ ok: true, count });
   } catch (error) {
     return json({
