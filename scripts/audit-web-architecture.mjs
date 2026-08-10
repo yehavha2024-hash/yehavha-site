@@ -56,11 +56,10 @@ const auditLocalReferences = (root, index) => {
     if (!ref || ref.startsWith('#') || /^(?:https?:|mailto:|tel:|data:|javascript:)/i.test(ref)) continue;
     const clean = ref.split('#')[0].split('?')[0];
     if (!clean) continue;
-    const key = clean;
-    if (seen.has(key) && /\.(?:js|css)$/i.test(clean)) {
+    if (seen.has(clean) && /\.(?:js|css)$/i.test(clean)) {
       report('WARNING', root, `동일 로컬 자산 중복 참조: ${clean}`);
     }
-    seen.add(key);
+    seen.add(clean);
     const target = clean.startsWith('/')
       ? path.join(root, clean.replace(/^\/+/, ''))
       : path.resolve(root, clean);
@@ -74,6 +73,7 @@ const auditNexusModel = () => {
   const statusPath = path.join(root, 'project-status.json');
   const generatedPath = path.join(root, 'projects.generated.json');
   const portalPath = path.join(root, 'portal-v2.js');
+  const redirectPath = path.join(root, 'functions/go.js');
   const manifestFiles = [
     'nexus.project.json',
     'three-minute-break/nexus.project.json',
@@ -87,6 +87,7 @@ const auditNexusModel = () => {
   if (fs.existsSync(generatedPath)) report('ERROR', generatedPath, 'projects.generated.json은 단일원본 원칙에 따라 존재하면 안 됨');
   if (!fs.existsSync(basePath)) return report('ERROR', root, 'projects.json 없음');
   if (!fs.existsSync(statusPath)) return report('ERROR', root, 'project-status.json 없음');
+  if (!fs.existsSync(redirectPath)) return report('ERROR', root, 'functions/go.js 없음');
 
   let base;
   let status;
@@ -94,6 +95,12 @@ const auditNexusModel = () => {
   catch { return report('ERROR', basePath, 'projects.json JSON 파싱 실패'); }
   try { status = JSON.parse(read(statusPath)); }
   catch { return report('ERROR', statusPath, 'project-status.json JSON 파싱 실패'); }
+
+  const redirectSource = read(redirectPath);
+  const allowedHosts = new Set(
+    [...redirectSource.matchAll(/['"]([a-z0-9.-]+\.[a-z]{2,})['"]/gi)].map(match => match[1].toLowerCase())
+  );
+  if (!allowedHosts.size) report('ERROR', redirectPath, '리다이렉트 허용 호스트를 확인할 수 없음');
 
   const categories = new Set((base.categories || []).map(item => item.id));
   const projectIds = new Set();
@@ -103,7 +110,19 @@ const auditNexusModel = () => {
     if (projectIds.has(project.id)) report('ERROR', basePath, `중복 프로젝트 id: ${project.id}`);
     projectIds.add(project.id);
     if (!categories.has(project.category)) report('ERROR', basePath, `알 수 없는 카테고리: ${project.category}`);
-    if (!/^https?:\/\//i.test(project.url || '')) report('ERROR', basePath, `잘못된 프로젝트 URL: ${project.id}`);
+    if (!/^https?:\/\//i.test(project.url || '')) {
+      report('ERROR', basePath, `잘못된 프로젝트 URL: ${project.id}`);
+    } else {
+      try {
+        const projectUrl = new URL(project.url);
+        if (projectUrl.protocol !== 'https:') report('ERROR', basePath, `HTTPS가 아닌 프로젝트 URL: ${project.id}`);
+        if (!allowedHosts.has(projectUrl.hostname.toLowerCase())) {
+          report('ERROR', redirectPath, `projects.json의 호스트가 /go 허용목록에 없음: ${project.id} → ${projectUrl.hostname}`);
+        }
+      } catch {
+        report('ERROR', basePath, `URL 파싱 실패: ${project.id}`);
+      }
+    }
     if (urls.has(project.url)) report('WARNING', basePath, `동일 URL을 공유하는 카드 존재: ${project.url}`);
     urls.add(project.url);
   }
