@@ -1,4 +1,5 @@
 const ALLOWED_HOSTS = new Set([
+  'yehavha-nexus.pages.dev',
   'yehavha-3min-rest.pages.dev',
   'yehavha-toeicman.pages.dev',
   'ai-song-studio.pages.dev',
