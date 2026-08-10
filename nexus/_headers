@@ -8,7 +8,7 @@
   Expires: 0
 /projects.json
   Cache-Control: no-cache, no-store, must-revalidate
-/projects.generated.json
+/project-status.json
   Cache-Control: no-cache, no-store, must-revalidate
 /portal-v2.css
   Cache-Control: no-cache, no-store, must-revalidate
