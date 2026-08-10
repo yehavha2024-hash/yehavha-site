@@ -6,7 +6,7 @@
   if (!dialog || !content) return;
 
   const siteTitle = (document.querySelector('h1')?.textContent || document.title || 'YEHAVHA NEXUS').trim();
-  const aiNotice = '인공지능 활용 안내: 일부 법률 연구노트·사례·요약의 초안 작성과 구조화 과정에서 생성형 인공지능을 보조적으로 활용했습니다. 법령·판례·공식자료의 확인, 법적 판단, 내용 검토 및 최종 편집은 운영자가 수행·관리합니다. 본 자료는 개별 사건에 대한 법률자문을 대체하지 않습니다.';
+  const aiNotice = 'AI 활용 안내: 일부 법률 연구노트·사례·요약의 초안 작성과 구조화 과정에서 생성형 AI를 보조적으로 활용했습니다. 법령·판례·공식자료의 확인, 법적 판단, 내용 검토 및 최종 편집은 운영자가 수행·관리합니다. 본 자료는 개별 사건에 대한 법률자문을 대체하지 않습니다.';
 
   function syncSiteFooterNotice() {
     const siteNotice = document.querySelector('.site-footer .ai-disclosure');
