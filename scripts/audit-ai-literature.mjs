@@ -26,18 +26,24 @@ const files = [
 
 global.window = {};
 let errors = 0;
-const fail = message => { console.error(`ERROR: ${message}`); errors += 1; };
+const escapeWorkflow = value => String(value).replaceAll('%', '%25').replaceAll('\r', '%0D').replaceAll('\n', '%0A');
+const fail = (message, file = 'legal-knowledge/ai-literature') => {
+  console.error(`ERROR: ${message}`);
+  console.log(`::error file=${file}::${escapeWorkflow(message)}`);
+  errors += 1;
+};
 
 for (const file of files) {
   const full = path.join(root, file);
+  const relative = `legal-knowledge/ai-literature/${file}`;
   if (!fs.existsSync(full)) {
-    fail(`필수 데이터 파일 없음: ${file}`);
+    fail(`필수 데이터 파일 없음: ${file}`, relative);
     continue;
   }
   try {
     vm.runInThisContext(fs.readFileSync(full, 'utf8'), { filename: full });
   } catch (error) {
-    fail(`${file} 실행 실패: ${error.message}`);
+    fail(`${file} 실행 실패: ${error.message}`, relative);
   }
 }
 
