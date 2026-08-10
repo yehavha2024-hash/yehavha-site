@@ -18,3 +18,20 @@ html body > main section.notice[aria-labelledby="notice-title"] > p{
     line-height:1.7!important;
   }
 }
+
+/* Operating quality policy: match compact explanatory-text standard */
+html body > main section.standard-section .completion-policy{
+  font-size:14px!important;
+  line-height:1.72!important;
+}
+html body > main section.standard-section .completion-policy strong{
+  font-size:14px!important;
+  line-height:1.72!important;
+}
+@media (max-width:620px){
+  html body > main section.standard-section .completion-policy,
+  html body > main section.standard-section .completion-policy strong{
+    font-size:14px!important;
+    line-height:1.7!important;
+  }
+}
