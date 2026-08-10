@@ -10,7 +10,7 @@
       "global": "LEGAL_KNOWLEDGE",
       "label": "연구노트",
       "files": [
-        "legal-knowledge/data.js",
+        "legal-knowledge/data-core-expansion-20.js",
         "legal-knowledge/data-civil.js",
         "legal-knowledge/data-public.js",
         "legal-knowledge/data-criminal.js",
