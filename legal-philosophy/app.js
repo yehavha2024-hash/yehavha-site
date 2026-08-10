@@ -115,7 +115,7 @@
     if (!Array.isArray(rows) || !rows.length) return '';
     return `<div class="citation-group"><p class="citation-group-title">${esc(label)}</p>${rows.map(row => `
       <article class="citation-row">
-        <p class="citation-title">${esc(row.citation)}</p>
+        <p class="citation-title">${txt(row.citation)}</p>
         ${row.pinpoint ? `<p class="citation-pinpoint"><strong>인용 위치</strong>${txt(row.pinpoint)}</p>` : ''}
         ${row.url ? `<a class="citation-link" href="${esc(row.url)}" target="_blank" rel="noopener noreferrer">자료 확인 ↗</a>` : ''}
       </article>
