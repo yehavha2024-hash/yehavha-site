@@ -131,3 +131,33 @@ main{max-width:1160px;padding:32px 28px 58px}
   .detail-dialog .detail-meta-row span,.detail-dialog .meta-chips span,.detail-dialog .exam-chips span,.detail-dialog .card-keywords span,.detail-dialog .badge,.detail-dialog .level{font-size:13.5px!important}
   .detail-dialog .detail-section p,.detail-dialog .detail-list{font-size:16px!important;line-height:1.8!important}
 }
+
+/* 2026-08-10 research-note TOC compact typography: unified with compact explanatory text */
+.detail-dialog .document-toc-title{
+  font-size:13px!important;
+  line-height:1.7!important;
+}
+.detail-dialog .document-toc button,
+.detail-dialog .document-toc button b{
+  font-size:14px!important;
+  line-height:1.72!important;
+}
+.detail-dialog .document-toc button span{
+  font-size:11px!important;
+  line-height:1.72!important;
+}
+@media(max-width:620px){
+  .detail-dialog .document-toc-title{
+    font-size:13px!important;
+    line-height:1.7!important;
+  }
+  .detail-dialog .document-toc button,
+  .detail-dialog .document-toc button b{
+    font-size:14px!important;
+    line-height:1.7!important;
+  }
+  .detail-dialog .document-toc button span{
+    font-size:11px!important;
+    line-height:1.7!important;
+  }
+}
