@@ -275,6 +275,34 @@ h1 span {
 }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
+/* Legacy shell compatibility: cached pre-2026-08-08 Nexus HTML remains readable if an in-app browser restores it. */
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+  gap: 24px;
+  align-items: stretch;
+}
+.hero-side { min-width: 0; }
+.info-panel {
+  height: 100%;
+  padding: 18px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  background: rgba(255,255,255,.035);
+}
+.info-panel .panel-title {
+  margin: 0 0 10px;
+  font-size: 1rem;
+  letter-spacing: -.02em;
+}
+.info-panel ul {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--muted);
+  font-size: .88rem;
+  line-height: 1.7;
+}
+
 @media (max-width: 760px) {
   body { background-attachment: scroll; }
   .hero { padding-top: 24px; }
@@ -284,6 +312,7 @@ h1 span {
   .category-icon { width: 46px; height: 46px; border-radius: 13px; font-size: 1.15rem; }
   .category-head h2 { font-size: 1.3rem; }
   .items-grid, .items-grid.one-item { grid-template-columns: 1fr; }
+  .hero-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
   .container { width: calc(100% - 18px); }
