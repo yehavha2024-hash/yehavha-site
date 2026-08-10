@@ -8,8 +8,11 @@
   let toastTimer;
 
   const COUNTER_ENDPOINT = '/api/access';
+  const researchStyles = document.createElement('link');
+  researchStyles.rel = 'stylesheet';
+  researchStyles.href = './research-groups.css?v=20260810-1';
+  document.head.append(researchStyles);
 
-  // API 응답 전에도 숫자 영역은 항상 보이게 유지합니다.
   if (accessCount) {
     accessCount.textContent = '0';
     accessCount.hidden = false;
@@ -36,7 +39,6 @@
       await navigator.clipboard.writeText(text);
       return;
     }
-
     const textarea = document.createElement('textarea');
     textarea.value = text;
     textarea.setAttribute('readonly', '');
@@ -85,12 +87,7 @@
 
   async function requestAccessCount(op = 'get') {
     try {
-      const response = await fetch(`${COUNTER_ENDPOINT}?op=${encodeURIComponent(op)}`, {
-        method: 'GET',
-        cache: 'no-store',
-        credentials: 'same-origin',
-        headers: { Accept: 'application/json' }
-      });
+      const response = await fetch(`${COUNTER_ENDPOINT}?op=${encodeURIComponent(op)}`, {method:'GET',cache:'no-store',credentials:'same-origin',headers:{Accept:'application/json'}});
       if (!response.ok) throw new Error(`counter HTTP ${response.status}`);
       const payload = await response.json();
       const value = Number(payload?.count);
@@ -117,18 +114,13 @@
     const article = make('article', 'item-card');
     const top = make('div', 'item-top');
     top.append(make('span', 'item-meta', project.meta || 'Project'));
-
     if (project.status) {
-      const tone = ['fresh', 'active', 'stable', 'unknown'].includes(project.statusTone)
-        ? project.statusTone
-        : 'active';
+      const tone = ['fresh','active','stable','unknown'].includes(project.statusTone) ? project.statusTone : 'active';
       top.append(make('span', `project-status status-${tone}`, project.status));
     }
-
     const title = make('h3', '', project.title);
     const description = make('p', '', project.description);
     const actions = make('div', 'item-actions');
-
     const visit = make('a', 'visit-link');
     visit.href = trackedProjectUrl(project.url);
     visit.dataset.trackAccess = 'project';
@@ -139,64 +131,80 @@
     const arrow = make('span', '', external ? '↗' : '→');
     arrow.setAttribute('aria-hidden', 'true');
     visit.append(arrow);
-
     const copy = make('button', 'copy-btn', '링크 복사');
     copy.type = 'button';
     copy.dataset.url = project.url;
-
     actions.append(visit, copy);
     article.append(top, title, description);
-
     if (project.managedBy === 'github' || project.managedBy === 'github-external') {
       const info = make('div', 'project-live-meta');
-      if (Number.isFinite(project.contentCount)) {
-        info.append(make('span', '', `${project.contentLabel || '콘텐츠'} ${project.contentCount}`));
-      }
-      if (project.lastUpdated) {
-        info.append(make('span', '', `업데이트 ${formatDate(project.lastUpdated)}`));
-      }
+      if (Number.isFinite(project.contentCount)) info.append(make('span', '', `${project.contentLabel || '콘텐츠'} ${project.contentCount}`));
+      if (project.lastUpdated) info.append(make('span', '', `업데이트 ${formatDate(project.lastUpdated)}`));
       if (info.childElementCount) article.append(info);
     }
-
     article.append(actions);
     return article;
   }
 
-  function renderCategory(category, projects) {
+  function renderItemsGrid(projects) {
+    const grid = make('div', `items-grid${projects.length === 1 ? ' one-item' : ''}`);
+    projects.forEach((project) => grid.append(renderProject(project)));
+    return grid;
+  }
+
+  function renderResearchGroup(group, projects) {
+    const block = make('section', `research-subgroup research-subgroup-${group.id}`);
+    block.setAttribute('aria-labelledby', `research-group-${group.id}`);
+    const head = make('div', 'research-subgroup-head');
+    head.append(make('p','eyebrow',group.eyebrow || 'RESEARCH'), make('h3','',group.title), make('p','research-subgroup-description',group.description || ''));
+    head.querySelector('h3').id = `research-group-${group.id}`;
+    block.append(head, renderItemsGrid(projects));
+    return block;
+  }
+
+  function renderCategory(category, projects, researchGroups = []) {
     const section = make('section', 'category-card');
     section.id = category.id;
     section.setAttribute('aria-labelledby', `${category.id}-title`);
-
     const head = make('div', 'category-head');
     const icon = make('div', `category-icon ${category.iconClass || ''}`);
     icon.append(makeCategoryIcon(category.id, 'category-icon-glyph'));
     icon.setAttribute('aria-hidden', 'true');
-
     const headText = make('div', 'category-copy');
-    headText.append(
-      make('p', 'eyebrow', category.eyebrow),
-      make('h2', '', category.title),
-      make('p', 'category-description', category.description)
-    );
+    headText.append(make('p','eyebrow',category.eyebrow), make('h2','',category.title), make('p','category-description',category.description));
     headText.querySelector('h2').id = `${category.id}-title`;
     head.append(icon, headText);
 
-    const grid = make('div', `items-grid${projects.length === 1 ? ' one-item' : ''}`);
-    projects.forEach((project) => grid.append(renderProject(project)));
-    section.append(head, grid);
+    if (category.id === 'research' && researchGroups.length) {
+      const groups = make('div', 'research-groups');
+      const assigned = new Set();
+      researchGroups.forEach((group) => {
+        const groupProjects = projects.filter((project) => {
+          const projectGroup = project.researchGroup || 'knowledge';
+          if (projectGroup === group.id) { assigned.add(project.id); return true; }
+          return false;
+        });
+        if (groupProjects.length) groups.append(renderResearchGroup(group, groupProjects));
+      });
+      const unassigned = projects.filter((project) => !assigned.has(project.id));
+      if (unassigned.length) groups.append(renderResearchGroup({id:'other',eyebrow:'OTHER RESEARCH',title:'기타 연구',description:'기존 연구자료와 독립 프로젝트입니다.'}, unassigned));
+      section.append(head, groups);
+      return section;
+    }
+
+    section.append(head, renderItemsGrid(projects));
     return section;
   }
 
   function renderPortal(data) {
     const categories = Array.isArray(data.categories) ? data.categories : [];
     const projects = Array.isArray(data.projects) ? data.projects : [];
-
+    const researchGroups = Array.isArray(data.researchGroups) ? data.researchGroups : [];
     renderQuickLinks(categories);
     portalGrid.replaceChildren();
-
     categories.forEach((category) => {
       const categoryProjects = projects.filter((project) => project.category === category.id);
-      if (categoryProjects.length) portalGrid.append(renderCategory(category, categoryProjects));
+      if (categoryProjects.length) portalGrid.append(renderCategory(category, categoryProjects, researchGroups));
     });
   }
 
@@ -209,9 +217,8 @@
   async function loadPortal() {
     try {
       let data;
-      try {
-        data = await fetchJson('./projects.generated.json');
-      } catch (generatedError) {
+      try { data = await fetchJson('./projects.generated.json'); }
+      catch (generatedError) {
         console.warn('Generated Nexus data unavailable; using base projects.json.', generatedError);
         data = await fetchJson('./projects.json');
       }
@@ -228,23 +235,13 @@
       const url = button.dataset.url;
       if (!url) return;
       const previous = button.textContent;
-      try {
-        await copyText(url);
-        button.textContent = '복사 완료';
-        showToast('프로젝트 링크를 복사했습니다.');
-      } catch (error) {
-        window.prompt('아래 주소를 복사하세요.', url);
-      } finally {
-        window.setTimeout(() => { button.textContent = previous; }, 1400);
-      }
+      try { await copyText(url); button.textContent = '복사 완료'; showToast('프로젝트 링크를 복사했습니다.'); }
+      catch (error) { window.prompt('아래 주소를 복사하세요.', url); }
+      finally { window.setTimeout(() => { button.textContent = previous; }, 1400); }
       return;
     }
-
-    // 프로젝트 이동은 /go 서버 라우트를 통과합니다. middleware가 사람·봇 구분 없이
-    // 요청 자체를 D1 누적 접속횟수에 기록하므로 브라우저에서 별도로 증가시키지 않습니다.
     const projectLink = event.target.closest('a[data-track-access="project"]');
     if (projectLink) return;
-
     const link = event.target.closest('a[href^="#"]');
     if (link) {
       const targetId = link.getAttribute('href');
@@ -254,13 +251,9 @@
     }
   });
 
-  // 접속 증가는 Cloudflare Pages middleware가 D1에서 수행합니다.
-  // 브라우저는 누적값 조회만 하므로 사람·봇 요청을 이중 집계하지 않습니다.
   window.setTimeout(async () => {
     const value = await requestAccessCount('get');
-    if (value === null) {
-      window.setTimeout(() => { void requestAccessCount('get'); }, 1800);
-    }
+    if (value === null) window.setTimeout(() => { void requestAccessCount('get'); }, 1800);
   }, 250);
 
   loadPortal();
