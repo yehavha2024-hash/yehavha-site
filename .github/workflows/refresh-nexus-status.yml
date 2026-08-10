@@ -6,7 +6,6 @@ on:
     paths:
       - 'nexus/**'
       - '!nexus/project-status.json'
-      - '!nexus/projects.generated.json'
       - 'nexus.project.json'
       - 'three-minute-break/**'
       - 'toeic-human-100/**'
@@ -38,19 +37,19 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Generate Nexus project status
+      - name: Refresh Nexus project status
         run: node nexus/scripts/update-status.mjs
 
-      - name: Commit generated Nexus data
+      - name: Commit Nexus status when changed
         shell: bash
         run: |
-          if git diff --quiet -- nexus/project-status.json nexus/projects.generated.json; then
-            echo "Nexus generated data is already current."
+          if git diff --quiet -- nexus/project-status.json; then
+            echo "Nexus project status is already current."
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add nexus/project-status.json nexus/projects.generated.json
-          git commit -m "Refresh Nexus generated project data"
+          git add nexus/project-status.json
+          git commit -m "Refresh Nexus project status"
           git push
