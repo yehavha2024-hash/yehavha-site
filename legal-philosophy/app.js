@@ -106,7 +106,7 @@
   }
 
   function renderWorks(item, depth) {
-    const works = (item.works || []).map(work => `<li><strong>${esc(work)}</strong></li>`).join('');
+    const works = (item.works || []).map(work => `<li><strong>${txt(work)}</strong></li>`).join('');
     const reading = Array.isArray(depth.reading) && depth.reading.length ? list(depth.reading, 'reading-list') : '<p>대표 저작에서 핵심 명제의 원문과 사용 맥락을 확인하고 직접 인용 전 판본·쪽수를 재검증합니다.</p>';
     return `<div class="works-block"><p class="subhead">대표 저작</p><ul class="work-list">${works}</ul><p class="subhead">읽기 포인트</p>${reading}</div>`;
   }
