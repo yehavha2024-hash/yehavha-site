@@ -7,8 +7,16 @@
 /projects.generated.json
   Cache-Control: no-cache, no-store, must-revalidate
 /portal-v2.css
-  Cache-Control: public, max-age=3600
+  Cache-Control: no-cache, no-store, must-revalidate
 /portal-v2.js
-  Cache-Control: public, max-age=3600
+  Cache-Control: no-cache, no-store, must-revalidate
+/nexus-standard.css
+  Cache-Control: no-cache, no-store, must-revalidate
+/status.css
+  Cache-Control: no-cache, no-store, must-revalidate
+/research-groups.css
+  Cache-Control: no-cache, no-store, must-revalidate
+/research-track/*
+  Cache-Control: no-cache, no-store, must-revalidate
 /assets/*
   Cache-Control: public, max-age=86400
