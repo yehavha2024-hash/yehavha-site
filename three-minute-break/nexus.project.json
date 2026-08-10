@@ -1,18 +1,8 @@
 {
   "id": "three-min-rest",
   "publish": true,
-  "project": {
-    "category": "apps",
-    "meta": "Web App",
-    "title": "3분 쉼표",
-    "description": "명언·생활영어·성경 핵심 의미·미니퀴즈를 짧게 이용하는 200개 콘텐츠 기반의 일일 순환 웹앱입니다.",
-    "url": "https://yehavha-3min-rest.pages.dev/",
-    "actionLabel": "앱 실행"
-  },
   "tracking": {
-    "paths": [
-      "three-minute-break"
-    ],
+    "paths": ["three-minute-break"],
     "freshDays": 7,
     "staleDays": 30,
     "count": {
