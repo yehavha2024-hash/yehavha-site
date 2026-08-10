@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="인공지능 법학 연구문헌 아카이브 — AI 법 연구에 필요한 필수도서, 전공서적, 국내 박사학위논문, 국내외 학술논문과 규범자료를 법영역·쟁점·논증 목적·읽기 순서로 연결한 연구문헌 지도" />
+  <meta name="theme-color" content="#071225" />
+  <title>인공지능 법학 연구문헌 아카이브 | AI Law Research Literature Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260810-1" />
+</head>
+<body>
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <nav class="back-nav" aria-label="상위 이동">
+        <a href="https://yehavha-nexus-hub.pages.dev/">← YEHAVHA NEXUS</a>
+        <a href="../">← 법리·판례 연구</a>
+      </nav>
+      <div class="eyebrow">AI LAW RESEARCH LITERATURE ARCHIVE</div>
+      <h1>인공지능 법학 연구문헌 아카이브</h1>
+      <p class="hero-copy">필수도서·전공서적·국내 박사학위논문·국내외 학술논문·규범자료를 단순 나열하지 않고, 법영역과 쟁점, 읽기 순서, 주장에 쓰는 방식, 연구 접목점을 하나의 문헌 지도에 연결합니다.</p>
+      <div class="hero-meta">
+        <span id="recordCount">코어 문헌 0</span>
+        <span id="routeCount">읽기 경로 0</span>
+        <span>검토 기준 2026.08.10</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="notice" aria-labelledby="notice-title">
+      <div><div class="section-kicker">RESEARCH NOTICE</div><h2 id="notice-title">문헌을 ‘근거’로 전환하는 아카이브</h2></div>
+      <p>요약은 원문을 대체하지 않습니다. 논문에 직접 인용하기 전에는 연결된 원문·공식 서지·최신 판본에서 문장, 쪽수, 법령 상태를 다시 확인합니다. 구매 링크는 접근 편의를 위한 것이며 학술적 우선순위를 의미하지 않습니다.</p>
+    </section>
+
+    <section class="logic-section" aria-labelledby="logic-title">
+      <div class="section-heading">
+        <div><div class="section-kicker">ARCHIVE LOGIC</div><h2 id="logic-title">자료를 읽고 논증으로 바꾸는 순서</h2></div>
+        <p>한 문헌을 읽고 끝내는 방식이 아니라, 쟁점별로 기초개념과 대립학설, 현행 규범, 비교법, 반론을 순차 연결합니다.</p>
+      </div>
+      <div class="flow" aria-label="문헌 연구 흐름">
+        <span>01 법영역 선택</span><b>→</b><span>02 핵심쟁점 확인</span><b>→</b><span>03 읽기 경로</span><b>→</b><span>04 근거 추출</span><b>→</b><span>05 반론 대조</span><b>→</b><span>06 논문 접목</span>
+      </div>
+      <div class="evidence-grid" aria-label="근거 역할">
+        <article><strong>개념 근거</strong><span>AI·자율성·설명가능성·창발성의 기술·이론 전제</span></article>
+        <article><strong>교리 근거</strong><span>불법행위·제품책임·회사법·행정절차 등 현행법 해석</span></article>
+        <article><strong>규범 근거</strong><span>기본권·공정성·책임성·인간개입의 정당화</span></article>
+        <article><strong>비교법 근거</strong><span>EU·미국·국제기준과 국내법의 차이 및 이식 한계</span></article>
+        <article><strong>반대논증</strong><span>AI 법인격 부정론, 설명권 제한론 등 경쟁 견해</span></article>
+        <article><strong>제도설계</strong><span>증명책임·로그·보험·감독·책임주체 배분으로 연결</span></article>
+      </div>
+    </section>
+
+    <section class="routes-section" aria-labelledby="routes-title">
+      <div class="section-heading">
+        <div><div class="section-kicker">READING ROUTES</div><h2 id="routes-title">쟁점별 읽기 경로</h2></div>
+        <p>각 경로는 ‘기초 → 교리 → 대립 → 최신 규율 → 논증’ 순서입니다. 경로를 선택하면 해당 문헌만 즉시 필터링됩니다.</p>
+      </div>
+      <div id="routeGrid" class="route-grid"></div>
+    </section>
+
+    <section class="controls" aria-label="문헌 검색 및 필터">
+      <div class="control-stack">
+        <label class="search-box"><span>통합 검색</span><input id="searchInput" type="search" placeholder="저자, 저작명, 법영역, 쟁점, 책임귀속, 창발적 손해 등" autocomplete="off" /></label>
+        <div class="filter-row"><span class="filter-label">문헌유형</span><div id="typeFilters" class="filters"></div></div>
+        <div class="filter-row"><span class="filter-label">법영역</span><div id="areaFilters" class="filters"></div></div>
+        <div class="filter-row compact-row">
+          <label><span>우선순위</span><select id="prioritySelect"><option value="all">전체</option><option value="A">A · 핵심</option><option value="B">B · 심화</option><option value="C">C · 확장</option></select></label>
+          <label><span>읽기단계</span><select id="stageSelect"><option value="all">전체</option></select></label>
+          <button id="resetButton" type="button" class="reset-button">필터 초기화</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="library-section" aria-labelledby="library-title">
+      <div class="section-heading library-heading">
+        <div><div class="section-kicker">LITERATURE MAP</div><h2 id="library-title">연구문헌 목록</h2></div>
+        <p id="resultCount">0개 문헌 표시</p>
+      </div>
+      <div id="cards" class="cards"></div>
+      <div id="emptyState" class="empty" hidden>조건에 맞는 문헌이 없습니다.</div>
+    </section>
+
+    <section class="method-section" aria-labelledby="method-title">
+      <div class="section-heading"><div><div class="section-kicker">CITATION METHOD</div><h2 id="method-title">논문에 접목할 때의 사용 규칙</h2></div></div>
+      <div class="method-grid">
+        <article><strong>01 개념을 빌릴 때</strong><p>정의만 옮기지 말고 해당 개념이 해결하려는 문제와 한계를 함께 기록합니다.</p></article>
+        <article><strong>02 학설을 근거로 쓸 때</strong><p>찬성 문헌만 연결하지 않고 경쟁 견해를 최소 하나 대조하여 자신의 선택 이유를 밝힙니다.</p></article>
+        <article><strong>03 비교법을 쓸 때</strong><p>외국 규범의 문언·적용대상·시행상태를 확인하고 국내법에 그대로 이식 가능한지 별도로 검토합니다.</p></article>
+        <article><strong>04 제도안을 제시할 때</strong><p>책임주체, 성립요건, 증명책임, 책임재산, 보험·공탁, 로그·감사 등 집행구조까지 연결합니다.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="detailDialog" class="detail-dialog" aria-labelledby="detailTitle">
+    <div class="dialog-shell">
+      <button id="dialogClose" class="dialog-close" type="button" aria-label="문헌 상세 닫기">닫기 ×</button>
+      <div id="detailContent"></div>
+    </div>
+  </dialog>
+
+  <footer class="site-footer" data-footer-standard="v1">
+    <div><strong>인공지능 법학 연구문헌 아카이브</strong><p>AI Law Research Literature Archive</p></div>
+    <div class="footer-note">
+      <p>Copyright © 이명훈 2026. All rights reserved.</p>
+      <p>문의 kimbrighth@gmail.com</p>
+      <p>AI는 문헌 탐색·분류·요약 보조에 활용되며, 서지·원문·현행 규범과 인용 위치는 연구자가 최종 검증합니다.</p>
+      <a href="#top">맨 위로 ↑</a>
+    </div>
+  </footer>
+
+  <script src="data.js?v=20260810-1"></script>
+  <script src="app.js?v=20260810-1"></script>
+</body>
+</html>
