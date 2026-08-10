@@ -1,15 +1,6 @@
 {
   "id": "ai-law-literature",
   "publish": true,
-  "project": {
-    "category": "research",
-    "researchGroup": "knowledge",
-    "meta": "AI Law Research Literature",
-    "title": "인공지능 법학 연구문헌 아카이브",
-    "description": "AI 법학 필수도서·전공서적·국내 박사학위논문·KCI 논문·해외 핵심문헌·규범자료를 민사·회사·헌법·행정·형사·개인정보·지식재산별로 연결하고, 직접 인용 핵심문헌·반대학설·비교법·최신문헌과 연구 접목점을 체계화합니다.",
-    "url": "https://yehavha-legal-knowledge.danielie.workers.dev/ai-literature/",
-    "actionLabel": "문헌 아카이브 보기"
-  },
   "tracking": {
     "paths": ["legal-knowledge/ai-literature"],
     "freshDays": 7,
