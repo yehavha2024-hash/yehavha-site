@@ -1,14 +1,6 @@
 {
   "id": "ai-law-institute",
   "publish": true,
-  "project": {
-    "category": "research",
-    "meta": "Research Institute",
-    "title": "AI 법률연구소",
-    "description": "인공지능의 기술적 작동과 법적 책임 사이의 연결구조를 연구합니다. AI 민사책임, Agentic AI·Multi-Agent Systems, 제조물책임, 증명위험, 책임배분과 제한적 법적 지위를 중심으로 연구합니다.",
-    "url": "https://yehavha-ai-law-institute.pages.dev/",
-    "actionLabel": "연구소 방문"
-  },
   "tracking": {
     "externalRepository": "yehavha2024-hash/ai-law-research-institute",
     "externalBranch": "master",
