@@ -10,7 +10,7 @@
   const COUNTER_ENDPOINT = '/api/access';
   const researchStyles = document.createElement('link');
   researchStyles.rel = 'stylesheet';
-  researchStyles.href = './research-groups.css?v=20260810-1';
+  researchStyles.href = './research-groups.css';
   document.head.append(researchStyles);
 
   if (accessCount) {
@@ -209,20 +209,25 @@
   }
 
   async function fetchJson(url) {
-    const response = await fetch(url, { cache: 'no-cache' });
+    const response = await fetch(url, { cache: 'no-store' });
     if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
     return response.json();
   }
 
   async function loadPortal() {
     try {
-      let data;
-      try { data = await fetchJson('./projects.generated.json'); }
-      catch (generatedError) {
-        console.warn('Generated Nexus data unavailable; using base projects.json.', generatedError);
-        data = await fetchJson('./projects.json');
+      const data = await fetchJson('./projects.json');
+      let statusMap = {};
+      try {
+        statusMap = await fetchJson('./project-status.json');
+      } catch (statusError) {
+        console.warn('Nexus project status unavailable; rendering canonical project data only.', statusError);
       }
-      renderPortal(data);
+      const projects = (Array.isArray(data.projects) ? data.projects : []).map((project) => ({
+        ...project,
+        ...(statusMap?.[project.id] || {})
+      }));
+      renderPortal({ ...data, projects });
     } catch (error) {
       console.error('YEHAVHA Nexus data load failed:', error);
       portalGrid.replaceChildren(make('section', 'category-card', '프로젝트 정보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.'));
