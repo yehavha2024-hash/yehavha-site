@@ -35,3 +35,15 @@ html body > main section.standard-section .completion-policy strong{
     line-height:1.7!important;
   }
 }
+
+/* Law-system and exam filter buttons: same compact 14px standard */
+html body > main section.controls .filter-btn{
+  font-size:14px!important;
+  line-height:1.72!important;
+}
+@media (max-width:620px){
+  html body > main section.controls .filter-btn{
+    font-size:14px!important;
+    line-height:1.7!important;
+  }
+}
