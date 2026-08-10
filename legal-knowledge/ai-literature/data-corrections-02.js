@@ -39,6 +39,21 @@
     });
   }
 
+  // 기존 문헌 4건에 누락된 연구상 증거역할 메타데이터를 보완한다.
+  // 서지·요약·링크는 건드리지 않고, 현재 연구에서의 사용 역할만 명시한다.
+  const evidenceRoleById = new Map([
+    ["article-kim-ai-crime-2023", ["직접 인용 핵심문헌"]],
+    ["article-fairness-2023", ["직접 인용 핵심문헌"]],
+    ["article-park-bias-2022", ["직접 인용 핵심문헌"]],
+    ["thesis-kang-civil-procedure-2024", ["직접 인용 핵심문헌"]]
+  ]);
+  for (const [recordId, evidenceRoles] of evidenceRoleById) {
+    const record = window.AI_LITERATURE_RECORDS.find(item => item.id === recordId);
+    if (record && (!Array.isArray(record.evidenceRoles) || !record.evidenceRoles.length)) {
+      record.evidenceRoles = evidenceRoles;
+    }
+  }
+
   if (Array.isArray(window.AI_LITERATURE_ROUTES)) {
     const route = window.AI_LITERATURE_ROUTES.find(item => item.id === "route-criminal");
     if (route) {
