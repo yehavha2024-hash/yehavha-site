@@ -146,3 +146,17 @@ body > main .reviewed{font-size:14px!important;color:#9fb2c5!important}
   body > main .card h3{font-size:20px!important;line-height:1.45!important}
   body > main .filter-btn{font-size:15px!important}
 }
+
+/* 2026-08-10 compact standard-note cards: same text scale as legal notice body */
+body > main .standard-grid article strong,
+body > main .standard-grid article span{
+  font-size:14px!important;
+  line-height:1.72!important;
+}
+@media(max-width:680px){
+  body > main .standard-grid article strong,
+  body > main .standard-grid article span{
+    font-size:14px!important;
+    line-height:1.72!important;
+  }
+}
