@@ -1,15 +1,23 @@
 /
   Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
+  Expires: 0
 /index.html
   Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
+  Expires: 0
 /projects.json
   Cache-Control: no-cache, no-store, must-revalidate
 /projects.generated.json
   Cache-Control: no-cache, no-store, must-revalidate
 /portal-v2.css
   Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
+  Expires: 0
 /portal-v2.js
   Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
+  Expires: 0
 /nexus-standard.css
   Cache-Control: no-cache, no-store, must-revalidate
 /status.css
@@ -18,5 +26,7 @@
   Cache-Control: no-cache, no-store, must-revalidate
 /research-track/*
   Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
+  Expires: 0
 /assets/*
   Cache-Control: public, max-age=86400
