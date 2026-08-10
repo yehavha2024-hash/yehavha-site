@@ -1,4 +1,5 @@
 const ALLOWED_HOSTS = new Set([
+  'yehavha-nexus-hub.pages.dev',
   'yehavha-nexus.pages.dev',
   'yehavha-3min-rest.pages.dev',
   'yehavha-toeicman.pages.dev',
@@ -38,6 +39,5 @@ export async function onRequestGet({ request }) {
     });
   }
 
-  // /go 요청 자체는 functions/_middleware.js가 접속 1회로 집계합니다.
   return Response.redirect(target.toString(), 302);
 }
