@@ -1,14 +1,6 @@
 {
   "id": "legal-knowledge",
   "publish": true,
-  "project": {
-    "category": "research",
-    "meta": "Advanced Legal Studies",
-    "title": "법리·판례 연구",
-    "description": "실정법·판례·법적 추론과 논증을 전문적으로 체계화한 고급 법률지식 아카이브입니다.",
-    "url": "https://yehavha-legal-knowledge.danielie.workers.dev",
-    "actionLabel": "연구자료 보기"
-  },
   "tracking": {
     "paths": ["legal-knowledge"],
     "freshDays": 7,
