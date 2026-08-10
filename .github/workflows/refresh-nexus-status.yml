@@ -12,6 +12,7 @@ on:
       - 'legal-knowledge/**'
       - 'ai-law-tech-foresight/**'
       - 'legal-philosophy/**'
+      - '.github/workflows/refresh-nexus-status.yml'
   schedule:
     - cron: '15 15 * * *'
   workflow_dispatch:
