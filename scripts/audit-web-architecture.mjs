@@ -5,17 +5,29 @@ const projects = [
   { dir: 'ai-law-tech-foresight', detailFiles: ['app.js', 'research-document-standard.js'] },
   { dir: 'legal-philosophy', detailFiles: ['app.js'] },
   { dir: 'legal-knowledge', detailFiles: ['research-document-standard.js'] },
+  { dir: 'legal-knowledge/ai-literature', detailFiles: [] },
   { dir: 'three-minute-break', detailFiles: [] },
   { dir: 'toeic-human-100', detailFiles: [] },
   { dir: 'nexus', detailFiles: [] },
+  { dir: 'nexus/research-track', detailFiles: [] },
 ];
 
 let errors = 0;
 let warnings = 0;
 
 const read = p => fs.existsSync(p) ? fs.readFileSync(p, 'utf8') : '';
+const annotationPath = project => {
+  try {
+    if (fs.existsSync(project) && fs.statSync(project).isFile()) return project;
+  } catch {}
+  const index = path.join(project, 'index.html');
+  return fs.existsSync(index) ? index : project;
+};
+const escapeWorkflow = value => String(value).replaceAll('%', '%25').replaceAll('\r', '%0D').replaceAll('\n', '%0A');
 const report = (kind, project, message) => {
   console.log(`${kind} ${project}: ${message}`);
+  const command = kind === 'ERROR' ? 'error' : 'warning';
+  console.log(`::${command} file=${annotationPath(project)}::${escapeWorkflow(message)}`);
   if (kind === 'ERROR') errors += 1;
   else warnings += 1;
 };
@@ -37,6 +49,91 @@ const auditAnchors = (root, index) => {
   }
 };
 
+const auditLocalReferences = (root, index) => {
+  const refs = [...index.matchAll(/\b(?:src|href)=["']([^"']+)["']/g)].map(match => match[1]);
+  const seen = new Set();
+  for (const ref of refs) {
+    if (!ref || ref.startsWith('#') || /^(?:https?:|mailto:|tel:|data:|javascript:)/i.test(ref)) continue;
+    const clean = ref.split('#')[0].split('?')[0];
+    if (!clean) continue;
+    const key = clean;
+    if (seen.has(key) && /\.(?:js|css)$/i.test(clean)) {
+      report('WARNING', root, `동일 로컬 자산 중복 참조: ${clean}`);
+    }
+    seen.add(key);
+    const target = clean.startsWith('/')
+      ? path.join(root, clean.replace(/^\/+/, ''))
+      : path.resolve(root, clean);
+    if (!fs.existsSync(target)) report('ERROR', root, `로컬 링크 대상 없음: ${ref}`);
+  }
+};
+
+const auditNexusModel = () => {
+  const root = 'nexus';
+  const basePath = path.join(root, 'projects.json');
+  const statusPath = path.join(root, 'project-status.json');
+  const generatedPath = path.join(root, 'projects.generated.json');
+  const portalPath = path.join(root, 'portal-v2.js');
+  const manifestFiles = [
+    'nexus.project.json',
+    'three-minute-break/nexus.project.json',
+    'toeic-human-100/nexus.project.json',
+    'legal-knowledge/nexus.project.json',
+    'legal-knowledge/ai-literature/nexus.project.json',
+    'ai-law-tech-foresight/nexus.project.json',
+    'legal-philosophy/nexus.project.json'
+  ];
+
+  if (fs.existsSync(generatedPath)) report('ERROR', generatedPath, 'projects.generated.json은 단일원본 원칙에 따라 존재하면 안 됨');
+  if (!fs.existsSync(basePath)) return report('ERROR', root, 'projects.json 없음');
+  if (!fs.existsSync(statusPath)) return report('ERROR', root, 'project-status.json 없음');
+
+  let base;
+  let status;
+  try { base = JSON.parse(read(basePath)); }
+  catch { return report('ERROR', basePath, 'projects.json JSON 파싱 실패'); }
+  try { status = JSON.parse(read(statusPath)); }
+  catch { return report('ERROR', statusPath, 'project-status.json JSON 파싱 실패'); }
+
+  const categories = new Set((base.categories || []).map(item => item.id));
+  const projectIds = new Set();
+  const urls = new Set();
+  for (const project of base.projects || []) {
+    if (!project?.id || !project?.title || !project?.url) report('ERROR', basePath, '필수 카드 필드(id/title/url) 누락');
+    if (projectIds.has(project.id)) report('ERROR', basePath, `중복 프로젝트 id: ${project.id}`);
+    projectIds.add(project.id);
+    if (!categories.has(project.category)) report('ERROR', basePath, `알 수 없는 카테고리: ${project.category}`);
+    if (!/^https?:\/\//i.test(project.url || '')) report('ERROR', basePath, `잘못된 프로젝트 URL: ${project.id}`);
+    if (urls.has(project.url)) report('WARNING', basePath, `동일 URL을 공유하는 카드 존재: ${project.url}`);
+    urls.add(project.url);
+  }
+
+  const manifestIds = new Set();
+  for (const relative of manifestFiles) {
+    if (!fs.existsSync(relative)) {
+      report('ERROR', relative, '승인 Nexus manifest 없음');
+      continue;
+    }
+    let manifest;
+    try { manifest = JSON.parse(read(relative)); }
+    catch { report('ERROR', relative, 'manifest JSON 파싱 실패'); continue; }
+    if (!manifest.id) report('ERROR', relative, 'manifest id 누락');
+    if (manifest.project) report('ERROR', relative, 'manifest에 카드 표시정보(project)가 중복 저장됨');
+    if (manifestIds.has(manifest.id)) report('ERROR', relative, `중복 manifest id: ${manifest.id}`);
+    manifestIds.add(manifest.id);
+    if (!projectIds.has(manifest.id)) report('ERROR', relative, `projects.json에 없는 manifest id: ${manifest.id}`);
+  }
+
+  for (const id of Object.keys(status || {})) {
+    if (!projectIds.has(id)) report('ERROR', statusPath, `projects.json에 없는 상태 id: ${id}`);
+    if (!manifestIds.has(id)) report('ERROR', statusPath, `승인 manifest가 없는 상태 id: ${id}`);
+  }
+
+  if (/projects\.generated\.json/.test(read(portalPath))) {
+    report('ERROR', portalPath, 'portal-v2.js가 제거된 projects.generated.json을 참조함');
+  }
+};
+
 for (const project of projects) {
   const root = project.dir;
   const indexPath = path.join(root, 'index.html');
@@ -55,6 +152,7 @@ for (const project of projects) {
   if (!index.includes('AI 활용 안내')) report('ERROR', root, '메인 AI 활용 안내 없음');
 
   auditAnchors(root, index);
+  auditLocalReferences(root, index);
 
   for (const file of fs.readdirSync(root)) {
     if (!file.endsWith('.js')) continue;
@@ -62,13 +160,13 @@ for (const project of projects) {
     const source = read(full);
 
     if (/new\s+MutationObserver[\s\S]{0,400}document\.(documentElement|body)/.test(source)) {
-      report('ERROR', `${root}/${file}`, '페이지 전체 MutationObserver 사용');
+      report('ERROR', full, '페이지 전체 MutationObserver 사용');
     }
     if (/createElement\(['"]style['"]\)/.test(source)) {
-      report('WARNING', `${root}/${file}`, '런타임 style 생성 발견');
+      report('WARNING', full, '런타임 style 생성 발견');
     }
     if (/site-footer[\s\S]{0,250}\.innerHTML|\.innerHTML[\s\S]{0,250}site-footer/.test(source)) {
-      report('ERROR', `${root}/${file}`, 'JavaScript가 메인 footer를 다시 생성할 가능성');
+      report('ERROR', full, 'JavaScript가 메인 footer를 다시 생성할 가능성');
     }
   }
 
@@ -76,7 +174,7 @@ for (const project of projects) {
   if (fs.existsSync(configPath)) {
     const config = read(configPath);
     if (/\bdocument\.|createElement\(|addEventListener\(|innerHTML/.test(config)) {
-      report('ERROR', `${root}/config.js`, 'config.js에 DOM/동작 코드 존재');
+      report('ERROR', configPath, 'config.js에 DOM/동작 코드 존재');
     }
   }
 
@@ -93,6 +191,8 @@ for (const project of projects) {
     }
   }
 }
+
+auditNexusModel();
 
 console.log(`\nArchitecture audit: ${errors} error(s), ${warnings} warning(s)`);
 if (errors) process.exit(1);
