@@ -35,6 +35,15 @@
     "contentCount": null,
     "contentLabel": "연구노트"
   },
+  "ai-law-literature": {
+    "id": "ai-law-literature",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-11",
+    "contentCount": 217,
+    "contentLabel": "연구문헌"
+  },
   "ai-law-tech-foresight": {
     "id": "ai-law-tech-foresight",
     "managedBy": "github",
