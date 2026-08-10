@@ -6,3 +6,15 @@
 .variation-cases{display:grid;gap:14px}.variation-case{border:1px solid #dfe6ed;border-radius:13px;overflow:hidden;background:#fff}.variation-question{padding:13px 15px;background:#f8fafc;border-bottom:1px solid #e7ecf1}.variation-question span{display:block;font-size:11px;font-weight:700;color:#50657a;margin-bottom:5px}.variation-question p{margin:0!important;font-size:13px;line-height:1.75;color:#26384b;font-weight:600}.variation-answer{padding:14px 15px}.answer-title{font-size:12px;font-weight:800;color:var(--navy-800);margin-bottom:9px}.analysis-row{display:grid;grid-template-columns:94px 1fr;gap:12px;padding:9px 0;border-top:1px dashed #e7ecf1}.analysis-row:first-of-type{border-top:0}.analysis-row strong{font-size:11px;line-height:1.7;color:#40566d}.analysis-row p{margin:0!important;font-size:12px;line-height:1.78;color:#536477}.variation-cases.hard .variation-case{border-color:#dfd1b6}.variation-cases.hard .variation-question{background:#faf7f0;border-color:#e8dcc5}.variation-cases.hard .variation-question span{color:#816331}.variation-cases.hard .answer-title{color:#755726}.direct-analysis{margin:0!important;font-size:12px;line-height:1.78;color:#536477}
 @media (max-width:900px){.standard-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}.standard-grid article:nth-child(4n+2),.stats .stat:nth-child(4n+2){margin-right:0!important}.standard-grid article:nth-child(4n+3),.stats .stat:nth-child(4n+3){margin-left:0!important}.roadmap-grid.six{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:620px){.standard-grid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:12px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))!important;column-gap:0!important;row-gap:12px!important}.standard-grid article{padding:14px 12px}.standard-grid strong{font-size:12px;line-height:1.45}.standard-grid span{font-size:10px;line-height:1.55}.stats .stat{padding:14px 12px!important;min-height:96px;display:flex;flex-direction:column;justify-content:center}.stats .stat strong{font-size:20px;line-height:1.2}.stats .stat span{font-size:10px;line-height:1.45}.roadmap-grid.six{grid-template-columns:1fr}.subfield-select{width:100%}.fact-row,.analysis-row{grid-template-columns:1fr;gap:4px}}
+
+/* Legal notice body text: compact explanatory copy */
+html body > main section.notice[aria-labelledby="notice-title"] > p{
+  font-size:14px!important;
+  line-height:1.72!important;
+}
+@media (max-width:620px){
+  html body > main section.notice[aria-labelledby="notice-title"] > p{
+    font-size:14px!important;
+    line-height:1.7!important;
+  }
+}
