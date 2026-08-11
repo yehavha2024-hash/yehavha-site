@@ -205,9 +205,22 @@ function renderV2Analyze(day) {
     <details class="reading-details"><summary>분석 후 본문 다시 읽기</summary><div><p class="example-ko">${escapeHtml(day.review?.rereadInstructionKo)}</p></div></details>`;
 }
 
+function prepareQuestionItem(item, qid) {
+  const options = Array.isArray(item?.options) ? item.options : [];
+  const match = String(qid).match(/^d(\d+)-speed-(\d+)$/);
+  if (!match || options.length < 2) return item;
+  const shift = (Number(match[1]) + Number(match[2])) % options.length;
+  if (!shift) return item;
+  return {
+    ...item,
+    options: [...options.slice(shift), ...options.slice(0, shift)],
+    answer: (Number(item.answer) - shift + options.length) % options.length
+  };
+}
 function questionHtml(item, qid, label) {
-  activeQuestions.set(qid, item);
-  return `<div class="practice-item" data-question="${escapeHtml(qid)}"><span class="practice-label">${escapeHtml(label)}</span><p class="question">${escapeHtml(item.question)}</p><div class="quiz-options">${(item.options || []).map((o,i)=>`<button class="quiz-option" data-qid="${escapeHtml(qid)}" data-index="${i}"><strong>(${String.fromCharCode(65+i)})</strong> ${escapeHtml(o)}</button>`).join("")}</div><p class="quiz-result">정답을 선택하세요.</p><div class="question-explanation"></div></div>`;
+  const renderedItem = prepareQuestionItem(item, qid);
+  activeQuestions.set(qid, renderedItem);
+  return `<div class="practice-item" data-question="${escapeHtml(qid)}"><span class="practice-label">${escapeHtml(label)}</span><p class="question">${escapeHtml(renderedItem.question)}</p><div class="quiz-options">${(renderedItem.options || []).map((o,i)=>`<button class="quiz-option" data-qid="${escapeHtml(qid)}" data-index="${i}"><strong>(${String.fromCharCode(65+i)})</strong> ${escapeHtml(o)}</button>`).join("")}</div><p class="quiz-result">정답을 선택하세요.</p><div class="question-explanation"></div></div>`;
 }
 
 const SPEED_QUIZ_BANK = {
