@@ -23,7 +23,7 @@
       "title": "출판·아카이브",
       "icon": "📚",
       "iconClass": "publishing-icon",
-      "description": "Amazon Kindle·U-Paper·교보문고에 출간한 전자책 가운데 대표 출간물을 선별하여 소개합니다."
+      "description": "Amazon Kindle·U-Paper에 출간한 전자책 가운데 대표 출간물을 선별하여 소개합니다."
     },
     {
       "id": "media",
@@ -163,7 +163,7 @@
       "category": "publishing",
       "meta": "Selected Publications",
       "title": "대표 출간 도서",
-      "description": "Amazon Kindle, U-Paper, 교보문고에 출간한 전자책 가운데 대표 도서를 선별하여 한곳에서 소개합니다.",
+      "description": "Amazon Kindle과 U-Paper에 출간한 전자책 가운데 대표 도서를 선별하여 한곳에서 소개합니다.",
       "url": "https://yehavha-nexus-hub.pages.dev/publishing/",
       "actionLabel": "출간 도서 보기"
     },
