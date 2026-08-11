@@ -25,6 +25,14 @@
     return { journalPart, pages: formatKoreanPages(pages) };
   }
 
+  function normalizeThesisPublication(publication) {
+    let source = clean(publication);
+    source = source.replace(/법학\s*박사(?!학위논문)/g, '박사학위논문');
+    source = source.replace(/법학박사학위논문/g, '박사학위논문');
+    source = source.replace(/박사\s*학위\s*논문/g, '박사학위논문');
+    return source;
+  }
+
   function standardizeCitation(record) {
     const type = clean(record.type);
     const language = clean(record.language);
@@ -44,8 +52,9 @@
     }
 
     if (type.includes('학위논문')) {
-      record.citation = `${author}, ${quoteKo(record.title)}, ${clean(record.publication)}, ${year}.`;
-      record.citationStandard = 'KO-THESIS-v2';
+      record.publication = normalizeThesisPublication(record.publication);
+      record.citation = `${author}, ${quoteKo(record.title)}, ${record.publication}, ${year}.`;
+      record.citationStandard = 'KO-THESIS-v3';
       return;
     }
 
