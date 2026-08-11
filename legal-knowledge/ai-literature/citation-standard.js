@@ -19,8 +19,8 @@
 
     const [, journal, volume, issue, pages] = match;
     const journalPart = issue
-      ? `『${journal.trim()}』 제${volume}권 제${issue}호`
-      : `『${journal.trim()}』 제${volume}호`;
+      ? `${journal.trim()} 제${volume}권 제${issue}호`
+      : `${journal.trim()} 제${volume}호`;
 
     return { journalPart, pages: formatPages(pages) };
   }
@@ -62,7 +62,7 @@
 
     if (type === '국내 학술논문' || (language !== '영어' && jurisdiction === '대한민국' && type.includes('학술논문'))) {
       record.citation = formatDomesticArticle(record);
-      record.citationStandard = 'KO-JOURNAL-v1';
+      record.citationStandard = 'KO-JOURNAL-v2';
       return;
     }
 
