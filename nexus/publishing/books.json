@@ -2,6 +2,22 @@
   "updatedAt": "2026-08-12",
   "books": [
     {
+      "id": "upaper-toeic-day001",
+      "platform": "U-Paper",
+      "title": "토익 인간 100일 프로젝트 DAY 001",
+      "description": "최근 발간한 대표 전자책입니다.",
+      "url": "https://yehavha.upaper.kr/content/1221195",
+      "actionLabel": "U-Paper에서 보기"
+    },
+    {
+      "id": "upaper-yhwh-returning-yeshua",
+      "platform": "U-Paper",
+      "title": "사람으로 오신 YHWH",
+      "description": "최근 발간한 대표 신앙 연구 전자책입니다.",
+      "url": "https://yehavha.upaper.kr/content/1221622",
+      "actionLabel": "U-Paper에서 보기"
+    },
+    {
       "id": "upaper-crucified-savior-yeshua",
       "platform": "U-Paper",
       "title": "십자가에 달리신 구원자 예슈아",
