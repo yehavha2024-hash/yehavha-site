@@ -11,13 +11,16 @@
 
   /*
    * SOURCE POLICY — 2026-08-12
-   * 국내 학술논문과 박사학위논문은 URL 모양만으로 검증하지 않는다.
+   * 국내 학술논문과 박사학위논문은 URL 형태만으로 검증하지 않는다.
    * KCI·RISS·대학 dCollection·국회도서관·DBpia 등 개별 서지에서
-   * 제목·저자·연도·권호/학위·쪽수를 직접 대조한 ID만 아래 화이트리스트에 포함한다.
-   * 미검증 문헌은 공개 목록에서 제외하며, 검증 후에만 다시 추가한다.
+   * 제목·저자·연도·권호/학위·쪽수를 직접 대조한 ID만 화이트리스트에 포함한다.
+   * 미검증 문헌은 공개 목록에서 제외하고 검증 후에만 다시 추가한다.
    */
 
-  // 공식 개별 서지 대조 과정에서 확인된 제목·출처 정정.
+  // ─────────────────────────────────────────────
+  // 1. 공식 서지와 다른 제목·출처를 개별 레코드 기준으로 교정
+  // ─────────────────────────────────────────────
+
   patch('kr-civil-kim-jaewan-2023', {
     title: '제조물 책임법의 디지털 제조물책임으로의 확장을 위한 검토: EU 「제조물책임지침 개정안」을 중심으로',
     url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART002981000',
@@ -25,6 +28,11 @@
   });
   patch('kr-civil-lee-jonggu-2025', {
     url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003301928',
+    access: 'KCI 개별 논문'
+  });
+
+  patch('kr-company-sung-jung-2025', {
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003296343',
     access: 'KCI 개별 논문'
   });
   patch('kr-company-nam-nam-2025', {
@@ -40,6 +48,14 @@
     access: 'KCI 개별 논문'
   });
 
+  patch('kr-public-kim-kim-2025', {
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003259766',
+    access: 'KCI 개별 논문'
+  });
+  patch('kr-public-lee-kookhyun-2025', {
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003182516',
+    access: 'KCI 개별 논문'
+  });
   patch('kr-public-impact-2026', {
     title: '인공지능기본법상 고영향 인공지능 영향평가의 문제점 및 개선 방향에 관한 연구',
     url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003337205',
@@ -55,11 +71,63 @@
     url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003301074',
     access: 'KCI 개별 논문'
   });
+  patch('kr-public-governance-2025', {
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003245252',
+    access: 'KCI 개별 논문'
+  });
+  patch('kr-public-lee-changmin-2026', {
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003335998',
+    access: 'KCI 개별 논문'
+  });
+  patch('kr-public-cho-kim-2021', {
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART002714993',
+    access: 'KCI 개별 논문'
+  });
+  patch('kr-public-kim-kim-discrimination-2019', {
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART002485139',
+    access: 'KCI 개별 논문'
+  });
+  patch('kr-public-kim-heejung-2020', {
+    title: '지능정보화 시대의 알고리즘 차별에 대한 법적 소고 -미국의 알고리즘 차별 사례를 중심으로-',
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART002628487',
+    access: 'KCI 개별 논문'
+  });
   patch('kr-public-lee-heeok-2026', {
     url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003337148',
     access: 'KCI 개별 논문'
   });
 
+  patch('kr-crim-medical-2025', {
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003245902',
+    access: 'KCI 개별 논문'
+  });
+  patch('kr-crim-nam-2021', {
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART002729246',
+    access: 'KCI 개별 논문'
+  });
+  patch('kr-crim-fu-2023', {
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART002958054',
+    access: 'KCI 개별 논문'
+  });
+  patch('kr-crim-park-heesoo-2024', {
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003156768',
+    access: 'KCI 개별 논문'
+  });
+  patch('kr-crim-strict-2026', {
+    title: '미국 형법상 엄격책임의 이론과 현대적 전개:인공지능 시대 자율주행기술에 대한 적용 가능성을 중심으로',
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003311827',
+    access: 'KCI 개별 논문'
+  });
+  patch('kr-crim-lee-seungjun-2023', {
+    title: 'Level 4 자율주행자동차의 사고시 형사책임에 대한 외국의 입법동향과 방향성 -독일, 일본 및 영국 입법권고안의 시사점을 중심으로-',
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART002985969',
+    access: 'KCI 개별 논문'
+  });
+
+  patch('kr-data-lee-lee-2024', {
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003059222',
+    access: 'KCI 개별 논문'
+  });
   patch('kr-data-lee-donggun-2023', {
     title: '인공지능 정보의 사용에 따른 개인정보보호에 관한 법적 연구 – 데이터 3법의「동의권」관련 분석을 중심으로 –',
     url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003001062',
@@ -89,9 +157,24 @@
     url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003198892',
     access: 'KCI 개별 논문'
   });
+  patch('kr-ip-jung-yunkyung-2024', {
+    title: '유럽연합 인공지능법(EU AI Act) 제정의 저작권법적 시사점',
+    publication: 'IP & Data 法 4(2), 71-109',
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003152336',
+    access: 'KCI 개별 논문'
+  });
   patch('kr-ip-kwon-soonjae-2024', {
     title: '인공지능 학습 관련 저작권 침해소송의 현실적 문제에 관한 소고 - 미국 캘리포니아 북부지방법원 계류중 사건을 중심으로 -',
     url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003155382',
+    access: 'KCI 개별 논문'
+  });
+  patch('kr-ip-park-hyejin-2026', {
+    title: '인공지능 생성 기술문서의 선행기술성 — 공중이용가능성과 실시가능성을 중심으로 —',
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003320134',
+    access: 'KCI 개별 논문'
+  });
+  patch('kr-ip-kwon-soonjae-2026', {
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003320141',
     access: 'KCI 개별 논문'
   });
   patch('kr-ip-choi-seungjae-2025', {
@@ -104,6 +187,36 @@
     access: 'KCI 개별 논문'
   });
 
+  // 기존 핵심 데이터 파일의 국내 논문도 개별 KCI 서지로 통일.
+  patch('article-trustworthy-ai-2022', {
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART002877025',
+    access: 'KCI 개별 논문'
+  });
+  patch('article-park-bias-2022', {
+    url: 'https://www.riss.kr/link?id=A108081517',
+    access: 'RISS 개별 논문'
+  });
+  patch('article-fairness-2023', {
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART002994595',
+    access: 'KCI 개별 논문'
+  });
+  patch('article-human-intervention-2026', {
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003337578',
+    access: 'KCI 개별 논문'
+  });
+  patch('article-copyright-genai-2025', {
+    title: '생성형 AI와 저작권 문제 - 저작권 침해와 저작물성의 사례와 분석-',
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003222050',
+    access: 'KCI 개별 논문'
+  });
+  patch('article-copyright-constitutional-2025', {
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003245251',
+    access: 'KCI 개별 논문'
+  });
+  patch('article-patent-ai-2025', {
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003221055',
+    access: 'KCI 개별 논문'
+  });
   patch('article-hallucination-rights-2026', {
     publication: '법이론실무연구 14(1), 49-88',
     url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003314937',
@@ -130,16 +243,24 @@
     url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003286602',
     access: 'KCI 개별 논문'
   });
+  patch('article-shin-new-ai-crime-2025', {
+    url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003216631',
+    access: 'KCI 개별 논문'
+  });
   patch('article-han-ml-criminal-2025', {
     url: 'https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART003247070',
     access: 'KCI 개별 논문'
   });
 
-  // 박사학위논문은 '법학박사' 같은 학위명이 아니라 문헌유형 '박사학위논문'으로 표기한다.
+  // 박사학위논문은 학위명('법학박사')이 아니라 문헌유형 '박사학위논문'으로 표기.
   patch('thesis-kang-hyekyung-2024', { publication: '전남대학교 대학원 박사학위논문' });
   patch('thesis-kang-civil-procedure-2024', { publication: '고려대학교 대학원 박사학위논문' });
   patch('thesis-kim-automated-admin-2024', { publication: '고려대학교 대학원 박사학위논문' });
   patch('thesis-yoon-ai-criminal-2018', { publication: '서울대학교 대학원 박사학위논문' });
+
+  // ─────────────────────────────────────────────
+  // 2. 실제 서지 대조 완료 화이트리스트
+  // ─────────────────────────────────────────────
 
   const VERIFIED_DOMESTIC_ARTICLES = new Set([
     // 핵심·기초 문헌
@@ -184,6 +305,7 @@
 
     // 상법·회사법
     'kr-company-lim-2025',
+    'kr-company-sung-jung-2025',
     'kr-company-kim-jongwoo-2019',
     'kr-company-nam-nam-2025',
     'kr-company-kim-jaekyung-2026',
@@ -191,6 +313,8 @@
     'kr-company-kim-jihwan-2013',
 
     // 헌법·공법
+    'kr-public-kim-kim-2025',
+    'kr-public-lee-kookhyun-2025',
     'kr-public-han-joohee-2026',
     'kr-public-impact-2026',
     'kr-public-no-hyunsook-2026',
@@ -198,6 +322,8 @@
     'kr-public-governance-2025',
     'kr-public-lee-changmin-2026',
     'kr-public-cho-kim-2021',
+    'kr-public-kim-kim-discrimination-2019',
+    'kr-public-kim-heejung-2020',
     'kr-public-lee-heeok-2026',
     'kr-public-park-jinwan-2025',
 
@@ -205,9 +331,16 @@
     'kr-crim-ryu-2026',
     'kr-crim-baek-2026',
     'kr-crim-lee-sangsoo-2025',
+    'kr-crim-medical-2025',
+    'kr-crim-nam-2021',
+    'kr-crim-fu-2023',
+    'kr-crim-park-heesoo-2024',
     'kr-crim-control-2026',
+    'kr-crim-strict-2026',
+    'kr-crim-lee-seungjun-2023',
 
     // 데이터·개인정보
+    'kr-data-lee-lee-2024',
     'kr-data-lee-donggun-2023',
     'kr-data-kim-kyungsook-2026',
     'kr-data-kim-hyunsook-2020',
@@ -223,11 +356,14 @@
     'kr-ip-park-sungho-2025',
     'kr-ip-lee-daehee-warhol-2024',
     'kr-ip-yoon-kwonsoon-2025',
+    'kr-ip-jung-yunkyung-2024',
     'kr-ip-lee-cheolnam-2024',
     'kr-ip-shin-seohye-2023',
     'kr-ip-kwon-soonjae-2024',
     'kr-ip-lee-bohyung-2026',
+    'kr-ip-park-hyejin-2026',
     'kr-ip-kwon-wonmyung-2026',
+    'kr-ip-kwon-soonjae-2026',
     'kr-ip-choi-seungjae-2025',
     'kr-ip-park-woochul-2026'
   ]);
@@ -248,7 +384,7 @@
   const isDomesticArticle = record => record.type === '국내 학술논문';
   const isDoctoralThesis = record => String(record.type || '').includes('박사학위논문');
 
-  // 실제 대조가 끝난 문헌만 공개한다. 미검증 자료는 삭제가 아니라 화면에서 보류한다.
+  // 실제 서지 대조가 완료된 문헌만 공개. 미검증 자료는 화면에서 보류한다.
   const kept = records.filter(record => {
     if (isDomesticArticle(record)) {
       const verified = VERIFIED_DOMESTIC_ARTICLES.has(record.id);
