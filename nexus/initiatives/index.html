@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="description" content="YEHAVHA Nexus Open Initiatives는 아이디어·사업·시장·계획·미팅·프로젝트를 공개 가능한 범위에서 구조화하고 진행상황을 기록하는 운영체계입니다."/>
+<meta name="theme-color" content="#081a30"/>
+<title>Open Initiatives | YEHAVHA Nexus</title>
+<link href="../portal-v2.css?v=20260811-2325" rel="stylesheet"/>
+<link href="./initiatives.css?v=20260811-2325" rel="stylesheet"/>
+</head>
+<body>
+<a class="skip-link" href="#initiativeGroups">운영 항목으로 이동</a>
+<header class="initiative-hero" id="top">
+  <div class="container">
+    <a class="back-link" href="../">← YEHAVHA Nexus</a>
+    <section class="hero-card initiative-hero-card">
+      <p class="eyebrow">OPEN INITIATIVES & OPERATIONS</p>
+      <h1>Open Initiatives <span>기획·운영 공개체계</span></h1>
+      <p class="subtitle">아이디어를 등록하고, 검토하고, 실행하고, 기록합니다.</p>
+      <p class="description">아이디어·사업·시장·계획·미팅·프로젝트를 하나의 흐름으로 관리하고, 공개 가능한 항목은 진행상태·다음 행동·결과까지 지속적으로 공개합니다.</p>
+      <div class="initiative-links" id="initiativeLinks" aria-label="기획·운영 바로가기"></div>
+    </section>
+  </div>
+</header>
+
+<main class="main">
+  <div class="container">
+    <section class="system-card" aria-labelledby="workflowTitle">
+      <div class="system-block">
+        <p class="eyebrow">LIFECYCLE</p>
+        <h2 id="workflowTitle">운영 단계</h2>
+        <div class="stage-row" id="lifecycle"></div>
+      </div>
+      <div class="system-block">
+        <p class="eyebrow">VISIBILITY</p>
+        <h2>공개 수준</h2>
+        <div class="visibility-grid" id="visibility"></div>
+      </div>
+    </section>
+    <div class="initiative-groups" id="initiativeGroups"></div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-card">
+      <strong>YEHAVHA Nexus · Open Initiatives</strong>
+      <p>공개 가능한 계획과 진행기록을 지속적으로 축적합니다.</p>
+      <a href="#top">맨 위로 이동 ↑</a>
+      <div class="footer-meta">
+        <p>Copyright © 이명훈. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="./initiatives.js?v=20260811-2325"></script>
+</body>
+</html>
