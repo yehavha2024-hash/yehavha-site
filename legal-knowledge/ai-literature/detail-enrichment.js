@@ -2,6 +2,61 @@
   'use strict';
 
   const records = Array.isArray(window.AI_LITERATURE_RECORDS) ? window.AI_LITERATURE_RECORDS : [];
+
+  const clean = value => String(value ?? '').replace(/\s+/g, ' ').trim();
+  const quoteKo = title => `"${clean(title).replace(/^[\"“”']+|[\"“”']+$/g, '')}"`;
+  const quoteEn = title => `“${clean(title).replace(/^[\"“”']+|[\"“”']+$/g, '')}”`;
+
+  function formatKoreanPages(value) {
+    const pages = clean(value).replace(/–/g, '-');
+    return pages ? `${pages}쪽` : '';
+  }
+
+  function parseKoreanJournal(publication) {
+    const source = clean(publication);
+    const match = source.match(/^(.+?)\s+(\d+)(?:\((\d+)\))?,\s*(\d+(?:[-–]\d+)?)$/);
+    if (!match) return null;
+
+    const [, journal, volume, issue, pages] = match;
+    const journalPart = issue
+      ? `${journal.trim()} 제${volume}권 제${issue}호`
+      : `${journal.trim()} 제${volume}호`;
+
+    return { journalPart, pages: formatKoreanPages(pages) };
+  }
+
+  function standardizeCitation(record) {
+    const type = clean(record.type);
+    const language = clean(record.language);
+    const jurisdiction = clean(record.jurisdiction);
+    const author = clean(record.author);
+    const year = clean(record.year);
+
+    if (type === '국내 학술논문' || (language !== '영어' && jurisdiction === '대한민국' && type.includes('학술논문'))) {
+      const parsed = parseKoreanJournal(record.publication);
+      if (parsed) {
+        record.citation = `${author}, ${quoteKo(record.title)}, ${parsed.journalPart}, ${year}, ${parsed.pages}.`;
+      } else {
+        record.citation = `${author}, ${quoteKo(record.title)}, ${clean(record.publication)}, ${year}.`;
+      }
+      record.citationStandard = 'KO-JOURNAL-v3';
+      return;
+    }
+
+    if (type.includes('학위논문')) {
+      record.citation = `${author}, ${quoteKo(record.title)}, ${clean(record.publication)}, ${year}.`;
+      record.citationStandard = 'KO-THESIS-v2';
+      return;
+    }
+
+    if (type === '해외 학술논문' || (language === '영어' && type.includes('학술논문'))) {
+      record.citation = `${author}, ${quoteEn(record.title)}, ${clean(record.publication)} (${year}).`;
+      record.citationStandard = 'EN-JOURNAL-v1';
+    }
+  }
+
+  records.forEach(standardizeCitation);
+
   const byId = new Map(records.map(record => [record.id, record]));
   const detailContent = document.getElementById('detailContent');
   if (!detailContent) return;
