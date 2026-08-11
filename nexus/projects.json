@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-11",
+  "updatedAt": "2026-08-12",
   "categories": [
     {
       "id": "apps",
@@ -23,7 +23,7 @@
       "title": "출판·아카이브",
       "icon": "📚",
       "iconClass": "publishing-icon",
-      "description": "신앙 연구와 학습 프로젝트를 전자책으로 만나볼 수 있습니다."
+      "description": "Amazon Kindle·U-Paper·교보문고에 출간한 전자책 가운데 대표 출간물을 선별하여 소개합니다."
     },
     {
       "id": "media",
@@ -159,22 +159,13 @@
       "actionLabel": "법철학 연구 보기"
     },
     {
-      "id": "ebook-yhwh",
+      "id": "publishing-hub",
       "category": "publishing",
-      "meta": "U-Paper eBook",
-      "title": "사람으로 오신 YHWH",
-      "description": "이스라엘 언약의 성취와 부활·성도 집결·천년 왕국을 다룬 신앙 연구 전자책입니다.",
-      "url": "https://yehavha.upaper.kr/content/1221622",
-      "actionLabel": "전자책 보기"
-    },
-    {
-      "id": "ebook-toeic-day001",
-      "category": "publishing",
-      "meta": "U-Paper eBook",
-      "title": "토익 인간 100일 프로젝트 DAY 001",
-      "description": "100일 동안 토익 실력을 단계적으로 높이는 학습 프로젝트의 첫 번째 전자책입니다.",
-      "url": "https://yehavha.upaper.kr/content/1221195",
-      "actionLabel": "전자책 보기"
+      "meta": "Selected Publications",
+      "title": "대표 출간 도서",
+      "description": "Amazon Kindle, U-Paper, 교보문고에 출간한 전자책 가운데 대표 도서를 선별하여 한곳에서 소개합니다.",
+      "url": "https://yehavha-nexus-hub.pages.dev/publishing/",
+      "actionLabel": "출간 도서 보기"
     },
     {
       "id": "youtube-hashem-yeshua",
