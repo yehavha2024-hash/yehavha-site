@@ -1,0 +1,45 @@
+{
+  "updatedAt": "2026-08-11",
+  "lifecycle": [
+    {"id":"idea","label":"IDEA","title":"제안"},
+    {"id":"review","label":"REVIEW","title":"검토"},
+    {"id":"planned","label":"PLANNED","title":"계획"},
+    {"id":"open","label":"OPEN","title":"공개"},
+    {"id":"active","label":"ACTIVE","title":"진행"},
+    {"id":"completed","label":"COMPLETED","title":"완료"},
+    {"id":"archived","label":"ARCHIVED","title":"보관"}
+  ],
+  "visibility": [
+    {"id":"public","label":"PUBLIC","description":"전체 내용 공개"},
+    {"id":"summary","label":"SUMMARY","description":"제목과 개요만 공개"},
+    {"id":"private","label":"PRIVATE","description":"비공개 관리"},
+    {"id":"embargo","label":"EMBARGO","description":"지정 시점까지 비공개"}
+  ],
+  "groups": [
+    {"id":"ideas","number":"01","eyebrow":"IDEA PIPELINE","title":"아이디어","description":"사업·서비스·콘텐츠·연구 외 아이디어를 최초 등록하고 검토 단계로 발전시킵니다."},
+    {"id":"business","number":"02","eyebrow":"BUSINESS","title":"사업","description":"신규 사업, 수익모델, 제휴, 교육·서비스 사업화를 검토합니다."},
+    {"id":"markets","number":"03","eyebrow":"MARKETS & SECURITIES","title":"시장·증권","description":"증권·기업·산업·기술·시장 흐름의 관찰과 판단 근거를 기록합니다."},
+    {"id":"plans","number":"04","eyebrow":"PLANS & ROADMAPS","title":"계획","description":"단기·중기·장기 계획과 실행 로드맵, 다음 행동을 관리합니다."},
+    {"id":"meetings","number":"05","eyebrow":"MEETINGS","title":"미팅","description":"예정 미팅, 논의사항, 결정사항과 후속조치를 기록합니다."},
+    {"id":"projects","number":"06","eyebrow":"PROJECT EXECUTION","title":"프로젝트","description":"준비·진행·완료 단계의 실제 프로젝트와 공개 진행기록을 관리합니다."},
+    {"id":"open-calls","number":"07","eyebrow":"OPEN CALLS","title":"공개 제안","description":"협업·참여·공동 프로젝트·외주 등 외부 제안과 참여 기회를 공개합니다."},
+    {"id":"resources","number":"08","eyebrow":"RESOURCES & BUDGET","title":"자원·예산","description":"예상비용, 예산, 필요자원, 사용내역과 결과를 공개 가능한 범위에서 연결합니다."},
+    {"id":"archive","number":"09","eyebrow":"ARCHIVE","title":"아카이브","description":"완료·중단·폐기된 안건과 그 판단·결과를 기록으로 보존합니다."}
+  ],
+  "items": [
+    {
+      "id":"open-initiatives-system",
+      "group":"projects",
+      "meta":"System Build",
+      "title":"Open Initiatives 운영체계 구축",
+      "summary":"Nexus에 아이디어·사업·시장·계획·미팅·프로젝트·공개제안을 지속적으로 등록하고, 공개 가능한 범위에서 진행상황과 결과를 공유하는 운영구조를 구축합니다.",
+      "status":"ACTIVE",
+      "statusId":"active",
+      "visibility":"PUBLIC",
+      "visibilityId":"public",
+      "registeredAt":"2026-08-11",
+      "updatedAt":"2026-08-11",
+      "nextAction":"각 영역의 실제 아이템을 순차적으로 등록하고 상태 이력을 축적합니다."
+    }
+  ]
+}
