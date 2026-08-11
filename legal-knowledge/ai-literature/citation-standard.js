@@ -9,7 +9,7 @@
 
   function formatPages(value) {
     const pages = clean(value).replace(/–/g, '-');
-    return pages ? `pp. ${pages}` : '';
+    return pages ? `${pages}쪽` : '';
   }
 
   function parseKoreanJournal(publication) {
@@ -35,24 +35,15 @@
       return `${author}, ${title}, ${parsed.journalPart}, ${year}, ${parsed.pages}.`;
     }
 
-    const publication = clean(record.publication);
-    return `${author}, ${title}, ${publication}, ${year}.`;
+    return `${author}, ${title}, ${clean(record.publication)}, ${year}.`;
   }
 
   function formatDomesticThesis(record) {
-    const author = clean(record.author);
-    const title = quoteKo(record.title);
-    const publication = clean(record.publication);
-    const year = clean(record.year);
-    return `${author}, ${title}, ${publication}, ${year}.`;
+    return `${clean(record.author)}, ${quoteKo(record.title)}, ${clean(record.publication)}, ${clean(record.year)}.`;
   }
 
   function formatOverseasArticle(record) {
-    const author = clean(record.author);
-    const title = quoteEn(record.title);
-    const publication = clean(record.publication);
-    const year = clean(record.year);
-    return `${author}, ${title}, ${publication} (${year}).`;
+    return `${clean(record.author)}, ${quoteEn(record.title)}, ${clean(record.publication)} (${clean(record.year)}).`;
   }
 
   records.forEach(record => {
@@ -62,13 +53,13 @@
 
     if (type === '국내 학술논문' || (language !== '영어' && jurisdiction === '대한민국' && type.includes('학술논문'))) {
       record.citation = formatDomesticArticle(record);
-      record.citationStandard = 'KO-JOURNAL-v2';
+      record.citationStandard = 'KO-JOURNAL-v3';
       return;
     }
 
     if (type.includes('학위논문')) {
       record.citation = formatDomesticThesis(record);
-      record.citationStandard = 'KO-THESIS-v1';
+      record.citationStandard = 'KO-THESIS-v2';
       return;
     }
 
