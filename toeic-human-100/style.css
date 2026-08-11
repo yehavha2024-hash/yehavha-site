@@ -70,9 +70,9 @@ h1 span { color: var(--navy); }
 .day-progress strong { color: var(--navy); }
 .progress-track { height: 8px; margin-top: 7px; overflow: hidden; border-radius: 999px; background: #e4ebf3; }
 .progress-track span { display: block; height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg, var(--navy), #4a86d8); transition: width .25s ease; }
-.category-tabs { display: grid; grid-template-columns: repeat(5, minmax(76px,1fr)); gap: 7px; margin: 12px 0; padding: 8px; border-radius: 20px; overflow-x: auto; }
-.category { min-width: 78px; border: 0; border-radius: 14px; padding: 10px 5px 9px; color: #53657a; background: transparent; cursor: pointer; font-size: .76rem; font-weight: 800; white-space: nowrap; }
-.category span { display: grid; place-items: center; width: 28px; height: 28px; margin: 0 auto 5px; border-radius: 9px; background: #edf2f8; color: var(--navy); font-size: .92rem; }
+.category-tabs { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 4px; margin: 10px 0; padding: 5px; border-radius: 20px; overflow: hidden; }
+.category { min-width: 0; border: 0; border-radius: 12px; padding: 8px 2px 7px; color: #53657a; background: transparent; cursor: pointer; font-size: .7rem; font-weight: 800; white-space: nowrap; }
+.category span { display: grid; place-items: center; width: 27px; height: 27px; margin: 0 auto 4px; border-radius: 8px; background: #edf2f8; color: var(--navy); font-size: .86rem; }
 .category.active { color: #fff; background: var(--navy); }
 .category.active span { background: rgba(255,255,255,.18); color: #fff; }
 .learning-card { min-height: 430px; padding: 22px 20px 24px; border-radius: 28px; }
@@ -129,7 +129,9 @@ footer p { margin: 0; color: #66768a; font-size: .76rem; line-height: 1.55; }
 @media (max-width: 460px) {
   .app-shell { padding-left: 10px; padding-right: 10px; }
   .hero, .learning-card { border-radius: 24px; }
-  .category-tabs { grid-template-columns: repeat(5, 78px); }
+  .category-tabs { grid-template-columns: repeat(4, minmax(0,1fr)); gap: 3px; padding: 4px; }
+  .category { min-width: 0; padding: 7px 1px 6px; font-size: .66rem; }
+  .category span { width: 26px; height: 26px; margin-bottom: 3px; }
   .learning-card { min-height: 450px; padding-left: 17px; padding-right: 17px; }
 }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
