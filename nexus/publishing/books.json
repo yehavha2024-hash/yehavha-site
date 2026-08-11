@@ -1,0 +1,37 @@
+{
+  "updatedAt": "2026-08-12",
+  "books": [
+    {
+      "id": "upaper-crucified-savior-yeshua",
+      "platform": "U-Paper",
+      "title": "십자가에 달리신 구원자 예슈아",
+      "description": "U-Paper 대표 출간 전자책입니다.",
+      "url": "https://yehavha.upaper.kr/content/1161013",
+      "actionLabel": "U-Paper에서 보기"
+    },
+    {
+      "id": "amazon-crucified-savior-yeshua",
+      "platform": "Amazon Kindle",
+      "title": "Crucified Savior Yeshua",
+      "description": "Amazon에 출간한 영어 전자책입니다.",
+      "url": "https://www.amazon.com/Crucified-Savior-Yeshua-Myounghun-Lee/dp/B0C7F59QR6",
+      "actionLabel": "Amazon에서 보기"
+    },
+    {
+      "id": "amazon-selected-book-2",
+      "platform": "Amazon Kindle",
+      "title": "Amazon 대표 출간 도서 II",
+      "description": "Amazon에 출간한 대표 전자책입니다.",
+      "url": "https://www.amazon.com/dp/B0C82C9HWZ?ref_=ast_author_mpb",
+      "actionLabel": "Amazon에서 보기"
+    },
+    {
+      "id": "kyobo-selected-ebook",
+      "platform": "교보문고",
+      "title": "교보문고 대표 전자책",
+      "description": "교보문고에서 유통 중인 대표 전자책입니다.",
+      "url": "https://ebook-product.kyobobook.co.kr/dig/epd/ebook/480D241098130",
+      "actionLabel": "교보문고에서 보기"
+    }
+  ]
+}
