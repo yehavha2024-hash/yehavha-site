@@ -1,0 +1,98 @@
+body {
+  background:
+    linear-gradient(rgba(3, 9, 22, 0.68), rgba(3, 9, 22, 0.94)),
+    url('../assets/portal-bg.webp') center / cover fixed no-repeat,
+    var(--bg);
+}
+.publishing-hero { padding: 28px 0 18px; }
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  margin-bottom: 10px;
+  color: #c7d8ec;
+  font-size: .88rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+.publishing-hero-card { margin-top: 0; }
+.publication-panel {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--panel);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: var(--shadow);
+}
+.publication-head { margin-bottom: 14px; }
+.publication-head h2 { margin: 0; font-size: 1.35rem; }
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 11px;
+}
+.book-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 220px;
+  padding: 18px;
+  border: 1px solid rgba(255,255,255,.075);
+  border-radius: 16px;
+  background: rgba(255,255,255,.035);
+}
+.book-platform {
+  align-self: flex-start;
+  padding: 5px 8px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 999px;
+  color: #b9cce4;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .05em;
+}
+.book-card h3 {
+  margin: 14px 0 8px;
+  font-size: 1.14rem;
+  line-height: 1.42;
+}
+.book-card p {
+  margin: 0;
+  flex: 1;
+  color: var(--muted);
+  font-size: .9rem;
+  line-height: 1.65;
+}
+.book-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 39px;
+  margin-top: 16px;
+  padding: 0 13px;
+  border: 1px solid rgba(255,255,255,.11);
+  border-radius: 10px;
+  background: rgba(73,139,225,.9);
+  color: white;
+  font-size: .85rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+.empty-state {
+  grid-column: 1 / -1;
+  padding: 18px;
+  border: 1px dashed rgba(255,255,255,.1);
+  border-radius: 13px;
+  color: #91a6bf;
+  text-align: center;
+}
+@media (max-width: 760px) {
+  body { background-attachment: scroll; }
+  .book-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .publishing-hero { padding-top: 18px; }
+  .publication-panel { padding: 18px; }
+  .book-card { min-height: 0; }
+}
