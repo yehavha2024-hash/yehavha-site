@@ -36,14 +36,28 @@ html body > main section.standard-section .completion-policy strong{
   }
 }
 
-/* Law-system and exam filter buttons: same compact 14px standard */
+/* Law-system and exam filter buttons: compact tag scale */
+html body > main section.controls .filters{
+  gap:6px!important;
+}
+html body > main section.controls .filter-row{
+  gap:8px!important;
+}
+html body > main section.controls .control-stack{
+  gap:10px!important;
+}
 html body > main section.controls .filter-btn{
-  font-size:14px!important;
-  line-height:1.72!important;
+  min-height:34px!important;
+  padding:5px 10px!important;
+  font-size:12px!important;
+  line-height:1.35!important;
+  border-radius:8px!important;
 }
 @media (max-width:620px){
   html body > main section.controls .filter-btn{
-    font-size:14px!important;
-    line-height:1.7!important;
+    min-height:34px!important;
+    padding:5px 9px!important;
+    font-size:12px!important;
+    line-height:1.35!important;
   }
 }
