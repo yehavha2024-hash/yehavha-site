@@ -18,11 +18,11 @@
       "actionLabel": "Amazon에서 보기"
     },
     {
-      "id": "amazon-selected-book-2",
+      "id": "amazon-call-on-the-name-of-yeshua",
       "platform": "Amazon Kindle",
-      "title": "Amazon 대표 출간 도서 II",
-      "description": "Amazon에 출간한 대표 전자책입니다.",
-      "url": "https://www.amazon.com/dp/B0C82C9HWZ?ref_=ast_author_mpb",
+      "title": "Call on the Name of Yeshua",
+      "description": "Amazon에 출간한 영어 전자책입니다.",
+      "url": "https://www.amazon.com/dp/B0C82C9HWZ?ref_=ast_author_dp&th=1&psc=1",
       "actionLabel": "Amazon에서 보기"
     },
     {
