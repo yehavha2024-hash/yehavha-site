@@ -1,0 +1,73 @@
+{
+  "runs": [
+    {
+      "id": "2026-08-12-P2-03",
+      "date": "2026-08-12",
+      "priority": "P2",
+      "itemTitle": "AI 음악 강좌 신청·신뢰자료 통합 페이지",
+      "status": "1차 실행 완료",
+      "objective": "P1의 원본 우선·중복 금지 규칙을 적용하여 기존 AI Song Studio 페이지가 신청 전 판단정보를 이미 얼마나 갖추고 있는지 감사하고, 실제로 빠진 검증 가능한 공개 결과 링크만 기존 config.js→app.js 경로에 보강한다.",
+      "keywords": ["강좌 랜딩페이지", "신청", "신뢰자료", "config.js", "app.js", "공개 결과", "중복 금지"],
+      "method": [
+        "index.html의 대상·준비물·FAQ·신청영역을 확인했다.",
+        "config.js가 강사 경력·정량 제작경험·커리큘럼·수강정보를 실제 단일 원본으로 관리하는지 확인했다.",
+        "app.js가 정적 HTML을 config.js 값으로 교체하는 구조를 확인해 화면의 오래된 정적 문구를 별도 수정대상에서 제외했다.",
+        "신청 전 필요한 정보표를 만들고 이미 충족된 항목과 실제 부족한 항목을 분리했다.",
+        "부족했던 공개 결과 확인 링크만 config.js의 proofLinks와 app.js의 기존 강사 렌더링 함수에 추가했다."
+      ],
+      "results": [
+        {
+          "title": "AI 음악 강좌 신청·신뢰자료 통합 페이지 감사 v1",
+          "publisher": "YEHAVHA Nexus AI Practice",
+          "date": "2026-08-12",
+          "url": "https://github.com/yehavha2024-hash/yehavha-site/blob/main/nexus/ai-practice/deliverables/course-landing-audit-v1.json",
+          "classification": "웹페이지 감사·실제 보강",
+          "rank": "A",
+          "keyPoint": "새 랜딩페이지를 만들 필요가 없다고 판단하고, 기존 구조에서 실제 부족했던 공개 결과 확인 링크만 추가했다.",
+          "researchUse": "다른 강좌·서비스 페이지도 ‘필요정보 감사→중복 제거→부족한 필드만 보강’ 순서로 개선하는 사례로 재사용한다.",
+          "caution": "정적 index.html의 오래된 강사 문구는 app.js가 config.js로 교체하므로 실제 렌더링 원본과 혼동하지 않는다."
+        },
+        {
+          "title": "AI Song Studio 공개 결과 링크 보강",
+          "publisher": "yehavha2024-hash/ai-song-studio",
+          "date": "2026-08-12",
+          "url": "https://github.com/yehavha2024-hash/ai-song-studio/blob/main/config.js",
+          "classification": "실제 코드 수정",
+          "rank": "A",
+          "keyPoint": "강사 프로필 데이터에 공개 채널·프로젝트 링크를 추가하고 기존 renderInstructor 함수가 이를 외부 확인 버튼으로 출력하도록 확장했다.",
+          "researchUse": "정량 경력 문구를 방문자가 직접 확인 가능한 공개 결과와 연결한다.",
+          "caution": "수익 규모나 성과 보장 문구는 신뢰자료로 추가하지 않았다."
+        }
+      ],
+      "failures": [
+        {
+          "issue": "처음에는 별도의 신청·신뢰자료 랜딩페이지를 새로 만들 수 있었다.",
+          "cause": "P2 항목명이 ‘통합 페이지’이므로 새 페이지가 필요하다고 해석하기 쉽기 때문.",
+          "correction": "기존 페이지를 먼저 감사한 결과 시간·인원·비용·준비물·FAQ·강사경력·신청동선이 이미 있어 새 페이지를 만들지 않고 부족한 링크만 추가했다."
+        },
+        {
+          "issue": "index.html의 정적 강사문구만 보면 경력 수치가 오래된 것으로 보였다.",
+          "cause": "실제 화면에서는 app.js가 config.js의 최신 데이터를 동적으로 렌더링한다는 소유권을 먼저 확인하지 않았기 때문.",
+          "correction": "수정 전에 config.js→app.js→index.html의 데이터 흐름을 확인하고 단일 원본인 config.js만 확장했다."
+        }
+      ],
+      "outputs": [
+        "신청 전 필수정보 6개 항목 감사 완료",
+        "새 랜딩페이지 불필요 결정",
+        "공개 결과 확인 링크 2개를 config.js에 추가",
+        "app.js 기존 강사 렌더링에 PUBLIC RESULTS 링크 출력 추가",
+        "기존 신청·디자인·데이터 소유권 유지"
+      ],
+      "standardsAdded": [
+        "‘통합 페이지’ 요청도 새 페이지 생성 전에 기존 페이지의 정보충족도를 먼저 감사한다.",
+        "정적 HTML보다 실제 렌더링 데이터의 소유권을 먼저 확인한다.",
+        "신뢰자료는 과장된 자기소개보다 외부에서 직접 확인 가능한 결과 링크를 우선한다."
+      ],
+      "nextActions": [
+        "실제 배포화면에서 공개 결과 버튼의 모바일 배치와 외부 링크 동작을 확인한다.",
+        "향후 공개 결과가 늘어도 강사 소개를 다시 복제하지 않고 proofLinks 데이터만 보강한다.",
+        "다음 P2인 도구별 역할 분리를 실제 P1·P2 작업흐름에 대입해 확정한다."
+      ]
+    }
+  ]
+}
