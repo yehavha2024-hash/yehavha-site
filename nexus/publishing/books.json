@@ -15,7 +15,22 @@
       "title": "사람으로 오신 YHWH",
       "description": "이스라엘 언약의 성취를 중심으로 예슈아의 재림, 부활, 성도 집결과 천년 왕국을 살펴보는 신앙 연구 전자책입니다.",
       "url": "https://yehavha.upaper.kr/content/1221622",
-      "actionLabel": "U-Paper에서 보기"
+      "actionLabel": "U-Paper에서 보기",
+      "detailEnabled": true,
+      "detail": {
+        "eyebrow": "FAITH RESEARCH EBOOK",
+        "problem": "이스라엘 언약의 성취, 예슈아의 재림, 부활, 성도 집결과 천년 왕국을 서로 분리된 주제로 보지 않고 하나의 흐름에서 살펴봅니다.",
+        "keyPoints": [
+          "이스라엘 언약의 성취를 전체 논의의 중심축으로 둡니다.",
+          "예슈아의 재림과 부활·성도 집결의 관계를 함께 살펴봅니다.",
+          "천년 왕국을 앞선 주제들과 연결하여 전체 흐름 속에서 읽습니다."
+        ],
+        "topics": ["이스라엘 언약", "예슈아의 재림", "부활", "성도 집결", "천년 왕국"],
+        "recommendedFor": [
+          "이스라엘 언약과 재림 주제를 함께 정리하고 싶은 독자",
+          "부활·성도 집결·천년 왕국의 관계를 한 흐름으로 살펴보고 싶은 독자"
+        ]
+      }
     },
     {
       "id": "upaper-crucified-savior-yeshua",
