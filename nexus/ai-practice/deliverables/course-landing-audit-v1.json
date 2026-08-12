@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0",
+  "title": "AI 음악 강좌 신청·신뢰자료 통합 페이지 감사 v1",
+  "sourceRepository": "yehavha2024-hash/ai-song-studio",
+  "auditDate": "2026-08-12",
+  "decision": "새 랜딩페이지를 만들지 않고 기존 index.html + config.js + app.js 구조를 유지한다.",
+  "requiredBeforeApplication": [
+    {
+      "item": "대상·소요시간·완성 결과",
+      "status": "충족",
+      "evidence": "초보자 대상, 120분, 제작 브리프·가사/스타일 프롬프트·후보 비교 기록·최종 음악 파일이 기존 페이지에 표시된다."
+    },
+    {
+      "item": "실습 과정",
+      "status": "충족",
+      "evidence": "브리프→가사→스타일→생성→비교·수정→저장의 전체 과정과 세부 시간표가 config.js의 curriculum 단일 원본으로 관리된다."
+    },
+    {
+      "item": "준비물·사전조건",
+      "status": "충족",
+      "evidence": "스마트폰 또는 노트북, 이메일 계정, 이어폰, 기초 디지털 역량, 음악이론 비필수, 상업적 이용 약관 확인이 명시되어 있다."
+    },
+    {
+      "item": "강사 실전경험·전문역량",
+      "status": "충족",
+      "evidence": "config.js가 대규모 생성·선별, 실제 공개·배포, AI 제작 전 과정, AI 활용 교육, 법학 연구 기반을 관리한다."
+    },
+    {
+      "item": "검증 가능한 공개 결과",
+      "status": "보강 완료",
+      "evidence": "config.js의 proofLinks와 app.js 렌더링을 추가하여 HASHEM YESHUA 공개 채널과 YEHAVHA Nexus 프로젝트를 강사 프로필에서 직접 확인할 수 있게 했다."
+    },
+    {
+      "item": "신청방법·인원·비용·진행방식·문의",
+      "status": "충족",
+      "evidence": "120분, 4~6명, 50,000원, 대면 소규모 실습, 이메일 신청과 문의주소가 기존 신청영역에 표시된다."
+    }
+  ],
+  "changes": [
+    "config.js에 proofLinks를 추가했다.",
+    "app.js의 기존 renderInstructor 함수가 proofLinks를 PUBLIC RESULTS 영역의 외부 링크 버튼으로 렌더링하도록 확장했다.",
+    "새 HTML 섹션·새 CSS 파일·별도 랜딩페이지는 만들지 않았다."
+  ],
+  "preserved": [
+    "강좌의 기존 정보구조",
+    "config.js의 콘텐츠 단일 원본 역할",
+    "app.js의 동적 렌더링 역할",
+    "기존 신청 이메일 흐름",
+    "기존 디자인·CSS 소유권"
+  ],
+  "notAdded": [
+    "수익 규모 공개",
+    "성과 보장 문구",
+    "불필요한 추가 신청 폼",
+    "중복 강사 소개 섹션",
+    "현재 페이지에 이미 있는 시간·비용·준비물의 재나열"
+  ]
+}
