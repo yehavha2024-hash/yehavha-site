@@ -34,6 +34,14 @@
       "description": "찬양, 영상, 음원과 디지털 미디어 콘텐츠를 소개합니다."
     },
     {
+      "id": "practice",
+      "eyebrow": "AI PRACTICE & IDEAS",
+      "title": "AI 실무·아이디어",
+      "icon": "✦",
+      "iconClass": "apps-icon",
+      "description": "AI 도구와 사례를 현재 프로젝트에 적용할 수 있는 자동화·콘텐츠·웹서비스·프롬프트 실행안으로 전환해 축적합니다."
+    },
+    {
       "id": "education",
       "eyebrow": "EDUCATION & COURSES",
       "title": "교육·강좌",
@@ -175,6 +183,15 @@
       "description": "영어와 히브리어 찬양, 신앙 고백과 관련 미디어 콘텐츠를 제공하는 공식 유튜브 채널입니다.",
       "url": "https://www.youtube.com/@yehavha",
       "actionLabel": "바로가기"
+    },
+    {
+      "id": "ai-practice-library",
+      "category": "practice",
+      "meta": "Execution Library",
+      "title": "AI 실무·아이디어 실행 자료실",
+      "description": "AI 활용 사례를 단순 수집하지 않고 자동화·콘텐츠 제작·웹·서비스 제작·프롬프트·도구 자료의 네 영역에서 현재 프로젝트에 적용 가능한 실행안으로 정리합니다.",
+      "url": "https://yehavha-nexus-hub.pages.dev/ai-practice/",
+      "actionLabel": "실행 자료실 보기"
     },
     {
       "id": "initiative-ideas",
