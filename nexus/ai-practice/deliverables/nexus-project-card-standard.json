@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "purpose": "기존 Nexus 카드 디자인을 유지하면서 방문자가 카드 하나에서 목적·성격·상태·최근성·규모·행동을 판단할 수 있게 하는 정보 기준",
+  "displayFields": [
+    {"field":"meta","role":"프로젝트 성격","example":"Web App / Advanced Legal Studies / AI Practical Course"},
+    {"field":"description","role":"한 줄 목적","rule":"무엇을 제공하는지 1~2문장으로 설명하고 내부 운영 설명은 넣지 않는다."},
+    {"field":"status","role":"현재 상태","rule":"최근 업데이트 / 운영 중 / 안정 운영 / 상태 확인 필요 중 하나."},
+    {"field":"lastUpdated","role":"최근성","rule":"GitHub 추적이 가능한 프로젝트에만 YYYY-MM-DD로 표시."},
+    {"field":"contentCount","role":"규모","rule":"콘텐츠·연구노트·연구축 등 의미 있는 단위가 있을 때만 표시."},
+    {"field":"actionLabel","role":"다음 행동","rule":"앱 실행 / 연구자료 보기 / 강좌 보기처럼 목적에 맞는 동사형으로 유지."}
+  ],
+  "doNotAdd": [
+    "카드마다 별도의 긴 주요기능 목록",
+    "도메인 주소의 본문 노출",
+    "중복 상태 배지",
+    "내부 개발용 설명",
+    "업데이트 없는 프로젝트에 임의 날짜"
+  ],
+  "samples": [
+    {
+      "id":"three-min-rest",
+      "title":"3분 쉼표",
+      "currentAssessment":"충분",
+      "reason":"description에 200개 콘텐츠·일일 순환·콘텐츠 종류가 포함되고 project-status에 최근 업데이트일과 콘텐츠 수가 있어 별도 기능칩이 필요하지 않다.",
+      "recommendedDisplay":["Web App","한 줄 목적","최근 업데이트","콘텐츠 200","업데이트 2026-08-11","앱 실행"]
+    },
+    {
+      "id":"legal-knowledge",
+      "title":"법리·판례 연구",
+      "currentAssessment":"충분",
+      "reason":"전문 아카이브라는 목적과 연구자료 보기 행동이 명확하고 project-status가 연구노트 107건·2026-08-12 업데이트를 제공한다.",
+      "recommendedDisplay":["Advanced Legal Studies","한 줄 목적","최근 업데이트","연구노트 107","업데이트 2026-08-12","연구자료 보기"]
+    },
+    {
+      "id":"ai-song-course",
+      "title":"AI 노래 만들기 2시간 실습",
+      "currentAssessment":"상태정보 부족",
+      "reason":"강좌 목적·소요시간·완성결과·행동은 description과 actionLabel에 이미 충분하지만 project-status 추적 대상이 아니므로 최근성·상태가 표시되지 않는다.",
+      "recommendedDisplay":["AI Practical Course","두 시간 안에 한 곡 완성","강좌 보기"],
+      "followUp":"상태 추적이 실제 운영에 필요할 때만 ai-song-studio를 승인 manifest에 편입한다. 카드 정보량을 늘리기 위해 임의 상태 필드를 추가하지 않는다."
+    },
+    {
+      "id":"ai-law-institute",
+      "title":"AI 법률연구소",
+      "currentAssessment":"상태 동기화 오류",
+      "reason":"nexus.project.json에는 외부 GitHub 추적설정이 있고 실제 master/index.html 최근 커밋은 2026-08-11로 조회되지만 project-status.json에는 lastUpdated=null·상태 확인 필요가 남아 있다.",
+      "followUp":"새 표시 필드를 추가하지 말고 기존 update-status 원본 경로의 외부 API 실행 실패 원인을 해결한다."
+    }
+  ],
+  "decision": "카드 정보 밀도 개선은 새 필드를 많이 추가하는 작업이 아니라 기존 6필드가 정확하게 채워지는지 관리하는 작업으로 정의한다."
+}
