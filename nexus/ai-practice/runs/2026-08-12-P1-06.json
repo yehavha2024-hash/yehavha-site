@@ -1,0 +1,80 @@
+{
+  "runs": [
+    {
+      "id": "2026-08-12-P1-06",
+      "date": "2026-08-12",
+      "priority": "P1",
+      "itemTitle": "전자책별 독립 소개 페이지 템플릿",
+      "status": "1차 실행 완료",
+      "objective": "대표도서마다 HTML을 복제하지 않고 기존 books.json을 단일 원본으로 유지하면서, 상세 데이터가 있는 책만 공통 detail.html에서 소개하고 판매처로 연결하는 재사용형 출판 페이지를 실제로 구현한다.",
+      "keywords": ["books.json", "detail.html", "공통 템플릿", "단일 원본", "책 소개", "판매처 연결", "복제 금지"],
+      "method": [
+        "기존 publishing/index.html·publishing.js·publishing.css·books.json의 역할을 확인했다.",
+        "대표도서 ‘사람으로 오신 YHWH’에만 detailEnabled와 상세정보를 선택적으로 추가했다.",
+        "publishing.js가 목록과 상세페이지를 모두 담당하도록 기존 동작 파일을 확장했다.",
+        "공통 detail.html 하나를 만들고 query id로 books.json의 해당 도서를 읽도록 했다.",
+        "CSS는 기존 publishing.css에만 추가하고 별도 상세페이지 전용 CSS를 만들지 않았다.",
+        "출판 목록에는 상세정보가 있는 책에만 ‘책 소개’ 버튼을 표시하고 기존 판매처 버튼은 유지했다."
+      ],
+      "results": [
+        {
+          "title": "공통 전자책 상세페이지",
+          "publisher": "YEHAVHA Nexus Publishing",
+          "date": "2026-08-12",
+          "url": "https://github.com/yehavha2024-hash/yehavha-site/blob/main/nexus/publishing/detail.html",
+          "classification": "실제 구현",
+          "rank": "A",
+          "keyPoint": "한 개의 detail.html이 books.json의 id를 읽어 상세 소개를 렌더링하므로 책마다 HTML 복제 없이 확장할 수 있다.",
+          "researchUse": "새 대표도서에는 books.json의 detail 데이터만 추가하면 같은 화면구조를 재사용할 수 있다.",
+          "caution": "상세정보가 없는 책은 억지로 빈 페이지를 만들지 않고 기존 판매처 직접 연결을 유지한다."
+        },
+        {
+          "title": "대표도서 상세 데이터 적용",
+          "publisher": "nexus/publishing/books.json",
+          "date": "2026-08-12",
+          "url": "https://github.com/yehavha2024-hash/yehavha-site/blob/main/nexus/publishing/books.json",
+          "classification": "콘텐츠 데이터",
+          "rank": "A",
+          "keyPoint": "‘사람으로 오신 YHWH’에 책이 다루는 문제, 핵심 주제와 관점 3개, 주요 주제 5개, 추천 독자를 추가했다.",
+          "researchUse": "목록 카드의 짧은 설명과 상세페이지의 깊은 설명을 같은 books.json 안에서 역할별로 분리했다.",
+          "caution": "현재 저장된 책 소개에서 확인할 수 있는 범위를 넘는 세부 주장·목차·저자정보를 임의 생성하지 않았다."
+        }
+      ],
+      "failures": [
+        {
+          "issue": "책마다 독립 HTML을 만들면 처음에는 빠르지만 출간물이 늘수록 디자인·링크·저작권 문구 수정이 중복된다.",
+          "cause": "‘독립 소개 페이지’를 물리적으로 별도 HTML 복제라고 해석하기 쉽기 때문.",
+          "correction": "독립 URL은 query id로 제공하되 화면 구조는 공통 detail.html 하나가 소유하도록 변경했다."
+        },
+        {
+          "issue": "상세 페이지 전용 CSS나 JS 파일을 따로 만들면 출판 모듈의 제어권이 다시 나뉠 수 있었다.",
+          "cause": "목록과 상세를 별도 사이트처럼 구현하려는 접근 때문.",
+          "correction": "기존 publishing.css와 publishing.js를 각각 표현·동작의 단일 소유자로 유지했다."
+        },
+        {
+          "issue": "현재 books.json만으로는 표지·저자·부제·상세 목차를 자동 표시할 수 없었다.",
+          "cause": "기존 데이터가 대표도서 카드용 최소 정보 중심이기 때문.",
+          "correction": "확인되지 않은 정보를 만들지 않고 현재 검증된 소개 범위만 상세 데이터에 넣었으며, 필요한 메타데이터는 향후 실제 자료가 있을 때 선택 필드로 추가한다."
+        }
+      ],
+      "outputs": [
+        "공통 detail.html 1개 구현",
+        "publishing.js 목록·상세 공통 동작으로 확장",
+        "publishing.css에 상세페이지 디자인 통합",
+        "대표도서 1권 상세 데이터 실제 적용",
+        "목록의 ‘책 소개’ → 상세 → 판매처 동선 구현"
+      ],
+      "standardsAdded": [
+        "독립 소개 페이지는 URL은 독립적으로 제공하되 구조 파일은 가능한 한 공통 템플릿 하나를 사용한다.",
+        "책 데이터의 단일 원본은 books.json으로 유지한다.",
+        "상세정보가 검증되지 않은 책에는 빈 상세페이지를 만들지 않는다.",
+        "HTML=구조, CSS=표현, publishing.js=동작의 기존 역할분리를 유지한다."
+      ],
+      "nextActions": [
+        "다른 대표도서에 실제 상세정보가 준비되면 books.json의 detail만 추가해 확장한다.",
+        "표지 원본 경로가 확보되면 공통 detail 구조에 선택적으로 coverAsset을 표시한다.",
+        "다음 P1인 ‘범용 실전 프롬프트 6단 구조’를 실제 GitHub 수정 작업에 적용해 표준 프롬프트로 확정한다."
+      ]
+    }
+  ]
+}
