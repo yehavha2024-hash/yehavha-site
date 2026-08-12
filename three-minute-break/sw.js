@@ -1,10 +1,11 @@
-const CACHE_NAME = "three-minute-break-v11-nexus-visual";
+const CACHE_NAME = "three-minute-break-v12-legal-philosophy";
 const ASSETS = [
   "./",
   "./index.html",
   "./style.css",
   "./nexus-shell.css",
   "./app.js",
+  "./legal-philosophy-quotes.js",
   "./manifest.webmanifest",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
