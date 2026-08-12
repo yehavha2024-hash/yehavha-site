@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 const here = path.dirname(fileURLToPath(import.meta.url));
 const indexPath = path.join(here, 'index.html');
 const index = fs.readFileSync(indexPath, 'utf8');
+const EXPECTED_TOTAL = 107;
 
 // 실제 배포 index.html에 선언된 데이터 스크립트 순서를 감사의 단일 원본으로 사용한다.
 // 별도 파일목록을 유지하지 않아 배포와 감사가 서로 다른 데이터를 검사하는 문제를 방지한다.
@@ -64,8 +65,8 @@ const cardView = item => ({
 });
 
 const out = {
-  generatedAt: '2026-08-09',
-  expectedTotal: 105,
+  generatedAt: '2026-08-12',
+  expectedTotal: EXPECTED_TOTAL,
   actualTotal: data.length,
   runtimeFiles: files,
   duplicateIds,
@@ -77,7 +78,7 @@ const out = {
     articleB_Bplus: articleB.map(cardView)
   }
 };
-if (data.length !== 105) out.warning = `Expected 105 cards but got ${data.length}`;
+if (data.length !== EXPECTED_TOTAL) out.warning = `Expected ${EXPECTED_TOTAL} cards but got ${data.length}`;
 const outPath = path.join(here, 'RUNTIME_AUDIT_OUTPUT_20260809.json');
 fs.writeFileSync(outPath, `${JSON.stringify(out, null, 2)}\n`, 'utf8');
 
@@ -130,4 +131,4 @@ console.log(JSON.stringify({
   priorityCounts: { sourceDC: weakSource.length, sourceB1: b1.length, articleC: articleC.length, articleB_Bplus: articleB.length }
 }, null, 2));
 
-if (data.length !== 105 || duplicateIds.length) process.exit(1);
+if (data.length !== EXPECTED_TOTAL || duplicateIds.length) process.exit(1);
