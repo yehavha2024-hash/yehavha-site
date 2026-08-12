@@ -34,17 +34,17 @@
     {
       "id":"ai-song-course",
       "title":"AI 노래 만들기 2시간 실습",
-      "currentAssessment":"상태정보 부족",
-      "reason":"강좌 목적·소요시간·완성결과·행동은 description과 actionLabel에 이미 충분하지만 project-status 추적 대상이 아니므로 최근성·상태가 표시되지 않는다.",
+      "currentAssessment":"상태정보 미추적",
+      "reason":"강좌 목적·소요시간·완성결과·행동은 description과 actionLabel에 이미 충분하지만 project-status 승인 추적 대상이 아니므로 최근성·상태가 표시되지 않는다.",
       "recommendedDisplay":["AI Practical Course","두 시간 안에 한 곡 완성","강좌 보기"],
       "followUp":"상태 추적이 실제 운영에 필요할 때만 ai-song-studio를 승인 manifest에 편입한다. 카드 정보량을 늘리기 위해 임의 상태 필드를 추가하지 않는다."
     },
     {
       "id":"ai-law-institute",
       "title":"AI 법률연구소",
-      "currentAssessment":"상태 동기화 오류",
-      "reason":"nexus.project.json에는 외부 GitHub 추적설정이 있고 실제 master/index.html 최근 커밋은 2026-08-11로 조회되지만 project-status.json에는 lastUpdated=null·상태 확인 필요가 남아 있다.",
-      "followUp":"새 표시 필드를 추가하지 말고 기존 update-status 원본 경로의 외부 API 실행 실패 원인을 해결한다."
+      "currentAssessment":"정상 동기화 확인",
+      "reason":"감사 중 일시적으로 project-status.json의 lastUpdated가 비어 있었으나 외부 master/index.html 추적설정과 API 응답을 확인한 뒤 다음 자동 Refresh Nexus project status 실행에서 2026-08-11·최근 업데이트·연구축 8로 정상 복구됐다.",
+      "followUp":"동일 현상이 반복될 때만 update-status.mjs 또는 GitHub API 실행 로그를 진단한다. 일회성 상태 지연을 이유로 결과 JSON을 수동 수정하지 않는다."
     }
   ],
   "decision": "카드 정보 밀도 개선은 새 필드를 많이 추가하는 작업이 아니라 기존 6필드가 정확하게 채워지는지 관리하는 작업으로 정의한다."
