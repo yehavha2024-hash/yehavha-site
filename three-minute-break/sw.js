@@ -1,11 +1,13 @@
-const CACHE_NAME = "three-minute-break-v12-legal-philosophy";
+const CACHE_NAME = "three-minute-break-v13-legal-quiz";
 const ASSETS = [
   "./",
   "./index.html",
   "./style.css",
   "./nexus-shell.css",
+  "./legal-quiz.css",
   "./app.js",
   "./legal-philosophy-quotes.js",
+  "./legal-quizzes.js",
   "./manifest.webmanifest",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
