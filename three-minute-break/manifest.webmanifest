@@ -1,7 +1,7 @@
 {
   "name": "3분 쉼표",
   "short_name": "3분쉼표",
-  "description": "명언, 영어, 성경의 핵심 의미, 미니 퀴즈를 가볍게 즐기는 웹앱",
+  "description": "법철학 핵심 주장, 생활영어, 성경 핵심 의미, 생활법률 퀴즈를 가볍게 살펴보는 웹앱",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
