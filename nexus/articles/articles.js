@@ -65,7 +65,7 @@
           const card = el('article', 'article-card');
           const top = el('div', 'article-card-top');
           const articleSection = sectionMap.get(article.section);
-          top.append(el('span', '', articleSection?.title || '글'));
+          top.append(el('span', '', article.sectionLabel || articleSection?.title || '글'));
           if (article.series) top.append(el('span', '', `· ${article.series}`));
 
           const title = el('h3');
@@ -181,6 +181,24 @@
     toc.hidden = false;
   }
 
+  function applyLanguageUI(article) {
+    const isEnglish = String(article.language || '').toLowerCase().startsWith('en');
+    document.documentElement.lang = isEnglish ? 'en' : (article.language || 'ko');
+    if (!isEnglish) return;
+
+    const skipLink = document.querySelector('.skip-link');
+    const backLink = document.querySelector('.reader-nav .back-link');
+    const tocTitle = document.getElementById('tocTitle');
+    const relatedTitle = document.querySelector('#relatedArticles h2');
+    const topLink = document.querySelector('.article-closing a');
+
+    if (skipLink) skipLink.textContent = 'Skip to article';
+    if (backLink) backLink.textContent = '← Articles & Research Archive';
+    if (tocTitle) tocTitle.textContent = 'Contents';
+    if (relatedTitle) relatedTitle.textContent = 'Related Articles';
+    if (topLink) topLink.textContent = 'Back to top ↑';
+  }
+
   async function renderDetail(data) {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
@@ -197,13 +215,15 @@
     const sectionMap = new Map((Array.isArray(data.sections) ? data.sections : []).map((section) => [section.id, section]));
     const section = sectionMap.get(article.section);
     const contentUrl = article.contentUrl || `./content/${encodeURIComponent(article.id)}.json`;
+    const isEnglish = String(article.language || '').toLowerCase().startsWith('en');
 
     try {
       const content = await fetchJson(contentUrl);
+      applyLanguageUI(article);
       document.title = `${article.title} | YEHAVHA Nexus`;
-      document.querySelector('meta[name="description"]')?.setAttribute('content', article.summary || article.title || 'YEHAVHA Nexus 글');
+      document.querySelector('meta[name="description"]')?.setAttribute('content', article.summary || article.title || (isEnglish ? 'YEHAVHA Nexus article' : 'YEHAVHA Nexus 글'));
 
-      document.getElementById('articleSection').textContent = section?.title || '글';
+      document.getElementById('articleSection').textContent = article.sectionLabel || section?.title || (isEnglish ? 'Article' : '글');
       const seriesNode = document.getElementById('articleSeries');
       if (article.series) {
         seriesNode.textContent = article.series;
@@ -217,7 +237,7 @@
         subtitleNode.hidden = false;
       }
 
-      document.getElementById('articleAuthor').textContent = `지은이 ${article.author || '이명훈'}`;
+      document.getElementById('articleAuthor').textContent = `${isEnglish ? 'Author' : '지은이'} ${article.author || '이명훈'}`;
 
       const summaryNode = document.getElementById('articleSummary');
       if (article.summary) {
