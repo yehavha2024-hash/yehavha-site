@@ -30,6 +30,7 @@
     {
       "id": "john-god-incarnate-recognition",
       "section": "bible-theology",
+      "language": "ko",
       "series": "요한복음 연구",
       "title": "하나님이 사람으로 오셨을 때 왜 알아보지 못했는가",
       "subtitle": "요한복음에 나타난 성육신과 하나님의 자기계시, 표적, 불신, 십자가의 구조와 의미",
@@ -38,6 +39,21 @@
       "publishedAt": "2026-08-13",
       "readingMinutes": 16,
       "contentUrl": "./content/john-god-incarnate-recognition.json"
+    },
+    {
+      "id": "john-god-incarnate-recognition-en",
+      "section": "bible-theology",
+      "sectionLabel": "Bible & Theology",
+      "language": "en",
+      "translationOf": "john-god-incarnate-recognition",
+      "series": "Gospel of John Study · English",
+      "title": "Why Did They Fail to Recognize God When He Came as a Man?",
+      "subtitle": "The Incarnation, God's Self-Revelation, Signs, Unbelief, and the Cross in the Gospel of John",
+      "summary": "This essay follows the Gospel of John to examine why many failed to recognize the God of Israel when He revealed Himself in human flesh.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-13",
+      "readingMinutes": 18,
+      "contentUrl": "./content/john-god-incarnate-recognition-en.json"
     }
   ]
 }
