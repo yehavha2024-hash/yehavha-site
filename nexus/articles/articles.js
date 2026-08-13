@@ -77,7 +77,6 @@
           const meta = el('div', 'article-card-meta');
           const date = formatDate(article.publishedAt || article.updatedAt);
           if (date) meta.append(el('span', '', date));
-          if (article.readingMinutes) meta.append(el('span', '', `${article.readingMinutes}분 읽기`));
           if (article.author) meta.append(el('span', '', article.author));
 
           card.append(top, title, summary, meta);
@@ -114,11 +113,6 @@
     renderArticleCards();
   }
 
-  function addMeta(container, label, value) {
-    if (!value) return;
-    container.append(el('span', '', `${label} ${value}`));
-  }
-
   function renderBlock(block, container) {
     if (!block || typeof block !== 'object') return;
     const type = block.type || 'paragraph';
@@ -152,10 +146,7 @@
       return;
     }
 
-    if (type === 'divider') {
-      container.append(el('hr', 'article-divider'));
-      return;
-    }
+    if (type === 'divider') return;
 
     if (type === 'list') {
       const list = document.createElement(block.ordered ? 'ol' : 'ul');
@@ -165,6 +156,29 @@
     }
 
     container.append(el('p', '', block.text || ''));
+  }
+
+  function buildTableOfContents(body) {
+    const toc = document.getElementById('articleToc');
+    const list = document.getElementById('tocList');
+    const headings = Array.from(body.querySelectorAll('h2, h3'));
+    list.replaceChildren();
+
+    if (!headings.length) {
+      toc.hidden = true;
+      return;
+    }
+
+    headings.forEach((heading, index) => {
+      heading.id = heading.id || `article-section-${index + 1}`;
+      const item = el('li', heading.tagName === 'H3' ? 'toc-subitem' : 'toc-item');
+      const link = el('a', '', heading.textContent.trim());
+      link.href = `#${heading.id}`;
+      item.append(link);
+      list.append(item);
+    });
+
+    toc.hidden = false;
   }
 
   async function renderDetail(data) {
@@ -202,25 +216,19 @@
         subtitleNode.textContent = article.subtitle;
         subtitleNode.hidden = false;
       }
-      document.getElementById('articleSummary').textContent = article.summary || '';
 
-      const meta = document.getElementById('articleMeta');
-      addMeta(meta, '작성', article.author || '');
-      addMeta(meta, '공개', formatDate(article.publishedAt));
-      if (article.updatedAt && article.updatedAt !== article.publishedAt) addMeta(meta, '수정', formatDate(article.updatedAt));
-      if (article.readingMinutes) addMeta(meta, '읽기', `${article.readingMinutes}분`);
+      document.getElementById('articleAuthor').textContent = `지은이 ${article.author || '이명훈'}`;
 
-      const tags = document.getElementById('articleTags');
-      (Array.isArray(article.tags) ? article.tags : []).forEach((tag) => tags.append(el('span', '', tag)));
-
-      const lead = document.getElementById('articleLead');
-      if (content.lead) {
-        lead.textContent = content.lead;
-        lead.hidden = false;
+      const summaryNode = document.getElementById('articleSummary');
+      if (article.summary) {
+        summaryNode.textContent = article.summary;
+        summaryNode.hidden = false;
       }
 
       const body = document.getElementById('articleBody');
+      if (content.lead) body.append(el('p', 'article-opening', content.lead));
       (Array.isArray(content.blocks) ? content.blocks : []).forEach((block) => renderBlock(block, body));
+      buildTableOfContents(body);
 
       const related = articles
         .filter((item) => item.id !== article.id && (item.section === article.section || (article.series && item.series === article.series)))
