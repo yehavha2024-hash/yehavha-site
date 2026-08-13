@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-12",
+  "updatedAt": "2026-08-13",
   "categories": [
     {
       "id": "apps",
@@ -51,11 +51,11 @@
     },
     {
       "id": "initiatives",
-      "eyebrow": "OPEN INITIATIVES & OPERATIONS",
+      "eyebrow": "IDEA HUB & OPERATIONS",
       "title": "기획·운영",
-      "icon": "◈",
+      "icon": "💡",
       "iconClass": "apps-icon",
-      "description": "아이디어·사업·시장·계획·미팅·프로젝트·공개 제안을 등록하고 검토·실행·기록하는 공개형 운영체계입니다."
+      "description": "사업·콘텐츠·연구·출판·서비스·협업 등 모든 아이디어를 한곳에 모아 수집 → 검토 → 계획 → 실행 → 완료로 연결합니다."
     }
   ],
   "researchGroups": [
@@ -194,67 +194,13 @@
       "actionLabel": "실행 자료실 보기"
     },
     {
-      "id": "initiative-ideas",
+      "id": "initiative-hub",
       "category": "initiatives",
-      "meta": "Idea Pipeline",
-      "title": "아이디어",
-      "description": "사업·서비스·콘텐츠·연구 외 아이디어를 최초 등록하고 검토 단계로 발전시키는 아이디어 파이프라인입니다.",
-      "url": "https://yehavha-nexus-hub.pages.dev/initiatives/#ideas",
-      "actionLabel": "아이디어 보기"
-    },
-    {
-      "id": "initiative-business",
-      "category": "initiatives",
-      "meta": "Business",
-      "title": "사업",
-      "description": "신규 사업, 수익모델, 제휴, 교육·서비스 사업화 가능성을 검토하고 실행계획으로 전환합니다.",
-      "url": "https://yehavha-nexus-hub.pages.dev/initiatives/#business",
-      "actionLabel": "사업 보기"
-    },
-    {
-      "id": "initiative-markets",
-      "category": "initiatives",
-      "meta": "Markets & Securities",
-      "title": "시장·증권",
-      "description": "증권·기업·산업·기술·시장 흐름을 관찰하고 판단 근거와 후속 검토사항을 기록합니다.",
-      "url": "https://yehavha-nexus-hub.pages.dev/initiatives/#markets",
-      "actionLabel": "시장 보기"
-    },
-    {
-      "id": "initiative-plans",
-      "category": "initiatives",
-      "meta": "Plans",
-      "title": "계획",
-      "description": "단기·중기·장기 계획과 실행 로드맵을 등록하고 다음 행동과 진행상태를 관리합니다.",
-      "url": "https://yehavha-nexus-hub.pages.dev/initiatives/#plans",
-      "actionLabel": "계획 보기"
-    },
-    {
-      "id": "initiative-meetings",
-      "category": "initiatives",
-      "meta": "Meetings",
-      "title": "미팅",
-      "description": "예정 미팅, 논의사항, 결정사항과 후속조치를 하나의 기록 흐름으로 관리합니다.",
-      "url": "https://yehavha-nexus-hub.pages.dev/initiatives/#meetings",
-      "actionLabel": "미팅 보기"
-    },
-    {
-      "id": "initiative-projects",
-      "category": "initiatives",
-      "meta": "Projects",
-      "title": "프로젝트",
-      "description": "검토를 통과한 안건을 준비·진행·완료 단계의 실제 프로젝트로 관리하고 진행기록을 공개합니다.",
-      "url": "https://yehavha-nexus-hub.pages.dev/initiatives/#projects",
-      "actionLabel": "프로젝트 보기"
-    },
-    {
-      "id": "initiative-open-calls",
-      "category": "initiatives",
-      "meta": "Open Calls",
-      "title": "공개 제안",
-      "description": "협업·참여·공동 프로젝트·외주 등 외부에 공개할 제안과 참여 기회를 정리합니다.",
-      "url": "https://yehavha-nexus-hub.pages.dev/initiatives/#open-calls",
-      "actionLabel": "공개 제안 보기"
+      "meta": "Idea Hub · 11 Active Records",
+      "title": "아이디어 허브",
+      "description": "사업·콘텐츠·AI 음악·연구·출판·서비스·협업·운영 개선 등 모든 아이디어를 한 보드에 모아 현재 상태와 다음 행동까지 관리합니다. 아이디어가 떠오르면 먼저 이곳에 등록하고, 검토를 통과한 항목만 계획과 프로젝트로 발전시킵니다.",
+      "url": "https://yehavha-nexus-hub.pages.dev/initiatives/",
+      "actionLabel": "아이디어 전체 보기"
     }
   ]
 }
