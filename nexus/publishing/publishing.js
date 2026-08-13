@@ -26,13 +26,15 @@
     const title = make('h3', '', book.title);
     const description = make('p', '', book.description || '');
     const actions = make('div', 'book-actions');
+    article.append(platform, title, description);
+    if (book.bibliography) article.append(make('div', 'book-bibliography', book.bibliography));
     if (book.detailEnabled && book.detail) {
       const detailLink = make('a', 'book-link book-link-secondary', '책 소개');
       detailLink.href = `./detail.html?id=${encodeURIComponent(book.id)}`;
       actions.append(detailLink);
     }
     actions.append(externalBookLink(book));
-    article.append(platform, title, description, actions);
+    article.append(actions);
     return article;
   }
 
