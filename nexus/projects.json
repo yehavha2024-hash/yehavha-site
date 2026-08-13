@@ -23,7 +23,7 @@
       "title": "출판·아카이브",
       "icon": "📚",
       "iconClass": "publishing-icon",
-      "description": "Amazon Kindle·U-Paper에 출간한 전자책 가운데 대표 출간물을 선별하여 소개합니다."
+      "description": "대표 전자책과 웹에서 직접 읽을 수 있는 글·연구 아카이브를 함께 제공합니다."
     },
     {
       "id": "media",
@@ -174,6 +174,15 @@
       "description": "Amazon Kindle과 U-Paper에 출간한 전자책 가운데 대표 도서를 선별하여 한곳에서 소개합니다.",
       "url": "https://yehavha-nexus-hub.pages.dev/publishing/",
       "actionLabel": "출간 도서 보기"
+    },
+    {
+      "id": "article-library",
+      "category": "publishing",
+      "meta": "Direct Reading Archive",
+      "title": "글·연구 아카이브",
+      "description": "성경·신학, AI·Suno, 히브리어·언어 등 주제별 글과 연재 챕터를 전자책과 분리하여 웹에서 바로 읽을 수 있도록 축적합니다.",
+      "url": "https://yehavha-nexus-hub.pages.dev/articles/",
+      "actionLabel": "글 읽기"
     },
     {
       "id": "youtube-hashem-yeshua",
