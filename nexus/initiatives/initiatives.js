@@ -1,10 +1,14 @@
 (() => {
   'use strict';
 
-  const links = document.getElementById('initiativeLinks');
-  const lifecycle = document.getElementById('lifecycle');
-  const visibility = document.getElementById('visibility');
-  const groupsRoot = document.getElementById('initiativeGroups');
+  const statsRoot = document.getElementById('ideaStats');
+  const lifecycleRoot = document.getElementById('lifecycle');
+  const filtersRoot = document.getElementById('categoryFilters');
+  const boardRoot = document.getElementById('initiativeBoard');
+  const boardCount = document.getElementById('boardCount');
+  let activeFilter = 'all';
+  let currentGroups = [];
+  let currentItems = [];
 
   function make(tag, className, text) {
     const el = document.createElement(tag);
@@ -17,82 +21,128 @@
     return value ? String(value).replaceAll('-', '.') : '-';
   }
 
+  function visibleItems(items) {
+    return items.filter(item => item.visibilityId !== 'private' && item.visibilityId !== 'embargo');
+  }
+
+  function renderStats(items) {
+    const visible = visibleItems(items);
+    const review = visible.filter(item => ['idea', 'review', 'planned'].includes(item.statusId)).length;
+    const active = visible.filter(item => item.statusId === 'active').length;
+    const done = visible.filter(item => ['completed', 'archived'].includes(item.statusId)).length;
+    const stats = [
+      ['ALL IDEAS', visible.length, '전체 등록'],
+      ['TO DECIDE', review, '검토·계획'],
+      ['IN MOTION', active, '실행 중'],
+      ['DONE', done, '완료·보관']
+    ];
+    statsRoot.replaceChildren();
+    stats.forEach(([label, value, title]) => {
+      const card = make('div', 'idea-stat');
+      card.append(make('span', 'idea-stat-label', label), make('strong', '', String(value)), make('small', '', title));
+      statsRoot.append(card);
+    });
+  }
+
   function renderLifecycle(stages) {
-    lifecycle.replaceChildren();
-    stages.forEach((stage, index) => {
-      const chip = make('div', 'stage');
-      chip.append(make('strong', '', stage.label), make('span', '', stage.title));
-      lifecycle.append(chip);
-      if (index < stages.length - 1) lifecycle.append(make('span', 'stage-arrow', '→'));
+    lifecycleRoot.replaceChildren();
+    (stages || []).forEach((stage, index) => {
+      const step = make('div', 'flow-step');
+      step.append(make('span', 'flow-index', String(index + 1).padStart(2, '0')), make('div', 'flow-copy'));
+      const copy = step.lastElementChild;
+      copy.append(make('strong', '', stage.label), make('small', '', stage.title));
+      lifecycleRoot.append(step);
     });
   }
 
-  function renderVisibility(items) {
-    visibility.replaceChildren();
-    items.forEach((item) => {
-      const block = make('div', 'visibility-item');
-      block.append(make('strong', '', item.label), make('span', '', item.description));
-      visibility.append(block);
+  function groupMap(groups) {
+    return new Map(groups.map(group => [group.id, group]));
+  }
+
+  function renderFilters(groups, items) {
+    filtersRoot.replaceChildren();
+    const visible = visibleItems(items);
+    const buttons = [{ id: 'all', icon: '◈', title: '전체', count: visible.length }, ...groups.map(group => ({
+      ...group,
+      count: visible.filter(item => item.group === group.id).length
+    }))];
+
+    buttons.forEach(group => {
+      const button = make('button', `filter-chip${activeFilter === group.id ? ' is-active' : ''}`);
+      button.type = 'button';
+      button.dataset.filter = group.id;
+      if (group.id !== 'all') button.id = group.id;
+      button.append(make('span', 'filter-icon', group.icon || '•'), make('span', 'filter-title', group.title), make('span', 'filter-count', String(group.count)));
+      button.addEventListener('click', () => {
+        activeFilter = group.id;
+        renderFilters(currentGroups, currentItems);
+        renderBoard(currentGroups, currentItems);
+        history.replaceState(null, '', group.id === 'all' ? location.pathname : `#${group.id}`);
+      });
+      filtersRoot.append(button);
     });
   }
 
-  function renderLinks(groups) {
-    links.replaceChildren();
-    groups.slice(0, 7).forEach((group) => {
-      const a = make('a', '', group.title);
-      a.href = `#${group.id}`;
-      links.append(a);
-    });
+  function statusLabel(item) {
+    const labels = { idea: '수집', review: '검토', planned: '계획', active: '실행', completed: '완료', archived: '보관' };
+    return labels[item.statusId] || item.status || '검토';
   }
 
-  function renderItem(item) {
-    const article = make('article', 'initiative-item');
-    const badges = make('div', 'item-badges');
-    badges.append(
-      make('span', 'badge', item.meta || 'Initiative'),
-      make('span', 'badge badge-status', item.status || 'REVIEW'),
-      make('span', `badge${item.visibilityId === 'public' ? ' badge-public' : ''}`, item.visibility || 'SUMMARY')
-    );
-    article.append(badges, make('h3', '', item.title), make('p', '', item.summary || ''));
+  function renderItem(item, groupsById) {
+    const group = groupsById.get(item.group) || {};
+    const article = make('article', 'idea-card');
 
-    const record = make('div', 'item-record');
-    const registered = make('div', 'record');
-    registered.append(make('strong', '', '등록'), make('span', '', formatDate(item.registeredAt)));
-    const updated = make('div', 'record');
-    updated.append(make('strong', '', '최근 수정'), make('span', '', formatDate(item.updatedAt)));
-    record.append(registered, updated);
-    article.append(record);
+    const head = make('div', 'idea-card-head');
+    const groupTag = make('span', 'group-tag');
+    groupTag.append(make('span', 'group-tag-icon', group.icon || '•'), document.createTextNode(group.title || item.group || '기타'));
+    const state = make('span', `state-tag state-${item.statusId || 'review'}`, statusLabel(item));
+    head.append(groupTag, state);
+
+    const title = make('h3', '', item.title);
+    const summary = make('p', 'idea-summary', item.summary || '');
+
+    const meta = make('div', 'idea-meta');
+    if (item.priority) meta.append(make('span', 'meta-chip', item.priority));
+    if (item.meta) meta.append(make('span', 'meta-chip', item.meta));
+    if (item.visibility) meta.append(make('span', 'meta-chip meta-soft', item.visibility));
+
+    article.append(head, title, summary, meta);
 
     if (item.nextAction) {
-      const next = make('p', 'next-action');
-      next.append(make('strong', '', '다음 행동 · '), document.createTextNode(item.nextAction));
+      const next = make('div', 'idea-next');
+      next.append(make('span', '', 'NEXT'), make('p', '', item.nextAction));
       article.append(next);
     }
+
+    const foot = make('div', 'idea-foot');
+    foot.append(make('span', '', `등록 ${formatDate(item.registeredAt)}`), make('span', '', `수정 ${formatDate(item.updatedAt)}`));
+    article.append(foot);
     return article;
   }
 
-  function renderGroups(groups, items) {
-    groupsRoot.replaceChildren();
-    groups.forEach((group) => {
-      const section = make('section', 'initiative-group');
-      section.id = group.id;
-      section.setAttribute('aria-labelledby', `${group.id}-title`);
-
-      const head = make('div', 'initiative-group-head');
-      head.append(make('div', 'group-number', group.number));
-      const copy = make('div', '');
-      copy.append(make('p', 'eyebrow', group.eyebrow), make('h2', '', group.title), make('p', 'group-description', group.description));
-      copy.querySelector('h2').id = `${group.id}-title`;
-      head.append(copy);
-
-      const grid = make('div', 'initiative-items');
-      const groupItems = items.filter((item) => item.group === group.id && item.visibilityId !== 'private' && item.visibilityId !== 'embargo');
-      if (groupItems.length) groupItems.forEach((item) => grid.append(renderItem(item)));
-      else grid.append(make('div', 'empty-state', '등록된 공개 항목이 없습니다.'));
-
-      section.append(head, grid);
-      groupsRoot.append(section);
+  function renderBoard(groups, items) {
+    const visible = visibleItems(items);
+    const filtered = activeFilter === 'all' ? visible : visible.filter(item => item.group === activeFilter);
+    const statusOrder = { active: 0, planned: 1, review: 2, idea: 3, completed: 4, archived: 5 };
+    filtered.sort((a, b) => {
+      const state = (statusOrder[a.statusId] ?? 9) - (statusOrder[b.statusId] ?? 9);
+      if (state !== 0) return state;
+      return String(b.updatedAt || '').localeCompare(String(a.updatedAt || ''));
     });
+
+    boardRoot.replaceChildren();
+    if (boardCount) boardCount.textContent = `${filtered.length}개 항목`;
+    if (!filtered.length) {
+      boardRoot.append(make('div', 'empty-state', '이 분류에는 아직 공개 등록된 아이디어가 없습니다. 새 생각은 먼저 아이디어 인박스에 등록합니다.'));
+      return;
+    }
+    const groupsById = groupMap(groups);
+    filtered.forEach(item => boardRoot.append(renderItem(item, groupsById)));
+  }
+
+  function applyHashFilter(groups) {
+    const hash = location.hash.replace('#', '');
+    if (hash && groups.some(group => group.id === hash)) activeFilter = hash;
   }
 
   async function load() {
@@ -100,15 +150,16 @@
       const response = await fetch('./data.json', { cache: 'no-store' });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
-      const groups = Array.isArray(data.groups) ? data.groups : [];
-      const items = Array.isArray(data.items) ? data.items : [];
-      renderLinks(groups);
+      currentGroups = Array.isArray(data.groups) ? data.groups : [];
+      currentItems = Array.isArray(data.items) ? data.items : [];
+      applyHashFilter(currentGroups);
+      renderStats(currentItems);
       renderLifecycle(Array.isArray(data.lifecycle) ? data.lifecycle : []);
-      renderVisibility(Array.isArray(data.visibility) ? data.visibility : []);
-      renderGroups(groups, items);
+      renderFilters(currentGroups, currentItems);
+      renderBoard(currentGroups, currentItems);
     } catch (error) {
-      console.error('Open Initiatives load failed:', error);
-      groupsRoot.replaceChildren(make('section', 'initiative-group', '운영 데이터를 불러오지 못했습니다.'));
+      console.error('Idea hub load failed:', error);
+      boardRoot.replaceChildren(make('div', 'empty-state', '아이디어 데이터를 불러오지 못했습니다.'));
     }
   }
 
