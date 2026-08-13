@@ -1,0 +1,28 @@
+{
+  "lead": "글의 핵심 문제의식 또는 결론을 한두 문장으로 제시합니다.",
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "첫 번째 소제목"
+    },
+    {
+      "type": "paragraph",
+      "text": "본문 문단을 입력합니다. 작성용 별표나 마크다운 기호는 화면에 노출하지 않습니다."
+    },
+    {
+      "type": "scripture",
+      "reference": "성경 장절",
+      "text": "필요한 성경 본문 또는 핵심 구절을 입력합니다."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "두 번째 소제목"
+    },
+    {
+      "type": "paragraph",
+      "text": "추가 본문을 입력합니다."
+    }
+  ]
+}
