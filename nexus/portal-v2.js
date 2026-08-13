@@ -19,12 +19,44 @@
   }
 
   const categoryIcons = {
-    apps: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/></svg>',
-    research: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 7.2 10 10M17 7.2 14 10M7 16.8 10 14M17 16.8 14 14"/></svg>',
+    apps: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="17" height="16" rx="2.5"/><path d="M3.5 8h17M7 6h.01M10 6h.01"/><path d="M7 12h4v4H7zM14 12h3M14 16h3"/></svg>',
+    research: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M6 6h12"/><path d="m7 6-3 6h6L7 6Zm10 0-3 6h6l-3-6Z"/><path d="M4 12c.5 2 5.5 2 6 0M14 12c.5 2 5.5 2 6 0M8 21h8"/></svg>',
     publishing: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5c3.2-.7 5.8 0 8 2v11c-2.2-2-4.8-2.7-8-2V5.5Z"/><path d="M20 5.5c-3.2-.7-5.8 0-8 2v11c2.2-2 4.8-2.7 8-2V5.5Z"/></svg>',
-    media: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="m10 8.7 5.4 3.3-5.4 3.3V8.7Z"/></svg>',
-    education: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-4 9 4-9 4-9-4Z"/><path d="M6.5 11v4.5c3.5 2.3 7.5 2.3 11 0V11"/><path d="M21 9v5"/></svg>'
+    media: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="m10 9 5 3-5 3V9Z"/><path d="M7 3v2M17 3v2"/></svg>',
+    practice: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m11.5 3 1.35 4.15L17 8.5l-4.15 1.35L11.5 14l-1.35-4.15L6 8.5l4.15-1.35L11.5 3Z"/><path d="m18.5 13 .75 2.25 2.25.75-2.25.75L18.5 19l-.75-2.25L15.5 16l2.25-.75L18.5 13Z"/><path d="M5.5 15.5 3 18l3 3 2.5-2.5"/></svg>',
+    education: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-4 9 4-9 4-9-4Z"/><path d="M6.5 11v4.5c3.5 2.3 7.5 2.3 11 0V11"/><path d="M21 9v5"/></svg>',
+    initiatives: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4"/><path d="M8.2 14.5C6.8 13.4 6 11.8 6 10a6 6 0 1 1 12 0c0 1.8-.8 3.4-2.2 4.5-.8.6-1.3 1.4-1.5 2.5H9.7c-.2-1.1-.7-1.9-1.5-2.5Z"/><path d="M12 5.5V8M7.8 7.2l1.7 1.7M16.2 7.2l-1.7 1.7"/></svg>'
   };
+
+  const portalTiers = [
+    {
+      id: 'core',
+      number: '01',
+      eyebrow: 'CORE WORKSPACES',
+      title: '핵심 작업영역',
+      description: '직접 사용하는 웹서비스와 장기 연구 기반을 가장 먼저 배치합니다.',
+      categoryIds: ['apps', 'research'],
+      variant: 'primary'
+    },
+    {
+      id: 'create',
+      number: '02',
+      eyebrow: 'CREATE · LEARN · SHARE',
+      title: '제작·교육·공개',
+      description: 'AI 실무를 교육·출판·미디어 결과물로 확장하는 영역을 한 층위로 묶습니다.',
+      categoryIds: ['practice', 'education', 'publishing', 'media'],
+      variant: 'compact'
+    },
+    {
+      id: 'operate',
+      number: '03',
+      eyebrow: 'IDEAS & OPERATIONS',
+      title: '운영·아이디어 허브',
+      description: '새 아이디어를 수집하고 검토·계획·실행으로 연결하는 운영 계층입니다.',
+      categoryIds: ['initiatives'],
+      variant: 'compact'
+    }
+  ];
 
   function showToast(message) {
     if (!toast) return;
@@ -100,14 +132,51 @@
     }
   }
 
-  function renderQuickLinks(categories) {
+  function orderedCategories(categories, projects) {
+    const byId = new Map(categories.map((category) => [category.id, category]));
+    const ordered = [];
+    portalTiers.forEach((tier) => tier.categoryIds.forEach((id) => {
+      const category = byId.get(id);
+      if (category && projects.some((project) => project.category === id)) ordered.push(category);
+    }));
+    categories.forEach((category) => {
+      if (!ordered.some((item) => item.id === category.id) && projects.some((project) => project.category === category.id)) ordered.push(category);
+    });
+    return ordered;
+  }
+
+  function renderQuickLinks(categories, projects) {
     quickLinks.replaceChildren();
     categories.forEach((category) => {
-      const link = make('a', 'quick-link');
+      const count = projects.filter((project) => project.category === category.id).length;
+      const link = make('a', `quick-link quick-link-${category.id}`);
       link.href = `#${category.id}`;
-      link.append(makeCategoryIcon(category.id, 'quick-icon'), make('span', 'quick-label', category.title));
+      link.dataset.category = category.id;
+      link.append(
+        makeCategoryIcon(category.id, 'quick-icon'),
+        make('span', 'quick-label', category.title),
+        make('span', 'quick-count', String(count))
+      );
       quickLinks.append(link);
     });
+  }
+
+  function renderHeroOverview(categories, projects, updatedAt) {
+    const old = document.querySelector('.portal-overview');
+    if (old) old.remove();
+    if (!quickLinks) return;
+    const overview = make('div', 'portal-overview');
+    const values = [
+      ['분야', categories.length],
+      ['프로젝트', projects.length],
+      ['업데이트', formatDate(updatedAt) || '상시']
+    ];
+    values.forEach(([label, value]) => {
+      const item = make('div', 'overview-item');
+      item.append(make('span', '', label), make('strong', '', String(value)));
+      overview.append(item);
+    });
+    quickLinks.insertAdjacentElement('afterend', overview);
   }
 
   function renderProject(project) {
@@ -162,17 +231,23 @@
     return block;
   }
 
-  function renderCategory(category, projects, researchGroups = []) {
-    const section = make('section', 'category-card');
+  function renderCategory(category, projects, researchGroups = [], variant = 'primary') {
+    const section = make('section', `category-card category-${category.id} category-${variant}`);
     section.id = category.id;
+    section.dataset.category = category.id;
     section.setAttribute('aria-labelledby', `${category.id}-title`);
+
     const head = make('div', 'category-head');
     const icon = make('div', `category-icon ${category.iconClass || ''}`);
     icon.append(makeCategoryIcon(category.id, 'category-icon-glyph'));
     icon.setAttribute('aria-hidden', 'true');
+
     const headText = make('div', 'category-copy');
-    headText.append(make('p','eyebrow',category.eyebrow), make('h2','',category.title), make('p','category-description',category.description));
-    headText.querySelector('h2').id = `${category.id}-title`;
+    const titleRow = make('div', 'category-title-row');
+    const title = make('h2', '', category.title);
+    title.id = `${category.id}-title`;
+    titleRow.append(title, make('span', 'category-count', `${projects.length} PROJECT${projects.length > 1 ? 'S' : ''}`));
+    headText.append(make('p','eyebrow',category.eyebrow), titleRow, make('p','category-description',category.description));
     head.append(icon, headText);
 
     if (category.id === 'research' && researchGroups.length) {
@@ -196,16 +271,56 @@
     return section;
   }
 
+  function renderTier(tier, categories, projects, researchGroups) {
+    const section = make('section', `portal-tier portal-tier-${tier.id}`);
+    section.setAttribute('aria-labelledby', `tier-${tier.id}-title`);
+
+    const head = make('div', 'portal-tier-head');
+    const number = make('span', 'tier-number', tier.number);
+    const copy = make('div', 'tier-copy');
+    copy.append(make('p', 'eyebrow', tier.eyebrow), make('h2', '', tier.title), make('p', 'tier-description', tier.description));
+    copy.querySelector('h2').id = `tier-${tier.id}-title`;
+    head.append(number, copy);
+
+    const grid = make('div', 'portal-tier-grid');
+    tier.categoryIds.forEach((id) => {
+      const category = categories.find((item) => item.id === id);
+      if (!category) return;
+      const categoryProjects = projects.filter((project) => project.category === id);
+      if (!categoryProjects.length) return;
+      grid.append(renderCategory(category, categoryProjects, researchGroups, tier.variant));
+    });
+
+    if (!grid.childElementCount) return null;
+    section.append(head, grid);
+    return section;
+  }
+
   function renderPortal(data) {
     const categories = Array.isArray(data.categories) ? data.categories : [];
     const projects = Array.isArray(data.projects) ? data.projects : [];
     const researchGroups = Array.isArray(data.researchGroups) ? data.researchGroups : [];
-    renderQuickLinks(categories);
+    const visibleCategories = orderedCategories(categories, projects);
+
+    renderQuickLinks(visibleCategories, projects);
+    renderHeroOverview(visibleCategories, projects, data.updatedAt);
     portalGrid.replaceChildren();
-    categories.forEach((category) => {
-      const categoryProjects = projects.filter((project) => project.category === category.id);
-      if (categoryProjects.length) portalGrid.append(renderCategory(category, categoryProjects, researchGroups));
+
+    portalTiers.forEach((tier) => {
+      const tierSection = renderTier(tier, visibleCategories, projects, researchGroups);
+      if (tierSection) portalGrid.append(tierSection);
     });
+
+    const tierIds = new Set(portalTiers.flatMap((tier) => tier.categoryIds));
+    const extraCategories = visibleCategories.filter((category) => !tierIds.has(category.id));
+    if (extraCategories.length) {
+      const extraTier = {
+        id: 'more', number: '04', eyebrow: 'MORE', title: '기타 영역',
+        description: '추가된 프로젝트 영역입니다.', categoryIds: extraCategories.map((category) => category.id), variant: 'compact'
+      };
+      const tierSection = renderTier(extraTier, visibleCategories, projects, researchGroups);
+      if (tierSection) portalGrid.append(tierSection);
+    }
   }
 
   async function fetchJson(url) {
