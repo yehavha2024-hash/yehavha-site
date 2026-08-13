@@ -3,10 +3,10 @@
 .teps-extension h3{margin:12px 0 8px;color:#443278;font-size:1.32rem;letter-spacing:-.025em}
 .teps-purpose{margin:0 0 16px;color:#667085;font-size:.9rem;line-height:1.65}
 .teps-passage{padding:18px 17px;border:1px solid rgba(91,63,163,.16);border-radius:19px;background:linear-gradient(180deg,#fbfaff,#f6f3ff)}
-.teps-passage p{margin:0;color:#20233a;font-family:Georgia,"Times New Roman",serif;font-size:1.06rem;line-height:1.95;letter-spacing:.002em}
+.teps-passage p{margin:0;color:#20233a;font-family:Georgia,"Times New Roman",serif;font-size:1.01rem;line-height:1.82;letter-spacing:.002em}
 .teps-logic{margin-top:13px}
 .teps-logic-box{margin-top:14px;padding:15px 16px;border-left:4px solid #7658bd;border-radius:0 16px 16px 0;background:#f6f3ff;color:#3f3560;line-height:1.65}
 .teps-logic-box p{margin:6px 0 0}
 .teps-word{background:#fbfaff}
 .teps-practice .practice-label{background:#ede9fe;color:#5b3fa3}
-@media(max-width:460px){.teps-passage{padding:16px 14px}.teps-passage p{font-size:1.01rem;line-height:1.9}}
+@media(max-width:460px){.teps-passage{padding:16px 14px}.teps-passage p{font-size:.99rem;line-height:1.8}}
