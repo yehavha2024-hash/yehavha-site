@@ -26,5 +26,18 @@
       "description": "연구·기술·콘텐츠·경험 등 독립적으로 공개할 가치가 있는 글을 주제 제한 없이 추가합니다."
     }
   ],
-  "articles": []
+  "articles": [
+    {
+      "id": "john-god-incarnate-recognition",
+      "section": "bible-theology",
+      "series": "요한복음 연구",
+      "title": "하나님이 사람으로 오셨을 때 왜 알아보지 못했는가",
+      "subtitle": "요한복음에 나타난 성육신과 하나님의 자기계시, 표적, 불신, 십자가의 구조와 의미",
+      "summary": "이스라엘이 성경을 통하여 찾던 하나님이 인간으로 나타났을 때 왜 많은 사람이 그분을 알아보지 못했는지를 요한복음의 주요 본문을 따라 살펴본다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-13",
+      "readingMinutes": 16,
+      "contentUrl": "./content/john-god-incarnate-recognition.json"
+    }
+  ]
 }
