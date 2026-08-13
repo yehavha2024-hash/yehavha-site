@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#081a30"/>
 <title>글 읽기 | YEHAVHA Nexus</title>
 <link href="../portal-v2.css?v=20260813-articles" rel="stylesheet"/>
-<link href="./articles.css?v=20260813-001" rel="stylesheet"/>
+<link href="./articles.css?v=20260813-002" rel="stylesheet"/>
 </head>
 <body data-page="detail">
 <a class="skip-link" href="#articleBody">본문으로 이동</a>
@@ -27,17 +27,27 @@
         </div>
         <h1 id="articleTitle"></h1>
         <p class="reader-subtitle" id="articleSubtitle" hidden></p>
-        <p class="reader-summary" id="articleSummary"></p>
-        <div class="reader-meta" id="articleMeta"></div>
-        <div class="reader-tags" id="articleTags"></div>
+        <p class="reader-author" id="articleAuthor"></p>
+        <p class="reader-summary" id="articleSummary" hidden></p>
       </header>
-      <div class="reader-lead" id="articleLead" hidden></div>
+
+      <nav class="reader-toc" id="articleToc" aria-labelledby="tocTitle" hidden>
+        <h2 id="tocTitle">목차</h2>
+        <ol id="tocList"></ol>
+      </nav>
+
       <div class="article-body" id="articleBody"></div>
+
       <nav class="related-articles" id="relatedArticles" aria-label="관련 글" hidden>
         <p class="eyebrow">RELATED ARTICLES</p>
         <h2>관련 글</h2>
         <div id="relatedGrid"></div>
       </nav>
+
+      <div class="article-closing">
+        <p>Copyright © 이명훈. All rights reserved.</p>
+        <a href="#top">맨 위로 이동 ↑</a>
+      </div>
     </article>
 
     <section class="reader-error" id="readerError" hidden>
@@ -47,15 +57,13 @@
     </section>
   </div>
 </main>
-<footer class="footer">
+<footer class="footer reader-site-footer">
   <div class="container">
     <div class="footer-card">
       <strong>YEHAVHA Nexus · Articles</strong>
-      <a href="#top">맨 위로 이동 ↑</a>
-      <div class="footer-meta"><p>Copyright © 이명훈. All rights reserved.</p></div>
     </div>
   </div>
 </footer>
-<script src="./articles.js?v=20260813-001"></script>
+<script src="./articles.js?v=20260813-002"></script>
 </body>
 </html>
