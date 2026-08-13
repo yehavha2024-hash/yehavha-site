@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="description" content="YEHAVHA Nexus 글·연구 아카이브 본문"/>
+<meta name="theme-color" content="#081a30"/>
+<title>글 읽기 | YEHAVHA Nexus</title>
+<link href="../portal-v2.css?v=20260813-articles" rel="stylesheet"/>
+<link href="./articles.css?v=20260813-001" rel="stylesheet"/>
+</head>
+<body data-page="detail">
+<a class="skip-link" href="#articleBody">본문으로 이동</a>
+<header class="reader-top" id="top">
+  <div class="container reader-nav">
+    <a class="back-link" href="./">← 글·연구 아카이브</a>
+    <a class="nexus-link" href="../">YEHAVHA Nexus</a>
+  </div>
+</header>
+<main class="reader-main">
+  <div class="container reader-shell">
+    <article class="reader-card" id="readerCard" hidden>
+      <header class="reader-header">
+        <div class="reader-kicker">
+          <span id="articleSection"></span>
+          <span id="articleSeries" hidden></span>
+        </div>
+        <h1 id="articleTitle"></h1>
+        <p class="reader-subtitle" id="articleSubtitle" hidden></p>
+        <p class="reader-summary" id="articleSummary"></p>
+        <div class="reader-meta" id="articleMeta"></div>
+        <div class="reader-tags" id="articleTags"></div>
+      </header>
+      <div class="reader-lead" id="articleLead" hidden></div>
+      <div class="article-body" id="articleBody"></div>
+      <nav class="related-articles" id="relatedArticles" aria-label="관련 글" hidden>
+        <p class="eyebrow">RELATED ARTICLES</p>
+        <h2>관련 글</h2>
+        <div id="relatedGrid"></div>
+      </nav>
+    </article>
+
+    <section class="reader-error" id="readerError" hidden>
+      <strong>글을 불러오지 못했습니다.</strong>
+      <p>주소를 확인하거나 글·연구 아카이브 목록으로 돌아가 주세요.</p>
+      <a href="./">글 목록 보기</a>
+    </section>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-card">
+      <strong>YEHAVHA Nexus · Articles</strong>
+      <a href="#top">맨 위로 이동 ↑</a>
+      <div class="footer-meta"><p>Copyright © 이명훈. All rights reserved.</p></div>
+    </div>
+  </div>
+</footer>
+<script src="./articles.js?v=20260813-001"></script>
+</body>
+</html>
