@@ -64,6 +64,15 @@ body {
   font-size: .9rem;
   line-height: 1.65;
 }
+.book-bibliography {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,.07);
+  color: #b9cce4;
+  font-size: .78rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
 .book-actions,
 .book-detail-actions {
   display: flex;
