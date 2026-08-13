@@ -1,45 +1,139 @@
 {
-  "updatedAt": "2026-08-11",
+  "updatedAt": "2026-08-13",
   "lifecycle": [
-    {"id":"idea","label":"IDEA","title":"제안"},
+    {"id":"idea","label":"CAPTURE","title":"수집"},
     {"id":"review","label":"REVIEW","title":"검토"},
-    {"id":"planned","label":"PLANNED","title":"계획"},
-    {"id":"open","label":"OPEN","title":"공개"},
-    {"id":"active","label":"ACTIVE","title":"진행"},
-    {"id":"completed","label":"COMPLETED","title":"완료"},
-    {"id":"archived","label":"ARCHIVED","title":"보관"}
+    {"id":"planned","label":"PLAN","title":"계획"},
+    {"id":"active","label":"DO","title":"실행"},
+    {"id":"completed","label":"DONE","title":"완료·보관"}
   ],
   "visibility": [
     {"id":"public","label":"PUBLIC","description":"전체 내용 공개"},
-    {"id":"summary","label":"SUMMARY","description":"제목과 개요만 공개"},
+    {"id":"summary","label":"SUMMARY","description":"제목과 개요 공개"},
     {"id":"private","label":"PRIVATE","description":"비공개 관리"},
     {"id":"embargo","label":"EMBARGO","description":"지정 시점까지 비공개"}
   ],
   "groups": [
-    {"id":"ideas","number":"01","eyebrow":"IDEA PIPELINE","title":"아이디어","description":"사업·서비스·콘텐츠·연구 외 아이디어를 최초 등록하고 검토 단계로 발전시킵니다."},
-    {"id":"business","number":"02","eyebrow":"BUSINESS","title":"사업","description":"신규 사업, 수익모델, 제휴, 교육·서비스 사업화를 검토합니다."},
-    {"id":"markets","number":"03","eyebrow":"MARKETS & SECURITIES","title":"시장·증권","description":"증권·기업·산업·기술·시장 흐름의 관찰과 판단 근거를 기록합니다."},
-    {"id":"plans","number":"04","eyebrow":"PLANS & ROADMAPS","title":"계획","description":"단기·중기·장기 계획과 실행 로드맵, 다음 행동을 관리합니다."},
-    {"id":"meetings","number":"05","eyebrow":"MEETINGS","title":"미팅","description":"예정 미팅, 논의사항, 결정사항과 후속조치를 기록합니다."},
-    {"id":"projects","number":"06","eyebrow":"PROJECT EXECUTION","title":"프로젝트","description":"준비·진행·완료 단계의 실제 프로젝트와 공개 진행기록을 관리합니다."},
-    {"id":"open-calls","number":"07","eyebrow":"OPEN CALLS","title":"공개 제안","description":"협업·참여·공동 프로젝트·외주 등 외부 제안과 참여 기회를 공개합니다."},
-    {"id":"resources","number":"08","eyebrow":"RESOURCES & BUDGET","title":"자원·예산","description":"예상비용, 예산, 필요자원, 사용내역과 결과를 공개 가능한 범위에서 연결합니다."},
-    {"id":"archive","number":"09","eyebrow":"ARCHIVE","title":"아카이브","description":"완료·중단·폐기된 안건과 그 판단·결과를 기록으로 보존합니다."}
+    {"id":"ideas","icon":"💡","title":"아이디어","description":"떠오른 생각·개선안·새 시도를 먼저 모으는 기본 인박스"},
+    {"id":"business","icon":"💼","title":"사업","description":"수익모델·강좌·서비스·제휴 등 사업화 후보"},
+    {"id":"markets","icon":"📈","title":"시장·증권","description":"기업·산업·기술·시장 변화와 판단 후보"},
+    {"id":"plans","icon":"🧭","title":"계획","description":"단기·중기·장기 실행 로드맵과 우선순위"},
+    {"id":"meetings","icon":"🤝","title":"미팅","description":"논의 예정·결정사항·후속조치 기록"},
+    {"id":"projects","icon":"🚀","title":"프로젝트","description":"검토를 통과해 실제 실행 중인 작업"},
+    {"id":"open-calls","icon":"📣","title":"공개 제안","description":"모집·협업·참여·외부 제안"},
+    {"id":"resources","icon":"▣","title":"자원·예산","description":"필요 도구·비용·시간·외부 자원"},
+    {"id":"archive","icon":"✓","title":"아카이브","description":"완료·중단·폐기와 판단 근거"}
   ],
   "items": [
     {
-      "id":"open-initiatives-system",
+      "id":"idea-hub-rebuild",
       "group":"projects",
-      "meta":"System Build",
-      "title":"Open Initiatives 운영체계 구축",
-      "summary":"Nexus에 아이디어·사업·시장·계획·미팅·프로젝트·공개제안을 지속적으로 등록하고, 공개 가능한 범위에서 진행상황과 결과를 공유하는 운영구조를 구축합니다.",
-      "status":"ACTIVE",
-      "statusId":"active",
-      "visibility":"PUBLIC",
-      "visibilityId":"public",
-      "registeredAt":"2026-08-11",
-      "updatedAt":"2026-08-11",
-      "nextAction":"각 영역의 실제 아이템을 순차적으로 등록하고 상태 이력을 축적합니다."
+      "meta":"Nexus System",
+      "title":"기획·운영을 통합 아이디어 허브로 재편",
+      "summary":"흩어진 기획 카드를 하나의 수집·검토·실행 보드로 통합하고 모든 아이디어가 한곳에서 상태와 다음 행동까지 이어지도록 구조를 압축합니다.",
+      "status":"ACTIVE","statusId":"active","priority":"P1","visibility":"PUBLIC","visibilityId":"public",
+      "registeredAt":"2026-08-11","updatedAt":"2026-08-13",
+      "nextAction":"새 아이디어는 별도 페이지를 만들기 전에 이 보드에 먼저 등록하고 분류·상태·다음 행동을 지정합니다."
+    },
+    {
+      "id":"suno-work-manual",
+      "group":"ideas",
+      "meta":"AI Music",
+      "title":"Suno 제작 경험을 반복 가능한 작업 매뉴얼로 전환",
+      "summary":"대량 생성 경험에서 축적한 가사·스타일·후보 비교·수정·선별 기준을 개별 감각이 아니라 재사용 가능한 제작 규칙으로 정리합니다.",
+      "status":"PLANNED","statusId":"planned","priority":"P1","visibility":"PUBLIC","visibilityId":"public",
+      "registeredAt":"2026-08-12","updatedAt":"2026-08-13",
+      "nextAction":"실제 곡 제작 사례에서 성공·실패·수정 이유를 추출해 AI 실무·아이디어 실행 자료실과 연결합니다."
+    },
+    {
+      "id":"multilingual-worship-channel",
+      "group":"projects",
+      "meta":"Media Operation",
+      "title":"HASHEM YESHUA 다국어 찬양 채널 운영 고도화",
+      "summary":"Suno 기반 찬양을 히브리어·영어·한국어 등으로 지속 공개하고 해외 청취자 대상 채널의 제작 규모·지속성·다국어 운영 강점을 체계적으로 축적합니다.",
+      "status":"ACTIVE","statusId":"active","priority":"P1","visibility":"PUBLIC","visibilityId":"public",
+      "registeredAt":"2026-08-08","updatedAt":"2026-08-13",
+      "nextAction":"곡별 언어·형식·플랫폼·반응 데이터를 남겨 다음 제작과 배포 기준에 반영합니다."
+    },
+    {
+      "id":"one-song-multiplatform",
+      "group":"ideas",
+      "meta":"Content System",
+      "title":"찬양곡 1곡을 유튜브·쇼츠·릴스·틱톡으로 파생",
+      "summary":"최종 음원·가사·자막·대표 이미지에서 롱폼과 세로형 숏폼을 파생해 플랫폼별 반복 제작을 줄이는 멀티플랫폼 제작 체계를 구축합니다.",
+      "status":"REVIEW","statusId":"review","priority":"P1","visibility":"PUBLIC","visibilityId":"public",
+      "registeredAt":"2026-08-12","updatedAt":"2026-08-13",
+      "nextAction":"실제 공개곡 1곡을 기준 사례로 정해 포맷별 산출물과 반응 기록 양식을 확정합니다."
+    },
+    {
+      "id":"ai-song-course-growth",
+      "group":"business",
+      "meta":"Education Business",
+      "title":"AI 노래 만들기 2시간 실습 강좌의 시범 운영과 확장",
+      "summary":"Suno 실전 제작·배포 경험을 바탕으로 초보자가 두 시간 안에 한 곡을 완성하도록 구성한 소규모 강좌를 실제 모집·수업·후기 축적 단계로 발전시킵니다.",
+      "status":"PLANNED","statusId":"planned","priority":"P1","visibility":"PUBLIC","visibilityId":"public",
+      "registeredAt":"2026-08-06","updatedAt":"2026-08-13",
+      "nextAction":"첫 시범 수강자를 모집하고 수업 중 막히는 지점과 결과물을 기록해 커리큘럼을 보정합니다."
+    },
+    {
+      "id":"ai-song-open-call",
+      "group":"open-calls",
+      "meta":"Pilot Recruitment",
+      "title":"AI 음악 소규모 시범 강좌 참여자 모집",
+      "summary":"대면 소규모 실습을 통해 실제 수강자 기준의 난이도·시간 배분·완성률을 검증하고 강좌 소개 페이지의 신뢰자료를 확보합니다.",
+      "status":"PLANNED","statusId":"planned","priority":"P2","visibility":"SUMMARY","visibilityId":"summary",
+      "registeredAt":"2026-08-13","updatedAt":"2026-08-13",
+      "nextAction":"모집 채널·가능 일정·정원·준비물을 확정한 뒤 공개 모집 문구를 연결합니다."
+    },
+    {
+      "id":"publishing-detail-pages",
+      "group":"business",
+      "meta":"Publishing",
+      "title":"전자책별 독립 소개 페이지와 판매 연결 구조",
+      "summary":"판매처 링크만 나열하지 않고 책의 문제의식·핵심 주장·목차·추천 독자·판매처를 하나의 소개 페이지에 연결하는 출판 자산을 만듭니다.",
+      "status":"REVIEW","statusId":"review","priority":"P2","visibility":"PUBLIC","visibilityId":"public",
+      "registeredAt":"2026-08-12","updatedAt":"2026-08-13",
+      "nextAction":"대표 도서부터 공통 상세 템플릿을 적용하고 판매처 링크를 한곳에 모읍니다."
+    },
+    {
+      "id":"legal-research-roadmap",
+      "group":"plans",
+      "meta":"Academic Roadmap",
+      "title":"석사 → KCI → 학술대회 → 박사연구계획 → 박사논문 연구 계보 구축",
+      "summary":"파편적인 연구 결과를 하나의 장기 연구계보로 연결하고 각 단계의 산출물·선행문헌·후속과제를 순차적으로 축적합니다.",
+      "status":"ACTIVE","statusId":"active","priority":"P1","visibility":"PUBLIC","visibilityId":"public",
+      "registeredAt":"2026-08-10","updatedAt":"2026-08-13",
+      "nextAction":"각 연구 단계별 현재 자료와 다음 산출물을 연구 트랙 페이지에서 직접 연결합니다."
+    },
+    {
+      "id":"ai-law-institute-expansion",
+      "group":"plans",
+      "meta":"Research Service",
+      "title":"AI 법률연구소의 연구·서비스 구조 고도화",
+      "summary":"AI 민사책임·Agentic AI·Multi-Agent Systems 등 핵심 연구축을 실제 연구 아카이브·설명 콘텐츠·향후 서비스 가능성과 연결합니다.",
+      "status":"REVIEW","statusId":"review","priority":"P2","visibility":"PUBLIC","visibilityId":"public",
+      "registeredAt":"2026-08-08","updatedAt":"2026-08-13",
+      "nextAction":"연구소에서 외부 방문자가 바로 이해할 수 있는 핵심 연구축과 공개 결과물을 우선 정리합니다."
+    },
+    {
+      "id":"ai-tool-budget",
+      "group":"resources",
+      "meta":"Tool Stack",
+      "title":"AI 제작·연구 도구의 역할과 비용 정리",
+      "summary":"ChatGPT·Suno·CapCut·GitHub·Cloudflare 등 반복 사용하는 도구를 주도·보조·배포 역할로 나누고 중복 비용과 사용 목적을 정리합니다.",
+      "status":"REVIEW","statusId":"review","priority":"P3","visibility":"SUMMARY","visibilityId":"summary",
+      "registeredAt":"2026-08-12","updatedAt":"2026-08-13",
+      "nextAction":"실제로 매달 사용하는 도구부터 비용·용도·대체 가능성을 기록합니다."
+    },
+    {
+      "id":"nexus-category-restructure",
+      "group":"archive",
+      "meta":"Completed UI",
+      "title":"Nexus 메인 카테고리 재배치와 프로젝트 포털 정리",
+      "summary":"웹앱·서비스, 연구·지식, 출판·아카이브, 미디어·콘텐츠 등 주요 영역을 재배치하고 프로젝트 포털의 기본 정보구조를 정리했습니다.",
+      "status":"COMPLETED","statusId":"completed","priority":"P3","visibility":"PUBLIC","visibilityId":"public",
+      "registeredAt":"2026-08-06","updatedAt":"2026-08-12",
+      "nextAction":"새 카테고리를 늘리기보다 기존 허브 안에서 실제 콘텐츠 밀도를 높입니다."
     }
   ]
 }
