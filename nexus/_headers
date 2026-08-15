@@ -24,6 +24,10 @@
   Cache-Control: no-cache, no-store, must-revalidate
 /research-groups.css
   Cache-Control: no-cache, no-store, must-revalidate
+/living-law/*
+  Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
+  Expires: 0
 /research-track/*
   Cache-Control: no-cache, no-store, must-revalidate
   Pragma: no-cache
