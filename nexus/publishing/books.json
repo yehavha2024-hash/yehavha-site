@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-13",
+  "updatedAt": "2026-08-15",
   "books": [
     {
       "id": "upaper-toeic-day001",
@@ -13,8 +13,9 @@
     {
       "id": "upaper-yhwh-returning-yeshua",
       "platform": "U-Paper",
-      "title": "사람으로 오신 YHWH",
-      "description": "이스라엘 언약의 성취를 중심으로 예슈아의 재림, 부활, 성도 집결과 천년 왕국을 살펴보는 신앙 연구 전자책입니다.",
+      "title": "사람으로 오신 YHWH, 다시 오실 예슈아",
+      "description": "이스라엘 언약의 성취와 부활·성도 집결·천년 왕국을 하나의 흐름으로 연결하여 예슈아의 재림과 언약 성취를 살펴보는 신앙 연구 전자책입니다.",
+      "bibliography": "초판 2026.08.11 · U-Paper",
       "url": "https://yehavha.upaper.kr/content/1221622",
       "actionLabel": "U-Paper에서 보기",
       "detailEnabled": true,
