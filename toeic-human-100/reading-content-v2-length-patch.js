@@ -1,6 +1,10 @@
-/* V2 short-reading normalization — DAY 001~010 */
+/* V1 focused-reading normalization — DAY 001~010 */
 (function (root) {
-  const program = root.TOEIC_READING_V2;
+  let program = null;
+  try {
+    if (typeof TOEIC_READING_V2 !== "undefined") program = TOEIC_READING_V2;
+  } catch {}
+  if (!program) program = root.TOEIC_READING_V2;
   if (!program || !Array.isArray(program.days)) return;
 
   const TARGET_MIN = 500;
@@ -40,33 +44,29 @@
 
   function removeOneSentence(paragraph) {
     const parts = sentences(paragraph);
-    if (parts.length <= 2) return paragraph;
+    if (parts.length <= 1) return null;
     parts.pop();
-    return parts.join(" ").trim();
+    return parts.join(" ").replace(/\s+/g, " ").trim();
   }
 
   function shortenParagraphs(paragraphs) {
     const next = paragraphs.map(p => String(p || "").replace(/\s+/g, " ").trim()).filter(Boolean);
     let total = wordCount(next.join(" "));
     let safety = 0;
-    while (total > TARGET_MAX && safety++ < 240) {
-      let candidate = -1;
-      let candidateWords = 0;
+    while (total > TARGET_MAX && safety++ < 500) {
+      const candidates = [];
       for (let i = 0; i < next.length; i += 1) {
-        const parts = sentences(next[i]);
-        const count = wordCount(next[i]);
-        if (parts.length <= 2) continue;
         const shortened = removeOneSentence(next[i]);
-        const delta = count - wordCount(shortened);
-        if (total - delta < TARGET_MIN) continue;
-        if (count > candidateWords) {
-          candidate = i;
-          candidateWords = count;
-        }
+        if (!shortened) continue;
+        const delta = wordCount(next[i]) - wordCount(shortened);
+        if (delta <= 0 || total - delta < TARGET_MIN) continue;
+        candidates.push({ i, shortened, delta, distance: Math.abs((total - delta) - 575) });
       }
-      if (candidate < 0) break;
-      next[candidate] = removeOneSentence(next[candidate]);
-      total = wordCount(next.join(" "));
+      if (!candidates.length) break;
+      candidates.sort((a, b) => a.distance - b.distance || b.delta - a.delta);
+      const chosen = candidates[0];
+      next[chosen.i] = chosen.shortened;
+      total -= chosen.delta;
     }
     return next;
   }
@@ -97,35 +97,13 @@
     if (!day || day.day > 10 || !Array.isArray(day.reading?.paragraphs)) continue;
     day.reading.paragraphs = shortenParagraphs(day.reading.paragraphs);
     const count = wordCount(day.reading.paragraphs.join(" "));
-    const originalInstruction = String(day.reading.instructionKo || "")
-      .replace(/^약\s*1,500단어[^.]*\.\s*/i, "")
-      .replace(/^약\s*700~850단어[^.]*\.\s*/i, "");
-    day.reading.instructionKo = `약 500~650단어의 집중 본문을 끝까지 읽으세요. ${originalInstruction || "모르는 단어가 있어도 먼저 문장구조와 문단기능을 유지합니다."}`;
+    day.reading.instructionKo = "약 500~650단어의 집중 본문을 끝까지 읽으세요. 핵심 흐름을 먼저 유지하고, 어휘·숙어·문법은 해부·학습 단계에서 따로 확인합니다.";
     expandExpressions(day);
     day.coverage ||= {};
     day.coverage.normalizedWordCount = count;
     day.coverage.readingTarget = "500~650 words";
     day.coverage.readingWithinTarget = count >= TARGET_MIN && count <= TARGET_MAX;
     day.coverage.masterPoolMode = "selection-source";
-    day.coverage.studyDesign = "short-reading-v3.2";
-  }
-
-  if (typeof document !== "undefined" && typeof MutationObserver !== "undefined") {
-    function fixReadingMeta() {
-      document.querySelectorAll(".reading-meta span").forEach(span => {
-        if (/1,500단어|1500단어|700~850단어/.test(span.textContent || "")) span.textContent = "약 500~650단어 집중 본문";
-      });
-    }
-
-    if (!root.__TOEIC_SHORT_READING_META_OBSERVER__) {
-      root.__TOEIC_SHORT_READING_META_OBSERVER__ = true;
-      const install = () => {
-        fixReadingMeta();
-        const observer = new MutationObserver(fixReadingMeta);
-        observer.observe(document.body, { childList: true, subtree: true });
-      };
-      if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", install, { once: true });
-      else install();
-    }
+    day.coverage.studyDesign = "short-reading-v3.3";
   }
 })(globalThis);
