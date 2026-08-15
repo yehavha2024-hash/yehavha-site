@@ -33,3 +33,5 @@ jobs:
           node-version: '22'
       - run: node scripts/audit-web-architecture.mjs
       - run: node nexus/scripts/audit-runtime.mjs
+      - if: github.event_name == 'push'
+        run: node nexus/scripts/audit-live-urls.mjs
