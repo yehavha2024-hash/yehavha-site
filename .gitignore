@@ -36,3 +36,11 @@ three-minute-break/VALIDATION_REPORT.md
 toeic-human-100/content.json
 toeic-human-100/CONTENT_CATALOG.csv
 toeic-human-100/VALIDATION_REPORT.md
+toeic-human-100/READING_V2_EXPANDED_VALIDATION.json
+toeic-human-100/READING_V2_COVERAGE.json
+toeic-human-100/READING_V2_COVERAGE.md
+toeic-human-100/NEXT_10_DAY_TARGETS.json
+toeic-human-100/NEXT_10_DAY_TARGETS.md
+legal-knowledge/.audit/
+legal-knowledge/RUNTIME_AUDIT_OUTPUT_*.json
+legal-knowledge/RUNTIME_AUDIT_PRIORITY_*.md
