@@ -1,0 +1,14 @@
+{
+  "id": "legal-research-track",
+  "publish": true,
+  "tracking": {
+    "paths": ["nexus/research-track"],
+    "freshDays": 7,
+    "staleDays": 30,
+    "count": {
+      "type": "static",
+      "value": 6,
+      "label": "연구 단계"
+    }
+  }
+}
