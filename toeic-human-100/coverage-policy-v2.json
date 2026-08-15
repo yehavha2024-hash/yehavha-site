@@ -1,12 +1,12 @@
 {
-  "version": "3.1",
-  "description": "700~850단어 집중독해와 분리형 핵심어휘·숙어 학습을 결합한 100일 TOEIC+TEPS 커버리지 정책",
+  "version": "3.2",
+  "description": "500~650단어 집중독해와 분리형 핵심어휘·숙어 학습을 결합한 100일 TOEIC+TEPS 커버리지 정책",
   "totalDays": 100,
   "blockSize": 10,
   "readingDesign": {
-    "toeicReadingWordsMin": 700,
-    "toeicReadingWordsMax": 850,
-    "targetCenter": 780,
+    "toeicReadingWordsMin": 500,
+    "toeicReadingWordsMax": 650,
+    "targetCenter": 575,
     "principle": "본문은 실제 독해 흐름을 우선하고 마스터 어휘를 채우기 위한 인위적 어휘목록 문장이나 반복문을 삽입하지 않는다.",
     "firstRead": "모르는 단어에서 멈추지 않고 문장구조·문단기능·근거와 결론을 유지한다.",
     "secondRead": "해부·학습 단계에서 핵심어휘·확장어휘·숙어·문법을 확인한 뒤 다시 읽는다."
