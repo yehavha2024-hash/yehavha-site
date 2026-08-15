@@ -27,7 +27,7 @@
       <div class="day-dashboard">
         <div class="day-copy">
           <span id="dayLabel">DAY 1</span>
-          <strong id="dayHeadline">장문독해 · 4단계 학습</strong>
+          <strong id="dayHeadline">집중독해 · 4단계 학습</strong>
           <small id="dateLabel"></small>
         </div>
         <div class="progress-ring" id="progressRing" aria-label="100일 진행률">
@@ -42,7 +42,7 @@
     </header>
 
     <nav class="category-tabs glass" aria-label="학습 단계">
-      <button class="category active" data-category="read"><span>01</span>장문읽기</button>
+      <button class="category active" data-category="read"><span>01</span>집중읽기</button>
       <button class="category" data-category="analyze"><span>02</span>해부·학습</button>
       <button class="category" data-category="apply"><span>03</span>문제·복습</button>
       <button class="category" data-category="speed"><span>04</span>스피드퀴즈</button>
@@ -50,8 +50,8 @@
 
     <section id="learningCard" class="learning-card glass" aria-live="polite">
       <div class="card-head">
-        <span id="badge" class="badge">장문읽기</span>
-        <span id="partBadge" class="part-badge">LONG READING</span>
+        <span id="badge" class="badge">집중읽기</span>
+        <span id="partBadge" class="part-badge">FOCUSED READING</span>
       </div>
       <div id="cardContent"></div>
       <div id="quizArea" class="quiz-area" hidden></div>
@@ -102,5 +102,6 @@
   <script src="app-v2.js?v=20260809-v6" defer></script>
   <script src="teps-extension-ui-v2.js?v=20260809-v6" defer></script>
   <script src="reading-content-v2-ready-rerender.js?v=20260809-v6" defer></script>
+  <script src="focused-reading-ui-patch.js?v=20260815-v1" defer></script>
 </body>
 </html>
