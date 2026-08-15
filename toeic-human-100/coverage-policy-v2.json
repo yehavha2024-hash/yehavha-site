@@ -1,53 +1,58 @@
 {
-  "version": "2.2",
-  "description": "10일 단위 TOEIC+TEPS 장문독해 어휘 커버리지 보정 정책",
+  "version": "3.0",
+  "description": "700~850단어 집중독해와 분리형 어휘·숙어 학습을 결합한 100일 TOEIC+TEPS 커버리지 정책",
   "totalDays": 100,
   "blockSize": 10,
   "completionTargetDay": 80,
+  "readingDesign": {
+    "toeicReadingWordsMin": 700,
+    "toeicReadingWordsMax": 850,
+    "targetCenter": 780,
+    "principle": "본문은 실제 독해 흐름을 우선하고 마스터 어휘를 채우기 위한 인위적 문장·반복문을 삽입하지 않는다.",
+    "firstRead": "모르는 단어에서 멈추지 않고 문장구조·문단기능·근거와 결론을 유지한다.",
+    "secondRead": "해부·학습 단계에서 핵심어휘·확장어휘·숙어·문법을 확인한 뒤 다시 읽는다."
+  },
   "milestones": [
-    {"day": 10, "maxMissingHeadwords": 3200},
-    {"day": 20, "maxMissingHeadwords": 2600},
-    {"day": 30, "maxMissingHeadwords": 2150},
-    {"day": 40, "maxMissingHeadwords": 1700},
-    {"day": 50, "maxMissingHeadwords": 1250},
-    {"day": 60, "maxMissingHeadwords": 850},
-    {"day": 70, "maxMissingHeadwords": 450},
+    {"day": 10, "maxMissingHeadwords": 1728},
+    {"day": 20, "maxMissingHeadwords": 1485},
+    {"day": 30, "maxMissingHeadwords": 1235},
+    {"day": 40, "maxMissingHeadwords": 990},
+    {"day": 50, "maxMissingHeadwords": 740},
+    {"day": 60, "maxMissingHeadwords": 495},
+    {"day": 70, "maxMissingHeadwords": 250},
     {"day": 80, "maxMissingHeadwords": 0},
     {"day": 90, "maxMissingHeadwords": 0},
     {"day": 100, "maxMissingHeadwords": 0}
   ],
-  "nextBlockPlanning": {
-    "coverageBufferRatio": 1.08,
-    "candidatePoolMultiplier": 2.0,
-    "minNewHeadwordsPerDay": 40,
-    "maxNewHeadwordsPerDay": 55,
-    "repeatTargetsPerDay": 20,
-    "newRoleShares": {
-      "toeic-specific": 0.32,
-      "academic-book-extension": 0.24,
-      "general-core": 0.44
-    },
-    "priorityOrder": [
-      "toeic-specific+academic-book-extension",
-      "toeic-specific",
-      "academic-book-extension",
-      "general-core"
-    ]
+  "vocabularyDesign": {
+    "masterHeadwords": 1728,
+    "day1To10": "기초 연결구간: 기존 핵심어휘 12~16개를 본문과 직접 연결",
+    "day11To80": "마스터 어휘 최초 노출 우선: 하루 약 24~30개를 해부·학습에서 명시적으로 확인",
+    "day81To100": "고빈도·TOEIC 핵심·취약 어휘 재노출: 하루 약 20~24개",
+    "firstExposureRule": "1,728개 표제어는 DAY 80까지 최소 1회 학습목록에 노출",
+    "reinforcementRule": "모든 단어를 본문에 반복 삽입하지 않고 TOEIC 핵심어와 일반 핵심어를 우선 재노출",
+    "separationRule": "본문 독해량과 어휘 커버리지량을 분리하여 본문 가독성을 희생하지 않는다."
   },
-  "finalMinimumExposureByRole": {
-    "toeic-specific": 4,
-    "general-core": 3,
-    "academic-book-extension": 2
+  "phraseAndGrammarCoverage": {
+    "phrasesPerDayMin": 6,
+    "phraseMethod": "숙어·연어·구동사를 독립 학습항목으로 제시하고 반복 사용",
+    "grammarPerDayMin": 3,
+    "grammarMethod": "문법명 암기보다 본문 문장구조와 포섭해 확인"
   },
+  "reinforcementPriority": [
+    "틀린 단어·취약 어휘",
+    "toeic-specific",
+    "general-core",
+    "academic-book-extension"
+  ],
   "contentRules": {
-    "toeicReadingWordsMin": 1350,
-    "toeicReadingWordsMax": 1650,
     "tepsExtensionWordsMin": 180,
     "doNotForceUnnaturalVocabulary": true,
     "semanticPlacementRequired": true,
-    "dayAllocationIsQuotaOnly": true,
-    "candidatePoolMayBeReplacedByOtherMissingWordsWhenSemanticallyBetter": true,
+    "removeLexicalBridgeFiller": true,
     "countToeicReading": true,
+    "countVocabularyStudy": true,
+    "countPhraseStudy": true,
     "countToeicPractice": true,
     "countSentenceAnalysis": true,
     "countTepsExtension": true
