@@ -1,0 +1,15 @@
+{
+  "id": "initiative-hub",
+  "publish": true,
+  "tracking": {
+    "paths": ["nexus/initiatives"],
+    "freshDays": 7,
+    "staleDays": 30,
+    "count": {
+      "type": "json-array",
+      "file": "nexus/initiatives/data.json",
+      "path": "items",
+      "label": "관리 항목"
+    }
+  }
+}
