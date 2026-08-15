@@ -139,8 +139,8 @@ function searchableText(item) {
   const solutionText = [...(item.variationAnalyses||[]),...(item.hardVariationAnalyses||[])].flatMap(a => Object.values(a||{}));
   const fields = [
     item.title,item.area,item.systemArea,item.subfield,item.type,item.summary,item.concept,item.issue,item.rule,item.coreRule,item.analysis,item.effect,item.theories,
-    item.doctrineDebate,item.comparativeLaw,item.crossLawConflict,item.adjacentCaseLaw,item.precedentLineage,item.methodLineage,item.caseFacts,item.courtHolding,item.courtReasoning,item.counter,item.refinementStage,
-    ...(item.keywords||[]),...(item.examTags||[]),...(item.requirements||[]),...(item.relatedRules||[]),...(item.variations||[]),...(item.hardVariations||[]),...(item.proofIssues||[]),...solutionText,...guidanceText,...matrixText,...deep,...(item.application||[])
+    item.doctrineDebate,item.comparativeLaw,item.crossLawConflict,item.adjacentCaseLaw,item.precedentLineage,item.methodLineage,item.caseFacts,item.courtHolding,item.courtReasoning,item.counter,item.refinementStage,item.followUpResearch,
+    ...(item.keywords||[]),...(item.examTags||[]),...(item.requirements||[]),...(item.relatedRules||[]),...(item.variations||[]),...(item.hardVariations||[]),...(item.proofIssues||[]),...(item.researchQuestions||[]),...solutionText,...guidanceText,...matrixText,...deep,...(item.application||[])
   ];
   return fields.filter(Boolean).join(' ').toLowerCase();
 }
@@ -176,6 +176,7 @@ function openDetail(id) {
   const allSources = links(item.sources || []);
   const deep = (item.deepDive || []).map(x => `<div class="deep-item"><strong>${esc(x.title)}</strong><p>${esc(x.body)}</p></div>`).join('');
   const application = (item.application || []).length ? `<ol class="detail-list application-list">${item.application.map(x=>`<li>${esc(x)}</li>`).join('')}</ol>` : '';
+  const researchQuestions = list(item.researchQuestions || [], 'detail-list research-question-list');
   const variation = variationCases(item,false);
   const hardVariation = variationCases(item,true);
   const proofIssues = list(item.proofIssues || [], 'detail-list proof-list');
@@ -211,6 +212,8 @@ function openDetail(id) {
     ${section('사례 적용·논증 순서', application)}
     ${section('사례변형 및 해설', variation)}
     ${section('고난도 사례변형 및 논증', hardVariation)}
+    ${section('연구 확인문제·퀴즈', researchQuestions)}
+    ${section('후속 연구 포인트', item.followUpResearch ? `<p>${esc(item.followUpResearch)}</p>` : '')}
     ${section('관련 법리', chips(item.relatedRules || []))}
     ${section('관련 판례', caseLinks)}
     ${section('공식 가이드라인·비교자료', guidanceLinks)}
