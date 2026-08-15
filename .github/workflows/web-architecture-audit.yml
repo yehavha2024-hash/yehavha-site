@@ -38,6 +38,8 @@ jobs:
           node-version: '22'
       - run: node scripts/audit-web-architecture.mjs
       - run: node scripts/audit-repo-hygiene.mjs
+      - name: Validate 3 minute break runtime content
+        run: node three-minute-break/scripts/export-content.mjs
       - run: node nexus/scripts/audit-runtime.mjs
       - if: github.event_name == 'push'
         run: node nexus/scripts/audit-live-urls.mjs
