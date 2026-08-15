@@ -6,10 +6,10 @@ import { fileURLToPath } from 'node:url';
 const here = path.dirname(fileURLToPath(import.meta.url));
 const indexPath = path.join(here, 'index.html');
 const index = fs.readFileSync(indexPath, 'utf8');
-const EXPECTED_TOTAL = 107;
+const auditDir = path.join(here, '.audit');
 
-// 실제 배포 index.html에 선언된 데이터 스크립트 순서를 감사의 단일 원본으로 사용한다.
-// 별도 파일목록을 유지하지 않아 배포와 감사가 서로 다른 데이터를 검사하는 문제를 방지한다.
+// 실제 배포 index.html에 선언된 데이터 스크립트 순서를 감사의 단일 원본으로 사용합니다.
+// 별도 카드 수나 파일목록을 하드코딩하지 않아 배포 구조와 감사 기준이 갈라지지 않게 합니다.
 const files = [...index.matchAll(/<script\s+[^>]*src=["']([^"']+)["'][^>]*><\/script>/gi)]
   .map(match => match[1].split('?')[0])
   .filter(file => file === 'schema.js' || file === 'manual-solution-audit.js' || file.startsWith('data-'));
@@ -26,6 +26,8 @@ for (const file of files) {
 }
 
 const data = sandbox.window.LEGAL_KNOWLEDGE;
+if (!Array.isArray(data) || data.length === 0) throw new Error('LEGAL_KNOWLEDGE runtime data is empty');
+
 const summary = sandbox.window.LEGAL_SOURCE_AUDIT_SUMMARY || {};
 const weakSource = data.filter(x => ['D', 'C'].includes(x.sourceLinkGrade));
 const b1 = data.filter(x => (x.sourceLinkAudit?.counts?.B1 || 0) > 0);
@@ -33,7 +35,8 @@ const articleC = data.filter(x => x.articleAccuracyGrade === 'C');
 const articleB = data.filter(x => ['B', 'B+'].includes(x.articleAccuracyGrade));
 const idCounts = data.reduce((m, x) => { m[x.id] = (m[x.id] || 0) + 1; return m; }, {});
 const duplicateIds = Object.entries(idCounts).filter(([, count]) => count > 1).map(([id, count]) => ({
-  id, count,
+  id,
+  count,
   cards: data.filter(x => x.id === id).map((x, index) => ({
     index,
     title: x.title,
@@ -54,7 +57,9 @@ const cardView = item => ({
   subfield: item.subfield,
   sourceLinkGrade: item.sourceLinkGrade,
   sourceCounts: item.sourceLinkAudit?.counts,
-  weakOrFragileSources: (item.sourceLinkAudit?.entries || []).filter(x => ['D', 'C', 'B1'].includes(x.code)).map(x => ({ label: x.label, url: x.url, code: x.code, note: x.note, field: x.field })),
+  weakOrFragileSources: (item.sourceLinkAudit?.entries || [])
+    .filter(x => ['D', 'C', 'B1'].includes(x.code))
+    .map(x => ({ label: x.label, url: x.url, code: x.code, note: x.note, field: x.field })),
   articleAccuracyGrade: item.articleAccuracyGrade,
   articleNote: item.articleAccuracyAudit?.note,
   articleRefs: item.articleAccuracyAudit?.refs,
@@ -64,9 +69,9 @@ const cardView = item => ({
   relatedCases: item.relatedCases || []
 });
 
+const generatedAt = new Date().toISOString();
 const out = {
-  generatedAt: '2026-08-12',
-  expectedTotal: EXPECTED_TOTAL,
+  generatedAt,
   actualTotal: data.length,
   runtimeFiles: files,
   duplicateIds,
@@ -78,12 +83,13 @@ const out = {
     articleB_Bplus: articleB.map(cardView)
   }
 };
-if (data.length !== EXPECTED_TOTAL) out.warning = `Expected ${EXPECTED_TOTAL} cards but got ${data.length}`;
-const outPath = path.join(here, 'RUNTIME_AUDIT_OUTPUT_20260809.json');
-fs.writeFileSync(outPath, `${JSON.stringify(out, null, 2)}\n`, 'utf8');
+
+fs.mkdirSync(auditDir, { recursive: true });
+fs.writeFileSync(path.join(auditDir, 'runtime-audit.json'), `${JSON.stringify(out, null, 2)}\n`, 'utf8');
 
 const md = [];
-md.push('# 런타임 취약 인용 우선검증 목록 — 2026-08-09', '');
+md.push('# 런타임 취약 인용 우선검증 목록', '');
+md.push(`- 생성시각: ${generatedAt}`);
 md.push(`- 전체 카드: ${data.length}`);
 md.push(`- 중복 ID: ${duplicateIds.length}`);
 duplicateIds.forEach(x => {
@@ -119,7 +125,7 @@ section('4순위 — 조문 B/B+', articleB, item => [
   `등급 ${item.articleAccuracyGrade}: ${item.articleAccuracyAudit?.note || ''}`,
   ...(item.statuteSources || []).map(x => `${x.label} → ${x.url}`)
 ]);
-fs.writeFileSync(path.join(here, 'RUNTIME_AUDIT_PRIORITY_20260809.md'), `${md.join('\n')}\n`, 'utf8');
+fs.writeFileSync(path.join(auditDir, 'runtime-audit-priority.md'), `${md.join('\n')}\n`, 'utf8');
 
 console.log(JSON.stringify({
   actualTotal: data.length,
@@ -128,7 +134,12 @@ console.log(JSON.stringify({
   sourceGrades: summary.sourceGrades,
   articleGrades: summary.articleGrades,
   precedentGrades: summary.precedentGrades,
-  priorityCounts: { sourceDC: weakSource.length, sourceB1: b1.length, articleC: articleC.length, articleB_Bplus: articleB.length }
+  priorityCounts: {
+    sourceDC: weakSource.length,
+    sourceB1: b1.length,
+    articleC: articleC.length,
+    articleB_Bplus: articleB.length
+  }
 }, null, 2));
 
-if (data.length !== EXPECTED_TOTAL || duplicateIds.length) process.exit(1);
+if (duplicateIds.length) process.exit(1);
