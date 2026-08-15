@@ -14,8 +14,8 @@
     "status": "최근 업데이트",
     "statusTone": "fresh",
     "lastUpdated": "2026-08-15",
-    "contentCount": 200,
-    "contentLabel": "콘텐츠"
+    "contentCount": 4,
+    "contentLabel": "학습 카테고리"
   },
   "toeicman": {
     "id": "toeicman",
@@ -23,8 +23,8 @@
     "status": "최근 업데이트",
     "statusTone": "fresh",
     "lastUpdated": "2026-08-15",
-    "contentCount": 500,
-    "contentLabel": "기존 학습카드"
+    "contentCount": 100,
+    "contentLabel": "학습일"
   },
   "toeicman-v2": {
     "id": "toeicman-v2",
