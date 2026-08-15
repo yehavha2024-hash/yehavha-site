@@ -61,6 +61,38 @@
     item.isCaseNote = isCaseNote;
     item.variationSolutionsComplete = variationSolutionsComplete(item,isReasoning);
 
+    const existingDeepDive = Array.isArray(item.deepDive) ? item.deepDive : [];
+    const existingDeepTitles = new Set(existingDeepDive.map(x => x && x.title).filter(Boolean));
+    const researchQuestions = [
+      {
+        title: '연구 확인문제 ① 핵심 규범',
+        body: `「${item.title}」의 핵심 법리 또는 규범을 관련 조문·판례와 연결하여 설명하고, 그 규범이 적용되기 위한 전제와 법적 효과를 구분해 정리해 봅니다.`
+      },
+      isCaseNote ? {
+        title: '연구 확인문제 ② 판례 논증',
+        body: '판례 사실관계에서 결론을 좌우한 사실을 추출하고, 법원이 규범전제 → 사실평가 → 포섭 → 결론의 순서로 어떤 논증을 전개했는지 재구성해 봅니다.'
+      } : {
+        title: '연구 확인문제 ② 요건·포섭',
+        body: '성립요건 가운데 결론을 좌우하는 판단요소를 선별하고, 사실 하나가 달라질 때 포섭과 법적 효과가 어떻게 달라지는지 사례형으로 검토해 봅니다.'
+      },
+      {
+        title: '연구 확인문제 ③ 반론·사례변형',
+        body: '주된 견해 또는 현재 연구노트의 결론에 대한 반대논리를 구성하고, 결론이 달라질 수 있는 사실관계나 예외를 하나 설정하여 다시 논증해 봅니다.'
+      },
+      {
+        title: '후속 연구 포인트',
+        body: isCaseNote
+          ? '판결 원문의 사실관계·적용조문·판단이유를 다시 대조하고 선행·후속·유사 판례를 연결합니다. 판결 당시 적용법과 현행법이 다르면 그 차이를 구분하고, 증명책임과 결정적 사실이 결론에 미치는 영향까지 추적합니다.'
+          : isReasoning
+            ? '같은 논증구조가 다른 법영역에서도 성립하는지 반례를 설정하고, 규칙·예외·요건사실·증명책임의 위치를 바꾸어 결론의 안정성을 검증합니다.'
+            : '현행 조문과 공식 해석을 기준으로 요건·효과를 확인하고 관련 판례·대립학설·인접 제도와 연결합니다. 실제 사례에 적용할 때는 사실확정, 증명책임, 반대논리와 최신 법령 여부를 별도로 점검합니다.'
+      }
+    ];
+    item.deepDive = [
+      ...existingDeepDive,
+      ...researchQuestions.filter(q => !existingDeepTitles.has(q.title))
+    ];
+
     const checks = [
       {key:'concept', label:'주제·개념', ok:hasText(item.concept)},
       {key:'statutes', label:'관련 조문', ok:isReasoning || hasList(item.statuteSources)},
