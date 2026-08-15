@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="YEHAVHA Nexus AI 실무·아이디어 실행 자료실. AI 자동화, 콘텐츠 제작, 웹·서비스 제작, 프롬프트·도구 자료를 실제 프로젝트 실행안으로 정리합니다."/>
+<meta name="description" content="YEHAVHA Nexus AI 실무·아이디어 실행 자료실. AI 자동화, 웹·서비스 제작, 프롬프트·도구 자료를 실제 프로젝트 실행안으로 정리합니다."/>
 <meta name="theme-color" content="#081a30"/>
 <title>AI 실무·아이디어 실행 자료실 | YEHAVHA Nexus</title>
 <link href="../portal-v2.css?v=20260812-2035" rel="stylesheet"/>
@@ -21,7 +21,7 @@
       <p class="eyebrow">AI PRACTICE & IDEAS</p>
       <h1>AI 실무·아이디어 <span>실행 자료실</span></h1>
       <p class="subtitle">자료를 모으는 곳이 아니라, 실제 프로젝트에 적용할 수 있는 실행안으로 바꾸는 공간입니다.</p>
-      <p class="description">AI 활용 사례와 도구 정보를 그대로 쌓지 않고 자동화·콘텐츠 제작·웹·서비스 제작·프롬프트·도구 자료의 네 영역으로 정리합니다. 각 항목에는 실제 실행 절차와 사용할 도구, 만들어야 할 산출물, 바로 이어갈 다음 행동까지 기록합니다.</p>
+      <p class="description">AI 활용 사례와 도구 정보를 그대로 쌓지 않고 자동화·웹·서비스 제작·프롬프트·도구 자료의 세 영역으로 정리합니다. 각 항목에는 실제 실행 절차와 사용할 도구, 만들어야 할 산출물, 바로 이어갈 다음 행동까지 기록합니다.</p>
       <nav class="practice-links" id="practiceLinks" aria-label="실행 자료실 바로가기"></nav>
       <a class="practice-log-link" href="./logs/">실제 실행 기록 · 결과 · 실패 · 수정사항 보기</a>
     </section>
@@ -31,7 +31,7 @@
   <section class="principles-card" aria-labelledby="principlesTitle"><p class="eyebrow">OPERATING PRINCIPLES</p><h2 id="principlesTitle">정리 원칙</h2><div class="principles-grid" id="principles"></div></section>
   <div class="practice-groups" id="practiceGroups"></div>
 </div></main>
-<footer class="footer"><div class="container"><div class="footer-card"><strong>YEHAVHA Nexus · AI Practice & Ideas</strong><p>실제 적용 결과와 수정 이유를 다시 자료실에 반영하여 반복 가능한 작업 방식으로 축적합니다.</p><a href="#top">맨 위로 이동 ↑</a><div class="footer-meta"><p>Copyright © 이명훈. All rights reserved.</p></div></div></div></footer>
+<footer class="footer" data-footer-standard="v1"><div class="container"><div class="footer-card"><strong>YEHAVHA Nexus · AI Practice & Ideas</strong><p>실제 적용 결과와 수정 이유를 다시 자료실에 반영하여 반복 가능한 작업 방식으로 축적합니다.</p><a href="#top">맨 위로 이동 ↑</a><div class="footer-meta"><p>Copyright © 이명훈 2026. All rights reserved.</p><p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p><p class="ai-disclosure">AI 활용 안내: 일부 실행안의 정리·구조화에 생성형 AI를 활용하며, 실제 적용·검토·수정과 최종 운영은 관리자가 수행합니다.</p></div></div></div></footer>
 <script>
 (() => {
   'use strict';
@@ -52,7 +52,7 @@
     if(!Array.isArray(item.tools)||!item.tools.includes('Suno'))return;
     const proof=make('aside','channel-proof'),icon=make('div','channel-proof-icon','♫'),body=make('div','channel-proof-body');
     body.append(make('span','channel-proof-kicker','SUNO · MULTILINGUAL CHANNEL'),make('p','channel-proof-title','Suno 기반 다국어 찬양 채널 운영'));
-    body.append(make('p','channel-proof-text','Suno를 활용해 제작한 찬양음악을 유튜브를 통해 지속적으로 공개하고 있으며, 히브리어·영어·한국어 등 다국어 콘텐츠를 해외 청취자에게 서비스하고 있습니다. 공개적으로 확인되는 국내 AI 찬양음악 채널 가운데 다국어 운영과 콘텐츠 제작 규모, 지속성 측면에서 매우 드물며 손꼽히는 전문 음악채널입니다.'));
+    body.append(make('p','channel-proof-text','Suno를 활용해 제작한 찬양음악을 유튜브를 통해 지속적으로 공개하고 있으며, 히브리어·영어·한국어 등 다국어 콘텐츠를 해외 청취자에게 서비스하고 있습니다. 공개적으로 확인되는 국내 AI 찬양음악 채널 가운데 다국어 운영과 지속적 제작 규모 측면에서 드문 전문 음악채널입니다.'));
     const tags=make('div','channel-proof-tags');['Suno 제작','YouTube 공개','히브리어 · 영어 · 한국어','해외 청취자'].forEach(text=>tags.append(make('span','channel-proof-tag',text)));body.append(tags);
     const link=make('a','channel-proof-link','HASHEM YESHUA 채널 보기 ↗');link.href='https://www.youtube.com/@yehavha';link.target='_blank';link.rel='noopener noreferrer';body.append(link);
     proof.append(icon,body);article.append(proof)
