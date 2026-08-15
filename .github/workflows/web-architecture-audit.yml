@@ -32,3 +32,4 @@ jobs:
         with:
           node-version: '22'
       - run: node scripts/audit-web-architecture.mjs
+      - run: node nexus/scripts/audit-runtime.mjs
