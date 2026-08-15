@@ -92,6 +92,49 @@ function auditAdvancedToeic() {
   }
 }
 
+function auditLivingLaw() {
+  const source = 'nexus/living-law';
+  for (const file of ['data.js', 'app.js', 'style.css', 'index.html', 'nexus.project.json']) {
+    if (!exists(`${source}/${file}`)) fail(source, `필수 실행파일 없음: ${file}`);
+  }
+  if (!exists(`${source}/data.js`)) return;
+
+  const context = { window: {}, console };
+  vm.createContext(context);
+  try {
+    vm.runInContext(read(`${source}/data.js`), context, { filename: 'living-law/data.js' });
+  } catch (error) {
+    fail(source, `생활법률 데이터 실행 실패: ${error.message}`);
+    return;
+  }
+
+  const data = context.window.LIVING_LAW_DATA;
+  if (!data) return fail(source, 'LIVING_LAW_DATA 없음');
+  if (!data.updatedAt || !data.legalBaseline) fail(source, '업데이트일 또는 법령 기준일 누락');
+
+  const categories = Array.isArray(data.categories) ? data.categories : [];
+  const items = Array.isArray(data.items) ? data.items : [];
+  const sourceMap = data.sources && typeof data.sources === 'object' ? data.sources : {};
+  if (categories.length !== 10) fail(source, `생활분야 ${categories.length}개, 기대값 10개`);
+  if (items.length !== 100) fail(source, `생활법률 ${items.length}개, 기대값 100개`);
+  if (!unique(categories.map(item => item.id))) fail(source, '생활분야 id 중복');
+  if (!unique(items.map(item => item.id))) fail(source, '생활법률 id 중복');
+  if (!unique(items.map(item => item.n))) fail(source, '생활법률 번호 중복');
+
+  const categoryIds = new Set(categories.map(item => item.id));
+  for (let n = 1; n <= 100; n += 1) if (!items.some(item => item.n === n)) fail(source, `생활법률 ${n}번 누락`);
+
+  for (const item of items) {
+    const label = `${source}/${item.id || item.n || '?'}`;
+    if (!categoryIds.has(item.category)) fail(label, `분야 대상 없음: ${item.category}`);
+    for (const key of ['title','summary','now','route','caution']) if (!item[key]) fail(label, `${key} 누락`);
+    if (!Array.isArray(item.evidence) || !item.evidence.length) fail(label, '확보자료 누락');
+    if (!Array.isArray(item.laws) || !item.laws.length) fail(label, '법률근거 누락');
+    if (!Array.isArray(item.sources) || !item.sources.length) fail(label, '공식 확인처 누락');
+    for (const key of item.sources || []) if (!sourceMap[key]) fail(label, `공식 확인처 키 없음: ${key}`);
+  }
+}
+
 function auditPublishing() {
   const source = 'nexus/publishing/books.json';
   const data = auditJson(source);
@@ -174,7 +217,7 @@ function auditStatusModel() {
   const projects = auditJson('nexus/projects.json');
   if (!status || !projects) return;
   const managedIds = [
-    'ai-law-institute','three-min-rest','toeicman','toeicman-v2','legal-research-track','legal-knowledge',
+    'ai-law-institute','three-min-rest','living-law-100','toeicman','toeicman-v2','legal-research-track','legal-knowledge',
     'ai-law-literature','ai-law-tech-foresight','legal-philosophy','publishing-hub','article-library','ai-practice-library','initiative-hub'
   ];
   for (const id of managedIds) {
@@ -185,6 +228,7 @@ function auditStatusModel() {
 
 auditInternalProjectUrls();
 auditAdvancedToeic();
+auditLivingLaw();
 auditPublishing();
 auditArticles();
 auditInitiatives();
