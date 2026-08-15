@@ -56,16 +56,6 @@
       "nextAction":"곡별 언어·형식·플랫폼·반응 데이터를 남겨 다음 제작과 배포 기준에 반영합니다."
     },
     {
-      "id":"one-song-multiplatform",
-      "group":"ideas",
-      "meta":"Content System",
-      "title":"찬양곡 1곡을 유튜브·쇼츠·릴스·틱톡으로 파생",
-      "summary":"최종 음원·가사·자막·대표 이미지에서 롱폼과 세로형 숏폼을 파생해 플랫폼별 반복 제작을 줄이는 멀티플랫폼 제작 체계를 구축합니다.",
-      "status":"REVIEW","statusId":"review","priority":"P1","visibility":"PUBLIC","visibilityId":"public",
-      "registeredAt":"2026-08-12","updatedAt":"2026-08-13",
-      "nextAction":"실제 공개곡 1곡을 기준 사례로 정해 포맷별 산출물과 반응 기록 양식을 확정합니다."
-    },
-    {
       "id":"ai-song-course-growth",
       "group":"business",
       "meta":"Education Business",
