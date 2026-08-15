@@ -14,10 +14,16 @@ const MANIFEST_FILES = [
   'nexus.project.json',
   'three-minute-break/nexus.project.json',
   'toeic-human-100/nexus.project.json',
+  'nexus/toeic-human-v2/nexus.project.json',
+  'nexus/research-track/nexus.project.json',
   'legal-knowledge/nexus.project.json',
   'legal-knowledge/ai-literature/nexus.project.json',
   'ai-law-tech-foresight/nexus.project.json',
-  'legal-philosophy/nexus.project.json'
+  'legal-philosophy/nexus.project.json',
+  'nexus/publishing/nexus.project.json',
+  'nexus/articles/nexus.project.json',
+  'nexus/ai-practice/nexus.project.json',
+  'nexus/initiatives/nexus.project.json'
 ];
 
 function readJson(file) {
@@ -26,6 +32,14 @@ function readJson(file) {
 
 function writeJson(file, value) {
   fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
+}
+
+function valueAtPath(root, pathSpec) {
+  if (!pathSpec) return root;
+  return String(pathSpec)
+    .split('.')
+    .filter(Boolean)
+    .reduce((value, key) => value?.[key], root);
 }
 
 function loadApprovedManifests() {
@@ -155,8 +169,34 @@ function countWindowArray(config) {
   return Array.isArray(value) ? value.length : 0;
 }
 
+function countJsonArray(config) {
+  const file = path.join(ROOT, config.file || '');
+  const value = valueAtPath(readJson(file), config.path);
+  if (!Array.isArray(value)) {
+    throw new Error(`JSON array not found: ${config.file}#${config.path || '(root)'}`);
+  }
+  return value.length;
+}
+
+function countJsonNestedArray(config) {
+  const file = path.join(ROOT, config.file || '');
+  const parents = valueAtPath(readJson(file), config.path);
+  if (!Array.isArray(parents)) {
+    throw new Error(`JSON parent array not found: ${config.file}#${config.path || '(root)'}`);
+  }
+  if (!config.child) throw new Error(`Nested array child key is missing: ${config.file}`);
+  return parents.reduce((sum, parent) => sum + (Array.isArray(parent?.[config.child]) ? parent[config.child].length : 0), 0);
+}
+
 function contentCount(config) {
   if (!config) return null;
+  if (config.type === 'static') {
+    const value = Number(config.value);
+    if (!Number.isFinite(value) || value < 0) throw new Error(`Invalid static content count: ${config.value}`);
+    return value;
+  }
+  if (config.type === 'json-array') return countJsonArray(config);
+  if (config.type === 'json-nested-array') return countJsonNestedArray(config);
   if (config.type === 'regex') return countRegex(config);
   if (config.type === 'window-array') return countWindowArray(config);
   throw new Error(`Unsupported content count type: ${config.type}`);
