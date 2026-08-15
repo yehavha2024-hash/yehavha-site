@@ -100,11 +100,11 @@
     {
       "id": "toeicman-v2",
       "category": "apps",
-      "meta": "Advanced English · 100-Day Child Tree",
+      "meta": "Advanced English · 100-Day Web App",
       "title": "심화 토익인간 V2",
-      "description": "기존 토익인간의 100일·4단계 형식을 유지하면서 어휘 정밀도, 복문 구조, 문단 논리, 패러프레이즈, 추론, 복합문서, 정책문서, TEPS형 비문학과 영어 원서형 독해를 10개 심화축 × 10일의 자체 하위 트리로 보강한 후속 과정입니다.",
+      "description": "기존 토익인간과 같은 DAY·4단계 학습 화면에서 고급 어휘, 복문 구조, 문단 논리, 패러프레이즈, 추론, 복합문서, 정책문서, TEPS형 비문학과 영어 원서형 독해를 실제 100일 학습자료로 심화하는 후속 과정입니다.",
       "url": "https://yehavha-nexus-hub.pages.dev/toeic-human-v2/",
-      "actionLabel": "심화 트리 보기"
+      "actionLabel": "심화과정 실행"
     },
     {
       "id": "ai-song-course",
