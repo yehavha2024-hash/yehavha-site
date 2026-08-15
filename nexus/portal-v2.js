@@ -166,9 +166,10 @@
     if (old) old.remove();
     if (!quickLinks) return;
     const overview = make('div', 'portal-overview');
+    const topLevelProjects = projects.filter((project) => !project.parentId);
     const values = [
       ['분야', categories.length],
-      ['프로젝트', projects.length],
+      ['프로젝트', topLevelProjects.length],
       ['업데이트', formatDate(updatedAt) || '상시']
     ];
     values.forEach(([label, value]) => {
@@ -179,8 +180,8 @@
     quickLinks.insertAdjacentElement('afterend', overview);
   }
 
-  function renderProject(project) {
-    const article = make('article', 'item-card');
+  function renderProject(project, isChild = false) {
+    const article = make('article', `item-card${isChild ? ' item-card-child' : ''}`);
     const top = make('div', 'item-top');
     top.append(make('span', 'item-meta', project.meta || 'Project'));
     if (project.status) {
@@ -216,8 +217,23 @@
   }
 
   function renderItemsGrid(projects) {
-    const grid = make('div', `items-grid${projects.length === 1 ? ' one-item' : ''}`);
-    projects.forEach((project) => grid.append(renderProject(project)));
+    const projectIds = new Set(projects.map((project) => project.id));
+    const roots = projects.filter((project) => !project.parentId || !projectIds.has(project.parentId));
+    const grid = make('div', `items-grid${roots.length === 1 ? ' one-item' : ''}`);
+
+    roots.forEach((project) => {
+      const children = projects.filter((candidate) => candidate.parentId === project.id);
+      if (!children.length) {
+        grid.append(renderProject(project));
+        return;
+      }
+      const tree = make('div', 'item-tree');
+      tree.append(renderProject(project));
+      const childList = make('div', 'item-tree-children');
+      children.forEach((child) => childList.append(renderProject(child, true)));
+      tree.append(childList);
+      grid.append(tree);
+    });
     return grid;
   }
 
@@ -246,7 +262,10 @@
     const titleRow = make('div', 'category-title-row');
     const title = make('h2', '', category.title);
     title.id = `${category.id}-title`;
-    titleRow.append(title, make('span', 'category-count', `${projects.length} PROJECT${projects.length > 1 ? 'S' : ''}`));
+    const subtreeCount = projects.filter((project) => project.parentId).length;
+    const topLevelCount = projects.length - subtreeCount;
+    const countText = subtreeCount ? `${topLevelCount} PROJECTS · ${subtreeCount} SUBTREE` : `${projects.length} PROJECT${projects.length > 1 ? 'S' : ''}`;
+    titleRow.append(title, make('span', 'category-count', countText));
     headText.append(make('p','eyebrow',category.eyebrow), titleRow, make('p','category-description',category.description));
     head.append(icon, headText);
 
