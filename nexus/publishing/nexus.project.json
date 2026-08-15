@@ -1,0 +1,15 @@
+{
+  "id": "publishing-hub",
+  "publish": true,
+  "tracking": {
+    "paths": ["nexus/publishing"],
+    "freshDays": 7,
+    "staleDays": 30,
+    "count": {
+      "type": "json-array",
+      "file": "nexus/publishing/books.json",
+      "path": "books",
+      "label": "대표도서"
+    }
+  }
+}
