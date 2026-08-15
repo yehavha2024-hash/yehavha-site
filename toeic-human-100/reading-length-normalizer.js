@@ -6,6 +6,7 @@
   const MIN_WORDS = 500;
   const MAX_WORDS = 650;
   const TARGET_WORDS = 575;
+  const MIN_PARAGRAPHS = 8;
 
   const countWords = text => String(text || '').trim().split(/\s+/).filter(Boolean).length;
   const splitSentences = text => String(text || '').match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [];
@@ -50,7 +51,7 @@
     }
 
     safety = 0;
-    while (total > MAX_WORDS && next.length > 4 && safety++ < 50) {
+    while (total > MAX_WORDS && next.length > MIN_PARAGRAPHS && safety++ < 50) {
       const candidates = [];
       for (let i = 1; i < next.length - 1; i += 1) {
         const words = countWords(next[i]);
