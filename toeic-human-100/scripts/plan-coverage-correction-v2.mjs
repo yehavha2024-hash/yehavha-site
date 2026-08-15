@@ -20,52 +20,56 @@ const nextMilestone = milestones.find(x => Number(x.day) === nextMilestoneDay) |
 const requiredByMilestone = nextMilestone ? Number(nextMilestone.minimumCumulativeNewHeadwords || 0) : activeTarget;
 const requiredAdditional = Math.max(0, requiredByMilestone - activeNow);
 const daysRemaining = nextDay === null ? 0 : Math.max(0, nextMilestoneDay - dayCount);
+const readingMin = Number(policy.readingDesign?.toeicReadingWordsMin || 500);
+const readingMax = Number(policy.readingDesign?.toeicReadingWordsMax || 650);
 
 function quotas(total, days) {
   if (!days) return [];
   const base = Math.floor(total / days);
   const remainder = total % days;
-  return Array.from({length:days}, (_,i) => base + (i < remainder ? 1 : 0));
+  return Array.from({ length: days }, (_, i) => base + (i < remainder ? 1 : 0));
 }
 
 const newQuotas = quotas(requiredAdditional, daysRemaining);
-const dayQuotas = Array.from({length:daysRemaining}, (_,i) => ({
-  day:dayCount + 1 + i,
-  newActiveHeadwordQuota:newQuotas[i],
-  reviewHeadwordQuota:2,
-  phraseMinimum:Number(policy.phraseAndGrammarCoverage?.phrasesPerDayMin || 6),
-  instruction:'본문 길이를 늘리지 말고 핵심어휘·숙어는 해부·학습 단계에서 처리한다.'
+const dayQuotas = Array.from({ length: daysRemaining }, (_, i) => ({
+  day: dayCount + 1 + i,
+  newActiveHeadwordQuota: newQuotas[i],
+  reviewHeadwordQuota: 2,
+  phraseMinimum: Number(policy.phraseAndGrammarCoverage?.phrasesPerDayMin || 6),
+  instruction: '본문 길이를 늘리지 말고 핵심어휘·숙어는 해부·학습 단계에서 처리한다.'
 }));
 
 const report = {
-  generatedAt:new Date().toISOString(),
-  design:'short-reading-v3',
-  current:{
+  generatedAt: new Date().toISOString(),
+  design: 'focused-reading-v4',
+  current: {
     dayCount,
-    masterPoolHeadwords:Number(coverage.masterHeadwords || policy.vocabularyDesign?.masterPoolHeadwords || 4786),
-    activeUniqueHeadwords:activeNow,
-    activeUniqueTarget:activeTarget,
-    remainingActiveHeadwords:remaining,
-    inactiveExtensionPool:Number(coverage.inactiveExtensionPool || 0)
+    masterPoolHeadwords: Number(coverage.masterHeadwords || policy.vocabularyDesign?.masterPoolHeadwords || 4786),
+    activeUniqueHeadwords: activeNow,
+    activeUniqueTarget: activeTarget,
+    remainingActiveHeadwords: remaining,
+    inactiveExtensionPool: Number(coverage.inactiveExtensionPool || 0)
   },
-  nextBlock:{
-    startDay:nextDay,
-    endDay:nextDay === null ? null : nextMilestoneDay,
-    milestone:nextMilestone,
+  nextBlock: {
+    startDay: nextDay,
+    endDay: nextDay === null ? null : nextMilestoneDay,
+    milestone: nextMilestone,
     requiredAdditional,
     dayQuotas
   },
-  rules:{
-    readingWords:'700~850',
-    newActiveWordsPerGeneratedDay:28,
-    reviewWordsPerGeneratedDay:2,
-    phrasesPerDayMin:Number(policy.phraseAndGrammarCoverage?.phrasesPerDayMin || 6),
-    fullMasterForcedIntoReading:false
+  rules: {
+    readingWords: `${readingMin}~${readingMax}`,
+    newActiveWordsPerGeneratedDay: 28,
+    reviewWordsPerGeneratedDay: 2,
+    phrasesPerDayMin: Number(policy.phraseAndGrammarCoverage?.phrasesPerDayMin || 6),
+    fullMasterForcedIntoReading: false
   }
 };
 
-fs.writeFileSync(OUT_JSON, JSON.stringify(report,null,2) + '\n');
-const dayLines = dayQuotas.length ? dayQuotas.map(x => `- DAY ${String(x.day).padStart(3,'0')}: 신규 활성어휘 ${x.newActiveHeadwordQuota}, 복습 ${x.reviewHeadwordQuota}, 숙어·연어 ${x.phraseMinimum}개 이상`).join('\n') : '- 100일 활성어휘 배치 완료';
-const md = `# 다음 10일 활성어휘 보정 목표\n\n- 현재 DAY: ${dayCount}\n- 마스터 원본 풀: ${report.current.masterPoolHeadwords}\n- 핵심 활성어휘: ${activeNow}/${activeTarget}\n- 남은 활성어휘: ${remaining}\n- 확장학습 풀: ${report.current.inactiveExtensionPool}\n\n## DAY별 기준\n\n${dayLines}\n\n## 원칙\n\n본문은 700~850단어를 유지하고 어휘량을 맞추기 위해 본문을 늘리지 않는다. 신규 핵심어휘·반복어휘·숙어·연어는 해부·학습 단계에서 관리하며, 전체 4,786개 마스터 풀은 선별·감사·확장학습의 원본으로 유지한다.\n`;
+fs.writeFileSync(OUT_JSON, `${JSON.stringify(report, null, 2)}\n`);
+const dayLines = dayQuotas.length
+  ? dayQuotas.map(x => `- DAY ${String(x.day).padStart(3, '0')}: 신규 활성어휘 ${x.newActiveHeadwordQuota}, 복습 ${x.reviewHeadwordQuota}, 숙어·연어 ${x.phraseMinimum}개 이상`).join('\n')
+  : '- 100일 활성어휘 배치 완료';
+const md = `# 다음 10일 활성어휘 보정 목표\n\n- 현재 DAY: ${dayCount}\n- 마스터 원본 풀: ${report.current.masterPoolHeadwords}\n- 핵심 활성어휘: ${activeNow}/${activeTarget}\n- 남은 활성어휘: ${remaining}\n- 확장학습 풀: ${report.current.inactiveExtensionPool}\n\n## DAY별 기준\n\n${dayLines}\n\n## 원칙\n\n본문은 ${readingMin}~${readingMax}단어를 유지하고 어휘량을 맞추기 위해 본문을 늘리지 않는다. 신규 핵심어휘·반복어휘·숙어·연어는 해부·학습 단계에서 관리하며, 전체 4,786개 마스터 풀은 선별·감사·확장학습의 원본으로 유지한다.\n`;
 fs.writeFileSync(OUT_MD, md);
 console.log(md);
