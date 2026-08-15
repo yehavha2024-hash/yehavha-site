@@ -1,0 +1,14 @@
+{
+  "id": "toeicman-v2",
+  "publish": true,
+  "tracking": {
+    "paths": ["nexus/toeic-human-v2"],
+    "freshDays": 7,
+    "staleDays": 30,
+    "count": {
+      "type": "static",
+      "value": 100,
+      "label": "심화 학습일"
+    }
+  }
+}
