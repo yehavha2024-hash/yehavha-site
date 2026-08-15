@@ -1,0 +1,15 @@
+{
+  "id": "living-law-100",
+  "publish": true,
+  "tracking": {
+    "paths": ["nexus/living-law"],
+    "freshDays": 7,
+    "staleDays": 30,
+    "count": {
+      "type": "regex",
+      "file": "nexus/living-law/data.js",
+      "pattern": "\\bI\\(\\d+,'",
+      "label": "생활법률 항목"
+    }
+  }
+}
