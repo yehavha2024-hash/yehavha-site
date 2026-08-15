@@ -9,11 +9,10 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   audit:
-    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -22,14 +21,10 @@ jobs:
           node-version: '22'
       - name: Run legal knowledge runtime audit
         run: node legal-knowledge/run-runtime-audit.mjs
-      - name: Commit runtime audit output
-        run: |
-          if [ -z "$(git status --porcelain -- legal-knowledge/RUNTIME_AUDIT_OUTPUT_20260809.json legal-knowledge/RUNTIME_AUDIT_PRIORITY_20260809.md)" ]; then
-            echo 'No audit output change.'
-            exit 0
-          fi
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add legal-knowledge/RUNTIME_AUDIT_OUTPUT_20260809.json legal-knowledge/RUNTIME_AUDIT_PRIORITY_20260809.md
-          git commit -m 'Update legal knowledge runtime audit output'
-          git push
+      - name: Upload runtime audit diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: legal-knowledge-runtime-audit
+          if-no-files-found: warn
+          path: legal-knowledge/.audit/
