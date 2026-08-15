@@ -26,6 +26,15 @@
     "contentCount": 500,
     "contentLabel": "기존 학습카드"
   },
+  "toeicman-v2": {
+    "id": "toeicman-v2",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-15",
+    "contentCount": 100,
+    "contentLabel": "심화 학습세트"
+  },
   "legal-knowledge": {
     "id": "legal-knowledge",
     "managedBy": "github",
