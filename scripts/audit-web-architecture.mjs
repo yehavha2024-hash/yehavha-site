@@ -12,6 +12,24 @@ const projects = [
   { dir: 'nexus/research-track', detailFiles: [] },
 ];
 
+const nexusRuntimePages = [
+  'nexus/toeic-human-v2',
+  'nexus/publishing',
+  'nexus/articles',
+  'nexus/ai-practice',
+  'nexus/ai-practice/logs',
+  'nexus/initiatives'
+];
+
+const nexusJsonFiles = [
+  'nexus/projects.json',
+  'nexus/project-status.json',
+  'nexus/publishing/books.json',
+  'nexus/articles/articles.json',
+  'nexus/ai-practice/data.json',
+  'nexus/initiatives/data.json'
+];
+
 let errors = 0;
 let warnings = 0;
 
@@ -61,9 +79,31 @@ const auditLocalReferences = (root, index) => {
     }
     seen.add(clean);
     const target = clean.startsWith('/')
-      ? path.join(root, clean.replace(/^\/+/, ''))
+      ? path.join('nexus', clean.replace(/^\/+/, ''))
       : path.resolve(root, clean);
     if (!fs.existsSync(target)) report('ERROR', root, `로컬 링크 대상 없음: ${ref}`);
+  }
+};
+
+const auditNexusRuntimePages = () => {
+  for (const root of nexusRuntimePages) {
+    const indexPath = path.join(root, 'index.html');
+    const index = read(indexPath);
+    if (!index) {
+      report('ERROR', root, 'index.html 없음');
+      continue;
+    }
+    auditAnchors(root, index);
+    auditLocalReferences(root, index);
+  }
+
+  for (const file of nexusJsonFiles) {
+    if (!fs.existsSync(file)) {
+      report('ERROR', file, '필수 JSON 없음');
+      continue;
+    }
+    try { JSON.parse(read(file)); }
+    catch (error) { report('ERROR', file, `JSON 파싱 실패: ${error.message}`); }
   }
 };
 
@@ -78,10 +118,16 @@ const auditNexusModel = () => {
     'nexus.project.json',
     'three-minute-break/nexus.project.json',
     'toeic-human-100/nexus.project.json',
+    'nexus/toeic-human-v2/nexus.project.json',
+    'nexus/research-track/nexus.project.json',
     'legal-knowledge/nexus.project.json',
     'legal-knowledge/ai-literature/nexus.project.json',
     'ai-law-tech-foresight/nexus.project.json',
-    'legal-philosophy/nexus.project.json'
+    'legal-philosophy/nexus.project.json',
+    'nexus/publishing/nexus.project.json',
+    'nexus/articles/nexus.project.json',
+    'nexus/ai-practice/nexus.project.json',
+    'nexus/initiatives/nexus.project.json'
   ];
 
   if (fs.existsSync(generatedPath)) report('ERROR', generatedPath, 'projects.generated.json은 단일원본 원칙에 따라 존재하면 안 됨');
@@ -119,6 +165,12 @@ const auditNexusModel = () => {
         if (!allowedHosts.has(projectUrl.hostname.toLowerCase())) {
           report('ERROR', redirectPath, `projects.json의 호스트가 /go 허용목록에 없음: ${project.id} → ${projectUrl.hostname}`);
         }
+        if (projectUrl.hostname === 'yehavha-nexus-hub.pages.dev') {
+          const cleanPath = decodeURIComponent(projectUrl.pathname).replace(/^\/+|\/+$/g, '');
+          const localRoot = cleanPath ? path.join('nexus', cleanPath) : 'nexus';
+          const localTarget = path.extname(localRoot) ? localRoot : path.join(localRoot, 'index.html');
+          if (!fs.existsSync(localTarget)) report('ERROR', basePath, `Nexus 내부 URL의 로컬 대상 없음: ${project.id} → ${localTarget}`);
+        }
       } catch {
         report('ERROR', basePath, `URL 파싱 실패: ${project.id}`);
       }
@@ -146,6 +198,9 @@ const auditNexusModel = () => {
   for (const id of Object.keys(status || {})) {
     if (!projectIds.has(id)) report('ERROR', statusPath, `projects.json에 없는 상태 id: ${id}`);
     if (!manifestIds.has(id)) report('ERROR', statusPath, `승인 manifest가 없는 상태 id: ${id}`);
+  }
+  for (const id of manifestIds) {
+    if (!(id in (status || {}))) report('ERROR', statusPath, `상태 정보가 없는 승인 manifest id: ${id}`);
   }
 
   if (/projects\.generated\.json/.test(read(portalPath))) {
@@ -211,6 +266,7 @@ for (const project of projects) {
   }
 }
 
+auditNexusRuntimePages();
 auditNexusModel();
 
 console.log(`\nArchitecture audit: ${errors} error(s), ${warnings} warning(s)`);
