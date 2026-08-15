@@ -1,10 +1,13 @@
-/* Short-reading + lexicon rebalance for generated DAY 011~100. */
+/* Short-reading + active-vocabulary rebalance for generated DAY 011~100. */
 (function (root) {
   const builder = root.TOEIC_READING_V2_BUILDER;
   if (!builder || typeof builder.build !== "function") return;
 
   const TARGET_MAX = 850;
   const TARGET_MIN = 700;
+  const ACTIVE_UNIQUE_TARGET = 2520;
+  const NEW_WORDS_PER_DAY = 28;
+  const REVIEW_WORDS_PER_DAY = 2;
   const ORIGINAL_PAD = "A further reading principle is to preserve the sentence frame when an unfamiliar expression appears. Instead of stopping immediately, identify the subject, locate the main verb, observe the connector, and decide whether the unknown item is essential to the author's claim. This controlled tolerance for uncertainty is what allows readers to finish long passages and later confirm vocabulary without losing the argument.";
   const PHRASE_POOL = [
     ["in accordance with", "~에 따라"], ["be responsible for", "~을 담당하다·책임지다"],
@@ -30,6 +33,14 @@
       seen.add(lemma);
       return true;
     });
+  }
+
+  function priority(entry) {
+    const roles = entry?.roles || [];
+    if (roles.includes("toeic-specific")) return 0;
+    if (roles.includes("general-core")) return 1;
+    if (roles.includes("academic-book-extension")) return 2;
+    return 3;
   }
 
   function stripScaffolding(text) {
@@ -74,24 +85,35 @@
     return next;
   }
 
-  function firstExposureMap(result) {
-    const first = new Map();
-    if (!(result?.targetMap instanceof Map)) return first;
+  function firstScheduledDays(result) {
+    const map = new Map();
+    if (!(result?.targetMap instanceof Map)) return map;
     for (let day = 11; day <= 100; day += 1) {
       for (const entry of uniqueEntries(result.targetMap.get(day) || [])) {
         const lemma = lemmaOf(entry).toLowerCase();
-        if (!first.has(lemma)) first.set(lemma, day);
+        if (!map.has(lemma)) map.set(lemma, day);
       }
     }
-    return first;
+    return map;
   }
 
-  function priority(entry) {
-    const roles = entry?.roles || [];
-    if (roles.includes("toeic-specific")) return 0;
-    if (roles.includes("general-core")) return 1;
-    if (roles.includes("academic-book-extension")) return 2;
-    return 3;
+  function buildActivePlan(result) {
+    if (!(result?.targetMap instanceof Map)) return { byDay: new Map(), activePool: [] };
+    const scheduled = [];
+    for (let day = 11; day <= 100; day += 1) scheduled.push(...(result.targetMap.get(day) || []));
+    const firstDay = firstScheduledDays(result);
+    const activePool = uniqueEntries(scheduled)
+      .sort((a, b) => priority(a) - priority(b) || (firstDay.get(lemmaOf(a).toLowerCase()) || 100) - (firstDay.get(lemmaOf(b).toLowerCase()) || 100) || lemmaOf(a).localeCompare(lemmaOf(b)))
+      .slice(0, ACTIVE_UNIQUE_TARGET)
+      .sort((a, b) => (firstDay.get(lemmaOf(a).toLowerCase()) || 100) - (firstDay.get(lemmaOf(b).toLowerCase()) || 100) || priority(a) - priority(b) || lemmaOf(a).localeCompare(lemmaOf(b)));
+
+    const byDay = new Map();
+    for (let i = 0; i < activePool.length; i += NEW_WORDS_PER_DAY) {
+      const day = 11 + Math.floor(i / NEW_WORDS_PER_DAY);
+      if (day > 100) break;
+      byDay.set(day, activePool.slice(i, i + NEW_WORDS_PER_DAY));
+    }
+    return { byDay, activePool };
   }
 
   function meaningFor(entry, existing) {
@@ -101,7 +123,7 @@
     if (roles.includes("toeic-specific")) return "TOEIC 핵심·실무 어휘 — 문맥과 결합으로 확인";
     if (roles.includes("academic-book-extension")) return "TEPS·원서 확장 어휘 — 문맥에서 의미 추론";
     if (roles.includes("general-core")) return "일반 비문학 핵심 어휘 — 반복 노출로 정착";
-    return "오늘의 확장 어휘 — 문맥 속 의미 확인";
+    return "확장 어휘 — 문맥 속 의미 확인";
   }
 
   function tierFor(entry, existing) {
@@ -112,21 +134,27 @@
     return "C";
   }
 
-  function rebalanceVocabulary(day, result, firstMap) {
-    if (!(result?.targetMap instanceof Map)) return;
-    const scheduled = uniqueEntries(result.targetMap.get(day.day) || []);
-    const existing = new Map((day.vocabulary || []).map(item => [lemmaOf(item).toLowerCase(), item]));
-    const first = scheduled.filter(entry => firstMap.get(lemmaOf(entry).toLowerCase()) === day.day);
-    const repeats = scheduled
-      .filter(entry => firstMap.get(lemmaOf(entry).toLowerCase()) !== day.day)
-      .sort((a, b) => {
-        const aExisting = existing.has(lemmaOf(a).toLowerCase()) ? 0 : 1;
-        const bExisting = existing.has(lemmaOf(b).toLowerCase()) ? 0 : 1;
-        return aExisting - bExisting || priority(a) - priority(b) || lemmaOf(a).localeCompare(lemmaOf(b));
-      });
+  function reviewEntriesForDay(dayNo, plan) {
+    if (dayNo <= 11) return [];
+    const learnedCount = Math.min(plan.activePool.length, (dayNo - 11) * NEW_WORDS_PER_DAY);
+    const learned = plan.activePool.slice(0, learnedCount).filter(entry => priority(entry) <= 1);
+    if (!learned.length) return [];
+    const picked = [];
+    let cursor = (dayNo * 17) % learned.length;
+    while (picked.length < REVIEW_WORDS_PER_DAY && picked.length < learned.length) {
+      const entry = learned[cursor % learned.length];
+      if (!picked.some(x => lemmaOf(x).toLowerCase() === lemmaOf(entry).toLowerCase())) picked.push(entry);
+      cursor += 37;
+    }
+    return picked;
+  }
 
-    const targetSize = day.day <= 80 ? 30 : 24;
-    const selected = uniqueEntries([...first, ...repeats.slice(0, Math.max(0, targetSize - first.length))]);
+  function rebalanceVocabulary(day, plan) {
+    const newEntries = plan.byDay.get(day.day) || [];
+    const reviewEntries = reviewEntriesForDay(day.day, plan);
+    const selected = uniqueEntries([...newEntries, ...reviewEntries]);
+    const existing = new Map((day.vocabulary || []).map(item => [lemmaOf(item).toLowerCase(), item]));
+
     day.vocabulary = selected.map(entry => {
       const lemma = lemmaOf(entry);
       const previous = existing.get(lemma.toLowerCase());
@@ -134,10 +162,12 @@
     });
 
     day.coverage ||= {};
-    day.coverage.firstExposureCount = first.length;
+    day.coverage.newActiveHeadwordCount = newEntries.length;
+    day.coverage.reinforcementCount = reviewEntries.length;
     day.coverage.studyVocabularyCount = selected.length;
-    day.coverage.reinforcementCount = Math.max(0, selected.length - first.length);
     day.coverage.studyLemmas = selected.map(lemmaOf);
+    day.coverage.activeUniqueTarget = plan.activePool.length;
+    day.coverage.masterPoolMode = "selection-source";
     day.coverage.studyDesign = "short-reading-v3";
   }
 
@@ -154,12 +184,12 @@
     }
   }
 
-  function normalizeDay(day, result, firstMap) {
+  function normalizeDay(day, plan) {
     if (!day || day.day < 11 || !Array.isArray(day.reading?.paragraphs)) return day;
     day.reading.paragraphs = shortenParagraphs(day.reading.paragraphs);
     const total = countWords(day.reading.paragraphs.join(" "));
-    day.reading.instructionKo = `약 700~850단어의 집중 본문을 끝까지 읽으세요. 오늘의 핵심은 문장구조와 문단기능을 놓치지 않고 전체 흐름을 유지하는 것입니다. 모르는 단어는 1회독 뒤 해부·학습 단계에서 확인합니다.`;
-    rebalanceVocabulary(day, result, firstMap);
+    day.reading.instructionKo = "약 700~850단어의 집중 본문을 끝까지 읽으세요. 문장구조와 문단기능을 유지하며 1회독하고, 핵심어휘·확장어휘·숙어는 해부·학습 단계에서 따로 확인합니다.";
+    rebalanceVocabulary(day, plan);
     expandExpressions(day);
     day.coverage ||= {};
     day.coverage.normalizedWordCount = total;
@@ -170,8 +200,14 @@
 
   function compactResult(result) {
     if (!result) return result;
-    const firstMap = firstExposureMap(result);
-    for (const day of result.days || []) normalizeDay(day, result, firstMap);
+    const plan = buildActivePlan(result);
+    for (const day of result.days || []) normalizeDay(day, plan);
+    result.activeVocabularyPlan = {
+      masterPoolMode: "selection-source",
+      activeUniqueTarget: plan.activePool.length,
+      newWordsPerDay: NEW_WORDS_PER_DAY,
+      reviewWordsPerDay: REVIEW_WORDS_PER_DAY
+    };
     return result;
   }
 
