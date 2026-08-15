@@ -13,6 +13,7 @@ const STATUS_FILE = path.join(NEXUS, 'project-status.json');
 const MANIFEST_FILES = [
   'nexus.project.json',
   'three-minute-break/nexus.project.json',
+  'nexus/living-law/nexus.project.json',
   'toeic-human-100/nexus.project.json',
   'nexus/toeic-human-v2/nexus.project.json',
   'nexus/research-track/nexus.project.json',
