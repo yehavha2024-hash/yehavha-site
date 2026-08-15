@@ -6,10 +6,9 @@
     "freshDays": 7,
     "staleDays": 30,
     "count": {
-      "type": "regex",
-      "file": "toeic-human-100/content.js",
-      "pattern": "\\\"day\\\"\\s*:",
-      "label": "기존 학습카드"
+      "type": "static",
+      "value": 100,
+      "label": "학습일"
     }
   }
 }
