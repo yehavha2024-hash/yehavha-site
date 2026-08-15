@@ -39,7 +39,7 @@
       "title": "AI 실무·아이디어",
       "icon": "✦",
       "iconClass": "apps-icon",
-      "description": "AI 도구와 사례를 현재 프로젝트에 적용할 수 있는 자동화·콘텐츠·웹서비스·프롬프트 실행안으로 전환해 축적합니다."
+      "description": "AI 도구와 사례를 현재 프로젝트에 적용할 수 있는 자동화·웹서비스·프롬프트 실행안으로 전환해 축적합니다."
     },
     {
       "id": "education",
@@ -84,7 +84,7 @@
       "category": "apps",
       "meta": "Web App",
       "title": "3분 쉼표",
-      "description": "명언·생활영어·성경 핵심 의미·미니퀴즈를 짧게 이용하는 200개 콘텐츠 기반의 일일 순환 웹앱입니다.",
+      "description": "명언·생활영어·성경 핵심 의미·미니퀴즈를 짧게 이용하는 일일 순환 웹앱입니다.",
       "url": "https://yehavha-3min-rest.pages.dev/",
       "actionLabel": "앱 실행"
     },
@@ -180,7 +180,7 @@
       "category": "publishing",
       "meta": "Selected Publications",
       "title": "대표 출간 도서",
-      "description": "Amazon Kindle과 U-Paper에 출간한 전자책 가운데 대표 도서를 선별하여 한곳에서 소개합니다.",
+      "description": "Amazon Kindle과 유페이퍼에 출간한 전자책 가운데 대표 도서를 선별하여 한곳에서 소개합니다.",
       "url": "https://yehavha-nexus-hub.pages.dev/publishing/",
       "actionLabel": "출간 도서 보기"
     },
@@ -214,7 +214,7 @@
     {
       "id": "initiative-hub",
       "category": "initiatives",
-      "meta": "Idea Hub · 11 Managed Records",
+      "meta": "Idea Hub · 10 Managed Records",
       "title": "아이디어 허브",
       "description": "사업·콘텐츠·AI 음악·연구·출판·서비스·협업·운영 개선 등 모든 아이디어를 한 보드에 모아 현재 상태와 다음 행동까지 관리합니다. 아이디어가 떠오르면 먼저 이곳에 등록하고, 검토를 통과한 항목만 계획과 프로젝트로 발전시킵니다.",
       "url": "https://yehavha-nexus-hub.pages.dev/initiatives/",
