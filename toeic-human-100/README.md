@@ -2,13 +2,13 @@
 
 GitHub에서 관리하는 100일 모바일 영어 학습 웹앱입니다. TOEIC을 단순 문제풀이 과목으로 다루지 않고, 매일 감당 가능한 분량의 영어 본문을 끝까지 읽으면서 어휘·숙어·문법·문장구조를 분리 학습하고 TEPS 고급 독해와 영어 원서 독해까지 확장합니다.
 
-## V3.2 학습 설계
+## 현재 학습 설계
 
 - DAY 001~100 TOEIC 집중독해 구성
 - DAY 001~100 TEPS 독해 확장 구성
 - 본문 목표: 약 500~650 words
 - 완료축: `집중읽기 / 해부·학습 / 문제·복습`
-- 기존 4,786개 마스터 어휘 DB는 삭제하지 않고 선별·감사·확장학습용 원본 풀로 유지
+- 4,786개 마스터 어휘 DB는 선별·감사·확장학습용 단일 원본 풀로 유지
 - 핵심 활성어휘 목표: 약 2,520개
 - 숙어·연어: 하루 최소 6개
 - 문법: 하루 최소 3개
@@ -19,7 +19,7 @@ GitHub에서 관리하는 100일 모바일 영어 학습 웹앱입니다. TOEIC�
 1. `집중읽기`
    - 약 500~650단어를 먼저 끝까지 읽음
    - 모르는 단어 때문에 중단하지 않고 주어·본동사·논리표지·문단기능을 유지
-   - 마스터 어휘를 채우기 위한 인위적 어휘목록 문장과 반복문은 제거
+   - 마스터 어휘를 채우기 위한 인위적 어휘목록 문장과 반복문은 최종 런타임에서 제거
    - 같은 날짜 하단의 TEPS 독해 확장으로 추상어휘와 논리독해를 확장
 2. `해부·학습`
    - TOEIC 핵심 활성어휘와 일반 비문학 어휘
@@ -42,9 +42,7 @@ GitHub에서 관리하는 100일 모바일 영어 학습 웹앱입니다. TOEIC�
 - TOEIC 특화 headword: 1,250
 - 학술·원서 확장 headword: 959
 
-이전 설계는 4,786개 전수를 본문에 계획된 횟수만큼 실제 노출하기 위해 controlled lexical bridge와 반복 문장을 사용했습니다. 이 방식은 어휘 커버리지는 높았지만 본문이 약 1,500단어까지 길어지고 실제 독해 흐름이 무거워지는 문제가 있었습니다.
-
-현재 설계는 독해량과 어휘량을 분리합니다.
+과거 설계는 4,786개 전수를 본문에 계획된 횟수만큼 실제 노출하기 위해 controlled lexical bridge와 반복 문장을 사용했습니다. 현재 운영 설계는 독해량과 어휘량을 분리하며, 이 과거 기준을 학습 성공조건이나 최종 본문 길이 결정 기준으로 사용하지 않습니다.
 
 - 마스터 4,786개: 전체 선별·감사·확장학습 풀
 - 핵심 활성어휘 약 2,520개: 100일 동안 명시적으로 학습하는 우선 어휘
@@ -53,7 +51,7 @@ GitHub에서 관리하는 100일 모바일 영어 학습 웹앱입니다. TOEIC�
 - TOEIC-specific 1,250개는 핵심 활성학습에 우선 포함
 - 활성어휘 밖의 단어는 TEPS 확장·문제해설·재독·후속 확장학습에 활용
 
-따라서 이제 `4,786개를 본문에 모두 집어넣는 것`을 학습 성공조건으로 사용하지 않습니다. 본문은 읽기 훈련, 어휘목록은 명시적 어휘학습이라는 서로 다른 기능을 담당합니다. 본문 길이를 500~650단어로 다시 줄여도 활성어휘·숙어·문법 학습량은 유지합니다.
+본문은 읽기 훈련, 어휘목록은 명시적 어휘학습이라는 서로 다른 기능을 담당합니다. 본문 길이를 500~650단어로 유지하면서 활성어휘·숙어·문법 학습량을 별도로 관리합니다.
 
 ## 100일 장르 확장
 
@@ -61,25 +59,34 @@ GitHub에서 관리하는 100일 모바일 영어 학습 웹앱입니다. TOEIC�
 
 전체 장르·주제 지도는 `READING_100_DAY_MAP.md`에 있습니다.
 
-## 주요 파일
+## 런타임 소유권
 
-- `index.html` — 화면 구조 및 V3.2 안내·로드 순서
-- `app-v2.js` — 학습·진행·음성·문제 상호작용
-- `reading-content-v2.js` — DAY 001
-- `reading-content-v2-days02-04.js`, `reading-content-v2-days05-07.js`, `reading-content-v2-days08-10.js` — DAY 002~010
-- `reading-content-v2-length-patch.js` — DAY 001~010 본문 500~650단어 정규화 및 숙어 보강
-- `reading-content-v2-days11-100-builder.js` — DAY 011~100 장르·주제 기반 콘텐츠 빌더
-- `reading-content-v2-generated-compact-patch.js` — DAY 011~100 본문 축약, lexical bridge 제거, 활성어휘 재배분
-- `teps-extension-v2.js`, `teps-extension-length-patch.js` — TEPS 확장
-- `master-lexicon-v2.json` — 4,786개 통합 마스터 어휘
+같은 데이터를 여러 patch 파일이 다시 수정하지 않도록 역할을 분리합니다.
+
+- `reading-content-v2.js` — DAY 001 기본자료
+- `reading-content-v2-days02-04.js`, `reading-content-v2-days05-07.js`, `reading-content-v2-days08-10.js` — DAY 002~010 기본자료
+- `reading-content-v2-days01-10-enrichment.js` — DAY 001~010 내용·숙어 보강만 담당
+- `reading-content-v2-days11-100-builder.js` — DAY 011~100 장르·주제 기반 기본 콘텐츠 생성
+- `reading-content-v2-generated-study-plan.js` — DAY 011~100 불필요 스캐폴딩 제거와 활성어휘·숙어 배치만 담당
+- `reading-length-normalizer.js` — DAY 001~100 최종 500~650단어 길이를 결정하는 유일한 모듈
+- `teps-extension-v2.js` — TEPS 기본자료
+- `teps-extension-enrichment.js` — TEPS 내용 보강만 담당
+- `reading-ready-sync.js` — 비동기 데이터 완료 후 화면 재렌더링만 담당
+- `focused-reading-ui.js` — 집중읽기 UI 표기 동기화만 담당
+- `master-lexicon-v2.json` — 4,786개 통합 마스터 어휘의 단일 원본
 - `coverage-policy-v2.json` — 집중독해·활성어휘·숙어·문법 커버리지 정책
+- `scripts/runtime-v2-loader.mjs` — 자동검증에서 사용하는 런타임 로드 순서의 단일 원본
+
+구 `*-patch.js`, 중복 length guard, staged validator는 운영경로에서 제거합니다.
 
 ## 자동검증
 
-- `scripts/validate-reading-v2-expanded.mjs` — 100일 본문 500~650단어, 어휘·숙어·문법 및 TEPS 구조검증
+- `scripts/runtime-v2-loader.mjs` — 실제 canonical 모듈을 동일 순서로 로드
+- `scripts/validate-reading-v2-expanded.mjs` — 100일 본문 500~650단어, 단일 length owner, 어휘·숙어·문법 및 TEPS 구조검증
 - `scripts/audit-reading-coverage-v2.mjs` — 4,786개 원본 풀과 약 2,520개 핵심 활성어휘를 분리하여 감사
+- `scripts/plan-coverage-correction-v2.mjs` — 정책 파일 기준으로 후속 활성어휘 목표를 계산
 
-검증 기준도 과거의 `본문 1,350~1,650단어 + 4,786개 본문 전수노출`에서 `500~650단어 집중독해 + 핵심 활성어휘 + 숙어·문법 분리학습` 기준으로 변경합니다.
+검증 기준은 `500~650단어 집중독해 + 핵심 활성어휘 + 숙어·문법 분리학습`이며, 전체 마스터 어휘를 본문에 강제 삽입하지 않습니다.
 
 ## 저작권 원칙
 
