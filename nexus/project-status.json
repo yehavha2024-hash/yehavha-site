@@ -17,15 +17,6 @@
     "contentCount": 4,
     "contentLabel": "학습 카테고리"
   },
-  "living-law-100": {
-    "id": "living-law-100",
-    "managedBy": "github",
-    "status": "신규 구축",
-    "statusTone": "fresh",
-    "lastUpdated": "2026-08-15",
-    "contentCount": 100,
-    "contentLabel": "생활법률"
-  },
   "toeicman": {
     "id": "toeicman",
     "managedBy": "github",
