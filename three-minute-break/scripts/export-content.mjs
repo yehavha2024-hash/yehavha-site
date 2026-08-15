@@ -17,7 +17,12 @@ const appIndex = scriptFiles.indexOf('app.js');
 if (appIndex < 0) throw new Error('index.html does not load app.js');
 const contentLayerFiles = scriptFiles.slice(appIndex + 1);
 
-const context = { console };
+// 콘텐츠 검증은 브라우저 UI 소유권과 분리합니다. 데이터 레이어에 남아 있는
+// 선택적 UI 후처리가 검증기의 DOM 환경을 요구하지 않도록 최소 no-op 문서만 제공합니다.
+const context = {
+  console,
+  document: { querySelector: () => null }
+};
 vm.createContext(context);
 vm.runInContext(`${appSource.slice(0, markerIndex)}\nglobalThis.__CONTENT__ = content;`, context, { filename: 'three-minute-break/app.js' });
 for (const file of contentLayerFiles) {
