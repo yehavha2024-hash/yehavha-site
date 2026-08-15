@@ -21,6 +21,27 @@
     return value ? String(value).replaceAll('-', '.') : '-';
   }
 
+  function publicText(value) {
+    return String(value || '')
+      .replaceAll('ChatGPT·Suno·CapCut·GitHub·Cloudflare 등 반복 사용하는 도구', '반복 사용하는 제작·연구 서비스')
+      .replaceAll('ChatGPT', '생성형 AI')
+      .replaceAll('NotebookLM', '자료분석 서비스')
+      .replaceAll('GitHub', '운영 저장소')
+      .replaceAll('Cloudflare Pages', '웹 배포 환경')
+      .replaceAll('Cloudflare', '웹 배포 환경');
+  }
+
+  function publicItem(item) {
+    if (item.id !== 'ai-tool-budget') return item;
+    return {
+      ...item,
+      meta: '운영 자원',
+      title: '제작·연구 운영자원의 역할과 비용 정리',
+      summary: '반복 사용하는 제작·연구 서비스를 주도·보조·배포 역할로 나누고 중복 비용과 사용 목적을 정리합니다.',
+      nextAction: '실제로 매달 사용하는 서비스부터 비용·용도·대체 가능성을 기록합니다.'
+    };
+  }
+
   function visibleItems(items) {
     return items.filter(item => item.visibilityId !== 'private' && item.visibilityId !== 'embargo');
   }
@@ -88,7 +109,8 @@
     return labels[item.statusId] || item.status || '검토';
   }
 
-  function renderItem(item, groupsById) {
+  function renderItem(rawItem, groupsById) {
+    const item = publicItem(rawItem);
     const group = groupsById.get(item.group) || {};
     const article = make('article', 'idea-card');
 
@@ -98,19 +120,19 @@
     const state = make('span', `state-tag state-${item.statusId || 'review'}`, statusLabel(item));
     head.append(groupTag, state);
 
-    const title = make('h3', '', item.title);
-    const summary = make('p', 'idea-summary', item.summary || '');
+    const title = make('h3', '', publicText(item.title));
+    const summary = make('p', 'idea-summary', publicText(item.summary));
 
     const meta = make('div', 'idea-meta');
     if (item.priority) meta.append(make('span', 'meta-chip', item.priority));
-    if (item.meta) meta.append(make('span', 'meta-chip', item.meta));
+    if (item.meta) meta.append(make('span', 'meta-chip', publicText(item.meta)));
     if (item.visibility) meta.append(make('span', 'meta-chip meta-soft', item.visibility));
 
     article.append(head, title, summary, meta);
 
     if (item.nextAction) {
       const next = make('div', 'idea-next');
-      next.append(make('span', '', 'NEXT'), make('p', '', item.nextAction));
+      next.append(make('span', '', 'NEXT'), make('p', '', publicText(item.nextAction)));
       article.append(next);
     }
 
