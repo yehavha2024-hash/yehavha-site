@@ -1,0 +1,15 @@
+{
+  "id": "article-library",
+  "publish": true,
+  "tracking": {
+    "paths": ["nexus/articles"],
+    "freshDays": 7,
+    "staleDays": 30,
+    "count": {
+      "type": "json-array",
+      "file": "nexus/articles/articles.json",
+      "path": "articles",
+      "label": "공개 글"
+    }
+  }
+}
