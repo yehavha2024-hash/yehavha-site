@@ -2,61 +2,73 @@
 
 운영 주소: https://yehavha-nexus-hub.pages.dev/
 
-운영 구조 정리 기준일: 2026-08-11
+운영 구조 기준일: 2026-08-15
 
-YEHAVHA Nexus는 웹앱·연구·출판·미디어·교육 프로젝트의 공식 진입점을 한곳에 모아 관리하는 통합 포털입니다.
+YEHAVHA Nexus는 웹앱·연구·출판·미디어·AI 실무·교육·기획 프로젝트의 공식 진입점을 한곳에 모아 관리하는 통합 포털입니다.
 
 ## 운영 원본
 
-Cloudflare Pages는 이 저장소의 `nexus/` 디렉터리만 Nexus 운영 원본으로 사용합니다.
+Cloudflare Pages는 이 저장소의 `nexus/` 디렉터리를 Nexus 운영 원본으로 사용합니다.
 
-- `nexus/index.html`: 포털 화면 구조
-- `nexus/portal-v2.css`: 공통 디자인
-- `nexus/status.css`: 자동관리 상태 표시
-- `nexus/research-groups.css`: 연구 하위그룹 표시
-- `nexus/portal-v2.js`: 카테고리·프로젝트 렌더링 및 상태 병합
-- `nexus/projects.json`: 카테고리·연구그룹·프로젝트 카드의 유일한 기준 데이터
-- `nexus/project-status.json`: 최근 업데이트일·콘텐츠 수·운영상태
-- `nexus/scripts/update-status.mjs`: 승인된 프로젝트 상태정보 갱신
-- `nexus/assets/portal-bg.webp`: 포털 배경
-- `nexus/_headers`: 캐시 제어
+- `nexus/index.html` — 포털 화면 구조
+- `nexus/portal-v2.css`, `nexus/nexus-standard.css`, `nexus/status.css`, `nexus/research-groups.css` — 현재 포털 스타일 계층
+- `nexus/portal-v2.js` — 카테고리·프로젝트 렌더링 및 상태 병합
+- `nexus/projects.json` — 카테고리·연구그룹·프로젝트 카드의 유일한 표시정보 원본
+- `nexus/project-status.json` — 최근 업데이트일·콘텐츠 수·운영상태의 유일한 상태 원본
+- `nexus/scripts/update-status.mjs` — 승인된 프로젝트 상태정보 갱신
+- `nexus/scripts/audit-runtime.mjs` — Nexus 데이터·하위 콘텐츠 런타임 검증
+- `nexus/scripts/audit-live-urls.mjs` — 실제 배포 URL·JSON·API·리다이렉트 스모크 테스트
+- `scripts/audit-repo-hygiene.mjs` — 구버전·고아 파일·과도한 권한·캐시 소유권 검증
+- `nexus/assets/portal-bg.webp` — 포털 배경
+- `nexus/_headers` — 캐시 제어
 
-## 데이터 역할
+## 데이터 역할과 소유권
 
-표시정보와 운영상태를 분리합니다.
+표시정보, 상태정보, 하위 프로젝트 데이터의 책임을 분리합니다.
 
-1. `projects.json`은 프로젝트 제목·설명·URL·카테고리·연구그룹을 관리합니다.
+1. `projects.json`은 프로젝트 제목·설명·URL·카테고리·연구그룹만 관리합니다.
 2. 각 `nexus.project.json`은 프로젝트 ID와 상태 추적·콘텐츠 집계 규칙만 관리합니다.
 3. `update-status.mjs`는 승인된 매니페스트를 읽어 `project-status.json`만 갱신합니다.
-4. `portal-v2.js`는 `projects.json`을 먼저 읽고 동일한 ID의 `project-status.json` 상태값만 병합합니다.
-5. 상태파일을 읽지 못하더라도 기본 프로젝트 카드와 링크는 `projects.json`만으로 정상 표시합니다.
-
-카드 정의를 자동 생성 파일이나 매니페스트에 다시 복제하지 않습니다.
+4. `portal-v2.js`는 `projects.json`을 먼저 읽고 동일 ID의 `project-status.json` 상태값만 병합합니다.
+5. 상태파일을 읽지 못하더라도 기본 프로젝트 카드와 링크는 `projects.json`만으로 표시됩니다.
+6. 카드 정의를 `projects.generated.json` 같은 자동 생성 파일이나 매니페스트에 다시 복제하지 않습니다.
+7. 진단 보고서·검증 산출물은 운영 원본으로 저장하지 않고 GitHub Actions artifact 또는 로컬 임시파일로만 생성합니다.
 
 ## 승인된 자동관리 프로젝트
 
-Nexus 자동갱신은 저장소 전체를 재귀 탐색하지 않습니다. 아래 7개 매니페스트만 승인된 상태 추적 원본으로 읽습니다.
+Nexus 상태갱신은 저장소 전체를 무차별 재귀 탐색하지 않고 아래 승인 매니페스트만 읽습니다.
 
 1. `nexus.project.json` — AI 법률연구소
 2. `three-minute-break/nexus.project.json` — 3분 쉼표
 3. `toeic-human-100/nexus.project.json` — 토익인간 100일 프로젝트
-4. `legal-knowledge/nexus.project.json` — 법리·판례 연구
-5. `legal-knowledge/ai-literature/nexus.project.json` — 인공지능 법학 연구문헌 아카이브
-6. `ai-law-tech-foresight/nexus.project.json` — AI 법·기술 선제연구 아카이브
-7. `legal-philosophy/nexus.project.json` — 법철학·기본권 연구
+4. `toeic-human-v2/nexus.project.json` — 심화 토익인간 V2
+5. `nexus/research-track/nexus.project.json` — 법학 학술연구 트랙
+6. `legal-knowledge/nexus.project.json` — 법리·판례 연구
+7. `legal-knowledge/ai-literature/nexus.project.json` — 인공지능 법학 연구문헌 아카이브
+8. `ai-law-tech-foresight/nexus.project.json` — AI 법·기술 선제연구 아카이브
+9. `legal-philosophy/nexus.project.json` — 법철학·기본권 연구
+10. `nexus/publishing/nexus.project.json` — 대표 출간 도서
+11. `nexus/articles/nexus.project.json` — 글·연구 아카이브
+12. `nexus/ai-practice/nexus.project.json` — AI 실무·아이디어 실행 자료실
+13. `nexus/initiatives/nexus.project.json` — 아이디어 허브
 
-새 프로젝트를 자동관리 대상으로 추가할 때에는 먼저 `projects.json`에 카드 정의를 등록합니다. 자동 상태 추적이 필요한 경우에만 매니페스트를 만들고 `nexus/scripts/update-status.mjs`의 승인 목록에도 명시적으로 등록합니다. 이 규칙으로 구버전 폴더나 잘못된 매니페스트가 포털에 자동 노출되는 것을 방지합니다.
+새 프로젝트는 먼저 `projects.json`에 카드 정의를 등록합니다. 자동 상태 추적이 필요한 경우에만 별도 매니페스트를 만들고 `nexus/scripts/update-status.mjs` 승인 목록에도 명시적으로 등록합니다. 이 방식으로 구버전 폴더나 잘못된 매니페스트가 포털에 자동 노출되는 것을 차단합니다.
 
-## 검증 규칙
+## 자동검증
 
-상태 갱신 시 다음을 확인합니다.
+`Web Architecture Audit`는 읽기 전용 권한으로 다음을 검사합니다.
 
-- `projects.json` 프로젝트 ID 중복 여부
-- 카테고리 존재 여부
-- 프로젝트 URL의 HTTP/HTTPS 형식
-- 승인 매니페스트 누락 여부
-- 승인 매니페스트 ID가 `projects.json`에 존재하는지 여부
-- 콘텐츠 집계 규칙의 실행 가능 여부
+- HTML 내부 링크와 로컬 자산 존재 여부
+- Nexus 프로젝트 ID·카테고리·URL·리다이렉트 허용목록 일치
+- 승인 매니페스트와 상태파일 일치
+- 구버전·generated·진단 산출물 재등장 여부
+- Service Worker의 현재 런타임 자산 소유 여부
+- 불필요한 GitHub Actions 쓰기 권한 여부
+- 3분 쉼표 실제 콘텐츠 로드순서와 퀴즈 데이터
+- Nexus 하위 데이터·본문 참조 무결성
+- 실제 운영 URL, `projects.json`, `project-status.json`, `/api/access`, `/go` 응답
+
+하위 프로젝트의 별도 검증은 해당 프로젝트 데이터 규칙에 따라 수행하며, 검증 결과를 운영 원본 파일과 섞지 않습니다.
 
 ## 상태 기준
 
@@ -66,17 +78,14 @@ Nexus 자동갱신은 저장소 전체를 재귀 탐색하지 않습니다. 아�
 
 프로젝트별 기준은 각 매니페스트에서 조정할 수 있습니다.
 
-## GitHub Actions
+## GitHub Actions 권한 원칙
 
-`.github/workflows/refresh-nexus-status.yml`은 Nexus 상태 갱신만 담당합니다. 다른 프로젝트의 학술자료 검증이나 콘텐츠 내보내기 작업과 분리하여, 하위 프로젝트의 별도 오류 때문에 Nexus 상태 갱신이 멈추지 않도록 구성합니다.
+- 일반 감사·검증 워크플로: `contents: read`
+- Nexus 상태 갱신 워크플로: `project-status.json` 변경이 필요하므로 제한적으로 `contents: write`
+- TOEIC 마스터 어휘 빌드: canonical `master-lexicon-v2.json` 갱신에 한해 별도 write 권한 사용
+- 진단용 워크플로는 결과를 저장소에 재커밋하지 않습니다.
 
-실행 시점:
-
-- 승인된 Nexus 관련 경로가 `main`에 변경될 때
-- 매일 1회 정기 점검
-- GitHub Actions에서 수동 실행할 때
-
-변경이 있을 경우 `nexus/project-status.json`만 자동 커밋합니다.
+`.github/workflows/refresh-nexus-status.yml`은 Nexus 상태 갱신만 담당하며 변경이 있을 때 `nexus/project-status.json`만 자동 커밋합니다.
 
 ## Cloudflare Pages
 
