@@ -23,6 +23,11 @@ function auditForbiddenArtifacts() {
     'toeic-human-100/reading-content-v2-ready-rerender.js',
     'toeic-human-100/focused-reading-ui-patch.js',
     'toeic-human-100/scripts/validate-reading-v2.mjs',
+    'toeic-human-100/V2_STATUS_20260809.md',
+    'toeic-human-100/V2_FINAL_STATUS_20260809.md',
+    'toeic-human-100/READING_PROGRAM_V2.md',
+    'toeic-human-100/COVERAGE_CORRECTION_SYSTEM.md',
+    'nexus/ai-practice/runs/2026-08-12-P1-02.json',
     'nexus/ai-practice/runs/2026-08-12-P1-03.json',
     'nexus/ai-practice/runs/2026-08-12-P1-04.json',
     'nexus/ai-practice/runs/2026-08-12-P2-02.json',
@@ -130,12 +135,20 @@ function auditAiPracticeIndex() {
     }
   }
 
+  const retiredInstructions = [
+    '전자책 30초 홍보영상',
+    '찬양곡 1곡을 유튜브·쇼츠·릴스·틱톡으로',
+    '법률연구·AI 강좌 60~90초 설명영상'
+  ];
   const deliverableRefs = new Set();
   const runFiles = [...listed].filter(relative => relative.endsWith('.json'));
   for (const relative of runFiles) {
     const target = `nexus/ai-practice/${relative}`;
     if (!exists(target)) continue;
     const text = read(target);
+    for (const retired of retiredInstructions) {
+      if (text.includes(retired)) error(target, `폐기된 실행지시가 현재 기록에 재등장함: ${retired}`);
+    }
     for (const match of text.matchAll(/nexus\/ai-practice\/deliverables\/([^"'?#\s]+\.json)/g)) deliverableRefs.add(match[1]);
   }
 
