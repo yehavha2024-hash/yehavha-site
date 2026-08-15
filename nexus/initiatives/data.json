@@ -36,6 +36,16 @@
       "nextAction":"새 아이디어는 별도 페이지를 만들기 전에 이 보드에 먼저 등록하고 분류·상태·다음 행동을 지정합니다."
     },
     {
+      "id":"living-law-100-service",
+      "group":"projects",
+      "meta":"Public Legal Service",
+      "title":"생활법률 100선 구축·운영",
+      "summary":"일반인이 자주 겪는 형사신고·주거·임대차·사유지·금전·개인정보·스토킹·소비자·근로·가족·교통 문제 100가지를 상황, 즉시 대응, 증거, 법적 근거, 다음 절차 중심으로 제공하는 실용 생활법률 웹서비스입니다.",
+      "status":"ACTIVE","statusId":"active","priority":"P1","visibility":"PUBLIC","visibilityId":"public",
+      "registeredAt":"2026-08-15","updatedAt":"2026-08-15",
+      "nextAction":"100개 항목의 법령 기준일과 공식 확인처를 유지하고 실제 생활이슈와 제도 변경을 검증한 뒤 필요한 항목만 단계적으로 확장합니다."
+    },
+    {
       "id":"suno-work-manual",
       "group":"ideas",
       "meta":"AI Music",
@@ -108,12 +118,12 @@
     {
       "id":"ai-tool-budget",
       "group":"resources",
-      "meta":"Tool Stack",
-      "title":"AI 제작·연구 도구의 역할과 비용 정리",
-      "summary":"ChatGPT·Suno·CapCut·GitHub·Cloudflare 등 반복 사용하는 도구를 주도·보조·배포 역할로 나누고 중복 비용과 사용 목적을 정리합니다.",
+      "meta":"Operating Resources",
+      "title":"AI 제작·연구 운영자원의 역할과 비용 정리",
+      "summary":"반복 사용하는 제작·연구 운영자원을 주도·보조·배포 역할로 나누고 중복 비용과 사용 목적을 정리합니다.",
       "status":"REVIEW","statusId":"review","priority":"P3","visibility":"SUMMARY","visibilityId":"summary",
-      "registeredAt":"2026-08-12","updatedAt":"2026-08-13",
-      "nextAction":"실제로 매달 사용하는 도구부터 비용·용도·대체 가능성을 기록합니다."
+      "registeredAt":"2026-08-12","updatedAt":"2026-08-15",
+      "nextAction":"실제로 매달 사용하는 운영자원부터 비용·용도·대체 가능성을 기록합니다."
     },
     {
       "id":"nexus-category-restructure",
