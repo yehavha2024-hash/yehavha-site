@@ -98,23 +98,26 @@
     day.coverage ||= {};
     day.coverage.normalizedWordCount = count;
     day.coverage.readingTarget = "700~850 words";
+    day.coverage.masterPoolMode = "selection-source";
     day.coverage.studyDesign = "short-reading-v3";
   }
 
-  function fixReadingMeta() {
-    document.querySelectorAll(".reading-meta span").forEach(span => {
-      if (/1,500단어|1500단어/.test(span.textContent || "")) span.textContent = "약 700~850단어 집중 본문";
-    });
-  }
+  if (typeof document !== "undefined" && typeof MutationObserver !== "undefined") {
+    function fixReadingMeta() {
+      document.querySelectorAll(".reading-meta span").forEach(span => {
+        if (/1,500단어|1500단어/.test(span.textContent || "")) span.textContent = "약 700~850단어 집중 본문";
+      });
+    }
 
-  if (!root.__TOEIC_SHORT_READING_META_OBSERVER__) {
-    root.__TOEIC_SHORT_READING_META_OBSERVER__ = true;
-    const install = () => {
-      fixReadingMeta();
-      const observer = new MutationObserver(fixReadingMeta);
-      observer.observe(document.body, { childList: true, subtree: true });
-    };
-    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", install, { once: true });
-    else install();
+    if (!root.__TOEIC_SHORT_READING_META_OBSERVER__) {
+      root.__TOEIC_SHORT_READING_META_OBSERVER__ = true;
+      const install = () => {
+        fixReadingMeta();
+        const observer = new MutationObserver(fixReadingMeta);
+        observer.observe(document.body, { childList: true, subtree: true });
+      };
+      if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", install, { once: true });
+      else install();
+    }
   }
 })(globalThis);
