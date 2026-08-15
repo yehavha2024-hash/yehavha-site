@@ -13,6 +13,7 @@ const projects = [
 ];
 
 const nexusRuntimePages = [
+  'nexus/living-law',
   'nexus/toeic-human-v2',
   'nexus/publishing',
   'nexus/articles',
@@ -117,6 +118,7 @@ const auditNexusModel = () => {
   const manifestFiles = [
     'nexus.project.json',
     'three-minute-break/nexus.project.json',
+    'nexus/living-law/nexus.project.json',
     'toeic-human-100/nexus.project.json',
     'nexus/toeic-human-v2/nexus.project.json',
     'nexus/research-track/nexus.project.json',
