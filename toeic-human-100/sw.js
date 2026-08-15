@@ -1,4 +1,4 @@
-const CACHE = "toeic-human-100-v11-focused-compact";
+const CACHE = "toeic-human-100-v12-canonical-runtime";
 const ASSETS = [
   "./",
   "index.html",
@@ -8,20 +8,20 @@ const ASSETS = [
   "v2-ui-theme.css",
   "app-v2.js",
   "teps-extension-ui-v2.js",
-  "reading-content-v2-ready-rerender.js",
-  "focused-reading-ui-patch.js",
+  "reading-ready-sync.js",
+  "focused-reading-ui.js",
   "content.js",
   "reading-content-v2.js",
   "reading-content-v2-days02-04.js",
   "reading-content-v2-days05-07.js",
   "reading-content-v2-days08-10.js",
   "reading-global-bridge.js",
-  "reading-content-v2-length-patch.js",
+  "reading-content-v2-days01-10-enrichment.js",
   "teps-extension-v2.js",
-  "teps-extension-length-patch.js",
+  "teps-extension-enrichment.js",
   "reading-content-v2-days11-100-builder.js",
-  "reading-content-v2-generated-compact-patch.js",
-  "reading-final-compact.js",
+  "reading-content-v2-generated-study-plan.js",
+  "reading-length-normalizer.js",
   "master-lexicon-v2.json",
   "manifest.webmanifest",
   "images/toeic-bg.webp",
@@ -50,16 +50,20 @@ function isCodeRequest(request) {
   return request.mode === "navigate" || /\.(?:html|js|css|webmanifest|json)$/.test(url.pathname);
 }
 
+function cacheSuccessfulResponse(request, response, event) {
+  if (!response.ok) return response;
+  const copy = response.clone();
+  event.waitUntil(caches.open(CACHE).then(cache => cache.put(request, copy)));
+  return response;
+}
+
 self.addEventListener("fetch", event => {
   if (event.request.method !== "GET") return;
+
   if (isCodeRequest(event.request)) {
     event.respondWith(
       fetch(event.request)
-        .then(response => {
-          const copy = response.clone();
-          caches.open(CACHE).then(cache => cache.put(event.request, copy));
-          return response;
-        })
+        .then(response => cacheSuccessfulResponse(event.request, response, event))
         .catch(async () => {
           const cached = await caches.match(event.request);
           if (cached) return cached;
@@ -69,11 +73,9 @@ self.addEventListener("fetch", event => {
     );
     return;
   }
+
   event.respondWith(
-    caches.match(event.request).then(cached => cached || fetch(event.request).then(response => {
-      const copy = response.clone();
-      caches.open(CACHE).then(cache => cache.put(event.request, copy));
-      return response;
-    }))
+    caches.match(event.request).then(cached => cached || fetch(event.request)
+      .then(response => cacheSuccessfulResponse(event.request, response, event)))
   );
 });
