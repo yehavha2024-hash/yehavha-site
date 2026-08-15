@@ -104,7 +104,7 @@
       {key:'courtHolding', label:'법원의 판단', ok:!isCaseNote || hasText(item.courtHolding), conditional:!isCaseNote},
       {key:'courtReasoning', label:'법원의 논증', ok:!isCaseNote || hasText(item.courtReasoning), conditional:!isCaseNote},
       {key:'coreRule', label:'핵심 법리', ok:hasText(item.coreRule)},
-      {key:'counter', label:'반대논리·한계', ok:hasText(item.counter) || (isReasoning && hasList(item.deepDive))},
+      {key:'counter', label:'반대논리·한계', ok:hasText(item.counter) || (isReasoning && hasList(existingDeepDive))},
       {key:'variations', label:'사례변형·법리적 해설', ok:item.variationSolutionsComplete},
       {key:'relatedRules', label:'관련 법리', ok:hasList(item.relatedRules)},
       {key:'relatedCases', label:'관련 판례', ok:!isCaseNote || hasList(item.relatedCases), conditional:!isCaseNote},
