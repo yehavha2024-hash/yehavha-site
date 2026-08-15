@@ -3,21 +3,21 @@
   "books": [
     {
       "id": "upaper-toeic-day001",
-      "platform": "U-Paper",
+      "platform": "유페이퍼",
       "title": "토익 인간 100일 프로젝트 DAY 001",
       "description": "100일 동안 장문 독해와 핵심 어휘·숙어·문법·문장구조를 반복하며 TOEIC 영어 문해력을 단계적으로 높이는 학습 프로젝트의 첫 번째 전자책입니다.",
       "bibliography": "ISBN 979-11-444-0290-4 · YES24 상용 유통",
       "url": "https://yehavha.upaper.kr/content/1221195",
-      "actionLabel": "U-Paper에서 보기"
+      "actionLabel": "유페이퍼에서 보기"
     },
     {
       "id": "upaper-yhwh-returning-yeshua",
-      "platform": "U-Paper",
+      "platform": "유페이퍼",
       "title": "사람으로 오신 YHWH, 다시 오실 예슈아",
       "description": "이스라엘 언약의 성취와 부활·성도 집결·천년 왕국을 하나의 흐름으로 연결하여 예슈아의 재림과 언약 성취를 살펴보는 신앙 연구 전자책입니다.",
-      "bibliography": "초판 2026.08.11 · U-Paper",
+      "bibliography": "초판 2026.08.11 · 유페이퍼",
       "url": "https://yehavha.upaper.kr/content/1221622",
-      "actionLabel": "U-Paper에서 보기",
+      "actionLabel": "유페이퍼에서 보기",
       "detailEnabled": true,
       "detail": {
         "eyebrow": "FAITH RESEARCH EBOOK",
@@ -36,11 +36,11 @@
     },
     {
       "id": "upaper-crucified-savior-yeshua",
-      "platform": "U-Paper",
+      "platform": "유페이퍼",
       "title": "십자가에 달리신 구원자 예슈아",
       "description": "예슈아의 십자가와 구원의 의미를 중심으로 성경의 핵심 신앙을 다루는 신앙 전자책입니다.",
       "url": "https://yehavha.upaper.kr/content/1161013",
-      "actionLabel": "U-Paper에서 보기"
+      "actionLabel": "유페이퍼에서 보기"
     },
     {
       "id": "amazon-crucified-savior-yeshua",
