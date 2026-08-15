@@ -1,88 +1,95 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="기존 토익인간 100일 프로젝트에서 부족했던 고급 어휘 정밀도, 복문구조, 패러프레이즈, 추론, 복합문서, TEPS 및 영어 원서형 독해를 실제 100일 학습자료로 보강하는 심화 토익인간 V2입니다."/>
-<meta name="theme-color" content="#071225"/>
-<title>심화 토익인간 V2 | YEHAVHA Nexus</title>
-<link rel="stylesheet" href="./style.css?v=20260815-1"/>
-<link rel="stylesheet" href="./learning.css?v=20260815-2"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#081a30" />
+  <meta name="description" content="토익인간의 학습 UI를 그대로 계승하여 고급 독해·어휘·구문·추론·전이 훈련을 100일간 학습하는 심화 토익인간 V2" />
+  <title>심화 토익인간 V2</title>
+  <link rel="stylesheet" href="./style.css?v=20260815-v3" />
 </head>
 <body>
-<header class="top" id="top">
-  <div class="container">
-    <a class="back" href="../">← YEHAVHA Nexus</a>
-    <section class="hero">
-      <p class="eyebrow">ADVANCED ENGLISH READING · 100-DAY CHILD TREE</p>
-      <h1>심화 토익인간 V2</h1>
-      <p class="hero-copy">기존 「토익인간 100일 프로젝트」의 구조와 학습 습관은 그대로 유지하면서, V1에서 상대적으로 부족했던 어휘 정밀도·복문 구조·문단 논리·패러프레이즈·추론·복합문서·정책문서·TEPS형 비문학·영어 원서형 독해를 실제 영문 본문과 문제로 전면 심화합니다. 각 DAY에는 650~800단어 집중독해와 어휘·숙어·구문·근거형 문제·전이과제가 들어갑니다.</p>
-      <div class="hero-meta">
-        <span>V1 → V2 Advanced</span>
-        <span>10개 심화축 × 10일</span>
-        <span>100개 실제 학습세트</span>
-        <span id="updatedAt">업데이트 2026.08.15</span>
-        <a href="https://yehavha-toeicman.pages.dev/" target="_blank" rel="noopener noreferrer">기존 토익인간 열기 ↗</a>
+  <main class="app-shell" id="top">
+    <a class="nexus-link" href="../" aria-label="예하바 넥서스로 돌아가기">← YEHAVHA NEXUS</a>
+
+    <header class="hero glass">
+      <div class="brand-row">
+        <div>
+          <p class="eyebrow">ADVANCED TOEIC · TEPS · BOOK READING · 100 DAYS</p>
+          <h1>심화 토익인간<br><span>V2 100일 프로젝트</span></h1>
+        </div>
       </div>
-      <div class="progress-card" aria-label="심화학습 진행률">
-        <div class="progress-head"><span>V2 학습 완료</span><strong id="completedCount">0 / 100</strong></div>
-        <div class="progress-track"><span id="progressBar"></span></div>
+      <div class="day-dashboard">
+        <div class="day-copy">
+          <span id="dayLabel">DAY 1</span>
+          <strong id="dayHeadline">심화 영어독해 · 4단계 학습</strong>
+          <small id="dayTrack"></small>
+        </div>
+        <div class="progress-ring" id="progressRing" aria-label="100일 진행 위치">
+          <span id="progressNumber">1</span>
+          <small>/100</small>
+        </div>
       </div>
+      <div class="day-progress" aria-label="오늘 학습 진행률">
+        <div><span>오늘 완료</span><strong id="dailyProgressText">0 / 4</strong></div>
+        <div class="progress-track"><span id="dailyProgressBar"></span></div>
+      </div>
+    </header>
+
+    <nav class="category-tabs glass" aria-label="학습 단계">
+      <button class="category active" data-category="read"><span>01</span>장문읽기</button>
+      <button class="category" data-category="analyze"><span>02</span>해부·학습</button>
+      <button class="category" data-category="apply"><span>03</span>문제·복습</button>
+      <button class="category" data-category="speed"><span>04</span>전이·속도</button>
+    </nav>
+
+    <section id="learningCard" class="learning-card glass" aria-live="polite">
+      <div class="card-head">
+        <span id="badge" class="badge">장문읽기</span>
+        <span id="partBadge" class="part-badge">ADVANCED READING</span>
+      </div>
+      <div id="cardContent"></div>
     </section>
-  </div>
-</header>
 
-<main>
-  <div class="container">
-    <div class="section-head first-section">
-      <p class="eyebrow">V1 → V2 DESIGN</p>
-      <h2>기존 구조를 살리고 부족한 부분만 심화</h2>
-      <p>V1의 학습 리듬을 유지하면서 각 DAY에서 실제 고급 독해·어휘·구문·추론 문제를 학습합니다.</p>
+    <div class="learning-actions">
+      <button id="speakBtn" class="secondary-button">영어 듣기</button>
+      <button id="completeBtn" class="primary-button">이 단계 완료</button>
     </div>
-    <section class="overview-grid" id="overviewGrid" aria-label="V2 설계원칙"></section>
 
-    <div class="section-head">
-      <p class="eyebrow">DAILY LEARNING FORMAT</p>
-      <h2>매일 유지되는 4단계 형식</h2>
-      <p>심화독해, 해부·학습, 추론·문제, 전이·속도의 네 단계에 실제 학습자료를 배치합니다.</p>
+    <div class="navigation-row glass">
+      <button id="prevDayBtn" aria-label="이전 학습일">‹</button>
+      <div>
+        <strong id="navDay">DAY 1</strong>
+        <small>이전·다음 날짜로 이동</small>
+      </div>
+      <button id="nextDayBtn" aria-label="다음 학습일">›</button>
     </div>
-    <section class="format-grid" id="formatGrid" aria-label="일일 학습형식"></section>
 
-    <div class="section-head">
-      <p class="eyebrow">LEARNING TREE</p>
-      <h2>영어학습 자체 트리구조</h2>
-      <p>기존 토익인간을 기초 부모노드로 두고, 심화 V2가 그 아래에서 10개의 독립 심화축으로 분기됩니다.</p>
-    </div>
-    <section class="tree-shell" id="learningTree" aria-label="심화 토익인간 V2 학습트리"></section>
+    <section class="stats glass" aria-label="학습 기록">
+      <div><span>완료 단계</span><strong id="totalCompleted">0</strong></div>
+      <div><span>완료한 날</span><strong id="completedDays">0</strong></div>
+      <div><span>오답 문제</span><strong id="wrongCount">0</strong></div>
+    </section>
 
-    <div class="section-head">
-      <p class="eyebrow">ADVANCED PRINCIPLES</p>
-      <h2>심화학습 운영원칙</h2>
-      <p>V2가 V1의 단순 반복이 되지 않도록 학습 범위와 난이도 상승방식을 고정합니다.</p>
+    <div class="footer-actions">
+      <button id="shareBtn" class="text-button">현재 학습 공유</button>
+      <button id="resetBtn" class="text-button">진행기록 초기화</button>
     </div>
-    <ol class="principles-list" id="principlesList" aria-label="심화학습 원칙"></ol>
 
-    <div class="section-head">
-      <p class="eyebrow">100-DAY ADVANCED CURRICULUM</p>
-      <h2>10개 심화축 · 100일 실제 학습자료</h2>
-      <p>각 DAY를 열면 650~800단어 영문 본문, 핵심어휘 18개, 숙어·연어 8개, 문장구조 4개, 근거형 문제 6개와 해설, 요약·재작성·근거회수 과제가 표시됩니다.</p>
-    </div>
-    <div class="branches" id="branches"></div>
-  </div>
-</main>
+    <footer class="glass site-footer" data-footer-standard="v1">
+      <p>심화 토익인간 V2는 기존 토익인간의 학습방식을 그대로 이어 고급 어휘·복문·논리·패러프레이즈·추론·복합문서·TEPS·원서형 독해를 실제 학습자료로 강화한 100일 과정입니다.</p>
+      <div class="footer-meta">
+        <p>Copyright © 이명훈 2026. All rights reserved.</p>
+        <p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p>
+        <p class="ai-disclosure">AI 활용 안내: 일부 영어 본문과 학습문항은 생성형 AI를 활용하여 제작했으며, 전체 학습구조와 콘텐츠는 운영자가 직접 기획·검토·관리합니다. TOEIC·TEPS 공식 기출문제를 복제한 자료가 아닙니다.</p>
+        <a href="#top">맨 위로 이동 ↑</a>
+      </div>
+    </footer>
+  </main>
 
-<footer class="footer" data-footer-standard="v1">
-  <div class="container">
-    <div class="footer-card">
-      <p>Copyright © 이명훈 2026. All rights reserved.</p>
-      <p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p>
-      <p class="ai-disclosure">AI 활용 안내: 일부 학습자료의 초안 구성에 생성형 AI를 활용하며, 전체 학습트리·난이도·교육목표·콘텐츠 구조와 최종 편집은 운영자가 직접 기획·검토·관리합니다. TOEIC·TEPS 공식 기출문제를 복제한 자료가 아닙니다.</p>
-      <a href="#top">맨 위로 이동 ↑</a>
-    </div>
-  </div>
-</footer>
-<script src="./data.js?v=20260815-1"></script>
-<script src="./learning-data.js?v=20260815-2"></script>
-<script defer src="./app.js?v=20260815-2"></script>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="./data.js?v=20260815-1"></script>
+  <script src="./learning-data.js?v=20260815-2"></script>
+  <script defer src="./app.js?v=20260815-v3"></script>
 </body>
 </html>
