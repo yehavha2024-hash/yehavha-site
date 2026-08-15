@@ -1,44 +1,37 @@
 # 토익인간 100일 프로젝트
 
-GitHub에서 관리하는 100일 모바일 영어 학습 웹앱입니다. V2는 TOEIC을 단순 문제풀이 과목으로 다루지 않고, 긴 영어 본문을 매일 끝까지 읽으면서 어휘·숙어·문법·문장구조를 문맥 속에서 반복해 익히고, 각 날짜 하단의 TEPS 독해 확장으로 추상어휘·논리·추론을 넓혀 영어 원서 독해까지 연결합니다.
+GitHub에서 관리하는 100일 모바일 영어 학습 웹앱입니다. TOEIC을 단순 문제풀이 과목으로 다루지 않고, 매일 감당 가능한 분량의 영어 본문을 끝까지 읽으면서 어휘·숙어·문법·문장구조를 분리 학습하고 TEPS 고급 독해와 영어 원서 독해까지 확장합니다.
 
-## V2 완성 상태
+## V3 학습 설계
 
-- DAY 001~100 TOEIC 장문 V2 구성 완료
-- DAY 001~100 TEPS 독해 확장 구성 완료
-- 완료축은 `장문읽기 / 해부·학습 / 문제·복습` 3개
-- DAY 001~010은 개별 제작 장문 원본을 사용
-- DAY 011~100은 100일 장르·주제 지도와 마스터 어휘 DB를 사용하는 결정론적 콘텐츠 빌더로 구성
-- DAY 011~100 생성 장문은 최종 정규화 후 1,446~1,579 words
-- TEPS 생성 확장은 205~223 words
-- 전체 DAY는 TOEIC 장문 1,350~1,650 words 규격을 통과
-- 기존 브라우저 진행기록은 V2 3단계 구조로 가능한 범위에서 자동 이관
+- DAY 001~100 TOEIC 집중독해 구성
+- DAY 001~100 TEPS 독해 확장 구성
+- 본문 목표: 약 700~850 words
+- 완료축: `장문읽기 / 해부·학습 / 문제·복습`
+- 기존 4,786개 마스터 어휘 DB는 삭제하지 않고 선별·감사·확장학습용 원본 풀로 유지
+- 핵심 활성어휘 목표: 약 2,520개
+- 숙어·연어: 하루 최소 6개
+- 문법: 하루 최소 3개
+- 기존 브라우저 진행기록은 가능한 범위에서 그대로 유지
 
 ## 학습 구조
 
 1. `장문읽기`
-   - 약 1,500단어 영어를 먼저 끝까지 읽음
+   - 약 700~850단어를 먼저 끝까지 읽음
    - 모르는 단어 때문에 중단하지 않고 주어·본동사·논리표지·문단기능을 유지
-   - 같은 날짜 하단에 TEPS 독해 확장을 추가하여 추상어휘와 논리독해로 확장
+   - 마스터 어휘를 채우기 위한 인위적 어휘목록 문장과 반복문은 제거
+   - 같은 날짜 하단의 TEPS 독해 확장으로 추상어휘와 논리독해를 확장
 2. `해부·학습`
-   - 핵심어휘
-   - 숙어·collocation·고정결합
-   - 문법
-   - 긴 문장구조
+   - TOEIC 핵심 활성어휘와 일반 비문학 어휘
+   - 숙어·collocation·구동사·고정결합
+   - 문법과 긴 문장구조
    - 핵심 문장 해체
    - TEPS 고급어휘·논리
 3. `문제·복습`
-   - TOEIC Part 5
-   - TOEIC Part 6
-   - TOEIC Part 7
+   - TOEIC Part 5·6·7
    - TEPS 빈칸·문맥·주제·추론
+   - 오답과 취약 어휘 재확인
    - 최종 재독
-
-## 100일 장르 확장
-
-전반부는 이메일·공지·광고·은행·회계·출장·보험·IT·배송·인사·시설·교통 등 TOEIC 실무장르를 폭넓게 다룹니다. 중반부에는 과학기술·환경·에너지·건강·교육·시장·계약·정책·개인정보·컴플라이언스 등 일반 비문학으로 확장하고, 후반부에는 설명문·비교에세이·원인결과·역사·과학·경제·법정책·AI·사회분석·논증문·원서형 챕터 및 TOEIC 복합문서 모의세트까지 연결합니다.
-
-전체 장르·주제 지도는 `READING_100_DAY_MAP.md`에 있습니다.
 
 ## 마스터 어휘와 커버리지
 
@@ -49,57 +42,44 @@ GitHub에서 관리하는 100일 모바일 영어 학습 웹앱입니다. V2는 
 - TOEIC 특화 headword: 1,250
 - 학술·원서 확장 headword: 959
 
-최종 자동감사 결과:
+이전 설계는 4,786개 전수를 본문에 계획된 횟수만큼 실제 노출하기 위해 controlled lexical bridge와 반복 문장을 사용했습니다. 이 방식은 어휘 커버리지는 높았지만 본문이 약 1,500단어까지 길어지고 실제 독해 흐름이 무거워지는 문제가 있었습니다.
 
-- 전체 등장 headword: 4,786 / 4,786 = 100%
-- 전체 미등장 headword: 0
-- DAY 080까지 미등장 headword: 0
-- 최종 최소 반복기준 미달: 0
-- 2회 이상 노출: 4,786
-- 3회 이상 노출: 4,713
-- 4회 이상 노출: 3,522
-- 8회 이상 노출: 1,128
+현재 설계는 독해량과 어휘량을 분리합니다.
 
-역할별 최종기준:
+- 마스터 4,786개: 전체 선별·감사·확장학습 풀
+- 핵심 활성어휘 약 2,520개: 100일 동안 명시적으로 학습하는 우선 어휘
+- DAY 011~100: 하루 신규 28개 중심, DAY 012부터 핵심어휘 2개 추가 재노출
+- 선별 우선순위: `toeic-specific → general-core → academic-book-extension`
+- TOEIC-specific 1,250개는 핵심 활성학습에 우선 포함
+- 활성어휘 밖의 단어는 TEPS 확장·문제해설·재독·후속 확장학습에 활용
 
-- TOEIC-specific: 최소 4회
-- general-core: 최소 3회
-- academic-book-extension: 최소 2회
+따라서 이제 `4,786개를 본문에 모두 집어넣는 것`을 학습 성공조건으로 사용하지 않습니다. 본문은 읽기 훈련, 어휘목록은 명시적 어휘학습이라는 서로 다른 기능을 담당합니다.
 
-각 역할군은 최종 감사에서 100% 커버리지를 통과했습니다.
+## 100일 장르 확장
 
-## 커버리지 구현 원칙
+전반부는 이메일·공지·광고·은행·회계·출장·보험·IT·배송·인사·시설·교통 등 TOEIC 실무장르를 폭넓게 다룹니다. 중반부에는 과학기술·환경·에너지·건강·교육·시장·계약·정책·개인정보·컴플라이언스로 확장하고, 후반부에는 설명문·비교에세이·원인결과·역사·과학·경제·법정책·AI·사회분석·논증문·원서형 챕터와 TOEIC 복합문서까지 연결합니다.
 
-마스터 전체를 단순 숨은 데이터로 계산하지 않습니다. DAY 011~100 장문에는 해당 날짜의 주제 본문과 함께 `TOEIC vocabulary`, `general nonfiction vocabulary`, `TEPS and book-reading vocabulary`의 controlled lexical bridge가 실제 학습 텍스트로 노출됩니다. 핵심 TOEIC 어휘와 주요 표현은 별도 어휘·문법·문제 해설에 집중하고, 폭넓은 일반·학술어휘는 장문을 포기하지 않고 문맥 속에서 견디고 재인식하는 훈련층으로 사용합니다.
-
-따라서 4,786개 전수 커버리지는 모든 단어가 90개의 서로 다른 독립 예문으로 상세 해설되었다는 의미가 아니라, 100일 전체 학습 화면에서 마스터 어휘가 계획된 횟수만큼 실제 노출되고 핵심영역은 반복 해설·문제·문맥훈련으로 강화된다는 의미입니다.
+전체 장르·주제 지도는 `READING_100_DAY_MAP.md`에 있습니다.
 
 ## 주요 파일
 
-- `index.html` — 화면 구조 및 전체 V2 로드 순서
-- `style.css`, `reading-v2.css`, `teps-extension-v2.css` — 디자인
-- `app-v2.js` — 3단계 학습·진행·음성·문제 상호작용
-- `teps-extension-ui-v2.js` — TOEIC 3단계 화면과 TEPS 확장 결합
+- `index.html` — 화면 구조 및 V3 안내·로드 순서
+- `app-v2.js` — 학습·진행·음성·문제 상호작용
 - `reading-content-v2.js` — DAY 001
 - `reading-content-v2-days02-04.js`, `reading-content-v2-days05-07.js`, `reading-content-v2-days08-10.js` — DAY 002~010
-- `reading-content-v2-days11-100-builder.js` — DAY 011~100 결정론적 콘텐츠 빌더
-- `reading-content-v2-generated-compact-patch.js` — 생성 장문 1,350~1,650 words 정규화
-- `reading-content-v2-ready-rerender.js` — 마스터 어휘 로드 후 UI 재렌더링
-- `teps-extension-v2.js` — DAY 001~010 TEPS 확장
-- `master-lexicon-v2.json` — 통합 마스터 어휘
-- `coverage-policy-v2.json` — 전면노출·반복기준
-- `content.js` — 기존 V1 데이터, 호환·기록이관용 유지
-- `manifest.webmanifest`, `sw.js`, `icons/` — PWA 및 오프라인 캐시
+- `reading-content-v2-length-patch.js` — DAY 001~010 본문 700~850단어 정규화 및 숙어 보강
+- `reading-content-v2-days11-100-builder.js` — DAY 011~100 장르·주제 기반 콘텐츠 빌더
+- `reading-content-v2-generated-compact-patch.js` — DAY 011~100 본문 축약, lexical bridge 제거, 활성어휘 재배분
+- `teps-extension-v2.js`, `teps-extension-length-patch.js` — TEPS 확장
+- `master-lexicon-v2.json` — 4,786개 통합 마스터 어휘
+- `coverage-policy-v2.json` — 짧은 독해·활성어휘·숙어·문법 커버리지 정책
 
 ## 자동검증
 
-- `scripts/validate-reading-v2.mjs` — 기본 V2 구조검증
-- `scripts/validate-reading-v2-expanded.mjs` — DAY 001~100 TOEIC 장문·TEPS 분량 및 구조검증
-- `scripts/audit-reading-coverage-v2.mjs` — 4,786개 마스터 어휘의 DAY 080 전면노출 및 최종 반복기준 검사
-- `scripts/plan-coverage-correction-v2.mjs` — 10일 단위 커버리지 정책과 상태 확인
-- `.github/workflows/toeic-reading-v2-validate.yml` — GitHub Actions 자동검증
+- `scripts/validate-reading-v2-expanded.mjs` — 100일 본문 700~850단어, 어휘·숙어·문법 및 TEPS 구조검증
+- `scripts/audit-reading-coverage-v2.mjs` — 4,786개 원본 풀과 약 2,520개 핵심 활성어휘를 분리하여 감사
 
-최종 검증에서는 문법검사, 100일 분량검사, TEPS 구조검사, 마스터 커버리지, 반복노출 기준이 모두 통과해야 성공으로 판정합니다.
+검증 기준도 과거의 `본문 1,350~1,650단어 + 4,786개 본문 전수노출`에서 `본문 가독성 + 핵심 활성어휘 + 숙어·문법 분리학습` 기준으로 변경합니다.
 
 ## 저작권 원칙
 
