@@ -10,6 +10,7 @@ on:
       - 'toeic-human-100/**'
       - 'nexus/**'
       - 'scripts/audit-web-architecture.mjs'
+      - 'scripts/audit-repo-hygiene.mjs'
       - 'WEB_PROJECT_STANDARD.md'
       - '.github/workflows/web-architecture-audit.yml'
   pull_request:
@@ -21,6 +22,7 @@ on:
       - 'toeic-human-100/**'
       - 'nexus/**'
       - 'scripts/audit-web-architecture.mjs'
+      - 'scripts/audit-repo-hygiene.mjs'
       - 'WEB_PROJECT_STANDARD.md'
 
 permissions:
@@ -35,6 +37,7 @@ jobs:
         with:
           node-version: '22'
       - run: node scripts/audit-web-architecture.mjs
+      - run: node scripts/audit-repo-hygiene.mjs
       - run: node nexus/scripts/audit-runtime.mjs
       - if: github.event_name == 'push'
         run: node nexus/scripts/audit-live-urls.mjs
