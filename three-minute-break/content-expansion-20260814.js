@@ -136,24 +136,24 @@
       meta: "생활영어 · 지각 알림"
     },
     {
-      title: "Could you say that again?",
-      body: "다시 말씀해 주시겠어요? 상대방의 말을 잘 듣지 못했거나 이해하지 못했을 때 정중하게 되묻는 표현입니다.\n예문: Sorry, could you say that again?\n해석: 죄송하지만 다시 말씀해 주시겠어요?",
-      meta: "생활영어 · 다시 묻기"
+      title: "Could you hold on for a second?",
+      body: "잠깐만 기다려 주시겠어요? 전화나 대화 중 짧게 기다려 달라고 부탁할 때 자연스럽게 씁니다.\n예문: Could you hold on for a second while I check the file?\n해석: 제가 파일을 확인하는 동안 잠깐만 기다려 주시겠어요?",
+      meta: "생활영어 · 잠시 대기"
     },
     {
-      title: "I’ll get back to you.",
-      body: "확인한 뒤 다시 연락드릴게요. 바로 답하기 어려운 질문이나 업무 요청을 받은 상황에서 자주 씁니다.\n예문: Let me check the schedule, and I’ll get back to you.\n해석: 일정을 확인한 뒤 다시 연락드릴게요.",
-      meta: "생활영어 · 업무 회신"
+      title: "Let me double-check.",
+      body: "다시 한번 확인해 볼게요. 이미 확인한 내용이라도 실수를 줄이기 위해 재확인할 때 씁니다.\n예문: Let me double-check the date before I send it.\n해석: 보내기 전에 날짜를 다시 한번 확인해 볼게요.",
+      meta: "생활영어 · 재확인"
     },
     {
-      title: "I didn’t catch that.",
-      body: "그 말을 잘 못 들었어요. 빠르게 지나간 말이나 전화통화에서 놓친 내용을 다시 확인할 때 씁니다.\n예문: I didn’t catch your name. Could you repeat it?\n해석: 성함을 잘 못 들었어요. 다시 말씀해 주시겠어요?",
-      meta: "생활영어 · 듣기 확인"
+      title: "Would you like me to help?",
+      body: "제가 도와드릴까요? 상대에게 도움이 필요한지 정중하게 먼저 제안할 때 씁니다.\n예문: Would you like me to help with the bags?\n해석: 가방 드는 것을 제가 도와드릴까요?",
+      meta: "생활영어 · 도움 제안"
     },
     {
-      title: "I’m on my way.",
-      body: "지금 가는 중이에요. 이미 출발해 목적지로 이동하고 있음을 간단히 알리는 매우 자주 쓰는 표현입니다.\n예문: Don’t worry. I’m on my way now.\n해석: 걱정하지 마세요. 지금 가는 중이에요.",
-      meta: "생활영어 · 이동 상황"
+      title: "I’m almost there.",
+      body: "거의 다 왔어요. 약속 장소나 목적지에 곧 도착한다는 것을 간단히 알릴 때 씁니다.\n예문: I’m almost there. I’ll see you in a few minutes.\n해석: 거의 다 왔어요. 몇 분 뒤에 뵐게요.",
+      meta: "생활영어 · 도착 임박"
     }
   ];
 
