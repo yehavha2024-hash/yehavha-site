@@ -1,43 +1,46 @@
 {
-  "version": "3.0",
-  "description": "700~850단어 집중독해와 분리형 어휘·숙어 학습을 결합한 100일 TOEIC+TEPS 커버리지 정책",
+  "version": "3.1",
+  "description": "700~850단어 집중독해와 분리형 핵심어휘·숙어 학습을 결합한 100일 TOEIC+TEPS 커버리지 정책",
   "totalDays": 100,
   "blockSize": 10,
-  "completionTargetDay": 80,
   "readingDesign": {
     "toeicReadingWordsMin": 700,
     "toeicReadingWordsMax": 850,
     "targetCenter": 780,
-    "principle": "본문은 실제 독해 흐름을 우선하고 마스터 어휘를 채우기 위한 인위적 문장·반복문을 삽입하지 않는다.",
+    "principle": "본문은 실제 독해 흐름을 우선하고 마스터 어휘를 채우기 위한 인위적 어휘목록 문장이나 반복문을 삽입하지 않는다.",
     "firstRead": "모르는 단어에서 멈추지 않고 문장구조·문단기능·근거와 결론을 유지한다.",
     "secondRead": "해부·학습 단계에서 핵심어휘·확장어휘·숙어·문법을 확인한 뒤 다시 읽는다."
   },
-  "milestones": [
-    {"day": 10, "maxMissingHeadwords": 1728},
-    {"day": 20, "maxMissingHeadwords": 1485},
-    {"day": 30, "maxMissingHeadwords": 1235},
-    {"day": 40, "maxMissingHeadwords": 990},
-    {"day": 50, "maxMissingHeadwords": 740},
-    {"day": 60, "maxMissingHeadwords": 495},
-    {"day": 70, "maxMissingHeadwords": 250},
-    {"day": 80, "maxMissingHeadwords": 0},
-    {"day": 90, "maxMissingHeadwords": 0},
-    {"day": 100, "maxMissingHeadwords": 0}
-  ],
   "vocabularyDesign": {
-    "masterHeadwords": 1728,
-    "day1To10": "기초 연결구간: 기존 핵심어휘 12~16개를 본문과 직접 연결",
-    "day11To80": "마스터 어휘 최초 노출 우선: 하루 약 24~30개를 해부·학습에서 명시적으로 확인",
-    "day81To100": "고빈도·TOEIC 핵심·취약 어휘 재노출: 하루 약 20~24개",
-    "firstExposureRule": "1,728개 표제어는 DAY 80까지 최소 1회 학습목록에 노출",
-    "reinforcementRule": "모든 단어를 본문에 반복 삽입하지 않고 TOEIC 핵심어와 일반 핵심어를 우선 재노출",
-    "separationRule": "본문 독해량과 어휘 커버리지량을 분리하여 본문 가독성을 희생하지 않는다."
+    "masterPoolHeadwords": 4786,
+    "masterPoolPurpose": "전체 4,786개는 선별·감사·확장학습을 위한 원본 어휘 풀로 유지하며 모든 단어를 본문에 강제 삽입하지 않는다.",
+    "activeUniqueTarget": 2520,
+    "day1To10": "기초 연결구간: 기존 핵심어휘를 본문과 직접 연결하고 숙어·연어를 하루 최소 6개로 보강",
+    "day11To100": "우선순위가 높은 마스터 어휘를 하루 신규 28개 중심으로 해부·학습에 배치하고, DAY 12부터 핵심어휘 2개를 추가 반복",
+    "selectionPriority": [
+      "toeic-specific",
+      "general-core",
+      "academic-book-extension"
+    ],
+    "separationRule": "본문 독해량과 어휘 커버리지량을 분리하여 본문 가독성을 희생하지 않는다.",
+    "extensionRule": "활성 2,520개 밖의 어휘는 TEPS 확장, 문제해설, 재독 및 후속 확장학습의 선별 풀로 사용한다."
   },
+  "activeVocabularyMilestones": [
+    {"day": 20, "minimumCumulativeNewHeadwords": 280},
+    {"day": 30, "minimumCumulativeNewHeadwords": 560},
+    {"day": 40, "minimumCumulativeNewHeadwords": 840},
+    {"day": 50, "minimumCumulativeNewHeadwords": 1120},
+    {"day": 60, "minimumCumulativeNewHeadwords": 1400},
+    {"day": 70, "minimumCumulativeNewHeadwords": 1680},
+    {"day": 80, "minimumCumulativeNewHeadwords": 1960},
+    {"day": 90, "minimumCumulativeNewHeadwords": 2240},
+    {"day": 100, "minimumCumulativeNewHeadwords": 2520}
+  ],
   "phraseAndGrammarCoverage": {
     "phrasesPerDayMin": 6,
     "phraseMethod": "숙어·연어·구동사를 독립 학습항목으로 제시하고 반복 사용",
     "grammarPerDayMin": 3,
-    "grammarMethod": "문법명 암기보다 본문 문장구조와 포섭해 확인"
+    "grammarMethod": "문법명 암기보다 본문 문장구조와 연결해 확인"
   },
   "reinforcementPriority": [
     "틀린 단어·취약 어휘",
@@ -50,6 +53,7 @@
     "doNotForceUnnaturalVocabulary": true,
     "semanticPlacementRequired": true,
     "removeLexicalBridgeFiller": true,
+    "fullMasterPoolInReadingRequired": false,
     "countToeicReading": true,
     "countVocabularyStudy": true,
     "countPhraseStudy": true,
