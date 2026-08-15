@@ -16,6 +16,13 @@ function auditForbiddenArtifacts() {
     'legal-knowledge/RUNTIME_AUDIT_OUTPUT_20260809.json',
     'legal-knowledge/RUNTIME_AUDIT_PRIORITY_20260809.md',
     'toeic-human-100/contrast-fix-20260809.css',
+    'toeic-human-100/reading-content-v2-length-patch.js',
+    'toeic-human-100/teps-extension-length-patch.js',
+    'toeic-human-100/reading-content-v2-generated-compact-patch.js',
+    'toeic-human-100/reading-final-compact.js',
+    'toeic-human-100/reading-content-v2-ready-rerender.js',
+    'toeic-human-100/focused-reading-ui-patch.js',
+    'toeic-human-100/scripts/validate-reading-v2.mjs',
     'nexus/ai-practice/runs/2026-08-12-P1-03.json',
     'nexus/ai-practice/runs/2026-08-12-P1-04.json',
     'nexus/ai-practice/runs/2026-08-12-P2-02.json',
@@ -23,7 +30,9 @@ function auditForbiddenArtifacts() {
     'nexus/ai-practice/deliverables/song-media-master-template.json',
     'nexus/ai-practice/deliverables/explainer-video-scripts-v1.json'
   ];
-  for (const relative of forbidden) if (exists(relative)) error(relative, '정리 완료된 구버전·생성 산출물이 다시 추가됨');
+  for (const relative of forbidden) {
+    if (exists(relative)) error(relative, '정리 완료된 구버전·생성 산출물이 다시 추가됨');
+  }
 }
 
 function auditWorkflowPermissions() {
@@ -45,29 +54,62 @@ function auditWorkflowPermissions() {
 
 function auditServiceWorkerAssets(project) {
   const swPath = `${project}/sw.js`;
+  const indexPath = `${project}/index.html`;
   if (!exists(swPath)) return;
   const source = read(swPath);
-  const quoted = [...source.matchAll(/["'](\.\/?[^"']+|[^"']+\.(?:html|css|js|json|webmanifest|png|webp|svg|ico))["']/g)]
-    .map(match => match[1])
-    .filter(value => !value.includes('${'));
   const assetBlock = source.match(/const\s+(?:ASSETS|ASSET_URLS)\s*=\s*\[([\s\S]*?)\];/);
-  if (!assetBlock) return;
+  if (!assetBlock) return error(swPath, 'precache 자산 배열을 확인할 수 없음');
   const assets = [...assetBlock[1].matchAll(/["']([^"']+)["']/g)].map(match => match[1]);
+  const normalizedAssets = new Set(assets.map(asset => asset.split('?')[0].replace(/^\.\//, '')));
+
   for (const asset of assets) {
     const clean = asset.split('?')[0].replace(/^\.\//, '');
     if (!clean || clean === '.') continue;
     const target = `${project}/${clean}`;
     if (!exists(target)) error(swPath, `precache 대상 파일 없음: ${asset}`);
   }
-  if (project === 'three-minute-break') {
-    const index = read(`${project}/index.html`);
+
+  if (exists(indexPath)) {
+    const index = read(indexPath);
     const runtimeScripts = [...index.matchAll(/<script\s+[^>]*src=["']([^"']+)["']/gi)]
-      .map(match => match[1].split('?')[0].replace(/^\.\//, ''));
+      .map(match => match[1].split('?')[0].replace(/^\.\//, ''))
+      .filter(script => script && !/^https?:\/\//i.test(script));
     for (const script of runtimeScripts) {
-      if (!assets.some(asset => asset.replace(/^\.\//, '') === script)) error(swPath, `현재 index.html 실행 스크립트가 precache에서 누락됨: ${script}`);
+      if (!normalizedAssets.has(script)) error(swPath, `현재 index.html 실행 스크립트가 precache에서 누락됨: ${script}`);
     }
   }
-  void quoted;
+}
+
+function auditToeicCanonicalOwnership() {
+  const source = 'toeic-human-100/index.html';
+  if (!exists(source)) return;
+  const index = read(source);
+  const canonical = [
+    'reading-content-v2-days01-10-enrichment.js',
+    'teps-extension-enrichment.js',
+    'reading-content-v2-generated-study-plan.js',
+    'reading-length-normalizer.js',
+    'reading-ready-sync.js',
+    'focused-reading-ui.js'
+  ];
+  for (const file of canonical) {
+    if (!exists(`toeic-human-100/${file}`)) error(source, `canonical 런타임 파일 없음: ${file}`);
+    if (!index.includes(file)) error(source, `canonical 런타임 파일이 index.html 로드순서에서 누락됨: ${file}`);
+  }
+
+  const loader = 'toeic-human-100/scripts/runtime-v2-loader.mjs';
+  if (!exists(loader)) error(loader, '검증 런타임 단일 로더 없음');
+  else {
+    const loaderSource = read(loader);
+    for (const file of canonical.slice(0, 4)) {
+      if (!loaderSource.includes(file)) error(loader, `브라우저 canonical 데이터 모듈과 검증 로더가 불일치: ${file}`);
+    }
+  }
+
+  const normalizer = 'toeic-human-100/reading-length-normalizer.js';
+  if (exists(normalizer) && !read(normalizer).includes("lengthOwner = 'reading-length-normalizer'")) {
+    error(normalizer, '최종 본문 길이 소유권 표식 없음');
+  }
 }
 
 function auditAiPracticeIndex() {
@@ -125,6 +167,7 @@ auditForbiddenArtifacts();
 auditWorkflowPermissions();
 auditServiceWorkerAssets('three-minute-break');
 auditServiceWorkerAssets('toeic-human-100');
+auditToeicCanonicalOwnership();
 auditAiPracticeIndex();
 auditSingleSourceRules();
 
