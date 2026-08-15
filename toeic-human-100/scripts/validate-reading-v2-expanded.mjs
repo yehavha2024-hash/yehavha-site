@@ -44,7 +44,7 @@ for (let dayNo=1; dayNo<=100; dayNo++) {
   const grammarCount = day.grammar?.length || 0;
   stats.push({day:dayNo,toeicWords:readingWords,paragraphs:paragraphs.length,tepsWords,tepsQuestions:t?.questions?.length||0,vocabCount,phraseCount,grammarCount,newActiveHeadwords:day.coverage?.newActiveHeadwordCount||0});
 
-  if (readingWords < 700 || readingWords > 850) errors.push(`DAY ${dayNo}: TOEIC reading ${readingWords} words, expected 700-850`);
+  if (readingWords < 500 || readingWords > 650) errors.push(`DAY ${dayNo}: TOEIC reading ${readingWords} words, expected 500-650`);
   if (paragraphs.length < 8) errors.push(`DAY ${dayNo}: paragraphs ${paragraphs.length}, minimum 8`);
   if (!Array.isArray(day.blocks) || day.blocks.join(',') !== 'read,analyze,apply') errors.push(`DAY ${dayNo}: completion blocks invalid`);
   if (phraseCount < 6) errors.push(`DAY ${dayNo}: expressions ${phraseCount}, minimum 6`);
@@ -62,7 +62,7 @@ for (let dayNo=1; dayNo<=100; dayNo++) {
 const generated = stats.filter(x=>x.day>=11);
 const report = {
   generatedAt:new Date().toISOString(),
-  design:'short-reading-v3',
+  design:'short-reading-v3.2',
   daysValidated:100,
   generatedDays:generated.length,
   generatedWordRange:generated.length ? {min:Math.min(...generated.map(x=>x.toeicWords)),max:Math.max(...generated.map(x=>x.toeicWords))} : null,
