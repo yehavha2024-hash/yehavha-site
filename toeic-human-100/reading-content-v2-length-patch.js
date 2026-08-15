@@ -3,7 +3,8 @@
   const program = root.TOEIC_READING_V2;
   if (!program || !Array.isArray(program.days)) return;
 
-  const TARGET_MAX = 850;
+  const TARGET_MIN = 500;
+  const TARGET_MAX = 650;
   const PHRASE_POOL = [
     ["in accordance with", "~에 따라"],
     ["be responsible for", "~을 담당하다·책임지다"],
@@ -48,13 +49,17 @@
     const next = paragraphs.map(p => String(p || "").replace(/\s+/g, " ").trim()).filter(Boolean);
     let total = wordCount(next.join(" "));
     let safety = 0;
-    while (total > TARGET_MAX && safety++ < 200) {
+    while (total > TARGET_MAX && safety++ < 240) {
       let candidate = -1;
       let candidateWords = 0;
       for (let i = 0; i < next.length; i += 1) {
         const parts = sentences(next[i]);
         const count = wordCount(next[i]);
-        if (parts.length > 2 && count > candidateWords) {
+        if (parts.length <= 2) continue;
+        const shortened = removeOneSentence(next[i]);
+        const delta = count - wordCount(shortened);
+        if (total - delta < TARGET_MIN) continue;
+        if (count > candidateWords) {
           candidate = i;
           candidateWords = count;
         }
@@ -92,20 +97,23 @@
     if (!day || day.day > 10 || !Array.isArray(day.reading?.paragraphs)) continue;
     day.reading.paragraphs = shortenParagraphs(day.reading.paragraphs);
     const count = wordCount(day.reading.paragraphs.join(" "));
-    const originalInstruction = String(day.reading.instructionKo || "").replace(/^약\s*1,500단어[^.]*\.\s*/i, "");
-    day.reading.instructionKo = `약 700~850단어의 집중 본문을 끝까지 읽으세요. ${originalInstruction || "모르는 단어가 있어도 먼저 문장구조와 문단기능을 유지합니다."}`;
+    const originalInstruction = String(day.reading.instructionKo || "")
+      .replace(/^약\s*1,500단어[^.]*\.\s*/i, "")
+      .replace(/^약\s*700~850단어[^.]*\.\s*/i, "");
+    day.reading.instructionKo = `약 500~650단어의 집중 본문을 끝까지 읽으세요. ${originalInstruction || "모르는 단어가 있어도 먼저 문장구조와 문단기능을 유지합니다."}`;
     expandExpressions(day);
     day.coverage ||= {};
     day.coverage.normalizedWordCount = count;
-    day.coverage.readingTarget = "700~850 words";
+    day.coverage.readingTarget = "500~650 words";
+    day.coverage.readingWithinTarget = count >= TARGET_MIN && count <= TARGET_MAX;
     day.coverage.masterPoolMode = "selection-source";
-    day.coverage.studyDesign = "short-reading-v3";
+    day.coverage.studyDesign = "short-reading-v3.2";
   }
 
   if (typeof document !== "undefined" && typeof MutationObserver !== "undefined") {
     function fixReadingMeta() {
       document.querySelectorAll(".reading-meta span").forEach(span => {
-        if (/1,500단어|1500단어/.test(span.textContent || "")) span.textContent = "약 700~850단어 집중 본문";
+        if (/1,500단어|1500단어|700~850단어/.test(span.textContent || "")) span.textContent = "약 500~650단어 집중 본문";
       });
     }
 
