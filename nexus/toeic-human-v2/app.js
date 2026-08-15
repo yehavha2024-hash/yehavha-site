@@ -2,294 +2,335 @@
   'use strict';
 
   const data = window.TOEIC_HUMAN_V2 || {};
-  const overviewGrid = document.getElementById('overviewGrid');
-  const formatGrid = document.getElementById('formatGrid');
-  const principlesList = document.getElementById('principlesList');
-  const tree = document.getElementById('learningTree');
-  const branchesWrap = document.getElementById('branches');
-  const updatedAt = document.getElementById('updatedAt');
-  const completedCount = document.getElementById('completedCount');
-  const progressBar = document.getElementById('progressBar');
-  const STORAGE_KEY = 'toeic-human-v2-completed';
+  const CATEGORIES = {
+    read: { label: '장문읽기', part: 'ADVANCED READING' },
+    analyze: { label: '해부·학습', part: 'VOCAB · COLLOCATION · SYNTAX' },
+    apply: { label: '문제·복습', part: 'EVIDENCE-BASED QUESTIONS' },
+    speed: { label: '전이·속도', part: 'TRANSFER · TIMED REVIEW' }
+  };
+  const categoryOrder = Object.keys(CATEGORIES);
+  const COMPLETION_KEY = 'toeic-human-v2-stage-completed-v3';
+  const WRONG_KEY = 'toeic-human-v2-wrong-v3';
 
-  function make(tag, className, text) {
-    const el = document.createElement(tag);
-    if (className) el.className = className;
-    if (text !== undefined) el.textContent = text;
-    return el;
+  const $ = (id) => document.getElementById(id);
+  const els = {
+    dayLabel: $('dayLabel'), dayHeadline: $('dayHeadline'), dayTrack: $('dayTrack'),
+    progressRing: $('progressRing'), progressNumber: $('progressNumber'),
+    dailyProgressText: $('dailyProgressText'), dailyProgressBar: $('dailyProgressBar'),
+    badge: $('badge'), partBadge: $('partBadge'), cardContent: $('cardContent'),
+    speakBtn: $('speakBtn'), completeBtn: $('completeBtn'),
+    prevDayBtn: $('prevDayBtn'), nextDayBtn: $('nextDayBtn'), navDay: $('navDay'),
+    totalCompleted: $('totalCompleted'), completedDays: $('completedDays'), wrongCount: $('wrongCount'),
+    shareBtn: $('shareBtn'), resetBtn: $('resetBtn'), toast: $('toast')
+  };
+
+  const lessons = (data.branches || []).flatMap((branch) =>
+    (branch.lessons || []).map((lesson, index) => ({
+      ...lesson,
+      branchId: branch.id,
+      branchOrder: branch.order,
+      branchTitle: branch.title,
+      focusTitle: branch.focuses?.[index]?.[0] || lesson.focusTitle || '',
+      focusKo: branch.focuses?.[index]?.[1] || lesson.focusKo || ''
+    }))
+  ).sort((a, b) => a.day - b.day);
+
+  let activeCategory = 'read';
+  let activeDay = 1;
+  let currentSpeechText = '';
+  let speechToken = 0;
+  let toastTimer;
+
+  function escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>'\"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','\"':'&quot;'}[c]));
   }
 
-  function loadCompleted() {
-    try {
-      const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      return new Set(Array.isArray(parsed) ? parsed.map(Number) : []);
-    } catch {
-      return new Set();
-    }
+  function showToast(message) {
+    if (!els.toast) return;
+    clearTimeout(toastTimer);
+    els.toast.textContent = message;
+    els.toast.classList.add('show');
+    toastTimer = setTimeout(() => els.toast.classList.remove('show'), 1700);
   }
 
-  function saveCompleted(set) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify([...set].sort((a, b) => a - b)));
+  function getCompleted() {
+    try { return JSON.parse(localStorage.getItem(COMPLETION_KEY) || '{}'); }
+    catch { return {}; }
+  }
+  function setCompleted(value) { localStorage.setItem(COMPLETION_KEY, JSON.stringify(value)); }
+  function getWrong() {
+    try { return JSON.parse(localStorage.getItem(WRONG_KEY) || '[]'); }
+    catch { return []; }
+  }
+  function setWrong(value) { localStorage.setItem(WRONG_KEY, JSON.stringify([...new Set(value)])); }
+  function isCompleted(day, category) { return Boolean(getCompleted()[day]?.includes(category)); }
+  function dayIsComplete(day, completed = getCompleted()) {
+    const set = new Set(completed[day] || []);
+    return categoryOrder.every((category) => set.has(category));
+  }
+  function firstIncompleteDay() {
+    const completed = getCompleted();
+    for (let day = 1; day <= 100; day += 1) if (!dayIsComplete(day, completed)) return day;
+    return 100;
+  }
+  function toggleCompleted(day, category) {
+    const completed = getCompleted();
+    completed[day] ||= [];
+    if (completed[day].includes(category)) completed[day] = completed[day].filter((x) => x !== category);
+    else completed[day].push(category);
+    setCompleted(completed);
   }
 
-  const completed = loadCompleted();
+  function lessonFor(day) { return lessons.find((item) => item.day === day) || null; }
 
-  function updateProgress() {
-    const count = completed.size;
-    if (completedCount) completedCount.textContent = `${count} / 100`;
-    if (progressBar) progressBar.style.width = `${Math.min(100, count)}%`;
-    document.querySelectorAll('[data-complete-day]').forEach((button) => {
-      const day = Number(button.dataset.completeDay);
-      const done = completed.has(day);
-      button.classList.toggle('is-complete', done);
-      button.textContent = done ? '완료됨 ✓' : '학습 완료';
-    });
-    document.querySelectorAll('[data-day-card]').forEach((card) => {
-      card.classList.toggle('day-complete', completed.has(Number(card.dataset.dayCard)));
-    });
-  }
-
-  function renderOverview(item) {
-    const card = make('article', 'overview-card');
-    card.append(make('span', 'overview-label', item.label), make('h3', '', item.title), make('p', '', item.description));
-    return card;
-  }
-
-  function renderFormat(item) {
-    const card = make('article', 'format-card');
-    const no = make('span', 'format-no', item.no);
-    const body = make('div', 'format-body');
-    body.append(make('h3', '', item.title), make('strong', 'format-target', item.target), make('p', '', item.description));
-    card.append(no, body);
-    return card;
-  }
-
-  function renderTree() {
-    if (!tree) return;
-    const root = make('div', 'tree-root');
-    const parent = make('a', 'tree-node tree-parent');
-    parent.href = data.parent?.url || '#';
-    parent.target = '_blank';
-    parent.rel = 'noopener noreferrer';
-    parent.append(make('span', 'tree-kicker', 'FOUNDATION'), make('strong', '', data.parent?.title || '토익인간 100일 프로젝트'), make('small', '', data.parent?.role || ''));
-
-    const connector = make('div', 'tree-connector', '↓');
-    const v2 = make('div', 'tree-node tree-v2');
-    v2.append(make('span', 'tree-kicker', 'ADVANCED CHILD TREE'), make('strong', '', data.title || '심화 토익인간 V2'), make('small', '', '실제 영문 본문·어휘·구문·근거형 문제를 학습하는 후속 100일 과정'));
-    root.append(parent, connector, v2);
-
-    const branchGrid = make('div', 'tree-branches');
-    (data.branches || []).forEach((branch) => {
-      const link = make('a', 'tree-branch');
-      link.href = `#${branch.id}`;
-      link.append(make('span', 'branch-order', branch.order), make('strong', '', branch.title), make('small', '', branch.days));
-      branchGrid.append(link);
-    });
-    root.append(branchGrid);
-    tree.append(root);
-  }
-
-  function sectionTitle(no, title, meta) {
-    const head = make('div', 'lesson-section-head');
-    head.append(make('span', 'lesson-section-no', no), make('h4', '', title));
-    if (meta) head.append(make('span', 'lesson-section-meta', meta));
-    return head;
+  function updateUrl() {
+    const url = new URL(location.href);
+    url.searchParams.set('day', String(activeDay));
+    url.searchParams.set('category', activeCategory);
+    history.replaceState({}, '', url);
   }
 
   function renderReading(lesson) {
-    const section = make('section', 'lesson-section reading-section');
-    section.append(sectionTitle('01', '심화독해', `${lesson.reading.wordCount} words`));
-    const intro = make('div', 'reading-intro');
-    intro.append(make('strong', '', lesson.reading.title), make('p', '', lesson.reading.instructionKo));
-    section.append(intro);
-    const article = make('article', 'advanced-reading');
-    lesson.reading.paragraphs.forEach((paragraph, index) => {
-      const row = make('div', 'reading-paragraph');
-      row.append(make('span', 'paragraph-no', String(index + 1).padStart(2, '0')), make('p', '', paragraph));
-      article.append(row);
-    });
-    section.append(article);
-    const summary = make('details', 'answer-details');
-    summary.append(make('summary', '', '1회독 후 핵심 흐름 확인'));
-    const summaryBody = make('div', 'answer-box');
-    summaryBody.append(make('p', '', lesson.reading.summaryKo));
-    summary.append(summaryBody);
-    section.append(summary);
-    return section;
+    currentSpeechText = (lesson.reading?.paragraphs || []).join(' ');
+    const paragraphs = (lesson.reading?.paragraphs || []).map((p) => `<p>${escapeHtml(p)}</p>`).join('');
+    return `
+      <div class="reading-header">
+        <h2 class="reading-title">${escapeHtml(lesson.reading?.title || lesson.focusTitle)}</h2>
+        <p class="reading-instruction">${escapeHtml(lesson.reading?.instructionKo || '')}</p>
+        <div class="reading-meta">
+          <span>${Number(lesson.reading?.wordCount || 0).toLocaleString('ko-KR')} words</span>
+          <span>${escapeHtml(lesson.branchTitle)}</span>
+          <span>${escapeHtml(lesson.focusTitle)}</span>
+        </div>
+      </div>
+      <article class="long-reading">${paragraphs}</article>
+      <details class="reading-details">
+        <summary>1회독 후 핵심 흐름 확인</summary>
+        <div><p>${escapeHtml(lesson.reading?.summaryKo || '')}</p></div>
+      </details>`;
   }
 
-  function renderLexiconCards(items, className = '') {
-    const grid = make('div', `learning-grid ${className}`.trim());
-    items.forEach((item) => {
-      const card = make('article', 'learning-item');
-      const top = make('div', 'learning-item-top');
-      top.append(make('strong', '', item.term));
-      if (item.tier) top.append(make('span', 'tier-badge', item.tier));
-      card.append(top, make('p', 'meaning-ko', item.meaningKo), make('p', 'example-en', item.example));
-      grid.append(card);
-    });
-    return grid;
+  function lexiconHtml(items) {
+    return (items || []).map((item) => `
+      <div class="lexicon-item">
+        <strong>${escapeHtml(item.term)}</strong>
+        ${item.tier ? `<span class="tier">${escapeHtml(item.tier)}</span>` : ''}
+        <span>${escapeHtml(item.meaningKo)}</span>
+        <span class="example-en">${escapeHtml(item.example)}</span>
+      </div>`).join('');
   }
 
   function renderAnalysis(lesson) {
-    const section = make('section', 'lesson-section');
-    section.append(sectionTitle('02', '해부·학습', '18 vocab · 8 collocations · 4 syntax'));
-
-    const vocabBlock = make('div', 'learning-block');
-    vocabBlock.append(make('h5', '', '본문·확장 핵심어휘 18'), make('p', 'block-note', '뜻 하나만 외우지 않고 예문 속 역할과 결합을 함께 확인합니다.'), renderLexiconCards(lesson.vocabulary, 'vocab-grid'));
-    section.append(vocabBlock);
-
-    const collocationBlock = make('div', 'learning-block');
-    collocationBlock.append(make('h5', '', '숙어·연어·고정결합 8'), renderLexiconCards(lesson.collocations, 'collocation-grid'));
-    section.append(collocationBlock);
-
-    const syntaxBlock = make('div', 'learning-block');
-    syntaxBlock.append(make('h5', '', '문장구조 4'));
-    const syntaxGrid = make('div', 'syntax-grid');
-    lesson.syntax.forEach((item) => {
-      const card = make('article', 'syntax-card');
-      card.append(make('strong', '', item.term), make('p', 'meaning-ko', item.meaningKo), make('p', 'example-en', item.example));
-      syntaxGrid.append(card);
-    });
-    syntaxBlock.append(syntaxGrid);
-    section.append(syntaxBlock);
-    return section;
-  }
-
-  function renderQuestion(question, qid, number) {
-    const card = make('article', 'question-card');
-    card.dataset.questionId = qid;
-    card.append(make('span', 'question-no', `Q${number}`), make('p', 'question-text', question.question));
-    const options = make('div', 'question-options');
-    question.options.forEach((option, index) => {
-      const button = make('button', 'question-option');
-      button.type = 'button';
-      button.dataset.index = String(index);
-      button.append(make('strong', '', `${String.fromCharCode(65 + index)}.`), document.createTextNode(` ${option}`));
-      button.addEventListener('click', () => {
-        if (card.dataset.answered === '1') return;
-        card.dataset.answered = '1';
-        const all = [...options.querySelectorAll('.question-option')];
-        all.forEach((btn, idx) => {
-          btn.disabled = true;
-          if (idx === question.answer) btn.classList.add('correct');
-        });
-        if (index !== question.answer) button.classList.add('wrong');
-        result.hidden = false;
-        result.querySelector('strong').textContent = index === question.answer ? '정답입니다.' : `정답은 ${String.fromCharCode(65 + question.answer)}입니다.`;
-      });
-      options.append(button);
-    });
-    card.append(options);
-    const result = make('div', 'question-result');
-    result.hidden = true;
-    result.append(make('strong', '', ''), make('p', '', question.explanationKo), make('small', '', `근거: ${question.evidence}`));
-    card.append(result);
-    return card;
+    currentSpeechText = [...(lesson.vocabulary || []), ...(lesson.collocations || []), ...(lesson.syntax || [])]
+      .map((item) => item.example).filter(Boolean).join(' ');
+    const syntax = (lesson.syntax || []).map((item) => `
+      <div class="structure-card">
+        <strong>${escapeHtml(item.term)}</strong>
+        <p>${escapeHtml(item.meaningKo)}</p>
+        <p class="example-en">${escapeHtml(item.example)}</p>
+      </div>`).join('');
+    return `
+      <p class="section-label">핵심어휘 18</p>
+      <p class="analysis-note">뜻 하나만 외우지 않고 예문 속 의미·결합·문체를 함께 확인합니다.</p>
+      <div class="lexicon-grid">${lexiconHtml(lesson.vocabulary)}</div>
+      <p class="section-label">숙어·연어·고정결합 8</p>
+      <div class="lexicon-grid">${lexiconHtml(lesson.collocations)}</div>
+      <p class="section-label">문장구조 4</p>
+      <div class="structure-list">${syntax}</div>`;
   }
 
   function renderQuestions(lesson) {
-    const section = make('section', 'lesson-section');
-    section.append(sectionTitle('03', '추론·문제', '6 evidence-based items'));
-    const note = make('p', 'block-note', '정답을 고른 뒤 반드시 근거 문장과 오답이 틀린 이유를 확인합니다.');
-    section.append(note);
-    const wrap = make('div', 'questions-wrap');
-    lesson.questions.forEach((question, index) => wrap.append(renderQuestion(question, `d${lesson.day}-q${index + 1}`, index + 1)));
-    section.append(wrap);
-    return section;
+    currentSpeechText = '';
+    return `
+      <div class="reading-header">
+        <h2 class="reading-title">${escapeHtml(lesson.focusTitle)} · 근거형 문제</h2>
+        <p class="reading-instruction">정답을 선택한 뒤 반드시 근거와 해설을 확인합니다.</p>
+      </div>
+      ${(lesson.questions || []).map((q, index) => `
+        <article class="question-card" data-question-index="${index}">
+          <span class="question-no">Q${index + 1}</span>
+          <p class="question">${escapeHtml(q.question)}</p>
+          <div class="quiz-options">
+            ${(q.options || []).map((option, optionIndex) => `<button class="quiz-option" type="button" data-option-index="${optionIndex}"><strong>${String.fromCharCode(65 + optionIndex)}.</strong> ${escapeHtml(option)}</button>`).join('')}
+          </div>
+          <div class="explanation-box" hidden>
+            <strong class="answer-line"></strong>
+            <span>${escapeHtml(q.explanationKo || '')}</span>
+            <small>근거: ${escapeHtml(q.evidence || '')}</small>
+          </div>
+        </article>`).join('')}`;
   }
 
   function renderTransfer(lesson) {
-    const section = make('section', 'lesson-section');
-    section.append(sectionTitle('04', '전이·속도', 'summary · rewrite · evidence · timed review'));
-    const grid = make('div', 'transfer-grid');
-    lesson.transfer.forEach((task, index) => {
-      const card = make('article', 'transfer-card');
-      card.append(make('span', 'transfer-no', String(index + 1).padStart(2, '0')), make('strong', '', task.title), make('p', '', task.instruction));
-      grid.append(card);
-    });
-    section.append(grid);
-    return section;
+    currentSpeechText = '';
+    return `
+      <div class="reading-header">
+        <h2 class="reading-title">${escapeHtml(lesson.focusTitle)} · 전이훈련</h2>
+        <p class="reading-instruction">같은 기술을 요약·재작성·근거회수·시간훈련에 옮겨 적용합니다.</p>
+      </div>
+      <div class="transfer-grid">
+        ${(lesson.transfer || []).map((task, index) => `
+          <article class="transfer-card">
+            <span>${String(index + 1).padStart(2, '0')}</span>
+            <strong>${escapeHtml(task.title)}</strong>
+            <p>${escapeHtml(task.instruction)}</p>
+          </article>`).join('')}
+      </div>`;
   }
 
-  function renderDay(branch, focus, lesson, dayNo) {
-    const details = make('details', 'day-card');
-    details.dataset.dayCard = String(dayNo);
-    const summary = make('summary', 'day-summary');
-    const dayLabel = make('span', 'day-number', `DAY ${String(dayNo).padStart(3, '0')}`);
-    const titleWrap = make('span', 'day-title-wrap');
-    titleWrap.append(make('strong', '', focus[0]), make('small', '', lesson?.reading?.title || focus[1]));
-    summary.append(dayLabel, titleWrap, make('span', 'day-chevron', '+'));
-
-    const body = make('div', 'day-body');
-    const point = make('div', 'day-focus-box');
-    point.append(make('span', 'focus-label', '오늘의 심화 포인트'), make('p', '', focus[1]));
-    body.append(point);
-
-    if (lesson) {
-      const actual = make('div', 'actual-learning');
-      actual.append(renderReading(lesson), renderAnalysis(lesson), renderQuestions(lesson), renderTransfer(lesson));
-      body.append(actual);
-    } else {
-      body.append(make('p', 'missing-lesson', '학습 데이터를 불러오지 못했습니다.'));
+  function renderCard() {
+    const lesson = lessonFor(activeDay);
+    if (!lesson) {
+      els.cardContent.innerHTML = '<p class="reading-instruction">학습 데이터를 불러오지 못했습니다.</p>';
+      return;
     }
-
-    const actions = make('div', 'day-actions');
-    const complete = make('button', 'complete-btn', '학습 완료');
-    complete.type = 'button';
-    complete.dataset.completeDay = String(dayNo);
-    complete.addEventListener('click', (event) => {
-      event.preventDefault();
-      if (completed.has(dayNo)) completed.delete(dayNo);
-      else completed.add(dayNo);
-      saveCompleted(completed);
-      updateProgress();
-    });
-    actions.append(complete);
-    body.append(actions);
-
-    details.append(summary, body);
-    return details;
+    const category = CATEGORIES[activeCategory];
+    els.badge.textContent = category.label;
+    els.partBadge.textContent = category.part;
+    if (activeCategory === 'read') els.cardContent.innerHTML = renderReading(lesson);
+    if (activeCategory === 'analyze') els.cardContent.innerHTML = renderAnalysis(lesson);
+    if (activeCategory === 'apply') els.cardContent.innerHTML = renderQuestions(lesson);
+    if (activeCategory === 'speed') els.cardContent.innerHTML = renderTransfer(lesson);
+    els.speakBtn.hidden = !currentSpeechText;
   }
 
-  function renderBranch(branch, branchIndex) {
-    const section = make('section', 'branch-card');
-    section.id = branch.id;
-    const rail = make('div', 'branch-rail');
-    rail.append(make('span', 'branch-big-no', branch.order));
-
-    const body = make('div', 'branch-body');
-    const top = make('div', 'branch-top');
-    const titleWrap = make('div', 'branch-title-wrap');
-    titleWrap.append(make('p', 'eyebrow', branch.eyebrow), make('h2', '', branch.title));
-    top.append(titleWrap, make('span', 'branch-days', branch.days));
-    body.append(top);
-
-    const gap = make('div', 'gap-box');
-    gap.append(make('span', 'gap-label', '심화 목표'), make('p', '', branch.gap));
-    body.append(gap);
-
-    const dayList = make('div', 'day-list');
-    (branch.focuses || []).forEach((focus, index) => {
-      const dayNo = branchIndex * 10 + index + 1;
-      const lesson = branch.lessons?.[index];
-      dayList.append(renderDay(branch, focus, lesson, dayNo));
-    });
-    body.append(dayList);
-    section.append(rail, body);
-    return section;
+  function updateStats() {
+    const completed = getCompleted();
+    const stageCount = Object.values(completed).reduce((sum, items) => sum + new Set(items || []).size, 0);
+    let days = 0;
+    for (let day = 1; day <= 100; day += 1) if (dayIsComplete(day, completed)) days += 1;
+    els.totalCompleted.textContent = String(stageCount);
+    els.completedDays.textContent = String(days);
+    els.wrongCount.textContent = String(getWrong().length);
   }
 
-  (data.overview || []).forEach((item) => overviewGrid?.append(renderOverview(item)));
-  (data.dailyFormat || []).forEach((item) => formatGrid?.append(renderFormat(item)));
-  (data.principles || []).forEach((text, index) => {
-    const li = make('li', 'principle-item');
-    li.append(make('span', 'principle-no', String(index + 1).padStart(2, '0')), make('span', '', text));
-    principlesList?.append(li);
+  function render() {
+    const lesson = lessonFor(activeDay);
+    if (!lesson) return;
+    els.dayLabel.textContent = `DAY ${activeDay}`;
+    els.dayHeadline.textContent = lesson.focusTitle || '심화 영어독해';
+    els.dayTrack.textContent = `${lesson.branchOrder} · ${lesson.branchTitle}`;
+    els.progressNumber.textContent = String(activeDay);
+    els.progressRing.style.setProperty('--progress', `${activeDay}%`);
+    els.navDay.textContent = `DAY ${activeDay}`;
+    els.prevDayBtn.disabled = activeDay <= 1;
+    els.nextDayBtn.disabled = activeDay >= 100;
+
+    document.querySelectorAll('.category').forEach((button) => button.classList.toggle('active', button.dataset.category === activeCategory));
+    const completed = getCompleted();
+    const todayCount = new Set(completed[activeDay] || []).size;
+    els.dailyProgressText.textContent = `${todayCount} / 4`;
+    els.dailyProgressBar.style.width = `${todayCount * 25}%`;
+    const done = isCompleted(activeDay, activeCategory);
+    els.completeBtn.classList.toggle('completed', done);
+    els.completeBtn.textContent = done ? '이 단계 완료됨 ✓' : '이 단계 완료';
+
+    renderCard();
+    updateStats();
+    updateUrl();
+  }
+
+  function splitSpeech(text, maxLength = 210) {
+    const sentenceList = String(text || '').replace(/\s+/g, ' ').match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [];
+    const chunks = [];
+    let current = '';
+    sentenceList.forEach((sentence) => {
+      const next = `${current} ${sentence}`.trim();
+      if (next.length <= maxLength) current = next;
+      else { if (current) chunks.push(current); current = sentence.trim(); }
+    });
+    if (current) chunks.push(current);
+    return chunks;
+  }
+
+  function speak(text) {
+    if (!('speechSynthesis' in window)) return showToast('이 브라우저에서는 음성 재생을 지원하지 않습니다.');
+    speechSynthesis.cancel();
+    const token = ++speechToken;
+    const chunks = splitSpeech(text);
+    let index = 0;
+    const voices = speechSynthesis.getVoices();
+    const preferred = voices.find((v) => /en-US/i.test(v.lang)) || voices.find((v) => /^en/i.test(v.lang));
+    const next = () => {
+      if (token !== speechToken || index >= chunks.length) return;
+      const utterance = new SpeechSynthesisUtterance(chunks[index++]);
+      utterance.lang = 'en-US';
+      utterance.rate = .82;
+      if (preferred) utterance.voice = preferred;
+      utterance.onend = next;
+      speechSynthesis.speak(utterance);
+    };
+    next();
+  }
+
+  document.querySelectorAll('.category').forEach((button) => {
+    button.addEventListener('click', () => {
+      activeCategory = button.dataset.category;
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   });
-  renderTree();
-  (data.branches || []).forEach((branch, index) => branchesWrap?.append(renderBranch(branch, index)));
 
-  if (updatedAt && data.updatedAt) updatedAt.textContent = `업데이트 ${String(data.updatedAt).replaceAll('-', '.')}`;
-  updateProgress();
+  els.cardContent.addEventListener('click', (event) => {
+    const option = event.target.closest('.quiz-option');
+    if (!option) return;
+    const card = option.closest('.question-card');
+    if (!card || card.dataset.answered === '1') return;
+    const lesson = lessonFor(activeDay);
+    const qIndex = Number(card.dataset.questionIndex);
+    const selected = Number(option.dataset.optionIndex);
+    const question = lesson?.questions?.[qIndex];
+    if (!question) return;
+    card.dataset.answered = '1';
+    card.querySelectorAll('.quiz-option').forEach((button, index) => {
+      button.disabled = true;
+      if (index === question.answer) button.classList.add('correct');
+    });
+    if (selected !== question.answer) {
+      option.classList.add('wrong');
+      setWrong([...getWrong(), `d${activeDay}-q${qIndex + 1}`]);
+    }
+    const explanation = card.querySelector('.explanation-box');
+    explanation.hidden = false;
+    explanation.querySelector('.answer-line').textContent = selected === question.answer ? '정답입니다.' : `정답은 ${String.fromCharCode(65 + question.answer)}입니다.`;
+    updateStats();
+  });
+
+  els.completeBtn.addEventListener('click', () => {
+    toggleCompleted(activeDay, activeCategory);
+    render();
+  });
+  els.speakBtn.addEventListener('click', () => speak(currentSpeechText));
+  els.prevDayBtn.addEventListener('click', () => { if (activeDay > 1) { activeDay -= 1; render(); window.scrollTo({top:0,behavior:'smooth'}); } });
+  els.nextDayBtn.addEventListener('click', () => { if (activeDay < 100) { activeDay += 1; render(); window.scrollTo({top:0,behavior:'smooth'}); } });
+
+  els.shareBtn.addEventListener('click', async () => {
+    const url = new URL(location.href);
+    url.searchParams.set('day', String(activeDay));
+    url.searchParams.set('category', activeCategory);
+    try {
+      await navigator.clipboard.writeText(url.toString());
+      showToast('현재 학습 링크를 복사했습니다.');
+    } catch {
+      window.prompt('아래 주소를 복사하세요.', url.toString());
+    }
+  });
+
+  els.resetBtn.addEventListener('click', () => {
+    if (!window.confirm('심화 토익인간 V2의 학습 진행기록과 오답기록을 초기화할까요?')) return;
+    localStorage.removeItem(COMPLETION_KEY);
+    localStorage.removeItem(WRONG_KEY);
+    activeDay = 1;
+    activeCategory = 'read';
+    render();
+    showToast('진행기록을 초기화했습니다.');
+  });
+
+  const params = new URL(location.href).searchParams;
+  const requestedDay = Number(params.get('day'));
+  const requestedCategory = params.get('category');
+  activeDay = Number.isInteger(requestedDay) && requestedDay >= 1 && requestedDay <= 100 ? requestedDay : firstIncompleteDay();
+  if (requestedCategory && CATEGORIES[requestedCategory]) activeCategory = requestedCategory;
+
+  render();
 })();
