@@ -47,7 +47,7 @@ jobs:
           const browser = await chromium.launch();
           for (const [name, url] of pages) {
             for (const [viewName, viewport] of views) {
-              const page = await browser.newPage({ viewportSize: viewport });
+              const page = await browser.newPage({ viewport });
               try {
                 await page.goto(url, { waitUntil: 'networkidle', timeout: 45000 });
                 await page.screenshot({ path: `visual-audit/${name}-${viewName}.png`, fullPage: true });
