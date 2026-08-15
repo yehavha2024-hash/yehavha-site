@@ -12,6 +12,7 @@
     if (text !== undefined) el.textContent = text;
     return el;
   };
+  const itemTitle = (item) => item.n === 48 ? '내 사진·영상을 허락 없이 올렸다면' : item.title;
 
   const searchInput = $('#lawSearch');
   const categoryFilters = $('#categoryFilters');
@@ -31,7 +32,7 @@
 
   function searchable(item) {
     return normal([
-      item.n,item.title,item.summary,item.now,item.route,item.caution,
+      item.n,itemTitle(item),item.summary,item.now,item.route,item.caution,
       ...(item.evidence || []),...(item.laws || []),categoryMap.get(item.category)?.title
     ].join(' '));
   }
@@ -77,7 +78,7 @@
     badges.append(make('span','law-category',category.title || item.category));
     if (item.hot) badges.append(make('span','hot-badge','핵심'));
     top.append(number,badges);
-    const title = make('h3','',item.title);
+    const title = make('h3','',itemTitle(item));
     const summary = make('p','law-summary',item.summary);
     const quick = make('div','quick-action');
     quick.append(make('span','quick-label','먼저'),make('p','',item.now));
@@ -136,7 +137,7 @@
     const meta = make('div','dialog-meta');
     meta.append(make('span','law-number',String(item.n).padStart(3,'0')),make('span','law-category',category.title || item.category));
     if (item.hot) meta.append(make('span','hot-badge','핵심'));
-    header.append(meta,make('h2','',item.title),make('p','dialog-summary',item.summary));
+    header.append(meta,make('h2','',itemTitle(item)),make('p','dialog-summary',item.summary));
 
     const action = make('div','action-panel');
     action.append(make('strong','','지금 할 일'),make('p','',item.now));
