@@ -3,8 +3,8 @@
   const builder = root.TOEIC_READING_V2_BUILDER;
   if (!builder || typeof builder.build !== "function") return;
 
-  const TARGET_MAX = 850;
-  const TARGET_MIN = 700;
+  const TARGET_MAX = 650;
+  const TARGET_MIN = 500;
   const ACTIVE_UNIQUE_TARGET = 2520;
   const NEW_WORDS_PER_DAY = 28;
   const REVIEW_WORDS_PER_DAY = 2;
@@ -67,13 +67,17 @@
     const next = (paragraphs || []).map(stripScaffolding).filter(Boolean);
     let total = countWords(next.join(" "));
     let safety = 0;
-    while (total > TARGET_MAX && safety++ < 300) {
+    while (total > TARGET_MAX && safety++ < 360) {
       let candidate = -1;
       let candidateWords = 0;
       for (let i = 0; i < next.length; i += 1) {
         const parts = splitSentences(next[i]);
         const words = countWords(next[i]);
-        if (parts.length > 1 && words > candidateWords) {
+        if (parts.length <= 1) continue;
+        const shortened = removeOneSentence(next[i]);
+        const delta = words - countWords(shortened);
+        if (total - delta < TARGET_MIN) continue;
+        if (words > candidateWords) {
           candidate = i;
           candidateWords = words;
         }
@@ -168,7 +172,7 @@
     day.coverage.studyLemmas = selected.map(lemmaOf);
     day.coverage.activeUniqueTarget = plan.activePool.length;
     day.coverage.masterPoolMode = "selection-source";
-    day.coverage.studyDesign = "short-reading-v3";
+    day.coverage.studyDesign = "short-reading-v3.2";
   }
 
   function expandExpressions(day) {
@@ -188,12 +192,12 @@
     if (!day || day.day < 11 || !Array.isArray(day.reading?.paragraphs)) return day;
     day.reading.paragraphs = shortenParagraphs(day.reading.paragraphs);
     const total = countWords(day.reading.paragraphs.join(" "));
-    day.reading.instructionKo = "약 700~850단어의 집중 본문을 끝까지 읽으세요. 문장구조와 문단기능을 유지하며 1회독하고, 핵심어휘·확장어휘·숙어는 해부·학습 단계에서 따로 확인합니다.";
+    day.reading.instructionKo = "약 500~650단어의 집중 본문을 끝까지 읽으세요. 문장구조와 문단기능을 유지하며 1회독하고, 핵심어휘·확장어휘·숙어는 해부·학습 단계에서 따로 확인합니다.";
     rebalanceVocabulary(day, plan);
     expandExpressions(day);
     day.coverage ||= {};
     day.coverage.normalizedWordCount = total;
-    day.coverage.readingTarget = "700~850 words";
+    day.coverage.readingTarget = "500~650 words";
     day.coverage.readingWithinTarget = total >= TARGET_MIN && total <= TARGET_MAX;
     return day;
   }
