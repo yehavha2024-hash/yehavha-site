@@ -1,28 +1,30 @@
 /* 2026-08-09 comprehensive contrast/readability fix — legal philosophy */
 :root{
-  --nxs-muted:#cbd7e3;
-  --nxs-line:rgba(255,255,255,.16);
+  --nxs-muted:#c2cfdb;
+  --nxs-line:rgba(255,255,255,.11);
 }
 body{font-size:16px!important;line-height:1.8!important}
 
-/* Main page: remove low-contrast gray text and pale chips on the dark theme. */
+/* Main page: keep reading contrast while reducing bright cell borders. */
 .lead,.synthesis-intro>p,.synthesis-proposition,.argument-step p,.synthesis-caution p,
 .debate-heading>p,.debate-thesis,.debate-sides p,.orientation-copy p,.card .thesis,
 .doctoral-summary-copy small,.doctoral-source-head p,.doctoral-block p,.doctoral-quote-ko{
-  color:#cbd7e3!important;
+  color:#c2cfdb!important;
 }
-.synthesis-chain,.count,.number,.card h3 small,.doctoral-author-ko,.doctoral-title-ko{color:#aebfd0!important}
+.synthesis-chain,.count,.number,.card h3 small,.doctoral-author-ko,.doctoral-title-ko{color:#a3b5c6!important}
+.synthesis-grid,.debate-grid,.debate-sides,.cards{align-items:start!important}
+.synthesis-card,.debate-card,.card,.debate-sides>div{height:auto!important}
 .badge,.keywords span,.doctoral-citation-summary span,.doctoral-meta-row span{
-  background:#102f52!important;
-  border-color:rgba(122,184,255,.30)!important;
-  color:#dcecff!important;
+  background:#0f2945!important;
+  border-color:rgba(122,184,255,.18)!important;
+  color:#b9ccde!important;
 }
 .controls input,.controls select,.open-btn{
   background:#0d2948!important;
-  color:#f2f6ff!important;
-  border-color:rgba(255,255,255,.22)!important;
+  color:#dce5ee!important;
+  border-color:rgba(255,255,255,.14)!important;
 }
-.controls span{color:#c5d3e1!important}
+.controls span{color:#b9c8d6!important}
 .open-btn{font-size:15px!important}
 
 /* Modal is a paper-reading surface. Do not inherit the site's light-on-dark colors. */
