@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-13",
+  "updatedAt": "2026-08-16",
   "sections": [
     {
       "id": "bible-theology",
@@ -27,6 +27,19 @@
     }
   ],
   "articles": [
+    {
+      "id": "dead-sea-scrolls-bible-messianic-expectation",
+      "section": "bible-theology",
+      "language": "ko",
+      "series": "사해사본 연구",
+      "title": "사해사본이 밝혀낸 예슈아 시대의 성경과 메시아 기대",
+      "subtitle": "4Q521·11Q13·쿰란 성경사본을 중심으로",
+      "summary": "사해사본의 본문 다원성과 4Q521·11Q13의 종말론 자료를 중심으로 예슈아 시대의 성경 전승과 메시아 기대를 검토한다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-16",
+      "readingMinutes": 18,
+      "contentUrl": "./content/dead-sea-scrolls-bible-messianic-expectation.json"
+    },
     {
       "id": "john-god-incarnate-recognition",
       "section": "bible-theology",
