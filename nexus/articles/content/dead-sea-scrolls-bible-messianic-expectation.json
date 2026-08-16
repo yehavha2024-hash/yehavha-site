@@ -386,18 +386,86 @@
     {
       "type": "list",
       "items": [
-        "Collins, John J. “The Works of the Messiah.” Dead Sea Discoveries 1, no. 1 (1994): 98–112.",
+        "Collins, John J. ‘The Works of the Messiah.’ Dead Sea Discoveries 1, no. 1 (1994): 98–112.",
         "Collins, John J. The Scepter and the Star: Messianism in Light of the Dead Sea Scrolls. 2nd ed. Grand Rapids: Eerdmans, 2010.",
         "García Martínez, Florentino, and Eibert J. C. Tigchelaar. The Dead Sea Scrolls Study Edition. 2 vols. Leiden: Brill, 1997–1998.",
-        "Jassen, Alex P. “Religion in the Dead Sea Scrolls.” Religion Compass 1, no. 1 (2006): 1–25.",
-        "Puech, Émile. “Messianism, Resurrection, and Eschatology at Qumran and in the New Testament.” In The Community of the Renewed Covenant, edited by Eugene Ulrich and James VanderKam. Notre Dame: University of Notre Dame Press, 1994.",
+        "Jassen, Alex P. ‘Religion in the Dead Sea Scrolls.’ Religion Compass 1, no. 1 (2006): 1–25.",
+        "Puech, Émile. ‘Messianism, Resurrection, and Eschatology at Qumran and in the New Testament.’ In The Community of the Renewed Covenant, edited by Eugene Ulrich and James VanderKam. Notre Dame: University of Notre Dame Press, 1994.",
         "Schiffman, Lawrence H., and James C. VanderKam, eds. Encyclopedia of the Dead Sea Scrolls. 2 vols. Oxford: Oxford University Press, 2000.",
         "Tov, Emanuel. Textual Criticism of the Hebrew Bible. 3rd ed. Minneapolis: Fortress Press, 2012.",
         "Ulrich, Eugene. The Dead Sea Scrolls and the Origins of the Bible. Grand Rapids: Eerdmans, 1999.",
         "VanderKam, James C. The Dead Sea Scrolls Today. 2nd ed. Grand Rapids: Eerdmans, 2010.",
-        "Van de Water, Rick. “Michael or Yhwh? Toward Identifying Melchizedek in 11Q13.” Journal for the Study of the Pseudepigrapha 16, no. 1 (2006): 75–86.",
+        "Van de Water, Rick. ‘Michael or Yhwh? Toward Identifying Melchizedek in 11Q13.’ Journal for the Study of the Pseudepigrapha 16, no. 1 (2006): 75–86.",
         "Israel Antiquities Authority. The Leon Levy Dead Sea Scrolls Digital Library."
       ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "책소개"
+    },
+    {
+      "type": "paragraph",
+      "text": "사해사본은 20세기 성서학과 제2성전기 유대교 연구의 흐름을 바꾼 가장 중요한 발견 가운데 하나이다. 쿰란 인근 동굴에서 발견된 이 문헌들은 예슈아 시대를 전후한 유대인들이 어떤 성경 본문을 읽었고, 메시아와 마지막 때를 어떻게 기대했는지를 당시의 실제 자료를 통해 보여준다."
+    },
+    {
+      "type": "paragraph",
+      "text": "이 책은 사해사본을 단순한 고고학적 유물이나 성경 보존의 증거로만 다루지 않는다. 마소라 본문과 70인역, 쿰란 히브리어 사본 사이의 관계를 살펴보고, 출애굽기 1장 5절의 70명과 75명 문제, 사무엘상 17장 4절의 골리앗 신장과 같은 구체적인 본문비평 사례를 통해 예슈아 시대에 복수의 성경 본문 전승이 공존하고 있었음을 검토한다."
+    },
+    {
+      "type": "paragraph",
+      "text": "특히 4Q521과 11Q13을 중심으로 당시 유대교의 메시아적·종말론적 기대를 집중적으로 살펴본다. 4Q521에는 가난한 자에게 좋은 소식이 전해지고 죽은 자가 살아나는 종말론적 구원의 표지가 나타나며, 11Q13에서는 희년과 해방, 심판이 멜기세덱이라는 높은 종말론적 인물과 결합된다. 이러한 자료는 신약성경에서 예슈아가 자신의 사역을 설명하는 언어와 당시 유대인들이 기다리던 구원의 시대를 비교할 수 있는 중요한 역사적 배경을 제공한다."
+    },
+    {
+      "type": "paragraph",
+      "text": "동시에 이 책은 확인된 사실과 학설, 신앙적 해석을 구별한다. 7Q5의 마가복음설, 쿰란의 복수 메시아 전승, 창세기 연대기 문제 등 논쟁적인 주장들을 그대로 받아들이지 않고 현재 확인할 수 있는 자료의 범위 안에서 검토한다. 사해사본이 신약성경을 직접 증명하기 때문에 중요한 것이 아니라, 예슈아와 사도들이 살았던 시대의 성경과 종말론적 기대를 역사적으로 복원할 수 있게 한다는 점에서 중요하다."
+    },
+    {
+      "type": "paragraph",
+      "text": "이 책은 결국 한 가지 질문으로 향한다. 예슈아 시대의 유대인들은 무엇을 기다리고 있었으며, 신약성경은 왜 예슈아를 그 기다림의 성취라고 선포했는가."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "저자소개"
+    },
+    {
+      "type": "paragraph",
+      "text": "이명훈은 법학을 전공하고 인공지능의 행위와 책임귀속 문제를 연구해 온 법학 연구자이자 디지털 콘텐츠 제작자이다. 법학과를 졸업하고 법학석사 학위를 취득했으며, 현재 Agentic AI와 다중 인공지능 에이전트 시스템의 행위효과 및 책임귀속 문제를 중심으로 연구를 이어가고 있다."
+    },
+    {
+      "type": "paragraph",
+      "text": "성경과 신앙 분야에서는 히브리어·영어·한국어 찬양 콘텐츠를 제공하는 유튜브 채널 HASHEM YESHUA를 운영하며, 성경 본문과 예슈아의 정체성, 이스라엘의 언약, 메시아와 종말론을 지속적으로 연구하고 있다. 성경 본문 자체의 증언과 역사적 자료, 현대 연구자의 해석을 구별하면서 성경의 내용을 보다 입체적으로 이해하는 데 관심을 두고 있다."
+    },
+    {
+      "type": "paragraph",
+      "text": "전자책과 웹 기반 연구 아카이브를 통해 성경 연구, 인공지능과 법, 언어와 콘텐츠 제작 등 다양한 분야의 연구와 기록을 공개하고 있다. 성경 연구에서는 특히 예슈아 시대의 유대교적 배경과 히브리어 성경 전승, 제2성전기 문헌이 신약성경 이해에 제공하는 역사적 의미를 탐구하고 있다."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "인공지능 활용 및 이미지 고지"
+    },
+    {
+      "type": "paragraph",
+      "text": "본 연구글과 전자책의 자료 정리, 초안 구성, 문장 편집 및 시각자료 제작 과정에는 생성형 인공지능 도구가 보조적으로 활용되었다. 연구의 최종 구성과 내용 선택, 사실관계 검토, 해석, 수정 및 출판에 대한 책임은 저자 이명훈에게 있다."
+    },
+    {
+      "type": "paragraph",
+      "text": "본문에 사용되는 삽입 이미지는 생성형 인공지능으로 제작한 설명용 시각자료이다. 실제 사해사본, 쿰란 유적 또는 고고학 유물을 촬영한 사진이나 1차 사료가 아니며, 역사적·문헌적 내용을 이해하기 위한 개념적 재현 이미지이다. 따라서 이미지 안의 사본 형태, 문자, 유물의 배치 및 세부 묘사는 실제 자료와 일치하지 않을 수 있으며, 역사적 사실의 근거로 사용하지 않는다."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "저작권 안내"
+    },
+    {
+      "type": "paragraph",
+      "text": "Copyright © 2026 이명훈. All rights reserved. 본 연구글과 전자책의 연구 구성, 해설, 문장, 편집 구성 및 저자가 창작한 콘텐츠의 저작권은 저자에게 있으며, 저자의 사전 허락 없이 전체 또는 상당 부분을 복제·전재·배포하거나 별도의 출판물·콘텐츠로 이용하는 것을 금한다."
+    },
+    {
+      "type": "paragraph",
+      "text": "성경 본문, 고대 문헌, 학술문헌 및 외부 자료의 인용·참조 부분은 각 원자료의 저작권 상태와 이용조건을 따른다. 생성형 인공지능을 활용하여 제작한 이미지의 이용과 권리 범위는 관련 법령과 해당 생성 서비스의 이용조건을 따르며, 본문에서는 연구 내용을 설명하기 위한 보조 시각자료로 사용한다."
     }
   ]
 }
