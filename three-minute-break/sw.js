@@ -1,9 +1,8 @@
-const CACHE_NAME = "three-minute-break-v14-canonical-content";
+const CACHE_NAME = "three-minute-break-v15-core-style";
 const ASSETS = [
   "./",
   "./index.html",
   "./style.css",
-  "./nexus-shell.css",
   "./legal-quiz.css",
   "./app.js",
   "./legal-philosophy-quotes.js",
