@@ -41,6 +41,10 @@ jobs:
       - run: node scripts/audit-web-architecture.mjs
       - run: node scripts/audit-repo-hygiene.mjs
       - run: node scripts/audit-style-ownership.mjs
+      - name: Validate legal mind runtime scripts
+        run: |
+          node --check legal-knowledge/legal-mind/data.js
+          node --check legal-knowledge/legal-mind/app.js
       - name: Validate 3 minute break runtime content
         run: node three-minute-break/scripts/export-content.mjs
       - run: node nexus/scripts/audit-runtime.mjs
