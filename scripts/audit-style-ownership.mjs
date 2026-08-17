@@ -64,6 +64,13 @@ function walk(dir, predicate) {
   return out;
 }
 
+function isPageLocalCore(resolved, indexFile) {
+  if (coreStyles.has(resolved)) return true;
+  const base = path.basename(resolved).toLowerCase();
+  if (!['style.css', 'styles.css'].includes(base)) return false;
+  return normalize(path.dirname(resolved)) === normalize(path.dirname(indexFile));
+}
+
 for (const relative of forbiddenLegacy) {
   if (fs.existsSync(relative)) fail(relative, '핵심 파일로 통합 완료된 구형 보조 레이어가 다시 존재함');
 }
@@ -87,7 +94,7 @@ for (const indexFile of indexFiles) {
     }
 
     const css = fs.readFileSync(resolved, 'utf8');
-    if (coreStyles.has(resolved)) continue;
+    if (isPageLocalCore(resolved, indexFile)) continue;
 
     const declaresNexusTheme = /YEHAVHA NEXUS[^\n]*(?:Visual Standard|Owned App Shell|UI Theme)/i.test(css)
       || /:root\s*\{[^}]{0,1600}--nxs-bg\s*:/is.test(css);
