@@ -27,6 +27,7 @@ const nexusRuntimePages = [
 const nexusJsonFiles = [
   'nexus/projects.json',
   'nexus/project-status.json',
+  'nexus/approved-manifests.json',
   'nexus/publishing/books.json',
   'nexus/articles/articles.json',
   'nexus/ai-practice/data.json',
@@ -115,39 +116,30 @@ const auditNexusModel = () => {
   const root = 'nexus';
   const basePath = path.join(root, 'projects.json');
   const statusPath = path.join(root, 'project-status.json');
+  const registryPath = path.join(root, 'approved-manifests.json');
   const generatedPath = path.join(root, 'projects.generated.json');
   const portalPath = path.join(root, 'portal-v2.js');
   const redirectPath = path.join(root, 'functions/go.js');
-  const manifestFiles = [
-    'nexus.project.json',
-    'three-minute-break/nexus.project.json',
-    'nexus/living-law/nexus.project.json',
-    'toeic-human-100/nexus.project.json',
-    'nexus/toeic-human-v2/nexus.project.json',
-    'nexus/research-track/nexus.project.json',
-    'legal-knowledge/nexus.project.json',
-    'legal-knowledge/legal-mind/nexus.project.json',
-    'legal-knowledge/ai-literature/nexus.project.json',
-    'ai-law-tech-foresight/nexus.project.json',
-    'legal-philosophy/nexus.project.json',
-    'nexus/publishing/nexus.project.json',
-    'nexus/articles/nexus.project.json',
-    'nexus/ai-practice/nexus.project.json',
-    'nexus/ai-trends/nexus.project.json',
-    'nexus/initiatives/nexus.project.json'
-  ];
 
   if (fs.existsSync(generatedPath)) report('ERROR', generatedPath, 'projects.generated.json은 단일원본 원칙에 따라 존재하면 안 됨');
   if (!fs.existsSync(basePath)) return report('ERROR', root, 'projects.json 없음');
   if (!fs.existsSync(statusPath)) return report('ERROR', root, 'project-status.json 없음');
+  if (!fs.existsSync(registryPath)) return report('ERROR', root, 'approved-manifests.json 없음');
   if (!fs.existsSync(redirectPath)) return report('ERROR', root, 'functions/go.js 없음');
 
   let base;
   let status;
+  let registry;
   try { base = JSON.parse(read(basePath)); }
   catch { return report('ERROR', basePath, 'projects.json JSON 파싱 실패'); }
   try { status = JSON.parse(read(statusPath)); }
   catch { return report('ERROR', statusPath, 'project-status.json JSON 파싱 실패'); }
+  try { registry = JSON.parse(read(registryPath)); }
+  catch { return report('ERROR', registryPath, 'approved-manifests.json JSON 파싱 실패'); }
+
+  const manifestFiles = Array.isArray(registry?.manifests) ? registry.manifests : [];
+  if (!manifestFiles.length) report('ERROR', registryPath, '승인 manifest 목록이 비어 있음');
+  if (new Set(manifestFiles).size !== manifestFiles.length) report('ERROR', registryPath, '승인 manifest 경로 중복');
 
   const redirectSource = read(redirectPath);
   const allowedHosts = new Set(
