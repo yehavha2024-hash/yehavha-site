@@ -12,6 +12,21 @@
   const stats = document.getElementById('stats');
   if (stats) stats.remove();
 
+  const literature = document.querySelector('[aria-labelledby="literature-archive-title"]');
+  if (literature && !document.getElementById('legal-mind-training-entry')) {
+    const section = document.createElement('section');
+    section.className = 'notice';
+    section.id = 'legal-mind-training-entry';
+    section.setAttribute('aria-labelledby', 'legal-mind-training-title');
+    section.innerHTML = `
+      <div>
+        <div class="section-kicker">LEGAL MIND · CASE TRAINING</div>
+        <h2 id="legal-mind-training-title">리걸 마인드 · 사례해결 훈련</h2>
+      </div>
+      <p>판례와 현실 분쟁을 사실관계 → 법적 사실 → 법률관계 → 쟁점 → 법규범·판례 → 증거·증명책임 → 주장·반론 → 포섭 → 절차·구제 → 결론·사례변형으로 반복 훈련합니다. <a href="./legal-mind/"><strong>사례해결 훈련 시작 →</strong></a></p>`;
+    literature.insertAdjacentElement('afterend', section);
+  }
+
   const stripTrailingPeriod = element => {
     const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
     let last = null;
