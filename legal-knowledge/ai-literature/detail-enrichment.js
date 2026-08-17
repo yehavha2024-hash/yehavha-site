@@ -2,10 +2,22 @@
   'use strict';
 
   const records = Array.isArray(window.AI_LITERATURE_RECORDS) ? window.AI_LITERATURE_RECORDS : [];
+  const aiBaseTerm = 'AI · Artificial Intelligence (인공지능, 사람의 지능적 기능인 학습·추론·판단·인식·생성 등을 전자적 장치나 소프트웨어를 통해 인공적으로 구현하는 기술과 시스템의 총칭)';
+  let terminologyRequested = false;
 
   const clean = value => String(value ?? '').replace(/\s+/g, ' ').trim();
   const quoteKo = title => `"${clean(title).replace(/^[\"“”']+|[\"“”']+$/g, '')}"`;
   const quoteEn = title => `“${clean(title).replace(/^[\"“”']+|[\"“”']+$/g, '')}”`;
+
+  function ensureTerminologyLibrary() {
+    if (window.RESEARCH_TERMINOLOGY_STANDARD || terminologyRequested) return;
+    terminologyRequested = true;
+    const script = document.createElement('script');
+    script.src = '../research-terminology-standard.js?v=20260817-2';
+    script.onload = () => queueMicrotask(enhanceDetail);
+    script.onerror = () => { terminologyRequested = false; };
+    document.head.appendChild(script);
+  }
 
   function formatKoreanPages(value) {
     const pages = clean(value).replace(/–/g, '-');
@@ -104,6 +116,53 @@
     parent.append(wrap);
   }
 
+  function currentRecord() {
+    const title = detailContent.querySelector('#detailTitle')?.textContent?.trim();
+    if (!title) return null;
+    return records.find(record => record.title === title) || null;
+  }
+
+  function enhanceTerminology() {
+    const record = currentRecord();
+    if (!record) return;
+
+    const raw = JSON.stringify(record);
+    const terms = [];
+    if (/\bAI\b/i.test(raw) || raw.includes('인공지능')) terms.push(aiBaseTerm);
+
+    const standard = window.RESEARCH_TERMINOLOGY_STANDARD;
+    if (standard && typeof standard.guideFor === 'function') {
+      standard.guideFor(record, 14).forEach(term => {
+        if (!terms.includes(term)) terms.push(term);
+      });
+    }
+
+    let section = detailContent.querySelector('.terminology-guide');
+    if (!terms.length) {
+      section?.remove();
+      return;
+    }
+
+    const signature = terms.join('|');
+    if (section?.dataset.signature === signature) return;
+
+    if (!section) {
+      section = make('section', 'detail-section terminology-guide');
+      const toc = detailContent.querySelector('.detail-toc');
+      const first = detailContent.querySelector('.detail-section');
+      if (toc) toc.insertAdjacentElement('afterend', section);
+      else if (first) first.insertAdjacentElement('beforebegin', section);
+      else detailContent.append(section);
+    }
+
+    section.dataset.signature = signature;
+    section.replaceChildren();
+    section.append(make('h3', '', '핵심 용어 해설 · 영어 원어 → 한글 용어 → 뜻'));
+    const ul = make('ul', 'terminology-list');
+    terms.forEach(term => ul.append(make('li', '', term)));
+    section.append(ul, make('p', 'detail-note', '해외 문헌과 영문 법개념은 원어를 유지하면서 국내 통용 한글 명칭과 이 문헌을 읽는 데 필요한 개념적 의미를 함께 제시합니다.'));
+  }
+
   function enhanceRelated() {
     const section = detailContent.querySelector('#detail-related');
     if (!section) return;
@@ -157,11 +216,13 @@
   }
 
   function enhanceDetail() {
+    enhanceTerminology();
     enhanceRoles();
     enhanceRelated();
   }
 
   const observer = new MutationObserver(() => enhanceDetail());
   observer.observe(detailContent, { childList: true, subtree: true });
+  ensureTerminologyLibrary();
   enhanceDetail();
 })();
