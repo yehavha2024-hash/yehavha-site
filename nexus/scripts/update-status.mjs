@@ -18,6 +18,7 @@ const MANIFEST_FILES = [
   'nexus/toeic-human-v2/nexus.project.json',
   'nexus/research-track/nexus.project.json',
   'legal-knowledge/nexus.project.json',
+  'legal-knowledge/legal-mind/nexus.project.json',
   'legal-knowledge/ai-literature/nexus.project.json',
   'ai-law-tech-foresight/nexus.project.json',
   'legal-philosophy/nexus.project.json',
