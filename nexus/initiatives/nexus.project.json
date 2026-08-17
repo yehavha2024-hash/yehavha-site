@@ -7,9 +7,9 @@
     "staleDays": 30,
     "count": {
       "type": "json-array",
-      "file": "nexus/initiatives/data.json",
+      "file": "nexus/initiatives/public-data.json",
       "path": "items",
-      "label": "관리 항목"
+      "label": "공개 항목"
     }
   }
 }
