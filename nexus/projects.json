@@ -75,7 +75,7 @@
       "id": "knowledge",
       "eyebrow": "RESEARCH KNOWLEDGE BASE",
       "title": "연구 지식 기반",
-      "description": "법철학·기본권, 법리·판례, AI 법학 연구문헌, AI 법·기술 선제연구를 장기 법학연구의 지식 기반으로 축적합니다."
+      "description": "법철학·기본권, 법리·판례, 리걸 마인드 사례훈련, AI 법학 연구문헌, AI 법·기술 선제연구를 장기 법학연구의 지식 기반으로 축적합니다."
     }
   ],
   "projects": [
@@ -153,6 +153,16 @@
       "description": "실정법·판례·법적 추론과 논증을 전문적으로 체계화한 고급 법률지식 아카이브입니다.",
       "url": "https://yehavha-legal-knowledge.danielie.workers.dev",
       "actionLabel": "연구자료 보기"
+    },
+    {
+      "id": "legal-mind-training",
+      "category": "research",
+      "researchGroup": "knowledge",
+      "meta": "Legal Mind · Case Solving Training",
+      "title": "리걸 마인드 · 사례해결 훈련",
+      "description": "판례와 현실 분쟁을 사실관계·법적 사실·법률관계·쟁점·법규범·판례·증거·증명책임·주장과 반론·포섭·절차·구제·결론·사례변형으로 반복해 법률가적 사고를 훈련합니다.",
+      "url": "https://yehavha-legal-knowledge.danielie.workers.dev/legal-mind/",
+      "actionLabel": "사례훈련 시작"
     },
     {
       "id": "ai-law-literature",
