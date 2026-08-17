@@ -104,6 +104,7 @@
 
   function isExternalProject(project) {
     const url = project.url || '';
+    if (typeof project.external === 'boolean') return project.external;
     return project.category === 'publishing' || project.category === 'media' || /upaper\.kr|youtube\.com|youtu\.be/i.test(url);
   }
 
