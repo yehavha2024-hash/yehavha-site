@@ -116,6 +116,15 @@
     "contentCount": 10,
     "contentLabel": "실행 항목"
   },
+  "ai-trends": {
+    "id": "ai-trends",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-17",
+    "contentCount": 12,
+    "contentLabel": "브리프"
+  },
   "initiative-hub": {
     "id": "initiative-hub",
     "managedBy": "github",
