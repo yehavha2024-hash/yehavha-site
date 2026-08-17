@@ -7,27 +7,7 @@ const ROOT = process.cwd();
 const NEXUS = path.join(ROOT, 'nexus');
 const BASE_FILE = path.join(NEXUS, 'projects.json');
 const STATUS_FILE = path.join(NEXUS, 'project-status.json');
-
-// Nexus 상태를 자동 추적할 프로젝트는 이 승인 목록만 읽습니다.
-// 카드의 제목·설명·URL은 nexus/projects.json만을 단일 원본으로 사용합니다.
-const MANIFEST_FILES = [
-  'nexus.project.json',
-  'three-minute-break/nexus.project.json',
-  'nexus/living-law/nexus.project.json',
-  'toeic-human-100/nexus.project.json',
-  'nexus/toeic-human-v2/nexus.project.json',
-  'nexus/research-track/nexus.project.json',
-  'legal-knowledge/nexus.project.json',
-  'legal-knowledge/legal-mind/nexus.project.json',
-  'legal-knowledge/ai-literature/nexus.project.json',
-  'ai-law-tech-foresight/nexus.project.json',
-  'legal-philosophy/nexus.project.json',
-  'nexus/publishing/nexus.project.json',
-  'nexus/articles/nexus.project.json',
-  'nexus/ai-practice/nexus.project.json',
-  'nexus/ai-trends/nexus.project.json',
-  'nexus/initiatives/nexus.project.json'
-];
+const REGISTRY_FILE = path.join(NEXUS, 'approved-manifests.json');
 
 function readJson(file) {
   return JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -36,6 +16,22 @@ function readJson(file) {
 function writeJson(file, value) {
   fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
 }
+
+function loadManifestRegistry() {
+  const registry = readJson(REGISTRY_FILE);
+  const manifests = registry?.manifests;
+  if (!Array.isArray(manifests) || !manifests.length) {
+    throw new Error('Approved Nexus manifest registry is empty or invalid');
+  }
+  if (new Set(manifests).size !== manifests.length) {
+    throw new Error('Duplicate manifest path in approved Nexus manifest registry');
+  }
+  return manifests;
+}
+
+// Nexus 상태를 자동 추적할 프로젝트는 이 승인 레지스트리만 읽습니다.
+// 카드의 제목·설명·URL은 nexus/projects.json만을 단일 원본으로 사용합니다.
+const MANIFEST_FILES = loadManifestRegistry();
 
 function valueAtPath(root, pathSpec) {
   if (!pathSpec) return root;
@@ -102,7 +98,13 @@ function latestLocalDate(paths = []) {
 
 function fetchText(url) {
   const args = ['-fsSL', '-H', 'User-Agent: YEHAVHA-Nexus'];
-  if (process.env.GITHUB_TOKEN) args.push('-H', `Authorization: Bearer ${process.env.GITHUB_TOKEN}`);
+  try {
+    const target = new URL(url);
+    const trustedAuthHosts = new Set(['api.github.com', 'raw.githubusercontent.com']);
+    if (process.env.GITHUB_TOKEN && trustedAuthHosts.has(target.hostname)) {
+      args.push('-H', `Authorization: Bearer ${process.env.GITHUB_TOKEN}`);
+    }
+  } catch {}
   args.push(url);
   return execFileSync('curl', args, { encoding: 'utf8', maxBuffer: 20 * 1024 * 1024 });
 }
