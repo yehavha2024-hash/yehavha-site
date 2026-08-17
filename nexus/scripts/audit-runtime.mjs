@@ -215,14 +215,33 @@ function auditAiPractice() {
 function auditStatusModel() {
   const status = auditJson('nexus/project-status.json');
   const projects = auditJson('nexus/projects.json');
-  if (!status || !projects) return;
-  const managedIds = [
-    'ai-law-institute','three-min-rest','living-law-100','toeicman','toeicman-v2','legal-research-track','legal-knowledge',
-    'ai-law-literature','ai-law-tech-foresight','legal-philosophy','publishing-hub','article-library','ai-practice-library','initiative-hub'
-  ];
+  const registry = auditJson('nexus/approved-manifests.json');
+  if (!status || !projects || !registry) return;
+
+  const manifestFiles = Array.isArray(registry.manifests) ? registry.manifests : [];
+  if (!manifestFiles.length) return fail('nexus/approved-manifests.json', '승인 manifest 목록이 비어 있음');
+  if (!unique(manifestFiles)) fail('nexus/approved-manifests.json', '승인 manifest 경로 중복');
+
+  const managedIds = [];
+  for (const relative of manifestFiles) {
+    const manifest = auditJson(relative);
+    if (!manifest || manifest.publish === false) continue;
+    if (!manifest.id) {
+      fail(relative, 'manifest id 누락');
+      continue;
+    }
+    managedIds.push(manifest.id);
+  }
+  if (!unique(managedIds)) fail('nexus/approved-manifests.json', '승인 manifest id 중복');
+
+  const projectIds = new Set((projects.projects || []).map(item => item.id));
+  const managedSet = new Set(managedIds);
   for (const id of managedIds) {
     if (!(id in status)) fail('nexus/project-status.json', `관리 프로젝트 상태 누락: ${id}`);
-    if (!(projects.projects || []).some(item => item.id === id)) fail('nexus/projects.json', `관리 프로젝트 카드 누락: ${id}`);
+    if (!projectIds.has(id)) fail('nexus/projects.json', `관리 프로젝트 카드 누락: ${id}`);
+  }
+  for (const id of Object.keys(status)) {
+    if (!managedSet.has(id)) fail('nexus/project-status.json', `승인 registry에 없는 상태 id 잔존: ${id}`);
   }
 }
 
