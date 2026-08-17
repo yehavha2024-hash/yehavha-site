@@ -1,0 +1,14 @@
+{
+  "id": "legal-mind-training",
+  "publish": true,
+  "tracking": {
+    "paths": ["legal-knowledge/legal-mind"],
+    "freshDays": 7,
+    "staleDays": 30,
+    "count": {
+      "type": "static",
+      "value": 16,
+      "label": "훈련 사례"
+    }
+  }
+}
