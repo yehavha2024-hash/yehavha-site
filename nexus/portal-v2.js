@@ -44,11 +44,11 @@
       variant: 'compact'
     },
     {
-      id: 'operate',
+      id: 'ideas',
       number: '03',
-      eyebrow: 'IDEAS & OPERATIONS',
-      title: '운영·아이디어 허브',
-      description: '새 아이디어를 수집하고 검토·계획·실행으로 연결하는 운영 계층입니다.',
+      eyebrow: 'PUBLIC IDEAS',
+      title: '아이디어 허브',
+      description: '공개 가능한 아이디어와 프로젝트 후보를 한곳에서 확인합니다.',
       categoryIds: ['initiatives'],
       variant: 'compact'
     }
