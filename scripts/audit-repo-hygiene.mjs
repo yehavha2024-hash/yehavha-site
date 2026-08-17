@@ -170,6 +170,46 @@ function auditSingleSourceRules() {
   ];
   for (const [relative, message] of forbidden) if (exists(relative)) error(relative, message);
 
+  const registryPath = 'nexus/approved-manifests.json';
+  if (!exists(registryPath)) {
+    error(registryPath, '승인 manifest 단일 레지스트리 없음');
+  } else {
+    try {
+      const manifests = json(registryPath)?.manifests;
+      if (!Array.isArray(manifests) || !manifests.length) error(registryPath, '승인 manifest 목록이 비어 있거나 형식이 잘못됨');
+      else {
+        if (new Set(manifests).size !== manifests.length) error(registryPath, '승인 manifest 경로 중복');
+        for (const relative of manifests) if (!exists(relative)) error(registryPath, `승인 manifest 대상 없음: ${relative}`);
+      }
+    } catch (cause) {
+      error(registryPath, `JSON 파싱 실패: ${cause.message}`);
+    }
+  }
+
+  const registryConsumers = [
+    'nexus/scripts/update-status.mjs',
+    'scripts/audit-web-architecture.mjs',
+    'nexus/scripts/audit-runtime.mjs'
+  ];
+  for (const relative of registryConsumers) {
+    if (!exists(relative)) continue;
+    if (!read(relative).includes('approved-manifests.json')) {
+      error(relative, '승인 manifest 목록을 독자 소유함. approved-manifests.json을 사용해야 함');
+    }
+  }
+  if (exists('nexus/scripts/update-status.mjs') && /const\s+MANIFEST_FILES\s*=\s*\[/.test(read('nexus/scripts/update-status.mjs'))) {
+    error('nexus/scripts/update-status.mjs', '승인 manifest 경로를 하드코딩함');
+  }
+  if (exists('scripts/audit-web-architecture.mjs') && /const\s+manifestFiles\s*=\s*\[/.test(read('scripts/audit-web-architecture.mjs'))) {
+    error('scripts/audit-web-architecture.mjs', '승인 manifest 경로를 하드코딩함');
+  }
+
+  for (const relative of ['README.md', 'nexus/README.md']) {
+    if (exists(relative) && read(relative).includes('nexus/research-groups.css')) {
+      error(relative, '삭제된 research-groups.css 경로가 문서에 잔존');
+    }
+  }
+
   const legalWorkflow = '.github/workflows/legal-knowledge-runtime-audit.yml';
   if (exists(legalWorkflow) && /git\s+(?:add|commit|push)/.test(read(legalWorkflow))) {
     error(legalWorkflow, '진단 워크플로가 생성물을 저장소에 다시 쓰고 있음');
