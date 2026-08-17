@@ -41,6 +41,8 @@ jobs:
       - run: node scripts/audit-web-architecture.mjs
       - run: node scripts/audit-repo-hygiene.mjs
       - run: node scripts/audit-style-ownership.mjs
+      - name: Validate article archive runtime script
+        run: node --check nexus/articles/articles.js
       - name: Validate legal mind runtime scripts
         run: |
           node --check legal-knowledge/legal-mind/data.js
