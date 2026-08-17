@@ -19,6 +19,7 @@ const nexusRuntimePages = [
   'nexus/articles',
   'nexus/ai-practice',
   'nexus/ai-practice/logs',
+  'nexus/ai-trends',
   'nexus/initiatives'
 ];
 
@@ -28,6 +29,7 @@ const nexusJsonFiles = [
   'nexus/publishing/books.json',
   'nexus/articles/articles.json',
   'nexus/ai-practice/data.json',
+  'nexus/ai-trends/data.json',
   'nexus/initiatives/data.json'
 ];
 
@@ -129,6 +131,7 @@ const auditNexusModel = () => {
     'nexus/publishing/nexus.project.json',
     'nexus/articles/nexus.project.json',
     'nexus/ai-practice/nexus.project.json',
+    'nexus/ai-trends/nexus.project.json',
     'nexus/initiatives/nexus.project.json'
   ];
 
