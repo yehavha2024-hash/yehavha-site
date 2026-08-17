@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-15",
+  "updatedAt": "2026-08-17",
   "categories": [
     {
       "id": "apps",
@@ -210,6 +210,20 @@
       "description": "Suno를 활용해 제작한 찬양음악을 유튜브에 지속적으로 공개하며 히브리어·영어·한국어 등 다국어 콘텐츠를 해외 청취자에게 서비스합니다. 공개적으로 확인되는 국내 AI 찬양음악 채널 가운데 다국어 운영과 지속적 제작 규모 측면에서 드문 전문 음악채널입니다.",
       "url": "https://www.youtube.com/@yehavha",
       "actionLabel": "바로가기"
+    },
+    {
+      "id": "ai-trends",
+      "category": "media",
+      "meta": "AI Intelligence · Trend Brief",
+      "title": "AI 동향 브리프",
+      "description": "프런티어·AGI/ASI, Agentic·Multi-Agent, Physical AI·휴머노이드·자율주행·드론, 컴퓨팅·메모리, 법·정책, 국가사업, 연구·논문, 사건·안전 이슈를 날짜별 원출처와 연구 연결점까지 함께 기록하는 상시 업데이트 브리프입니다.",
+      "url": "https://yehavha-nexus-hub.pages.dev/ai-trends/",
+      "actionLabel": "AI 동향 보기",
+      "external": false,
+      "managedBy": "github",
+      "contentCount": 12,
+      "contentLabel": "브리프",
+      "lastUpdated": "2026-08-17"
     },
     {
       "id": "ai-practice-library",
