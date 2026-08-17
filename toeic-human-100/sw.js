@@ -1,11 +1,11 @@
-const CACHE = "toeic-human-100-v12-canonical-runtime";
+const CACHE = "toeic-human-100-v13-project-standard";
 const ASSETS = [
   "./",
   "index.html",
   "style.css",
   "reading-v2.css",
   "teps-extension-v2.css",
-  "v2-ui-theme.css",
+  "project-standard.css",
   "app-v2.js",
   "teps-extension-ui-v2.js",
   "reading-ready-sync.js",
