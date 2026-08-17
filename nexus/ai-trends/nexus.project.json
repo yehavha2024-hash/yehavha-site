@@ -1,9 +1,15 @@
 {
   "id": "ai-trends",
-  "title": "AI 동향 브리프",
-  "category": "media",
-  "route": "/ai-trends/",
-  "data": "./data.json",
-  "updatedAt": "2026-08-17",
-  "updateCadence": "주 2~4회 · 중요 변화 발생 시 수시"
+  "publish": true,
+  "tracking": {
+    "paths": ["nexus/ai-trends"],
+    "freshDays": 7,
+    "staleDays": 30,
+    "count": {
+      "type": "json-array",
+      "file": "nexus/ai-trends/data.json",
+      "path": "entries",
+      "label": "브리프"
+    }
+  }
 }
