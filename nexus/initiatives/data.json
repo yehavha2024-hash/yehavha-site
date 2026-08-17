@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-15",
+  "updatedAt": "2026-08-17",
   "lifecycle": [
     {"id":"idea","label":"CAPTURE","title":"수집"},
     {"id":"review","label":"REVIEW","title":"검토"},
@@ -32,8 +32,18 @@
       "title":"기획·운영을 통합 아이디어 허브로 재편",
       "summary":"흩어진 기획 카드를 하나의 수집·검토·실행 보드로 통합하고 모든 아이디어가 한곳에서 상태와 다음 행동까지 이어지도록 구조를 압축합니다.",
       "status":"ACTIVE","statusId":"active","priority":"P1","visibility":"PUBLIC","visibilityId":"public",
-      "registeredAt":"2026-08-11","updatedAt":"2026-08-13",
-      "nextAction":"새 아이디어는 별도 페이지를 만들기 전에 이 보드에 먼저 등록하고 분류·상태·다음 행동을 지정합니다."
+      "registeredAt":"2026-08-11","updatedAt":"2026-08-17",
+      "nextAction":"새 아이디어와 실제 착수 프로젝트는 이 보드에 먼저 등록하고 분류·상태·다음 행동을 지속 갱신합니다."
+    },
+    {
+      "id":"ai-trends-brief",
+      "group":"projects",
+      "meta":"AI Intelligence · Media Content",
+      "title":"AI 동향 브리프 상시 운영·연구자료화",
+      "summary":"프런티어 AI, Agentic AI (에이전틱 AI), Multi-Agent Systems (다중 에이전트 시스템), Physical AI (피지컬 AI), 자율주행·드론, AI 컴퓨팅, 법·정책·표준, 논문·평가, 사건·안전·국가사업을 원출처와 연구 연결점까지 함께 축적하는 독립 동향 브리프를 운영합니다.",
+      "status":"ACTIVE","statusId":"active","priority":"P1","visibility":"PUBLIC","visibilityId":"public",
+      "registeredAt":"2026-08-17","updatedAt":"2026-08-17",
+      "nextAction":"주 2~4회 및 중요 변화 발생 시 최신 항목을 추가하고, 영문 전문용어는 최초·핵심 노출에서 반드시 한글 통용명칭을 괄호로 병기하며 기존 브리프도 같은 표기 원칙으로 유지합니다."
     },
     {
       "id":"living-law-100-service",
