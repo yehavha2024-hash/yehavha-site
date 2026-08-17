@@ -1,0 +1,20 @@
+{
+  "manifests": [
+    "nexus.project.json",
+    "three-minute-break/nexus.project.json",
+    "nexus/living-law/nexus.project.json",
+    "toeic-human-100/nexus.project.json",
+    "nexus/toeic-human-v2/nexus.project.json",
+    "nexus/research-track/nexus.project.json",
+    "legal-knowledge/nexus.project.json",
+    "legal-knowledge/legal-mind/nexus.project.json",
+    "legal-knowledge/ai-literature/nexus.project.json",
+    "ai-law-tech-foresight/nexus.project.json",
+    "legal-philosophy/nexus.project.json",
+    "nexus/publishing/nexus.project.json",
+    "nexus/articles/nexus.project.json",
+    "nexus/ai-practice/nexus.project.json",
+    "nexus/ai-trends/nexus.project.json",
+    "nexus/initiatives/nexus.project.json"
+  ]
+}
