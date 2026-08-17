@@ -62,6 +62,15 @@
     "contentCount": 108,
     "contentLabel": "연구노트"
   },
+  "legal-mind-training": {
+    "id": "legal-mind-training",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-17",
+    "contentCount": 16,
+    "contentLabel": "훈련 사례"
+  },
   "ai-law-literature": {
     "id": "ai-law-literature",
     "managedBy": "github",
