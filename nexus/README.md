@@ -2,7 +2,7 @@
 
 운영 주소: https://yehavha-nexus-hub.pages.dev/
 
-운영 구조 기준일: 2026-08-15
+운영 구조 기준일: 2026-08-17
 
 YEHAVHA Nexus는 웹앱·연구·출판·미디어·AI 실무·교육·기획 프로젝트의 공식 진입점을 한곳에 모아 관리하는 통합 포털입니다.
 
@@ -40,17 +40,19 @@ Nexus 상태갱신은 저장소 전체를 무차별 재귀 탐색하지 않고 �
 
 1. `nexus.project.json` — AI 법률연구소
 2. `three-minute-break/nexus.project.json` — 3분 쉼표
-3. `toeic-human-100/nexus.project.json` — 토익인간 100일 프로젝트
-4. `toeic-human-v2/nexus.project.json` — 심화 토익인간 V2
-5. `nexus/research-track/nexus.project.json` — 법학 학술연구 트랙
-6. `legal-knowledge/nexus.project.json` — 법리·판례 연구
-7. `legal-knowledge/ai-literature/nexus.project.json` — 인공지능 법학 연구문헌 아카이브
-8. `ai-law-tech-foresight/nexus.project.json` — AI 법·기술 선제연구 아카이브
-9. `legal-philosophy/nexus.project.json` — 법철학·기본권 연구
-10. `nexus/publishing/nexus.project.json` — 대표 출간 도서
-11. `nexus/articles/nexus.project.json` — 글·연구 아카이브
-12. `nexus/ai-practice/nexus.project.json` — AI 실무·아이디어 실행 자료실
-13. `nexus/initiatives/nexus.project.json` — 아이디어 허브
+3. `nexus/living-law/nexus.project.json` — 생활법률 100선
+4. `toeic-human-100/nexus.project.json` — 토익인간 100일 프로젝트
+5. `nexus/toeic-human-v2/nexus.project.json` — 심화 토익인간 V2
+6. `nexus/research-track/nexus.project.json` — 법학 학술연구 트랙
+7. `legal-knowledge/nexus.project.json` — 법리·판례 연구
+8. `legal-knowledge/ai-literature/nexus.project.json` — 인공지능 법학 연구문헌 아카이브
+9. `ai-law-tech-foresight/nexus.project.json` — AI 법·기술 선제연구 아카이브
+10. `legal-philosophy/nexus.project.json` — 법철학·기본권 연구
+11. `nexus/publishing/nexus.project.json` — 대표 출간 도서
+12. `nexus/articles/nexus.project.json` — 글·연구 아카이브
+13. `nexus/ai-practice/nexus.project.json` — AI 실무·아이디어 실행 자료실
+14. `nexus/ai-trends/nexus.project.json` — AI 동향 브리프
+15. `nexus/initiatives/nexus.project.json` — 아이디어 허브
 
 새 프로젝트는 먼저 `projects.json`에 카드 정의를 등록합니다. 자동 상태 추적이 필요한 경우에만 별도 매니페스트를 만들고 `nexus/scripts/update-status.mjs` 승인 목록에도 명시적으로 등록합니다. 이 방식으로 구버전 폴더나 잘못된 매니페스트가 포털에 자동 노출되는 것을 차단합니다.
 
