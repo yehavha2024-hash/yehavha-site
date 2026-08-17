@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-16",
+  "updatedAt": "2026-08-17",
   "sections": [
     {
       "id": "bible-theology",
@@ -27,6 +27,19 @@
     }
   ],
   "articles": [
+    {
+      "id": "word-essence-returning-yeshua",
+      "section": "bible-theology",
+      "language": "ko",
+      "series": "성경 연구",
+      "title": "말씀의 본질과 다시 오실 예슈아",
+      "subtitle": "율법과 말씀, 성육신, 교회의 자기성찰, 재림 신앙을 잇는 성경적 고찰",
+      "summary": "율법의 본질에서 출발해 말씀이 권력으로 변질되는 문제, 사람으로 오신 예슈아, 지식의 시대에 교회가 경계할 점, 그리고 휴거보다 다시 오시는 주님을 중심에 두어야 하는 재림 신앙을 하나의 흐름으로 살펴본다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-17",
+      "readingMinutes": 24,
+      "contentUrl": "./content/word-essence-returning-yeshua.json"
+    },
     {
       "id": "dead-sea-scrolls-bible-messianic-expectation",
       "section": "bible-theology",
