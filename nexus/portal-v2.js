@@ -8,10 +8,6 @@
   let toastTimer;
 
   const COUNTER_ENDPOINT = '/api/access';
-  const researchStyles = document.createElement('link');
-  researchStyles.rel = 'stylesheet';
-  researchStyles.href = './research-groups.css';
-  document.head.append(researchStyles);
 
   if (accessCount) {
     accessCount.textContent = '0';
