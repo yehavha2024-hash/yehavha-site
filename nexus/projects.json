@@ -219,11 +219,7 @@
       "description": "프런티어·AGI/ASI, Agentic·Multi-Agent, Physical AI·휴머노이드·자율주행·드론, 컴퓨팅·메모리, 법·정책, 국가사업, 연구·논문, 사건·안전 이슈를 날짜별 원출처와 연구 연결점까지 함께 기록하는 상시 업데이트 브리프입니다.",
       "url": "https://yehavha-nexus-hub.pages.dev/ai-trends/",
       "actionLabel": "AI 동향 보기",
-      "external": false,
-      "managedBy": "github",
-      "contentCount": 12,
-      "contentLabel": "브리프",
-      "lastUpdated": "2026-08-17"
+      "external": false
     },
     {
       "id": "ai-practice-library",
