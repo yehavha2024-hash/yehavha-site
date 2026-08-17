@@ -23,6 +23,16 @@
   const paragraphs = (items=[]) => items.length ? items.map(x => `<p>${esc(x)}</p>`).join('') : '<p class="muted">추가 연구 예정</p>';
   const list = (items=[]) => items.length ? `<ul>${items.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '<p class="muted">추가 연구 예정</p>';
   const articleSection = (number, title, body) => `<section class="article-section"><div class="section-number">${esc(number)}</div><div class="article-section-body"><h4>${esc(title)}</h4>${body}</div></section>`;
+  const normalizeTitle = value => String(value || '').replace(/\s+/g,' ').trim().toLowerCase();
+  const englishTitle = item => {
+    const title = normalizeTitle(item?.title);
+    const english = normalizeTitle(item?.en);
+    return english && english !== title ? String(item.en).trim() : '';
+  };
+  const titleMarkup = item => {
+    const secondary = englishTitle(item);
+    return `${esc(item.title)}${secondary ? ` <small>${esc(secondary)}</small>` : ''}`;
+  };
 
   function documentFooter() {
     return `<footer class="document-footer" aria-label="연구본문 문서 하단">
@@ -133,7 +143,7 @@
         <div class="row-number">${String(item.order).padStart(2,'0')}</div>
         <div class="row-main">
           <div class="row-meta"><span>${esc(item.stage)}</span><span>${esc(item.maturity)}</span>${item.academic ? '<span class="academic-badge">학술 심화</span>' : ''}</div>
-          <h3>${esc(item.title)} <small>${esc(item.en)}</small></h3>
+          <h3>${titleMarkup(item)}</h3>
           <p class="row-summary">${esc(item.summary)}</p>
           ${item.researchQuestion ? `<p class="research-question"><strong>연구질문</strong> ${esc(item.researchQuestion)}</p>` : ''}
           <div class="row-tags">${chips((item.phdTags || []).slice(0,5))}</div>
@@ -174,7 +184,7 @@
     detailContent.innerHTML = `
       <header class="article-header">
         <div class="article-kicker">${String(item.order).padStart(2,'0')} · ${esc(item.stage)} · ${esc(item.maturity)}</div>
-        <h3>${esc(item.title)} <small>${esc(item.en)}</small></h3>
+        <h3>${titleMarkup(item)}</h3>
         <p class="article-lead">${esc(item.summary)}</p>
         ${item.researchQuestion ? `<div class="article-question"><strong>핵심 연구질문</strong><p>${esc(item.researchQuestion)}</p></div>` : ''}
         ${item.scenarioNote ? `<div class="forecast-warning"><strong>기술예측·시나리오</strong><p>${esc(item.scenarioNote)}</p></div>` : ''}
