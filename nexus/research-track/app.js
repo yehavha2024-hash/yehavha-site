@@ -38,6 +38,69 @@
     return article;
   }
 
+  function renderStageDetail(detail) {
+    const section = make('section', 'thesis-brief');
+    section.setAttribute('aria-label', detail.label || '연구 핵심 요약');
+
+    const head = make('div', 'brief-head');
+    head.append(make('span', 'brief-label', detail.label || '연구 핵심 요약'));
+    if (detail.title) head.append(make('h3', '', detail.title));
+    section.append(head);
+
+    if (detail.lead) section.append(make('p', 'brief-lead', detail.lead));
+
+    if (Array.isArray(detail.toc) && detail.toc.length) {
+      const toc = make('div', 'brief-toc');
+      detail.toc.forEach((item, index) => {
+        const chip = make('span', 'brief-toc-item');
+        chip.append(make('b', '', String(index + 1).padStart(2, '0')), document.createTextNode(item));
+        toc.append(chip);
+      });
+      section.append(toc);
+    }
+
+    if (Array.isArray(detail.sections) && detail.sections.length) {
+      const grid = make('div', 'brief-grid');
+      detail.sections.forEach((item, index) => {
+        const article = make('article', 'brief-section');
+        const title = make('div', 'brief-section-title');
+        title.append(make('span', '', String(index + 1).padStart(2, '0')), make('h4', '', item.title));
+        article.append(title, make('p', '', item.text));
+        grid.append(article);
+      });
+      section.append(grid);
+    }
+
+    if (Array.isArray(detail.flow) && detail.flow.length) {
+      const block = make('div', 'brief-block');
+      block.append(make('p', 'brief-block-title', '핵심 책임귀속 구조'));
+      const flow = make('div', 'brief-flow');
+      detail.flow.forEach((item, index) => {
+        const step = make('div', 'flow-step');
+        step.append(make('span', 'flow-no', String(index + 1).padStart(2, '0')), make('strong', '', item));
+        flow.append(step);
+      });
+      block.append(flow);
+      section.append(block);
+    }
+
+    if (Array.isArray(detail.contributions) && detail.contributions.length) {
+      const block = make('div', 'brief-block');
+      block.append(make('p', 'brief-block-title', '연구의 학술적 의미'));
+      const grid = make('div', 'contribution-grid');
+      detail.contributions.forEach((item) => {
+        const card = make('article', 'contribution-card');
+        card.append(make('h4', '', item.title), make('p', '', item.text));
+        grid.append(card);
+      });
+      block.append(grid);
+      section.append(block);
+    }
+
+    if (detail.note) section.append(make('p', 'brief-note', detail.note));
+    return section;
+  }
+
   function renderStage(stage) {
     const article = make('article', `stage-card tone-${stage.tone || 'future'}`);
     article.id = stage.id;
@@ -81,6 +144,8 @@
     } else {
       body.append(make('p', 'empty-note', '성과가 확정되면 이 단계에 순차적으로 추가합니다.'));
     }
+
+    if (stage.detail) body.append(renderStageDetail(stage.detail));
 
     article.append(rail, body);
     return article;
