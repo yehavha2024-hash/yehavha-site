@@ -9,7 +9,10 @@
       "type": "window-array",
       "global": "AI_FORESIGHT_RECORDS",
       "label": "기술연구",
-      "files": ["ai-law-tech-foresight/data.js"]
+      "files": [
+        "ai-law-tech-foresight/data.js",
+        "ai-law-tech-foresight/trend-terms-20260817.js"
+      ]
     }
   }
 }
