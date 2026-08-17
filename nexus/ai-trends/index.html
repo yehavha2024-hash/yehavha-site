@@ -10,15 +10,15 @@
 <style>
 :root{--accent:#7ab8ff;--line:rgba(255,255,255,.10);--panel:rgba(8,18,38,.78);--panel2:rgba(11,29,51,.86);--soft:rgba(122,184,255,.08);--muted:#b8c9df}
 *{box-sizing:border-box}html{scroll-behavior:smooth;max-width:100%;overflow-x:hidden}body{margin:0;max-width:100%;overflow-x:hidden;background:#071225;color:#f2f6ff}
-.container,.dashboard,.section-card,.radar-grid,.radar-card,.scope-grid,.scope-item,.controls,.control-card,.filter-row,.search,.feed,.brief-card,.analysis-grid,.analysis-box,.tags,.sources{min-width:0;max-width:100%}
+.container,.dashboard,.section-card,.radar-grid,.radar-card,.scope-grid,.scope-item,.scope-head,.controls,.control-card,.filter-row,.search,.feed,.brief-card,.analysis-grid,.analysis-box,.tags,.sources{min-width:0;max-width:100%}
 .trend-hero{padding:28px 0 16px}.back-link{display:inline-flex;align-items:center;margin:0 0 18px;color:#c8d8e9;text-decoration:none;font-size:.92rem}.back-link:hover{color:#fff}
 .trend-hero-card{padding:34px;min-width:0;max-width:100%}.trend-hero-card h1{margin:.18rem 0 .7rem;font-size:clamp(2.1rem,5vw,3.5rem);line-height:1.05;overflow-wrap:anywhere}.trend-hero-card h1 span{display:block;margin-top:.42rem;color:#b9d9f8;font-size:.43em;line-height:1.4;font-weight:650}
 .hero-lead{max-width:980px;margin:0;color:#e8f2fc;font-size:clamp(1rem,2.1vw,1.2rem);font-weight:700;line-height:1.65;overflow-wrap:anywhere}.hero-description{max-width:1000px;margin:.65rem 0 0;color:var(--muted);font-size:.95rem;line-height:1.8;overflow-wrap:anywhere}
 .hero-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;min-width:0}.hero-meta span{display:inline-flex;max-width:100%;padding:7px 10px;border:1px solid rgba(122,184,255,.16);border-radius:999px;background:rgba(5,20,38,.42);color:#bcd3e8;font-size:.76rem;font-weight:800;overflow-wrap:anywhere}
 .dashboard{display:grid;gap:16px;width:100%}.section-card{width:100%;border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg,rgba(13,34,58,.88),rgba(7,23,42,.86));box-shadow:0 18px 54px rgba(0,0,0,.16);padding:26px;overflow:hidden}
 .section-head{display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:18px;min-width:0}.section-head>div{min-width:0}.section-head h2{margin:.12rem 0 0;font-size:clamp(1.35rem,3vw,1.85rem);overflow-wrap:anywhere}.section-note{margin:0;color:#91a8be;font-size:.82rem;line-height:1.5;text-align:right;overflow-wrap:anywhere}
-.radar-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%}.radar-card{width:100%;padding:18px;border:1px solid rgba(122,184,255,.13);border-radius:17px;background:rgba(5,19,35,.47)}.radar-top{display:flex;align-items:center;gap:9px;margin-bottom:9px;min-width:0}.num{color:#6f93b6;font-size:.75rem;font-weight:900;letter-spacing:.08em}.radar-label{color:#8bb9e1;font-size:.69rem;font-weight:900;letter-spacing:.11em;overflow-wrap:anywhere}.radar-card h3{margin:0 0 8px;font-size:1rem;line-height:1.5}.radar-card p{margin:0;color:#b8c7d6;font-size:.88rem;line-height:1.7}
-.scope-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;width:100%}.scope-item{width:100%;padding:14px;border:1px solid rgba(255,255,255,.075);border-radius:14px;background:rgba(4,18,34,.38)}.scope-item strong{display:block;margin:5px 0 6px;font-size:.89rem}.scope-item p{margin:0;color:#9fb2c5;font-size:.78rem;line-height:1.55}
+.radar-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%}.radar-card{width:100%;padding:18px;border:1px solid rgba(122,184,255,.13);border-radius:17px;background:rgba(5,19,35,.47)}.radar-top{display:flex;align-items:center;gap:9px;margin-bottom:9px;min-width:0}.num{color:#6f93b6;font-size:.75rem;font-weight:900;letter-spacing:.08em;flex:0 0 auto}.radar-label{color:#8bb9e1;font-size:.69rem;font-weight:900;letter-spacing:.11em;overflow-wrap:anywhere}.radar-card h3{margin:0 0 8px;font-size:1rem;line-height:1.5}.radar-card p{margin:0;color:#b8c7d6;font-size:.88rem;line-height:1.7}
+.scope-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;width:100%}.scope-item{width:100%;padding:14px;border:1px solid rgba(255,255,255,.075);border-radius:14px;background:rgba(4,18,34,.38)}.scope-head{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:8px}.scope-item strong{display:block;margin:0;font-size:.89rem;line-height:1.45}.scope-item p{margin:0;color:#9fb2c5;font-size:.78rem;line-height:1.65}
 .radar-card h3,.radar-card p,.scope-item strong,.scope-item p,.brief-card h3,.brief-summary,.analysis-box p,.tag,.source-link{overflow-wrap:anywhere;word-break:break-word}
 .controls{position:sticky;top:0;z-index:5;width:100%;padding:12px 0;background:linear-gradient(180deg,#071225 72%,rgba(7,18,37,0))}.control-card{display:flex;width:100%;gap:10px;align-items:center;padding:13px;border:1px solid var(--line);border-radius:17px;background:rgba(7,20,38,.94);backdrop-filter:blur(14px);overflow:hidden}
 .filter-row{display:flex;gap:7px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;padding-bottom:1px}.filter-btn{flex:0 0 auto;border:1px solid rgba(255,255,255,.1);border-radius:999px;background:rgba(255,255,255,.025);color:#b9cadb;padding:8px 11px;font:inherit;font-size:.76rem;font-weight:800;cursor:pointer}.filter-btn.active{border-color:rgba(122,184,255,.4);background:rgba(122,184,255,.13);color:#edf7ff}
@@ -28,7 +28,7 @@
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:13px}.tag{max-width:100%;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.035);color:#8fa6bc;font-size:.68rem}.sources{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}.source-link{display:inline-flex;align-items:center;max-width:100%;min-height:36px;padding:7px 10px;border:1px solid rgba(122,184,255,.16);border-radius:10px;color:#a9d1f2;text-decoration:none;font-size:.76rem;font-weight:800}.source-link:hover{background:rgba(122,184,255,.08);border-color:rgba(122,184,255,.36)}
 .empty{padding:30px;text-align:center;border:1px dashed rgba(255,255,255,.12);border-radius:16px;color:#90a6bb}
 @media(max-width:900px){.scope-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.radar-grid,.analysis-grid{grid-template-columns:minmax(0,1fr)}.section-head{align-items:start;flex-direction:column}.section-note{text-align:left}.control-card{display:block}.search{width:100%;margin:9px 0 0;min-width:0}}
-@media(max-width:560px){.trend-hero{padding-top:18px}.trend-hero-card,.section-card{padding:16px;border-radius:18px}.dashboard{gap:12px}.scope-grid,.radar-grid,.analysis-grid{grid-template-columns:minmax(0,1fr);gap:8px}.scope-item,.radar-card,.brief-card{width:100%;padding:14px}.controls{padding:7px 0}.control-card{width:100%;padding:8px;border-radius:14px}.filter-row{width:100%;max-width:100%}.search{width:100%;max-width:100%}.brief-signal{width:100%;margin-left:0}.hero-meta{gap:6px}.hero-meta span{font-size:.72rem}.section-head{gap:6px;margin-bottom:14px}.section-note{font-size:.78rem}.source-link{width:100%;justify-content:flex-start}.footer-card{max-width:100%}}
+@media(max-width:560px){.trend-hero{padding-top:18px}.trend-hero-card,.section-card{padding:16px;border-radius:18px}.dashboard{gap:12px}.scope-grid,.radar-grid,.analysis-grid{grid-template-columns:minmax(0,1fr);gap:8px}.scope-item,.radar-card,.brief-card{width:100%;padding:14px}.scope-head{gap:7px;margin-bottom:7px}.scope-item strong{font-size:.92rem}.scope-item p{font-size:.8rem;line-height:1.7}.controls{padding:7px 0}.control-card{width:100%;padding:8px;border-radius:14px}.filter-row{width:100%;max-width:100%}.search{width:100%;max-width:100%}.brief-signal{width:100%;margin-left:0}.hero-meta{gap:6px}.hero-meta span{font-size:.72rem}.section-head{gap:6px;margin-bottom:14px}.section-note{font-size:.78rem}.source-link{width:100%;justify-content:flex-start}.footer-card{max-width:100%}}
 </style>
 </head>
 <body>
@@ -90,6 +90,40 @@
   'use strict';
   const $ = (id) => document.getElementById(id);
   const state = { data:null, filter:'all', query:'' };
+  const scopeDetails = {
+    '01': {
+      title:'Frontier AI (프런티어 AI) · AGI (범용인공지능) · ASI (초지능)',
+      text:'Frontier Model (프런티어 모델)의 출시·버전·성능·가격·컨텍스트 윈도우를 추적하고, Reasoning (추론)·Benchmark (벤치마크) 변화와 AGI·ASI 논의가 실제 시스템 능력과 어느 정도 일치하는지 비교합니다.'
+    },
+    '02': {
+      title:'Agentic AI (에이전틱 AI) · Multi-Agent Systems (다중 인공지능 에이전트 시스템)',
+      text:'Autonomous Agent (자율 에이전트)의 Tool Use (도구 사용), Memory (메모리), Planning (계획), Long-horizon Task (장기 과업) 수행 능력을 보고, 복수 에이전트의 협업·역할분담·프로토콜·상호운용성·권한관리 변화를 추적합니다.'
+    },
+    '03': {
+      title:'Physical AI (피지컬 AI) · Humanoid Robotics (휴머노이드 로봇)',
+      text:'VLA, Vision-Language-Action Model (시각-언어-행동 모델), Embodied Reasoning (체화 추론), On-device AI (온디바이스 AI)를 중심으로 휴머노이드·산업로봇의 자율 작업, 환경 적응, 센서·제어·안전 기술과 실제 배치 사례를 확인합니다.'
+    },
+    '04': {
+      title:'Autonomous Driving (자율주행) · UAS/Drone (무인항공시스템·드론)',
+      text:'자율주행차의 운전자 개입 수준·실도로 운행·사고·책임 문제와 UAS (무인항공시스템), BVLOS (가시권 밖 비행), 드론 배송·군집비행의 운항 승인, 안전기준, 규제 변화와 상용화 범위를 추적합니다.'
+    },
+    '05': {
+      title:'AI Compute (AI 컴퓨팅) · Memory Architecture (메모리 아키텍처)',
+      text:'GPU (그래픽처리장치), NPU (신경망처리장치), VRAM (비디오 메모리), Unified Memory (통합 메모리), AI PC의 사양 변화를 보고, Local Inference (로컬 추론)와 클라우드 추론의 비용·성능·전력·개인정보 처리 구조를 비교합니다.'
+    },
+    '06': {
+      title:'AI Law & Governance (AI 법·거버넌스) · Standards (표준)',
+      text:'한국 인공지능기본법, EU AI Act (EU 인공지능법), 미국 연방·주 정책과 NIST·ISO/IEC 표준을 중심으로 시행일, 적용대상, 사업자 의무, 고위험·고영향 분류, 투명성·안전·책임 규범과 실제 집행 동향을 추적합니다.'
+    },
+    '07': {
+      title:'AI Research & Evaluation (AI 연구·평가)',
+      text:'주요 Journal Article (학술논문), Preprint (사전공개논문), Benchmark (벤치마크), Evaluation Harness (평가 실행환경)를 선별해 핵심 주장·방법론·성능지표·재현성·한계를 정리하고, 법학·정책 연구에 직접 연결할 수 있는 자료를 구분합니다.'
+    },
+    '08': {
+      title:'AI Safety (AI 안전) · National Strategy (국가전략)',
+      text:'Prompt Injection (프롬프트 인젝션), Red Teaming (레드팀 검증), 모델·에이전트 오작동, 보안사고와 실제 피해 사례를 추적하고, 국가 GPU 인프라·데이터센터·R&D (연구개발)·인재양성·산업지원 사업과 국가 AI 전략의 변화를 함께 봅니다.'
+    }
+  };
 
   function make(tag, cls, text) {
     const el = document.createElement(tag);
@@ -118,8 +152,11 @@
   function renderScope(items) {
     const root = $('scopeGrid'); root.replaceChildren();
     (items || []).forEach(item => {
+      const copy = scopeDetails[item.number] || item;
       const card = make('article','scope-item');
-      card.append(make('span','num',item.number), make('strong','',item.title), make('p','',item.text));
+      const head = make('div','scope-head');
+      head.append(make('span','num',item.number), make('strong','',copy.title));
+      card.append(head, make('p','',copy.text));
       root.append(card);
     });
   }
