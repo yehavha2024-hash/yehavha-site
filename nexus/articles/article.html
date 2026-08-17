@@ -114,27 +114,6 @@ body[data-page="detail"] .scripture-block p{
     </div>
   </div>
 </footer>
-<script src="./articles.js?v=20260813-003"></script>
-<script>
-(() => {
-  const articleBody = document.getElementById('articleBody');
-  if (!articleBody) return;
-
-  const normalizeYeshuaName = () => {
-    articleBody.querySelectorAll('.scripture-block p').forEach((node) => {
-      node.textContent = node.textContent.replace(/\bJesus\b/g, 'Yeshua');
-    });
-
-    articleBody.querySelectorAll('.article-note').forEach((node) => {
-      if (node.textContent.trim() === 'Scripture quotations are from the King James Version (KJV).') {
-        node.textContent = 'Scripture quotations are from the King James Version (KJV), with “Jesus” in the text rendered as “Yeshua.”';
-      }
-    });
-  };
-
-  new MutationObserver(normalizeYeshuaName).observe(articleBody, { childList: true, subtree: true });
-  normalizeYeshuaName();
-})();
-</script>
+<script src="./articles.js?v=20260817-004"></script>
 </body>
 </html>
