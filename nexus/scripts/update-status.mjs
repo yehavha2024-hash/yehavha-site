@@ -24,6 +24,7 @@ const MANIFEST_FILES = [
   'nexus/publishing/nexus.project.json',
   'nexus/articles/nexus.project.json',
   'nexus/ai-practice/nexus.project.json',
+  'nexus/ai-trends/nexus.project.json',
   'nexus/initiatives/nexus.project.json'
 ];
 
