@@ -41,6 +41,21 @@
       "contentUrl": "./content/word-essence-returning-yeshua.json"
     },
     {
+      "id": "word-essence-returning-yeshua-en",
+      "section": "bible-theology",
+      "sectionLabel": "Bible & Theology",
+      "language": "en",
+      "translationOf": "word-essence-returning-yeshua",
+      "series": "Bible Study · English",
+      "title": "The Essence of God’s Word and the Return of Yeshua",
+      "subtitle": "A Biblical Reflection on the Torah, the Word, the Incarnation, the Church, and the Return of the Lord",
+      "summary": "This study follows a single biblical trajectory from the essence of the Torah through the dangers of religious power, God who came as man, the Church in an age of expanding knowledge, and a theology of the Second Coming centred not on escape but on the Lord who is coming again.",
+      "author": "MyungHun Lee",
+      "publishedAt": "2026-08-17",
+      "readingMinutes": 27,
+      "contentUrl": "./content/word-essence-returning-yeshua-en.json"
+    },
+    {
       "id": "dead-sea-scrolls-bible-messianic-expectation",
       "section": "bible-theology",
       "language": "ko",
