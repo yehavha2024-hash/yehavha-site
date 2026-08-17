@@ -92,8 +92,8 @@
       button.setAttribute('aria-label', `${section.title} 글 보기`);
       button.append(
         el('span', 'topic-number', String(index + 1).padStart(2, '0')),
-        el('span', 'eyebrow', section.eyebrow || 'TOPIC'),
         el('h3', '', section.title),
+        el('span', 'eyebrow', section.eyebrow || 'TOPIC'),
         el('p', '', section.description || ''),
         el('span', 'topic-count', `${count} ARTICLE${count === 1 ? '' : 'S'}`)
       );
@@ -131,7 +131,8 @@
     if (type === 'scripture') {
       const box = el('section', 'scripture-block');
       if (block.reference) box.append(el('span', 'scripture-reference', block.reference));
-      box.append(el('p', '', block.text || ''));
+      const scriptureText = String(block.text || '').replace(/\bJesus\b/g, 'Yeshua');
+      box.append(el('p', '', scriptureText));
       container.append(box);
       return;
     }
@@ -142,7 +143,11 @@
     }
 
     if (type === 'note') {
-      container.append(el('aside', 'article-note', block.text || ''));
+      let noteText = String(block.text || '');
+      if (noteText === 'Scripture quotations are from the King James Version (KJV).') {
+        noteText = 'Scripture quotations are from the King James Version (KJV), with “Jesus” in the text rendered as “Yeshua.”';
+      }
+      container.append(el('aside', 'article-note', noteText));
       return;
     }
 
