@@ -103,6 +103,15 @@
     return `<div class="thinking-note"><strong>${esc(label)}</strong><p>${esc(text)}</p></div>`;
   }
 
+  function mindGuide(principle, application, next){
+    return `${thought('판단 기준', principle)}<div class="variation-item"><b>이 사건 적용</b><p>${esc(application)}</p><dl><div><dt>다음 연결</dt><dd>${esc(next)}</dd></div></dl></div>`;
+  }
+
+  function support(label, items){
+    if (!Array.isArray(items) || !items.length) return '';
+    return `<details class="argument-box"><summary><strong>${esc(label)}</strong></summary>${list(items)}</details>`;
+  }
+
   function legalMindOverview(item){
     const rows = [
       ['법률관계', first(item.relation)],
@@ -175,23 +184,40 @@
 
   function openCase(id){
     const item = cases.find(c=>c.id===id); if(!item)return;
-    const sources = (item.sources||[]).length ? `<div class="source-list">${item.sources.map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join('')}</div>` : '<p>이 사례는 훈련용 가상사례입니다. 실제 적용 전 최신 공식 법령·판례를 별도로 확인하십시오.</p>';
-    const argumentsHtml = `${thought('리걸 마인드','한쪽 주장만 강화하지 않습니다. 청구·문제제기 측의 가장 강한 논리와 상대방의 가장 강한 반론을 모두 세운 뒤, 어느 쪽이 법규범·증거·증명책임 구조와 더 잘 맞는지 비교합니다.')}<div class="two-col"><div class="argument-box"><strong>청구·문제제기 측의 논리</strong>${para(item.claimant)}</div><div class="argument-box"><strong>상대방의 반론</strong>${para(item.respondent)}</div></div>`;
+    const sources = (item.sources||[]).length ? `<div class="source-list">${item.sources.map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join('')}</div>` : '<p>훈련용 가상사례입니다. 실제 적용 전 최신 공식 법령·판례와 구체적 사실관계를 별도로 확인하십시오.</p>';
 
-    const factsThought = `아직 누가 옳은지 판단하지 않습니다. 먼저 사건을 시간순으로 고정합니다. 이 사례에서는 ${joined(item.facts,3)}${(item.facts||[]).length>3?' 등의 순서로 놓습니다.':'의 순서로 놓습니다.'}`;
-    const legalFactsThought = `모든 사실에 같은 무게를 주지 않습니다. 결론을 움직이는 사실은 ${joined(item.legalFacts,4)}입니다. 감정·도덕평가보다 법적 요건의 충족 여부를 바꾸는 사실을 먼저 남깁니다.`;
-    const relationThought = `당사자를 단순히 “누가 잘못했는가”로 보지 않고 권리·의무와 청구의 방향으로 바꿉니다. 이 사건의 기본 구조는 ${joined(item.relation,3)}입니다.`;
-    const issuesThought = `일상적인 질문을 법원이 답할 수 있는 법적 판단 질문으로 바꿉니다. 이 사건에서 먼저 세울 쟁점은 ${joined(item.issues,3)}입니다. 쟁점이 정확해야 뒤의 조문·판례 검색도 정확해집니다.`;
-    const normsThought = `쟁점을 먼저 정한 뒤 그 질문에 답하는 규범을 찾습니다. 적용 후보는 ${joined(item.laws,3)}${(item.precedents||[]).length?`이고, 판례에서는 ${joined(item.precedents,2)}를 확인합니다.`:'입니다.'} 조문은 요건과 법률효과를 주고 판례는 그 의미와 적용범위를 구체화합니다.`;
-    const evidenceThought = `법적으로 중요한 사실도 증명되지 않으면 재판의 기초가 되기 어렵습니다. 이 사건에서는 ${joined(item.evidence,4)}가 핵심 자료가 되고, 증명책임은 ${joined(item.burden,2)}의 구조로 봅니다.`;
-    const subsumptionThought = `여기가 리걸 마인드의 핵심입니다. 조문을 반복하는 것이 아니라 이미 정리한 사실을 법적 요건 하나하나에 대입합니다. 이 사례의 포섭 구조는 ${joined(item.subsumption,4)}입니다.`;
-    const procedureThought = `실체법상 권리가 있다는 판단과 실제로 그 권리를 실현하는 절차는 구별합니다. 이 사건에서는 ${joined(item.procedure,3)}의 순서와 수단을 검토합니다.`;
-    const conclusionThought = `결론은 직감이나 가치판단을 새로 덧붙이는 단계가 아닙니다. 앞서 정리한 사실·쟁점·규범·증거·포섭을 압축한 법률적 결과입니다. 이 사건의 결론은 ${joined(item.conclusion,3)}입니다.`;
-    const variationThought = `사례변형은 같은 문장을 반복하는 단계가 아닙니다. 바뀐 사실이 어느 법적 요건을 변화시키고, 그 변화가 권리·의무·책임·우선순위·범죄성립 등 어떤 법률효과로 이어지는지를 원사례와 비교합니다.`;
+    const factsApply = `이 사건에서는 ${joined(item.facts,4)}${(item.facts||[]).length>4?' 등의 순서로 시간축을 잡습니다.':'의 순서로 시간축을 잡습니다.'}`;
+    const legalFactsApply = `결론을 움직이는 사실은 ${joined(item.legalFacts,4)}입니다.`;
+    const relationApply = `이 사건의 기본 법률관계는 ${joined(item.relation,3)}입니다.`;
+    const issuesApply = `핵심 쟁점은 ${joined(item.issues,3)}입니다.`;
+    const normsApply = `적용 후보는 ${joined(item.laws,3)}${(item.precedents||[]).length?`이고, 관련 판례에서는 ${joined(item.precedents,2)}를 확인합니다.`:'입니다.'}`;
+    const evidenceApply = `핵심 자료는 ${joined(item.evidence,4)}이고, 증명책임은 ${joined(item.burden,2)}의 구조로 정리합니다.`;
+    const subsumptionApply = `이 사례에서 사실을 요건에 대입하는 핵심은 ${joined(item.subsumption,4)}입니다.`;
+    const procedureApply = `권리실현 수단은 ${joined(item.procedure,3)}의 순서와 방법으로 검토합니다.`;
+    const conclusionApply = `앞 단계의 포섭을 거친 법률적 결론은 ${joined(item.conclusion,3)}입니다.`;
+
+    const argumentsHtml = `${mindGuide(
+      '한쪽 주장만 강화하지 않고 청구·문제제기 측과 상대방의 가장 강한 논리를 각각 세웁니다.',
+      `청구·문제제기 측은 ${joined(item.claimant,2)}라고 주장할 수 있고, 상대방은 ${joined(item.respondent,2)}라고 반박할 수 있습니다.`,
+      '양쪽 주장을 증거·증명책임과 결합한 뒤 어느 주장이 법적 요건에 더 잘 부합하는지를 포섭 단계에서 비교합니다.'
+    )}<div class="two-col"><div class="argument-box"><strong>청구·문제제기 측의 논리</strong>${para(item.claimant)}</div><div class="argument-box"><strong>상대방의 반론</strong>${para(item.respondent)}</div></div>`;
 
     const disclaimer = `<footer class="detail-disclaimer"><strong>학습·검증 안내</strong><p>본 자료는 리걸 마인드와 법률적 사고 구조를 익히기 위한 교육·연구용 자료이며 개별 사건에 대한 법률자문이나 법률의견이 아닙니다.</p><p>일부 가상사례 구성과 학습용 해설·초안 정리에 생성형 AI를 활용했으며, 판례 기반 사례는 공식 판결문과 법령 원문을 기준으로 검증합니다. 실제 사건은 최신 법령·판례와 구체적 증거관계를 별도로 확인해야 합니다.</p><p>Copyright © 이명훈 2026. All rights reserved.</p></footer>`;
 
-    $('#caseDetail').innerHTML = `<header class="detail-head"><div class="detail-kicker">${esc(item.id)} · ${esc(item.mode)} · ${esc(item.area)}</div><h3>${esc(item.title)}</h3><p>${esc(item.summary)}</p><div class="detail-meta"><span>${esc(item.level)}</span><span>${esc(item.mode)}</span><span>${esc(item.area)}</span></div></header><div class="training-question"><strong>읽는 방법</strong><span>먼저 스스로 답을 만들지 않습니다. 아래의 리걸 마인드 해설을 순서대로 읽으면서 “왜 이 단계에서 이 사실을 보고, 왜 다음 단계로 넘어가는가”를 추적하십시오.</span><em>출발 쟁점 · ${esc(item.question)}</em></div><div class="model-overview"><strong>전체 리걸 마인드 흐름</strong>${legalMindOverview(item)}</div><div class="detail-steps">${step('01','사실관계 — 판단 전에 사건의 시간축을 고정한다',thought('리걸 마인드',factsThought)+list(item.facts),true)}${step('02','법적으로 의미 있는 사실 — 결론을 움직이는 사실만 선별한다',thought('리걸 마인드',legalFactsThought)+list(item.legalFacts),true)}${step('03','당사자·법률관계 — 사람관계를 청구·권리·의무 관계로 바꾼다',thought('리걸 마인드',relationThought)+list(item.relation),true)}${step('04','핵심 쟁점 — 일상적 질문을 법적 판단 질문으로 바꾼다',thought('리걸 마인드',issuesThought)+list(item.issues),true)}${step('05','적용 법규범·판례 — 쟁점에 답하는 규범을 찾는다',thought('리걸 마인드',normsThought)+list(item.laws)+list(item.precedents),true)}${step('06','증거·증명책임 — 주장할 사실과 증명할 사실을 분리한다',thought('리걸 마인드',evidenceThought)+`<h4>핵심 증거</h4>${list(item.evidence)}<h4>증명책임</h4>${list(item.burden)}`)}${step('07','주장·반론 — 양쪽 논리를 같은 강도로 구성한다',argumentsHtml)}${step('08','포섭 — 구체적 사실을 법적 요건에 대입한다',thought('리걸 마인드',subsumptionThought)+list(item.subsumption),true)}${step('09','절차·구제 — 권리판단과 권리실현 수단을 구별한다',thought('리걸 마인드',procedureThought)+list(item.procedure))}${step('10','결론 — 앞 단계의 판단을 법률효과로 연결한다',thought('리걸 마인드',conclusionThought)+list(item.conclusion),true)}${step('11','사례변형 — 변경된 요건과 법률효과를 비교한다',thought('리걸 마인드',variationThought)+variationList(item),true)}${step('12','공식자료·검증 — 리걸 마인드 해설을 원문과 대조한다',thought('검증 원칙','판례 기반 사례는 반드시 판결문과 법령 원문에 다시 연결하고, 가상사례는 실제 사건에 그대로 대입하지 않습니다.')+sources)}</div>${disclaimer}`;
+    $('#caseDetail').innerHTML = `<header class="detail-head"><div class="detail-kicker">${esc(item.id)} · ${esc(item.mode)} · ${esc(item.area)}</div><h3>${esc(item.title)}</h3><p>${esc(item.summary)}</p><div class="detail-meta"><span>${esc(item.level)}</span><span>${esc(item.mode)}</span><span>${esc(item.area)}</span></div></header><div class="training-question"><strong>읽는 방법</strong><span>먼저 스스로 답을 만들지 않습니다. 각 단계의 ‘판단 기준 → 이 사건 적용 → 다음 연결’을 읽으면서 사실이 법적 요건과 법률효과로 변환되는 순서를 추적하십시오.</span><em>출발 쟁점 · ${esc(item.question)}</em></div><div class="model-overview"><strong>전체 리걸 마인드 흐름</strong>${legalMindOverview(item)}</div><div class="detail-steps">
+      ${step('01','사실관계 — 판단 전에 사건의 시간축을 고정한다',mindGuide('누가 옳은지 판단하기 전에 사건을 시간순으로 고정합니다.',factsApply,'고정된 사실 중 법적 요건의 충족 여부를 바꾸는 사실만 다음 단계에서 선별합니다.')+support('사실관계 상세 보기',item.facts),true)}
+      ${step('02','법적으로 의미 있는 사실 — 결론을 움직이는 사실만 선별한다',mindGuide('모든 사실에 같은 무게를 주지 않고 법적 요건을 움직이는 사실을 선별합니다.',legalFactsApply,'선별된 사실을 당사자의 권리·의무·청구 관계에 배치합니다.')+support('법적 사실 상세 보기',item.legalFacts))}
+      ${step('03','당사자·법률관계 — 사람관계를 청구·권리·의무 관계로 바꾼다',mindGuide('사람 사이의 갈등을 누가 누구에게 무엇을 청구하거나 항변할 수 있는지의 구조로 바꿉니다.',relationApply,'각 법률관계에서 법원이 답해야 할 핵심 법적 질문을 쟁점으로 추출합니다.')+support('법률관계 상세 보기',item.relation))}
+      ${step('04','핵심 쟁점 — 일상적 질문을 법적 판단 질문으로 바꾼다',mindGuide('일상적인 옳고 그름이 아니라 법규범으로 답할 수 있는 질문을 세웁니다.',issuesApply,'쟁점마다 적용 가능한 조문·판례·법리를 찾아 판단규범을 확정합니다.')+support('핵심 쟁점 상세 보기',item.issues))}
+      ${step('05','적용 법규범·판례 — 쟁점에 답하는 규범을 찾는다',mindGuide('결론을 먼저 정해놓고 법을 찾지 않고, 확정된 쟁점에 답하는 규범을 찾습니다.',normsApply,'규범의 각 요건 중 어떤 사실을 누가 증명해야 하는지 증거·증명책임 단계로 넘깁니다.')+support('적용 법률 상세 보기',item.laws)+support('관련 판례·법리 상세 보기',item.precedents))}
+      ${step('06','증거·증명책임 — 주장할 사실과 증명할 사실을 분리한다',mindGuide('법적으로 중요한 사실도 증명되지 않으면 재판의 기초가 되기 어렵기 때문에 사실·증거·증명책임을 연결합니다.',evidenceApply,'증명 가능한 사실을 기초로 양 당사자의 가장 강한 주장과 반론을 구성합니다.')+support('핵심 증거 상세 보기',item.evidence)+support('증명책임 상세 보기',item.burden))}
+      ${step('07','주장·반론 — 양쪽 논리를 같은 강도로 구성한다',argumentsHtml)}
+      ${step('08','포섭 — 구체적 사실을 법적 요건에 대입한다',mindGuide('조문을 반복하는 것이 아니라 확정된 사실을 법적 요건 하나하나에 대입합니다.',subsumptionApply,'각 요건의 충족·불충족 판단을 합쳐 실체법상 권리·책임이 있는지를 정리합니다.')+support('포섭 상세 보기',item.subsumption))}
+      ${step('09','절차·구제 — 권리판단과 권리실현 수단을 구별한다',mindGuide('실체법상 권리가 있다는 것과 그 권리를 실제로 실현하는 절차는 구별합니다.',procedureApply,'선택한 절차와 구제수단까지 포함해 실제 법률효과와 최종 결론을 정리합니다.')+support('절차·구제 상세 보기',item.procedure))}
+      ${step('10','결론 — 앞 단계의 판단을 법률효과로 연결한다',mindGuide('결론은 직감이 아니라 사실·쟁점·규범·증거·포섭을 압축한 법률적 결과입니다.',conclusionApply,'이 결론을 기준점으로 삼아 핵심 사실 하나가 바뀔 때 어떤 요건과 법률효과가 달라지는지 사례변형에서 비교합니다.')+support('결론 상세 보기',item.conclusion))}
+      ${step('11','사례변형 — 변경된 요건과 법률효과를 비교한다',mindGuide('사례변형은 같은 결론을 복사하는 것이 아니라 바뀐 사실이 어떤 법적 요건을 변화시키는지 먼저 찾습니다.','각 변형은 아래에서 요건 변화·법률효과·확인할 사실과 증거로 나누어 원사례와 비교합니다.','결론이 달라졌다면 어느 사실과 어느 요건 때문에 달라졌는지를 역으로 확인합니다.')+variationList(item))}
+      ${step('12','공식자료·검증 — 리걸 마인드 해설을 원문과 대조한다',`<p>판례 기반 사례는 판결문과 법령 원문을 확인하고, 가상사례는 실제 사건에 그대로 대입하지 않습니다.</p>${sources}`)}
+    </div>${disclaimer}`;
     $('#caseDialog').showModal();
   }
 
