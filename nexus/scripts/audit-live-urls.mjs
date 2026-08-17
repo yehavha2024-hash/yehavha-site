@@ -108,6 +108,7 @@ async function checkRedirect() {
 }
 
 for (const project of projects) await check(project);
+await check({ id: 'legal-mind-training', url: 'https://yehavha-legal-knowledge.danielie.workers.dev/legal-mind/' });
 await checkJson('/projects.json', data => Array.isArray(data?.projects) && data.projects.length > 0);
 await checkJson('/project-status.json', data => data && typeof data === 'object' && Object.keys(data).length >= 10);
 await checkAccessApi();
