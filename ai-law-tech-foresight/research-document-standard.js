@@ -7,6 +7,20 @@
 
   const siteTitle = (document.querySelector('h1')?.textContent || document.title || 'AI 법·기술 선제연구 아카이브').trim();
   const aiNotice = 'AI 활용 안내: 일부 기술·법률 연구자료의 탐색·구조화·초안 작성에 생성형 AI를 활용했으며, 사실과 전망의 구분, 법적 분석, 출처 검토와 최종 편집은 운영자가 관리합니다.';
+  let terminologyRequested = false;
+
+  function ensureTerminologyLibrary() {
+    if (window.RESEARCH_TERMINOLOGY_STANDARD || terminologyRequested) return;
+    terminologyRequested = true;
+    const script = document.createElement('script');
+    script.src = 'research-terminology-standard.js?v=20260817-2';
+    script.onload = () => {
+      window.RESEARCH_TERMINOLOGY_STANDARD?.normalizeForesightLabels?.();
+      queueMicrotask(standardize);
+    };
+    script.onerror = () => { terminologyRequested = false; };
+    document.head.appendChild(script);
+  }
 
   function ensureFooter() {
     let footer = content.querySelector('.document-footer');
@@ -44,6 +58,45 @@
     }
   }
 
+  function currentRecord() {
+    const heading = content.querySelector('.article-header h3')?.textContent?.trim();
+    if (!heading) return null;
+    return (window.AI_FORESIGHT_RECORDS || []).find(item => heading.includes(item.title)) || null;
+  }
+
+  function ensureTerminologyGuide() {
+    const standard = window.RESEARCH_TERMINOLOGY_STANDARD;
+    const item = currentRecord();
+    if (!standard || !item || typeof standard.guideFor !== 'function') return;
+
+    const terms = standard.guideFor(item, 16);
+    let guide = content.querySelector('.terminology-guide');
+    if (!terms.length) {
+      guide?.remove();
+      return;
+    }
+
+    const signature = terms.join('|');
+    if (guide?.dataset.signature === signature) return;
+
+    if (!guide) {
+      guide = document.createElement('section');
+      guide.className = 'article-section terminology-guide';
+      const header = content.querySelector('.article-header');
+      if (header) header.insertAdjacentElement('afterend', guide);
+      else content.prepend(guide);
+    }
+
+    guide.dataset.signature = signature;
+    guide.innerHTML = `
+      <div class="section-number"></div>
+      <div class="article-section-body">
+        <h4>핵심 용어 해설 · 영어 원어 → 한글 용어 → 뜻</h4>
+        <ul>${terms.map(term => `<li>${term}</li>`).join('')}</ul>
+        <p class="muted">기술용어와 영문 법개념은 원어를 유지하되, 국내에서 부르는 한글 명칭과 이 연구에서 필요한 기능·법적 의미를 함께 제시합니다.</p>
+      </div>`;
+  }
+
   function ensureToc() {
     const sections = [...content.querySelectorAll('.article-section, .detail-section')];
     if (!sections.length) return;
@@ -77,6 +130,7 @@
 
   function standardize() {
     if (!content.childElementCount) return;
+    ensureTerminologyGuide();
     ensureToc();
     ensureFooter();
   }
@@ -99,5 +153,6 @@
   detailObserver.observe(content, { childList: true, subtree: false });
 
   dialog.addEventListener('close', () => content.scrollTo({ top: 0, behavior: 'auto' }));
+  ensureTerminologyLibrary();
   standardize();
 })();
