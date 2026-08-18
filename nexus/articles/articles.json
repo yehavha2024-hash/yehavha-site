@@ -5,7 +5,6 @@
     {"id":"ai-suno","eyebrow":"AI MUSIC & SUNO","title":"AI·Suno","description":"AI 음악 생성, Suno 활용, 제작·선별·편집·배포 경험을 글과 강의형 본문으로 정리합니다."},
     {"id":"ai-law-essay","eyebrow":"AI LAW ESSAYS","title":"AI 법 전문에세이","description":"AI 법의 개별 쟁점을 법리·법제·판례·비교법으로 통합하여 완결된 논증형 글로 정리합니다."},
     {"id":"ai-law-research","eyebrow":"AI LAW RESEARCH","title":"AI 법 연구자료","description":"A·M·R·L·F·P·G 코드별 연구쟁점, 법적 근거, 잠정모형과 후속과제를 축적합니다."},
-    {"id":"hebrew-language","eyebrow":"HEBREW & LANGUAGE","title":"히브리어·언어","description":"히브리어 표현, 성경 언어, 번역과 언어 학습에 관한 글을 축적합니다."},
     {"id":"open-topics","eyebrow":"OPEN TOPICS","title":"기타 주제","description":"연구·기술·콘텐츠·경험 등 독립적으로 공개할 가치가 있는 글을 주제 제한 없이 추가합니다."}
   ],
   "articles": [
