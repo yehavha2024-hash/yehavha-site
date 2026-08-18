@@ -47,6 +47,19 @@
       "contentUrl": "./content/ai-law-a01.json"
     },
     {
+      "id": "ai-law-a02",
+      "section": "ai-law-research",
+      "language": "ko",
+      "series": "A02 · 권한초과",
+      "title": "AI 에이전트의 권한초과·재위임과 법률효과 귀속",
+      "subtitle": "최초 명령에서 최종 거래까지의 권한 연쇄",
+      "summary": "AI 에이전트가 다른 에이전트에게 업무를 재위임하거나 사전 권한범위를 넘어 거래할 때 최종 법률효과의 귀속기준을 검토한다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-18",
+      "readingMinutes": 5,
+      "contentUrl": "./content/ai-law-a02.json"
+    },
+    {
       "id": "ai-law-m01",
       "section": "ai-law-research",
       "language": "ko",
@@ -58,6 +71,19 @@
       "publishedAt": "2026-08-18",
       "readingMinutes": 5,
       "contentUrl": "./content/ai-law-m01.json"
+    },
+    {
+      "id": "ai-law-m02",
+      "section": "ai-law-research",
+      "language": "ko",
+      "series": "M02 · 책임경로",
+      "title": "에이전트 간 업무위임·재위임과 책임경로의 추적",
+      "subtitle": "분산된 협업구조에서 행위경로를 재구성하는 방법",
+      "summary": "A2A형 다중 에이전트 협업에서 업무위임과 재위임이 반복될 때 책임경로와 통제지점을 어떻게 특정할 것인지 검토한다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-18",
+      "readingMinutes": 5,
+      "contentUrl": "./content/ai-law-m02.json"
     },
     {
       "id": "ai-law-r01",
@@ -73,6 +99,58 @@
       "contentUrl": "./content/ai-law-r01.json"
     },
     {
+      "id": "ai-law-r02",
+      "section": "ai-law-research",
+      "language": "ko",
+      "series": "R02 · 증거접근",
+      "title": "AI 손해의 증거접근과 결함·인과관계 추정",
+      "subtitle": "정보비대칭과 기술적 복잡성을 완화하는 증명구조",
+      "summary": "AI 내부자료가 사업자 측에 집중된 상황에서 증거접근, 결함 추정, 인과관계 추정을 어떻게 설계할 것인지 비교법적으로 검토한다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-18",
+      "readingMinutes": 5,
+      "contentUrl": "./content/ai-law-r02.json"
+    },
+    {
+      "id": "ai-law-l01",
+      "section": "ai-law-research",
+      "language": "ko",
+      "series": "L01 · 계층책임",
+      "title": "AI 가치사슬의 다층적 책임귀속",
+      "subtitle": "설계·제공·통합·배치·운용 단계의 책임구조",
+      "summary": "AI 시스템의 개발·제공·통합·배치·운용에 참여한 복수 주체의 책임을 통제능력과 정보보유 정도에 따라 계층적으로 분석한다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-18",
+      "readingMinutes": 5,
+      "contentUrl": "./content/ai-law-l01.json"
+    },
+    {
+      "id": "ai-law-l02",
+      "section": "ai-law-research",
+      "language": "ko",
+      "series": "L02 · 인간 감독",
+      "title": "인간 감독과 책임관리인의 법적 기능",
+      "subtitle": "형식적 승인에서 실질적 위험통제로",
+      "summary": "고영향·고위험 AI의 인간 감독의무를 책임관리인의 권한·능력·중단수단과 연결하여 책임법적으로 재구성한다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-18",
+      "readingMinutes": 5,
+      "contentUrl": "./content/ai-law-l02.json"
+    },
+    {
+      "id": "ai-law-l03",
+      "section": "ai-law-research",
+      "language": "ko",
+      "series": "L03 · 지속적 통제",
+      "title": "사후학습·업데이트와 지속적 통제에 따른 책임",
+      "subtitle": "시장출시 후 변화하는 AI의 책임기준",
+      "summary": "출시 후 업데이트·학습·외부서비스 연결로 AI가 변화할 때 제공자와 제조자의 지속적 통제가능성을 책임판단에 어떻게 반영할지 검토한다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-18",
+      "readingMinutes": 5,
+      "contentUrl": "./content/ai-law-l03.json"
+    },
+    {
       "id": "ai-law-f01",
       "section": "ai-law-research",
       "language": "ko",
@@ -84,6 +162,45 @@
       "publishedAt": "2026-08-18",
       "readingMinutes": 5,
       "contentUrl": "./content/ai-law-f01.json"
+    },
+    {
+      "id": "ai-law-p01",
+      "section": "ai-law-research",
+      "language": "ko",
+      "series": "P01 · Physical AI",
+      "title": "Physical AI의 제조물책임과 자기진화형 기계의 안전의무",
+      "subtitle": "소프트웨어·학습·안전결정 기록을 중심으로",
+      "summary": "AI가 로봇·기계의 물리적 제어에 결합될 때 소프트웨어 결함, 자기진화, 안전결정 기록과 제조자의 통제를 어떻게 책임법에 반영할지 검토한다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-18",
+      "readingMinutes": 5,
+      "contentUrl": "./content/ai-law-p01.json"
+    },
+    {
+      "id": "ai-law-p02",
+      "section": "ai-law-research",
+      "language": "ko",
+      "series": "P02 · 자율주행",
+      "title": "자율주행 사고데이터와 책임경로의 재구성",
+      "subtitle": "자동화 수준·사고로그·텔레메트리의 증거기능",
+      "summary": "자율주행 사고에서 시스템 작동상태와 사고데이터를 이용해 행위주체, 결함, 인과관계와 운용자 개입 가능성을 재구성한다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-18",
+      "readingMinutes": 5,
+      "contentUrl": "./content/ai-law-p02.json"
+    },
+    {
+      "id": "ai-law-g01",
+      "section": "ai-law-research",
+      "language": "ko",
+      "series": "G01 · 국내 법제",
+      "title": "국내 고영향 AI의 위험관리·설명·감독·문서보관 의무",
+      "subtitle": "인공지능기본법 제34조의 책임법적 의미",
+      "summary": "현행 인공지능기본법의 고영향 AI 의무를 주의의무, 인간 감독, 로그·문서보존, 책임관리인 제도와 연결하여 분석한다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-18",
+      "readingMinutes": 5,
+      "contentUrl": "./content/ai-law-g01.json"
     },
     {
       "id": "ai-agent-responsibility-law",
