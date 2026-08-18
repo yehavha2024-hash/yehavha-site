@@ -72,7 +72,7 @@
 
     if (type === '해외 학술논문' || (language === '영어' && type.includes('학술논문'))) {
       record.citation = formatOverseasArticle(record);
-      record.citationStandard = 'EN-JOURNAL-v2';
+      record.citationStandard = 'EN-JOURNAL-v3';
     }
   });
 
@@ -88,7 +88,7 @@
 
   function renderCitation(value) {
     const escaped = escapeHtml(normalizeCitation(value));
-    return escaped.replace(/“([^”]*[A-Za-z][^”]*)”(?=,)/g, '<em class="western-article-title" lang="en">$1</em>');
+    return escaped.replace(/“([^”]*[A-Za-z][^”]*)”(?=,)/g, '“<em class="western-article-title" lang="en">$1</em>”');
   }
 
   function processCitationBoxes(root) {
@@ -98,7 +98,7 @@
     root.querySelectorAll?.('.citation-box').forEach(box => boxes.push(box));
     boxes.forEach(box => {
       box.innerHTML = renderCitation(box.textContent || '');
-      box.dataset.citationStandard = 'EN-JOURNAL-v2';
+      box.dataset.citationStandard = 'EN-JOURNAL-v3';
     });
   }
 
