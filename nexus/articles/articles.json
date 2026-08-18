@@ -56,8 +56,34 @@
       "summary": "AI 에이전트가 다른 에이전트에게 업무를 재위임하거나 사전 권한범위를 넘어 거래할 때 최종 법률효과의 귀속기준을 검토한다.",
       "author": "이명훈",
       "publishedAt": "2026-08-18",
-      "readingMinutes": 5,
+      "readingMinutes": 12,
       "contentUrl": "./content/ai-law-a02.json"
+    },
+    {
+      "id": "ai-law-a03",
+      "section": "ai-law-research",
+      "language": "ko",
+      "series": "A03 · 기능적 대리",
+      "title": "법적 주체성 없는 AI의 사실상 대리행위와 대리·사자의 경계",
+      "subtitle": "민법 제114조·제117조와 대법원 2023다225580을 중심으로",
+      "summary": "AI가 법적 대리인은 아니면서도 상대방 선택·조건결정·계약실행을 수행하는 경우 대리·사자·도구의 경계를 기능적으로 분석한다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-18",
+      "readingMinutes": 11,
+      "contentUrl": "./content/ai-law-a03.json"
+    },
+    {
+      "id": "ai-law-a04",
+      "section": "ai-law-research",
+      "language": "ko",
+      "series": "A04 · 인식기준",
+      "title": "AI의 시스템적 인식가능성과 민법 제116조의 적용한계",
+      "subtitle": "인간의 주관적 인식을 의인화하지 않는 위험탐지 기준",
+      "summary": "대리인의 인식을 기준으로 하는 민법 제116조가 Agentic AI에서 갖는 한계를 검토하고 제공자 등의 주의의무 판단을 위한 시스템적 인식가능성 기준을 제안한다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-18",
+      "readingMinutes": 10,
+      "contentUrl": "./content/ai-law-a04.json"
     },
     {
       "id": "ai-law-m01",
@@ -82,8 +108,21 @@
       "summary": "A2A형 다중 에이전트 협업에서 업무위임과 재위임이 반복될 때 책임경로와 통제지점을 어떻게 특정할 것인지 검토한다.",
       "author": "이명훈",
       "publishedAt": "2026-08-18",
-      "readingMinutes": 5,
+      "readingMinutes": 12,
       "contentUrl": "./content/ai-law-m02.json"
+    },
+    {
+      "id": "ai-law-m03",
+      "section": "ai-law-research",
+      "language": "ko",
+      "series": "M03 · 기능적 재위임",
+      "title": "다중 AI의 기능적 재위임과 민법상 복대리 법리",
+      "subtitle": "민법 제120조·제121조·제123조·제682조의 규범적 기능",
+      "summary": "다중 AI의 하위업무 위임을 민법상 복대리와 직접 동일시하지 않고 재위임 제한·선임·감독·권한연결의 원리를 기능적으로 재구성한다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-18",
+      "readingMinutes": 10,
+      "contentUrl": "./content/ai-law-m03.json"
     },
     {
       "id": "ai-law-r01",
@@ -108,8 +147,21 @@
       "summary": "AI 내부자료가 사업자 측에 집중된 상황에서 증거접근, 결함 추정, 인과관계 추정을 어떻게 설계할 것인지 비교법적으로 검토한다.",
       "author": "이명훈",
       "publishedAt": "2026-08-18",
-      "readingMinutes": 5,
+      "readingMinutes": 16,
       "contentUrl": "./content/ai-law-r02.json"
+    },
+    {
+      "id": "ai-law-r03",
+      "section": "ai-law-research",
+      "language": "ko",
+      "series": "R03 · 혼합형 손해",
+      "title": "외부 사기 개입형 혼합 AI 실행손해의 인과관계와 손해분담",
+      "subtitle": "사기자·AI 서비스·플랫폼·결제·사용자 사이의 원인분해",
+      "summary": "외부 사기와 자율적 AI 실행이 결합한 손해를 순수 창발손해와 구별하고 각 주체의 의무·인과관계·손해분담을 단계적으로 분석한다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-18",
+      "readingMinutes": 11,
+      "contentUrl": "./content/ai-law-r03.json"
     },
     {
       "id": "ai-law-l01",
@@ -121,7 +173,7 @@
       "summary": "AI 시스템의 개발·제공·통합·배치·운용에 참여한 복수 주체의 책임을 통제능력과 정보보유 정도에 따라 계층적으로 분석한다.",
       "author": "이명훈",
       "publishedAt": "2026-08-18",
-      "readingMinutes": 5,
+      "readingMinutes": 13,
       "contentUrl": "./content/ai-law-l01.json"
     },
     {
@@ -134,7 +186,7 @@
       "summary": "고영향·고위험 AI의 인간 감독의무를 책임관리인의 권한·능력·중단수단과 연결하여 책임법적으로 재구성한다.",
       "author": "이명훈",
       "publishedAt": "2026-08-18",
-      "readingMinutes": 5,
+      "readingMinutes": 13,
       "contentUrl": "./content/ai-law-l02.json"
     },
     {
@@ -147,8 +199,21 @@
       "summary": "출시 후 업데이트·학습·외부서비스 연결로 AI가 변화할 때 제공자와 제조자의 지속적 통제가능성을 책임판단에 어떻게 반영할지 검토한다.",
       "author": "이명훈",
       "publishedAt": "2026-08-18",
-      "readingMinutes": 5,
+      "readingMinutes": 13,
       "contentUrl": "./content/ai-law-l03.json"
+    },
+    {
+      "id": "ai-law-l04",
+      "section": "ai-law-research",
+      "language": "ko",
+      "series": "L04 · 서비스 계약책임",
+      "title": "유료 Agentic AI 서비스 제공자의 계약상 주의의무",
+      "subtitle": "민법 제390조·제681조와 상대방 검증의무",
+      "summary": "사용자를 대신해 실제 거래를 수행하는 유료 Agentic AI 서비스에서 약속된 기능, 검증수준, 자율성, 사용자 과실을 기준으로 계약책임을 구조화한다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-18",
+      "readingMinutes": 11,
+      "contentUrl": "./content/ai-law-l04.json"
     },
     {
       "id": "ai-law-f01",
@@ -164,6 +229,19 @@
       "contentUrl": "./content/ai-law-f01.json"
     },
     {
+      "id": "ai-law-f02",
+      "section": "ai-law-research",
+      "language": "ko",
+      "series": "F02 · 기능적 대리단위",
+      "title": "기능적 대리단위의 제한적 법적 지위와 책임재원",
+      "subtitle": "등록·권한·재위임·로그·책임관리인·보험의 결합",
+      "summary": "완전한 AI 법인격 대신 자율거래 AI의 권한과 책임을 추적할 수 있는 기능적 대리단위를 식별하고 보험·공탁·책임재산에 연결하는 제도모형을 검토한다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-18",
+      "readingMinutes": 11,
+      "contentUrl": "./content/ai-law-f02.json"
+    },
+    {
       "id": "ai-law-p01",
       "section": "ai-law-research",
       "language": "ko",
@@ -173,7 +251,7 @@
       "summary": "AI가 로봇·기계의 물리적 제어에 결합될 때 소프트웨어 결함, 자기진화, 안전결정 기록과 제조자의 통제를 어떻게 책임법에 반영할지 검토한다.",
       "author": "이명훈",
       "publishedAt": "2026-08-18",
-      "readingMinutes": 5,
+      "readingMinutes": 13,
       "contentUrl": "./content/ai-law-p01.json"
     },
     {
@@ -186,7 +264,7 @@
       "summary": "자율주행 사고에서 시스템 작동상태와 사고데이터를 이용해 행위주체, 결함, 인과관계와 운용자 개입 가능성을 재구성한다.",
       "author": "이명훈",
       "publishedAt": "2026-08-18",
-      "readingMinutes": 5,
+      "readingMinutes": 14,
       "contentUrl": "./content/ai-law-p02.json"
     },
     {
@@ -199,8 +277,34 @@
       "summary": "현행 인공지능기본법의 고영향 AI 의무를 주의의무, 인간 감독, 로그·문서보존, 책임관리인 제도와 연결하여 분석한다.",
       "author": "이명훈",
       "publishedAt": "2026-08-18",
-      "readingMinutes": 5,
+      "readingMinutes": 14,
       "contentUrl": "./content/ai-law-g01.json"
+    },
+    {
+      "id": "ai-law-g02",
+      "section": "ai-law-research",
+      "language": "ko",
+      "series": "G02 · 결제권한",
+      "title": "AI에 대한 결제권한 위임과 전자금융거래법상 접근매체 관리",
+      "subtitle": "허가된 AI 결제와 무권한 전자금융사고의 구별",
+      "summary": "AI가 사용자의 카드·인증수단으로 결제할 때 접근매체 관리, 전자금융사고, 이용자 과실을 구별하고 목적·금액·기간이 제한된 위임형 지급권한 모델을 검토한다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-18",
+      "readingMinutes": 11,
+      "contentUrl": "./content/ai-law-g02.json"
+    },
+    {
+      "id": "ai-agent-functional-agency",
+      "section": "open-topics",
+      "language": "ko",
+      "series": "AI 법 연구 · 사례분석",
+      "title": "AI는 대리인이 아니지만 대리한다",
+      "subtitle": "Agentic AI·다중 에이전트의 호텔 예약 사례로 본 대리·복대리·사기·결제·손해귀속",
+      "summary": "법적 대리인 지위가 없는 Agentic AI가 사용자 대신 호텔을 검색·선택·예약·결제하고 하위 에이전트에 업무를 재위임한 뒤 가짜 호텔로 인한 손해가 발생한 사례를 민법상 대리·복대리·위임·사기·채무불이행·불법행위와 전자상거래·전자금융 법제로 단계적으로 분석한다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-18",
+      "readingMinutes": 29,
+      "contentUrl": "./content/ai-agent-functional-agency.json"
     },
     {
       "id": "ai-agent-responsibility-law",
