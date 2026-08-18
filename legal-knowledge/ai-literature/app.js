@@ -26,6 +26,9 @@
   };
 
   const escapeHtml = value => String(value ?? "").replace(/[&<>'\"]/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'\"':"&quot;"}[char]));
+  const citationHtml = value => typeof window.AI_LITERATURE_CITATION_STANDARD?.renderCitation === "function"
+    ? window.AI_LITERATURE_CITATION_STANDARD.renderCitation(value)
+    : escapeHtml(value);
   const normalize = value => String(value ?? "").toLocaleLowerCase("ko-KR").replace(/\s+/g," ").trim();
   const unique = values => [...new Set(values)].filter(Boolean);
 
@@ -178,7 +181,7 @@
       <nav class="detail-toc" aria-label="문헌 상세 목차">
         <a href="#detail-biblio">01 서지정보</a><a href="#detail-summary">02 핵심 요지</a><a href="#detail-role">03 논증역할</a><a href="#detail-must">04 반드시 볼 논점</a><a href="#detail-use">05 주장에 쓰는 방식</a><a href="#detail-fit">06 현재 연구 접목</a><a href="#detail-counter">07 반대·주의</a><a href="#detail-related">08 연결 문헌</a><a href="#detail-source">09 링크</a>
       </nav>
-      <section class="detail-section" id="detail-biblio"><h3>01 서지정보</h3><div class="citation-box">${escapeHtml(record.citation)}</div></section>
+      <section class="detail-section" id="detail-biblio"><h3>01 서지정보</h3><div class="citation-box" data-citation-standard="${escapeHtml(window.AI_LITERATURE_CITATION_STANDARD?.version || '')}">${citationHtml(record.citation)}</div></section>
       <section class="detail-section" id="detail-summary"><h3>02 핵심 요지</h3><p>${escapeHtml(record.summary)}</p></section>
       <section class="detail-section" id="detail-role"><h3>03 논증역할</h3><div class="tag-row">${roleTags(record, 10)}</div></section>
       <section class="detail-section" id="detail-must"><h3>04 반드시 볼 논점</h3>${listHtml(record.mustRead)}</section>
