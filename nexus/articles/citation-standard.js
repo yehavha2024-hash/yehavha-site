@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const VERSION = 'LAW-KR-WESTERN-v8';
+  const VERSION = 'LAW-KR-WESTERN-v9';
   const RULE = '서양 단행본은 『책 제목』으로 표시하고 제목만 이탤릭체, 출판사는 일반체, 서양 논문 제목은 따옴표를 유지하고 제목만 이탤릭체, 면수는 p.123 / pp.123-125 형식';
   const body = document.getElementById('articleBody');
   if (!body) return;
@@ -78,8 +78,11 @@
   }
 
   function normalizeBookPublisherPunctuation(value) {
-    return String(value ?? '').replace(/(『[^』]+』)\s*\(([^()]*)\)/g, (match, title, inside) => {
-      return publisherMarker.test(inside) ? `${title}, ${inside}` : match;
+    // 판·번역자 같은 서지 한정어는 유지하고, 출판사+연도 괄호만 쉼표형으로 바꾼다.
+    // 출판사 없는 단순 연도 괄호는 그대로 둔다.
+    return String(value ?? '').replace(/(『[^』]+』(?:,\s*[^()]*)?)\s*\(([^()]*)\)/g, (match, prefix, inside) => {
+      if (!publisherMarker.test(inside)) return match;
+      return `${prefix.replace(/,\s*$/, '')}, ${inside}`;
     });
   }
 
