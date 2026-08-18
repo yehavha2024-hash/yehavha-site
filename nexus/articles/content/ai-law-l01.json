@@ -1,0 +1,20 @@
+{
+  "lead": "L01은 AI 시스템의 개발·제공·통합·배치·운용 과정에 복수의 주체가 참여하는 경우 책임을 하나의 주체에게 집중시키지 않고 각 단계의 통제능력과 정보보유 정도에 따라 계층적으로 배분할 수 있는지 검토한다.",
+  "blocks": [
+    {"type":"heading","level":2,"text":"연구쟁점"},
+    {"type":"paragraph","text":"AI 가치사슬의 다층적 책임귀속"},
+    {"type":"heading","level":2,"text":"핵심명제"},
+    {"type":"paragraph","text":"AI 사고의 책임주체를 개발자 또는 사용자 중 하나로 단순화하기보다 모델 제공자, 시스템 통합자, 배치자, 운용자 등 각 행위자의 역할과 통제가능성, 정보보유, 위험예방 능력을 기준으로 책임을 구분할 필요가 있다."},
+    {"type":"heading","level":2,"text":"비교법적 근거"},
+    {"type":"paragraph","text":"EU AI Act 제25조는 고위험 AI의 가치사슬에서 명칭변경, 중대한 변경, 목적변경을 한 주체가 새로운 제공자로 취급될 수 있도록 하고, 제공자와 구성요소 공급자 사이의 정보·기술접근 협력을 요구한다. 이는 통합·변경·배치 단계가 독자적 규제책임을 발생시킬 수 있음을 보여준다."},
+    {"type":"paragraph","text":"OECD AI 원칙은 AI 행위자가 자신의 역할, 맥락, 행동능력에 따라 책임을 부담하고 AI 생애주기 전체에서 추적가능성과 지속적인 위험관리를 확보해야 한다고 본다."},
+    {"type":"heading","level":2,"text":"박사논문 연결"},
+    {"type":"paragraph","text":"설계·통합·배치·운용이라는 계층적 책임귀속 모델의 직접적인 비교법 근거로 사용한다. 기능적 단위가 별도의 책임재산을 보유하더라도 인간과 기업의 단계별 책임을 면제하지 않는 보충적 구조를 설계하는 데도 연결된다."},
+    {"type":"heading","level":2,"text":"해외 원자료"},
+    {"type":"paragraph","text":"Regulation (EU) 2024/1689, Article 25. https://eur-lex.europa.eu/eli/reg/2024/1689/oj"},
+    {"type":"paragraph","text":"OECD AI Principles. https://www.oecd.org/en/topics/ai-principles.html"},
+    {"type":"paragraph","text":"NIST AI Risk Management Framework 1.0. https://doi.org/10.6028/NIST.AI.100-1"},
+    {"type":"heading","level":2,"text":"검증상태"},
+    {"type":"note","text":"1차 검증 완료. 국내 불법행위법상 공동책임·사용자책임·제조물책임과 각 계층의 연결기준을 추가 검토한다."}
+  ]
+}
