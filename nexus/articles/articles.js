@@ -16,6 +16,37 @@
     return node;
   }
 
+  function appendLinkedText(node, value) {
+    const text = String(value || '');
+    const urlPattern = /https?:\/\/[^\s]+/g;
+    let lastIndex = 0;
+
+    for (const match of text.matchAll(urlPattern)) {
+      const rawUrl = match[0];
+      const trailingMatch = rawUrl.match(/[),.;]+$/);
+      const trailing = trailingMatch ? trailingMatch[0] : '';
+      const href = trailing ? rawUrl.slice(0, -trailing.length) : rawUrl;
+      const index = match.index ?? 0;
+
+      if (index > lastIndex) {
+        node.append(document.createTextNode(text.slice(lastIndex, index)));
+      }
+
+      const link = el('a', 'article-source-link', href);
+      link.href = href;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      node.append(link);
+
+      if (trailing) node.append(document.createTextNode(trailing));
+      lastIndex = index + rawUrl.length;
+    }
+
+    if (lastIndex < text.length) {
+      node.append(document.createTextNode(text.slice(lastIndex)));
+    }
+  }
+
   function formatDate(value) {
     if (!value) return '';
     return String(value).replaceAll('-', '.');
@@ -124,7 +155,9 @@
     }
 
     if (type === 'paragraph') {
-      container.append(el('p', '', block.text || ''));
+      const paragraph = el('p');
+      appendLinkedText(paragraph, block.text || '');
+      container.append(paragraph);
       return;
     }
 
@@ -138,7 +171,9 @@
     }
 
     if (type === 'quote') {
-      container.append(el('blockquote', '', block.text || ''));
+      const quote = el('blockquote');
+      appendLinkedText(quote, block.text || '');
+      container.append(quote);
       return;
     }
 
@@ -147,7 +182,9 @@
       if (noteText === 'Scripture quotations are from the King James Version (KJV).') {
         noteText = 'Scripture quotations are from the King James Version (KJV), with “Jesus” in the text rendered as “Yeshua.”';
       }
-      container.append(el('aside', 'article-note', noteText));
+      const note = el('aside', 'article-note');
+      appendLinkedText(note, noteText);
+      container.append(note);
       return;
     }
 
@@ -155,12 +192,18 @@
 
     if (type === 'list') {
       const list = document.createElement(block.ordered ? 'ol' : 'ul');
-      (Array.isArray(block.items) ? block.items : []).forEach((item) => list.append(el('li', '', item)));
+      (Array.isArray(block.items) ? block.items : []).forEach((item) => {
+        const listItem = el('li');
+        appendLinkedText(listItem, item);
+        list.append(listItem);
+      });
       container.append(list);
       return;
     }
 
-    container.append(el('p', '', block.text || ''));
+    const paragraph = el('p');
+    appendLinkedText(paragraph, block.text || '');
+    container.append(paragraph);
   }
 
   function buildTableOfContents(body) {
