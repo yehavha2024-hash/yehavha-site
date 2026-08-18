@@ -1,12 +1,13 @@
 (() => {
   'use strict';
 
-  const VERSION = 'EN-JOURNAL-v5';
+  const VERSION = 'AI-LITERATURE-CITATION-v6';
   const records = Array.isArray(window.AI_LITERATURE_RECORDS) ? window.AI_LITERATURE_RECORDS : [];
 
-  const clean = value => String(value ?? '').replace(/\s+/g, ' ').trim();
+  const clean = value => String(value ?? '').replace(/\*/g, '').replace(/\s+/g, ' ').trim();
   const quoteKo = title => `"${clean(title).replace(/^['"“”]+|['"“”]+$/g, '')}"`;
   const quoteEn = title => `“${clean(title).replace(/^['"“”]+|['"“”]+$/g, '')}”`;
+  const bookTitle = title => `『${clean(title).replace(/^『|』$/g, '')}』`;
 
   function formatPages(value) {
     const pages = clean(value).replace(/–/g, '-');
@@ -40,6 +41,16 @@
     return `${clean(record.author)}, ${quoteKo(record.title)}, ${clean(record.publication)}, ${clean(record.year)}.`;
   }
 
+  function formatDomesticBook(record) {
+    const existing = clean(record.citation);
+    if (existing.includes('『') && existing.includes('』')) return existing;
+    return `${clean(record.author)}, ${bookTitle(record.title)}, ${clean(record.publication)}, ${clean(record.year)}.`;
+  }
+
+  function formatOverseasBook(record) {
+    return `${clean(record.author)}, ${bookTitle(record.title)}, ${clean(record.publication)}, ${clean(record.year)}.`;
+  }
+
   function formatOverseasPublication(value) {
     const source = clean(value).replace(/–/g, '-');
     const ranged = source.match(/^(.*?),\s*(\d+)-(\d+)$/);
@@ -55,6 +66,13 @@
     const type = clean(record.type);
     const language = clean(record.language);
     const jurisdiction = clean(record.jurisdiction);
+    const isBook = type === '필수도서' || type === '전공서적' || type.includes('단행본');
+
+    if (isBook) {
+      record.citation = language === '영어' ? formatOverseasBook(record) : formatDomesticBook(record);
+      record.citationStandard = language === '영어' ? 'EN-BOOK-v6' : 'KO-BOOK-v3';
+      return;
+    }
 
     if (type === '국내 학술논문' || (language !== '영어' && jurisdiction === '대한민국' && type.includes('학술논문'))) {
       record.citation = formatDomesticArticle(record);
@@ -70,8 +88,11 @@
 
     if (type === '해외 학술논문' || (language === '영어' && type.includes('학술논문'))) {
       record.citation = formatOverseasArticle(record);
-      record.citationStandard = VERSION;
+      record.citationStandard = 'EN-JOURNAL-v6';
+      return;
     }
+
+    if (typeof record.citation === 'string') record.citation = clean(record.citation);
   });
 
   const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, ch => ({
@@ -85,13 +106,14 @@
   }
 
   function renderCitation(value) {
-    const escaped = escapeHtml(normalizeCitation(value));
+    let escaped = escapeHtml(normalizeCitation(value));
+    escaped = escaped.replace(/『([^』]*[A-Za-z][^』]*)』/g, '『<em class="western-book-title" lang="en">$1</em>』');
     return escaped.replace(/“([^”]*[A-Za-z][^”]*)”(?=,)/g, '“<em class="western-article-title" lang="en">$1</em>”');
   }
 
   window.AI_LITERATURE_CITATION_STANDARD = Object.freeze({
     version: VERSION,
-    rule: '서양 논문 제목은 따옴표를 유지하고 제목만 이탤릭체, 제목 뒤 쉼표는 닫는 따옴표 밖, 면수는 p.123 / pp.123-125 형식',
+    rule: '단행본은 『책 제목』으로 표시하고 영문 책 제목만 이탤릭체, 출판사는 일반체, 서양 논문 제목은 따옴표를 유지하고 제목만 이탤릭체, 면수는 p.123 / pp.123-125 형식',
     normalizeCitation,
     renderCitation
   });
