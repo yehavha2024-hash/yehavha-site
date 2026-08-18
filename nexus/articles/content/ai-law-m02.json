@@ -1,0 +1,20 @@
+{
+  "lead": "M02는 다중 AI 에이전트 시스템에서 업무위임과 재위임이 반복될 때 책임경로를 어떻게 재구성할 것인지 다룬다. 기술적으로는 에이전트가 다른 에이전트의 능력을 탐색하고 하위 업무를 맡기는 구조가 이미 표준화되고 있어 법적 분석도 단일 행위자 모델을 넘어설 필요가 있다.",
+  "blocks": [
+    {"type":"heading","level":2,"text":"연구쟁점"},
+    {"type":"paragraph","text":"에이전트 간 업무위임·재위임과 책임경로의 추적"},
+    {"type":"heading","level":2,"text":"핵심명제"},
+    {"type":"paragraph","text":"다중 에이전트 시스템의 책임은 최종 출력만을 기준으로 특정하기보다 어떤 에이전트가 어떤 업무를 요청하고, 어느 단계에서 판단이 변경되었으며, 누가 그 시스템을 설계·연결·배치·운용했는지를 경로 단위로 재구성해야 한다."},
+    {"type":"heading","level":2,"text":"기술적 근거"},
+    {"type":"paragraph","text":"A2A 1.0은 서로 다른 사업자와 프레임워크의 에이전트가 능력을 탐색하고 복합 업무를 위임하며 정보와 결과물을 교환하도록 설계된다. 이는 복수 에이전트의 협업이 예외적 상황이 아니라 시스템 구조 자체가 될 수 있음을 보여준다."},
+    {"type":"heading","level":2,"text":"법적 쟁점"},
+    {"type":"paragraph","text":"재위임이 반복되면 최초 이용자의 통제와 최종 행위 사이의 거리가 커진다. 따라서 개별 에이전트의 오류뿐 아니라 위임정책, 상대 에이전트 선택기준, 접근권한, 상호검증 절차, 중단 가능성도 책임판단의 요소가 될 수 있다."},
+    {"type":"heading","level":2,"text":"박사논문 연결"},
+    {"type":"paragraph","text":"창발적 손해의 발생경로를 설명하고 다중 에이전트 시스템을 기능적 단위로 특정할 필요성을 뒷받침한다. 특히 계층적 책임귀속과 작동로그의 필요성을 연결하는 중간 논증으로 활용한다."},
+    {"type":"heading","level":2,"text":"핵심 연결자료"},
+    {"type":"paragraph","text":"Agent2Agent Protocol 1.0.0. https://a2a-protocol.org/v1.0.0/"},
+    {"type":"paragraph","text":"OECD AI Principles, Accountability and traceability. https://www.oecd.org/en/topics/ai-principles.html"},
+    {"type":"heading","level":2,"text":"검증상태"},
+    {"type":"note","text":"1차 검증 완료. 에이전트 선택·재위임 알고리즘과 공동불법행위·사용자책임 법리의 접목을 추가 검토한다."}
+  ]
+}
