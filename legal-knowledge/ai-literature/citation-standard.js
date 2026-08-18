@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const VERSION = 'EN-JOURNAL-v4';
+  const VERSION = 'EN-JOURNAL-v5';
   const records = Array.isArray(window.AI_LITERATURE_RECORDS) ? window.AI_LITERATURE_RECORDS : [];
 
   const clean = value => String(value ?? '').replace(/\s+/g, ' ').trim();
@@ -87,34 +87,6 @@
   function renderCitation(value) {
     const escaped = escapeHtml(normalizeCitation(value));
     return escaped.replace(/“([^”]*[A-Za-z][^”]*)”(?=,)/g, '“<em class="western-article-title" lang="en">$1</em>”');
-  }
-
-  // 상세화면의 서지정보 전용 셀만 처리한다. 다른 마크업이 들어오면 소유권을 넘지 않는다.
-  function ownsCitationBox(box) {
-    return Array.from(box.children).every(child => child.matches('em.western-article-title'));
-  }
-
-  function processCitationBoxes(root) {
-    if (!(root instanceof Element)) return;
-    const boxes = [];
-    if (root.matches('.citation-box')) boxes.push(root);
-    root.querySelectorAll?.('.citation-box').forEach(box => boxes.push(box));
-    boxes.forEach(box => {
-      if (!ownsCitationBox(box)) return;
-      const rendered = renderCitation(box.textContent || '');
-      if (box.innerHTML !== rendered) box.innerHTML = rendered;
-      box.dataset.citationStandard = VERSION;
-    });
-  }
-
-  const observer = new MutationObserver(mutations => {
-    mutations.forEach(mutation => mutation.addedNodes.forEach(processCitationBoxes));
-  });
-  if (document.documentElement) observer.observe(document.documentElement, { childList: true, subtree: true });
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => processCitationBoxes(document.body), { once: true });
-  } else {
-    processCitationBoxes(document.body);
   }
 
   window.AI_LITERATURE_CITATION_STANDARD = Object.freeze({
