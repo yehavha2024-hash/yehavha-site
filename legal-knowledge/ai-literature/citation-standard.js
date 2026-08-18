@@ -1,13 +1,14 @@
 (() => {
   'use strict';
 
-  const VERSION = 'AI-LITERATURE-CITATION-v7';
+  const VERSION = 'AI-LITERATURE-CITATION-v8';
   const records = Array.isArray(window.AI_LITERATURE_RECORDS) ? window.AI_LITERATURE_RECORDS : [];
 
-  const clean = value => String(value ?? '').replace(/\*/g, '').replace(/\s+/g, ' ').trim();
-  const quoteKo = title => `"${clean(title).replace(/^['"“”]+|['"“”]+$/g, '')}"`;
-  const quoteEn = title => `“${clean(title).replace(/^['"“”]+|['"“”]+$/g, '')}”`;
-  const bookTitle = title => `『${clean(title).replace(/^『|』$/g, '')}』`;
+  const clean = value => String(value ?? '').replace(/\s+/g, ' ').trim();
+  const cleanTitle = value => clean(value).replace(/\*/g, '');
+  const quoteKo = title => `"${cleanTitle(title).replace(/^['"“”]+|['"“”]+$/g, '')}"`;
+  const quoteEn = title => `“${cleanTitle(title).replace(/^['"“”]+|['"“”]+$/g, '')}”`;
+  const bookTitle = title => `『${cleanTitle(title).replace(/^『|』$/g, '')}』`;
 
   // 실제 해외 문헌 데이터에서 수록서로 확인된 단행본만 명시한다.
   // Handbook라는 단어만으로 자동 판별하지 않아 보고서·저널명을 잘못 감싸지 않는다.
@@ -29,6 +30,14 @@
         return segment.replace(bookContainerPattern, match => `『${match}』`);
       })
       .join('');
+  }
+
+  function stripTitleAsterisks(value) {
+    return String(value ?? '')
+      .replace(/“([^”]*)”/g, (_, title) => `“${title.replace(/\*/g, '')}”`)
+      .replace(/『([^』]*)』/g, (_, title) => `『${title.replace(/\*/g, '')}』`)
+      .replace(/\*+(?=[“『])/g, '')
+      .replace(/([”』])\*+/g, '$1');
   }
 
   function formatPages(value) {
@@ -64,7 +73,7 @@
   }
 
   function formatDomesticBook(record) {
-    const existing = clean(record.citation);
+    const existing = stripTitleAsterisks(clean(record.citation));
     if (existing.includes('『') && existing.includes('』')) return existing;
     return `${clean(record.author)}, ${bookTitle(record.title)}, ${clean(record.publication)}, ${clean(record.year)}.`;
   }
@@ -92,7 +101,7 @@
 
     if (isBook) {
       record.citation = language === '영어' ? formatOverseasBook(record) : formatDomesticBook(record);
-      record.citationStandard = language === '영어' ? 'EN-BOOK-v7' : 'KO-BOOK-v3';
+      record.citationStandard = language === '영어' ? 'EN-BOOK-v8' : 'KO-BOOK-v3';
       return;
     }
 
@@ -110,11 +119,11 @@
 
     if (type === '해외 학술논문' || (language === '영어' && type.includes('학술논문'))) {
       record.citation = formatOverseasArticle(record);
-      record.citationStandard = 'EN-JOURNAL-v7';
+      record.citationStandard = 'EN-JOURNAL-v8';
       return;
     }
 
-    if (typeof record.citation === 'string') record.citation = clean(record.citation);
+    if (typeof record.citation === 'string') record.citation = stripTitleAsterisks(clean(record.citation));
   });
 
   const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, ch => ({
@@ -122,7 +131,7 @@
   }[ch]));
 
   function normalizeCitation(value) {
-    return clean(value)
+    return stripTitleAsterisks(clean(value))
       .replace(/,\s*”/g, '”,')
       .replace(/\b(pp?\.)\s+(?=\d)/gi, '$1');
   }
@@ -135,7 +144,7 @@
 
   window.AI_LITERATURE_CITATION_STANDARD = Object.freeze({
     version: VERSION,
-    rule: '단행본은 『책 제목』으로 표시하고 영문 책 제목만 이탤릭체, 출판사는 일반체, 단행본 수록 논문은 수록서명에도 『』를 적용, 서양 논문 제목은 따옴표를 유지하고 제목만 이탤릭체, 면수는 p.123 / pp.123-125 형식',
+    rule: '단행본은 『책 제목』으로 표시하고 영문 책 제목만 이탤릭체, 출판사는 일반체, 단행본 수록 논문은 수록서명에도 『』를 적용, 제목에 붙은 마크다운 *만 제거하고 공식 출처명의 *는 보존, 면수는 p.123 / pp.123-125 형식',
     westernBookContainers,
     normalizeCitation,
     renderCitation
