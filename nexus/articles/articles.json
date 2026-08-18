@@ -14,6 +14,12 @@
       "description": "AI 음악 생성, Suno 활용, 제작·선별·편집·배포 경험을 글과 강의형 본문으로 정리합니다."
     },
     {
+      "id": "ai-law-research",
+      "eyebrow": "AI LAW RESEARCH",
+      "title": "AI 법 연구자료",
+      "description": "AI 에이전트·다중 에이전트 시스템의 행위효과, 책임귀속, 인과관계, 기능적 법적 지위를 연구쟁점 ID별로 축적합니다."
+    },
+    {
       "id": "hebrew-language",
       "eyebrow": "HEBREW & LANGUAGE",
       "title": "히브리어·언어",
@@ -27,6 +33,58 @@
     }
   ],
   "articles": [
+    {
+      "id": "ai-law-a01",
+      "section": "ai-law-research",
+      "language": "ko",
+      "series": "A01 · 행위효과",
+      "title": "AI 에이전트의 자율적 거래행위와 법률효과 귀속",
+      "subtitle": "권한부여·대리법·자동화된 계약형성의 구조",
+      "summary": "AI 에이전트가 일정한 권한범위 안에서 계약·결제를 실행할 때 법률효과를 누구에게 귀속할 것인지, 행위효과와 손해책임을 어떻게 분리할 것인지 검토한다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-18",
+      "readingMinutes": 5,
+      "contentUrl": "./content/ai-law-a01.json"
+    },
+    {
+      "id": "ai-law-m01",
+      "section": "ai-law-research",
+      "language": "ko",
+      "series": "M01 · 다중 에이전트",
+      "title": "다중 AI 에이전트의 상호작용과 창발적 손해",
+      "subtitle": "개별행위에서 시스템 상호작용 위험으로",
+      "summary": "복수의 AI 에이전트가 협업·재위임·정보교환을 수행할 때 발생하는 네트워크 위험과 창발적 손해를 책임법의 관점에서 분석한다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-18",
+      "readingMinutes": 5,
+      "contentUrl": "./content/ai-law-m01.json"
+    },
+    {
+      "id": "ai-law-r01",
+      "section": "ai-law-research",
+      "language": "ko",
+      "series": "R01 · 증명책임",
+      "title": "AI 손해의 인과관계 증명과 증명위험 배분",
+      "subtitle": "불투명성·기술적 복잡성·창발적 손해의 증명구조",
+      "summary": "AI의 불투명성과 다중 시스템의 복잡성으로 피해자의 인과관계 입증이 어려워지는 경우 증명위험을 어떻게 배분할 것인지 검토한다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-18",
+      "readingMinutes": 5,
+      "contentUrl": "./content/ai-law-r01.json"
+    },
+    {
+      "id": "ai-law-f01",
+      "section": "ai-law-research",
+      "language": "ko",
+      "series": "F01 · 기능적 지위",
+      "title": "AI 시스템의 기능적 법적 지위와 책임단위의 특정",
+      "subtitle": "등록·식별·로그·책임관리인·책임재산을 중심으로",
+      "summary": "AI에게 완전한 인간형 법인격을 부여하지 않고도 일정한 AI 시스템을 책임추적 가능한 기능적 단위로 특정할 수 있는지 검토한다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-18",
+      "readingMinutes": 5,
+      "contentUrl": "./content/ai-law-f01.json"
+    },
     {
       "id": "ai-agent-responsibility-law",
       "section": "open-topics",
