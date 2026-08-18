@@ -1,0 +1,19 @@
+{
+  "lead": "L03은 AI가 출시 이후 업데이트·학습·외부서비스 연결을 통해 계속 변화하는 경우 책임의 기준시점을 최초 출시시점에만 고정할 수 있는지 검토한다. 디지털 제품에서는 제조자와 제공자의 통제가 시장출시 후에도 계속될 수 있기 때문이다.",
+  "blocks": [
+    {"type":"heading","level":2,"text":"연구쟁점"},
+    {"type":"paragraph","text":"사후학습·업데이트와 지속적 통제에 따른 책임"},
+    {"type":"heading","level":2,"text":"핵심명제"},
+    {"type":"paragraph","text":"AI 시스템이 출시 후 업데이트, 업그레이드, 머신러닝, 외부 구성요소 변경으로 기능과 위험이 달라지는 경우 책임판단은 최초 출시 당시 상태뿐 아니라 누가 그 변화를 통제할 수 있었는지를 함께 보아야 한다."},
+    {"type":"heading","level":2,"text":"비교법적 근거"},
+    {"type":"paragraph","text":"EU 신 제조물책임지침은 제조자가 통제하는 소프트웨어·관련서비스·업데이트·업그레이드·머신러닝 알고리즘으로 제품이 시장출시 후 결함상태가 된 경우에도 제조자의 책임이 계속될 수 있음을 전제로 한다."},
+    {"type":"paragraph","text":"EU AI Act는 고위험 AI 제공자에게 시스템의 전 생애에 걸친 사후시장 모니터링을 요구하고, 다른 AI 시스템과의 상호작용까지 분석대상으로 포함한다."},
+    {"type":"heading","level":2,"text":"박사논문 연결"},
+    {"type":"paragraph","text":"책임귀속의 핵심요소로 지속적 통제가능성을 제시하는 근거가 된다. 기능적 단위의 등록정보와 로그가 버전·모델·구성 변경을 추적해야 하는 이유도 이 항목에서 도출된다."},
+    {"type":"heading","level":2,"text":"해외 원자료"},
+    {"type":"paragraph","text":"Directive (EU) 2024/2853, 특히 시장출시 이후 제조자 통제와 업데이트 관련 규정. https://eur-lex.europa.eu/eli/dir/2024/2853/oj"},
+    {"type":"paragraph","text":"Regulation (EU) 2024/1689, Article 72 Post-market monitoring. https://eur-lex.europa.eu/eli/reg/2024/1689/oj"},
+    {"type":"heading","level":2,"text":"검증상태"},
+    {"type":"note","text":"1차 검증 완료. 온라인 학습과 외부 모델 교체가 제조자 또는 제공자의 통제범위에 포함되는 기준을 추가 연구한다."}
+  ]
+}
