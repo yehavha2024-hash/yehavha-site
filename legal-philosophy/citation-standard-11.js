@@ -61,7 +61,7 @@
     const escaped = escapeHtml(normalized);
     return escaped.replace(/“([^”]*[A-Za-z][^”]*)”(?=,)/g, (_, title) => {
       audit.italicCandidates += 1;
-      return `<em class="western-article-title" lang="en">${title}</em>`;
+      return `“<em class="western-article-title" lang="en">${title}</em>”`;
     });
   }
 
@@ -77,7 +77,7 @@
       const raw = target.textContent || '';
       const rendered = renderCitation(raw);
       if (target.innerHTML !== rendered) target.innerHTML = rendered;
-      target.dataset.citationStandard = 'LAW-KR-WESTERN-v2';
+      target.dataset.citationStandard = 'LAW-KR-WESTERN-v3';
     });
   }
 
@@ -98,8 +98,8 @@
   }
 
   window.LEGAL_CITATION_STANDARD = Object.freeze({
-    version: 'LAW-KR-WESTERN-v2',
-    rule: '서양 논문 제목은 이탤릭체, 제목 뒤 쉼표는 제목 밖, 면수는 p.123 / pp.123-125 형식',
+    version: 'LAW-KR-WESTERN-v3',
+    rule: '서양 논문 제목은 따옴표를 유지하고 제목만 이탤릭체, 제목 뒤 쉼표는 닫는 따옴표 밖, 면수는 p.123 / pp.123-125 형식',
     normalizeCitationText,
     renderCitation,
     audit
