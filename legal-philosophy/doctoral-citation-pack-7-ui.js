@@ -26,6 +26,9 @@
 
   const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
   const txt = value => esc(localize(value));
+  const citationHtml = value => typeof window.LEGAL_CITATION_STANDARD?.renderCitation === 'function'
+    ? window.LEGAL_CITATION_STANDARD.renderCitation(value)
+    : esc(value);
   const bilingual = item => bibliographyKo[item.key] || { author: item.author, title: item.title };
   const axisCounts = pack.reduce((acc, item) => {
     acc[item.axis] = (acc[item.axis] || 0) + 1;
@@ -70,7 +73,7 @@
           </div>
           <div class="doctoral-block">
             <strong>논문 각주 표준안</strong>
-            <p class="doctoral-footnote">${esc(item.footnote)}</p>
+            <p class="doctoral-footnote" data-citation-standard="${esc(window.LEGAL_CITATION_STANDARD?.version || '')}">${citationHtml(item.footnote)}</p>
           </div>
           <div class="doctoral-block wide">
             <strong>해당 논증에서의 사용 위치</strong>
