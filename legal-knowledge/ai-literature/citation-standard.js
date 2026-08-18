@@ -1,6 +1,7 @@
 (() => {
   'use strict';
 
+  const VERSION = 'EN-JOURNAL-v4';
   const records = Array.isArray(window.AI_LITERATURE_RECORDS) ? window.AI_LITERATURE_RECORDS : [];
 
   const clean = value => String(value ?? '').replace(/\s+/g, ' ').trim();
@@ -31,10 +32,7 @@
     const year = clean(record.year);
     const parsed = parseKoreanJournal(record.publication);
 
-    if (parsed) {
-      return `${author}, ${title}, ${parsed.journalPart}, ${year}, ${parsed.pages}.`;
-    }
-
+    if (parsed) return `${author}, ${title}, ${parsed.journalPart}, ${year}, ${parsed.pages}.`;
     return `${author}, ${title}, ${clean(record.publication)}, ${year}.`;
   }
 
@@ -72,7 +70,7 @@
 
     if (type === '해외 학술논문' || (language === '영어' && type.includes('학술논문'))) {
       record.citation = formatOverseasArticle(record);
-      record.citationStandard = 'EN-JOURNAL-v3';
+      record.citationStandard = VERSION;
     }
   });
 
@@ -91,19 +89,26 @@
     return escaped.replace(/“([^”]*[A-Za-z][^”]*)”(?=,)/g, '“<em class="western-article-title" lang="en">$1</em>”');
   }
 
+  // 상세화면의 서지정보 전용 셀만 처리한다. 다른 마크업이 들어오면 소유권을 넘지 않는다.
+  function ownsCitationBox(box) {
+    return Array.from(box.children).every(child => child.matches('em.western-article-title'));
+  }
+
   function processCitationBoxes(root) {
     if (!(root instanceof Element)) return;
     const boxes = [];
     if (root.matches('.citation-box')) boxes.push(root);
     root.querySelectorAll?.('.citation-box').forEach(box => boxes.push(box));
     boxes.forEach(box => {
-      box.innerHTML = renderCitation(box.textContent || '');
-      box.dataset.citationStandard = 'EN-JOURNAL-v3';
+      if (!ownsCitationBox(box)) return;
+      const rendered = renderCitation(box.textContent || '');
+      if (box.innerHTML !== rendered) box.innerHTML = rendered;
+      box.dataset.citationStandard = VERSION;
     });
   }
 
   const observer = new MutationObserver(mutations => {
-    mutations.forEach(mutation => mutation.addedNodes.forEach(node => processCitationBoxes(node)));
+    mutations.forEach(mutation => mutation.addedNodes.forEach(processCitationBoxes));
   });
   if (document.documentElement) observer.observe(document.documentElement, { childList: true, subtree: true });
   if (document.readyState === 'loading') {
@@ -111,4 +116,11 @@
   } else {
     processCitationBoxes(document.body);
   }
+
+  window.AI_LITERATURE_CITATION_STANDARD = Object.freeze({
+    version: VERSION,
+    rule: '서양 논문 제목은 따옴표를 유지하고 제목만 이탤릭체, 제목 뒤 쉼표는 닫는 따옴표 밖, 면수는 p.123 / pp.123-125 형식',
+    normalizeCitation,
+    renderCitation
+  });
 })();
