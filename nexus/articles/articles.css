@@ -101,8 +101,11 @@ body{background:#061321;color:var(--article-text)}
   .article-hero-icon{width:52px;height:52px;border-radius:15px}
   .article-hero-icon svg{width:28px;height:28px}
   .article-hero-card .description{font-size:12.5px}
-  .archive-panel{padding:16px}
+  .article-layout{gap:8px}
+  .archive-panel{padding:8px}
   .archive-summary>div{padding:12px}
+  .article-grid{gap:6px}
+  .topic-grid{gap:6px}
   .reader-shell{width:calc(100% - 20px)}
   .reader-header{padding:25px 20px 19px}
   .reader-header h1{font-size:1.9rem}
