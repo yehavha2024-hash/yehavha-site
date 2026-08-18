@@ -1,0 +1,19 @@
+{
+  "lead": "P02는 자율주행 사고에서 사고 순간 자동화 시스템이 어느 수준으로 작동하고 있었는지, 제조자·개발자·운영자가 어떤 데이터를 보유하는지에 따라 책임판단의 정확성이 달라진다는 점을 연구한다.",
+  "blocks": [
+    {"type":"heading","level":2,"text":"연구쟁점"},
+    {"type":"paragraph","text":"자율주행 사고데이터와 책임경로의 재구성"},
+    {"type":"heading","level":2,"text":"핵심명제"},
+    {"type":"paragraph","text":"자율주행 사고의 책임을 판단하려면 운전자와 자동화 시스템 중 누가 동적 운전업무를 수행하고 있었는지, 사고 직전 어떤 기능이 활성화되어 있었는지, 시스템과 운영자가 어떤 정보를 보유하고 있었는지를 데이터로 확인할 수 있어야 한다."},
+    {"type":"heading","level":2,"text":"해외 규제동향"},
+    {"type":"paragraph","text":"미국 NHTSA는 ADS와 Level 2 ADAS가 관여한 일정한 사고를 제조자와 운영자가 보고하도록 하고 있다. 최신 체계는 사고 직전 시스템 사용 여부와 사고정보를 수집하여 안전결함 조사와 집행의 기초로 활용한다."},
+    {"type":"heading","level":2,"text":"책임법적 의미"},
+    {"type":"paragraph","text":"사고보고와 텔레메트리의 확보는 규제감독만을 위한 것이 아니라 책임법에서도 행위주체 식별, 인과관계 분석, 결함 여부, 운용자 개입 가능성을 판단하는 증거가 된다. 데이터 기록능력의 차이가 책임증명의 불균형으로 이어질 수 있다는 점도 고려해야 한다."},
+    {"type":"heading","level":2,"text":"박사논문 연결"},
+    {"type":"paragraph","text":"Physical AI에서 로그와 등록의 필요성을 실제 사고규제 사례로 뒷받침한다. 기능적 단위에 고유식별정보와 사고로그를 결합하는 제도설계의 실증적 근거로 활용한다."},
+    {"type":"heading","level":2,"text":"해외 원자료"},
+    {"type":"paragraph","text":"NHTSA Standing General Order on Crash Reporting. https://www.nhtsa.gov/laws-regulations/standing-general-order-crash-reporting"},
+    {"type":"heading","level":2,"text":"검증상태"},
+    {"type":"note","text":"2025년 개정 Standing General Order와 2026년 공개자료 기준 확인 완료. 국내 자율주행 사고기록·보험법제와 추가 비교한다."}
+  ]
+}
