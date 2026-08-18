@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const VERSION = 'LAW-KR-WESTERN-v7';
+  const VERSION = 'LAW-KR-WESTERN-v8';
   const RULE = '서양 단행본은 『책 제목』으로 표시하고 제목만 이탤릭체, 출판사는 일반체, 서양 논문 제목은 따옴표를 유지하고 제목만 이탤릭체, 면수는 p.123 / pp.123-125 형식';
   const body = document.getElementById('articleBody');
   if (!body) return;
@@ -9,7 +9,6 @@
   const citationHeading = /(?:참고문헌|핵심\s*문헌|핵심\s*연결문헌|학술\s*자료|학술\s*연결|법령[·ㆍ・,\s]*판례[·ㆍ・,\s]*학술|해외\s*원자료|references|bibliography)/i;
   const academicSignal = /(?:\bDOI\b|doi\.org|ssrn\.com|heinonline|jstor|springer|cambridge\.org|oup\.com|Law Review|\bJournal\b|University Press|Handbook|Working Paper|Public Law\s*&\s*Legal Theory Series)/i;
 
-  // 공개 글에서 실제로 등장하거나 법학 연구 트리에서 확인된 단행본만 명시적으로 허용한다.
   const westernBookTitles = Object.freeze([
     'The Cambridge Handbook of Private Law and Artificial Intelligence',
     'The Cambridge Handbook of the Law, Policy, and Regulation for Human-Robot Interaction',
@@ -30,7 +29,6 @@
     'We, the Robots? Regulating Artificial Intelligence and the Limits of the Law',
     'Kant’s Doctrine of Right: A Commentary',
     'Constitutionalism: Past, Present, and Future',
-    'Constitutional and Political Theory: Selected Writings',
     'Responsibility in Law and Morality',
     'Natural Law and Natural Rights',
     'Punishment and Responsibility',
@@ -71,6 +69,14 @@
       .join('');
   }
 
+  function stripTitleAsterisks(value) {
+    return String(value ?? '')
+      .replace(/“([^”]*)”/g, (_, title) => `“${title.replace(/\*/g, '')}”`)
+      .replace(/『([^』]*)』/g, (_, title) => `『${title.replace(/\*/g, '')}』`)
+      .replace(/\*+(?=[“『])/g, '')
+      .replace(/([”』])\*+/g, '$1');
+  }
+
   function normalizeBookPublisherPunctuation(value) {
     return String(value ?? '').replace(/(『[^』]+』)\s*\(([^()]*)\)/g, (match, title, inside) => {
       return publisherMarker.test(inside) ? `${title}, ${inside}` : match;
@@ -78,9 +84,9 @@
   }
 
   function normalizeCitationText(value) {
-    let text = String(value ?? '').replace(/\*/g, '');
-    text = correctKnownBibliographicTypos(text);
+    let text = correctKnownBibliographicTypos(value);
     text = markKnownBookTitles(text);
+    text = stripTitleAsterisks(text);
     text = normalizeBookPublisherPunctuation(text);
     return text
       .replace(/,\s*”/g, '”,')
@@ -123,7 +129,8 @@
       let match = text.match(/^(.+?),\s*“([^”]+)”\s*,\s*(.+)$/);
       if (!match) match = text.match(/^([^,]+),\s*([^,]+),\s*(.+)$/);
       if (match && /[A-Za-z]/.test(match[2]) && !match[2].trim().startsWith('『')) {
-        text = `${match[1]}, “${match[2].trim()}”, ${match[3]}`;
+        const articleTitle = match[2].trim().replace(/\*/g, '');
+        text = `${match[1]}, “${articleTitle}”, ${match[3]}`;
       }
     }
     appendStyledText(fragment, text);
