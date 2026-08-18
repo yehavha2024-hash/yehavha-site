@@ -51,9 +51,9 @@
     );
   }
 
-  // 연구종합 UI만 아직 별도 렌더러를 사용하므로 이 한 셀에 한해 후처리한다.
-  // 링크·버튼 등 다른 컴포넌트가 들어온 셀은 소유권을 침범하지 않고 건너뛴다.
-  const synthesisCitationSelector = '.citation-text';
+  // 세 UI가 평문으로 출력하는 인용 전용 셀만 소유한다.
+  // 링크·버튼 등 다른 컴포넌트가 들어온 셀은 건드리지 않아 후처리의 권한을 제한한다.
+  const citationSelector = '.doctoral-footnote, .citation-title, .citation-text';
 
   function isOwnedCitationNode(target) {
     return Array.from(target.children).every(child => child.matches('em.western-article-title'));
@@ -62,8 +62,8 @@
   function processNode(node) {
     if (!(node instanceof Element)) return;
     const targets = [];
-    if (node.matches(synthesisCitationSelector)) targets.push(node);
-    node.querySelectorAll?.(synthesisCitationSelector).forEach(target => targets.push(target));
+    if (node.matches(citationSelector)) targets.push(node);
+    node.querySelectorAll?.(citationSelector).forEach(target => targets.push(target));
 
     targets.forEach(target => {
       if (!isOwnedCitationNode(target)) return;
