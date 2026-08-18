@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const VERSION = 'LAW-KR-WESTERN-v6';
+  const VERSION = 'LAW-KR-WESTERN-v7';
   const RULE = '서양 단행본은 『책 제목』으로 표시하고 제목만 이탤릭체, 출판사는 일반체, 서양 논문 제목은 따옴표를 유지하고 제목만 이탤릭체, 면수는 p.123 / pp.123-125 형식';
   const body = document.getElementById('articleBody');
   if (!body) return;
@@ -13,9 +13,17 @@
   const westernBookTitles = Object.freeze([
     'The Cambridge Handbook of Private Law and Artificial Intelligence',
     'The Cambridge Handbook of the Law, Policy, and Regulation for Human-Robot Interaction',
+    'Research Handbook on the Law of Artificial Intelligence',
+    'Punishment and Responsibility: Essays in the Philosophy of Law',
+    'Playing by the Rules: A Philosophical Examination of Rule-Based Decision-Making in Law and in Life',
+    'The Cost of Accidents: A Legal and Economic Analysis',
+    'Constitutional and Political Theory: Selected Writings',
     'Law for Computer Scientists and Other Folk',
+    'The Oxford Handbook of Comparative Constitutional Law',
     'Proportionality: Constitutional Rights and their Limitations',
     'A Legal Theory for Autonomous Artificial Agents',
+    'A Theory of Legal Argumentation',
+    'Justice as Fairness: A Restatement',
     'A Theory of Legal Personhood',
     'A Theory of Constitutional Rights',
     'The Reasonable Robot: Artificial Intelligence and the Law',
@@ -33,27 +41,48 @@
     'The Idea of Private Law',
     'Risks and Wrongs',
     'The Cost of Accidents',
-    'The Costs of Accidents',
     'Legal Reasoning and Legal Theory',
-    'Robot Rights'
+    'The Morality of Law',
+    'Legal Personhood',
+    'Corrective Justice',
+    'Private Wrongs',
+    'Robot Rights',
+    'Law’s Empire'
   ].sort((a, b) => b.length - a.length));
 
+  const publisherMarker = /(?:University Press|\bOUP\b|\bCUP\b|\bUP\b|MIT Press|Clarendon Press|Hart Publishing|Basic Books|Columbia University Press|De Gruyter|Mohr Siebeck|Springer|Routledge|Edward Elgar)/i;
   const escapeRegExp = value => String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const bookTitlePattern = new RegExp(westernBookTitles.map(escapeRegExp).join('|'), 'g');
+
+  function correctKnownBibliographicTypos(value) {
+    return String(value ?? '')
+      .replace(/Visa A\. J\. Kurki/g, 'Visa A.J. Kurki')
+      .replace(/Guido Calabresi, The Costs of Accidents: A Legal and Economic Analysis/g, 'Guido Calabresi, The Cost of Accidents: A Legal and Economic Analysis')
+      .replace(/Guido Calabresi, The Costs of Accidents/g, 'Guido Calabresi, The Cost of Accidents');
+  }
 
   function markKnownBookTitles(value) {
-    let text = String(value ?? '');
-    westernBookTitles.forEach(title => {
-      const pattern = new RegExp(escapeRegExp(title), 'g');
-      text = text.replace(pattern, (match, offset, source) => {
-        if (source[offset - 1] === '『' && source[offset + match.length] === '』') return match;
-        return `『${match}』`;
-      });
+    return String(value ?? '')
+      .split(/(『[^』]*』|“[^”]*”)/g)
+      .map(segment => {
+        if (!segment || segment.startsWith('『') || segment.startsWith('“')) return segment;
+        return segment.replace(bookTitlePattern, match => `『${match}』`);
+      })
+      .join('');
+  }
+
+  function normalizeBookPublisherPunctuation(value) {
+    return String(value ?? '').replace(/(『[^』]+』)\s*\(([^()]*)\)/g, (match, title, inside) => {
+      return publisherMarker.test(inside) ? `${title}, ${inside}` : match;
     });
-    return text;
   }
 
   function normalizeCitationText(value) {
-    return markKnownBookTitles(String(value ?? '').replace(/\*/g, ''))
+    let text = String(value ?? '').replace(/\*/g, '');
+    text = correctKnownBibliographicTypos(text);
+    text = markKnownBookTitles(text);
+    text = normalizeBookPublisherPunctuation(text);
+    return text
       .replace(/,\s*”/g, '”,')
       .replace(/\b(pp?\.)\s+(?=\d)/gi, '$1');
   }
