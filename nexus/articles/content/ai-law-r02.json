@@ -1,0 +1,22 @@
+{
+  "lead": "R02는 AI 손해에서 피해자가 시스템 내부자료에 접근하기 어렵고 기술적 복잡성 때문에 결함과 인과관계를 직접 입증하기 곤란한 경우 증거접근과 추정규칙을 어떻게 구성할 것인지 검토한다.",
+  "blocks": [
+    {"type":"heading","level":2,"text":"연구쟁점"},
+    {"type":"paragraph","text":"AI 손해의 증거접근과 결함·인과관계 추정"},
+    {"type":"heading","level":2,"text":"핵심명제"},
+    {"type":"paragraph","text":"AI 시스템의 내부작동과 데이터가 사업자 측에 집중되어 있는 경우 피해자에게 전통적인 수준의 완전한 인과관계 증명을 요구하면 책임법의 실효성이 약화될 수 있다. 일정한 전제사실이 입증된 경우 정보보유자에게 설명·자료제출 부담을 강화하거나 결함 또는 인과관계를 추정하는 방식을 검토할 필요가 있다."},
+    {"type":"heading","level":2,"text":"비교법적 근거"},
+    {"type":"paragraph","text":"EU 신 제조물책임지침은 복잡한 기술제품의 피해자가 결함과 인과관계를 입증하는 데 직면하는 과도한 어려움을 고려하여 증거개시와 추정규칙을 강화하였다. 소프트웨어와 AI도 제조물책임 구조에 포함될 수 있으므로 AI 손해의 증명법리를 설계하는 중요한 비교자료가 된다."},
+    {"type":"heading","level":2,"text":"한계"},
+    {"type":"paragraph","text":"인과관계 추정을 지나치게 넓게 인정하면 결과책임으로 변질될 위험이 있다. 따라서 위험의 현실화, 규범위반, 로그·기술문서의 부재, 피해자의 정보접근 곤란 등 구체적인 요건을 결합해야 한다."},
+    {"type":"heading","level":2,"text":"박사논문 연결"},
+    {"type":"paragraph","text":"창발적 손해에 대한 증명위험 배분 논증의 핵심 항목이다. 민법 제760조 제2항의 공동불법행위 구조와 결합하여 개별 원인자를 특정하기 어려운 다중 AI 손해의 증명구조를 설계하는 데 활용한다."},
+    {"type":"heading","level":2,"text":"핵심 연결문헌"},
+    {"type":"paragraph","text":"Sandy Steel, Legal Causation and AI, The Cambridge Handbook of Private Law and Artificial Intelligence, 2024. DOI 10.1017/9781108980197.010"},
+    {"type":"paragraph","text":"원문 연결 https://doi.org/10.1017/9781108980197.010"},
+    {"type":"heading","level":2,"text":"해외 원자료"},
+    {"type":"paragraph","text":"Directive (EU) 2024/2853 on liability for defective products. https://eur-lex.europa.eu/eli/dir/2024/2853/oj"},
+    {"type":"heading","level":2,"text":"검증상태"},
+    {"type":"note","text":"1차 검증 완료. 국내 민사소송상 문서제출명령·증명방해·개연성 이론과의 접목을 추가 검토한다."}
+  ]
+}
