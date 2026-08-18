@@ -11,10 +11,13 @@
 
   const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
   const txt = value => esc(localize(value));
+  const citationHtml = value => typeof window.LEGAL_CITATION_STANDARD?.renderCitation === 'function'
+    ? window.LEGAL_CITATION_STANDARD.renderCitation(value)
+    : esc(value);
 
   const renderReference = ref => {
     const type = txt(ref?.type || '자료');
-    const citation = esc(ref?.citation || '');
+    const citation = citationHtml(ref?.citation || '');
     const pinpoint = txt(ref?.pinpoint || '');
     const url = String(ref?.url || '').trim();
     const link = url
@@ -23,7 +26,7 @@
     return `
       <li class="citation-item">
         <div class="citation-meta"><span class="citation-type">${type}</span>${link}</div>
-        <p class="citation-text">${citation}</p>
+        <p class="citation-text" data-citation-standard="${esc(window.LEGAL_CITATION_STANDARD?.version || '')}">${citation}</p>
         ${pinpoint ? `<p class="citation-pinpoint"><strong>인용 위치</strong> ${pinpoint}</p>` : ''}
       </li>
     `;
