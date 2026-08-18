@@ -42,8 +42,15 @@
     return `${clean(record.author)}, ${quoteKo(record.title)}, ${clean(record.publication)}, ${clean(record.year)}.`;
   }
 
+  function formatOverseasPublication(value) {
+    const source = clean(value).replace(/–/g, '-');
+    const ranged = source.match(/^(.*?),\s*(\d+)-(\d+)$/);
+    if (ranged) return `${ranged[1]}, pp.${ranged[2]}-${ranged[3]}`;
+    return source.replace(/\b(pp?\.)\s+(?=\d)/gi, '$1');
+  }
+
   function formatOverseasArticle(record) {
-    return `${clean(record.author)}, ${quoteEn(record.title)}, ${clean(record.publication)} (${clean(record.year)}).`;
+    return `${clean(record.author)}, ${quoteEn(record.title)}, ${formatOverseasPublication(record.publication)} (${clean(record.year)}).`;
   }
 
   records.forEach(record => {
@@ -65,7 +72,43 @@
 
     if (type === '해외 학술논문' || (language === '영어' && type.includes('학술논문'))) {
       record.citation = formatOverseasArticle(record);
-      record.citationStandard = 'EN-JOURNAL-v1';
+      record.citationStandard = 'EN-JOURNAL-v2';
     }
   });
+
+  const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, ch => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+  }[ch]));
+
+  function normalizeCitation(value) {
+    return clean(value)
+      .replace(/,\s*”/g, '”,')
+      .replace(/\b(pp?\.)\s+(?=\d)/gi, '$1');
+  }
+
+  function renderCitation(value) {
+    const escaped = escapeHtml(normalizeCitation(value));
+    return escaped.replace(/“([^”]*[A-Za-z][^”]*)”(?=,)/g, '<em class="western-article-title" lang="en">$1</em>');
+  }
+
+  function processCitationBoxes(root) {
+    if (!(root instanceof Element)) return;
+    const boxes = [];
+    if (root.matches('.citation-box')) boxes.push(root);
+    root.querySelectorAll?.('.citation-box').forEach(box => boxes.push(box));
+    boxes.forEach(box => {
+      box.innerHTML = renderCitation(box.textContent || '');
+      box.dataset.citationStandard = 'EN-JOURNAL-v2';
+    });
+  }
+
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => mutation.addedNodes.forEach(node => processCitationBoxes(node)));
+  });
+  if (document.documentElement) observer.observe(document.documentElement, { childList: true, subtree: true });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => processCitationBoxes(document.body), { once: true });
+  } else {
+    processCitationBoxes(document.body);
+  }
 })();
