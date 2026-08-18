@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-17",
+  "updatedAt": "2026-08-18",
   "sections": [
     {
       "id": "bible-theology",
@@ -27,6 +27,19 @@
     }
   ],
   "articles": [
+    {
+      "id": "ai-agent-responsibility-law",
+      "section": "open-topics",
+      "language": "ko",
+      "series": "AI 법 연구",
+      "title": "AI 에이전트 시대, 책임법은 무엇을 바꾸어야 하는가",
+      "subtitle": "단일 인공지능에서 다중 에이전트 시스템으로 이동하는 책임법의 구조",
+      "summary": "AI 에이전트의 행위효과와 손해책임을 구별하고, 다중 AI의 창발적 손해와 인과관계, 로그, 계층적 책임귀속, 기능적 책임단위의 가능성을 핵심 선행연구와 해외 원자료에 연결하여 검토한다.",
+      "author": "이명훈",
+      "publishedAt": "2026-08-18",
+      "readingMinutes": 16,
+      "contentUrl": "./content/ai-agent-responsibility-law.json"
+    },
     {
       "id": "word-essence-returning-yeshua",
       "section": "bible-theology",
