@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const VERSION = 'LAW-KR-WESTERN-v4';
+  const VERSION = 'LAW-KR-WESTERN-v5';
   const RULE = '서양 논문 제목은 따옴표를 유지하고 제목만 이탤릭체, 제목 뒤 쉼표는 닫는 따옴표 밖, 면수는 p.123 / pp.123-125 형식';
   const body = document.getElementById('articleBody');
   if (!body) return;
