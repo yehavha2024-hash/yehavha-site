@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const VERSION = 'LAW-KR-WESTERN-v7';
+  const VERSION = 'LAW-KR-WESTERN-v8';
   const RULE = '서양 단행본은 『책 제목』으로 표시하고 제목만 이탤릭체, 출판사는 일반체, 서양 논문 제목은 따옴표를 유지하고 제목만 이탤릭체, 면수는 p.123 / pp.123-125 형식';
   const citationFields = new Set(['citation', 'footnote']);
   const pageFields = new Set(['citation', 'footnote', 'pinpoint', 'edition']);
@@ -97,6 +97,14 @@
       .join('');
   }
 
+  function stripTitleAsterisks(value) {
+    return String(value ?? '')
+      .replace(/“([^”]*)”/g, (_, title) => `“${title.replace(/\*/g, '')}”`)
+      .replace(/『([^』]*)』/g, (_, title) => `『${title.replace(/\*/g, '')}』`)
+      .replace(/\*+(?=[“『])/g, '')
+      .replace(/([”』])\*+/g, '$1');
+  }
+
   function normalizeBookPublisherPunctuation(value) {
     return String(value ?? '').replace(/(『[^』]+』)\s*\(([^()]*)\)/g, (match, title, inside) => {
       return publisherMarker.test(inside) ? `${title}, ${inside}` : match;
@@ -104,9 +112,9 @@
   }
 
   function normalizeCitationText(value) {
-    let text = String(value ?? '').replace(/\*/g, '');
-    text = correctKnownBibliographicTypos(text);
+    let text = correctKnownBibliographicTypos(value);
     text = markKnownBookTitles(text);
+    text = stripTitleAsterisks(text);
     text = normalizeBookPublisherPunctuation(text);
     text = normalizePageSpacing(text);
     text = text.replace(/,\s*”/g, '”,');
