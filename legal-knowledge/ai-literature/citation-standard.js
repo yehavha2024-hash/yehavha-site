@@ -1,13 +1,35 @@
 (() => {
   'use strict';
 
-  const VERSION = 'AI-LITERATURE-CITATION-v6';
+  const VERSION = 'AI-LITERATURE-CITATION-v7';
   const records = Array.isArray(window.AI_LITERATURE_RECORDS) ? window.AI_LITERATURE_RECORDS : [];
 
   const clean = value => String(value ?? '').replace(/\*/g, '').replace(/\s+/g, ' ').trim();
   const quoteKo = title => `"${clean(title).replace(/^['"“”]+|['"“”]+$/g, '')}"`;
   const quoteEn = title => `“${clean(title).replace(/^['"“”]+|['"“”]+$/g, '')}”`;
   const bookTitle = title => `『${clean(title).replace(/^『|』$/g, '')}』`;
+
+  // 실제 해외 문헌 데이터에서 수록서로 확인된 단행본만 명시한다.
+  // Handbook라는 단어만으로 자동 판별하지 않아 보고서·저널명을 잘못 감싸지 않는다.
+  const westernBookContainers = Object.freeze([
+    'The Cambridge Handbook of Private Law and Artificial Intelligence',
+    'The Cambridge Handbook of the Law, Policy, and Regulation for Human-Robot Interaction',
+    'Research Handbook on the Law of Artificial Intelligence',
+    'The Oxford Handbook of Comparative Constitutional Law'
+  ].sort((a, b) => b.length - a.length));
+
+  const escapeRegExp = value => String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const bookContainerPattern = new RegExp(westernBookContainers.map(escapeRegExp).join('|'), 'g');
+
+  function markKnownBookContainers(value) {
+    return String(value ?? '')
+      .split(/(『[^』]*』|“[^”]*”)/g)
+      .map(segment => {
+        if (!segment || segment.startsWith('『') || segment.startsWith('“')) return segment;
+        return segment.replace(bookContainerPattern, match => `『${match}』`);
+      })
+      .join('');
+  }
 
   function formatPages(value) {
     const pages = clean(value).replace(/–/g, '-');
@@ -54,8 +76,8 @@
   function formatOverseasPublication(value) {
     const source = clean(value).replace(/–/g, '-');
     const ranged = source.match(/^(.*?),\s*(\d+)-(\d+)$/);
-    if (ranged) return `${ranged[1]}, pp.${ranged[2]}-${ranged[3]}`;
-    return source.replace(/\b(pp?\.)\s+(?=\d)/gi, '$1');
+    if (ranged) return `${markKnownBookContainers(ranged[1])}, pp.${ranged[2]}-${ranged[3]}`;
+    return markKnownBookContainers(source.replace(/\b(pp?\.)\s+(?=\d)/gi, '$1'));
   }
 
   function formatOverseasArticle(record) {
@@ -70,7 +92,7 @@
 
     if (isBook) {
       record.citation = language === '영어' ? formatOverseasBook(record) : formatDomesticBook(record);
-      record.citationStandard = language === '영어' ? 'EN-BOOK-v6' : 'KO-BOOK-v3';
+      record.citationStandard = language === '영어' ? 'EN-BOOK-v7' : 'KO-BOOK-v3';
       return;
     }
 
@@ -88,7 +110,7 @@
 
     if (type === '해외 학술논문' || (language === '영어' && type.includes('학술논문'))) {
       record.citation = formatOverseasArticle(record);
-      record.citationStandard = 'EN-JOURNAL-v6';
+      record.citationStandard = 'EN-JOURNAL-v7';
       return;
     }
 
@@ -113,7 +135,8 @@
 
   window.AI_LITERATURE_CITATION_STANDARD = Object.freeze({
     version: VERSION,
-    rule: '단행본은 『책 제목』으로 표시하고 영문 책 제목만 이탤릭체, 출판사는 일반체, 서양 논문 제목은 따옴표를 유지하고 제목만 이탤릭체, 면수는 p.123 / pp.123-125 형식',
+    rule: '단행본은 『책 제목』으로 표시하고 영문 책 제목만 이탤릭체, 출판사는 일반체, 단행본 수록 논문은 수록서명에도 『』를 적용, 서양 논문 제목은 따옴표를 유지하고 제목만 이탤릭체, 면수는 p.123 / pp.123-125 형식',
+    westernBookContainers,
     normalizeCitation,
     renderCitation
   });
