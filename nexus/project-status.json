@@ -2,9 +2,9 @@
   "ai-law-institute": {
     "id": "ai-law-institute",
     "managedBy": "github-external",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
-    "lastUpdated": "2026-08-17",
+    "status": "상태 확인 필요",
+    "statusTone": "unknown",
+    "lastUpdated": null,
     "contentCount": 8,
     "contentLabel": "연구축"
   },
@@ -113,7 +113,7 @@
     "status": "최근 업데이트",
     "statusTone": "fresh",
     "lastUpdated": "2026-08-18",
-    "contentCount": 6,
+    "contentCount": 10,
     "contentLabel": "공개 글"
   },
   "ai-practice-library": {
