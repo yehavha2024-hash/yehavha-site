@@ -26,6 +26,7 @@ on:
       - 'scripts/audit-repo-hygiene.mjs'
       - 'scripts/audit-style-ownership.mjs'
       - 'WEB_PROJECT_STANDARD.md'
+      - '.github/workflows/web-architecture-audit.yml'
 
 permissions:
   contents: read
@@ -49,8 +50,10 @@ jobs:
           node --check nexus/functions/api/access.js
           node --check nexus/functions/lib/metrics.js
           node nexus/scripts/audit-portal-enhancements.mjs
-      - name: Validate article archive runtime script
-        run: node --check nexus/articles/articles.js
+      - name: Validate article archive runtime scripts
+        run: |
+          node --check nexus/articles/articles.js
+          node --check nexus/articles/article-seo.js
       - name: Validate legal mind runtime scripts
         run: |
           node --check legal-knowledge/legal-mind/data.js
