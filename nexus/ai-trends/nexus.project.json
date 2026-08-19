@@ -1,6 +1,11 @@
 {
   "id": "ai-trends",
   "publish": true,
+  "review": {
+    "contentReviewedAt": "2026-08-17",
+    "baselineAt": "2026-08-17",
+    "baselineLabel": "자료기준"
+  },
   "tracking": {
     "paths": ["nexus/ai-trends"],
     "freshDays": 7,
