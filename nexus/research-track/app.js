@@ -127,7 +127,7 @@
       body.append(focus);
     }
 
-    if (stage.deliverable) {
+    if (stage.deliverable && stage.id !== 'master') {
       const output = make('div', 'stage-output');
       output.append(make('span', 'output-label', '주요 산출물'), make('strong', '', stage.deliverable));
       body.append(output);
