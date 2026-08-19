@@ -1,3 +1,5 @@
+import { recordMetric } from './lib/metrics.js';
+
 const ALLOWED_HOSTS = new Set([
   'yehavha-nexus-hub.pages.dev',
   'yehavha-3min-rest.pages.dev',
@@ -24,7 +26,7 @@ function safeDestination(value) {
   }
 }
 
-export async function onRequestGet({ request }) {
+export async function onRequestGet({ request, env, waitUntil }) {
   const requestUrl = new URL(request.url);
   const target = safeDestination(requestUrl.searchParams.get('to'));
 
@@ -36,6 +38,11 @@ export async function onRequestGet({ request }) {
         'cache-control': 'no-store'
       }
     });
+  }
+
+  if (env?.NEXUS_DB) {
+    const projectId = requestUrl.searchParams.get('id') || '';
+    waitUntil(recordMetric(env.NEXUS_DB, 'project_click', projectId).catch(() => undefined));
   }
 
   return Response.redirect(target.toString(), 302);
