@@ -37,6 +37,7 @@ function auditPortalSources() {
   const approved = Array.isArray(registry.manifests) ? registry.manifests : [];
   if (!unique(approved)) fail(registryPath, '승인 manifest 경로 중복');
   const approvedIds = new Set();
+  const reviewById = new Map();
   for (const relative of approved) {
     if (!exists(relative)) {
       fail(registryPath, `승인 manifest 없음: ${relative}`);
@@ -47,6 +48,7 @@ function auditPortalSources() {
     if (approvedIds.has(manifest.id)) fail(registryPath, `승인 manifest id 중복: ${manifest.id}`);
     approvedIds.add(manifest.id);
     const review = manifest.review || {};
+    reviewById.set(manifest.id, review);
     if (review.contentReviewedAt && !isoDate(review.contentReviewedAt)) fail(relative, 'contentReviewedAt YYYY-MM-DD 형식 아님');
     if (review.baselineAt && !isoDate(review.baselineAt)) fail(relative, 'baselineAt YYYY-MM-DD 형식 아님');
     if (review.baselineAt && !review.baselineLabel) fail(relative, 'baselineAt이 있으나 baselineLabel 누락');
@@ -57,6 +59,18 @@ function auditPortalSources() {
     const item = status[id];
     if (item.contentReviewedAt && !isoDate(item.contentReviewedAt)) fail(statusPath, `${id} contentReviewedAt 형식 오류`);
     if (item.baselineAt && !isoDate(item.baselineAt)) fail(statusPath, `${id} baselineAt 형식 오류`);
+    const review = reviewById.get(id) || {};
+    for (const key of ['contentReviewedAt', 'baselineAt', 'baselineLabel']) {
+      const manifestValue = review[key] || null;
+      const statusValue = item[key] || null;
+      if (manifestValue !== statusValue) {
+        fail(statusPath, `${id} ${key}가 승인 manifest와 불일치: manifest=${manifestValue ?? '-'} status=${statusValue ?? '-'}`);
+      }
+    }
+  }
+
+  for (const id of approvedIds) {
+    if (!status[id]) fail(statusPath, `승인 manifest 상태 출력 누락: ${id}`);
   }
 
   for (const forbidden of ['nexus/search-index.json', 'nexus/projects.search.json', 'nexus/projects.generated.json']) {
