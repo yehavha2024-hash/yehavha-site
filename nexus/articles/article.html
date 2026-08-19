@@ -30,12 +30,35 @@ body[data-page="detail"] .reader-toc{
 body[data-page="detail"] .reader-subtitle{color:#c7d5e3}
 body[data-page="detail"] .reader-author{color:#b8cadb}
 body[data-page="detail"] .reader-summary{color:#bfd0df}
-body[data-page="detail"] .reader-toc h2{color:#d6e1ec}
+body[data-page="detail"] .reader-toc h2{color:#d6e1ec;text-align:center;margin-bottom:8px!important}
 body[data-page="detail"] .reader-toc a{color:#b5c8da}
 body[data-page="detail"] .reader-toc a:hover{color:#e5eef7}
 body[data-page="detail"] .article-opening{color:#cedae6}
 body[data-page="detail"] .western-article-title,
 body[data-page="detail"] .western-book-title{font-style:italic}
+/* Compact two-column TOC for every article */
+body[data-page="detail"] .reader-toc ol{
+  display:block!important;
+  column-count:2;
+  column-gap:0;
+  column-rule:1px solid rgba(255,255,255,.07);
+}
+body[data-page="detail"] .reader-toc li{
+  break-inside:avoid;
+  -webkit-column-break-inside:avoid;
+  padding:3px 10px!important;
+}
+body[data-page="detail"] .reader-toc .toc-subitem{padding-left:10px!important}
+body[data-page="detail"] .reader-toc a{
+  display:-webkit-box!important;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+  font-size:10.4px!important;
+  line-height:1.32!important;
+  word-break:keep-all;
+  overflow-wrap:anywhere;
+}
 /* Compact scripture cards */
 body[data-page="detail"] .article-body .scripture-block{
   height:auto!important;
@@ -52,6 +75,11 @@ body[data-page="detail"] .scripture-block p{
   line-height:1.48!important;
 }
 @media(max-width:700px){
+  body[data-page="detail"] .reader-toc{padding:8px 9px!important}
+  body[data-page="detail"] .reader-toc h2{margin-bottom:6px!important;text-align:center}
+  body[data-page="detail"] .reader-toc li{padding:3px 7px!important}
+  body[data-page="detail"] .reader-toc .toc-subitem{padding-left:7px!important}
+  body[data-page="detail"] .reader-toc a{font-size:9.8px!important;line-height:1.28!important}
   body[data-page="detail"] .article-body .scripture-block{
     margin:7px 0!important;
     padding:6px 10px 5px!important;
