@@ -106,9 +106,35 @@ function auditMetricsOwnership() {
   }
 }
 
+function auditSeoOwnership() {
+  const livingLaw = 'nexus/living-law/index.html';
+  const archive = 'nexus/articles/index.html';
+  const reader = 'nexus/articles/article.html';
+  const articleSeo = 'nexus/articles/article-seo.js';
+  for (const file of [livingLaw, archive, reader, articleSeo]) {
+    if (!exists(file)) fail(file, 'SEO 필수 파일 없음');
+  }
+  if (errors) return;
+
+  if (!read(livingLaw).includes('rel="canonical" href="https://yehavha-nexus-hub.pages.dev/living-law/"')) {
+    fail(livingLaw, '생활법률 canonical 누락');
+  }
+  if (!read(livingLaw).includes('"@type":"WebApplication"')) fail(livingLaw, '생활법률 WebApplication 구조화 데이터 누락');
+  if (!read(archive).includes('rel="canonical" href="https://yehavha-nexus-hub.pages.dev/articles/"')) fail(archive, '글 아카이브 canonical 누락');
+  if (!read(archive).includes('"@type":"CollectionPage"')) fail(archive, '글 아카이브 CollectionPage 구조화 데이터 누락');
+  if (!read(reader).includes('./article-seo.js')) fail(reader, '개별 글 동적 SEO 스크립트 연결 누락');
+
+  const seo = read(articleSeo);
+  if (!seo.includes("fetch('./articles.json'")) fail(articleSeo, 'articles.json 원본을 소비하지 않음');
+  if (!seo.includes("'ScholarlyArticle'")) fail(articleSeo, 'AI 법 연구글 ScholarlyArticle 타입 누락');
+  if (!seo.includes("'Article'")) fail(articleSeo, '일반 글 Article 타입 누락');
+  if (/const\s+articles\s*=\s*\[/.test(seo)) fail(articleSeo, '글 목록을 SEO 스크립트가 중복 소유함');
+}
+
 auditPortalSources();
 auditPortalRuntimeOwnership();
 auditMetricsOwnership();
+auditSeoOwnership();
 
 console.log(`Nexus portal enhancement audit: ${errors} error(s)`);
 if (errors) process.exit(1);
