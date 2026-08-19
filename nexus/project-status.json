@@ -22,9 +22,12 @@
     "managedBy": "github",
     "status": "최근 업데이트",
     "statusTone": "fresh",
-    "lastUpdated": "2026-08-15",
+    "lastUpdated": "2026-08-19",
     "contentCount": 100,
-    "contentLabel": "생활법률 항목"
+    "contentLabel": "생활법률 항목",
+    "contentReviewedAt": "2026-08-15",
+    "baselineAt": "2026-08-15",
+    "baselineLabel": "법령기준"
   },
   "toeicman": {
     "id": "toeicman",
@@ -130,9 +133,12 @@
     "managedBy": "github",
     "status": "최근 업데이트",
     "statusTone": "fresh",
-    "lastUpdated": "2026-08-17",
+    "lastUpdated": "2026-08-19",
     "contentCount": 12,
-    "contentLabel": "브리프"
+    "contentLabel": "브리프",
+    "contentReviewedAt": "2026-08-17",
+    "baselineAt": "2026-08-17",
+    "baselineLabel": "자료기준"
   },
   "initiative-hub": {
     "id": "initiative-hub",
