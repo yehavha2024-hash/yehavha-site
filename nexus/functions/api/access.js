@@ -1,3 +1,5 @@
+import { readMetrics, recordMetric } from '../lib/metrics.js';
+
 let schemaReady = false;
 
 function json(body, status = 200) {
@@ -42,12 +44,29 @@ async function readCount(db) {
   return Number(row?.count ?? 0);
 }
 
-export async function onRequestGet({ env }) {
+export async function onRequestGet({ request, env }) {
   if (!env?.NEXUS_DB) {
     return json({ ok: false, error: 'nexus_db_binding_missing' }, 500);
   }
 
   try {
+    const url = new URL(request.url);
+    const op = url.searchParams.get('op') || 'get';
+
+    if (op === 'event') {
+      const recorded = await recordMetric(
+        env.NEXUS_DB,
+        url.searchParams.get('event'),
+        url.searchParams.get('project')
+      );
+      return json({ ok: recorded });
+    }
+
+    if (op === 'metrics') {
+      const metrics = await readMetrics(env.NEXUS_DB, url.searchParams.get('days') || 30);
+      return json({ ok: true, ...metrics });
+    }
+
     const count = await readCount(env.NEXUS_DB);
     return json({ ok: true, count });
   } catch (error) {
