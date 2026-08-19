@@ -2,6 +2,7 @@
    Owner: nexus/portal-v2.js
    Purpose: compact search/discovery, featured/recent layout, maturity signals and mid-width responsive tuning.
    This file owns presentation only; project/status data remain owned by projects.json and project-status.json. */
+.portal-featured,.portal-recent,.portal-trust{display:none!important}
 .portal-discovery{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:10px 0;margin-top:10px}
 .portal-search{grid-column:1/-1;position:relative;padding:12px 14px;border:1px solid rgba(122,184,255,.16);border-radius:14px;background:rgba(7,22,39,.64)}
 .portal-search-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:8px}
