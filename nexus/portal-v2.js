@@ -6,8 +6,21 @@
   const portalGrid = document.getElementById('portalGrid');
   const accessCount = document.getElementById('accessCount');
   let toastTimer;
+  let currentPortalData = null;
 
   const COUNTER_ENDPOINT = '/api/access';
+  const ENHANCEMENT_STYLES = './portal-enhancements.css?v=20260819-1018';
+
+  function ensureEnhancementStyles() {
+    if (document.querySelector('link[data-nexus-enhancements]')) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = ENHANCEMENT_STYLES;
+    link.dataset.nexusEnhancements = 'true';
+    document.head.append(link);
+  }
+
+  ensureEnhancementStyles();
 
   if (accessCount) {
     accessCount.textContent = '0';
@@ -52,6 +65,12 @@
       categoryIds: ['initiatives'],
       variant: 'compact'
     }
+  ];
+
+  const featuredDefinitions = [
+    { id: 'legal-research-track', kicker: 'RESEARCH', note: '장기 법학 연구 계보' },
+    { id: 'living-law-100', kicker: 'PRACTICAL', note: '실제 대응순서 중심 법률 가이드' },
+    { id: 'article-library', kicker: 'PUBLICATIONS', note: '웹에서 바로 읽는 공개 아카이브' }
   ];
 
   function showToast(message) {
@@ -104,8 +123,17 @@
     return project.category === 'publishing' || project.category === 'media' || /upaper\.kr|youtube\.com|youtu\.be/i.test(url);
   }
 
-  function trackedProjectUrl(url) {
-    return `/go?to=${encodeURIComponent(url)}`;
+  function trackedProjectUrl(project) {
+    const params = new URLSearchParams({ to: project.url });
+    if (project.id) params.set('id', project.id);
+    return `/go?${params.toString()}`;
+  }
+
+  function maturityFor(project) {
+    if (project.category === 'initiatives') return { label: '아이디어', tone: 'idea' };
+    if (project.category === 'practice') return { label: '실행·확장', tone: 'expanding' };
+    if (project.category === 'research') return { label: '연구 운영', tone: 'research' };
+    return { label: '운영', tone: 'operational' };
   }
 
   function showAccessCount(value) {
@@ -127,6 +155,12 @@
       console.warn('Nexus D1 access counter unavailable:', error);
       return null;
     }
+  }
+
+  function trackEvent(eventName, projectId = '') {
+    const params = new URLSearchParams({ op: 'event', event: eventName });
+    if (projectId) params.set('project', projectId);
+    fetch(`${COUNTER_ENDPOINT}?${params.toString()}`, {method:'GET',cache:'no-store',credentials:'same-origin',keepalive:true}).catch(() => undefined);
   }
 
   function orderedCategories(categories, projects) {
@@ -163,9 +197,11 @@
     if (old) old.remove();
     if (!quickLinks) return;
     const overview = make('div', 'portal-overview');
+    const managed = projects.filter((project) => project.managedBy === 'github' || project.managedBy === 'github-external').length;
     const values = [
       ['분야', categories.length],
       ['프로젝트', projects.length],
+      ['자동관리', managed],
       ['업데이트', formatDate(updatedAt) || '상시']
     ];
     values.forEach(([label, value]) => {
@@ -176,10 +212,186 @@
     quickLinks.insertAdjacentElement('afterend', overview);
   }
 
+  function projectSearchText(project, categories, researchGroups) {
+    const category = categories.find((item) => item.id === project.category);
+    const group = researchGroups.find((item) => item.id === project.researchGroup);
+    return [project.id, project.title, project.meta, project.description, category?.title, category?.description, group?.title, group?.description, project.contentLabel]
+      .filter(Boolean)
+      .join(' ')
+      .toLocaleLowerCase('ko-KR');
+  }
+
+  function renderSearch(data, host) {
+    const projects = data.projects || [];
+    const categories = data.categories || [];
+    const researchGroups = data.researchGroups || [];
+    const block = make('section', 'portal-search');
+    block.setAttribute('aria-labelledby', 'nexus-search-title');
+    const head = make('div', 'portal-search-head');
+    const title = make('h2', '', 'Nexus 통합검색');
+    title.id = 'nexus-search-title';
+    head.append(title, make('p', '', '현재 등록된 전체 프로젝트·연구영역 검색'));
+    const box = make('div', 'portal-search-box');
+    const input = make('input', 'portal-search-input');
+    input.type = 'search';
+    input.autocomplete = 'off';
+    input.placeholder = '예: Agentic AI, 책임귀속, 임대차, Suno, 성경';
+    input.setAttribute('aria-label', 'Nexus 통합검색');
+    const clear = make('button', 'portal-search-clear', '지우기');
+    clear.type = 'button';
+    const results = make('div', 'portal-search-results');
+    results.setAttribute('aria-live', 'polite');
+    box.append(input, clear);
+    block.append(head, box, results);
+    host.append(block);
+
+    const renderResults = () => {
+      const query = input.value.trim().toLocaleLowerCase('ko-KR');
+      results.replaceChildren();
+      if (!query) return;
+      const matches = projects
+        .filter((project) => projectSearchText(project, categories, researchGroups).includes(query))
+        .slice(0, 10);
+      if (!matches.length) {
+        results.append(make('p', 'search-empty', '일치하는 등록 프로젝트가 없습니다. 다른 핵심어로 검색해 주세요.'));
+        return;
+      }
+      matches.forEach((project) => {
+        const category = categories.find((item) => item.id === project.category);
+        const link = make('a', 'search-result');
+        link.href = trackedProjectUrl(project);
+        link.dataset.trackAccess = 'project';
+        link.dataset.searchResult = project.id;
+        const external = isExternalProject(project);
+        link.target = external ? '_blank' : '_self';
+        if (external) link.rel = 'noopener noreferrer';
+        const copy = make('span');
+        copy.append(make('strong', '', project.title), make('span', '', `${category?.title || '프로젝트'} · ${project.meta || ''}`));
+        link.append(copy, make('span', 'search-result-arrow', external ? '↗' : '→'));
+        results.append(link);
+      });
+    };
+
+    input.addEventListener('input', renderResults);
+    input.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter') return;
+      const query = input.value.trim();
+      if (!query) return;
+      trackEvent('search');
+      const url = new URL(window.location.href);
+      url.searchParams.set('q', query);
+      history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
+    });
+    clear.addEventListener('click', () => {
+      input.value = '';
+      results.replaceChildren();
+      const url = new URL(window.location.href);
+      url.searchParams.delete('q');
+      history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
+      input.focus();
+    });
+
+    const initialQuery = new URL(window.location.href).searchParams.get('q');
+    if (initialQuery) {
+      input.value = initialQuery;
+      renderResults();
+    }
+  }
+
+  function renderFeatured(projects, host) {
+    const block = make('section', 'portal-featured');
+    block.setAttribute('aria-labelledby', 'featured-title');
+    const titleRow = make('div', 'discovery-title-row');
+    const title = make('h2', '', '대표 진입점');
+    title.id = 'featured-title';
+    titleRow.append(title, make('span', '', 'RESEARCH · PRACTICAL · PUBLICATIONS'));
+    const grid = make('div', 'featured-grid');
+    featuredDefinitions.forEach((definition) => {
+      const project = projects.find((item) => item.id === definition.id);
+      if (!project) return;
+      const link = make('a', 'featured-link');
+      link.href = trackedProjectUrl(project);
+      link.dataset.trackAccess = 'project';
+      link.dataset.featuredProject = project.id;
+      const external = isExternalProject(project);
+      link.target = external ? '_blank' : '_self';
+      if (external) link.rel = 'noopener noreferrer';
+      link.append(make('span', 'featured-kicker', definition.kicker), make('strong', '', project.title), make('small', '', definition.note));
+      grid.append(link);
+    });
+    block.append(titleRow, grid);
+    host.append(block);
+  }
+
+  function renderRecent(projects, host) {
+    const recent = projects
+      .filter((project) => project.lastUpdated)
+      .sort((a, b) => String(b.lastUpdated).localeCompare(String(a.lastUpdated)) || String(a.title).localeCompare(String(b.title), 'ko'))
+      .slice(0, 8);
+    if (!recent.length) return;
+    const block = make('section', 'portal-recent');
+    block.setAttribute('aria-labelledby', 'recent-title');
+    const titleRow = make('div', 'discovery-title-row');
+    const title = make('h2', '', '최근 업데이트');
+    title.id = 'recent-title';
+    titleRow.append(title, make('span', '', '최신 8개'));
+    const list = make('div', 'recent-list');
+    recent.forEach((project) => {
+      const link = make('a', 'recent-link');
+      link.href = trackedProjectUrl(project);
+      link.dataset.trackAccess = 'project';
+      link.dataset.recentProject = project.id;
+      const external = isExternalProject(project);
+      link.target = external ? '_blank' : '_self';
+      if (external) link.rel = 'noopener noreferrer';
+      link.append(make('strong', '', project.title), make('span', '', formatDate(project.lastUpdated)));
+      list.append(link);
+    });
+    block.append(titleRow, list);
+    host.append(block);
+  }
+
+  function renderTrust(host) {
+    const block = make('section', 'portal-trust');
+    block.setAttribute('aria-labelledby', 'trust-title');
+    const titleRow = make('div', 'discovery-title-row');
+    const title = make('h2', '', '운영·검증 기준');
+    title.id = 'trust-title';
+    titleRow.append(title, make('span', '', 'TRUST LAYER'));
+    const grid = make('div', 'trust-grid');
+    const items = [
+      ['단일 원본', '프로젝트 표시정보와 자동 상태정보의 소유권을 분리합니다.'],
+      ['원출처 우선', '법령·논문·정책·연구자료는 가능한 한 공식 원문과 연결합니다.'],
+      ['업데이트 추적', '승인된 프로젝트만 최근 수정일과 콘텐츠 수를 자동 집계합니다.'],
+      ['AI 활용 고지', '생성형 AI를 활용하되 기획·검토·편집·운영 책임을 분명히 표시합니다.']
+    ];
+    items.forEach(([label, text]) => {
+      const item = make('div', 'trust-item');
+      item.append(make('strong', '', label), make('span', '', text));
+      grid.append(item);
+    });
+    block.append(titleRow, grid);
+    host.append(block);
+  }
+
+  function renderDiscovery(data) {
+    document.querySelector('.portal-discovery')?.remove();
+    const heroCard = document.querySelector('.hero-card');
+    if (!heroCard) return;
+    const host = make('div', 'portal-discovery');
+    renderSearch(data, host);
+    renderFeatured(data.projects || [], host);
+    renderRecent(data.projects || [], host);
+    renderTrust(host);
+    heroCard.insertAdjacentElement('afterend', host);
+  }
+
   function renderProject(project) {
     const article = make('article', 'item-card');
     const top = make('div', 'item-top');
     top.append(make('span', 'item-meta', project.meta || 'Project'));
+    const maturity = maturityFor(project);
+    top.append(make('span', `maturity-chip maturity-${maturity.tone}`, maturity.label));
     if (project.status) {
       const tone = ['fresh','active','stable','unknown'].includes(project.statusTone) ? project.statusTone : 'active';
       top.append(make('span', `project-status status-${tone}`, project.status));
@@ -188,7 +400,7 @@
     const description = make('p', '', project.description);
     const actions = make('div', 'item-actions');
     const visit = make('a', 'visit-link');
-    visit.href = trackedProjectUrl(project.url);
+    visit.href = trackedProjectUrl(project);
     visit.dataset.trackAccess = 'project';
     const external = isExternalProject(project);
     visit.target = external ? '_blank' : '_self';
@@ -200,13 +412,18 @@
     const copy = make('button', 'copy-btn', '링크 복사');
     copy.type = 'button';
     copy.dataset.url = project.url;
+    copy.dataset.projectId = project.id;
     actions.append(visit, copy);
     article.append(top, title, description);
     if (project.managedBy === 'github' || project.managedBy === 'github-external') {
       const info = make('div', 'project-live-meta');
       if (Number.isFinite(project.contentCount)) info.append(make('span', '', `${project.contentLabel || '콘텐츠'} ${project.contentCount}`));
-      if (project.lastUpdated) info.append(make('span', '', `업데이트 ${formatDate(project.lastUpdated)}`));
+      if (project.lastUpdated) info.append(make('span', '', `운영수정 ${formatDate(project.lastUpdated)}`));
       if (info.childElementCount) article.append(info);
+      const review = make('div', 'project-review-meta');
+      if (project.contentReviewedAt) review.append(make('span', '', `내용검토 ${formatDate(project.contentReviewedAt)}`));
+      if (project.baselineAt) review.append(make('span', '', `${project.baselineLabel || '기준일'} ${formatDate(project.baselineAt)}`));
+      if (review.childElementCount) article.append(review);
     }
     article.append(actions);
     return article;
@@ -293,14 +510,61 @@
     return section;
   }
 
+  function installSeo(data) {
+    const canonicalUrl = 'https://yehavha-nexus-hub.pages.dev/';
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      document.head.append(canonical);
+    }
+    canonical.href = canonicalUrl;
+
+    let robots = document.querySelector('meta[name="robots"]');
+    if (!robots) {
+      robots = document.createElement('meta');
+      robots.name = 'robots';
+      document.head.append(robots);
+    }
+    robots.content = 'index,follow,max-image-preview:large';
+
+    document.querySelector('script[data-nexus-structured-data]')?.remove();
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.dataset.nexusStructuredData = 'true';
+    script.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'YEHAVHA Nexus',
+      alternateName: '예하바 프로젝트 포털',
+      url: canonicalUrl,
+      description: '웹앱·연구·출판·미디어·AI 실무·교육·아이디어 프로젝트를 연결하는 통합 포털',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: `${canonicalUrl}?q={search_term_string}`,
+        'query-input': 'required name=search_term_string'
+      },
+      hasPart: (data.projects || []).map((project) => ({
+        '@type': 'WebPage',
+        name: project.title,
+        url: project.url,
+        description: project.description
+      }))
+    });
+    document.head.append(script);
+  }
+
   function renderPortal(data) {
     const categories = Array.isArray(data.categories) ? data.categories : [];
     const projects = Array.isArray(data.projects) ? data.projects : [];
     const researchGroups = Array.isArray(data.researchGroups) ? data.researchGroups : [];
     const visibleCategories = orderedCategories(categories, projects);
+    currentPortalData = { ...data, categories, projects, researchGroups };
 
     renderQuickLinks(visibleCategories, projects);
     renderHeroOverview(visibleCategories, projects, data.updatedAt);
+    renderDiscovery(currentPortalData);
+    installSeo(currentPortalData);
     portalGrid.replaceChildren();
 
     portalTiers.forEach((tier) => {
@@ -352,13 +616,25 @@
       const url = button.dataset.url;
       if (!url) return;
       const previous = button.textContent;
-      try { await copyText(url); button.textContent = '복사 완료'; showToast('프로젝트 링크를 복사했습니다.'); }
-      catch (error) { window.prompt('아래 주소를 복사하세요.', url); }
-      finally { window.setTimeout(() => { button.textContent = previous; }, 1400); }
+      try {
+        await copyText(url);
+        button.textContent = '복사 완료';
+        showToast('프로젝트 링크를 복사했습니다.');
+        trackEvent('copy', button.dataset.projectId || '');
+      } catch (error) {
+        window.prompt('아래 주소를 복사하세요.', url);
+      } finally {
+        window.setTimeout(() => { button.textContent = previous; }, 1400);
+      }
       return;
     }
     const projectLink = event.target.closest('a[data-track-access="project"]');
-    if (projectLink) return;
+    if (projectLink) {
+      if (projectLink.dataset.featuredProject) trackEvent('featured_open', projectLink.dataset.featuredProject);
+      else if (projectLink.dataset.recentProject) trackEvent('recent_open', projectLink.dataset.recentProject);
+      else if (projectLink.dataset.searchResult) trackEvent('search_open', projectLink.dataset.searchResult);
+      return;
+    }
     const link = event.target.closest('a[href^="#"]');
     if (link) {
       const targetId = link.getAttribute('href');
