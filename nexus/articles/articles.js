@@ -173,7 +173,7 @@
     document.getElementById('updatedAt').textContent = formatDate(data.updatedAt) || '-';
 
     const sectionMap = new Map(sections.map((section) => [section.id, section]));
-    const sectionPriority = new Map([['ai-law-essay', 0], ['ai-law-research', 1]]);
+    const sectionPriority = new Map(sections.map((section, index) => [section.id, index]));
     let activeSection = null;
 
     function renderArticleCards() {
@@ -193,18 +193,20 @@
       }
 
       emptyState.hidden = true;
-      let lastAiLawSection = '';
+      let lastSection = '';
       list
         .slice()
         .sort((a, b) => {
-          const dateOrder = String(b.publishedAt || b.updatedAt || '').localeCompare(String(a.publishedAt || a.updatedAt || ''));
-          if (dateOrder) return dateOrder;
-          return (sectionPriority.get(a.section) ?? 10) - (sectionPriority.get(b.section) ?? 10);
+          if (!activeSection) {
+            const sectionOrder = (sectionPriority.get(a.section) ?? 99) - (sectionPriority.get(b.section) ?? 99);
+            if (sectionOrder) return sectionOrder;
+          }
+          return String(b.publishedAt || b.updatedAt || '').localeCompare(String(a.publishedAt || a.updatedAt || ''));
         })
         .forEach((article) => {
-          if (!activeSection && (article.section === 'ai-law-essay' || article.section === 'ai-law-research') && article.section !== lastAiLawSection) {
-            articleGrid.append(el('div', 'article-group-title', sectionMap.get(article.section)?.title || 'AI 법'));
-            lastAiLawSection = article.section;
+          if (!activeSection && article.section !== lastSection) {
+            articleGrid.append(el('div', 'article-group-title', sectionMap.get(article.section)?.title || '기타 주제'));
+            lastSection = article.section;
           }
 
           const card = el('article', 'article-card');
