@@ -104,12 +104,20 @@
   function renderStage(stage) {
     const article = make('article', `stage-card tone-${stage.tone || 'future'}`);
     article.id = stage.id;
-    const rail = make('div', 'stage-rail');
-    rail.append(make('span', 'stage-order', stage.order));
+    article.style.display = 'block';
+
     const body = make('div', 'stage-body');
     const top = make('div', 'stage-top');
     const titleWrap = make('div', 'stage-title-wrap');
-    titleWrap.append(make('p', 'eyebrow', stage.eyebrow), make('h2', '', stage.title));
+    titleWrap.append(make('p', 'eyebrow', stage.eyebrow));
+
+    const heading = make('div', 'stage-heading');
+    heading.style.display = 'flex';
+    heading.style.alignItems = 'baseline';
+    heading.style.gap = '10px';
+    heading.append(make('span', 'stage-order', stage.order), make('h2', '', stage.title));
+    titleWrap.append(heading);
+
     top.append(titleWrap, make('span', 'stage-status', stage.status));
     body.append(top, make('p', 'stage-summary', stage.summary));
 
@@ -147,7 +155,7 @@
 
     if (stage.detail) body.append(renderStageDetail(stage.detail));
 
-    article.append(rail, body);
+    article.append(body);
     return article;
   }
 
