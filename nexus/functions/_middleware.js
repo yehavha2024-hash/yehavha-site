@@ -9,6 +9,7 @@ function shouldCount(request) {
   const path = url.pathname;
 
   if (path.startsWith('/api/access')) return false;
+  if (path === '/go' || path.startsWith('/go/')) return false;
   if (STATIC_ASSET_RE.test(path)) return false;
 
   return true;
