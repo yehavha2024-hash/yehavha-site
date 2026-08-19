@@ -31,6 +31,7 @@ function loadManifestRegistry() {
 
 // Nexus 상태를 자동 추적할 프로젝트는 이 승인 레지스트리만 읽습니다.
 // 카드의 제목·설명·URL은 nexus/projects.json만을 단일 원본으로 사용합니다.
+// 내용 검토일·법령/자료 기준일은 각 승인 manifest의 review 객체가 소유합니다.
 const MANIFEST_FILES = loadManifestRegistry();
 
 function valueAtPath(root, pathSpec) {
@@ -137,7 +138,7 @@ function latestDate(tracking, fallbackPaths = []) {
 }
 
 function dateOnly(iso) {
-  return iso ? iso.slice(0, 10) : null;
+  return iso ? String(iso).slice(0, 10) : null;
 }
 
 function ageDays(iso) {
@@ -153,6 +154,14 @@ function statusFor(latest, tracking = {}) {
   if (age <= freshDays) return { status: '최근 업데이트', statusTone: 'fresh' };
   if (age <= staleDays) return { status: '운영 중', statusTone: 'active' };
   return { status: '안정 운영', statusTone: 'stable' };
+}
+
+function reviewStatus(review = {}) {
+  const output = {};
+  if (review.contentReviewedAt) output.contentReviewedAt = dateOnly(review.contentReviewedAt);
+  if (review.baselineAt) output.baselineAt = dateOnly(review.baselineAt);
+  if (review.baselineLabel) output.baselineLabel = String(review.baselineLabel).slice(0, 30);
+  return output;
 }
 
 function countRegex(config) {
@@ -241,7 +250,8 @@ for (const { file, relative, data } of manifests) {
     ...statusFor(latest, tracking),
     lastUpdated: dateOnly(latest),
     contentCount: count,
-    contentLabel: tracking.count?.label || '콘텐츠'
+    contentLabel: tracking.count?.label || '콘텐츠',
+    ...reviewStatus(data.review)
   };
 }
 
@@ -250,5 +260,7 @@ writeJson(STATUS_FILE, statusMap);
 console.log(`YEHAVHA Nexus status refreshed: ${Object.keys(statusMap).length} approved GitHub-managed project(s).`);
 for (const item of Object.values(statusMap)) {
   const title = (base.projects || []).find(project => project.id === item.id)?.title || item.id;
-  console.log(`- ${title}: ${item.status}, ${item.contentLabel} ${item.contentCount ?? '-'}, ${item.lastUpdated ?? '-'}`);
+  const review = item.contentReviewedAt ? `, 내용검토 ${item.contentReviewedAt}` : '';
+  const baseline = item.baselineAt ? `, ${item.baselineLabel || '기준일'} ${item.baselineAt}` : '';
+  console.log(`- ${title}: ${item.status}, ${item.contentLabel} ${item.contentCount ?? '-'}, ${item.lastUpdated ?? '-'}${review}${baseline}`);
 }
