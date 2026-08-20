@@ -1,7 +1,7 @@
 {
   "updatedAt": "2026-08-20",
   "categories": [
-    {"id":"university","eyebrow":"NEXUS UNIVERSITY","title":"NEXUS UNIVERSITY","icon":"","iconClass":"university-icon","description":"AI 기반 자기주도형 종합대학 커리큘럼"},
+    {"id":"university","eyebrow":"NEXUS UNIVERSITY","title":"NEXUS UNIVERSITY","icon":"","iconClass":"university-icon","description":"대학 수준 지식을 기초부터 전문·융합까지 배우는 자기주도형 디지털 학습 플랫폼"},
     {"id":"apps","eyebrow":"WEB APPS & SERVICES","title":"웹앱·서비스","icon":"📱","iconClass":"apps-icon","description":"모바일 중심 웹서비스"},
     {"id":"research","eyebrow":"RESEARCH & KNOWLEDGE","title":"연구·지식","icon":"⚖️","iconClass":"research-icon","description":"학술연구와 연구 지식 기반"},
     {"id":"publishing","eyebrow":"PUBLISHING & ARCHIVE","title":"출판·아카이브","icon":"📚","iconClass":"publishing-icon","description":"전자책과 공개 글 아카이브"},
