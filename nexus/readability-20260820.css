@@ -1,0 +1,24 @@
+/* 2026-08-20 readability adjustment: preserve compact layout, increase text only */
+body{font-size:16px}
+.description{font-size:15px!important;line-height:1.66!important}
+.quick-link{font-size:14px!important}.quick-label{font-size:14px!important}.quick-count{font-size:11.5px!important}
+.portal-search-head h2{font-size:16px!important}.portal-search-head p{font-size:12px!important}.portal-search-input{font-size:14.5px!important}.portal-search-clear{font-size:12.5px!important}
+.search-result strong{font-size:14px!important}.search-result span{font-size:12px!important;line-height:1.46!important}.search-empty{font-size:12.5px!important}
+.overview-item span{font-size:10.8px!important}.overview-item strong{font-size:12.5px!important}
+.tier-copy .eyebrow,.category-head .eyebrow,.research-subgroup-head .eyebrow{font-size:10px!important}
+.tier-copy h2{font-size:1.16rem!important}.tier-description{font-size:13px!important;line-height:1.5!important}
+.category-head h2{font-size:1.22rem!important}.category-description{font-size:13.5px!important;line-height:1.55!important}.category-count{font-size:10.2px!important}
+.research-subgroup-head h3{font-size:15px!important}.research-subgroup-description{font-size:12.5px!important;line-height:1.52!important}
+.item-meta,.item-domain,.project-status{font-size:11.2px!important}.maturity-chip{font-size:10px!important}
+.item-card h3{font-size:16.5px!important;line-height:1.4!important}.item-card p{font-size:14px!important;line-height:1.58!important}
+.project-live-meta,.project-review-meta{font-size:11px!important;line-height:1.45!important}.visit-link,.copy-btn{font-size:12.3px!important}
+.category-university .category-description{font-size:14px!important}.category-university .item-card p{font-size:14px!important;line-height:1.6!important}
+.footer-card p,.footer-card a{font-size:13px!important}.footer-meta p{font-size:12px!important}
+@media(max-width:620px){
+ body{font-size:15px}
+ .description{font-size:14px!important}.quick-link{font-size:13.5px!important}.quick-label{font-size:13.5px!important}
+ .tier-description{font-size:12.5px!important}.category-description{font-size:13px!important}.research-subgroup-description{font-size:12px!important}
+ .item-card h3{font-size:16px!important}.item-card p{font-size:13.5px!important;line-height:1.56!important}
+ .item-meta,.item-domain,.project-status{font-size:10.8px!important}.project-live-meta,.project-review-meta{font-size:10.7px!important}.visit-link,.copy-btn{font-size:12px!important}
+ .category-university .item-card p{font-size:13.5px!important}
+}
