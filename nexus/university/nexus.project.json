@@ -1,0 +1,14 @@
+{
+  "id": "nexus-university",
+  "publish": true,
+  "tracking": {
+    "paths": ["nexus/university"],
+    "freshDays": 7,
+    "staleDays": 30,
+    "count": {
+      "type": "static",
+      "value": 35,
+      "label": "University Core 과목"
+    }
+  }
+}
