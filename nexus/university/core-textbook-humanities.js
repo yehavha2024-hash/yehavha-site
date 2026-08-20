@@ -1,0 +1,72 @@
+(()=>{'use strict';window.NEXUS_CORE_TEXTBOOK=window.NEXUS_CORE_TEXTBOOK||{};Object.assign(window.NEXUS_CORE_TEXTBOOK,{
+'CORE-121':{overview:'세계문명사 I은 고대 도시문명의 형성에서 중세 세계까지 정치·종교·경제·기술·교역의 상호작용을 비교하며 문명이 고립된 단위가 아니라 연결망 속에서 발전했음을 학습한다.',texts:['Herodotus, Histories','Thucydides, History of the Peloponnesian War','Sima Qian, Records of the Grand Historian','Peter Brown, The World of Late Antiquity','Jerry Bentley et al., Traditions & Encounters'],lessons:[
+['메소포타미아와 도시국가','관개농업·문자·사원·왕권·법전의 결합이 초기 국가와 행정조직을 형성했다.',['city-state','cuneiform','bureaucracy','law code'],'','함무라비 법전의 계층별 규율이 국가권력과 사회질서를 어떻게 반영하는지 분석한다.',['Code of Hammurabi','Van De Mieroop, A History of the Ancient Near East']],
+['고대 이집트와 국가형성','나일강의 농업주기와 중앙집권적 왕권, 종교적 정당성이 장기적 국가연속성을 가능하게 했다.',['pharaoh','divine kingship','redistribution'],'','피라미드 건설을 노동조직·세금·종교라는 세 관점에서 설명한다.',['The Book of the Dead','Ian Shaw, The Oxford History of Ancient Egypt']],
+['인더스와 초기 남아시아','도시계획·교역·표준화가 강한 조직능력을 보여주지만 문자해독의 한계 때문에 정치구조 해석에는 불확실성이 남는다.',['Harappan civilization','urban planning','archaeology'],'','모헨조다로 유적만으로 중앙집권국가를 단정할 수 있는지 증거수준을 평가한다.',['Upinder Singh, A History of Ancient and Early Medieval India']],
+['고대 중국과 제국질서','상·주에서 진·한으로 이어지는 과정에서 천명·관료제·법가·유가가 정치질서의 핵심 개념으로 발전했다.',['Mandate of Heaven','bureaucracy','Confucianism','Legalism'],'','진의 법가적 통치와 한의 유교적 관료제를 비교한다.',['Sima Qian, Records of the Grand Historian','Confucius, Analects']],
+['히브리 문명과 고대근동','이스라엘의 언약·율법·예언 전통은 고대근동의 제국·성전·법 전통과 상호작용하며 독특한 종교정체성을 형성했다.',['covenant','Torah','prophecy','monotheism'],'','고대근동 조약형식과 성서의 언약구조를 비교한다.',['Hebrew Bible','John Walton, Ancient Near Eastern Thought']],
+['그리스 폴리스와 고전문화','폴리스의 시민권·직접정치·전쟁경험은 철학·역사서술·정치사상의 발전과 긴밀히 연결되었다.',['polis','citizenship','democracy','hoplite'],'','아테네 민주정의 참여범위와 배제집단을 함께 분석한다.',['Herodotus, Histories','Thucydides, Peloponnesian War']],
+['헬레니즘 세계','알렉산드로스 정복 이후 그리스어·도시문화·상업망이 서아시아와 이집트의 기존 전통과 융합되었다.',['Hellenism','cosmopolitanism','cultural syncretism'],'','알렉산드리아를 지식·교역·권력의 교차점으로 분석한다.',['Arrian, Anabasis of Alexander']],
+['로마 공화정과 제국','법·시민권·군사·도로·조세체계가 광범위한 지역을 통합했지만 공화정 제도의 위기와 제국화가 병행되었다.',['republic','empire','Roman law','citizenship'],'','카이사르 이후 공화정의 제도적 붕괴 원인을 설명한다.',['Polybius, Histories','Livy, History of Rome']],
+['기독교와 후기고대','기독교는 유대교적 뿌리와 그리스로마 세계 속에서 성장했고 제국의 공인 이후 종교·정치·사회조직에 큰 변화를 만들었다.',['early Christianity','late antiquity','church','imperial religion'],'','콘스탄티누스 이후 교회와 제국 관계의 변화를 분석한다.',['Eusebius, Life of Constantine','Peter Brown, The World of Late Antiquity']],
+['이슬람의 등장과 확장','7세기 아라비아에서 등장한 이슬람은 종교공동체·법·제국을 연결하며 지중해·서아시아·중앙아시아를 재편했다.',['ummah','caliphate','sharia','trade'],'','우마이야와 아바스 왕조의 행정·문화 차이를 비교한다.',['Quran','Hugh Kennedy, The Prophet and the Age of the Caliphates']],
+['중세 유럽과 봉건질서','왕권·영주제·교회·도시·길드가 중첩된 다중권력구조를 형성했고 장원경제와 상업도시가 공존했다.',['feudalism','manorialism','church','guild'],'','봉건제를 단일한 피라미드 구조로 설명하는 모형의 한계를 검토한다.',['Marc Bloch, Feudal Society']],
+['유라시아 교역망과 중세 세계','실크로드·인도양·사하라 교역망은 상품뿐 아니라 종교·기술·질병·지식을 이동시켰다.',['Silk Roads','Indian Ocean trade','diaspora','Black Death'],'','흑사병의 확산을 무역망과 인구구조 변화로 분석한다.',['Ibn Battuta, Rihla','Janet Abu-Lughod, Before European Hegemony']]
+]},
+'CORE-122':{overview:'세계문명사 II는 15세기 이후 세계적 연결의 확대와 국가·시장·과학·산업·제국·민족주의·전쟁·탈식민화·디지털화가 현대 세계질서를 형성한 과정을 분석한다.',texts:['Eric Hobsbawm, The Age of Revolution','C. A. Bayly, The Birth of the Modern World','Jürgen Osterhammel, The Transformation of the World','Kenneth Pomeranz, The Great Divergence'],lessons:[
+['르네상스와 인문주의','고전의 재발견·도시경제·인쇄술·후원체계가 지식생산과 개인·정치에 대한 새로운 관점을 확산했다.',['Renaissance','humanism','printing'],'','인쇄술이 지식의 비용과 권위구조를 어떻게 바꾸었는지 분석한다.',['Petrarch, Letters','Elizabeth Eisenstein, The Printing Press as an Agent of Change']],
+['종교개혁과 종교전쟁','성서해석·교회권위·인쇄술·국가권력이 결합해 서유럽 종교질서를 분열시키고 국가형성에도 영향을 주었다.',['Reformation','confessionalization','state formation'],'','루터의 논쟁이 신학문제에서 정치질서 문제로 확장된 과정을 설명한다.',['Martin Luther, Ninety-Five Theses']],
+['과학혁명과 지식질서','관찰·수학·실험·기계론적 자연관이 새로운 과학방법을 형성했지만 기존 지식전통과 단절만으로 설명할 수는 없다.',['Scientific Revolution','experiment','mechanism'],'','갈릴레이와 뉴턴의 방법을 비교한다.',['Galileo, Dialogue','Newton, Principia']],
+['대항해·대서양 세계·식민지','유럽의 해양팽창은 아메리카 정복·노예무역·은과 작물의 이동을 통해 전지구적 생태·경제체계를 재편했다.',['Columbian Exchange','Atlantic slavery','mercantilism'],'','은 유통이 유럽·아메리카·중국 경제를 연결한 방식을 분석한다.',['Alfred Crosby, The Columbian Exchange']],
+['계몽주의와 혁명','자연권·주권·시민·공화주의에 관한 사상이 미국·프랑스·아이티 혁명과 결합해 정치적 정당성의 기준을 변화시켰다.',['Enlightenment','natural rights','revolution'],'','프랑스 인권선언과 아이티혁명의 보편성·배제 문제를 비교한다.',['Declaration of the Rights of Man','C. L. R. James, The Black Jacobins']],
+['산업혁명과 자본주의','화석연료·기계화·공장제·금융·시장확대가 생산성과 도시화를 높였지만 노동·계급·환경문제를 심화했다.',['industrialization','capitalism','urbanization'],'','영국 산업혁명의 임금·노동시간·도시환경 변화를 함께 평가한다.',['Hobsbawm, The Age of Revolution','Pomeranz, The Great Divergence']],
+['민족주의와 국민국가','언어·교육·군대·행정·인쇄문화가 상상의 공동체와 국민정체성을 조직했다.',['nationalism','nation-state','citizenship'],'','독일·이탈리아 통일에서 문화민족주의와 국가권력의 역할을 비교한다.',['Benedict Anderson, Imagined Communities']],
+['제국주의와 세계경제','산업자본·군사기술·인종이론·전략경쟁이 19세기 제국주의 확대를 지지했으며 식민지 사회는 다양한 방식으로 대응했다.',['imperialism','colonialism','racial hierarchy'],'','아프리카 분할을 경제적·전략적·이념적 요인으로 분석한다.',['Hobson, Imperialism','Said, Orientalism']],
+['제1차 세계대전과 전체전','동맹체계·제국경쟁·민족주의·동원체제가 지역위기를 세계적 총력전으로 확대했다.',['total war','mobilization','self-determination'],'','사라예보 사건이 전쟁의 원인인지 촉발요인인지 구분한다.',['Christopher Clark, The Sleepwalkers']],
+['대공황·파시즘·제2차 세계대전','경제위기·민주주의 취약성·극단적 민족주의·제국주의가 파시즘과 전쟁의 조건을 형성했다.',['Great Depression','fascism','Holocaust','World War II'],'','바이마르 공화국의 제도와 경제위기를 함께 분석한다.',['Hobsbawm, Age of Extremes']],
+['냉전과 탈식민화','미·소 경쟁과 핵억제 속에서 아시아·아프리카 식민지가 독립했고 제3세계는 양극체제 안팎에서 독자적 전략을 모색했다.',['Cold War','decolonization','non-alignment'],'','한국전쟁·베트남전쟁을 냉전과 탈식민화가 겹치는 전쟁으로 분석한다.',['Odd Arne Westad, The Global Cold War']],
+['세계화·디지털화·새로운 세계질서','1970년대 이후 금융·공급망·인터넷·플랫폼이 국경을 넘어 연결성을 높였지만 불평등·취약성·지정학적 재편도 심화했다.',['globalization','digital revolution','supply chain'],'','반도체 공급망을 세계화와 국가안보의 긴장으로 분석한다.',['Osterhammel, The Transformation of the World']]
+]},
+'CORE-123':{overview:'사상사는 철학적 개념을 시대별 이름의 목록으로 배우는 것이 아니라 인간·지식·국가·종교·과학에 관한 질문이 역사적 조건 속에서 어떻게 변형되었는지를 추적한다.',texts:['Plato, Republic','Aristotle, Politics','Augustine, City of God','Kant, Critique of Pure Reason','Marx, Capital','Nietzsche, On the Genealogy of Morality'],lessons:[
+['플라톤과 이상국가','플라톤은 감각세계와 이데아의 구분, 영혼의 질서와 정의로운 국가의 유비를 통해 지식과 정치의 관계를 논했다.',['Forms','justice','philosopher-king'],'','동굴의 비유를 지식·교육·권력 문제로 해석한다.',['Plato, Republic']],
+['아리스토텔레스와 목적론','아리스토텔레스는 형상·질료·원인·목적의 개념으로 자연과 인간행위를 설명하고 공동체 속 덕과 행복을 강조했다.',['four causes','telos','virtue','polis'],'','행복을 순간적 감정이 아니라 활동의 탁월성으로 보는 논리를 설명한다.',['Aristotle, Nicomachean Ethics','Politics']],
+['스토아·에피쿠로스와 삶의 철학','헬레니즘 철학은 불확실한 세계에서 욕망·감정·자유를 어떻게 관리할지 실천적 문제로 다뤘다.',['Stoicism','Epicureanism','ataraxia'],'','통제가능한 것과 통제불가능한 것의 구분을 현대 위험관리와 비교한다.',['Epictetus, Enchiridion','Epicurus, Letter to Menoeceus']],
+['아우구스티누스·아퀴나스와 중세사상','그리스철학과 기독교 신학의 결합 속에서 창조·악·의지·자연법·이성과 계시의 관계가 체계화되었다.',['natural law','free will','faith and reason'],'','아퀴나스의 자연법 개념을 실정법과 비교한다.',['Augustine, City of God','Aquinas, Summa Theologiae']],
+['르네상스·종교개혁·인간주의','인간의 존엄·원전회귀·개인양심·교회권위 비판이 근대적 개인과 텍스트 해석의 새로운 조건을 만들었다.',['humanism','conscience','ad fontes'],'','에라스무스와 루터의 자유의지 논쟁을 비교한다.',['Erasmus, On Free Will','Luther, Bondage of the Will']],
+['데카르트·로크·흄과 근대 인식론','합리론과 경험론은 확실한 지식의 근거를 이성·경험·습관에서 서로 다르게 찾았다.',['rationalism','empiricism','skepticism'],'','흄의 인과비판이 과학적 추론에 주는 문제를 설명한다.',['Descartes, Meditations','Locke, Essay','Hume, Enquiry']],
+['계몽주의와 사회계약','홉스·로크·루소는 자연상태와 계약을 통해 국가권력·자유·재산·일반의지의 정당성을 서로 다르게 구성했다.',['social contract','sovereignty','general will'],'','세 사상가의 국가정당화 논리를 표로 비교한다.',['Hobbes, Leviathan','Locke, Second Treatise','Rousseau, Social Contract']],
+['칸트와 비판철학','칸트는 경험 이전의 인식조건과 자율적 도덕법칙을 통해 합리론·경험론 및 타율적 윤리를 재구성했다.',['transcendental idealism','autonomy','categorical imperative'],'','정언명령의 보편화 공식과 결과주의를 비교한다.',['Kant, Critique of Pure Reason','Groundwork']],
+['헤겔·마르크스와 역사','헤겔은 역사적 자기의식과 변증법을, 마르크스는 물질적 생산관계와 계급갈등을 사회변동의 핵심으로 보았다.',['dialectic','alienation','historical materialism'],'','노동소외를 현대 플랫폼 노동에 적용한다.',['Hegel, Phenomenology of Spirit','Marx, Capital']],
+['다윈·니체·프로이트와 인간관의 전환','진화·계보학·무의식은 인간을 이성적·고정적 본성으로 보는 관념을 흔들었다.',['evolution','genealogy','unconscious'],'','도덕규범을 보편명제와 역사적 산물이라는 두 관점에서 비교한다.',['Darwin, Origin of Species','Nietzsche, Genealogy','Freud, Introductory Lectures']],
+['현상학·실존주의·분석철학','후설·하이데거·사르트르는 경험과 존재를, 프레게·러셀·비트겐슈타인은 언어와 논리를 중심으로 철학을 재편했다.',['phenomenology','existentialism','analytic philosophy'],'','“의미는 사용이다”라는 후기 비트겐슈타인의 관점을 사례로 설명한다.',['Husserl, Ideas','Wittgenstein, Philosophical Investigations']],
+['비판이론·페미니즘·탈식민·기술사상','20세기 이후 권력·젠더·식민성·매체·기술이 지식과 주체를 구성한다는 비판적 관점이 확대되었다.',['critical theory','feminism','postcolonialism','technology critique'],'','AI 데이터셋의 범주가 사회적 권력관계를 재생산하는 문제를 분석한다.',['Foucault, Discipline and Punish','Simone de Beauvoir, The Second Sex','Said, Orientalism']]
+]},
+'CORE-124':{overview:'문학과 인간은 서사·시·비극·소설의 형식이 인간의 기억·욕망·도덕·정체성·공동체 경험을 어떻게 구성하고 해석하게 하는지를 학습한다.',texts:['Aristotle, Poetics','Erich Auerbach, Mimesis','Mikhail Bakhtin, The Dialogic Imagination','Gérard Genette, Narrative Discourse','Martha Nussbaum, Love’s Knowledge'],lessons:[
+['신화·서사시와 집단기억','신화와 서사시는 영웅·신·전쟁·기원을 통해 공동체의 가치와 역사기억을 서사화한다.',['myth','epic','collective memory'],'','Gilgamesh와 Iliad의 영웅성을 죽음과 명예의 관점에서 비교한다.',['Epic of Gilgamesh','Homer, Iliad']],
+['비극과 카타르시스','비극은 행위·오류·필연·인식의 구조를 통해 인간의 책임과 고통을 탐색한다.',['hamartia','anagnorisis','catharsis'],'','Oedipus Rex에서 무지와 책임의 관계를 분석한다.',['Aristotle, Poetics','Sophocles, Oedipus Rex']],
+['희극·풍자·사회비판','희극과 풍자는 규범을 뒤집고 과장해 권력과 관습의 모순을 드러낸다.',['comedy','satire','carnivalesque'],'','Swift의 풍자에서 문자적 의미와 비판적 의도를 구분한다.',['Swift, A Modest Proposal','Bakhtin, Rabelais and His World']],
+['서정시와 목소리','시적 화자·리듬·이미지·은유는 직접 설명보다 압축된 언어로 감정과 인식을 조직한다.',['lyric speaker','metaphor','prosody'],'','동일한 주제를 산문과 시로 표현했을 때 의미밀도를 비교한다.',['Perrine, Sound and Sense']],
+['근대소설과 개인','근대소설은 내면·사회계층·도시·시간을 장기서사로 조직하며 개인과 사회의 긴장을 탐구한다.',['novel','interiority','realism'],'','Madame Bovary에서 욕망과 사회적 기대를 분석한다.',['Auerbach, Mimesis']],
+['리얼리즘·자연주의','리얼리즘은 일상적 인물과 사회구조를 구체적으로 재현하고 자연주의는 환경·유전·경제조건의 제약을 강조했다.',['realism','naturalism','social determinism'],'','소설 속 빈곤을 개인선택과 구조적 조건으로 나누어 읽는다.',['Zola, The Experimental Novel']],
+['모더니즘과 의식의 흐름','전통적 서사순서를 해체하고 시간·의식·파편성을 표현해 근대적 주체의 불안과 경험을 탐색한다.',['modernism','stream of consciousness','fragmentation'],'','Virginia Woolf의 내적 시간과 시계시간을 비교한다.',['Woolf, Mrs Dalloway']],
+['서사학과 시점','서술자·초점화·시간순서·반복·속도가 독자가 사건을 이해하는 방식을 결정한다.',['narrator','focalization','analepsis','duration'],'','한 사건을 1인칭과 전지적 시점으로 다시 써 의미차이를 분석한다.',['Genette, Narrative Discourse']],
+['대화주의와 다성성','소설은 하나의 작가목소리보다 여러 사회적 언어와 관점이 충돌하는 장이 될 수 있다.',['dialogism','polyphony','heteroglossia'],'','Dostoevsky 작품에서 인물의 목소리가 작가의 단순 대변이 아닌 이유를 설명한다.',['Bakhtin, Problems of Dostoevsky’s Poetics']],
+['식민·탈식민 문학','식민언어·정체성·혼종성·기억을 통해 제국의 서사와 주변부의 자기서술이 충돌한다.',['postcolonialism','hybridity','subaltern'],'','Things Fall Apart를 식민지 기록과 원주민 서사의 충돌로 읽는다.',['Achebe, Things Fall Apart','Said, Culture and Imperialism']],
+['문학·윤리·공감','서사는 타인의 관점과 구체적 상황을 경험하게 하지만 감정이 곧 도덕적 정당성을 보장하는 것은 아니다.',['narrative ethics','empathy','moral imagination'],'','법적 사건을 판결문과 소설형 서사로 읽을 때 판단이 달라지는지 분석한다.',['Nussbaum, Love’s Knowledge']],
+['디지털·AI 시대의 서사','게임·인터랙티브 픽션·생성형 AI는 저자·독자·텍스트 경계를 변화시키며 창작주체와 진정성의 문제를 제기한다.',['digital narrative','procedural authorship','generative text'],'','AI 공동창작 소설의 저자성·편집책임·독창성을 토론한다.',['Hayles, Electronic Literature']]
+]},
+'CORE-125':{overview:'언어·의미·해석은 기호와 문장이 어떻게 의미를 만들고, 발화맥락과 해석전통이 그 의미를 어떻게 변화시키는지 언어철학·화용론·해석학을 통해 학습한다.',texts:['Ferdinand de Saussure, Course in General Linguistics','Gottlob Frege, On Sense and Reference','Ludwig Wittgenstein, Philosophical Investigations','Hans-Georg Gadamer, Truth and Method','Paul Ricoeur, Interpretation Theory'],lessons:[
+['기호·구조·차이','소쉬르는 기표와 기의의 결합 및 언어체계 내부의 차이가 의미를 만든다고 보았다.',['signifier','signified','langue','parole'],'','같은 대상이 언어마다 다른 범주로 나뉘는 사례를 분석한다.',['Saussure, Course in General Linguistics']],
+['지시와 의미','프레게는 표현의 지시대상과 그것을 제시하는 방식인 의미를 구분해 동일대상에 대한 다른 표현의 인지적 차이를 설명했다.',['sense','reference','identity statement'],'','“샛별”과 “개밥바라기별”이 동일대상을 가리켜도 정보가 다른 이유를 설명한다.',['Frege, On Sense and Reference']],
+['그림이론과 언어게임','초기 비트겐슈타인의 논리적 그림이론과 후기의 사용·언어게임 관점을 비교한다.',['picture theory','language game','family resemblance'],'','“게임”의 공통본질을 하나로 정의하기 어려운 이유를 설명한다.',['Wittgenstein, Tractatus','Philosophical Investigations']],
+['발화행위','말은 사실을 기술할 뿐 아니라 약속·명령·선언처럼 사회적 행위를 수행한다.',['locution','illocution','perlocution'],'','“계약을 해지합니다”가 정보전달과 법적 행위를 동시에 수행하는 조건을 분석한다.',['Austin, How to Do Things with Words']],
+['함축과 협력원리','화자는 문자적 의미보다 더 많은 것을 전달하며 청자는 맥락과 협력원리를 통해 함축을 추론한다.',['implicature','cooperative principle','maxim'],'','“몇몇 학생이 합격했다”가 왜 “모두는 아니다”라는 함축을 만들 수 있는지 설명한다.',['Grice, Logic and Conversation']],
+['전제·맥락·지시표현','대명사·시간·장소·전제는 발화상황에 의존하며 문장만으로 의미가 완결되지 않는다.',['presupposition','indexical','context'],'','“그가 다시 왔다”에 포함된 전제를 분해한다.',['Levinson, Pragmatics']],
+['슐라이어마허와 딜타이','근대 해석학은 문법적 이해와 저자의 개별성, 역사적 삶의 맥락을 복원하는 문제를 체계화했다.',['hermeneutics','authorial intention','historicity'],'','오래된 법률문언의 저자의도와 현재적 의미를 구분한다.',['Schleiermacher, Hermeneutics and Criticism','Dilthey, Selected Works']],
+['가다머와 지평융합','해석자는 전통과 선이해에서 벗어날 수 없으며 이해는 과거의 지평과 현재의 지평이 만나는 사건이다.',['prejudice','tradition','fusion of horizons'],'','고대 텍스트를 현대 윤리기준으로 읽을 때 발생하는 긴장을 설명한다.',['Gadamer, Truth and Method']],
+['리쾨르와 텍스트의 자율성','기록된 텍스트는 저자의 원래 상황을 넘어 새로운 독자와 세계를 열며 설명과 이해를 결합해야 한다.',['distanciation','textual autonomy','appropriation'],'','저자 인터뷰와 작품 자체가 충돌할 때 해석근거를 어떻게 배분할지 토론한다.',['Ricoeur, Interpretation Theory']],
+['번역과 의미손실','완전한 일대일 대응이 없는 언어 사이에서 의미·뉘앙스·문화맥락·전문용어를 어떻게 보존할지 선택해야 한다.',['translation equivalence','untranslatability','semantic field'],'','법률용어 responsibility·liability·accountability의 번역차이를 비교한다.',['Jakobson, On Linguistic Aspects of Translation']],
+['법적 해석과 문언','법률해석은 문언·체계·목적·선례·헌법적 가치가 충돌할 수 있으며 의미론과 제도적 권위가 결합한다.',['textualism','purposivism','precedent'],'','“차량”에 새로운 이동기기가 포함되는지 문언·목적 관점에서 각각 논증한다.',['Hart, The Concept of Law','Dworkin, Law’s Empire']],
+['AI 언어모델과 의미','언어모델은 대규모 사용패턴을 학습하지만 통계적 예측·세계지식·화행의도·진리조건을 구분해야 한다.',['distributional semantics','LLM','grounding','pragmatics'],'','유창한 AI 답변이 의미이해와 사실참을 자동으로 보장하지 않는 이유를 분석한다.',['Bender & Koller, Climbing towards NLU']]
+]}
+});})();
