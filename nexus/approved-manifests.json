@@ -11,10 +11,13 @@
     "legal-knowledge/ai-literature/nexus.project.json",
     "ai-law-tech-foresight/nexus.project.json",
     "legal-philosophy/nexus.project.json",
+    "nexus/ai-legal-glossary/nexus.project.json",
     "nexus/publishing/nexus.project.json",
     "nexus/articles/nexus.project.json",
     "nexus/ai-practice/nexus.project.json",
+    "nexus/ai-governance/nexus.project.json",
     "nexus/ai-trends/nexus.project.json",
-    "nexus/initiatives/nexus.project.json"
+    "nexus/initiatives/nexus.project.json",
+    "nexus/future-trees/nexus.project.json"
   ]
 }
