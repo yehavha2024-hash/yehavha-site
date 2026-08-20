@@ -42,7 +42,7 @@
       if (!article) return;
 
       const canonical = `${DETAIL_URL}?id=${encodeURIComponent(article.id)}`;
-      const title = `${article.title} | YEHAVHA Nexus`;
+      const title = `${article.title} | YEHAVHA NEXUS`;
       const description = article.summary || article.subtitle || article.title;
       const language = article.language || 'ko';
 
