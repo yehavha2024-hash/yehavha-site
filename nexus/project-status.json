@@ -128,24 +128,6 @@
     "contentCount": 28,
     "contentLabel": "공개 글"
   },
-  "ai-practice-library": {
-    "id": "ai-practice-library",
-    "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
-    "lastUpdated": "2026-08-20",
-    "contentCount": 8,
-    "contentLabel": "실행 항목"
-  },
-  "ai-governance-execution": {
-    "id": "ai-governance-execution",
-    "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
-    "lastUpdated": "2026-08-20",
-    "contentCount": 10,
-    "contentLabel": "실행 모듈"
-  },
   "ai-trends": {
     "id": "ai-trends",
     "managedBy": "github",
@@ -184,15 +166,6 @@
     "lastUpdated": "2026-08-20",
     "contentCount": 496,
     "contentLabel": "개설 과목"
-  },
-  "ai-service-operations": {
-    "id": "ai-service-operations",
-    "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
-    "lastUpdated": "2026-08-20",
-    "contentCount": 8,
-    "contentLabel": "운영 모듈"
   },
   "initiative-hub": {
     "id": "initiative-hub",
