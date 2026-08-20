@@ -1,6 +1,7 @@
 {
   "updatedAt": "2026-08-21",
   "categories": [
+    {"id":"intelligence","eyebrow":"STRATEGIC INTELLIGENCE","title":"정보·전략","icon":"◆","iconClass":"intelligence-icon","description":"국내외 공개정보를 검증·분석해 중요한 변화와 위험·기회·향후 관찰지점을 압축하는 최우선 전략정보 영역"},
     {"id":"university","eyebrow":"NEXUS UNIVERSITY","title":"NEXUS UNIVERSITY","icon":"","iconClass":"university-icon","description":"대학 수준 지식을 기초부터 전문·융합까지 배우는 자기주도형 디지털 학습 플랫폼"},
     {"id":"apps","eyebrow":"WEB APPS & SERVICES","title":"웹앱·서비스","icon":"📱","iconClass":"apps-icon","description":"일상과 학습에 활용할 수 있는 모바일 중심 웹서비스"},
     {"id":"research","eyebrow":"RESEARCH & KNOWLEDGE","title":"연구·지식","icon":"⚖️","iconClass":"research-icon","description":"AI·법학을 중심으로 한 학술연구와 전문 지식 자료"},
@@ -15,7 +16,7 @@
     {"id":"knowledge","eyebrow":"RESEARCH KNOWLEDGE BASE","title":"연구 지식 기반","description":"법리·판례·문헌·법철학·용어·선제연구를 연결한 전문 자료"}
   ],
   "projects": [
-    {"id":"strategic-intelligence-briefing","category":"apps","meta":"Priority 01 · Strategic Intelligence","title":"정보전략 브리핑실","description":"국내외 공개정보를 선별·교차검증해 정치·외교·안보·경제·산업·법정책·과학·사회 분야의 중요한 변화와 위험·기회·향후 관찰지점을 매일 Executive Brief로 압축합니다.","url":"https://yehavha-nexus-hub.pages.dev/intelligence-briefing/","actionLabel":"오늘의 전략 브리핑","external":false},
+    {"id":"strategic-intelligence-briefing","category":"intelligence","meta":"Priority 00 · Strategic Intelligence","title":"정보전략 브리핑실","description":"국내외 공개정보를 선별·교차검증해 정치·외교·안보·경제·산업·법정책·과학·사회 분야의 중요한 변화와 위험·기회·향후 관찰지점을 매일 Executive Brief로 압축합니다.","url":"https://yehavha-nexus-hub.pages.dev/intelligence-briefing/","actionLabel":"오늘의 전략 브리핑","external":false},
     {"id":"nexus-university","category":"university","meta":"AI-Powered Self-Directed University","title":"NEXUS UNIVERSITY","description":"University Core 35과목과 12개 단과대학·융합학부를 통해 대학 수준 지식을 기초부터 전문·융합까지 배우고 연구로 연결하는 자기주도형 디지털 학습 플랫폼입니다.","url":"https://yehavha-nexus-hub.pages.dev/university/","actionLabel":"학습 플랫폼 입장","external":false},
     {"id":"three-min-rest","category":"apps","meta":"Web App","title":"3분 쉼표","description":"명언·생활영어·성경 핵심 의미·미니퀴즈를 짧게 이용하는 일일 순환 웹앱입니다.","url":"https://yehavha-3min-rest.pages.dev/","actionLabel":"앱 실행"},
     {"id":"living-law-100","category":"apps","meta":"Practical Law · 100 Essentials","title":"생활법률 100선","description":"일상에서 자주 맞닥뜨리는 100가지 법률 상황을 즉시 대응, 증거, 법적 근거와 다음 절차 중심으로 살펴볼 수 있습니다.","url":"https://yehavha-nexus-hub.pages.dev/living-law/","actionLabel":"생활법률 보기"},
