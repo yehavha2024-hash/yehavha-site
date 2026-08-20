@@ -1,22 +1,191 @@
 {
-  "strategic-intelligence-briefing": {"id":"strategic-intelligence-briefing","managedBy":"github","status":"운영 준비","statusTone":"active","lastUpdated":"2026-08-21","contentCount":0,"contentLabel":"핵심정보","contentReviewedAt":"2026-08-21","baselineAt":"2026-08-21","baselineLabel":"운영기준"},
-  "ai-law-institute": {"id":"ai-law-institute","managedBy":"github-external","status":"최근 업데이트","statusTone":"fresh","lastUpdated":"2026-08-17","contentCount":8,"contentLabel":"연구축"},
-  "three-min-rest": {"id":"three-min-rest","managedBy":"github","status":"최근 업데이트","statusTone":"fresh","lastUpdated":"2026-08-17","contentCount":4,"contentLabel":"학습 카테고리"},
-  "living-law-100": {"id":"living-law-100","managedBy":"github","status":"최근 업데이트","statusTone":"fresh","lastUpdated":"2026-08-20","contentCount":100,"contentLabel":"생활법률 항목","contentReviewedAt":"2026-08-15","baselineAt":"2026-08-15","baselineLabel":"법령기준"},
-  "toeicman": {"id":"toeicman","managedBy":"github","status":"최근 업데이트","statusTone":"fresh","lastUpdated":"2026-08-17","contentCount":100,"contentLabel":"학습일"},
-  "toeicman-v2": {"id":"toeicman-v2","managedBy":"github","status":"최근 업데이트","statusTone":"fresh","lastUpdated":"2026-08-20","contentCount":100,"contentLabel":"심화 학습일"},
-  "legal-research-track": {"id":"legal-research-track","managedBy":"github","status":"최근 업데이트","statusTone":"fresh","lastUpdated":"2026-08-20","contentCount":6,"contentLabel":"연구 단계"},
-  "legal-knowledge": {"id":"legal-knowledge","managedBy":"github","status":"최근 업데이트","statusTone":"fresh","lastUpdated":"2026-08-20","contentCount":108,"contentLabel":"연구노트"},
-  "legal-mind-training": {"id":"legal-mind-training","managedBy":"github","status":"최근 업데이트","statusTone":"fresh","lastUpdated":"2026-08-20","contentCount":16,"contentLabel":"훈련 사례"},
-  "ai-law-literature": {"id":"ai-law-literature","managedBy":"github","status":"최근 업데이트","statusTone":"fresh","lastUpdated":"2026-08-19","contentCount":217,"contentLabel":"연구문헌"},
-  "ai-law-tech-foresight": {"id":"ai-law-tech-foresight","managedBy":"github","status":"최근 업데이트","statusTone":"fresh","lastUpdated":"2026-08-17","contentCount":19,"contentLabel":"기술연구"},
-  "legal-philosophy": {"id":"legal-philosophy","managedBy":"github","status":"최근 업데이트","statusTone":"fresh","lastUpdated":"2026-08-19","contentCount":56,"contentLabel":"핵심 연구"},
-  "ai-legal-glossary": {"id":"ai-legal-glossary","managedBy":"github","status":"최근 업데이트","statusTone":"fresh","lastUpdated":"2026-08-20","contentCount":24,"contentLabel":"핵심 용어"},
-  "publishing-hub": {"id":"publishing-hub","managedBy":"github","status":"최근 업데이트","statusTone":"fresh","lastUpdated":"2026-08-20","contentCount":9,"contentLabel":"대표도서"},
-  "article-library": {"id":"article-library","managedBy":"github","status":"최근 업데이트","statusTone":"fresh","lastUpdated":"2026-08-20","contentCount":28,"contentLabel":"공개 글"},
-  "ai-trends": {"id":"ai-trends","managedBy":"github","status":"최근 업데이트","statusTone":"fresh","lastUpdated":"2026-08-20","contentCount":25,"contentLabel":"브리프","contentReviewedAt":"2026-08-20","baselineAt":"2026-08-20","baselineLabel":"자료기준"},
-  "ai-music-archive": {"id":"ai-music-archive","managedBy":"github","status":"최근 업데이트","statusTone":"fresh","lastUpdated":"2026-08-20","contentCount":8,"contentLabel":"운영 모듈"},
-  "education-hub": {"id":"education-hub","managedBy":"github","status":"최근 업데이트","statusTone":"fresh","lastUpdated":"2026-08-20","contentCount":6,"contentLabel":"운영 모듈"},
-  "nexus-university": {"id":"nexus-university","managedBy":"github","status":"최근 업데이트","statusTone":"fresh","lastUpdated":"2026-08-20","contentCount":496,"contentLabel":"개설 과목"},
-  "initiative-hub": {"id":"initiative-hub","managedBy":"github","status":"최근 업데이트","statusTone":"fresh","lastUpdated":"2026-08-20","contentCount":12,"contentLabel":"공개 항목"}
+  "ai-law-institute": {
+    "id": "ai-law-institute",
+    "managedBy": "github-external",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-17",
+    "contentCount": 8,
+    "contentLabel": "연구축"
+  },
+  "strategic-intelligence-briefing": {
+    "id": "strategic-intelligence-briefing",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-21",
+    "contentCount": 0,
+    "contentLabel": "핵심정보",
+    "contentReviewedAt": "2026-08-21",
+    "baselineAt": "2026-08-21",
+    "baselineLabel": "운영기준"
+  },
+  "three-min-rest": {
+    "id": "three-min-rest",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-17",
+    "contentCount": 4,
+    "contentLabel": "학습 카테고리"
+  },
+  "living-law-100": {
+    "id": "living-law-100",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-20",
+    "contentCount": 100,
+    "contentLabel": "생활법률 항목",
+    "contentReviewedAt": "2026-08-15",
+    "baselineAt": "2026-08-15",
+    "baselineLabel": "법령기준"
+  },
+  "toeicman": {
+    "id": "toeicman",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-17",
+    "contentCount": 100,
+    "contentLabel": "학습일"
+  },
+  "toeicman-v2": {
+    "id": "toeicman-v2",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-20",
+    "contentCount": 100,
+    "contentLabel": "심화 학습일"
+  },
+  "legal-research-track": {
+    "id": "legal-research-track",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-20",
+    "contentCount": 6,
+    "contentLabel": "연구 단계"
+  },
+  "legal-knowledge": {
+    "id": "legal-knowledge",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-20",
+    "contentCount": 108,
+    "contentLabel": "연구노트"
+  },
+  "legal-mind-training": {
+    "id": "legal-mind-training",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-20",
+    "contentCount": 16,
+    "contentLabel": "훈련 사례"
+  },
+  "ai-law-literature": {
+    "id": "ai-law-literature",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-19",
+    "contentCount": 217,
+    "contentLabel": "연구문헌"
+  },
+  "ai-law-tech-foresight": {
+    "id": "ai-law-tech-foresight",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-17",
+    "contentCount": 19,
+    "contentLabel": "기술연구"
+  },
+  "legal-philosophy": {
+    "id": "legal-philosophy",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-19",
+    "contentCount": 56,
+    "contentLabel": "핵심 연구"
+  },
+  "ai-legal-glossary": {
+    "id": "ai-legal-glossary",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-20",
+    "contentCount": 24,
+    "contentLabel": "핵심 용어"
+  },
+  "publishing-hub": {
+    "id": "publishing-hub",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-20",
+    "contentCount": 9,
+    "contentLabel": "대표도서"
+  },
+  "article-library": {
+    "id": "article-library",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-20",
+    "contentCount": 28,
+    "contentLabel": "공개 글"
+  },
+  "ai-trends": {
+    "id": "ai-trends",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-20",
+    "contentCount": 25,
+    "contentLabel": "브리프",
+    "contentReviewedAt": "2026-08-20",
+    "baselineAt": "2026-08-20",
+    "baselineLabel": "자료기준"
+  },
+  "ai-music-archive": {
+    "id": "ai-music-archive",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-20",
+    "contentCount": 8,
+    "contentLabel": "운영 모듈"
+  },
+  "education-hub": {
+    "id": "education-hub",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-20",
+    "contentCount": 6,
+    "contentLabel": "운영 모듈"
+  },
+  "nexus-university": {
+    "id": "nexus-university",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-20",
+    "contentCount": 496,
+    "contentLabel": "개설 과목"
+  },
+  "initiative-hub": {
+    "id": "initiative-hub",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-20",
+    "contentCount": 12,
+    "contentLabel": "공개 항목"
+  }
 }
