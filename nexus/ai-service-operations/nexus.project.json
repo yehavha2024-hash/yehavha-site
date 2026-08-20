@@ -1,0 +1,14 @@
+{
+  "id": "ai-service-operations",
+  "publish": true,
+  "tracking": {
+    "paths": ["nexus/ai-service-operations"],
+    "freshDays": 7,
+    "staleDays": 30,
+    "count": {
+      "type": "static",
+      "value": 8,
+      "label": "운영 모듈"
+    }
+  }
+}
