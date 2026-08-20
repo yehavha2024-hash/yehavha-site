@@ -23,7 +23,7 @@
 
   function fixSharedLinks() {
     const schema = detail.querySelector('.schema-strip a');
-    if (schema) schema.href = '../../legal-knowledge/legal-mind/case-review.schema.json';
+    if (schema) schema.href = 'https://yehavha-legal-knowledge.danielie.workers.dev/legal-mind/case-review.schema.json';
   }
 
   function render(item) {
