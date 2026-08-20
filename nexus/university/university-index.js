@@ -1,12 +1,94 @@
-(()=>{'use strict';
-const data=window.NEXUS_CURRICULUM;const coreHost=document.getElementById('coreStages');const collegeHost=document.getElementById('collegeCatalog');const interHost=document.getElementById('interCatalog');const search=document.getElementById('courseSearch');const searchStatus=document.getElementById('searchStatus');
+(()=>{
+'use strict';
+
+const data=window.NEXUS_CURRICULUM;
+const coreHost=document.getElementById('coreStages');
+const collegeHost=document.getElementById('collegeCatalog');
+const interHost=document.getElementById('interCatalog');
+const search=document.getElementById('courseSearch');
+const searchStatus=document.getElementById('searchStatus');
+
 const esc=(v='')=>String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-const stageMeta={1:['Stage 1 · Intellectual Foundation','사고·수학·문명·과학·컴퓨터의 기초 렌즈'],2:['Stage 2 · Fundamental Tools','전문지식을 읽고 분석하기 위한 기본 도구'],3:['Stage 3 · Disciplinary Expansion','여러 학문의 설명방식과 핵심 지식 확장'],4:['Stage 4 · Analysis & Integration','자료·모델·제도·기술을 통합 분석'],5:['Stage 5 · Synthesis','복합문제를 여러 학문으로 종합하는 Capstone']};
+const stageMeta={
+  1:['Stage 1 · Intellectual Foundation','사고·수학·문명·과학·컴퓨터의 기초 렌즈'],
+  2:['Stage 2 · Fundamental Tools','전문지식을 읽고 분석하기 위한 기본 도구'],
+  3:['Stage 3 · Disciplinary Expansion','여러 학문의 설명방식과 핵심 지식 확장'],
+  4:['Stage 4 · Analysis & Integration','자료·모델·제도·기술을 통합 분석'],
+  5:['Stage 5 · Synthesis','복합문제를 여러 학문으로 종합하는 Capstone']
+};
 const href=c=>c.id==='CORE-101'?'./core-101.html':`./course.html?id=${encodeURIComponent(c.id)}`;
-function card(c){return `<a class="course-card open catalog-course" href="${href(c)}" data-search="${esc(`${c.id} ${c.title} ${c.summary} ${c.college} ${c.department}`.toLowerCase())}"><span class="course-code">${esc(c.id)}</span><span class="course-copy"><strong>${esc(c.title)}</strong><small>${esc(c.summary)}</small></span><span class="course-state">Level ${esc(c.level)}</span></a>`;}
-function renderCore(){coreHost.innerHTML=[1,2,3,4,5].map(stage=>{const items=data.core.filter(c=>c.stage===stage);const [title,desc]=stageMeta[stage];return `<section class="stage catalog-group"><div class="stage-top"><div><h3>${esc(title)}</h3><p>${esc(desc)}</p></div><span class="badge">${items.length} COURSES</span></div><div class="course-grid">${items.map(card).join('')}</div></section>`}).join('');}
-function renderColleges(){collegeHost.innerHTML=data.colleges.map((college,i)=>{const courseCount=college.departments.reduce((n,d)=>n+d.courseIds.length,0);const opened=['ECON','ARCH','EDU'].includes(college.code);return `<details class="college-catalog catalog-group" ${opened?'open':''}><summary><span class="college-index">${String(i+1).padStart(2,'0')}</span><span><strong>${esc(college.title)}</strong><small>${college.departments.length} Departments · ${courseCount} Courses</small></span><span class="course-state">${esc(college.code)}</span></summary><div class="department-list">${college.departments.map(dept=>{const items=dept.courseIds.map(id=>data.courses.find(c=>c.id===id)).filter(Boolean);return `<section class="department-block"><div class="department-head"><strong>${esc(dept.title)}</strong><span>${items.length} Courses</span></div><div class="course-grid">${items.map(card).join('')}</div></section>`}).join('')}</div></details>`}).join('');}
-function renderInter(){const items=data.interdisciplinary.map(id=>data.courses.find(c=>c.id===id)).filter(Boolean);const foundation=items.filter(c=>c.id.startsWith('INT-'));const seminar=items.filter(c=>c.id.startsWith('SEM-'));interHost.innerHTML=`<section class="stage catalog-group"><div class="stage-top"><div><h3>Interdisciplinary Courses</h3><p>문제정의·시스템맵·전문렌즈·증거·위험·거버넌스를 통합하는 400-level 과정</p></div><span class="badge">${foundation.length} COURSES</span></div><div class="course-grid">${foundation.map(card).join('')}</div></section><section class="stage catalog-group"><div class="stage-top"><div><h3>Advanced Problem Seminars</h3><p>책임·안전·민주주의·노동·전쟁·정체성을 여러 학문 관점으로 분석하는 500-level 세미나</p></div><span class="badge">${seminar.length} COURSES</span></div><div class="course-grid">${seminar.map(card).join('')}</div></section>`;}
-function filter(){const q=search.value.trim().toLowerCase();let visible=0;document.querySelectorAll('.catalog-course').forEach(el=>{const hit=!q||el.dataset.search.includes(q);el.hidden=!hit;if(hit)visible++;});document.querySelectorAll('.department-block').forEach(block=>{block.hidden=!block.querySelector('.catalog-course:not([hidden])');});document.querySelectorAll('.college-catalog').forEach(group=>{const hit=!!group.querySelector('.catalog-course:not([hidden])');group.hidden=!hit;if(q&&hit)group.open=true;});document.querySelectorAll('.stage.catalog-group').forEach(group=>{group.hidden=!group.querySelector('.catalog-course:not([hidden])');});searchStatus.textContent=q?`${visible}개 과목 검색됨`:`전체 ${data.all.length}개 과목`;}
-renderCore();renderColleges();renderInter();search.addEventListener('input',filter);filter();
+
+function card(c){
+  return `<a class="course-card open catalog-course" href="${href(c)}" data-search="${esc(`${c.id} ${c.title} ${c.summary} ${c.college} ${c.department}`.toLowerCase())}"><span class="course-code">${esc(c.id)}</span><span class="course-copy"><strong>${esc(c.title)}</strong><small>${esc(c.summary)}</small></span><span class="course-state">Level ${esc(c.level)}</span></a>`;
+}
+
+function renderCore(){
+  coreHost.innerHTML=[1,2,3,4,5].map(stage=>{
+    const items=data.core.filter(c=>c.stage===stage);
+    const [title,desc]=stageMeta[stage];
+    return `<section class="stage catalog-group"><div class="stage-top"><div><h3>${esc(title)}</h3><p>${esc(desc)}</p></div><span class="badge">${items.length} COURSES</span></div><div class="course-grid">${items.map(card).join('')}</div></section>`;
+  }).join('');
+}
+
+function renderColleges(){
+  collegeHost.innerHTML=data.colleges.map((college,i)=>{
+    const courseCount=college.departments.reduce((n,d)=>n+d.courseIds.length,0);
+    return `<details class="college-catalog catalog-group"><summary><span class="college-index">${String(i+1).padStart(2,'0')}</span><span><strong>${esc(college.title)}</strong><small>${college.departments.length} Departments · ${courseCount} Courses</small></span><span class="course-state">${esc(college.code)}</span></summary><div class="department-list">${college.departments.map(dept=>{
+      const items=dept.courseIds.map(id=>data.courses.find(c=>c.id===id)).filter(Boolean);
+      return `<section class="department-block"><div class="department-head"><strong>${esc(dept.title)}</strong><span>${items.length} Courses</span></div><div class="course-grid">${items.map(card).join('')}</div></section>`;
+    }).join('')}</div></details>`;
+  }).join('');
+}
+
+function renderInter(){
+  const items=data.interdisciplinary.map(id=>data.courses.find(c=>c.id===id)).filter(Boolean);
+  const foundation=items.filter(c=>c.id.startsWith('INT-'));
+  const seminar=items.filter(c=>c.id.startsWith('SEM-'));
+  interHost.innerHTML=`<section class="stage catalog-group"><div class="stage-top"><div><h3>Interdisciplinary Courses</h3><p>문제정의·시스템맵·전문렌즈·증거·위험·거버넌스를 통합하는 400-level 과정</p></div><span class="badge">${foundation.length} COURSES</span></div><div class="course-grid">${foundation.map(card).join('')}</div></section><section class="stage catalog-group"><div class="stage-top"><div><h3>Advanced Problem Seminars</h3><p>책임·안전·민주주의·노동·전쟁·정체성을 여러 학문 관점으로 분석하는 500-level 세미나</p></div><span class="badge">${seminar.length} COURSES</span></div><div class="course-grid">${seminar.map(card).join('')}</div></section>`;
+}
+
+function closeAllColleges(){
+  document.querySelectorAll('.college-catalog').forEach(group=>{group.open=false;});
+}
+
+function filter(){
+  const q=search.value.trim().toLowerCase();
+  let visible=0;
+
+  document.querySelectorAll('.catalog-course').forEach(el=>{
+    const hit=!q||el.dataset.search.includes(q);
+    el.hidden=!hit;
+    if(hit)visible++;
+  });
+
+  document.querySelectorAll('.department-block').forEach(block=>{
+    block.hidden=!block.querySelector('.catalog-course:not([hidden])');
+  });
+
+  document.querySelectorAll('.college-catalog').forEach(group=>{
+    const hit=!!group.querySelector('.catalog-course:not([hidden])');
+    group.hidden=!hit;
+    group.open=Boolean(q&&hit);
+  });
+
+  document.querySelectorAll('.stage.catalog-group').forEach(group=>{
+    group.hidden=!group.querySelector('.catalog-course:not([hidden])');
+  });
+
+  searchStatus.textContent=q?`${visible}개 과목 검색됨`:`전체 ${data.all.length}개 과목`;
+}
+
+function normalizeEntryState(){
+  if(!search.value.trim()) closeAllColleges();
+  else filter();
+}
+
+renderCore();
+renderColleges();
+renderInter();
+closeAllColleges();
+filter();
+
+search.addEventListener('input',filter);
+window.addEventListener('pageshow',normalizeEntryState);
 })();
