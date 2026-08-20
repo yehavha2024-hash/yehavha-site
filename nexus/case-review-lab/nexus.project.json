@@ -1,0 +1,14 @@
+{
+  "id": "case-review-lab",
+  "publish": true,
+  "tracking": {
+    "paths": ["nexus/case-review-lab"],
+    "freshDays": 7,
+    "staleDays": 30,
+    "count": {
+      "type": "static",
+      "value": 8,
+      "label": "검토 단계"
+    }
+  }
+}
