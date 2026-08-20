@@ -1,0 +1,14 @@
+{
+  "id": "education-hub",
+  "publish": true,
+  "tracking": {
+    "paths": ["nexus/education-hub"],
+    "freshDays": 7,
+    "staleDays": 30,
+    "count": {
+      "type": "static",
+      "value": 6,
+      "label": "운영 모듈"
+    }
+  }
+}
