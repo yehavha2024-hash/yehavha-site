@@ -1,0 +1,12 @@
+(()=>{'use strict';
+const id=new URLSearchParams(location.search).get('id');
+const econ=window.NEXUS_ECON_BUS_TEXTBOOKS||{},arch=window.NEXUS_ARCH_URBAN_TEXTBOOKS||{},edu=window.NEXUS_EDUCATION_TEXTBOOKS||{},inter=window.NEXUS_INTERDISCIPLINARY_TEXTBOOKS||{};
+const kind=econ[id]?'econ':arch[id]?'arch':edu[id]?'edu':inter[id]?'inter':null;if(!kind)return;
+const configs={econ:{badge:'ECON · BUSINESS TEXTBOOK 2.0',note:'이 과목은 모형·회계·자료·계산·추정·민감도·위험·의사결정을 연결하는 경제·경영 전공 교재입니다.',theory:'모형·회계·자료·분석방법·의사결정',case:'의사결정 사례·시나리오',read:'표준교재·대표모형·실증문헌'},arch:{badge:'ARCHITECTURE · URBAN TEXTBOOK 2.0',note:'이 과목은 대지·사용자·공간·구조·환경·법규·도면·BIM·검증·비평·수정을 연결하는 건축·도시 전공 교재입니다.',theory:'대지·구조·환경·법규·설계·검증·비평',case:'Design / Analysis Studio',read:'표준교재·설계기준·대표사례'},edu:{badge:'EDUCATION · LEARNING TEXTBOOK 2.0',note:'이 과목은 학습목표·학습자·학습이론·교수설계·평가·피드백·학습데이터·재설계를 연결하는 교육·학습과학 전공 교재입니다.',theory:'학습이론·교수설계·평가·피드백·학습데이터·재설계',case:'Instructional Design Lab',read:'표준교재·대표연구·평가문헌'},inter:{badge:'INTERDISCIPLINARY SEMINAR 2.0',note:'이 과정은 문제정의·시스템맵·전문분야 렌즈·증거·위험·가치충돌·법·거버넌스·대안설계·Capstone을 수행하는 융합학부·고급세미나 과정입니다.',theory:'전문분야 렌즈·증거·위험·실패경로·법·거버넌스',case:'Integrated Case · Capstone',read:'전문분야 원자료·정책·대표연구'}};
+const text=configs[kind];const badges=[...document.querySelectorAll('.course-kicker .badge')];if(badges.length)badges[badges.length-1].textContent=text.badge;
+document.querySelectorAll('.course-meta span').forEach(el=>{if(el.textContent.trim()==='TEXTBOOK CORE')el.textContent=text.badge;});
+const note=document.querySelector('.textbook-note');if(note)note.textContent=text.note;
+document.querySelectorAll('.lesson-section h3').forEach(h=>{const t=h.textContent.trim();if(t==='핵심 이론·학설·개념')h.textContent=text.theory;else if(t==='사례')h.textContent=text.case;else if(t==='대표 원전·문헌')h.textContent=text.read;else if(t==='공식·모형'&&kind==='econ')h.textContent='모형·공식·재무계산';});
+const overviewTag=document.querySelector('.section-head span');if(overviewTag&&overviewTag.textContent.includes('TEXTBOOK'))overviewTag.textContent=text.badge;
+const integrity=window.NEXUS_FULL_TEXTBOOK_INTEGRITY;if(integrity&&!integrity.ok){const host=document.querySelector('.course-hero-box');if(host){const warn=document.createElement('div');warn.className='textbook-note';warn.style.borderColor='rgba(239,120,120,.4)';warn.style.color='#f3b7b7';warn.textContent=`전체 교재 데이터 점검 필요: ${integrity.invalid.slice(0,3).join(' / ')}${integrity.invalid.length>3?' 외':''}`;host.append(warn);}}
+})();
