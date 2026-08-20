@@ -14,26 +14,46 @@ const projects = [
 ];
 
 const nexusRuntimePages = [
+  'nexus/intelligence-briefing',
+  'nexus/university',
   'nexus/living-law',
   'nexus/toeic-human-v2',
+  'nexus/research-track',
+  'nexus/ai-legal-glossary',
   'nexus/publishing',
   'nexus/articles',
-  'nexus/ai-practice',
-  'nexus/ai-practice/logs',
   'nexus/ai-trends',
+  'nexus/ai-music-archive',
+  'nexus/education-hub',
   'nexus/initiatives'
+];
+
+const nexusDetailPages = [
+  'nexus/publishing/detail.html',
+  'nexus/articles/article.html',
+  'nexus/university/course.html',
+  'nexus/university/quality-audit.html'
 ];
 
 const nexusJsonFiles = [
   'nexus/projects.json',
   'nexus/project-status.json',
   'nexus/approved-manifests.json',
+  'nexus/intelligence-briefing/latest.json',
+  'nexus/intelligence-briefing/archive-index.json',
   'nexus/publishing/books.json',
   'nexus/articles/articles.json',
-  'nexus/ai-practice/data.json',
   'nexus/ai-trends/data.json',
   'nexus/initiatives/data.json'
 ];
+
+const retiredNexusPaths = [
+  'nexus/ai-practice',
+  'nexus/ai-governance',
+  'nexus/ai-service-operations'
+];
+
+const COPYRIGHT_STANDARD = 'Copyright © 이명훈 2026. All rights reserved.';
 
 let errors = 0;
 let warnings = 0;
@@ -90,7 +110,25 @@ const auditLocalReferences = (root, index) => {
   }
 };
 
+const auditFooterStandard = file => {
+  if (!fs.existsSync(file)) return report('ERROR', file, 'footer 감사 대상 HTML 없음');
+  const html = read(file);
+  if (!html.includes(COPYRIGHT_STANDARD)) {
+    report('ERROR', file, `표준 Copyright 문구 누락 또는 순서 오류: ${COPYRIGHT_STANDARD}`);
+  }
+  if (/Copyright ©\s*2026\s*이명훈/.test(html)) {
+    report('ERROR', file, '구버전 Copyright 순서(2026 이명훈)가 잔존');
+  }
+  if (!html.includes('mailto:kimbrighth@gmail.com')) report('ERROR', file, '표준 문의 mailto 누락');
+  if (!html.includes('AI 활용 안내')) report('ERROR', file, 'AI 활용 안내 누락');
+  if (/\.footer::after/.test(html)) report('ERROR', file, 'HTML 안에 footer 가상요소 소유 흔적이 있음');
+};
+
 const auditNexusRuntimePages = () => {
+  for (const retired of retiredNexusPaths) {
+    if (fs.existsSync(retired)) report('ERROR', retired, '삭제된 Nexus 프로젝트 경로가 다시 존재함');
+  }
+
   for (const root of nexusRuntimePages) {
     const indexPath = path.join(root, 'index.html');
     const index = read(indexPath);
@@ -100,7 +138,11 @@ const auditNexusRuntimePages = () => {
     }
     auditAnchors(root, index);
     auditLocalReferences(root, index);
+    auditFooterStandard(indexPath);
   }
+
+  auditFooterStandard('nexus/index.html');
+  for (const file of nexusDetailPages) auditFooterStandard(file);
 
   for (const file of nexusJsonFiles) {
     if (!fs.existsSync(file)) {
@@ -202,8 +244,12 @@ const auditNexusModel = () => {
     if (!(id in (status || {}))) report('ERROR', statusPath, `상태 정보가 없는 승인 manifest id: ${id}`);
   }
 
-  if (/projects\.generated\.json/.test(read(portalPath))) {
+  const portal = read(portalPath);
+  if (/projects\.generated\.json/.test(portal)) {
     report('ERROR', portalPath, 'portal-v2.js가 제거된 projects.generated.json을 참조함');
+  }
+  if (/\bpractice\b|ai-practice/.test(portal)) {
+    report('ERROR', portalPath, '삭제된 AI 실무·아이디어 분류 또는 경로 참조가 portal-v2.js에 잔존');
   }
 };
 
