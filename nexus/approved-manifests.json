@@ -19,6 +19,7 @@
     "nexus/ai-trends/nexus.project.json",
     "nexus/ai-music-archive/nexus.project.json",
     "nexus/education-hub/nexus.project.json",
+    "nexus/university/nexus.project.json",
     "nexus/ai-service-operations/nexus.project.json",
     "nexus/initiatives/nexus.project.json"
   ]
