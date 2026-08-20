@@ -28,6 +28,8 @@
   }
 
   const categoryIcons = {
+    intelligence: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 20 6v5c0 5-3.4 8.2-8 10-4.6-1.8-8-5-8-10V6l8-3Z"/><path d="M8 12h8M12 8v8"/></svg>',
+    university: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-5 9 5-9 5-9-5Z"/><path d="M5 12v7M9 14v5M15 14v5M19 12v7M3 20h18"/></svg>',
     apps: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="17" height="16" rx="2.5"/><path d="M3.5 8h17M7 6h.01M10 6h.01"/><path d="M7 12h4v4H7zM14 12h3M14 16h3"/></svg>',
     research: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M6 6h12"/><path d="m7 6-3 6h6L7 6Zm10 0-3 6h6l-3-6Z"/><path d="M4 12c.5 2 5.5 2 6 0M14 12c.5 2 5.5 2 6 0M8 21h8"/></svg>',
     publishing: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5c3.2-.7 5.8 0 8 2v11c-2.2-2-4.8-2.7-8-2V5.5Z"/><path d="M20 5.5c-3.2-.7-5.8 0-8 2v11c2.2-2 4.8-2.7 8-2V5.5Z"/></svg>',
@@ -39,26 +41,44 @@
 
   const portalTiers = [
     {
-      id: 'core',
+      id: 'intelligence',
+      number: '00',
+      eyebrow: 'STRATEGIC INTELLIGENCE',
+      title: '정보·전략',
+      description: '국내외 핵심 정보를 선별·검증·분석해 판단에 필요한 변화와 위험·기회를 가장 먼저 제시합니다.',
+      categoryIds: ['intelligence'],
+      variant: 'primary'
+    },
+    {
+      id: 'university',
       number: '01',
+      eyebrow: 'NEXUS UNIVERSITY',
+      title: 'NEXUS UNIVERSITY',
+      description: '대학 수준의 체계적 학습과 연구 기반을 연결합니다.',
+      categoryIds: ['university'],
+      variant: 'primary'
+    },
+    {
+      id: 'core',
+      number: '02',
       eyebrow: 'CORE WORKSPACES',
       title: '핵심 작업영역',
-      description: '직접 사용하는 웹서비스와 장기 연구 기반을 가장 먼저 배치합니다.',
+      description: '직접 사용하는 웹서비스와 장기 연구 기반을 배치합니다.',
       categoryIds: ['apps', 'research'],
       variant: 'primary'
     },
     {
       id: 'create',
-      number: '02',
+      number: '03',
       eyebrow: 'CREATE · LEARN · SHARE',
       title: '제작·교육·공개',
-      description: 'AI 실무를 교육·출판·미디어 결과물로 확장하는 영역을 한 층위로 묶습니다.',
-      categoryIds: ['practice', 'education', 'publishing', 'media'],
+      description: '교육·출판·미디어 결과물을 한 층위로 묶습니다.',
+      categoryIds: ['education', 'publishing', 'media'],
       variant: 'compact'
     },
     {
       id: 'ideas',
-      number: '03',
+      number: '04',
       eyebrow: 'PUBLIC IDEAS',
       title: '아이디어 허브',
       description: '공개 가능한 아이디어와 프로젝트 후보를 한곳에서 확인합니다.',
@@ -68,6 +88,7 @@
   ];
 
   const featuredDefinitions = [
+    { id: 'strategic-intelligence-briefing', kicker: 'INTELLIGENCE', note: '오늘의 핵심 전략정보 브리핑' },
     { id: 'legal-research-track', kicker: 'RESEARCH', note: '장기 법학 연구 계보' },
     { id: 'living-law-100', kicker: 'PRACTICAL', note: '실제 대응순서 중심 법률 가이드' },
     { id: 'article-library', kicker: 'PUBLICATIONS', note: '웹에서 바로 읽는 공개 아카이브' }
@@ -130,6 +151,7 @@
   }
 
   function maturityFor(project) {
+    if (project.category === 'intelligence') return { label: '최우선 정보', tone: 'research' };
     if (project.category === 'initiatives') return { label: '아이디어', tone: 'idea' };
     if (project.category === 'practice') return { label: '실행·확장', tone: 'expanding' };
     if (project.category === 'research') return { label: '연구 운영', tone: 'research' };
@@ -538,7 +560,7 @@
       name: 'YEHAVHA Nexus',
       alternateName: '예하바 프로젝트 포털',
       url: canonicalUrl,
-      description: '웹앱·연구·출판·미디어·AI 실무·교육·아이디어 프로젝트를 연결하는 통합 포털',
+      description: '전략정보·대학·웹앱·연구·출판·미디어·교육·아이디어 프로젝트를 연결하는 통합 포털',
       potentialAction: {
         '@type': 'SearchAction',
         target: `${canonicalUrl}?q={search_term_string}`,
@@ -576,7 +598,7 @@
     const extraCategories = visibleCategories.filter((category) => !tierIds.has(category.id));
     if (extraCategories.length) {
       const extraTier = {
-        id: 'more', number: '04', eyebrow: 'MORE', title: '기타 영역',
+        id: 'more', number: '05', eyebrow: 'MORE', title: '기타 영역',
         description: '추가된 프로젝트 영역입니다.', categoryIds: extraCategories.map((category) => category.id), variant: 'compact'
       };
       const tierSection = renderTier(extraTier, visibleCategories, projects, researchGroups);
