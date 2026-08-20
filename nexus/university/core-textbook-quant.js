@@ -1,0 +1,72 @@
+(()=>{'use strict';window.NEXUS_CORE_TEXTBOOK=window.NEXUS_CORE_TEXTBOOK||{};Object.assign(window.NEXUS_CORE_TEXTBOOK,{
+'CORE-111':{overview:'수학적 사고는 계산기술보다 구조·관계·불변량을 찾고, 정의와 공리에서 결론을 엄밀하게 도출하는 문제해결 훈련이다.',texts:['George Pólya, How to Solve It','Daniel Velleman, How to Prove It','Richard Courant & Herbert Robbins, What Is Mathematics?','Paul Halmos, Naive Set Theory'],lessons:[
+['집합·원소·관계','집합은 대상을 명확한 기준으로 묶는 기본 언어이며 포함관계·합집합·교집합·여집합으로 구조를 표현한다.',['set','subset','relation'],'A∪B, A∩B, Aᶜ','법적 책임주체 집합과 고위험 AI 시스템 집합의 교집합을 정의한다.',['Halmos, Naive Set Theory']],
+['명제와 수학적 논리','필요조건·충분조건·역·이·대우를 구분하면 수학적 주장과 일상적 추론의 구조를 명확히 할 수 있다.',['proposition','necessary condition','sufficient condition'],'P→Q ≡ ¬Q→¬P','“등록된 시스템이면 추적가능하다”의 대우를 작성한다.',['Velleman, How to Prove It']],
+['함수와 대응','함수는 입력집합의 각 원소에 출력집합의 하나의 값을 대응시키며 변화·규칙·모형의 핵심 언어다.',['function','domain','range'],'f:A→B','위험점수 함수의 정의역과 치역을 명시한다.',['Courant & Robbins, What Is Mathematics?']],
+['증명의 구조','직접증명·대우증명·모순증명은 주장형태에 따라 가장 효율적인 논증경로를 선택하는 방법이다.',['direct proof','contrapositive','contradiction'],'','짝수의 제곱이 짝수임을 직접증명하고 대우증명과 비교한다.',['Velleman, How to Prove It']],
+['수학적 귀납법','기초단계와 귀납단계를 통해 자연수 전체에 대한 명제를 유한한 논증으로 확장한다.',['induction','base case','inductive step'],'P(1), P(k)→P(k+1) ⇒ ∀nP(n)','1+…+n=n(n+1)/2를 귀납법으로 증명한다.',['Velleman, How to Prove It']],
+['수열·패턴·극한 직관','수열은 변화의 순서를 표현하고 극한은 무한과정의 안정값을 엄밀하게 다루는 도구다.',['sequence','limit','convergence'],'lim n→∞ aₙ=L','반복학습 성능향상이 특정 값에 수렴하는 모형을 해석한다.',['Courant & Robbins, What Is Mathematics?']],
+['조합적 사고','경우의 수·순열·조합은 가능한 상태공간을 체계적으로 세고 중복을 통제한다.',['permutation','combination','counting'],'nCr=n!/(r!(n-r)!)','10개 위험요인 중 3개를 선택하는 가능한 조합 수를 계산한다.',['Graham, Knuth & Patashnik, Concrete Mathematics']],
+['그래프와 네트워크','정점과 간선으로 관계망을 표현하면 연결성·경로·중심성 같은 구조적 속성을 분석할 수 있다.',['graph','vertex','edge','path'],'G=(V,E)','다중 AI 에이전트 간 메시지 흐름을 그래프로 모델링한다.',['Diestel, Graph Theory']],
+['대수구조와 불변량','연산 아래 유지되는 성질과 대칭을 찾으면 복잡한 계산을 구조적 문제로 바꿀 수 있다.',['operation','group','invariant'],'','회전해도 동일한 정사각형의 대칭을 군의 관점에서 이해한다.',['Gallian, Contemporary Abstract Algebra']],
+['최적화의 사고','목적함수와 제약조건을 명시하고 가능한 해 중 최선의 해를 찾는 문제로 현실의 선택을 변환한다.',['objective','constraint','feasible set'],'min f(x) s.t. gᵢ(x)≤0','비용을 최소화하면서 안전기준을 만족하는 자원배분을 설계한다.',['Boyd & Vandenberghe, Convex Optimization']],
+['근사·추정·차원분석','정확한 정보가 없을 때 규모와 단위를 보존하는 근사계산으로 합리적 범위를 얻을 수 있다.',['estimation','order of magnitude','dimensional analysis'],'[L]/[T]=velocity','도시 하루 택시 이동량을 Fermi 추정으로 계산한다.',['Pólya, How to Solve It']],
+['문제해결 종합','이해→계획→실행→검토의 순환과정에서 표현을 바꾸고 특수사례·반례를 활용한다.',['problem solving','heuristic','counterexample'],'','복합 확률문제를 표·그림·대수식 세 방식으로 표현해 해결한다.',['Pólya, How to Solve It']]
+]},
+'CORE-112':{overview:'정량적 추론은 비율·단위·증감률·함수·그래프를 사용해 수치가 실제로 무엇을 의미하는지 판단하고 규모와 불확실성을 과장 없이 해석하는 능력이다.',texts:['Steen, Mathematics and Democracy','Paulos, Innumeracy','Moore, Notz & Fligner, The Basic Practice of Statistics','Tufte, The Visual Display of Quantitative Information'],lessons:[
+['비율·분율·백분율','절대수치와 비율을 구분하고 분모가 무엇인지 확인해야 규모를 정확하게 비교할 수 있다.',['ratio','proportion','percentage'],'percentage=(part/whole)×100','사고건수 100건 증가와 사고율 10% 증가를 구분한다.',['Steen, Mathematics and Democracy']],
+['증가율과 복리','퍼센트포인트와 퍼센트 증가를 구분하고 반복 증가가 기하급수적으로 누적됨을 이해한다.',['growth rate','percentage point','compound growth'],'Vₜ=V₀(1+r)ᵗ','연 10% 성장한 시장의 5년 후 규모를 계산한다.',['Paulos, Innumeracy']],
+['단위·차원·환산','수치에는 항상 단위가 붙으며 단위오류는 계산이 맞아도 해석을 무효화할 수 있다.',['unit','dimension','conversion'],'1 m/s=3.6 km/h','전력과 에너지 단위를 혼동한 보고서를 수정한다.',['NIST SI Guide']],
+['선형관계와 기울기','기울기는 입력 1단위 변화에 대한 출력변화를 나타내며 절편과 적용구간을 함께 해석해야 한다.',['slope','intercept','linear model'],'y=mx+b','월 사용량과 요금의 선형모형을 추정한다.',['OpenStax, College Algebra']],
+['지수·로그·스케일','지수성장은 일정 비율로 증가하고 로그척도는 큰 범위를 압축해 비교한다.',['exponential growth','logarithm','log scale'],'y=aeᵏᵗ, log(ab)=log a+log b','감염자 증가곡선과 로그축 그래프를 비교한다.',['OpenStax, Precalculus']],
+['그래프 읽기와 시각적 왜곡','축의 시작점·범위·면적·색상·누적표현이 실제 차이를 과장하거나 축소할 수 있다.',['axis','scale','visual encoding'],'','세로축을 95에서 시작한 막대그래프가 차이를 과장하는 방식을 설명한다.',['Tufte, The Visual Display of Quantitative Information']],
+['지수·평균·중앙값','대표값은 분포의 모양에 따라 다른 의미를 가지며 극단값이 있는 경우 평균만으로 설명하면 왜곡될 수 있다.',['mean','median','index number'],'x̄=Σxᵢ/n','소득분포에서 평균소득과 중위소득을 비교한다.',['Moore et al., The Basic Practice of Statistics']],
+['규모와 Fermi 추정','복잡한 양을 몇 개의 독립된 요소로 분해해 자릿수 수준의 합리적 추정을 만든다.',['Fermi estimate','order of magnitude','decomposition'],'Q≈a×b×c','서울 하루 배달건수를 인구·이용률·주문빈도로 추정한다.',['Weinstein & Adam, Guesstimation']],
+['금리·현재가치·할인','미래의 금액과 현재의 금액은 동일하지 않으며 할인율은 시간과 위험의 가치를 반영한다.',['present value','discount rate','compound interest'],'PV=FV/(1+r)ᵗ','5년 후 1억원의 현재가치를 할인율별로 비교한다.',['Brealey, Myers & Allen, Principles of Corporate Finance']],
+['위험의 정량화','확률과 피해크기를 함께 고려해 기대손실을 계산하되 희귀·대형위험은 기대값만으로 충분하지 않을 수 있다.',['probability','severity','expected loss'],'E[L]=ΣpᵢLᵢ','AI 사고가 드물지만 피해가 큰 경우 보험료 산정의 한계를 검토한다.',['Gigerenzer, Risk Savvy']],
+['정량 비교와 표준화','단위와 분포가 다른 지표를 직접 비교할 때 표준화·인구당 지표·기준연도 조정이 필요하다.',['normalization','per capita','indexing'],'z=(x-μ)/σ','국가별 AI 사고건수를 인구·사용량 기준으로 다시 비교한다.',['Steen, Mathematics and Democracy']],
+['정량 논증 종합','수치주장은 분모·단위·기준시점·불확실성·그래프 표현을 함께 검토해야 논증으로 기능한다.',['quantitative claim','benchmark','uncertainty'],'','정책보고서의 핵심 수치 5개를 역산하고 그래프와 원자료를 대조한다.',['Tufte, The Visual Display of Quantitative Information']]
+]},
+'CORE-113':{overview:'확률과 통계는 불확실한 현상에서 자료가 어떻게 생성되는지 모델링하고, 표본으로부터 모집단에 관한 추론을 수행하는 수학적 언어다.',texts:['Freedman, Pisani & Purves, Statistics','Larry Wasserman, All of Statistics','Gelman, Hill & Vehtari, Regression and Other Stories','Richard McElreath, Statistical Rethinking'],lessons:[
+['확률의 공리와 사건','표본공간·사건·합사건·교사건을 정의하고 확률공리로 일관된 불확실성 계산을 수행한다.',['sample space','event','probability axiom'],'P(Ω)=1, P(Aᶜ)=1-P(A)','두 독립적 시스템 장애 중 하나 이상 발생할 확률을 계산한다.',['Wasserman, All of Statistics']],
+['조건부확률과 독립성','새 정보가 들어왔을 때 확률이 어떻게 갱신되는지 조건부확률로 표현하고 독립성과 구분한다.',['conditional probability','independence'],'P(A|B)=P(A∩B)/P(B)','사고가 발생했다는 조건에서 특정 부품결함 확률을 계산한다.',['Freedman et al., Statistics']],
+['Bayes 정리와 기저율','검사정확도만으로 결과를 해석하지 않고 사전확률과 우도를 결합해 사후확률을 계산한다.',['Bayes theorem','prior','likelihood','posterior'],'P(H|E)=P(E|H)P(H)/P(E)','희귀질환 양성검사에서 실제 질병확률을 계산한다.',['McElreath, Statistical Rethinking']],
+['확률변수와 기댓값','확률변수는 불확실한 결과를 수치화하고 기댓값·분산은 평균수준과 변동성을 요약한다.',['random variable','expectation','variance'],'E[X]=Σxp(x), Var(X)=E[(X-μ)²]','보험 손실분포에서 기대손실과 변동성을 계산한다.',['Wasserman, All of Statistics']],
+['대표 확률분포','Bernoulli·Binomial·Poisson·Normal 분포가 어떤 데이터생성과정에 적합한지 구분한다.',['binomial','Poisson','normal distribution'],'P(X=k)=C(n,k)pᵏ(1-p)ⁿ⁻ᵏ','하루 사고건수를 Poisson 모형으로 근사할 조건을 평가한다.',['Freedman et al., Statistics']],
+['대수의 법칙과 중심극한정리','반복표본에서 표본평균이 모집단평균에 접근하고 정규분포에 근사되는 이유를 이해한다.',['law of large numbers','central limit theorem'],'√n(x̄-μ)/σ → N(0,1)','표본수가 커질수록 평균추정이 안정되는 시뮬레이션을 해석한다.',['Wasserman, All of Statistics']],
+['표본추출과 표집분포','무작위표본과 표본통계량의 분포를 구분하고 표준오차를 통해 추정의 변동성을 표현한다.',['sampling distribution','standard error','random sample'],'SE(x̄)=s/√n','1,000명 조사에서 평균오차의 크기를 계산한다.',['Freedman et al., Statistics']],
+['신뢰구간','점추정 하나가 아니라 반복표집에서의 불확실성을 구간으로 표현하고 신뢰수준을 정확히 해석한다.',['confidence interval','margin of error'],'x̄±z*SE','95% 신뢰구간을 “모수가 95% 확률로 들어 있다”라고 잘못 해석하는 오류를 고친다.',['Wasserman, All of Statistics']],
+['가설검정과 p값','p값은 귀무가설 아래 관찰결과 이상이 나올 확률이며 효과의 크기나 가설이 참일 확률이 아니다.',['null hypothesis','p-value','type I error'],'p=P(T≥Tobs|H₀)','p=.03인 결과를 정책적으로 중요한 효과라고 단정할 수 있는지 검토한다.',['ASA Statement on p-Values']],
+['효과크기와 검정력','표본수가 크면 작은 효과도 유의해질 수 있으므로 효과크기·신뢰구간·검정력을 함께 본다.',['effect size','power','type II error'],'d=(x̄₁-x̄₂)/sₚ','AI 튜터의 평균점수 0.5점 상승이 실질적으로 중요한지 평가한다.',['Cohen, Statistical Power Analysis']],
+['상관과 회귀','상관은 선형연관의 크기를, 회귀는 조건부 평균관계를 모델링하지만 인과관계를 자동으로 보장하지 않는다.',['correlation','regression','residual'],'y=β₀+β₁x+ε','AI 사용시간과 성취도의 회귀계수에 숨은 교란을 검토한다.',['Gelman et al., Regression and Other Stories']],
+['다중비교·Bayesian·재현성','많은 가설을 시험할수록 우연한 유의결과가 늘며 Bayesian 추론과 사전등록은 다른 불확실성 관리방법을 제공한다.',['multiple testing','FDR','Bayesian inference','preregistration'],'FDR=E[V/max(R,1)]','20개 성과지표 중 유의한 1개만 보고한 연구를 평가한다.',['Gelman & Loken, The Garden of Forking Paths']]
+]},
+'CORE-114':{overview:'데이터 리터러시는 표와 그래프를 읽는 능력을 넘어 데이터가 어떤 과정에서 만들어졌고 무엇을 측정하며 어떤 편향과 누락을 포함하는지 판단하는 능력이다.',texts:['Cathy O’Neil, Weapons of Math Destruction','Carl Bergstrom & Jevin West, Calling Bullshit','Edward Tufte, The Visual Display of Quantitative Information','Knaflic, Storytelling with Data'],lessons:[
+['데이터 생성과 측정','데이터는 현실의 복사본이 아니라 특정 목적·센서·설문·행정절차가 만들어낸 측정결과다.',['data generating process','measurement','proxy'],'Observed=Signal+Noise','체포건수를 범죄율의 직접지표로 사용할 때 생기는 측정문제를 분석한다.',['Bergstrom & West, Calling Bullshit']],
+['데이터형과 척도','명목·서열·등간·비율척도는 가능한 연산과 통계방법을 다르게 제한한다.',['nominal','ordinal','interval','ratio'],'','만족도 1~5점을 연속형 변수처럼 평균낼 때의 가정을 검토한다.',['Stevens, On the Theory of Scales of Measurement']],
+['표본편향과 선택편향','누가 데이터에 들어오고 빠졌는지가 결과보다 먼저 확인되어야 한다.',['selection bias','coverage error','survivorship bias'],'','성공한 스타트업만 조사해 AI 도입효과를 추정하는 오류를 분석한다.',['Bergstrom & West, Calling Bullshit']],
+['결측치와 데이터품질','결측이 무작위인지 구조적인지에 따라 단순삭제·대체가 서로 다른 편향을 만든다.',['MCAR','MAR','MNAR','imputation'],'','고소득 응답자가 소득문항을 더 자주 비워두는 설문을 해석한다.',['Little & Rubin, Statistical Analysis with Missing Data']],
+['요약통계와 분포','평균·중앙값·분산·분위수는 데이터분포의 서로 다른 면을 요약하며 하나의 수치만으로 충분하지 않다.',['distribution','quantile','variance'],'IQR=Q3-Q1','대기시간 데이터에서 평균과 90백분위수를 함께 보고한다.',['Tukey, Exploratory Data Analysis']],
+['시각화 원리','정확한 비교·불필요한 장식 제거·축과 단위의 명확성이 데이터 시각화의 핵심이다.',['visual encoding','chart junk','small multiples'],'','3D 원형차트를 단순 막대그래프로 바꿔 비교가능성을 높인다.',['Tufte, The Visual Display of Quantitative Information']],
+['분모·기저율·Simpson 역설','집단구성이 달라지면 전체비율과 하위집단 비율의 방향이 달라질 수 있으므로 분모를 재구성해야 한다.',['base rate','denominator','Simpson’s paradox'],'','병원 전체 성공률과 중증도별 성공률이 반대로 보이는 사례를 분석한다.',['Pearl, Causality']],
+['상관·예측·인과의 구분','예측모형이 정확하더라도 개입효과를 설명하지 못할 수 있으며 인과질문은 별도 설계가 필요하다.',['prediction','causation','confounding'],'','퇴사예측모형에서 변수 중요도를 퇴사의 원인으로 오해하지 않는다.',['Hernán & Robins, Causal Inference']],
+['알고리즘 데이터와 피드백루프','예측결과가 다시 데이터수집을 바꾸면 편향이 자기강화되는 피드백루프가 생길 수 있다.',['feedback loop','performative prediction','label bias'],'','치안예측이 특정 지역 순찰을 늘려 더 많은 체포데이터를 만드는 과정을 분석한다.',['O’Neil, Weapons of Math Destruction']],
+['개인정보와 데이터 거버넌스','수집목적·최소수집·접근권한·보존기간·재식별위험을 데이터 전 생애주기에서 관리한다.',['data minimization','purpose limitation','re-identification'],'','의료데이터를 연구와 서비스개선에 재사용할 때 목적과 권한을 분리한다.',['Nissenbaum, Privacy in Context']],
+['재현가능한 데이터분석','원자료·정제과정·코드·버전·분석결정을 기록해야 결과를 검증하고 반복할 수 있다.',['provenance','version control','reproducibility'],'','수작업 엑셀 수정만 남은 분석을 스크립트 기반 파이프라인으로 바꾼다.',['Peng, Reproducible Research in Computational Science']],
+['데이터 주장 감사','출처→수집→정제→분모→모형→시각화→결론의 전 과정을 역추적해 데이터 주장을 감사한다.',['data audit','provenance','uncertainty communication'],'','공공기관 AI 성과보고서의 핵심 지표 하나를 원자료까지 추적한다.',['Bergstrom & West, Calling Bullshit']]
+]},
+'CORE-115':{overview:'모델과 시스템 사고는 현실의 일부를 목적에 맞게 단순화하고, 구성요소 간 상호작용·피드백·지연·불확실성을 분석해 복잡한 현상을 설명하고 개입하는 방법이다.',texts:['Donella Meadows, Thinking in Systems','John Sterman, Business Dynamics','George Box, Science and Statistics','Nassim Taleb, The Black Swan'],lessons:[
+['모델이란 무엇인가','모델은 현실 그 자체가 아니라 특정 질문에 필요한 변수와 관계만 남긴 목적지향적 단순화다.',['model','assumption','abstraction'],'','교통모형이 보행자 행동을 제외할 때 어떤 질문에는 유용하고 어떤 질문에는 부적절한지 판단한다.',['Box, Science and Statistics']],
+['시스템 경계와 구성요소','무엇을 시스템 안과 밖에 둘 것인지에 따라 원인과 책임의 설명이 달라진다.',['system boundary','component','environment'],'','AI 서비스 장애에서 모델·API·운영자·사용자를 시스템 경계에 어떻게 포함할지 비교한다.',['Meadows, Thinking in Systems']],
+['stock과 flow','축적량과 유입·유출률을 구분하면 시간에 따른 시스템 상태변화를 설명할 수 있다.',['stock','flow','accumulation'],'dS/dt=Inflow-Outflow','병원 대기환자 수를 유입·진료완료 흐름으로 모델링한다.',['Sterman, Business Dynamics']],
+['피드백 루프','강화피드백은 변화를 증폭하고 균형피드백은 목표에서 벗어난 변화를 억제한다.',['reinforcing loop','balancing loop'],'','추천알고리즘이 인기콘텐츠 노출을 더 늘리는 강화루프를 그린다.',['Meadows, Thinking in Systems']],
+['지연과 비선형성','원인과 결과 사이 시간지연과 임계점은 직관적 선형예측을 실패하게 만든다.',['delay','nonlinearity','threshold'],'','정책효과가 늦게 나타나 과잉대응이 발생하는 사례를 분석한다.',['Sterman, Business Dynamics']],
+['네트워크와 연결구조','시스템의 결과는 개별 노드 특성뿐 아니라 연결밀도·중심성·군집구조에 좌우된다.',['network','centrality','cascade'],'A=[aᵢⱼ]','다중에이전트 시스템에서 한 중앙노드 장애가 연쇄실패를 만드는 경로를 추적한다.',['Barabási, Network Science']],
+['복잡계와 창발','국소규칙의 상호작용이 중앙통제 없이 거시적 패턴을 만들 수 있으며 이를 창발이라 한다.',['complexity','emergence','self-organization'],'','개별 거래알고리즘이 함께 시장급락을 유발하는 가능성을 분석한다.',['Mitchell, Complexity: A Guided Tour']],
+['불확실성과 민감도','입력값과 가정이 조금 바뀔 때 결과가 얼마나 변하는지 확인하면 모형의 취약점을 알 수 있다.',['sensitivity analysis','parameter uncertainty'],'Sᵢ=∂Y/∂Xᵢ','AI 위험점수의 임계값을 바꿨을 때 분류결과가 얼마나 달라지는지 측정한다.',['Saltelli et al., Global Sensitivity Analysis']],
+['Monte Carlo와 확률모형','불확실한 입력을 확률분포로 두고 반복시뮬레이션해 결과분포를 추정한다.',['Monte Carlo','simulation','distribution'],'Ŷ=(1/N)Σf(Xᵢ)','프로젝트 비용의 지연·환율·수요변동을 시뮬레이션한다.',['Rubinstein & Kroese, Simulation and the Monte Carlo Method']],
+['검증·보정·과적합','모델은 과거자료에 잘 맞는 것과 새로운 상황에서 잘 작동하는 것을 구분해 검증해야 한다.',['calibration','validation','overfitting'],'','위험모형을 학습자료와 별도 검증자료에서 비교한다.',['Hastie, Tibshirani & Friedman, The Elements of Statistical Learning']],
+['시나리오와 강건한 결정','예측 하나보다 여러 가능한 미래에서 성능이 크게 무너지지 않는 대안을 찾는 접근이 필요하다.',['scenario','robust decision','deep uncertainty'],'minₐ maxₛ Loss(a,s)','AI 규제강도 3개 대안을 기술발전 속도별 시나리오에서 비교한다.',['Lempert et al., Shaping the Next One Hundred Years']],
+['시스템 개입과 레버리지','파라미터보다 정보흐름·규칙·목표·패러다임 같은 상위구조의 변화가 더 큰 효과를 낼 수 있다.',['leverage point','policy resistance','system redesign'],'','사고 후 벌금 인상과 로그의무·권한구조 변경의 효과를 비교한다.',['Meadows, Leverage Points']]
+]}
+});})();
