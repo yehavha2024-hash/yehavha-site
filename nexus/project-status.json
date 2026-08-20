@@ -101,6 +101,15 @@
     "contentCount": 56,
     "contentLabel": "핵심 연구"
   },
+  "ai-legal-glossary": {
+    "id": "ai-legal-glossary",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-20",
+    "contentCount": 24,
+    "contentLabel": "핵심 용어"
+  },
   "publishing-hub": {
     "id": "publishing-hub",
     "managedBy": "github",
@@ -128,6 +137,15 @@
     "contentCount": 8,
     "contentLabel": "실행 항목"
   },
+  "ai-governance-execution": {
+    "id": "ai-governance-execution",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-20",
+    "contentCount": 10,
+    "contentLabel": "실행 모듈"
+  },
   "ai-trends": {
     "id": "ai-trends",
     "managedBy": "github",
@@ -148,5 +166,14 @@
     "lastUpdated": "2026-08-18",
     "contentCount": 12,
     "contentLabel": "공개 항목"
+  },
+  "future-tree-roadmap": {
+    "id": "future-tree-roadmap",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-20",
+    "contentCount": 4,
+    "contentLabel": "독립 후보"
   }
 }
