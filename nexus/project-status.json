@@ -158,6 +158,42 @@
     "baselineAt": "2026-08-20",
     "baselineLabel": "자료기준"
   },
+  "case-review-lab": {
+    "id": "case-review-lab",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-20",
+    "contentCount": 8,
+    "contentLabel": "검토 단계"
+  },
+  "ai-music-archive": {
+    "id": "ai-music-archive",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-20",
+    "contentCount": 8,
+    "contentLabel": "운영 모듈"
+  },
+  "education-hub": {
+    "id": "education-hub",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-20",
+    "contentCount": 6,
+    "contentLabel": "운영 모듈"
+  },
+  "ai-service-operations": {
+    "id": "ai-service-operations",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-20",
+    "contentCount": 8,
+    "contentLabel": "운영 모듈"
+  },
   "initiative-hub": {
     "id": "initiative-hub",
     "managedBy": "github",
@@ -166,14 +202,5 @@
     "lastUpdated": "2026-08-18",
     "contentCount": 12,
     "contentLabel": "공개 항목"
-  },
-  "future-tree-roadmap": {
-    "id": "future-tree-roadmap",
-    "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
-    "lastUpdated": "2026-08-20",
-    "contentCount": 4,
-    "contentLabel": "독립 후보"
   }
 }
