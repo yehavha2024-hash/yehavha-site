@@ -27,16 +27,10 @@ function auditForbiddenArtifacts() {
     'toeic-human-100/V2_FINAL_STATUS_20260809.md',
     'toeic-human-100/READING_PROGRAM_V2.md',
     'toeic-human-100/COVERAGE_CORRECTION_SYSTEM.md',
-    'nexus/ai-practice/runs/2026-08-12-P1-02.json',
-    'nexus/ai-practice/runs/2026-08-12-P1-03.json',
-    'nexus/ai-practice/runs/2026-08-12-P1-04.json',
-    'nexus/ai-practice/runs/2026-08-12-P2-02.json',
-    'nexus/ai-practice/deliverables/ebook-promo-yhwh-yeshua-30s.json',
-    'nexus/ai-practice/deliverables/song-media-master-template.json',
-    'nexus/ai-practice/deliverables/explainer-video-scripts-v1.json'
+    'nexus/ai-practice'
   ];
   for (const relative of forbidden) {
-    if (exists(relative)) error(relative, '정리 완료된 구버전·생성 산출물이 다시 추가됨');
+    if (exists(relative)) error(relative, '정리 완료된 구버전·삭제 프로젝트가 다시 추가됨');
   }
 }
 
@@ -117,52 +111,6 @@ function auditToeicCanonicalOwnership() {
   }
 }
 
-function auditAiPracticeIndex() {
-  const source = 'nexus/ai-practice/run-index.json';
-  if (!exists(source)) return error(source, '실행 인덱스 없음');
-  const index = json(source);
-  const listed = new Set(index.files || []);
-  for (const relative of listed) {
-    const target = `nexus/ai-practice/${relative}`;
-    if (!exists(target)) error(source, `인덱스가 없는 파일을 참조함: ${relative}`);
-  }
-
-  const runDir = path.join(ROOT, 'nexus/ai-practice/runs');
-  if (fs.existsSync(runDir)) {
-    for (const file of fs.readdirSync(runDir).filter(name => name.endsWith('.json'))) {
-      const relative = `runs/${file}`;
-      if (!listed.has(relative)) error(source, `인덱스에 등록되지 않은 실행 JSON 잔존: ${relative}`);
-    }
-  }
-
-  const retiredInstructions = [
-    '전자책 30초 홍보영상',
-    '찬양곡 1곡을 유튜브·쇼츠·릴스·틱톡으로',
-    '법률연구·AI 강좌 60~90초 설명영상'
-  ];
-  const deliverableRefs = new Set();
-  const runFiles = [...listed].filter(relative => relative.endsWith('.json'));
-  for (const relative of runFiles) {
-    const target = `nexus/ai-practice/${relative}`;
-    if (!exists(target)) continue;
-    const text = read(target);
-    for (const retired of retiredInstructions) {
-      if (text.includes(retired)) error(target, `폐기된 실행지시가 현재 기록에 재등장함: ${retired}`);
-    }
-    for (const match of text.matchAll(/nexus\/ai-practice\/deliverables\/([^"'?#\s]+\.json)/g)) deliverableRefs.add(match[1]);
-  }
-
-  const deliverableDir = path.join(ROOT, 'nexus/ai-practice/deliverables');
-  if (fs.existsSync(deliverableDir)) {
-    for (const file of fs.readdirSync(deliverableDir).filter(name => name.endsWith('.json'))) {
-      if (!deliverableRefs.has(file)) warn(`nexus/ai-practice/deliverables/${file}`, '현재 실행 인덱스에서 참조되지 않는 산출물');
-    }
-    for (const file of deliverableRefs) {
-      if (!exists(`nexus/ai-practice/deliverables/${file}`)) error(source, `실행기록이 없는 산출물을 참조함: ${file}`);
-    }
-  }
-}
-
 function auditSingleSourceRules() {
   const forbidden = [
     ['nexus/projects.generated.json', 'Nexus 프로젝트 카드는 projects.json만 단일 원본으로 사용'],
@@ -210,6 +158,22 @@ function auditSingleSourceRules() {
     }
   }
 
+  const headers = 'nexus/_headers';
+  if (exists(headers)) {
+    const source = read(headers);
+    for (const retired of ['/ai-governance/*', '/ai-service-operations/*', '/research-groups.css']) {
+      if (source.includes(retired)) error(headers, `삭제된 경로의 캐시 규칙 잔존: ${retired}`);
+    }
+  }
+
+  const compactCss = 'nexus/layer-compact.css';
+  if (exists(compactCss)) {
+    const source = read(compactCss);
+    if (/\.footer::after/.test(source) || source.includes('Copyright © 이명훈 2026. All rights reserved.')) {
+      error(compactCss, 'Copyright를 CSS 가상요소가 소유함. 저작권 문구는 HTML footer가 명시적으로 소유해야 함');
+    }
+  }
+
   const legalWorkflow = '.github/workflows/legal-knowledge-runtime-audit.yml';
   if (exists(legalWorkflow) && /git\s+(?:add|commit|push)/.test(read(legalWorkflow))) {
     error(legalWorkflow, '진단 워크플로가 생성물을 저장소에 다시 쓰고 있음');
@@ -221,7 +185,6 @@ auditWorkflowPermissions();
 auditServiceWorkerAssets('three-minute-break');
 auditServiceWorkerAssets('toeic-human-100');
 auditToeicCanonicalOwnership();
-auditAiPracticeIndex();
 auditSingleSourceRules();
 
 console.log(`Repository hygiene audit: ${errors} error(s), ${warnings} warning(s)`);
