@@ -7,8 +7,8 @@
     "staleDays": 30,
     "count": {
       "type": "static",
-      "value": 8,
-      "label": "검토 단계"
+      "value": 6,
+      "label": "자동 점검"
     }
   }
 }
