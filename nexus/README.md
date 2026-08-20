@@ -2,9 +2,9 @@
 
 운영 주소: https://yehavha-nexus-hub.pages.dev/
 
-운영 구조 기준일: 2026-08-19
+운영 구조 기준일: 2026-08-21
 
-YEHAVHA Nexus는 웹앱·연구·출판·미디어·AI 실무·교육·기획 프로젝트의 공식 진입점을 한곳에 모아 관리하는 통합 포털입니다.
+YEHAVHA Nexus는 전략정보·대학·웹앱·연구·출판·미디어·교육·기획 프로젝트의 공식 진입점을 한곳에 모아 관리하는 통합 포털입니다.
 
 ## 운영 원본
 
@@ -23,6 +23,7 @@ Cloudflare Pages는 이 저장소의 `nexus/` 디렉터리를 Nexus 운영 원�
 - `nexus/scripts/audit-portal-enhancements.mjs` — 통합검색·검증일·측정계층·소유권 중복 검증
 - `nexus/scripts/audit-live-urls.mjs` — 실제 배포 URL·JSON·API·리다이렉트 스모크 테스트
 - `scripts/audit-repo-hygiene.mjs` — 구버전·고아 파일·과도한 권한·소유권 중복 검증
+- `scripts/audit-web-architecture.mjs` — 내부링크·로컬자산·Footer·Copyright·삭제경로·프로젝트 모델 검증
 - `nexus/functions/lib/metrics.js` — 개인정보·검색어 원문 없이 일자별 집계형 이용행동만 기록하는 유일한 측정 스키마·이벤트 소유 코드
 - `nexus/functions/api/access.js` — 접속횟수와 집계형 측정 조회·기록 API
 - `nexus/functions/go.js` — 승인된 프로젝트 URL 이동과 프로젝트 클릭 집계
@@ -45,6 +46,7 @@ Cloudflare Pages는 이 저장소의 `nexus/` 디렉터리를 Nexus 운영 원�
 10. `metrics.js`는 검색어·IP·User-Agent·Referer 같은 개인 또는 원문 이용정보를 저장하지 않고 이벤트 종류·프로젝트 ID·일자별 합계만 기록합니다.
 11. `/go` 프로젝트 이동은 일반 페이지 접속횟수에서 제외하여 페이지 접속과 프로젝트 클릭을 중복 집계하지 않습니다.
 12. 진단 보고서·검증 산출물은 운영 원본으로 저장하지 않고 GitHub Actions artifact 또는 로컬 임시파일로만 생성합니다.
+13. Copyright와 문의·AI 활용 안내는 실제 HTML Footer가 소유하며 CSS `::after` 같은 가상요소가 문구를 생성하지 않습니다.
 
 `nexus/search-index.json`, `nexus/projects.search.json`, `nexus/projects.generated.json`처럼 프로젝트나 검색정보를 중복 소유하는 별도 생성 파일은 만들지 않습니다. `audit-portal-enhancements.mjs`가 이러한 파일의 재등장을 실패 처리합니다.
 
@@ -94,6 +96,9 @@ Nexus 상태갱신은 저장소 전체를 무차별 재귀 탐색하지 않습�
 - 승인 목록의 중복 소유·하드코딩 재등장 여부
 - Service Worker의 현재 런타임 자산 소유 여부
 - 불필요한 GitHub Actions 쓰기 권한 여부
+- 삭제된 Nexus 프로젝트 경로·링크·포털 로직의 재등장 여부
+- 표준 Copyright 문구·문의 mailto·AI 활용 안내의 명시적 HTML Footer 존재 여부
+- CSS 가상요소가 Copyright 문구를 재생성하는지 여부
 - 3분 쉼표 실제 콘텐츠 로드순서와 퀴즈 데이터
 - Nexus 하위 데이터·본문 참조 무결성
 - 실제 운영 URL, `projects.json`, `project-status.json`, `/api/access`, `/go` 응답
@@ -108,7 +113,7 @@ Nexus 상태갱신은 저장소 전체를 무차별 재귀 탐색하지 않습�
 
 프로젝트별 기준은 각 매니페스트에서 조정할 수 있습니다.
 
-메인 화면의 `운영`, `연구 운영`, `실행·확장`, `아이디어` 표시는 프로젝트의 공개 성숙도를 빠르게 구분하기 위한 UI 분류이며 자동 상태의 `최근 업데이트/운영 중/안정 운영`과 역할이 다릅니다.
+메인 화면의 `최우선 정보`, `운영`, `연구 운영`, `아이디어` 표시는 프로젝트의 공개 성숙도를 빠르게 구분하기 위한 UI 분류이며 자동 상태의 `최근 업데이트/운영 중/안정 운영`과 역할이 다릅니다.
 
 ## 이용측정 원칙
 
