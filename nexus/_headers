@@ -28,6 +28,20 @@
   Cache-Control: no-cache, no-store, must-revalidate
 /research-groups.css
   Cache-Control: no-cache, no-store, must-revalidate
+/layer-compact.css
+  Cache-Control: no-cache, no-store, must-revalidate
+/ai-governance/*
+  Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
+  Expires: 0
+/ai-legal-glossary/*
+  Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
+  Expires: 0
+/future-trees/*
+  Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
+  Expires: 0
 /initiatives/*
   Cache-Control: no-cache, no-store, must-revalidate
   Pragma: no-cache
