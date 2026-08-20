@@ -1,6 +1,7 @@
 import { readMetrics, recordMetric } from '../lib/metrics.js';
 
 let schemaReady = false;
+const ALLOWED_OPS = new Set(['get', 'event', 'metrics']);
 
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -53,13 +54,19 @@ export async function onRequestGet({ request, env }) {
     const url = new URL(request.url);
     const op = url.searchParams.get('op') || 'get';
 
+    if (!ALLOWED_OPS.has(op)) {
+      return json({ ok: false, error: 'unsupported_operation' }, 400);
+    }
+
     if (op === 'event') {
       const recorded = await recordMetric(
         env.NEXUS_DB,
         url.searchParams.get('event'),
         url.searchParams.get('project')
       );
-      return json({ ok: recorded });
+      return recorded
+        ? json({ ok: true })
+        : json({ ok: false, error: 'invalid_metric_event' }, 400);
     }
 
     if (op === 'metrics') {
@@ -70,10 +77,7 @@ export async function onRequestGet({ request, env }) {
     const count = await readCount(env.NEXUS_DB);
     return json({ ok: true, count });
   } catch (error) {
-    return json({
-      ok: false,
-      error: 'nexus_db_query_failed',
-      detail: String(error?.message || error)
-    }, 500);
+    console.error('Nexus metrics API failed:', error);
+    return json({ ok: false, error: 'nexus_db_query_failed' }, 500);
   }
 }
