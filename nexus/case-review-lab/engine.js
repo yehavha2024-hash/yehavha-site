@@ -2,141 +2,152 @@
   'use strict';
 
   const arr = value => Array.isArray(value) ? value.filter(Boolean) : [];
-  const unique = values => [...new Set(arr(values).filter(Boolean))];
   const nodes = (caseId, prefix, values) => arr(values).map((text,index)=>({id:`${caseId}-${prefix}${String(index+1).padStart(2,'0')}`,text,refs:[]}));
-  const texts = values => arr(values).map(item => typeof item === 'string' ? item : item.text).filter(Boolean);
-  const stage = role => ({role,status:'waiting',outputs:[],sourceRefs:[],notes:[]});
+  const stage = label => ({label,status:'대기',outputs:[],missing:[]});
+  const validUrl = value => /^https?:\/\//i.test(String(value || '').trim());
 
   function normalizeCase(item){
     const caseId = item.caseId || `LAB-${Date.now()}`;
     return {
-      schemaVersion:'1.0',
-      pipelineVersion:'1.0',
+      schemaVersion:'1.1',
+      pipelineVersion:'1.1',
       caseId,
-      metadata:{title:item.title||'',mode:item.mode||'',area:item.area||'',level:item.level||'',question:item.question||'',summary:item.summary||''},
+      metadata:{title:item.title||'',mode:item.mode||'',area:item.area||'',question:item.question||'',summary:item.summary||''},
       intake:{facts:nodes(caseId,'F',item.facts),legalFacts:nodes(caseId,'LF',item.legalFacts),relations:nodes(caseId,'R',item.relations),issues:nodes(caseId,'I',item.issues)},
-      law:{laws:nodes(caseId,'L',item.laws),precedents:nodes(caseId,'P',item.precedents),officialSources:arr(item.sources).map((source,index)=>({id:`${caseId}-SRC${String(index+1).padStart(2,'0')}`,label:source.label||`공식자료 ${index+1}`,url:source.url||'',verificationStatus:'linked'}))},
+      law:{laws:nodes(caseId,'L',item.laws),precedents:nodes(caseId,'P',item.precedents),officialSources:arr(item.sources).map((source,index)=>({id:`${caseId}-SRC${String(index+1).padStart(2,'0')}`,label:source.label||`자료 ${index+1}`,url:source.url||'',linkValid:validUrl(source.url)}))},
       evidence:{items:nodes(caseId,'E',item.evidence),burdens:nodes(caseId,'B',item.burdens)},
       arguments:{claimant:nodes(caseId,'A',item.claimant),respondent:nodes(caseId,'C',item.respondent)},
       analysis:{subsumption:nodes(caseId,'S',item.subsumption),procedure:nodes(caseId,'PR',item.procedure)},
-      decision:{conclusions:nodes(caseId,'D',item.conclusions),variations:nodes(caseId,'V',item.variations)},
-      review:{status:'ready',stages:{collector:stage('법률자료수집가'),analyst:stage('법률분석가'),counter:stage('반론가'),verifier:stage('검증관'),neutralPanel:stage('중립평가단'),integrator:stage('판단통합자')},gates:{sourceGate:'대기',counterArgumentGate:'대기',neutralityGate:'대기'}},
-      audit:{generatedAt:new Date().toISOString(),sourceCaseId:caseId,manualReviewRequired:true}
+      decision:{conclusions:nodes(caseId,'D',item.conclusions)},
+      review:{
+        status:'대기',
+        stages:{
+          inputCheck:stage('핵심 입력 점검'),
+          lawCheck:stage('법률자료 연결 점검'),
+          evidenceCheck:stage('증거·증명책임 점검'),
+          argumentCheck:stage('양측 주장 점검'),
+          analysisCheck:stage('분석항목 점검'),
+          summary:stage('검토 준비상태 요약')
+        },
+        gates:{coreInput:'대기',sourceLinks:'대기',reviewReadiness:'대기'},
+        unresolved:[]
+      },
+      audit:{generatedAt:new Date().toISOString(),automaticScope:'입력자료의 형식·누락·연결상태 점검',manualLegalReviewRequired:true}
     };
   }
 
-  function collect(record){
-    const laws = texts(record.law.laws);
-    const precedents = texts(record.law.precedents);
-    const sources = record.law.officialSources.filter(source => /^https?:\/\//i.test(source.url));
-    record.review.stages.collector = {
-      role:'법률자료수집가',
-      status:laws.length ? 'completed' : 'manual-review-required',
-      outputs:[`적용 법규범 ${laws.length}개`, `판례·판례법리 ${precedents.length}개`, `공식자료 링크 ${sources.length}개`],
-      sourceRefs:[...record.law.laws.map(n=>n.id),...record.law.precedents.map(n=>n.id),...sources.map(n=>n.id)],
-      notes:['자료수집 단계는 적용후보와 원문 위치를 고정합니다.']
+  function inputCheck(record){
+    const missing = [];
+    if (!record.metadata.title) missing.push('사건명');
+    if (!record.metadata.question) missing.push('판단질문');
+    if (!record.intake.facts.length) missing.push('사실관계');
+    if (!record.intake.issues.length) missing.push('핵심쟁점');
+    const complete = missing.length === 0;
+    record.review.stages.inputCheck = {
+      label:'핵심 입력 점검',
+      status:complete ? '완료' : '보강 필요',
+      outputs:[
+        `사실관계 ${record.intake.facts.length}개 · 법적 사실 ${record.intake.legalFacts.length}개 · 법률관계 ${record.intake.relations.length}개 · 핵심쟁점 ${record.intake.issues.length}개`,
+        complete ? '필수 입력항목이 모두 있습니다.' : `필수 입력 누락: ${missing.join(', ')}`
+      ],
+      missing
+    };
+    record.review.gates.coreInput = complete ? '필수입력 완료' : '필수입력 보강 필요';
+  }
+
+  function lawCheck(record){
+    const validSources = record.law.officialSources.filter(source => source.linkValid);
+    const invalidSources = record.law.officialSources.filter(source => !source.linkValid);
+    const missing = [];
+    if (!record.law.laws.length) missing.push('적용 법령·법규범');
+    if (!validSources.length) missing.push('공식자료 URL');
+    record.review.stages.lawCheck = {
+      label:'법률자료 연결 점검',
+      status:missing.length ? '보강 필요' : '연결 있음',
+      outputs:[
+        `사용자 입력 법령·법규범 ${record.law.laws.length}개 · 판례·판례법리 ${record.law.precedents.length}개`,
+        `URL 형식이 유효한 자료 링크 ${validSources.length}개${invalidSources.length ? ` · 형식 오류 ${invalidSources.length}개` : ''}`,
+        '이 단계는 링크 존재와 입력 여부만 확인합니다. 법령 현행성·판결문 내용·출처의 진위를 자동 검증하지 않습니다.'
+      ],
+      missing
+    };
+    record.review.gates.sourceLinks = validSources.length ? '자료 링크 있음 · 원문검증 필요' : '공식자료 링크 없음';
+  }
+
+  function evidenceCheck(record){
+    const missing = [];
+    if (!record.evidence.items.length) missing.push('증거');
+    if (!record.evidence.burdens.length) missing.push('증명책임·입증위험');
+    record.review.stages.evidenceCheck = {
+      label:'증거·증명책임 점검',
+      status:missing.length ? '보강 필요' : '입력 있음',
+      outputs:[
+        `사용자 입력 증거 ${record.evidence.items.length}개 · 증명책임/입증위험 ${record.evidence.burdens.length}개`,
+        '증거 개수만으로 증거가 충분한지, 신빙성이 있는지, 증명력이 높은지는 판정하지 않습니다.'
+      ],
+      missing
     };
   }
 
-  function analyze(record){
-    const issues = texts(record.intake.issues);
-    const subsumption = texts(record.analysis.subsumption);
-    const procedures = texts(record.analysis.procedure);
-    record.review.stages.analyst = {
-      role:'법률분석가',
-      status:issues.length ? 'completed' : 'manual-review-required',
-      outputs:unique([
-        issues.length ? `핵심 쟁점: ${issues.join(' / ')}` : '쟁점 입력 필요',
-        subsumption.length ? `포섭: ${subsumption.join(' / ')}` : '포섭 보강 필요',
-        procedures.length ? `절차·구제: ${procedures.join(' / ')}` : ''
-      ]),
-      sourceRefs:[...record.intake.issues.map(n=>n.id),...record.analysis.subsumption.map(n=>n.id),...record.evidence.items.map(n=>n.id)],
-      notes:['사실과 규범을 분리하고 증명 가능한 사실을 중심으로 판단합니다.']
+  function argumentCheck(record){
+    const missing = [];
+    if (!record.arguments.claimant.length) missing.push('주장측 논리');
+    if (!record.arguments.respondent.length) missing.push('상대방 반론');
+    record.review.stages.argumentCheck = {
+      label:'양측 주장 점검',
+      status:missing.length ? '보강 필요' : '양측 입력 있음',
+      outputs:[
+        `주장측 논리 ${record.arguments.claimant.length}개 · 상대방 반론 ${record.arguments.respondent.length}개`,
+        record.arguments.respondent.length ? '반대논증 입력이 존재합니다.' : '상대방 관점의 반론이 없어 일방향 검토 위험이 있습니다.'
+      ],
+      missing
     };
   }
 
-  function counter(record){
-    const respondent = texts(record.arguments.respondent);
-    const burdens = texts(record.evidence.burdens);
-    record.review.stages.counter = {
-      role:'반론가',
-      status:respondent.length ? 'completed' : 'manual-review-required',
-      outputs:unique([
-        respondent.length ? `상대방 핵심 반론: ${respondent.join(' / ')}` : '반대논증 입력 필요',
-        burdens.length ? `증명책임 위험: ${burdens.join(' / ')}` : ''
-      ]),
-      sourceRefs:[...record.arguments.respondent.map(n=>n.id),...record.evidence.burdens.map(n=>n.id)],
-      notes:['분석가의 결론을 승인하지 않고 독립적으로 공격합니다.']
+  function analysisCheck(record){
+    const missing = [];
+    if (!record.analysis.subsumption.length) missing.push('포섭');
+    if (!record.analysis.procedure.length) missing.push('절차·구제');
+    if (!record.decision.conclusions.length) missing.push('조건부 결론');
+    record.review.stages.analysisCheck = {
+      label:'분석항목 점검',
+      status:missing.length ? '보강 필요' : '입력 있음',
+      outputs:[
+        `포섭 ${record.analysis.subsumption.length}개 · 절차/구제 ${record.analysis.procedure.length}개 · 조건부 결론 ${record.decision.conclusions.length}개`,
+        '여기에 표시되는 포섭과 결론은 사용자가 입력한 내용입니다. 시스템이 새 법률의견을 생성한 것이 아닙니다.'
+      ],
+      missing
     };
-    record.review.gates.counterArgumentGate = respondent.length ? '통과' : '수동보강 필요';
   }
 
-  function verify(record){
-    const validSources = record.law.officialSources.filter(source => /^https?:\/\//i.test(source.url));
-    const lawCount = record.law.laws.length;
-    const gate = lawCount && validSources.length ? '원문 연결' : '수동 원문확인 필요';
-    record.review.stages.verifier = {
-      role:'검증관',
-      status:gate === '원문 연결' ? 'conditional' : 'manual-review-required',
-      outputs:[`법규범 ${lawCount}개 · 공식자료 ${validSources.length}개`, `출처 게이트: ${gate}`, '현행성·판결문 문구의 최종 확인은 수동검토 대상입니다.'],
-      sourceRefs:[...record.law.laws.map(n=>n.id),...validSources.map(n=>n.id)],
-      notes:['원문 미확인 자료는 확정근거로 승격하지 않습니다.']
+  function summarize(record){
+    const checked = ['inputCheck','lawCheck','evidenceCheck','argumentCheck','analysisCheck'];
+    const missing = checked.flatMap(id => record.review.stages[id].missing || []);
+    record.review.unresolved = [...new Set(missing)];
+    const ready = record.review.unresolved.length === 0;
+    record.review.stages.summary = {
+      label:'검토 준비상태 요약',
+      status:ready ? '구조화 완료' : '보강 필요',
+      outputs:[
+        ready ? '입력자료의 구조상 필수 검토항목이 모두 채워져 있습니다.' : `추가 입력·확인이 필요한 항목: ${record.review.unresolved.join(', ')}`,
+        '다음 단계는 최신 법령·판례 원문 확인, 증거가치 평가, 사실인정, 법률적 포섭과 최종 판단입니다. 이 단계는 현재 자동 수행하지 않습니다.'
+      ],
+      missing:record.review.unresolved
     };
-    record.review.gates.sourceGate = gate;
-    record.audit.manualReviewRequired = true;
-  }
-
-  function neutral(record){
-    const lawCount = record.law.laws.length;
-    const evidenceCount = record.evidence.items.length;
-    const claimantCount = record.arguments.claimant.length;
-    const respondentCount = record.arguments.respondent.length;
-    const lawStrength = lawCount >= 2 ? '강함' : lawCount === 1 ? '경합' : '약함';
-    const evidenceFit = evidenceCount >= 4 ? '충분' : evidenceCount >= 2 ? '일부 부족' : '핵심증거 부족';
-    const counterDurability = respondentCount && claimantCount ? '경합' : respondentCount ? '높음' : '취약';
-    const uncertainty = record.review.gates.sourceGate === '원문 연결' && evidenceCount >= 4 && respondentCount ? '중간' : '높음';
-    record.review.stages.neutralPanel = {
-      role:'중립평가단',
-      status:'conditional',
-      outputs:[`법리 강도: ${lawStrength}`,`증거 충족도: ${evidenceFit}`,`반론 내구성: ${counterDurability}`,`불확실성: ${uncertainty}`],
-      sourceRefs:[...record.evidence.items.map(n=>n.id),...record.arguments.claimant.map(n=>n.id),...record.arguments.respondent.map(n=>n.id)],
-      notes:['확률 수치 대신 법리·증거·반론·불확실성의 네 축으로 평가합니다.']
-    };
-    record.review.gates.neutralityGate = '중립평가 완료';
-  }
-
-  function integrate(record){
-    const conclusions = texts(record.decision.conclusions);
-    const legalFacts = texts(record.intake.legalFacts);
-    const burdens = texts(record.evidence.burdens);
-    const manual = ['collector','analyst','counter','verifier'].some(id => record.review.stages[id].status === 'manual-review-required');
-    record.review.stages.integrator = {
-      role:'판단통합자',
-      status:manual ? 'manual-review-required' : 'completed',
-      outputs:unique([
-        conclusions.length ? `통합 결론: ${conclusions.join(' / ')}` : '조건부 결론 입력 필요',
-        legalFacts.length ? `결론을 바꿀 핵심 사실: ${legalFacts.slice(0,3).join(' / ')}` : '',
-        burdens.length ? `남은 증명위험: ${burdens.slice(0,2).join(' / ')}` : '',
-        manual ? '수동보강 또는 원문검토가 남아 있습니다.' : '자동 단계는 완료되었으며 최종 수동검토가 필요합니다.'
-      ]),
-      sourceRefs:[...record.decision.conclusions.map(n=>n.id),...record.intake.legalFacts.map(n=>n.id),...record.evidence.burdens.map(n=>n.id)],
-      notes:['분석·반론·검증상태를 함께 보존합니다.']
-    };
-    record.review.status = manual ? 'manual-review-required' : 'completed';
-    record.audit.manualReviewRequired = true;
+    record.review.gates.reviewReadiness = ready ? '구조화 완료 · 법률검토 필요' : '입력 보강 후 법률검토';
+    record.review.status = ready ? '구조화 완료' : '입력 보강 필요';
   }
 
   function run(item){
     const record = normalizeCase(item);
-    record.review.status = 'running';
-    collect(record);
-    analyze(record);
-    counter(record);
-    verify(record);
-    neutral(record);
-    integrate(record);
+    inputCheck(record);
+    lawCheck(record);
+    evidenceCheck(record);
+    argumentCheck(record);
+    analysisCheck(record);
+    summarize(record);
     return record;
   }
 
-  window.CASE_REVIEW_ENGINE = {schemaVersion:'1.0',pipelineVersion:'1.0',run,normalizeCase};
+  window.CASE_REVIEW_ENGINE = {schemaVersion:'1.1',pipelineVersion:'1.1',run,normalizeCase};
 })();
