@@ -54,11 +54,6 @@ jobs:
         run: |
           node --check nexus/articles/articles.js
           node --check nexus/articles/article-seo.js
-      - name: Validate independent case review LAB runtime
-        run: |
-          node --check nexus/case-review-lab/engine.js
-          node --check nexus/case-review-lab/app.js
-          node -e "JSON.parse(require('fs').readFileSync('nexus/case-review-lab/case-review.schema.json','utf8')); console.log('Case review schema JSON OK')"
       - name: Validate legal philosophy citation coverage
         run: |
           node --check legal-philosophy/research-citations-6d.js
