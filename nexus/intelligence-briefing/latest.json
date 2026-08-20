@@ -1,9 +1,129 @@
 {
-  "generatedAt": null,
-  "window": "최근 24시간 중심 · 필요 시 중장기 배경 포함",
+  "generatedAt": "2026-08-21T00:25:00+09:00",
+  "window": "2026-08-20 00:00–2026-08-21 00:25 KST · 중요 사안은 중장기 배경 보강",
   "schedule": "06:30 KST daily",
-  "executiveSummary": "첫 일일 브리핑 생성 전입니다. 국내외 공개정보를 선별·교차검증해 전략적 중요도가 높은 5~8개 사안을 우선 브리핑합니다.",
-  "items": [],
-  "watchlist": [],
-  "outlook": []
+  "executiveSummary": "오늘의 핵심은 안보·에너지·금융·산업 공급망에서 정책의 예측가능성이 동시에 낮아지고 있다는 점이다. 한반도에서는 미국의 동맹 부담 이전과 대북 직접외교 시도가 실제 연합훈련 조정으로 나타나는 가운데 북한은 미사일 압박을 지속하고 중국은 서울에 미중 경쟁에서의 전략적 자율을 요구하고 있다. 중동에서는 호르무즈의 명목상 개방 여부보다 실제 통항·정제·보험 능력의 훼손이 더 중요한 변수로 바뀌었고, 이는 장기금리와 물가를 통해 미국 통화·재정정책에도 압력을 가한다. 우크라이나는 러시아 정유 인프라를 타격해 국내 연료 부족을 현실화했지만 자체 방공탄 부족이라는 비대칭 취약성을 안고 있다. 중국은 희토류를 전면 금수보다 국가별·품목별 허가 조절 방식으로 운용하며 외교적 레버리지를 정교화하고 있다. 공통적으로 군사·외교·금융·산업정책이 분리된 영역이 아니라 하나의 전략경쟁 체계로 결합되는 양상이다.",
+  "items": [
+    {
+      "priority": "CRITICAL",
+      "category": "외교·안보",
+      "headline": "한미 연합억제의 운용원칙이 흔들리는 가운데 북한과 중국이 동시에 서울의 선택지를 압박",
+      "fact": "미국 대통령은 한미 연합훈련 축소를 지시했고 한국 외교장관은 이 결정이 사전 협의 없이 내려졌다고 밝혔다. 북한은 약 10발의 단거리 탄도미사일을 발사했고, 중국 왕이 외교부장은 서울에서 한국이 미중 경쟁에서 한쪽 편을 들지 말고 전략적 자율성을 유지해야 한다고 요구했다. 미국의 2026 국가방위전략은 한국이 북한 억지의 주된 책임을 맡고 미국은 더 제한된 지원을 제공할 수 있다고 명시하며, 미 육군의 2026-27 전략환경평가는 한국의 국방비 GDP 3.5% 확대와 2028년 전시작전통제권 전환 일정을 전제로 한다.",
+      "assessment": "이번 훈련 축소를 일회성 정치 이벤트로 보기 어렵다. 미국의 구조적 부담 이전 전략, 트럼프식 대북 정상외교, 북한의 핵·미사일 지렛대, 중국의 전략적 자율 요구가 같은 시점에 겹치고 있다. 한국은 기존의 고정된 확장억제 체제에서 방위비·작전권·훈련·주한미군 역할을 다시 협상하는 과도기로 진입하고 있다.",
+      "impact": "서울은 북한 억지력 유지와 동시에 미국과의 연합지휘·훈련 공백을 최소화해야 하며, 중국과의 경제·외교 관계까지 관리해야 한다. 미국의 대북 직접접촉이 한국과 충분히 조율되지 않을 경우 동맹 내 정보·정책 비대칭이 커질 수 있다.",
+      "watch": "연합훈련 축소가 다음 훈련에도 반복되는지, 주한미군 임무와 방위비 분담이 추가 조정되는지, 트럼프-김정은 회담의 선행조건이 무엇인지, 한중 정상회담에서 중국이 대만·미사일방어·공급망 문제를 연계하는지 확인한다.",
+      "confidence": "높음",
+      "sources": [
+        {"label":"Reuters · 한미훈련 사전협의 부재","url":"https://www.reuters.com/world/asia-pacific/south-korea-says-caught-off-guard-by-trumps-order-cut-military-drills-2026-08-19/"},
+        {"label":"AP · 북한 미사일 발사","url":"https://apnews.com/article/b3af05067e4258f90f67023c7b2b3e9a"},
+        {"label":"Reuters · 왕이 방한 및 전략적 자율 요구","url":"https://www.reuters.com/world/asia-pacific/china-urges-south-korea-not-take-sides-blames-us-policy-korea-tensions-2026-08-20/"},
+        {"label":"U.S. DoD · 2026 National Defense Strategy","url":"https://media.defense.gov/2026/Jan/23/2003864773/-1/-1/0/2026-national-defense-strategy.pdf"},
+        {"label":"U.S. Army · 2026-27 Strategic Security Environment","url":"https://media.defense.gov/2026/Jun/23/2003952667/-1/-1/0/20260731_StrategicEstimate_RGB_Online.PDF"}
+      ]
+    },
+    {
+      "priority": "CRITICAL",
+      "category": "에너지·국제정세",
+      "headline": "호르무즈 위기의 본질이 봉쇄 여부에서 실질 운송·정제 능력 훼손으로 이동",
+      "fact": "Kpler 기준 8월 18일과 19일 호르무즈를 통과한 원자재 운반선은 각각 9척에 그쳤다. 전쟁 전 하루 130척 이상이 통과하던 수준과 큰 차이다. 미국 EIA는 2026년 2분기 호르무즈를 통한 원유·석유액체 평균 통과량을 하루 490만 배럴로 추산했으며, 전쟁 전인 2025년 4분기 2,160만 배럴에서 급감했다고 밝혔다. 8월 20일 브렌트유는 배럴당 93.81달러까지 상승했고 UAE는 이란과의 금융·경제 거래를 중단했다.",
+      "assessment": "미국과 이란이 해협이 열렸는지를 두고 상반된 주장을 내놓지만 시장에 중요한 것은 법적·정치적 표현이 아니라 실제 운송능력이다. 현재 위기는 원유 자체의 절대 부족보다 선박 통항, 보험, 정유설비 손상, 대체항로 비용이 결합된 물류·정제 위기로 변하고 있다. 따라서 외교적 합의가 성립해도 에너지 가격이 즉시 정상화될 가능성은 낮다.",
+      "impact": "에너지 수입 의존도가 높은 한국은 원유가격뿐 아니라 LNG·정제품·해상보험·운임 상승을 동시에 받을 수 있다. 에너지발 물가가 장기화되면 한국과 주요국 중앙은행의 금리 인하 여력이 줄고 제조업 원가와 항공·해운 비용이 재차 상승한다.",
+      "watch": "호르무즈 일일 실제 통항 척수와 선적량, 보험료와 VLCC 운임, 걸프 정유시설 재가동 속도, UAE-이란 경제관계 회복 여부, 미국-이란 간 비공개 중재 채널 재개 여부를 추적한다.",
+      "confidence": "높음",
+      "sources": [
+        {"label":"Reuters · 호르무즈 실제 통항량","url":"https://www.reuters.com/world/middle-east/hormuz-shipping-unchanged-amid-us-iran-stalemate-data-shows-2026-08-20/"},
+        {"label":"Reuters · 유가 및 공급우려","url":"https://www.reuters.com/business/energy/oil-prices-steady-investors-assess-us-iran-war-outlook-2026-08-20/"},
+        {"label":"U.S. EIA · August 2026 Short-Term Energy Outlook","url":"https://www.eia.gov/outlooks/steo/pdf/steo_full.pdf"},
+        {"label":"Reuters · UAE의 대이란 금융·경제 중단","url":"https://www.reuters.com/world/middle-east/uaes-financial-embargo-iran-after-missile-threat-puts-rivalry-back-spotlight-2026-08-19/"}
+      ]
+    },
+    {
+      "priority": "HIGH",
+      "category": "경제·금융",
+      "headline": "미국은 장기금리 급등을 국채시장 유동성 조치로 완화하려 하지만 통화정책은 오히려 긴축 위험을 유지",
+      "fact": "미국 30년 국채금리는 2007년 이후 최고 수준 부근까지 상승했고 재무부는 장기물 바이백 확대를 통해 시장 유동성 완화에 나섰다. 미국 정부부채는 40조 달러를 넘어섰다. 한편 연준은 7월 회의에서 기준금리를 3.50~3.75%로 유지했지만 3명의 위원이 0.25%포인트 인상을 주장했으며, 공개된 회의 논의는 인플레이션 위험이 여전히 상방에 있음을 보여준다.",
+      "assessment": "현재 미국 정책당국은 서로 다른 문제를 동시에 처리하고 있다. 재무부는 장기 국채시장의 유동성과 차입비용을 완화해야 하지만 연준은 에너지·관세발 물가 때문에 금융여건을 충분히 완화하기 어렵다. 이는 아직 재정지배로 단정할 단계는 아니지만, 재정정책과 통화정책의 목표가 충돌하기 시작한 신호다.",
+      "impact": "장기금리가 높은 상태로 유지되면 미국 주택·기업금융과 성장주 밸류에이션에 부담이 되고, 달러와 원화 변동성도 확대될 수 있다. 한국의 외화조달 비용과 장기채 금리에도 상방 압력이 전이될 가능성이 있다.",
+      "watch": "미 30년물 금리가 바이백 이후 안정되는지, 9월 FOMC에서 인상 의견이 확대되는지, 에너지 가격과 기대인플레이션이 다시 상승하는지, 달러 약세와 장기금리 상승이 동시에 나타나는지를 본다.",
+      "confidence": "중상",
+      "sources": [
+        {"label":"Reuters · 미 국채 바이백과 장기금리","url":"https://www.reuters.com/business/bonds-bounce-us-buybacks-relief-may-be-brief-2026-08-20/"},
+        {"label":"Reuters · 주식시장과 장기금리","url":"https://www.reuters.com/business/us-stock-futures-muted-bond-yields-resume-uptrend-ahead-walmarts-earnings-2026-08-20/"},
+        {"label":"Federal Reserve · 2026-07-29 FOMC Statement","url":"https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm"},
+        {"label":"U.S. Treasury · 2026 Q3 Refunding","url":"https://home.treasury.gov/news/press-releases/sb0590"}
+      ]
+    },
+    {
+      "priority": "HIGH",
+      "category": "전쟁·유럽",
+      "headline": "우크라이나의 러시아 정유 타격이 전술적 공격을 국내 연료부족이라는 전략적 경제압박으로 전환",
+      "fact": "우크라이나군은 러시아 TANECO 정유공장과 Tamanneftegaz 석유터미널을 타격했다고 밝혔다. 러시아에서는 모스크바를 포함한 여러 지역에서 주유소 판매 제한과 장시간 대기가 발생했고 정부는 연료 수출 제한, 품질기준 완화, 석유제품 수입으로 대응하고 있다. 동시에 러시아의 대규모 미사일·드론 공격으로 키이우 일대에서 최소 16명이 사망했고, 우크라이나는 Patriot 요격탄 부족을 공개적으로 호소했다.",
+      "assessment": "우크라이나의 장거리 타격은 러시아의 에너지 수입·배급 체계까지 흔들기 시작했다는 점에서 질적 변화가 있다. 그러나 이것이 전쟁의 전환점이라는 의미는 아니다. 러시아는 더 큰 미사일 생산능력을 유지하고 있으며, 우크라이나는 탄도미사일 방어탄 부족이라는 치명적 취약점을 가진다. 양측이 상대의 에너지·도시 인프라를 압박하는 상호 소모전이 강화되는 단계다.",
+      "impact": "러시아의 연료 부족은 군수·수송 비용과 국내 경제에 부담을 줄 수 있지만, 정유 차질이 장기화되면 국제 정제품 시장의 공급 부족도 심화시킬 수 있다. 유럽과 중동의 에너지 위기가 동시에 발생하면 글로벌 디젤·항공유 시장의 충격이 커진다.",
+      "watch": "러시아의 실제 휘발유 수입량과 정유시설 복구기간, 추가 수출제한, 우크라이나의 장거리 타격 빈도, Patriot 요격탄 신규 공급 여부, 러시아의 보복 표적이 에너지·항만으로 확대되는지 추적한다.",
+      "confidence": "높음",
+      "sources": [
+        {"label":"Reuters · 우크라이나의 러시아 정유시설 타격","url":"https://www.reuters.com/business/energy/ukraine-hits-russias-taneco-oil-refinery-oil-terminal-military-says-2026-08-20/"},
+        {"label":"Reuters · 모스크바 연료부족","url":"https://www.reuters.com/business/energy/frustrated-moscow-drivers-face-long-queues-refill-fuel-shortages-return-2026-08-20/"},
+        {"label":"Reuters · 키이우 대규모 공습과 방공탄 부족","url":"https://www.reuters.com/world/ukrainian-capital-kyiv-under-attack-by-russian-ballistic-missiles-mayor-says-2026-08-19/"},
+        {"label":"AP · 키이우 공격 교차검증","url":"https://apnews.com/article/92ff5d7d1073fd8692a75e4e677f425b"}
+      ]
+    },
+    {
+      "priority": "HIGH",
+      "category": "산업·공급망",
+      "headline": "중국은 희토류를 전면 금수보다 국가별·품목별 허가 조절 방식의 외교 레버리지로 정교화",
+      "fact": "중국의 7월 대미 이트륨 산화물 수출은 29톤으로 증가했지만 일본에 대한 이트륨·터븀·디스프로슘·갈륨 공급은 여전히 강하게 제한되고 있다. 대미 희토류 영구자석 수출은 647톤으로 회복됐지만 핵심 중희토류는 허가 통제의 영향을 계속 받는다. 미국 USGS는 최근 공급망 분석에서 중국이 84개 핵심 광물 중 46개의 미국 경제적 공급차질 위험에서 가장 큰 기여국이며, 이트륨·디스프로슘·터븀 등 중희토류는 중국 외 생산이 거의 없어 충격이 크다고 평가했다.",
+      "assessment": "중국의 전략은 단순한 금수보다 정교하다. 전체 교역을 차단하지 않고 특정 국가·기업·품목의 허가 속도를 조절하면 경제적 비용을 제한하면서 상대국의 협상행동에 영향을 줄 수 있다. 미국에는 일부 공급을 풀고 일본에는 압박을 유지하는 현재 패턴은 핵심광물을 동맹 분리와 외교협상의 수단으로 활용할 수 있음을 보여준다.",
+      "impact": "한국은 반도체·항공우주·방산·전기모터·배터리 공급망이 중희토류와 특수금속에 연결돼 있어 직접 규제가 아니더라도 가격상승과 제3국 수요 전환의 영향을 받을 수 있다. 국가비축과 대체 공급원의 실효성을 품목별로 점검할 필요가 있다.",
+      "watch": "중국의 국가별 수출허가 데이터, 대미 공급 회복이 다른 동맹국으로 확대되는지, 일본 규제가 완화되는지, 미국·브라질·호주 대체 공급 프로젝트의 실제 생산량이 얼마나 빨리 늘어나는지 확인한다.",
+      "confidence": "높음",
+      "sources": [
+        {"label":"Reuters · 7월 중국 희토류 대미 수출","url":"https://www.reuters.com/world/asia-pacific/china-exports-us-rise-rare-earth-critical-aerospace-sector-2026-08-20/"},
+        {"label":"Reuters · 일본 대상 중희토류 제한","url":"https://www.reuters.com/world/china/chinas-heavy-rare-earth-tap-stays-closed-japan-june-2026-07-20/"},
+        {"label":"USGS · Critical Minerals Supply Disruption Methodology","url":"https://pubs.usgs.gov/publication/ofr20251047/full"},
+        {"label":"AP · 브라질 희토류 대체 공급망","url":"https://apnews.com/article/d247150492581197cfa9614c9437c4c2"}
+      ]
+    }
+  ],
+  "watchlist": [
+    {
+      "title": "한국 헌법개정 논의",
+      "detail": "대통령 4년 중임제와 대통령 권한의 국회 이전 구상이 공개됐다. 개헌안이 실제 여야 협상 의제로 전환되는 시점과 감사원·총리·인사권 조정 범위를 추적한다."
+    },
+    {
+      "title": "한반도 비상대비 체계의 복합위기 전환",
+      "detail": "2026 을지연습은 드론·사이버공격과 국가중요시설 복합위기를 공식 훈련 시나리오에 포함했다. 실제 제도·예산·민관 대응체계로 연결되는지 확인한다."
+    },
+    {
+      "title": "유럽 산불 대응자원 포화",
+      "detail": "세르비아가 EU 내 소방항공기 부족으로 러시아 지원을 요청했다. 기후재난이 유럽 민방위 자원 부족과 러시아의 영향력 회복 통로로 작동하는지 관찰한다."
+    },
+    {
+      "title": "인도네시아 플로레스 지진 연쇄",
+      "detail": "최근 대형 지진 이후 8월 20일 규모 5.9의 얕은 지진이 다시 발생했다. 구조·교통·항만 피해 확대와 추가 강진 여부를 관찰한다."
+    },
+    {
+      "title": "이란 핵물질 검증 공백",
+      "detail": "호르무즈 협상이 에너지 문제에 가려져 있으나 IAEA는 폭격 이후 고농축 우라늄 위치와 상태를 충분히 검증하지 못하고 있다. 군사충돌 재확대 시 핵확산 위험이 급격히 커질 수 있다."
+    }
+  ],
+  "outlook": [
+    {
+      "title": "향후 1주 · 한반도",
+      "detail": "북한이 추가 무력시위와 대화 여지를 병행할 가능성이 높다. 핵심은 발사 횟수보다 미국의 훈련축소가 추가 양보로 이어지는지 여부다."
+    },
+    {
+      "title": "향후 1~4주 · 에너지",
+      "detail": "호르무즈 실제 통항량이 의미 있게 회복되지 않으면 배럴당 90달러 안팎의 고유가보다 정제품·운임·보험료 상승이 더 큰 물가 충격으로 전환될 가능성이 있다."
+    },
+    {
+      "title": "9월 · 미국 통화·국채시장",
+      "detail": "장기금리가 높은 상태에서 에너지발 물가가 유지될 경우 연준의 완화 기대는 약해지고 국채 바이백의 시장안정 효과도 제한될 수 있다."
+    },
+    {
+      "title": "향후 1~2개월 · 미중 핵심광물 협상",
+      "detail": "중국이 미국에는 일부 공급을 확대하면서 동맹국에는 차등 압박을 유지할 경우 희토류는 관세보다 더 정밀한 협상수단으로 자리잡을 가능성이 높다."
+    }
+  ]
 }
