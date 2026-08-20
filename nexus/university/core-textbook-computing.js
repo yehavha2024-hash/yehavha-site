@@ -1,0 +1,72 @@
+(()=>{'use strict';window.NEXUS_CORE_TEXTBOOK=window.NEXUS_CORE_TEXTBOOK||{};Object.assign(window.NEXUS_CORE_TEXTBOOK,{
+'CORE-151':{overview:'컴퓨터와 정보는 비트·논리회로·CPU·메모리·운영체제·네트워크·데이터베이스·보안이 계층적으로 결합해 계산과 정보처리를 수행하는 원리를 학습한다.',texts:['Patterson & Hennessy, Computer Organization and Design','Tanenbaum & Bos, Modern Operating Systems','Kurose & Ross, Computer Networking','Bryant & O’Hallaron, Computer Systems: A Programmer’s Perspective'],lessons:[
+['정보·비트·부호화','디지털 시스템은 연속적인 현실정보를 이산적 기호로 표현하며 비트·바이트·문자·이미지 부호화가 모든 계산의 기반이다.',['bit','byte','encoding','entropy'],'I=-log₂P(x)','UTF-8과 이미지 픽셀 데이터가 모두 비트열로 표현되는 방식을 비교한다.',['Shannon, A Mathematical Theory of Communication']],
+['불 대수와 논리회로','AND·OR·NOT 등의 논리연산을 게이트로 구현하고 조합회로와 순차회로가 계산과 상태저장을 수행한다.',['Boolean algebra','logic gate','combinational circuit'],'A∧B, A∨B, ¬A','반가산기와 전가산기의 진리표를 작성한다.',['Patterson & Hennessy']],
+['CPU와 명령어','CPU는 fetch-decode-execute 주기로 명령어를 처리하며 레지스터·ALU·제어장치가 데이터 이동과 연산을 담당한다.',['CPU','instruction set','register','ALU'],'','고수준 덧셈 연산이 기계어 명령으로 분해되는 과정을 추적한다.',['Patterson & Hennessy']],
+['메모리 계층','레지스터·캐시·RAM·SSD는 속도·용량·비용의 상충관계 속에서 계층화되며 locality가 성능의 핵심이다.',['cache','RAM','locality','virtual memory'],'AMAT=Hit time+Miss rate×Miss penalty','캐시적중률 변화가 평균 메모리 접근시간에 미치는 영향을 계산한다.',['Bryant & O’Hallaron']],
+['운영체제와 프로세스','운영체제는 CPU·메모리·파일·장치를 추상화하고 프로세스와 스레드를 스케줄링해 공유자원을 관리한다.',['process','thread','scheduler','system call'],'','두 프로그램이 동시에 실행될 때 CPU 시간을 어떻게 공유하는지 설명한다.',['Tanenbaum & Bos']],
+['동시성·교착·동기화','병렬 실행은 race condition을 만들 수 있어 lock·semaphore·transaction으로 공유상태를 조정해야 한다.',['race condition','mutex','deadlock'],'Deadlock: mutual exclusion+hold/wait+no preemption+circular wait','은행 잔액 동시갱신에서 경쟁조건을 분석한다.',['Tanenbaum & Bos']],
+['파일·저장장치','파일시스템은 이름·디렉터리·권한·블록을 관리하고 데이터의 지속성과 복구를 지원한다.',['filesystem','inode','journaling'],'','전원장애 후 파일시스템 일관성을 journaling이 어떻게 보완하는지 설명한다.',['OSTEP, Operating Systems: Three Easy Pieces']],
+['데이터베이스 기초','관계형 데이터베이스는 스키마·키·관계·SQL을 통해 구조화된 데이터를 저장하고 제약조건으로 일관성을 유지한다.',['relation','primary key','SQL','normalization'],'SELECT ... FROM ... WHERE ...','학생-과목-수강 관계를 정규화된 테이블로 설계한다.',['Silberschatz et al., Database System Concepts']],
+['네트워크와 인터넷','계층형 프로토콜은 물리적 전송에서 IP 라우팅·TCP 신뢰성·HTTP 응용까지 기능을 분리한다.',['TCP/IP','routing','packet','HTTP'],'Throughput≈window/RTT','웹페이지 요청이 DNS·TCP·TLS·HTTP를 거치는 경로를 추적한다.',['Kurose & Ross']],
+['정보보안의 기본','기밀성·무결성·가용성, 인증·권한·암호화·위협모델을 통해 시스템 보안을 구조적으로 분석한다.',['confidentiality','integrity','authentication','authorization'],'C=E_K(P)','비밀번호 저장에서 해시와 암호화의 차이를 설명한다.',['Anderson, Security Engineering']],
+['클라우드·분산시스템','여러 노드가 네트워크를 통해 협력하면 확장성과 내결함성을 얻지만 지연·부분실패·일관성 문제가 생긴다.',['distributed system','replication','consistency','fault tolerance'],'CAP: consistency/availability/partition tolerance','데이터센터 장애에도 서비스를 유지하기 위한 복제전략을 설계한다.',['Kleppmann, Designing Data-Intensive Applications']],
+['컴퓨터·사회·에너지','컴퓨팅은 편의뿐 아니라 프라이버시·접근성·보안·에너지·노동·권력문제를 만들며 기술설계와 제도가 함께 작동한다.',['digital divide','privacy','energy use','accessibility'],'','대규모 데이터센터의 전력사용과 사회적 편익을 함께 평가한다.',['Ceruzzi, A History of Modern Computing']]
+]},
+'CORE-152':{overview:'컴퓨팅 사고와 프로그래밍은 문제를 분해하고 추상화한 뒤 알고리즘으로 표현하여 코드로 구현·테스트·개선하는 과정을 학습한다.',texts:['Abelson & Sussman, Structure and Interpretation of Computer Programs','Allen Downey, Think Python','Cormen et al., Introduction to Algorithms','Brian Kernighan, The Practice of Programming'],lessons:[
+['문제분해와 추상화','복잡한 문제를 독립적인 하위문제로 나누고 중요하지 않은 세부를 감춰 재사용 가능한 구조를 만든다.',['decomposition','abstraction','interface'],'','학생 성적처리 문제를 입력·검증·계산·출력으로 분해한다.',['Wing, Computational Thinking']],
+['변수·자료형·표현','변수는 값에 이름을 붙이고 자료형은 가능한 값과 연산을 제한해 오류를 줄인다.',['variable','type','state'],'','정수·실수·문자열·불리언이 서로 다른 이유를 코드로 확인한다.',['Downey, Think Python']],
+['조건문과 제어흐름','조건에 따라 실행경로를 선택하고 복잡한 분기를 논리식으로 구조화한다.',['if','branch','Boolean expression'],'','대출승인 규칙을 중첩 조건문 대신 명확한 논리식으로 작성한다.',['Kernighan, Practice of Programming']],
+['반복과 루프','반복문은 동일한 계산을 데이터 집합에 적용하며 종료조건과 loop invariant가 정확성을 좌우한다.',['loop','iteration','invariant'],'','목록의 최댓값을 찾는 반복 알고리즘의 불변식을 설명한다.',['Cormen et al.']],
+['함수와 모듈','함수는 입력·출력·부작용을 명확히 하여 코드의 재사용·테스트·이해가능성을 높인다.',['function','parameter','return','module'],'f(x)→y','세금계산을 하나의 순수함수로 분리한다.',['Abelson & Sussman']],
+['자료구조','리스트·스택·큐·집합·딕셔너리는 연산특성이 다르며 문제에 맞는 구조선택이 성능과 명확성을 결정한다.',['array','stack','queue','hash map'],'','브라우저 뒤로가기 기능에 스택을 적용한다.',['Goodrich et al., Data Structures and Algorithms']],
+['재귀와 분할정복','재귀는 문제를 더 작은 동일형태 문제로 정의하며 base case와 호출깊이를 명확히 해야 한다.',['recursion','base case','divide and conquer'],'T(n)=aT(n/b)+f(n)','이진탐색과 병합정렬의 재귀구조를 비교한다.',['Cormen et al.']],
+['알고리즘 복잡도','Big-O 표기법은 입력크기가 커질 때 시간·공간 사용의 성장률을 비교한다.',['Big-O','time complexity','space complexity'],'O(1), O(log n), O(n), O(n log n), O(n²)','선형탐색과 이진탐색의 입력규모별 비용을 비교한다.',['Cormen et al.']],
+['디버깅과 테스트','오류를 증상·재현조건·원인으로 분리하고 unit test·boundary test로 변경 후 재발을 막는다.',['debugging','unit test','boundary case'],'','빈 목록과 매우 큰 입력에서 실패하는 함수를 테스트한다.',['Kernighan, Practice of Programming']],
+['객체와 상태','객체지향은 데이터와 행위를 하나의 추상화로 묶지만 과도한 상속보다 명확한 책임분리가 중요하다.',['object','class','encapsulation'],'','은행계좌 객체의 상태와 메서드를 설계한다.',['Gamma et al., Design Patterns']],
+['버전관리와 협업','Git은 변경이력·브랜치·병합을 관리해 실험과 협업을 재현가능하게 한다.',['commit','branch','merge','diff'],'','기능 개발을 별도 브랜치에서 수행하고 충돌을 해결한다.',['Chacon & Straub, Pro Git']],
+['프로그램 설계 프로젝트','요구사항→자료구조→알고리즘→구현→테스트→리팩터링의 전체 개발주기를 작은 프로그램에 적용한다.',['specification','implementation','refactoring'],'','개인 학습기록 앱의 최소 기능을 설계·구현·테스트한다.',['Abelson & Sussman']]
+]},
+'CORE-153':{overview:'데이터·알고리즘·플랫폼은 데이터구조와 알고리즘이 대규모 서비스의 저장·검색·추천·순위·분산처리·API·플랫폼 거버넌스를 어떻게 구성하는지 학습한다.',texts:['Cormen et al., Introduction to Algorithms','Kleppmann, Designing Data-Intensive Applications','Garcia-Molina et al., Database Systems','Parker, Van Alstyne & Choudary, Platform Revolution'],lessons:[
+['데이터모델과 스키마','관계형·문서형·그래프형 모델은 데이터의 관계와 질의를 서로 다르게 표현한다.',['schema','relational','document','graph'],'','SNS 친구관계를 관계형 테이블과 그래프DB로 각각 모델링한다.',['Kleppmann, Designing Data-Intensive Applications']],
+['배열·연결리스트·해시','자료구조는 접근·삽입·삭제 비용이 다르며 사용패턴에 맞는 선택이 필요하다.',['array','linked list','hash table'],'average hash lookup≈O(1)','캐시용 키-값 저장소에 해시테이블을 사용하는 이유를 설명한다.',['Cormen et al.']],
+['정렬·검색','정렬은 후속검색과 분석을 효율화하며 이진탐색은 정렬된 데이터에서 로그시간 탐색을 제공한다.',['sorting','binary search'],'binary search O(log n)','100만 개 ID에서 선형탐색과 이진탐색의 비교횟수를 계산한다.',['Cormen et al.']],
+['트리와 그래프 알고리즘','트리·그래프는 계층·경로·연결망을 표현하며 BFS·DFS·최단경로가 핵심연산이다.',['tree','BFS','DFS','shortest path'],'Dijkstra O((V+E)logV)','도시 도로망에서 최단경로를 계산한다.',['Cormen et al.']],
+['데이터베이스 트랜잭션','ACID 속성은 동시에 여러 사용자가 데이터를 수정할 때 일관성과 복구가능성을 보장한다.',['ACID','transaction','isolation'],'','동시에 두 번 송금되는 문제를 트랜잭션 격리로 방지한다.',['Gray & Reuter, Transaction Processing']],
+['분산저장과 일관성','복제와 파티셔닝은 확장성과 가용성을 높이지만 네트워크 분할에서 일관성 선택이 필요하다.',['replication','partitioning','consistency'],'CAP trade-off','글로벌 메시징 서비스의 읽기·쓰기 일관성 요구를 설계한다.',['Kleppmann']],
+['추천과 순위알고리즘','추천은 사용자·아이템·행동데이터를 이용해 관련성을 예측하지만 노출편향과 인기편향을 만들 수 있다.',['collaborative filtering','ranking','exposure bias'],'score(u,i)=pᵤ·qᵢ','영상추천에서 클릭률 최적화가 다양성을 낮추는 현상을 분석한다.',['Ricci et al., Recommender Systems Handbook']],
+['검색엔진과 정보검색','역색인·TF-IDF·BM25·링크분석은 대규모 문서에서 관련문서를 빠르게 찾고 순위를 정한다.',['inverted index','TF-IDF','BM25','PageRank'],'tfidf(t,d)=tf×log(N/df)','검색어가 문서에서 흔하지만 전체문서에는 드문 경우 가중치가 높아지는 이유를 설명한다.',['Manning et al., Introduction to Information Retrieval']],
+['API와 서비스 경계','API는 내부 구현을 감추고 데이터·기능 계약을 정의하며 인증·버전·오류처리가 서비스간 결합도를 조절한다.',['API','REST','contract','versioning'],'','AI 모델 서비스를 REST API로 노출할 때 입력·오류·인증 규칙을 설계한다.',['Fielding, Architectural Styles and the Design of Network-based Software Architectures']],
+['데이터 파이프라인','수집·검증·변환·저장·학습·배포의 파이프라인은 데이터계보와 품질검사를 통해 재현성을 유지한다.',['ETL','pipeline','data lineage'],'','실시간 로그에서 학습데이터를 만드는 파이프라인의 실패지점을 찾는다.',['Kleppmann']],
+['확장성·신뢰성·관측성','대규모 플랫폼은 캐시·로드밸런싱·복제와 함께 로그·메트릭·트레이싱으로 장애를 탐지하고 복구한다.',['scalability','reliability','observability'],'Availability=MTBF/(MTBF+MTTR)','99.9%와 99.99% 가용성의 월 허용장애시간을 비교한다.',['Beyer et al., Site Reliability Engineering']],
+['플랫폼 권력과 거버넌스','양면시장·네트워크 효과·API 규칙·추천정책이 생태계 참여자의 기회와 종속성을 동시에 만든다.',['network effect','platform governance','lock-in'],'','앱스토어 수수료와 접근규칙을 시장설계와 경쟁정책 관점에서 분석한다.',['Parker et al., Platform Revolution']]
+]},
+'CORE-154':{overview:'인공지능의 원리는 탐색·지식표현·확률추론·머신러닝·딥러닝·언어모델·강화학습·에이전트·안전평가까지 현대 AI의 핵심 모형과 한계를 학습한다.',texts:['Russell & Norvig, Artificial Intelligence: A Modern Approach','Goodfellow, Bengio & Courville, Deep Learning','Bishop, Pattern Recognition and Machine Learning','Sutton & Barto, Reinforcement Learning','Jurafsky & Martin, Speech and Language Processing'],lessons:[
+['AI의 문제정의와 역사','AI는 지능을 하나의 능력으로 가정하기보다 탐색·추론·학습·지각·언어·행동 과제로 나눠 형식화해 왔다.',['Turing test','symbolic AI','machine learning'],'','체스·번역·자율주행이 요구하는 지능능력을 분해한다.',['Turing, Computing Machinery and Intelligence','Russell & Norvig']],
+['탐색과 휴리스틱','상태공간·행동·목표·비용을 정의하고 BFS·DFS·A* 등 탐색전략으로 해를 찾는다.',['state space','heuristic','A*'],'f(n)=g(n)+h(n)','경로계획 문제에서 admissible heuristic의 의미를 설명한다.',['Russell & Norvig']],
+['지식표현과 논리추론','명제논리·술어논리·규칙·온톨로지는 사실과 관계를 명시적으로 표현하고 추론가능하게 한다.',['knowledge representation','ontology','inference'],'KB ⊨ α','의료 지식규칙에서 증상과 진단후보를 추론한다.',['Russell & Norvig']],
+['확률적 추론','불완전한 관찰과 노이즈를 확률변수와 Bayesian network로 표현해 증거에 따라 믿음을 갱신한다.',['Bayesian network','conditional independence'],'P(X₁…Xₙ)=∏P(Xᵢ|Parents(Xᵢ))','질병-증상-검사결과의 조건부 의존성을 그래프로 만든다.',['Pearl, Probabilistic Reasoning in Intelligent Systems']],
+['지도학습','입력-정답 쌍에서 함수 f(x)를 학습하며 손실함수·일반화·과적합·교차검증이 핵심이다.',['supervised learning','loss','generalization'],'MSE=(1/n)Σ(y-ŷ)²','과거 대출자료로 연체확률을 예측할 때 학습·검증·테스트 데이터를 분리한다.',['Bishop, PRML']],
+['비지도학습과 표현학습','정답라벨 없이 군집·저차원구조·잠재표현을 발견하며 결과해석에는 추가 가정이 필요하다.',['clustering','PCA','representation learning'],'PCA: maximize variance of Xw','고객행동 데이터를 군집화하고 군집이 실제 사회범주인지 검토한다.',['Hastie et al., Elements of Statistical Learning']],
+['신경망과 딥러닝','여러 층의 가중합과 비선형함수를 통해 복잡한 함수를 근사하고 역전파로 손실의 기울기를 계산한다.',['neural network','backpropagation','gradient descent'],'w←w-η∇L(w)','이미지분류기의 학습률이 너무 크거나 작을 때 나타나는 문제를 설명한다.',['Goodfellow et al., Deep Learning']],
+['자연어처리와 Transformer','attention은 토큰 사이 관계를 가중합으로 계산하고 Transformer는 이를 병렬화해 대규모 언어모델의 기반이 된다.',['token','attention','Transformer'],'Attention(Q,K,V)=softmax(QKᵀ/√d)V','긴 문장에서 어떤 단어가 다른 단어의 해석에 영향을 주는지 attention으로 설명한다.',['Vaswani et al., Attention Is All You Need']],
+['생성AI와 Foundation Model','대규모 사전학습 모델은 다음 토큰 예측 등 자기지도학습을 통해 범용표현을 얻고 프롬프트·미세조정·검색결합으로 다양한 과제를 수행한다.',['pretraining','foundation model','fine-tuning','RAG'],'L=-ΣlogP(xₜ|x₍<t₎)','언어모델의 유창성이 사실정확성을 자동으로 보장하지 않는 이유를 설명한다.',['Bommasani et al., On the Opportunities and Risks of Foundation Models']],
+['강화학습','에이전트는 상태에서 행동을 선택하고 보상을 최대화하도록 정책을 학습하며 장기보상의 할인과 탐색-활용 균형이 중요하다.',['MDP','policy','reward','Q-learning'],'Gₜ=ΣγᵏRₜ₊ₖ₊₁','로봇이 즉시보상보다 장기목표를 선택하도록 보상함수를 설계한다.',['Sutton & Barto']],
+['AI 에이전트와 계획','Agentic AI는 목표·도구·메모리·환경피드백을 연결해 여러 단계의 행동을 계획하고 실행하며 권한·실패누적 문제가 커진다.',['agent','planning','tool use','memory'],'π(a|s)','메일·캘린더·결제를 사용할 수 있는 에이전트의 권한경계를 설계한다.',['Russell & Norvig']],
+['평가·안전·정렬','정확도뿐 아니라 강건성·분포이탈·공정성·보안·인간감독·오용가능성을 평가해야 실제 배치위험을 판단할 수 있다.',['robustness','alignment','red teaming','human oversight'],'Risk≈Probability×Impact','고성능 모델이 안전하지 않을 수 있는 실패모드와 평가셋을 설계한다.',['Amodei et al., Concrete Problems in AI Safety']]
+]},
+'CORE-155':{overview:'AI와 인간사회는 자동화가 노동·시장·권력·프라이버시·차별·정보환경·책임·창작·안보·교육·의료에 미치는 영향을 사회과학과 법정책 관점에서 통합 분석한다.',texts:['Frank Pasquale, The Black Box Society','Cathy O’Neil, Weapons of Math Destruction','Shoshana Zuboff, The Age of Surveillance Capitalism','Virginia Eubanks, Automating Inequality','NIST AI Risk Management Framework'],lessons:[
+['자동화와 노동','AI는 직업 전체보다 과업구성을 먼저 변화시키며 대체·보완·감시·숙련재편 효과가 산업별로 다르게 나타난다.',['automation','task substitution','augmentation'],'Productivity=Output/Input','번역가 업무를 번역생성·검수·고객소통 과업으로 나눠 AI 영향을 분석한다.',['Autor, Why Are There Still So Many Jobs?']],
+['AI와 생산성·시장집중','대규모 데이터·컴퓨팅·모델 투자는 생산성을 높일 수 있지만 규모의 경제와 네트워크 효과가 집중을 강화할 수 있다.',['productivity','economies of scale','market concentration'],'HHI=Σsᵢ²','Foundation model 시장의 진입장벽을 컴퓨팅·데이터·유통으로 분해한다.',['Acemoglu & Restrepo, Automation and New Tasks']],
+['알고리즘 차별과 공정성','과거 데이터·라벨·목표함수·임계값이 집단별 오류율 차이를 만들며 서로 다른 공정성 정의는 동시에 충족되지 않을 수 있다.',['demographic parity','equalized odds','calibration'],'P(Ŷ=1|A=a) equal across groups','채용모델의 합격률과 오류율을 집단별로 비교한다.',['Barocas, Hardt & Narayanan, Fairness and Machine Learning']],
+['프라이버시와 감시','데이터수집·추론·결합은 명시적으로 제공하지 않은 정보까지 추정할 수 있어 동의만으로 통제하기 어렵다.',['privacy','profiling','surveillance'],'ε-differential privacy concept','위치·결제·검색기록 결합으로 민감정보를 추론하는 사례를 분석한다.',['Zuboff, Age of Surveillance Capitalism']],
+['정보환경과 허위정보','생성AI는 정보생산비용을 낮추며 합성미디어·대량선전·개인화 설득이 신뢰와 검증비용을 변화시킨다.',['misinformation','deepfake','information integrity'],'','선거기간 합성음성의 출처표시·플랫폼 대응·언론검증을 설계한다.',['Wardle & Derakhshan, Information Disorder']],
+['인간자율성과 자동화편향','사람은 AI 권고를 과신하거나 반대로 알고리즘을 일률적으로 거부할 수 있어 적절한 신뢰보정과 이의제기 절차가 필요하다.',['automation bias','algorithm aversion','human-in-the-loop'],'','의료진이 AI 진단을 독립검토하지 않고 따르는 상황을 분석한다.',['Parasuraman & Riley, Humans and Automation']],
+['책임·설명·감사','복잡한 AI 공급망에서 개발자·배포자·운영자·사용자의 통제가능성과 정보접근 수준에 따라 책임을 배분해야 한다.',['accountability','audit','traceability','explainability'],'','다중에이전트 시스템 사고에서 로그와 권한구조로 역할별 책임을 추적한다.',['Pasquale, Black Box Society']],
+['창작·저작권·문화','생성AI는 학습데이터·스타일모방·인간의 창작기여·출처표시 문제를 통해 저작권과 문화산업의 가치배분을 재검토하게 한다.',['authorship','training data','transformative use'],'','AI 음악에서 프롬프트·편집·후반작업의 인간기여를 구분한다.',['Lessig, Free Culture']],
+['AI 보안과 오용','프롬프트주입·데이터오염·모델탈취·사회공학·자동화된 공격은 AI가 공격표면과 공격속도를 동시에 늘릴 수 있음을 보여준다.',['prompt injection','data poisoning','model theft'],'Risk=Threat×Vulnerability×Impact','업무에이전트가 악성 문서의 지시를 실행하는 공격을 위협모형으로 분석한다.',['NIST AI RMF']],
+['군사·치안·고위험 사용','자율무기·예측치안·국경감시는 생명·자유에 직접 영향을 주므로 인간통제·오류율·책임·비례성 기준이 중요하다.',['autonomous weapons','predictive policing','meaningful human control'],'','얼굴인식 오탐이 체포결정으로 연결되는 절차를 분석한다.',['Eubanks, Automating Inequality']],
+['교육·의료·공공서비스','AI는 접근성과 개인화를 높일 수 있지만 오류·의존·민감정보·디지털격차·절차적 권리 문제를 동반한다.',['personalization','digital divide','procedural fairness'],'','복지급여 자동심사에서 오류정정과 인간심사 권리를 설계한다.',['Eubanks, Automating Inequality']],
+['AI 거버넌스와 사회계약','위험기반 규제·표준·감사·사고보고·책임제도·공공참여를 결합해 혁신과 기본권·안전을 동시에 관리해야 한다.',['risk governance','standards','incident reporting','public participation'],'','고위험 AI의 등록·로그·감사·보험·이의제기 체계를 통합 설계한다.',['NIST AI RMF','OECD AI Principles']]
+]}
+});})();
