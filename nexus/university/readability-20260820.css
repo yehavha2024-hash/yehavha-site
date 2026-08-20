@@ -1,0 +1,26 @@
+/* 2026-08-20 readability adjustment: typography only, compact geometry preserved */
+body{font-size:16px;line-height:1.72}
+.back,.utility-link{font-size:13px}.stamp,.badge{font-size:11px}
+.eyebrow{font-size:11px}.lead{font-size:15px;line-height:1.66}.notice{font-size:12.5px;line-height:1.56}
+.button{font-size:12.5px}.metric span{font-size:10.5px}.metric strong{font-size:15px}
+.section-head span{font-size:10.8px}.section-intro{font-size:14px;line-height:1.6}
+.stage h3{font-size:16px}.stage p{font-size:12.5px;line-height:1.5}
+.course-code{font-size:10.8px}.course-copy strong{font-size:13.5px}.course-copy small{font-size:10.5px}.course-state{font-size:9.5px}
+.college .num{font-size:10px}.college strong{font-size:13.8px}.college p{font-size:11.8px;line-height:1.46}
+.path span{font-size:11.5px}.footer{font-size:11.5px}
+.course-subtitle{font-size:14px;line-height:1.55}.course-meta span{font-size:10.5px}.progress-head{font-size:11px}.progress-head strong{font-size:12px}
+.toc a strong{font-size:11.5px}.toc a span{font-size:10px}.module-head p{font-size:12px;line-height:1.5}
+.lesson-no{font-size:10.5px}.lesson-title strong{font-size:13.5px;line-height:1.34}.lesson-title span{font-size:10.5px}.lesson-check{font-size:9.5px}
+.lesson-section h3{font-size:13px}.lesson-section p{font-size:14px;line-height:1.68}.lesson-section ul,.lesson-section ol{font-size:13.5px;line-height:1.58}
+.concepts span{font-size:10.5px}.case{font-size:13.5px;line-height:1.62}.exercise strong{font-size:12px}.exercise{font-size:13px}
+.tutor-box p{font-size:12.5px;line-height:1.52}.tutor-copy{font-size:11px}.assessment h3{font-size:14.5px}.assessment p,.assessment li{font-size:13px;line-height:1.58}
+@media(max-width:650px){
+ body{font-size:15px;line-height:1.66}.back,.utility-link{font-size:12.5px}
+ .lead{font-size:13.5px;line-height:1.55}.notice{font-size:11.5px}.button{font-size:11.5px}.metric span{font-size:9.8px}.metric strong{font-size:13px}
+ .section-intro{font-size:12.5px;line-height:1.52}.stage h3{font-size:14px}.stage p{font-size:11.2px;line-height:1.42}
+ .course-code{font-size:9.8px}.course-copy strong{font-size:12.5px}.course-copy small{font-size:9.6px}.course-state{font-size:8.3px}
+ .college strong{font-size:12.3px}.college p{font-size:10.4px;line-height:1.38}.path span{font-size:10.3px}.footer{font-size:10.5px}
+ .course-subtitle{font-size:12.5px}.course-meta span{font-size:9.5px}.toc a strong{font-size:10.8px}.toc a span{font-size:9.3px}.module-head p{font-size:11px}
+ .lesson-title strong{font-size:12.5px}.lesson-title span{font-size:9.5px}.lesson-section h3{font-size:12px}.lesson-section p{font-size:13.5px;line-height:1.62}.lesson-section ul,.lesson-section ol{font-size:13px;line-height:1.55}
+ .concepts span{font-size:9.5px}.case{font-size:13px}.exercise{font-size:12.5px}.tutor-box p{font-size:11.8px}.assessment p,.assessment li{font-size:12.5px}
+}
