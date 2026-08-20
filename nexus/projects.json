@@ -1,19 +1,19 @@
 {
   "updatedAt": "2026-08-20",
   "categories": [
-    {"id":"university","eyebrow":"NEXUS UNIVERSITY","title":"NEXUS UNIVERSITY","icon":"","iconClass":"university-icon","description":"AI 기반 자기주도형 종합대학 커리큘럼."},
-    {"id":"apps","eyebrow":"WEB APPS & SERVICES","title":"웹앱·서비스","icon":"📱","iconClass":"apps-icon","description":"모바일 중심 웹서비스."},
-    {"id":"research","eyebrow":"RESEARCH & KNOWLEDGE","title":"연구·지식","icon":"⚖️","iconClass":"research-icon","description":"학술연구와 연구 지식 기반."},
-    {"id":"publishing","eyebrow":"PUBLISHING & ARCHIVE","title":"출판·아카이브","icon":"📚","iconClass":"publishing-icon","description":"전자책과 공개 글 아카이브."},
-    {"id":"media","eyebrow":"MEDIA & CONTENT","title":"미디어·콘텐츠","icon":"🎬","iconClass":"media-icon","description":"찬양·영상·AI 동향·음악 제작 아카이브."},
-    {"id":"practice","eyebrow":"AI PRACTICE & IDEAS","title":"AI 실무·아이디어","icon":"✦","iconClass":"apps-icon","description":"AI 자동화·실무·거버넌스·서비스 운영."},
-    {"id":"education","eyebrow":"EDUCATION & COURSES","title":"교육·강좌","icon":"🎓","iconClass":"education-icon","description":"생성형 AI 실습형 교육과 공통 운영체계."},
-    {"id":"initiatives","eyebrow":"IDEA HUB","title":"아이디어 허브","icon":"💡","iconClass":"apps-icon","description":"신규 아이디어와 프로젝트 후보."}
+    {"id":"university","eyebrow":"NEXUS UNIVERSITY","title":"NEXUS UNIVERSITY","icon":"","iconClass":"university-icon","description":"AI 기반 자기주도형 종합대학 커리큘럼"},
+    {"id":"apps","eyebrow":"WEB APPS & SERVICES","title":"웹앱·서비스","icon":"📱","iconClass":"apps-icon","description":"모바일 중심 웹서비스"},
+    {"id":"research","eyebrow":"RESEARCH & KNOWLEDGE","title":"연구·지식","icon":"⚖️","iconClass":"research-icon","description":"학술연구와 연구 지식 기반"},
+    {"id":"publishing","eyebrow":"PUBLISHING & ARCHIVE","title":"출판·아카이브","icon":"📚","iconClass":"publishing-icon","description":"전자책과 공개 글 아카이브"},
+    {"id":"media","eyebrow":"MEDIA & CONTENT","title":"미디어·콘텐츠","icon":"🎬","iconClass":"media-icon","description":"찬양·영상·AI 동향·음악 제작 아카이브"},
+    {"id":"practice","eyebrow":"AI PRACTICE & IDEAS","title":"AI 실무·아이디어","icon":"✦","iconClass":"apps-icon","description":"AI 자동화·실무·거버넌스·서비스 운영"},
+    {"id":"education","eyebrow":"EDUCATION & COURSES","title":"교육·강좌","icon":"🎓","iconClass":"education-icon","description":"생성형 AI 실습형 교육과 공통 운영체계"},
+    {"id":"initiatives","eyebrow":"IDEA HUB","title":"아이디어 허브","icon":"💡","iconClass":"apps-icon","description":"신규 아이디어와 프로젝트 후보"}
   ],
   "researchGroups": [
-    {"id":"institute","eyebrow":"INDEPENDENT RESEARCH INSTITUTE","title":"독립 연구기관","description":"AI 법률연구소 독립 연구축."},
-    {"id":"track","eyebrow":"ACADEMIC RESEARCH TRACK","title":"법학 연구 트랙","description":"석사 → KCI → 학술발표 → 박사연구."},
-    {"id":"knowledge","eyebrow":"RESEARCH KNOWLEDGE BASE","title":"연구 지식 기반","description":"법리·판례·문헌·법철학·용어·선제연구."}
+    {"id":"institute","eyebrow":"INDEPENDENT RESEARCH INSTITUTE","title":"독립 연구기관","description":"AI 법률연구소 독립 연구축"},
+    {"id":"track","eyebrow":"ACADEMIC RESEARCH TRACK","title":"법학 연구 트랙","description":"석사 → KCI → 학술발표 → 박사연구"},
+    {"id":"knowledge","eyebrow":"RESEARCH KNOWLEDGE BASE","title":"연구 지식 기반","description":"법리·판례·문헌·법철학·용어·선제연구"}
   ],
   "projects": [
     {"id":"nexus-university","category":"university","meta":"AI-Powered Self-Directed University","title":"NEXUS UNIVERSITY","description":"University Core 35과목과 12개 단과대학·융합학부를 단계적으로 학습하고 연구로 연결하는 AI 기반 자기주도형 종합대학 커리큘럼입니다.","url":"https://yehavha-nexus-hub.pages.dev/university/","actionLabel":"대학 입장","external":false},
