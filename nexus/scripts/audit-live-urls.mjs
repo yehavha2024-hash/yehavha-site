@@ -2,6 +2,8 @@ import fs from 'node:fs';
 
 const projects = JSON.parse(fs.readFileSync('nexus/projects.json', 'utf8')).projects || [];
 const NEXUS_ORIGIN = 'https://yehavha-nexus-hub.pages.dev';
+const COPYRIGHT_STANDARD = 'Copyright © 이명훈 2026. All rights reserved.';
+const RETIRED_PATHS = ['/ai-practice/', '/ai-governance/', '/ai-service-operations/'];
 const OWNED_HOSTS = [
   /\.pages\.dev$/i,
   /\.danielie\.workers\.dev$/i
@@ -18,9 +20,21 @@ async function request(url, options = {}) {
   return fetch(url, {
     method: options.method || 'GET',
     redirect: options.redirect || 'follow',
-    headers: { 'user-agent': 'YEHAVHA-Nexus-Smoke-Test/1.1', ...(options.headers || {}) },
+    headers: { 'user-agent': 'YEHAVHA-Nexus-Smoke-Test/1.2', ...(options.headers || {}) },
     signal: AbortSignal.timeout(15000)
   });
+}
+
+function auditLiveCopyright(projectId, url, body) {
+  if (url.origin !== NEXUS_ORIGIN) return;
+  if (!body.includes(COPYRIGHT_STANDARD)) {
+    errors += 1;
+    console.error(`ERROR ${projectId}: 라이브 Copyright 표준문구 미반영 ${url}`);
+  }
+  if (/Copyright ©\s*2026\s*이명훈/.test(body)) {
+    errors += 1;
+    console.error(`ERROR ${projectId}: 구버전 Copyright 순서가 라이브에 잔존 ${url}`);
+  }
 }
 
 async function check(project) {
@@ -42,6 +56,7 @@ async function check(project) {
       console.error(`ERROR ${project.id}: 응답 본문이 비정상적으로 짧음 (${body.length} bytes) ${url}`);
       return;
     }
+    auditLiveCopyright(project.id, url, body);
     console.log(`OK ${project.id}: HTTP ${response.status} ${response.url}`);
   } catch (error) {
     errors += 1;
@@ -107,12 +122,32 @@ async function checkRedirect() {
   }
 }
 
+async function checkRetiredPaths() {
+  for (const pathname of RETIRED_PATHS) {
+    const url = `${NEXUS_ORIGIN}${pathname}`;
+    try {
+      const response = await request(url, { redirect: 'manual' });
+      if (response.status < 400) {
+        errors += 1;
+        console.error(`ERROR ${pathname}: 삭제 경로가 라이브에서 HTTP ${response.status}로 접근 가능`);
+      } else {
+        console.log(`OK ${pathname}: retired HTTP ${response.status}`);
+      }
+    } catch (error) {
+      errors += 1;
+      console.error(`ERROR ${pathname}: ${error.message}`);
+    }
+  }
+}
+
+await check({ id: 'nexus-home', url: `${NEXUS_ORIGIN}/` });
 for (const project of projects) await check(project);
 await check({ id: 'legal-mind-training', url: 'https://yehavha-legal-knowledge.danielie.workers.dev/legal-mind/' });
 await checkJson('/projects.json', data => Array.isArray(data?.projects) && data.projects.length > 0);
 await checkJson('/project-status.json', data => data && typeof data === 'object' && Object.keys(data).length >= 10);
 await checkAccessApi();
 await checkRedirect();
+await checkRetiredPaths();
 
 console.log(`Live Nexus smoke test: ${errors} error(s)`);
 if (errors) process.exit(1);
