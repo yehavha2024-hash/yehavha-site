@@ -1,9 +1,9 @@
 let schemaReady = false;
 
-const STATIC_ASSET_RE = /\.(?:css|js|mjs|cjs|json|map|png|jpe?g|gif|webp|avif|svg|ico|woff2?|ttf|otf|mp4|webm|mp3|wav|zip)$/i;
+const STATIC_ASSET_RE = /\.(?:css|js|mjs|cjs|json|map|png|jpe?g|gif|webp|avif|svg|ico|woff2?|ttf|otf|mp4|webm|mp3|wav|zip|txt|xml|webmanifest)$/i;
 
 function shouldCount(request) {
-  if (request.method !== 'GET' && request.method !== 'HEAD') return false;
+  if (request.method !== 'GET') return false;
 
   const url = new URL(request.url);
   const path = url.pathname;
