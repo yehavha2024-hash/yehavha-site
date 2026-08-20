@@ -11,13 +11,25 @@
     return el;
   }
 
-  function externalBookLink(book) {
-    const link = make('a', 'book-link', book.actionLabel || '도서 보기');
-    link.href = book.url;
+  function externalLink(url, label, className = 'book-link') {
+    const link = make('a', className, label || '도서 보기');
+    link.href = url;
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     link.append(document.createTextNode(' ↗'));
     return link;
+  }
+
+  function externalBookLink(book) {
+    return externalLink(book.url, book.actionLabel || '도서 보기');
+  }
+
+  function appendAdditionalLinks(actions, book) {
+    if (!Array.isArray(book.additionalLinks)) return;
+    book.additionalLinks.forEach((item) => {
+      if (!item || !item.url) return;
+      actions.append(externalLink(item.url, item.label || '다른 판매처에서 보기', 'book-link book-link-secondary'));
+    });
   }
 
   function renderBook(book) {
@@ -34,6 +46,7 @@
       actions.append(detailLink);
     }
     actions.append(externalBookLink(book));
+    appendAdditionalLinks(actions, book);
     article.append(actions);
     return article;
   }
@@ -75,6 +88,7 @@
     const back = make('a', 'book-link book-link-secondary', '대표 도서 목록');
     back.href = './';
     actions.append(back, externalBookLink(book));
+    appendAdditionalLinks(actions, book);
     detailRoot.append(actions);
   }
 
