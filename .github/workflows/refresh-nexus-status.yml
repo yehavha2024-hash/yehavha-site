@@ -38,22 +38,19 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Promote strategic intelligence priority
-        run: node nexus/scripts/promote-intelligence.mjs
-
       - name: Refresh Nexus project status
         run: node nexus/scripts/update-status.mjs
 
-      - name: Commit Nexus updates when changed
+      - name: Commit Nexus status when changed
         shell: bash
         run: |
-          if git diff --quiet -- nexus/project-status.json nexus/portal-v2.js; then
-            echo "Nexus portal and project status are already current."
+          if git diff --quiet -- nexus/project-status.json; then
+            echo "Nexus project status is already current."
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add nexus/project-status.json nexus/portal-v2.js
-          git commit -m "Refresh Nexus intelligence priority and project status"
+          git add nexus/project-status.json
+          git commit -m "Refresh Nexus project status"
           git push
