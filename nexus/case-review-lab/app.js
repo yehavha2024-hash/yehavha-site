@@ -1,13 +1,16 @@
 (() => {
   'use strict';
 
-  const cases = Array.isArray(window.LEGAL_MIND_CASES) ? window.LEGAL_MIND_CASES : [];
-  const select = document.getElementById('caseSelect');
-  const detail = document.getElementById('caseDetail');
-  const count = document.getElementById('caseCount');
-  if (!select || !detail) return;
+  const engine = window.CASE_REVIEW_ENGINE;
+  const form = document.getElementById('caseForm');
+  const output = document.getElementById('reviewOutput');
+  const gates = document.getElementById('reviewGates');
+  const stages = document.getElementById('reviewStages');
+  const trace = document.getElementById('reviewTrace');
+  if (!engine || !form || !output || !gates || !stages || !trace) return;
 
-  const arr = value => Array.isArray(value) ? value : [];
+  const $ = id => document.getElementById(id);
+  const lines = value => String(value || '').split(/\n+/).map(item => item.trim()).filter(Boolean);
   const make = (tag, className, text) => {
     const el = document.createElement(tag);
     if (className) el.className = className;
@@ -15,56 +18,87 @@
     return el;
   };
 
-  function record(label, value) {
-    const box = make('div', 'record');
-    box.append(make('strong', '', label), make('span', '', value));
+  function sources(value) {
+    return lines(value).map((line,index) => {
+      const split = line.split('|').map(item => item.trim());
+      if (split.length > 1) return {label:split[0] || `공식자료 ${index+1}`, url:split.slice(1).join('|')};
+      return {label:`공식자료 ${index+1}`, url:line};
+    });
+  }
+
+  function collectInput() {
+    return {
+      caseId:$('caseId').value.trim() || `LAB-${Date.now()}`,
+      title:$('caseTitle').value.trim(),
+      mode:$('caseMode').value,
+      area:$('caseArea').value.trim(),
+      level:'실제 검토',
+      question:$('caseQuestion').value.trim(),
+      summary:$('caseSummary').value.trim(),
+      facts:lines($('facts').value),
+      legalFacts:lines($('legalFacts').value),
+      relations:lines($('relations').value),
+      issues:lines($('issues').value),
+      laws:lines($('laws').value),
+      precedents:lines($('precedents').value),
+      sources:sources($('sources').value),
+      evidence:lines($('evidence').value),
+      burdens:lines($('burdens').value),
+      claimant:lines($('claimant').value),
+      respondent:lines($('respondent').value),
+      subsumption:lines($('subsumption').value),
+      procedure:lines($('procedure').value),
+      conclusions:lines($('conclusions').value),
+      variations:[]
+    };
+  }
+
+  function gate(label, value) {
+    const box = make('div','gate');
+    box.append(make('span','',label), make('strong','',value));
     return box;
   }
 
-  function fixSharedLinks() {
-    const schema = detail.querySelector('.schema-strip a');
-    if (schema) schema.href = 'https://yehavha-legal-knowledge.danielie.workers.dev/legal-mind/case-review.schema.json';
+  function render(record) {
+    gates.replaceChildren(
+      gate('출처 게이트', record.review.gates.sourceGate),
+      gate('반대논증 게이트', record.review.gates.counterArgumentGate),
+      gate('중립성 게이트', record.review.gates.neutralityGate)
+    );
+
+    stages.replaceChildren();
+    const order = ['collector','analyst','counter','verifier','neutralPanel','integrator'];
+    order.forEach(id => {
+      const stage = record.review.stages[id];
+      const card = make('article','review-stage');
+      const head = make('header');
+      head.append(make('h3','',stage.role), make('span','stage-status',stage.status));
+      const list = make('ul');
+      stage.outputs.forEach(text => list.append(make('li','',text)));
+      card.append(head,list);
+      stages.append(card);
+    });
+
+    trace.textContent = `${record.caseId} · ${record.intake.facts.length} facts · ${record.intake.issues.length} issues · ${record.law.laws.length} laws · ${record.evidence.items.length} evidence · ${record.law.officialSources.length} sources · ${record.review.status}`;
+    output.hidden = false;
+    output.scrollIntoView({behavior:'smooth',block:'start'});
   }
 
-  function render(item) {
-    if (!item) {
-      detail.replaceChildren(make('p', 'lab-empty', '등록된 사건 사례가 없습니다.'));
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const item = collectInput();
+    if (!item.title || !item.question || !item.facts.length || !item.issues.length) {
+      window.alert('사건명, 판단질문, 사실관계, 핵심쟁점을 입력해 주세요.');
       return;
     }
-
-    detail.replaceChildren();
-    const kicker = make('p', 'detail-kicker', `${item.id} · ${item.mode || '사례'} · ${item.area || '법영역'}`);
-    const overview = make('section', 'model-overview');
-    overview.append(
-      make('h2', '', item.title || item.id),
-      make('p', 'case-summary', item.summary || ''),
-      make('strong', 'case-question', item.question || '')
-    );
-
-    const meta = make('div', 'record-grid lab-records');
-    meta.append(
-      record('FACTS', `${arr(item.facts).length}개`),
-      record('ISSUES', `${arr(item.issues).length}개`),
-      record('LAW', `${arr(item.laws).length}개`),
-      record('EVIDENCE', `${arr(item.evidence).length}개`),
-      record('COUNTER', `${arr(item.respondent).length}개`),
-      record('SOURCES', `${arr(item.sources).length}개`)
-    );
-
-    detail.append(kicker, overview, meta);
-    window.setTimeout(fixSharedLinks, 0);
-  }
-
-  cases.forEach(item => {
-    const option = document.createElement('option');
-    option.value = item.id;
-    option.textContent = `${item.id} · ${item.title}`;
-    select.append(option);
+    render(engine.run(item));
   });
-  if (count) count.textContent = `${cases.length} CASES`;
 
-  select.addEventListener('change', () => render(cases.find(item => item.id === select.value)));
-  render(cases[0]);
-
-  new MutationObserver(fixSharedLinks).observe(detail, {childList:true, subtree:true});
+  document.getElementById('clearCase').addEventListener('click', () => {
+    form.reset();
+    output.hidden = true;
+    gates.replaceChildren();
+    stages.replaceChildren();
+    trace.textContent = '';
+  });
 })();
