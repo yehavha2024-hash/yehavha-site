@@ -8,7 +8,13 @@
       "description": "100일 동안 장문 독해와 핵심 어휘·숙어·문법·문장구조를 반복하며 TOEIC 영어 문해력을 단계적으로 높이는 학습 프로젝트의 첫 번째 전자책입니다.",
       "bibliography": "ISBN 979-11-444-0290-4 · YES24 상용 유통",
       "url": "https://m.yes24.com/goods/detail/195116965",
-      "actionLabel": "YES24에서 보기"
+      "actionLabel": "YES24에서 보기",
+      "additionalLinks": [
+        {
+          "url": "https://yehavha.upaper.kr/content/1221195",
+          "label": "유페이퍼에서 보기"
+        }
+      ]
     },
     {
       "id": "upaper-yhwh-returning-yeshua",
