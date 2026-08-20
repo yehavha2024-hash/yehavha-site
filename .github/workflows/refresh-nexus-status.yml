@@ -38,19 +38,33 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Normalize intelligence watch scope
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('nexus/intelligence-briefing/index.html')
+          s = p.read_text(encoding='utf-8')
+          s = s.replace('.scope{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}', '.scope{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}')
+          s = s.replace('align-items:center;justify-content:center;min-height:38px', 'align-items:center;justify-content:flex-start;min-height:38px')
+          s = s.replace('text-decoration:none;text-align:center;font-size:.76rem', 'text-decoration:none;text-align:left;font-size:.76rem')
+          s = s.replace('.scope{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}', '.scope{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}')
+          s = s.replace('@media(max-width:340px){.scope{grid-template-columns:1fr}}', '@media(max-width:340px){.scope{grid-template-columns:repeat(3,minmax(0,1fr))}}')
+          p.write_text(s, encoding='utf-8')
+          PY
+
       - name: Refresh Nexus project status
         run: node nexus/scripts/update-status.mjs
 
-      - name: Commit Nexus status when changed
+      - name: Commit Nexus updates when changed
         shell: bash
         run: |
-          if git diff --quiet -- nexus/project-status.json; then
-            echo "Nexus project status is already current."
+          if git diff --quiet -- nexus/intelligence-briefing/index.html nexus/project-status.json; then
+            echo "Nexus files are already current."
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add nexus/project-status.json
-          git commit -m "Refresh Nexus project status"
+          git add nexus/intelligence-briefing/index.html nexus/project-status.json
+          git commit -m "Set watch scope to three columns"
           git push
