@@ -1,0 +1,72 @@
+(()=>{'use strict';window.NEXUS_CORE_TEXTBOOK=window.NEXUS_CORE_TEXTBOOK||{};Object.assign(window.NEXUS_CORE_TEXTBOOK,{
+'CORE-101':{overview:'비판적 사고는 주장과 근거를 분해하고, 증거의 질과 추론의 타당성을 평가하며, 반론과 불확실성을 고려해 판단의 강도를 조정하는 훈련이다.',texts:['John Dewey, How We Think','Stephen Toulmin, The Uses of Argument','Daniel Kahneman, Thinking, Fast and Slow','Anthony Weston, A Rulebook for Arguments'],lessons:[
+['비판적 사고의 목적','판단은 단순 의견과 다르며 근거·검증가능성·수정가능성을 요구한다.',['정당화','잠정성','메타인지'],'','AI가 전문가보다 항상 정확하다는 주장의 범위와 평가기준을 분해한다.',['Dewey, How We Think']],
+['주장·전제·결론','논증은 결론을 지지하는 하나 이상의 전제로 구성되며 숨은 전제를 드러내야 평가할 수 있다.',['claim','premise','conclusion','implicit premise'],'P1, P2 … ⇒ C','많은 기업이 도입했다는 사실이 안전성을 입증한다는 결론으로 이어지는 숨은 전제를 찾는다.',['Weston, A Rulebook for Arguments']],
+['언어·정의·모호성','애매한 용어와 평가어는 논쟁의 실질을 흐리므로 조작적 정의와 문맥적 의미를 구분한다.',['ambiguity','vagueness','operational definition'],'','“공정한 AI”에서 공정성의 서로 다른 정의를 비교한다.',['Ogden & Richards, The Meaning of Meaning']],
+['연역추론','타당성은 전제가 참일 때 결론이 거짓일 수 없는 구조적 성질이며 건전성은 타당성과 참인 전제를 함께 요구한다.',['validity','soundness','deduction'],'modus ponens: P→Q, P ∴ Q','정책 규칙을 조건문으로 바꾸고 형식적 타당성을 점검한다.',['Irving Copi et al., Introduction to Logic']],
+['귀납추론','귀납은 표본에서 모집단 또는 관찰된 사례에서 일반규칙으로 확장하므로 표본대표성과 대안설명이 핵심이다.',['induction','sampling','strength'],'P(H|E) ∝ P(E|H)P(H)','소규모 사용자 후기만으로 전체 서비스 만족도를 일반화할 수 있는지 평가한다.',['Hume, An Enquiry Concerning Human Understanding']],
+['인과추론','상관은 원인을 보장하지 않으며 시간순서·공변·대안원인 통제와 개입가능성을 검토해야 한다.',['correlation','causation','confounder'],'ATE = E[Y(1)-Y(0)]','AI 도입 후 생산성이 올랐다는 기업 사례에서 경기회복·인력변화 등 교란요인을 찾는다.',['Judea Pearl & Dana Mackenzie, The Book of Why']],
+['비형식적 오류','오류는 결론이 반드시 거짓이라는 뜻이 아니라 제시된 이유가 결론을 충분히 지지하지 못한다는 뜻이다.',['ad hominem','straw man','false dilemma','appeal to authority'],'','상대방의 신분을 공격하는 주장이 정책의 타당성과 무관함을 분석한다.',['Douglas Walton, Informal Logic']],
+['인지편향','확증편향·가용성·기준점·과신은 정보 선택과 확률판단을 체계적으로 왜곡할 수 있다.',['confirmation bias','availability','anchoring','overconfidence'],'','첫 번째 AI 성능 수치가 이후 평가의 기준점이 되는 현상을 분석한다.',['Kahneman, Thinking, Fast and Slow']],
+['출처와 증거의 질','출처의 권위보다 자료생성방법·독립성·표본·측정·재현가능성을 우선 확인한다.',['source criticism','independence','replication'],'','기업 보도자료와 독립 검증논문이 같은 성능주장을 할 때 증거가중치를 다르게 배분한다.',['Booth et al., The Craft of Research']],
+['반론과 스틸맨','좋은 반론은 약한 버전을 공격하지 않고 상대 주장을 가장 강한 형태로 재구성한 뒤 핵심전제를 비판한다.',['steelman','rebuttal','burden of proof'],'','AI 규제 찬반 양측의 가장 강한 논증을 각각 재구성한다.',['Toulmin, The Uses of Argument']],
+['불확실한 의사결정','사실·가치·위험·대안을 분리하고 기대효용과 최악상황을 함께 검토하면 과도한 확신을 줄일 수 있다.',['risk','uncertainty','expected utility'],'EU(a)=ΣP(s)U(a,s)','완전자율주행 도입을 안전·편익·책임·불확실성 기준으로 비교한다.',['Hammond, Keeney & Raiffa, Smart Choices']],
+['종합 사례분석','복합문제는 주장→근거→추론→반론→불확실성→잠정결론 순서로 구조화한다.',['argument map','synthesis','revision'],'','AI 자동결정 시스템의 도입 여부를 기술성능·사회효과·법적 책임을 함께 고려해 평가한다.',['Toulmin, The Uses of Argument']]
+]},
+'CORE-102':{overview:'논리학은 명제와 추론의 형식을 분석해 어떤 결론이 전제로부터 필연적으로 또는 개연적으로 따라오는지 평가하는 학문이다.',texts:['Aristotle, Prior Analytics','Gottlob Frege, Begriffsschrift','Alfred Tarski, Introduction to Logic','Patrick Hurley, A Concise Introduction to Logic'],lessons:[
+['논리와 논증의 형식','내용과 형식을 구별하고 명제·논증·추론규칙의 관계를 파악한다.',['proposition','argument','inference'],'','동일한 논리형식을 가진 서로 다른 내용의 논증을 비교한다.',['Aristotle, Prior Analytics']],
+['명제논리와 진리함수','부정·연언·선언·조건문·쌍조건문의 진리조건을 진리표로 분석한다.',['negation','conjunction','disjunction','conditional'],'¬P, P∧Q, P∨Q, P→Q, P↔Q','복합 정책조건을 명제기호로 번역하고 진리표를 작성한다.',['Tarski, Introduction to Logic']],
+['타당성·건전성·일관성','타당성은 형식, 건전성은 전제의 진리까지 포함하며 일관성은 명제집합의 공동참 가능성이다.',['validity','soundness','consistency'],'Γ ⊨ C','세 법규범이 서로 모순 없이 동시에 적용될 수 있는지 검토한다.',['Hurley, A Concise Introduction to Logic']],
+['자연연역과 기본 추론규칙','modus ponens, modus tollens, hypothetical syllogism 등 핵심 규칙을 단계적 증명에 적용한다.',['modus ponens','modus tollens','natural deduction'],'P→Q, ¬Q ∴ ¬P','계약조건과 위반사실에서 법적 효과를 추론하는 형식을 점검한다.',['Fitch, Symbolic Logic']],
+['술어논리','개체·술어·전칭·존재양화사를 사용해 자연언어의 일반명제를 더 정밀하게 표현한다.',['predicate','quantifier','scope'],'∀x(Px→Qx), ∃xPx','“모든 고위험 AI는 등록되어야 한다”의 논리구조를 형식화한다.',['Frege, Begriffsschrift']],
+['동일성·관계·양화범위','관계술어와 중첩 양화에서 범위 차이가 의미를 어떻게 바꾸는지 분석한다.',['identity','relation','quantifier scope'],'∀x∃yRxy ≠ ∃y∀xRxy','“모든 환자에게 어떤 의사가 있다”와 “한 의사가 모든 환자를 담당한다”를 비교한다.',['Quine, Methods of Logic']],
+['귀납논리','열거적 귀납·유추·통계적 일반화의 강도를 표본크기·대표성·기저율로 평가한다.',['enumerative induction','analogy','base rate'],'P(H|E)=P(E|H)P(H)/P(E)','낮은 기저율 질병의 진단검사 결과를 해석한다.',['Hacking, An Introduction to Probability and Inductive Logic']],
+['가설추론과 최선설명','abduction은 관찰을 가장 잘 설명하는 가설을 선택하지만 단순성·설명력·대안가설을 함께 비교해야 한다.',['abduction','IBE','explanatory power'],'','시스템 장애의 여러 원인 중 로그와 시간순서에 가장 부합하는 설명을 선택한다.',['Harman, The Inference to the Best Explanation']],
+['논리적 오류와 오류의 형식','후건긍정·전건부정·순환논증 등 형식 또는 구조상 오류를 식별한다.',['affirming consequent','denying antecedent','circularity'],'P→Q, Q ∴ P (invalid)','“AI 사고가 났으니 AI가 자율적이었다”라는 추론의 오류를 점검한다.',['Copi et al., Introduction to Logic']],
+['Toulmin 논증모형','claim·data·warrant·backing·qualifier·rebuttal을 사용해 실제 논증을 형식논리보다 세밀하게 분석한다.',['claim','data','warrant','qualifier'],'','판례 논증에서 사실자료와 법적 연결규칙을 구분한다.',['Toulmin, The Uses of Argument']],
+['논리와 언어','함축·전제·맥락 때문에 자연언어 논증은 순수한 형식화만으로 포착되지 않을 수 있다.',['implicature','presupposition','context'],'','“아직도 그 정책을 지지하는가”라는 질문에 내포된 전제를 분석한다.',['Grice, Logic and Conversation']],
+['종합 논증분석','실제 글을 명제화하고 형식적 타당성·귀납강도·숨은 전제·언어맥락을 통합 평가한다.',['formalization','argument map','critical reconstruction'],'','학술논문 한 편의 핵심 주장을 논증지도와 기호논리로 재구성한다.',['Tarski, Introduction to Logic']]
+]},
+'CORE-103':{overview:'학술적 읽기는 글의 내용을 요약하는 데서 그치지 않고 연구질문·논증·방법·증거·한계를 재구성하고 다른 문헌과의 관계를 파악하는 능력이다.',texts:['Mortimer Adler & Charles Van Doren, How to Read a Book','Wayne Booth et al., The Craft of Research','Umberto Eco, How to Write a Thesis','Greenhalgh, How to Read a Paper'],lessons:[
+['읽기의 수준과 목적','정보확인·이해·비판·연구라는 목적에 따라 읽기전략과 메모방식이 달라진다.',['inspectional reading','analytical reading','research reading'],'','같은 논문을 발표준비용과 인용검증용으로 다르게 읽는다.',['Adler & Van Doren, How to Read a Book']],
+['제목·초록·목차로 구조 예측','본문 전에 연구질문·범위·자료·결론을 예측하면 읽기의 탐색비용을 줄일 수 있다.',['abstract','keywords','structure'],'','초록만으로 가설·방법·주요결과를 5문장으로 복원한다.',['Greenhalgh, How to Read a Paper']],
+['논증지도 만들기','핵심 주장과 하위 주장, 근거, 반론, 한계를 계층적으로 표시한다.',['argument mapping','claim hierarchy','evidence'],'','법학 논문의 목차를 실제 논증흐름으로 다시 그린다.',['Booth et al., The Craft of Research']],
+['IMRaD와 실증논문 읽기','Introduction·Methods·Results·Discussion의 역할을 구분하고 결과와 저자의 해석을 분리한다.',['IMRaD','methods','results','discussion'],'','통계적 유의성이 있는 결과와 연구자가 주장하는 정책적 의미 사이의 간격을 찾는다.',['Greenhalgh, How to Read a Paper']],
+['인문·법학 논문 읽기','문제설정·개념정의·원전해석·선행학설·규범논증·결론의 구조를 추적한다.',['doctrinal argument','interpretation','conceptual analysis'],'','판례평석에서 판결요지와 저자의 비판을 분리한다.',['Eco, How to Write a Thesis']],
+['표·그림·수식 읽기','축·단위·분모·오차막대·모형가정을 확인하고 본문 설명과 일치하는지 검증한다.',['scale','denominator','confidence interval','model assumption'],'','로그축 그래프를 선형축처럼 읽었을 때 생기는 오류를 찾는다.',['Tufte, The Visual Display of Quantitative Information']],
+['주석·각주·인용망 읽기','인용은 권위장식이 아니라 주장계보와 증거근거를 추적하는 경로다.',['citation chaining','primary source','secondary source'],'','한 핵심주장의 각주를 원문까지 역추적한다.',['Booth et al., The Craft of Research']],
+['원전과 번역본 읽기','번역어 선택·판본·문맥·시대어의 차이를 확인해 2차문헌의 해석을 원전과 대조한다.',['edition','translation','textual context'],'','같은 철학개념의 두 번역어가 논증에 미치는 차이를 비교한다.',['Eco, How to Write a Thesis']],
+['체계적 문헌검토 읽기','검색식·선정기준·포함연구·편향평가·종합방법을 확인한다.',['systematic review','inclusion criteria','publication bias'],'','메타분석 결론이 특정 데이터베이스와 포함기준에 민감한지 평가한다.',['Cochrane Handbook for Systematic Reviews']],
+['비판적 평가','내적타당도·외적타당도·측정타당도·대안설명·과도한 일반화를 점검한다.',['internal validity','external validity','construct validity'],'','한 국가의 소규모 연구결과를 세계 전체에 일반화할 수 있는지 검토한다.',['Shadish, Cook & Campbell, Experimental and Quasi-Experimental Designs']],
+['연구노트와 문헌매트릭스','문헌별 질문·방법·주장·증거·한계·내 연구와의 연결점을 동일 필드로 기록한다.',['literature matrix','annotated bibliography','research note'],'','10편의 논문을 동일한 7개 항목으로 비교표화한다.',['Booth et al., The Craft of Research']],
+['종합 독해','여러 문헌의 합의·대립·공백을 분리해 하나의 연구지형을 재구성한다.',['synthesis','controversy','research gap'],'','상반된 세 논문의 차이가 데이터·개념·방법 중 어디에서 발생하는지 설명한다.',['Hart, Doing a Literature Review']]
+]},
+'CORE-104':{overview:'학술적 글쓰기는 자료를 나열하는 행위가 아니라 독자가 검증할 수 있는 주장과 근거를 구조화하고 출처·한계·반론을 명시하는 연구 커뮤니케이션이다.',texts:['Booth et al., The Craft of Research','Joseph Williams & Joseph Bizup, Style','Kate Turabian, A Manual for Writers','Howard Becker, Writing for Social Scientists'],lessons:[
+['연구문제와 논제','좋은 글은 넓은 주제보다 답할 수 있는 질문과 논증가능한 논제로 시작한다.',['research question','thesis','scope'],'','“AI 책임”을 “다중에이전트 손해에서 운용자 귀속기준은 무엇인가”로 좁힌다.',['Booth et al., The Craft of Research']],
+['두괄식 문단과 논리적 흐름','문단은 주제문·근거·설명·연결로 구성하고 각 문단은 전체 논제의 한 기능을 담당한다.',['topic sentence','cohesion','coherence'],'','한 문단에 두 개의 독립 주장이 섞인 초안을 분리한다.',['Williams & Bizup, Style']],
+['논증구조와 Toulmin 모형','주장·자료·보증·한정·반론을 명시하면 숨은 전제와 과도한 단정을 줄일 수 있다.',['claim','evidence','warrant','rebuttal'],'','규제 필요성 논증을 Toulmin 요소로 재작성한다.',['Toulmin, The Uses of Argument']],
+['정의와 개념사용','핵심용어는 사전식 정의보다 연구에서 사용하는 범위·기준·배제대상을 명확히 해야 한다.',['stipulative definition','operational definition','conceptual clarity'],'','“자율성”을 기술적 자율성과 법적 자율성으로 구분한다.',['Sartori, Concept Misformation in Comparative Politics']],
+['인용·패러프레이즈·표절','직접인용·간접인용·요약의 기능을 구별하고 모든 핵심 주장에 추적가능한 출처를 제공한다.',['quotation','paraphrase','citation ethics'],'','원문의 문장구조만 바꾼 부적절한 패러프레이즈를 수정한다.',['Turabian, A Manual for Writers']],
+['문헌검토 쓰기','문헌을 저자별로 나열하지 않고 쟁점·방법·결론·대립축을 중심으로 종합한다.',['thematic synthesis','research gap','state of the art'],'','10개 문헌을 3개 쟁점군으로 재배열한다.',['Hart, Doing a Literature Review']],
+['방법론 서술','자료·표본·변수·절차·분석방법을 다른 연구자가 재현할 수 있을 정도로 명시한다.',['methods transparency','operationalization','replicability'],'','“자료를 분석했다”를 실제 데이터원과 코딩절차로 구체화한다.',['APA Publication Manual']],
+['결과와 해석 분리','관찰된 결과와 그 결과의 의미에 대한 해석을 구분해 과도한 인과주장을 피한다.',['results','interpretation','causal claim'],'','상관분석 결과를 인과관계로 서술한 문장을 수정한다.',['Greenhalgh, How to Read a Paper']],
+['반론·한계·대안설명','강한 글은 취약점을 숨기지 않고 가장 중요한 반론과 한계를 먼저 다룬다.',['counterargument','limitation','alternative explanation'],'','자기 논제에 가장 치명적인 반례를 한 문단으로 작성한다.',['Booth et al., The Craft of Research']],
+['표·그림·수식의 서술','시각자료는 본문을 대체하지 않으며 독자가 무엇을 봐야 하는지 핵심 패턴과 한계를 설명해야 한다.',['figure caption','data narrative','uncertainty'],'','복잡한 표를 핵심 비교 2개만 남겨 재설계한다.',['Tufte, The Visual Display of Quantitative Information']],
+['퇴고와 문체','명사화·수동태·불필요한 수식·긴 문장을 줄이고 행위자와 논리관계를 명시한다.',['revision','clarity','conciseness'],'','50단어 문장을 두 문장으로 나누되 의미손실 없이 고친다.',['Williams & Bizup, Style']],
+['논문형 종합과제','문제→선행연구→논제→근거→반론→결론의 구조로 짧은 학술논문을 완성한다.',['academic argument','structure','peer review'],'','2,000자 논증문을 작성하고 인용·반론·한계를 자체 점검한다.',['Booth et al., The Craft of Research']]
+]},
+'CORE-105':{overview:'연구방법론은 질문을 검증가능한 설계로 바꾸고, 측정·표본·인과·해석의 오류를 통제해 근거 있는 지식을 생산하는 규칙을 다룬다.',texts:['Karl Popper, The Logic of Scientific Discovery','Thomas Kuhn, The Structure of Scientific Revolutions','Shadish, Cook & Campbell, Experimental and Quasi-Experimental Designs','John Creswell & J. David Creswell, Research Design','Judea Pearl, Causality'],lessons:[
+['연구질문·가설·이론','이론은 현상을 설명하는 명제체계이고 가설은 관찰가능한 예측으로 변환된 검증문장이다.',['theory','hypothesis','falsifiability'],'H0 vs H1','“AI 사용이 생산성을 높인다”를 측정가능한 가설로 바꾼다.',['Popper, The Logic of Scientific Discovery']],
+['패러다임과 과학변화','정상과학·이상현상·패러다임 전환을 통해 지식이 누적만으로 발전하지 않는다는 관점을 검토한다.',['paradigm','normal science','anomaly'],'','기존 법적 행위자 개념이 자율 AI에서 어떤 이상현상을 만나는지 비교한다.',['Kuhn, The Structure of Scientific Revolutions']],
+['개념화와 측정','추상개념을 관찰가능한 지표로 조작화하고 신뢰도·타당도를 검증한다.',['operationalization','reliability','validity'],'Observed = True + Error','“AI 자율성”을 독립적 목표설정·행동선택·환경적응 지표로 측정한다.',['Babbie, The Practice of Social Research']],
+['표본과 일반화','모집단·표본틀·선정확률·비응답을 고려해야 표본에서 모집단으로 일반화할 수 있다.',['population','sampling frame','selection bias'],'SE ≈ σ/√n','온라인 설문 참여자만으로 전체 시민의 AI 인식을 추정하는 한계를 분석한다.',['Cochran, Sampling Techniques']],
+['실험설계와 RCT','무작위배정은 잠재적 교란변수를 평균적으로 균형화해 처치효과 추정의 근거를 강화한다.',['randomization','control group','treatment effect'],'ATE=E[Y(1)-Y(0)]','AI 튜터 효과를 기존 학습법과 무작위 비교하는 실험을 설계한다.',['Shadish, Cook & Campbell']],
+['준실험과 관찰연구','자연실험·차이의 차이·회귀불연속·매칭은 무작위실험이 불가능할 때 인과추론을 보완한다.',['DiD','RDD','matching'],'DiD=(Yt1-Yt0)-(Yc1-Yc0)','AI 규제 도입 전후의 사고율을 비교할 때 비교집단을 설계한다.',['Angrist & Pischke, Mostly Harmless Econometrics']],
+['인과모형과 DAG','원인·매개·교란·충돌변수를 그래프로 표현하면 어떤 변수를 통제해야 하는지 명확해진다.',['DAG','confounder','mediator','collider'],'do(X=x)','AI 도입과 생산성 사이에서 기업규모가 교란변수인지 검토한다.',['Pearl, Causality']],
+['질적연구','면담·참여관찰·사례연구는 행위자의 의미와 맥락을 깊게 탐색하며 표본수보다 이론적 포화가 중요할 수 있다.',['interview','thematic analysis','saturation'],'','AI 사고 담당자의 의사결정과 책임인식을 반구조화 면담으로 조사한다.',['Creswell & Poth, Qualitative Inquiry']],
+['혼합방법','정량자료의 패턴과 질적자료의 맥락을 결합하되 두 방법의 질문과 통합지점을 사전에 설계한다.',['mixed methods','triangulation','integration'],'','사고통계와 사건담당자 면담을 결합해 AI 위험을 분석한다.',['Creswell & Creswell, Research Design']],
+['재현성·검증·오픈사이언스','사전등록·데이터와 코드 공개·독립재현은 선택적 보고와 분석유연성을 줄인다.',['preregistration','replication','open data'],'','동일 데이터에서 여러 분석을 시도한 뒤 유의한 결과만 보고하는 문제를 평가한다.',['Nosek et al., Promoting an Open Research Culture']],
+['연구윤리','동의·위험최소화·개인정보·이해상충·취약집단 보호는 연구설계의 부가요소가 아니라 정당성 조건이다.',['informed consent','IRB','conflict of interest'],'','민감한 의료 AI 로그를 연구에 사용할 때 동의와 비식별화를 설계한다.',['Belmont Report']],
+['연구설계 종합','질문→이론→측정→표본→방법→분석→윤리→한계의 일관성을 하나의 연구계획서로 통합한다.',['research design','identification','limitations'],'','Agentic AI 사고책임 연구를 법도그마틱 분석과 사례데이터를 결합해 설계한다.',['Creswell & Creswell, Research Design']]
+]}
+});})();
