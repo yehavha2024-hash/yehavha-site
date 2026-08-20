@@ -4,36 +4,15 @@ const law=window.NEXUS_LAW_TEXTBOOKS||{};
 const ai=window.NEXUS_AI_TEXTBOOKS||{};
 const philosophy=window.NEXUS_PHILOSOPHY_TEXTBOOKS||{};
 const social=window.NEXUS_SOCIAL_TEXTBOOKS||{};
-Object.entries(law).forEach(([id,c])=>{
- core[id]={overview:`${c.focus}을 조문·법리·학설·판례·비교법·사례 포섭의 순서로 학습하는 전공 교재 과정이다. 단순한 법률요약이 아니라 적용규범을 특정하고 요건을 분해한 뒤 사실과 증거를 포섭하여 반론과 구제수단까지 구성한다.`,texts:c.readings||[],lessons:(c.lessons||[]).map(l=>[
-  l.title,(l.lecture||[]).join(' '),
-  [...(l.norms||[]).map(x=>`조문·규범: ${x}`),...(l.theory||[]).map(x=>`법리·학설: ${x}`),...(l.caseLaw||[]).map(x=>`판례: ${x}`),...(l.comparison||[]).map(x=>`비교법: ${x}`)],'',l.application||'',
-  [...(c.readings||[]).slice(0,4),...(l.caseLaw||[])]
- ])};
-});
-Object.entries(ai).forEach(([id,c])=>{
- core[id]={overview:`${c.focus}을 알고리즘·수학모형·시스템 아키텍처·대표논문·실험·실패모드의 순서로 학습하는 전공 교재 과정이다. 개념을 암기하는 데 그치지 않고 최소 구현, 복잡도와 오차 분석, 실패 재현, 로그 기반 원인분석과 완화 설계까지 수행한다.`,texts:c.readings||[],lessons:(c.lessons||[]).map(l=>[
-  l.title,(l.lecture||[]).join(' '),
-  [...(l.algorithm||[]).map(x=>`알고리즘: ${x}`),...(l.system||[]).map(x=>`시스템 구조: ${x}`),...(l.papers||[]).map(x=>`대표논문: ${x}`),...(l.failures||[]).map(x=>`실패모드: ${x}`)],
-  (l.math||[]).join(' · '),l.lab||'',
-  [...(c.readings||[]).slice(0,4),...(l.papers||[])]
- ])};
-});
-Object.entries(philosophy).forEach(([id,c])=>{
- core[id]={overview:`${c.focus}을 사상가 소개나 결론 암기가 아니라 원전의 문제설정에서 출발해 핵심명제와 논증을 재구성하고, 대립학설과 가장 강한 반론을 검토한 뒤 현대 문제에 적용하는 철학 전공 교재 과정이다.`,texts:c.readings||[],lessons:(c.lessons||[]).map(l=>[
-  l.title,(l.lecture||[]).join(' '),
-  [...(l.primary||[]).map(x=>`원전: ${x}`),...(l.thesis||[]).map(x=>`핵심명제: ${x}`),...(l.argument||[]).map(x=>`논증: ${x}`),...(l.rival||[]).map(x=>`대립학설: ${x}`),...(l.objection||[]).map(x=>`반론: ${x}`)],
-  '',l.modern||'',
-  [...(c.readings||[]).slice(0,4),...(l.primary||[])]
- ])};
-});
-Object.entries(social).forEach(([id,c])=>{
- core[id]={overview:`${c.focus}을 이론 설명에 머물지 않고 개념화·변수화·연구설계·자료·인과추론·대표 경험연구·경쟁설명으로 검증하는 사회과학 전공 교재 과정이다. 상관관계와 인과관계를 구별하고 측정·표본·선택편향·외적타당도를 지속적으로 점검한다.`,texts:c.readings||[],lessons:(c.lessons||[]).map(l=>[
-  l.title,(l.lecture||[]).join(' '),
-  [...(l.theory||[]).map(x=>`이론: ${x}`),...(l.variables||[]).map(x=>`개념·변수: ${x}`),...(l.design||[]).map(x=>`연구설계: ${x}`),...(l.study||[]).map(x=>`경험연구: ${x}`),...(l.rival||[]).map(x=>`경쟁설명: ${x}`)],
-  '',l.application||'',
-  [...(c.readings||[]).slice(0,4),...(l.study||[])]
- ])};
-});
-window.NEXUS_SPECIALIZED_TEXTBOOK_COUNTS={law:Object.keys(law).length,ai:Object.keys(ai).length,philosophy:Object.keys(philosophy).length,social:Object.keys(social).length,total:Object.keys(law).length+Object.keys(ai).length+Object.keys(philosophy).length+Object.keys(social).length};
+const natural=window.NEXUS_NATURAL_TEXTBOOKS||{};
+const engineering=window.NEXUS_ENGINEERING_TEXTBOOKS||{};
+const medicine=window.NEXUS_MEDICINE_TEXTBOOKS||{};
+Object.entries(law).forEach(([id,c])=>{core[id]={overview:`${c.focus}을 조문·법리·학설·판례·비교법·사례 포섭의 순서로 학습하는 전공 교재 과정이다. 단순한 법률요약이 아니라 적용규범을 특정하고 요건을 분해한 뒤 사실과 증거를 포섭하여 반론과 구제수단까지 구성한다.`,texts:c.readings||[],lessons:(c.lessons||[]).map(l=>[l.title,(l.lecture||[]).join(' '),[...(l.norms||[]).map(x=>`조문·규범: ${x}`),...(l.theory||[]).map(x=>`법리·학설: ${x}`),...(l.caseLaw||[]).map(x=>`판례: ${x}`),...(l.comparison||[]).map(x=>`비교법: ${x}`)],'',l.application||'',[...(c.readings||[]).slice(0,4),...(l.caseLaw||[])]] )};});
+Object.entries(ai).forEach(([id,c])=>{core[id]={overview:`${c.focus}을 알고리즘·수학모형·시스템 아키텍처·대표논문·실험·실패모드의 순서로 학습하는 전공 교재 과정이다. 개념을 암기하는 데 그치지 않고 최소 구현, 복잡도와 오차 분석, 실패 재현, 로그 기반 원인분석과 완화 설계까지 수행한다.`,texts:c.readings||[],lessons:(c.lessons||[]).map(l=>[l.title,(l.lecture||[]).join(' '),[...(l.algorithm||[]).map(x=>`알고리즘: ${x}`),...(l.system||[]).map(x=>`시스템 구조: ${x}`),...(l.papers||[]).map(x=>`대표논문: ${x}`),...(l.failures||[]).map(x=>`실패모드: ${x}`)],(l.math||[]).join(' · '),l.lab||'',[...(c.readings||[]).slice(0,4),...(l.papers||[])]] )};});
+Object.entries(philosophy).forEach(([id,c])=>{core[id]={overview:`${c.focus}을 사상가 소개나 결론 암기가 아니라 원전의 문제설정에서 출발해 핵심명제와 논증을 재구성하고, 대립학설과 가장 강한 반론을 검토한 뒤 현대 문제에 적용하는 철학 전공 교재 과정이다.`,texts:c.readings||[],lessons:(c.lessons||[]).map(l=>[l.title,(l.lecture||[]).join(' '),[...(l.primary||[]).map(x=>`원전: ${x}`),...(l.thesis||[]).map(x=>`핵심명제: ${x}`),...(l.argument||[]).map(x=>`논증: ${x}`),...(l.rival||[]).map(x=>`대립학설: ${x}`),...(l.objection||[]).map(x=>`반론: ${x}`)],'',l.modern||'',[...(c.readings||[]).slice(0,4),...(l.primary||[])]] )};});
+Object.entries(social).forEach(([id,c])=>{core[id]={overview:`${c.focus}을 이론 설명에 머물지 않고 개념화·변수화·연구설계·자료·인과추론·대표 경험연구·경쟁설명으로 검증하는 사회과학 전공 교재 과정이다. 상관관계와 인과관계를 구별하고 측정·표본·선택편향·외적타당도를 지속적으로 점검한다.`,texts:c.readings||[],lessons:(c.lessons||[]).map(l=>[l.title,(l.lecture||[]).join(' '),[...(l.theory||[]).map(x=>`이론: ${x}`),...(l.variables||[]).map(x=>`개념·변수: ${x}`),...(l.design||[]).map(x=>`연구설계: ${x}`),...(l.study||[]).map(x=>`경험연구: ${x}`),...(l.rival||[]).map(x=>`경쟁설명: ${x}`)],'',l.application||'',[...(c.readings||[]).slice(0,4),...(l.study||[])]] )};});
+Object.entries(natural).forEach(([id,c])=>{core[id]={overview:`${c.focus}을 법칙→수학모형→실험→측정→데이터→오차→이론의 한계 순서로 학습하는 자연과학 전공 교재 과정이다. 식을 암기하는 대신 변수·단위·가정·경계조건을 설명하고 예측값과 관측값의 차이를 오차와 경쟁가설로 분석한다.`,texts:c.readings||[],lessons:(c.lessons||[]).map(l=>[l.title,(l.lecture||[]).join(' '),[...(l.law||[]).map(x=>`법칙: ${x}`),...(l.experiment||[]).map(x=>`실험: ${x}`),...(l.measurement||[]).map(x=>`측정·데이터: ${x}`),...(l.limit||[]).map(x=>`이론 한계: ${x}`)],(l.model||[]).join(' · '),l.application||'',[...(c.readings||[]).slice(0,4),...(l.experiment||[])]] )};});
+Object.entries(engineering).forEach(([id,c])=>{core[id]={overview:`${c.focus}을 요구조건→모델링→설계→계산→시뮬레이션→제작·구현→검증→고장모드→안전 순서로 학습하는 공학 전공 교재 과정이다. 정상작동뿐 아니라 설계여유·FMEA·검증기준·안전규격을 통해 실패 가능한 시스템을 어떻게 설계하고 관리하는지 학습한다.`,texts:c.readings||[],lessons:(c.lessons||[]).map(l=>[l.title,(l.lecture||[]).join(' '),[...(l.requirements||[]).map(x=>`요구조건: ${x}`),...(l.model||[]).map(x=>`모델링: ${x}`),...(l.simulation||[]).map(x=>`시뮬레이션: ${x}`),...(l.build||[]).map(x=>`제작·구현: ${x}`),...(l.verification||[]).map(x=>`검증: ${x}`),...(l.failure||[]).map(x=>`고장모드: ${x}`),...(l.safety||[]).map(x=>`안전·규격: ${x}`)],(l.calculation||[]).join(' · '),l.project||'',[...(c.readings||[]).slice(0,4),...(l.safety||[])]] )};});
+Object.entries(medicine).forEach(([id,c])=>{core[id]={overview:`${c.focus}을 정상구조→정상생리→병태생리→진단→감별진단→치료원리→근거수준→환자안전 순서로 학습하는 의학·보건 전공 교재 과정이다. 실제 진료지시가 아니라 대학 수준의 임상추론과 근거평가를 교육용 가상사례로 훈련한다.`,texts:c.readings||[],lessons:(c.lessons||[]).map(l=>[l.title,(l.lecture||[]).join(' '),[...(l.normal||[]).map(x=>`정상구조: ${x}`),...(l.physiology||[]).map(x=>`생리: ${x}`),...(l.pathophysiology||[]).map(x=>`병태생리: ${x}`),...(l.diagnosis||[]).map(x=>`진단: ${x}`),...(l.differential||[]).map(x=>`감별: ${x}`),...(l.treatment||[]).map(x=>`치료원리: ${x}`),...(l.evidence||[]).map(x=>`근거수준: ${x}`),...(l.safety||[]).map(x=>`환자안전: ${x}`)],'',l.caseStudy||'',[...(c.readings||[]).slice(0,4),...(l.evidence||[])]] )};});
+window.NEXUS_SPECIALIZED_TEXTBOOK_COUNTS={law:Object.keys(law).length,ai:Object.keys(ai).length,philosophy:Object.keys(philosophy).length,social:Object.keys(social).length,natural:Object.keys(natural).length,engineering:Object.keys(engineering).length,medicine:Object.keys(medicine).length,total:Object.keys(law).length+Object.keys(ai).length+Object.keys(philosophy).length+Object.keys(social).length+Object.keys(natural).length+Object.keys(engineering).length+Object.keys(medicine).length};
 })();
