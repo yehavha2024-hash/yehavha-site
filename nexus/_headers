@@ -10,6 +10,8 @@
   Cache-Control: no-cache, no-store, must-revalidate
 /project-status.json
   Cache-Control: no-cache, no-store, must-revalidate
+/approved-manifests.json
+  Cache-Control: no-cache, no-store, must-revalidate
 /portal-v2.css
   Cache-Control: no-cache, no-store, must-revalidate
   Pragma: no-cache
@@ -26,11 +28,9 @@
   Cache-Control: no-cache, no-store, must-revalidate
 /status.css
   Cache-Control: no-cache, no-store, must-revalidate
-/research-groups.css
-  Cache-Control: no-cache, no-store, must-revalidate
 /layer-compact.css
   Cache-Control: no-cache, no-store, must-revalidate
-/ai-governance/*
+/intelligence-briefing/*
   Cache-Control: no-cache, no-store, must-revalidate
   Pragma: no-cache
   Expires: 0
@@ -50,10 +50,6 @@
   Cache-Control: no-cache, no-store, must-revalidate
   Pragma: no-cache
   Expires: 0
-/ai-service-operations/*
-  Cache-Control: no-cache, no-store, must-revalidate
-  Pragma: no-cache
-  Expires: 0
 /initiatives/*
   Cache-Control: no-cache, no-store, must-revalidate
   Pragma: no-cache
@@ -67,6 +63,18 @@
   Pragma: no-cache
   Expires: 0
 /articles/*
+  Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
+  Expires: 0
+/publishing/*
+  Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
+  Expires: 0
+/ai-trends/*
+  Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
+  Expires: 0
+/toeic-human-v2/*
   Cache-Control: no-cache, no-store, must-revalidate
   Pragma: no-cache
   Expires: 0
