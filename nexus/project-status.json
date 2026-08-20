@@ -176,6 +176,15 @@
     "contentCount": 6,
     "contentLabel": "운영 모듈"
   },
+  "nexus-university": {
+    "id": "nexus-university",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-20",
+    "contentCount": 35,
+    "contentLabel": "University Core 과목"
+  },
   "ai-service-operations": {
     "id": "ai-service-operations",
     "managedBy": "github",
