@@ -1,0 +1,72 @@
+(()=>{'use strict';window.NEXUS_CORE_TEXTBOOK=window.NEXUS_CORE_TEXTBOOK||{};Object.assign(window.NEXUS_CORE_TEXTBOOK,{
+'CORE-161':{overview:'윤리학은 무엇이 옳은지에 대한 직관을 이론적 기준으로 검토하고 행위·결과·덕·권리·관계·정의가 충돌할 때 정당화 가능한 판단을 만드는 학문이다.',texts:['Aristotle, Nicomachean Ethics','Immanuel Kant, Groundwork of the Metaphysics of Morals','John Stuart Mill, Utilitarianism','John Rawls, A Theory of Justice','Beauchamp & Childress, Principles of Biomedical Ethics'],lessons:[
+['도덕·윤리·메타윤리','도덕판단의 의미·객관성·상대주의·이유의 성격을 구분해 “좋다”와 “옳다”의 언어를 분석한다.',['metaethics','moral realism','relativism'],'','문화마다 관행이 다르다는 사실이 윤리적 상대주의를 논리적으로 보장하는지 검토한다.',['Shafer-Landau, The Fundamentals of Ethics']],
+['아리스토텔레스와 덕윤리','좋은 삶은 규칙준수보다 성품의 탁월성과 실천적 지혜를 통해 상황에 맞는 중용을 형성하는 과정이다.',['virtue','eudaimonia','phronesis'],'','AI 개발자의 정직·신중·용기를 전문적 덕으로 분석한다.',['Aristotle, Nicomachean Ethics']],
+['공리주의','행위의 도덕성은 모든 관련자의 행복·복지를 얼마나 증진하는지 결과를 비교해 평가한다.',['utility','consequentialism','impartiality'],'maximize ΣUᵢ','자율주행의 사고피해 최소화 정책을 공리주의 관점에서 검토한다.',['Mill, Utilitarianism']],
+['Kant 의무론','인간을 단순한 수단이 아니라 목적으로 대하고 자신이 따르는 원칙을 보편법칙으로 의지할 수 있는지 검토한다.',['duty','autonomy','categorical imperative'],'Universalize maxim M','사용자 동의 없이 데이터를 수집하는 원칙을 보편화 가능한지 평가한다.',['Kant, Groundwork']],
+['권리이론','권리는 다수의 이익 때문에 쉽게 침해할 수 없는 개인의 보호영역과 청구근거를 제공한다.',['rights','liberty','claim','dignity'],'','공공안전을 위한 얼굴인식이 프라이버시권을 제한하는 조건을 분석한다.',['Dworkin, Taking Rights Seriously']],
+['사회계약과 Rawls 정의론','원초적 입장과 무지의 베일은 자신의 위치를 모르는 상태에서 공정한 기본원칙을 선택하도록 한다.',['original position','veil of ignorance','difference principle'],'','AI 자동화로 발생한 생산성 이익과 실업비용의 분배원칙을 설계한다.',['Rawls, A Theory of Justice']],
+['돌봄윤리와 관계적 자율성','도덕은 추상적 독립개인뿐 아니라 의존·돌봄·관계·취약성을 고려해야 한다.',['care ethics','dependency','relational autonomy'],'','고령환자의 의료 AI 사용에서 가족·돌봄자·환자의 관계를 분석한다.',['Gilligan, In a Different Voice','Held, The Ethics of Care']],
+['생명윤리','자율성·선행·악행금지·정의의 네 원칙은 의료·생명과학에서 가치충돌을 구조화하는 대표적 틀이다.',['autonomy','beneficence','nonmaleficence','justice'],'','AI 진단의 높은 정확도와 환자의 설명요구권이 충돌하는 사례를 평가한다.',['Beauchamp & Childress']],
+['환경윤리와 미래세대','인간중심주의를 넘어 생태계·동물·미래세대의 도덕적 지위를 고려하고 장기위험의 책임을 논한다.',['anthropocentrism','future generations','intergenerational justice'],'','현재의 저비용 에너지와 장기 기후피해를 세대간 정의로 평가한다.',['Leopold, A Sand County Almanac']],
+['전문직·기업윤리','전문가는 정보비대칭과 공적 신뢰 때문에 일반인보다 높은 성실·주의·이해상충 관리의무를 가질 수 있다.',['professional ethics','fiduciary duty','conflict of interest'],'','AI 감사회사가 피감사 기업의 컨설팅도 수행하는 이해상충을 분석한다.',['Davis, Profession, Code and Ethics']],
+['AI 윤리','공정성·투명성·프라이버시·안전·책임·인간통제를 원칙목록에 그치지 않고 실제 시스템 설계와 의사결정 절차에 연결한다.',['fairness','transparency','accountability','human oversight'],'','채용 AI의 데이터·모형·임계값·이의제기 절차를 윤리감사한다.',['Floridi et al., AI4People']],
+['도덕적 불확실성과 다원주의','서로 다른 윤리이론이 다른 결론을 낼 때 공통금지선·가중치·최악피해·절차적 정당성을 조합해 결정을 내린다.',['moral uncertainty','pluralism','reflective equilibrium'],'','고위험 AI 정책을 공리주의·권리론·정의론에서 각각 평가하고 공통결론을 찾는다.',['Rawls, A Theory of Justice']]
+]},
+'CORE-162':{overview:'예술과 미학은 아름다움·재현·표현·형식·제도·매체·수용을 둘러싼 철학적 논의를 실제 작품분석과 연결한다.',texts:['Plato, Republic','Aristotle, Poetics','Immanuel Kant, Critique of Judgment','Walter Benjamin, The Work of Art in the Age of Mechanical Reproduction','Arthur Danto, The Transfiguration of the Commonplace'],lessons:[
+['플라톤과 모방비판','플라톤은 예술을 모방의 모방으로 보며 진리·정서·교육에 미치는 영향을 정치적 문제로 다뤘다.',['mimesis','representation','censorship'],'','가상현실의 사실적 재현이 진실과 동일한지 논의한다.',['Plato, Republic Book X']],
+['아리스토텔레스와 비극','예술은 단순복제가 아니라 가능한 행위의 구조를 재현하며 비극은 플롯·인식·감정의 조직을 통해 효과를 만든다.',['plot','catharsis','mimesis'],'','영화 한 편의 플롯을 비극의 시작-중간-끝 구조로 분석한다.',['Aristotle, Poetics']],
+['미·숭고·Kant','미적 판단은 개념적 증명 없이 보편적 동의를 요구하는 무관심한 쾌이며 숭고는 감각의 한계를 넘어서는 경험과 연결된다.',['beauty','sublime','disinterestedness'],'','거대한 자연풍경과 상품디자인의 미적 판단을 비교한다.',['Kant, Critique of Judgment']],
+['형식주의','선·색·리듬·구성 같은 형식적 관계를 작품가치의 핵심으로 보며 내용·맥락 중심 해석과 긴장한다.',['formalism','significant form','composition'],'','추상회화를 주제설명 없이 형식요소만으로 분석한다.',['Clive Bell, Art']],
+['표현이론','예술은 감정의 단순 방출보다 감정을 형식화·명료화해 타인과 공유하는 행위로 이해될 수 있다.',['expression','emotion','articulation'],'','블루스 음악의 반복형식과 정서표현 관계를 분석한다.',['Collingwood, The Principles of Art']],
+['제도이론과 예술세계','어떤 대상이 예술이 되는 것은 물리적 속성뿐 아니라 미술관·비평가·작가·관습의 제도적 맥락과 연결된다.',['artworld','institutional theory','context'],'','Duchamp의 Fountain이 예술로 논의되는 조건을 분석한다.',['Danto, The Artworld','Dickie, Art and the Aesthetic']],
+['복제기술과 Benjamin','사진·영화 같은 기술복제는 작품의 유일한 현존과 아우라를 변화시키고 대중적 수용과 정치성을 확대한다.',['aura','mechanical reproduction','mass culture'],'','스트리밍 시대 음악파일에서 원본성과 현존의 의미를 토론한다.',['Benjamin, Work of Art']],
+['모더니즘과 아방가르드','예술은 전통적 재현과 장르규범을 해체하며 매체 자체와 제도의 조건을 비판대상으로 삼았다.',['modernism','avant-garde','medium specificity'],'','전통 회화와 설치미술의 매체개념을 비교한다.',['Greenberg, Modernist Painting']],
+['음악의 미학','음악의 의미가 순수한 음형식에 있는지 감정·서사·사회맥락에 있는지 형식주의와 표현주의가 논쟁한다.',['absolute music','expression','form'],'','기악곡이 언어 없이 의미를 갖는 방식을 분석한다.',['Hanslick, On the Musically Beautiful']],
+['수용·해석·취향','작품의 의미와 가치는 제작자 의도뿐 아니라 독자·관객의 해석공동체와 사회적 취향구조 속에서 형성된다.',['reception','interpretive community','taste'],'','동일 작품이 세대별로 다르게 평가되는 이유를 분석한다.',['Bourdieu, Distinction']],
+['디자인과 일상미학','기능·사용성·형태·접근성이 결합된 디자인은 예술과 공학·생활세계의 경계를 재구성한다.',['design','function','affordance','everyday aesthetics'],'','스마트폰 인터페이스를 미와 사용성의 결합으로 분석한다.',['Donald Norman, The Design of Everyday Things']],
+['생성형 AI와 예술','생성형 AI는 저자성·의도·데이터·스타일·독창성·진정성을 재검토하게 하며 인간의 선택과 편집기여가 핵심쟁점이 된다.',['generative art','authorship','originality','style'],'','AI 생성 이미지에서 프롬프트·선택·수정·후반작업의 창작기여를 구분한다.',['Danto, Transfiguration of the Commonplace']]
+]},
+'CORE-163':{overview:'종교·신학·문명은 종교를 신앙명제뿐 아니라 의례·공동체·텍스트·제도·문화의 복합현상으로 보고 주요 종교전통과 문명 형성의 관계를 비교한다.',texts:['Mircea Eliade, The Sacred and the Profane','Émile Durkheim, The Elementary Forms of Religious Life','Max Weber, The Sociology of Religion','Ninian Smart, Dimensions of the Sacred','Wilfred Cantwell Smith, The Meaning and End of Religion'],lessons:[
+['종교를 정의하는 방법','신·초월·의례·공동체·경험·윤리 중 하나만으로 모든 종교를 정의하기 어렵기 때문에 다차원적 접근이 필요하다.',['religion','sacred','ritual','belief'],'','신 개념이 약한 전통도 종교로 분류할 수 있는 기준을 설계한다.',['Smart, Dimensions of the Sacred']],
+['신화·의례·성스러움','신화는 세계와 공동체의 의미를 서사화하고 의례는 이를 반복적 행위와 공간·시간 속에서 구현한다.',['myth','ritual','sacred space'],'','성지순례가 개인경험과 공동체정체성을 동시에 만드는 과정을 분석한다.',['Eliade, Sacred and Profane']],
+['고대근동 종교세계','메소포타미아·이집트·가나안의 신전·왕권·제의·신화는 고대 서아시아 종교문화를 이해하는 배경을 제공한다.',['temple','sacrifice','divine kingship'],'','왕권과 신전경제의 관계를 비교한다.',['Hallo, Context of Scripture']],
+['유대교와 언약·율법','토라·언약·성전·예언·랍비전통은 유대 공동체의 역사와 정체성을 형성한 핵심 축이다.',['Torah','covenant','Temple','rabbinic tradition'],'','제2성전 파괴 이후 예배와 율법해석의 중심이 어떻게 이동했는지 설명한다.',['Hebrew Bible','Mishnah selections']],
+['기독교와 교리형성','예슈아 운동에서 출발한 초기 기독교는 성서해석·교회조직·공의회 논쟁을 통해 신론·기독론·구원론을 체계화했다.',['church','Christology','council','creed'],'','니케아 논쟁에서 용어정의가 신학과 제도권력에 미친 영향을 분석한다.',['New Testament','Nicene Creed','Athanasius, On the Incarnation']],
+['이슬람과 공동체·법','Quran·Hadith·ummah·fiqh 전통이 신앙·윤리·법·정치의 관계를 형성했다.',['Quran','Hadith','ummah','fiqh'],'','수니·시아 분화의 초기 정치사와 종교적 발전을 구분한다.',['Quran','Marshall Hodgson, Venture of Islam']],
+['힌두 전통과 철학','Veda·Upanishad·Bhagavad Gita 및 다양한 철학학파는 dharma·karma·moksha·atman 문제를 서로 다르게 다룬다.',['dharma','karma','moksha','atman'],'','Bhagavad Gita의 행위와 의무 개념을 비교윤리적으로 읽는다.',['Upanishads','Bhagavad Gita']],
+['불교와 고통·해탈','사성제·연기·무아·팔정도는 고통의 원인과 해탈의 길을 분석하며 여러 불교전통에서 다양하게 발전했다.',['Four Noble Truths','dependent origination','anatta'],'','고정된 자아 개념과 무아 사상을 비교한다.',['Dhammapada','Rahula, What the Buddha Taught']],
+['동아시아 종교·사상','유교·도교·불교·민간신앙은 경쟁하면서도 가족·국가·자연·수양의 관념을 상호변형했다.',['Confucianism','Daoism','syncretism'],'','유교 제례를 종교·윤리·사회제도의 세 관점에서 분석한다.',['Analects','Daodejing']],
+['종교·국가·문명','종교제도는 국가정당성·법·교육·복지·전쟁·평화와 결합하거나 긴장하며 세속화도 지역별로 다른 경로를 보인다.',['church-state','secularization','civil religion'],'','세속화가 종교소멸과 동일한지 비교사회학적으로 검토한다.',['Weber, Sociology of Religion','Casanova, Public Religions']],
+['종교다원주의와 근대성','세계화와 이주는 서로 다른 종교전통의 접촉을 늘려 배타주의·포괄주의·다원주의·종교자유 문제를 확대했다.',['pluralism','religious freedom','interfaith'],'','공공기관의 종교적 중립성과 개인의 종교표현 자유를 비교한다.',['John Hick, An Interpretation of Religion']],
+['디지털·AI 시대의 종교','온라인예배·디지털 성서도구·AI 설교·가상공동체는 권위·해석·공동체·진정성의 전통적 경계를 재구성한다.',['digital religion','authority','AI interpretation'],'','AI가 생성한 신학답변을 원전·전통·공동체 검증 없이 사용하는 위험을 분석한다.',['Campbell, Digital Religion']]
+]},
+'CORE-164':{overview:'기술과 인간은 기술을 중립적 도구가 아니라 인간의 능력·노동·지각·권력·환경·제도를 함께 재구성하는 사회기술적 체계로 분석한다.',texts:['Martin Heidegger, The Question Concerning Technology','Lewis Mumford, Technics and Civilization','Jacques Ellul, The Technological Society','Marshall McLuhan, Understanding Media','Bruno Latour, Science in Action'],lessons:[
+['도구·기술·기술체계','기술은 개별 도구뿐 아니라 지식·표준·인프라·조직·사용관행이 결합된 체계로 이해해야 한다.',['technology','technique','sociotechnical system'],'','스마트폰을 기기 하나가 아니라 앱·통신망·플랫폼·규제의 체계로 분석한다.',['Mumford, Technics and Civilization']],
+['산업혁명과 기계화','증기기관·공장제·표준시간·분업은 생산량뿐 아니라 노동규율과 도시생활의 시간구조를 바꾸었다.',['mechanization','factory system','division of labor'],'','공장시계가 노동자의 시간감각을 어떻게 변화시켰는지 분석한다.',['E. P. Thompson, Time, Work-Discipline, and Industrial Capitalism']],
+['Marx와 기계·소외','기술은 생산력을 높이는 동시에 자본주의적 소유관계 속에서 노동통제와 소외를 강화할 수 있다.',['alienation','machinery','labor process'],'','플랫폼 알고리즘의 작업배분을 기계에 의한 노동통제로 해석한다.',['Marx, Capital Vol. I']],
+['Heidegger의 기술비판','현대기술의 본질을 단순한 도구가 아니라 세계를 계산가능한 자원으로 드러내는 Gestell의 방식으로 분석한다.',['Gestell','enframing','standing-reserve'],'','자연을 데이터와 최적화대상으로만 보는 관점을 비판적으로 검토한다.',['Heidegger, Question Concerning Technology']],
+['Ellul과 기술적 자율성','효율성의 논리가 사회 여러 영역으로 확산되면 기술체계가 인간의 목적보다 자체적 최적화를 우선할 수 있다는 비판을 검토한다.',['technique','efficiency','autonomy of technology'],'','성과지표 최적화가 교육의 본래 목적을 왜곡하는 사례를 분석한다.',['Ellul, The Technological Society']],
+['McLuhan과 매체','매체는 전달내용뿐 아니라 감각비율·사회적 속도·관계형태를 바꾸므로 “매체 자체가 메시지”가 된다.',['medium','extension','media ecology'],'','숏폼 영상 형식이 정치정보 수용방식을 어떻게 바꾸는지 분석한다.',['McLuhan, Understanding Media']],
+['STS와 사회기술적 구성','기술의 형태는 공학적 효율만이 아니라 이해관계자·정책·문화·사용자 협상 속에서 형성된다.',['SCOT','actor-network','co-construction'],'','자전거 설계가 사용자집단의 요구에 따라 변화한 고전 사례를 검토한다.',['Bijker, Hughes & Pinch, Social Construction of Technological Systems']],
+['위험사회와 기술재난','고도기술은 편익과 함께 원전사고·화학오염·기후변화 같은 제조된 위험을 만들며 위험의 분배와 책임이 정치화된다.',['risk society','manufactured risk','normal accident'],'','복잡한 시스템 사고를 개인과실만으로 설명할 수 있는지 검토한다.',['Beck, Risk Society','Perrow, Normal Accidents']],
+['감시·데이터화·플랫폼','디지털 인프라는 행동을 데이터로 전환하고 예측·광고·평가를 통해 새로운 감시와 시장권력을 형성한다.',['surveillance','datafication','platform power'],'','직장 모니터링 소프트웨어가 생산성과 자율성에 미치는 영향을 분석한다.',['Zuboff, Age of Surveillance Capitalism']],
+['생명·의료기술과 인간정체성','유전자편집·보조생식·신경기술은 치료와 향상의 경계를 흐리며 정상성·자율성·정체성 문제를 제기한다.',['enhancement','bioethics','human identity'],'','치료목적 뇌-컴퓨터 인터페이스와 능력향상용 사용을 비교한다.',['Habermas, The Future of Human Nature']],
+['AI와 인간능력','AI는 기억·글쓰기·판단·창작을 외부화하고 증강하지만 기술의존·deskilling·책임공백도 만들 수 있다.',['augmentation','deskilling','extended cognition'],'','법률 AI가 변호사의 검색능력과 독립적 판단을 동시에 어떻게 변화시키는지 분석한다.',['Clark & Chalmers, The Extended Mind']],
+['책임있는 혁신','기술설계 초기부터 예상·성찰·포용·대응을 통해 사회적 가치와 위험을 반영하는 거버넌스가 필요하다.',['responsible innovation','anticipation','participation'],'','공공 AI 시스템 개발 전 시민·전문가·피해가능집단을 참여시키는 절차를 설계한다.',['Stilgoe, Owen & Macnaghten, Developing a Framework for Responsible Innovation']]
+]},
+'CORE-165':{overview:'현대 세계의 핵심문제는 기후·AI·생명·전쟁·민주주의·불평등·이주·고령화·에너지·보건·금융·공급망을 하나의 복합시스템으로 분석하는 University Core 종합과정이다.',texts:['IPCC Assessment Reports','UNDP Human Development Reports','World Bank World Development Reports','Ulrich Beck, World Risk Society','Donella Meadows, Thinking in Systems'],lessons:[
+['기후위기','온실가스·에너지·산업·토지이용과 취약성·적응·정의 문제를 자연과학·경제·정치·법의 관점에서 통합한다.',['climate risk','mitigation','adaptation','justice'],'Risk=f(Hazard,Exposure,Vulnerability)','도시 폭염대책을 기후모형·보건·주거불평등·전력수요와 연결한다.',['IPCC AR6']],
+['AI 전환','AI의 생산성·자동화·안전·권력·책임·정보환경 효과를 기술성능만으로 판단하지 않고 제도적 조건과 함께 평가한다.',['AI transition','automation','governance'],'','범용 AI의 공공도입을 효율성·오류·감사·책임·노동 관점에서 분석한다.',['NIST AI RMF']],
+['팬데믹·생물안보','감염병은 생물학적 전파뿐 아니라 이동·의료역량·정보·불평등·국제협력에 따라 피해규모가 달라진다.',['pandemic','biosecurity','R₀','One Health'],'R₀≈βcD','백신배분을 감염확산과 국제정의 관점에서 평가한다.',['WHO pandemic preparedness materials']],
+['전쟁·핵·안보딜레마','군사기술·동맹·오인·억제가 상호작용해 각국의 방어행동이 전체 불안을 높이는 안보딜레마를 만들 수 있다.',['deterrence','security dilemma','nuclear risk'],'','AI 기반 조기경보가 핵위기에서 오판시간을 줄이는 동시에 자동화위험을 높일 수 있는지 분석한다.',['Schelling, Arms and Influence']],
+['민주주의·허위정보·양극화','선거제도·경제불평등·미디어플랫폼·정치정체성이 민주적 경쟁과 공통사실 기반에 영향을 준다.',['polarization','disinformation','democratic resilience'],'','생성형 AI 정치광고에 출처표시·플랫폼책임·표현의 자유 기준을 적용한다.',['Dahl, On Democracy']],
+['불평등과 사회이동','소득·부·교육·건강·주거·디지털 접근의 격차가 세대간 이동성과 정치적 기회에 누적적으로 작용한다.',['inequality','mobility','wealth concentration'],'Gini=ΣΣ|yᵢ-yⱼ|/(2n²μ)','AI 자동화 이익이 자본소유자에 집중될 때 조세·교육·사회보험 대안을 비교한다.',['Piketty, Capital in the Twenty-First Century']],
+['이주·난민·국경','전쟁·경제·기후가 이동을 촉발하며 국가의 국경통제와 인권·노동수요·사회통합이 충돌한다.',['migration','refugee','integration'],'','기후이주민을 기존 난민법으로 보호할 수 있는지 한계를 분석한다.',['UNHCR Global Trends']],
+['고령화·돌봄·인구','출산율 저하와 기대수명 증가는 노동·연금·의료·돌봄체계를 동시에 재설계하게 한다.',['aging','dependency ratio','care economy'],'Dependency ratio=(young+old)/working-age','돌봄로봇 도입이 인력부족·인간관계·책임에 미치는 영향을 분석한다.',['UN World Population Prospects']],
+['에너지안보와 전환','탈탄소·가격안정·공급안보·산업경쟁력은 동시에 충족하기 어려우므로 전원믹스와 인프라를 시스템으로 설계해야 한다.',['energy security','decarbonization','grid'],'','재생에너지 확대와 저장장치·송전망·기저전원의 관계를 분석한다.',['IEA World Energy Outlook']],
+['글로벌 보건과 건강격차','질병부담은 생물학뿐 아니라 소득·주거·교육·환경·의료접근 같은 사회적 결정요인에 의해 분배된다.',['global health','social determinants','DALY'],'DALY=YLL+YLD','AI 의료가 전문의 부족지역의 접근성을 높이면서 데이터격차를 만들 수 있는지 분석한다.',['WHO, Social Determinants of Health']],
+['금융·공급망·시스템위험','상호연결된 금융과 공급망은 효율성을 높이지만 작은 충격이 연쇄적으로 증폭될 수 있어 회복력과 여유용량이 중요하다.',['systemic risk','supply chain','resilience'],'','한 반도체 공장의 중단이 자동차·전자·AI 산업에 연쇄효과를 만드는 경로를 그린다.',['Taleb, Antifragile']],
+['통합 Capstone','하나의 문제를 과학적 사실·사회구조·경제유인·윤리·정치·법·기술의 여러 층위로 분해하고 대안을 비교한다.',['systems synthesis','trade-off','governance'],'','“고령사회에서 의료 AI를 어디까지 자동화할 것인가”를 전체 Core 지식을 사용해 종합보고서로 작성한다.',['Meadows, Thinking in Systems']]
+]}
+});})();
