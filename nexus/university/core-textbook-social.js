@@ -1,0 +1,72 @@
+(()=>{'use strict';window.NEXUS_CORE_TEXTBOOK=window.NEXUS_CORE_TEXTBOOK||{};Object.assign(window.NEXUS_CORE_TEXTBOOK,{
+'CORE-131':{overview:'사회학은 개인의 선택을 넘어 규범·제도·계층·조직·네트워크가 행동과 기회를 어떻게 구조화하는지 분석한다.',texts:['Émile Durkheim, The Rules of Sociological Method','Karl Marx, Capital','Max Weber, Economy and Society','Erving Goffman, The Presentation of Self in Everyday Life','Pierre Bourdieu, Distinction'],lessons:[
+['사회학적 상상력','개인의 경험을 사회구조·역사·제도와 연결해 사적 문제와 공적 문제를 구분한다.',['sociological imagination','structure','agency'],'','청년 취업난을 개인능력과 노동시장구조라는 두 수준에서 분석한다.',['C. Wright Mills, The Sociological Imagination']],
+['뒤르켐과 사회적 사실','규범·제도·집합의식은 개인 밖에 존재하면서 행동을 제약하는 사회적 사실로 분석될 수 있다.',['social fact','anomie','solidarity'],'','자살률 차이를 개인심리만이 아니라 사회통합 수준으로 설명한다.',['Durkheim, Suicide']],
+['마르크스와 계급','생산수단 소유와 노동관계가 계급구조·착취·갈등을 형성하며 경제구조가 사회관계를 조직한다.',['class','surplus value','alienation'],'','플랫폼 노동에서 소유·통제·잉여가치의 위치를 분석한다.',['Marx, Capital']],
+['베버와 합리화','사회행위의 의미와 권력의 정당성을 분석하고 근대사회를 관료제·합리화의 확대로 설명한다.',['social action','authority','bureaucracy','rationalization'],'','알고리즘 기반 행정절차를 관료제의 확장으로 해석한다.',['Weber, Economy and Society']],
+['상징적 상호작용','자아와 사회적 의미는 반복적 상호작용 속에서 형성되며 상황정의가 행동을 조직한다.',['symbolic interactionism','self','definition of situation'],'','온라인 프로필 관리가 자아표현에 미치는 영향을 분석한다.',['Goffman, Presentation of Self']],
+['사회화와 규범','가족·학교·미디어·동료집단을 통해 역할과 규범을 학습하지만 개인은 이를 수동적으로만 수용하지 않는다.',['socialization','norm','role'],'','AI 추천이 청소년의 취향사회화에 미치는 영향을 토론한다.',['Berger & Luckmann, The Social Construction of Reality']],
+['계층·불평등·자본','경제자본뿐 아니라 문화자본·사회자본·상징자본이 교육·직업·취향의 격차를 재생산할 수 있다.',['stratification','cultural capital','social capital'],'','대학진학 격차를 소득만이 아니라 문화자본과 네트워크로 분석한다.',['Bourdieu, Distinction']],
+['조직과 제도','조직은 공식규칙뿐 아니라 관행·전문규범·환경의 정당성 압력에 의해 유사해질 수 있다.',['organization','institution','isomorphism'],'','기업들이 규제 전에도 AI 윤리위원회를 만드는 이유를 제도주의로 설명한다.',['DiMaggio & Powell, The Iron Cage Revisited']],
+['일탈과 사회통제','일탈은 행위 자체보다 규칙제정·낙인·감시·제재의 과정에서 구성될 수 있다.',['deviance','labeling','social control'],'','같은 온라인 행위가 집단에 따라 정상·위반으로 다르게 규정되는 사례를 분석한다.',['Becker, Outsiders']],
+['네트워크와 사회자본','정보·영향력·기회는 개인 특성뿐 아니라 관계망의 위치와 약한 연결을 통해 이동한다.',['network','weak ties','social capital'],'','구직정보가 가까운 친구보다 약한 연결에서 더 많이 오는 이유를 설명한다.',['Granovetter, The Strength of Weak Ties']],
+['세계화와 위험사회','생산·금융·이주·환경위험이 국경을 넘어 연결되면서 국가단위 제도와 글로벌 상호의존 사이 긴장이 커진다.',['globalization','risk society','transnationalism'],'','기후위험과 AI 공급망을 초국가적 위험으로 비교한다.',['Ulrich Beck, Risk Society']],
+['디지털사회와 AI','플랫폼·데이터화·알고리즘 분류가 노동·관계·평판·기회배분을 재구성하며 새로운 권력비대칭을 만든다.',['platform society','datafication','algorithmic power'],'','배달플랫폼의 배차알고리즘을 노동통제와 정보비대칭 관점에서 분석한다.',['van Dijck et al., The Platform Society']]
+]},
+'CORE-132':{overview:'정치·국가·민주주의는 권력의 정당화, 국가의 제도구조, 시민참여와 대표, 민주주의의 작동조건과 취약성을 비교정치와 정치사상 관점에서 학습한다.',texts:['Aristotle, Politics','Thomas Hobbes, Leviathan','John Locke, Second Treatise of Government','Robert Dahl, Polyarchy','Giovanni Sartori, Comparative Constitutional Engineering'],lessons:[
+['정치와 권력','정치는 희소한 가치와 공적 결정을 둘러싼 권력관계이며 권력은 강제·자원·의제설정·규범형성 등 여러 형태를 가진다.',['power','authority','agenda setting'],'','정책의제에 오르지 못한 문제도 권력관계의 결과인지 분석한다.',['Steven Lukes, Power: A Radical View']],
+['국가와 주권','근대국가는 영토·인구·법질서·정당한 강제력의 조직이며 주권은 국내 최고권력과 대외독립을 둘러싼 개념이다.',['state','sovereignty','legitimacy'],'','글로벌 플랫폼 규제가 국가주권과 충돌하는 지점을 찾는다.',['Weber, Politics as a Vocation']],
+['사회계약과 정당성','홉스·로크·루소는 자연상태와 계약을 통해 안전·권리·일반의지라는 서로 다른 국가정당화 기준을 제시했다.',['social contract','natural rights','general will'],'','비상상황에서 자유제한을 세 사상가의 기준으로 비교한다.',['Hobbes, Leviathan','Locke, Second Treatise','Rousseau, Social Contract']],
+['헌정주의와 권력분립','헌법은 권력을 창설하면서 동시에 제한하며 입법·행정·사법의 분립과 견제가 권력집중을 억제한다.',['constitutionalism','separation of powers','checks and balances'],'','행정부의 자동화된 결정시스템에 사법심사가 필요한 이유를 분석한다.',['Federalist Papers']],
+['민주주의의 최소조건','경쟁적 선거·보통선거권·표현과 결사의 자유·대안정보가 실질적 경쟁을 가능하게 한다.',['polyarchy','participation','contestation'],'','선거는 있지만 언론과 야당이 제한된 체제를 민주주의로 볼 수 있는지 평가한다.',['Dahl, Polyarchy']],
+['선거제도와 대표','다수대표제·비례대표제·혼합제는 정당체계·대표성·정부형성에 서로 다른 유인을 만든다.',['majoritarian','proportional representation','district magnitude'],'','동일 득표율이 선거제도에 따라 의석으로 다르게 전환되는 사례를 계산한다.',['Lijphart, Patterns of Democracy']],
+['정당·이익집단·시민사회','정당은 선거와 정부를 연결하고 이익집단·시민단체는 조직된 선호를 정책과정에 전달한다.',['party','interest group','civil society'],'','플랫폼 기업의 로비와 시민단체의 정책참여를 비교한다.',['Schattschneider, Party Government']],
+['의회·행정부·관료제','정책은 선출권력과 전문관료의 상호작용 속에서 만들어지며 위임·정보비대칭·책임통제가 핵심문제다.',['principal-agent','bureaucracy','delegation'],'','AI 규제기관에 전문적 재량을 얼마나 위임할지 설계한다.',['Moe, The Politics of Bureaucratic Structure']],
+['비교정치와 체제유형','대통령제·의원내각제, 연방제·단일제, 권위주의 유형을 제도적 유인과 역사적 맥락에서 비교한다.',['presidentialism','parliamentarism','federalism','authoritarianism'],'','대통령제와 의원내각제의 책임성과 교착 가능성을 비교한다.',['Sartori, Comparative Constitutional Engineering']],
+['국제정치의 주요이론','현실주의는 권력과 안보, 자유주의는 제도와 상호의존, 구성주의는 규범과 정체성을 강조한다.',['realism','liberalism','constructivism'],'','AI 군비경쟁을 세 국제정치이론으로 각각 설명한다.',['Waltz, Theory of International Politics','Keohane, After Hegemony','Wendt, Social Theory of International Politics']],
+['민주주의의 위기와 정보환경','양극화·허위정보·불평등·제도불신은 민주적 숙의와 경쟁의 기반을 약화할 수 있다.',['polarization','disinformation','democratic backsliding'],'','추천알고리즘이 정치적 양극화를 강화하는 경로를 분석한다.',['Levitsky & Ziblatt, How Democracies Die']],
+['AI 시대의 국가와 민주주의','자동행정·예측치안·생성형 정치콘텐츠는 효율성과 함께 투명성·책임성·차별·권력집중 문제를 제기한다.',['algorithmic governance','accountability','digital sovereignty'],'','복지급여 자동심사 시스템의 민주적 통제장치를 설계한다.',['Yeung, Algorithmic Regulation']]
+]},
+'CORE-133':{overview:'경제와 시장은 희소자원의 배분, 가격과 생산, 기업과 경쟁, 거시경제, 시장실패와 정책을 미시·거시경제학의 기본모형으로 학습한다.',texts:['N. Gregory Mankiw, Principles of Economics','Hal Varian, Intermediate Microeconomics','Olivier Blanchard, Macroeconomics','Paul Krugman, Maurice Obstfeld & Marc Melitz, International Economics','Thaler, Misbehaving'],lessons:[
+['희소성·기회비용·한계사고','선택은 포기한 최선대안의 비용을 가지며 경제적 의사결정은 평균보다 한계편익과 한계비용을 비교한다.',['scarcity','opportunity cost','marginal analysis'],'choose if MB≥MC','GPU 자원을 연구와 상용서비스 사이에 배분하는 기회비용을 계산한다.',['Mankiw, Principles of Economics']],
+['수요·공급·균형','가격은 수요와 공급의 상호작용으로 형성되고 외생변화는 곡선의 이동을 통해 균형가격과 수량을 바꾼다.',['demand','supply','equilibrium'],'Qd=a-bP, Qs=c+dP','AI 컴퓨팅 수요증가가 GPU 시장가격에 미치는 영향을 분석한다.',['Mankiw, Principles of Economics']],
+['탄력성','가격·소득 변화에 수요량이 얼마나 민감한지 탄력성으로 측정하면 세금·가격전략 효과를 예측할 수 있다.',['price elasticity','income elasticity'],'ε=(%ΔQ)/(%ΔP)','구독료 10% 인상 시 수요가 4% 감소하면 탄력성을 계산한다.',['Varian, Intermediate Microeconomics']],
+['소비자 선택','예산제약 아래 효용을 최대화하는 모형으로 소비선택과 대체효과·소득효과를 설명한다.',['utility','budget constraint','indifference curve'],'max U(x,y) s.t. pₓx+pᵧy=I','AI 서비스와 다른 소프트웨어 구독 사이의 소비선택을 모델링한다.',['Varian, Intermediate Microeconomics']],
+['기업·비용·생산','기업은 기술과 비용구조 아래 산출량을 선택하며 단기·장기 비용과 규모의 경제가 시장구조를 좌우한다.',['production function','fixed cost','marginal cost'],'π=TR-TC','대규모 모델 학습의 고정비가 시장진입장벽을 높이는지 분석한다.',['Varian, Intermediate Microeconomics']],
+['시장구조와 경쟁','완전경쟁·독점·과점은 가격결정력과 진입장벽이 다르며 전략적 상호작용이 과점시장의 핵심이다.',['competition','monopoly','oligopoly'],'MR=MC','클라우드 AI 시장의 집중도를 경쟁정책 관점에서 검토한다.',['Tirole, The Theory of Industrial Organization']],
+['게임이론과 전략','상대의 선택이 내 보수에 영향을 줄 때 최적전략과 Nash 균형을 통해 상호의존적 결정을 분석한다.',['Nash equilibrium','dominant strategy','prisoner’s dilemma'],'uᵢ(sᵢ,s₋ᵢ)','AI 안전투자 경쟁에서 기업의 죄수의 딜레마를 구성한다.',['Osborne, An Introduction to Game Theory']],
+['시장실패와 외부효과','외부효과·공공재·정보비대칭은 사적 선택과 사회적 최적의 괴리를 만들며 조세·규제·권리배분이 대응수단이 된다.',['externality','public good','asymmetric information'],'MSC=MPC+MEC','AI 오판 피해비용이 기업가격에 반영되지 않는 상황을 분석한다.',['Pigou, Economics of Welfare','Coase, The Problem of Social Cost']],
+['GDP·물가·실업','국민계정은 생산·소득·지출을 측정하고 물가상승률·실업률과 함께 거시경제 상태를 요약한다.',['GDP','inflation','unemployment'],'Y=C+I+G+NX','AI 투자 확대가 GDP 구성요소 중 어디에 반영되는지 설명한다.',['Blanchard, Macroeconomics']],
+['경기·재정·통화정책','총수요 충격과 통화·재정정책은 생산·물가·고용에 영향을 주지만 시차와 기대, 부채제약을 고려해야 한다.',['fiscal policy','monetary policy','aggregate demand'],'MV=PY','경기침체기에 정부투자와 금리인하의 효과를 비교한다.',['Blanchard, Macroeconomics']],
+['무역·비교우위·세계화','비교우위는 절대생산성이 낮아도 상대적 기회비용 차이로 교역이익이 가능함을 보여준다.',['comparative advantage','trade','exchange rate'],'opportunity cost A<B','반도체 설계와 제조를 국가별 비교우위로 설명한다.',['Krugman et al., International Economics']],
+['행동경제·플랫폼경제','제한된 합리성·프레이밍·네트워크 효과·양면시장은 전통적 완전합리 모형을 보완한다.',['bounded rationality','nudge','network effect','two-sided market'],'V≈αN²','추천플랫폼에서 사용자 수가 가치와 시장집중을 동시에 높이는 과정을 분석한다.',['Thaler, Misbehaving','Rochet & Tirole, Platform Competition in Two-Sided Markets']]
+]},
+'CORE-134':{overview:'법과 제도는 규범이 권리·의무·권한·책임을 어떻게 배분하고, 입법·행정·사법과 절차가 이를 어떻게 해석·집행하는지 법학의 기본구조를 학습한다.',texts:['H. L. A. Hart, The Concept of Law','Hans Kelsen, Pure Theory of Law','Ronald Dworkin, Law’s Empire','Lon Fuller, The Morality of Law','Roscoe Pound, An Introduction to the Philosophy of Law'],lessons:[
+['법규범과 법원','헌법·법률·명령·조례·판례·관습 등 법원의 위계와 효력관계를 구분한다.',['legal norm','source of law','hierarchy of norms'],'','행정지침이 법률과 충돌할 때 효력관계를 검토한다.',['Kelsen, Pure Theory of Law']],
+['규칙의 구조와 Hart','Hart는 의무를 부과하는 1차규칙과 인정·변경·재판을 가능하게 하는 2차규칙을 구분했다.',['primary rule','secondary rule','rule of recognition'],'','AI 등록의무 규칙과 그 규칙을 제정할 권한규칙을 구분한다.',['Hart, The Concept of Law']],
+['권리·의무·권한·면책','Hohfeld의 법률관계 분석은 권리와 그 상대방의 의무, 권한과 책임 등을 정확히 구분한다.',['claim-right','duty','power','liability','immunity'],'Right↔Duty, Power↔Liability','데이터 삭제요구권이 누구에게 어떤 의무를 발생시키는지 분석한다.',['Hohfeld, Fundamental Legal Conceptions']],
+['법인격과 법적 주체','법적 인격은 자연적 속성보다 법질서가 권리·의무·재산·소송능력을 귀속시키는 제도적 지위로 이해할 수 있다.',['legal personality','capacity','juristic person'],'','회사와 AI 시스템의 법적 지위 부여 논리를 비교한다.',['Dewey, The Historic Background of Corporate Legal Personality']],
+['계약과 사적 자치','계약은 당사자의 합의에 법적 구속력을 부여하되 강행규정·공서양속·정보비대칭 등 한계를 가진다.',['contract','consent','consideration','good faith'],'','AI 에이전트가 자동 체결한 거래의 의사귀속 문제를 분석한다.',['Atiyah, The Rise and Fall of Freedom of Contract']],
+['불법행위와 손해배상','고의·과실·위법성·인과·손해의 구조를 통해 사적 손해의 귀속과 위험배분을 다룬다.',['negligence','causation','damage'],'Damage = factual cause + legal scope','자율주행 사고에서 제조자·운영자·사용자의 주의의무를 분리한다.',['Prosser & Keeton on Torts']],
+['형사법과 책임원칙','범죄성립은 행위·구성요건·위법성·책임을 중심으로 검토하며 국가형벌권은 죄형법정주의와 책임주의에 제한된다.',['actus reus','mens rea','legality','culpability'],'','자동화 시스템의 행위 때문에 인간에게 형사책임을 묻는 조건을 검토한다.',['Hart, Punishment and Responsibility']],
+['헌법과 기본권','국가권력을 조직·제한하고 자유·평등·절차적 권리를 보장하며 기본권 충돌에서는 정당화와 비례성이 핵심이다.',['constitutionalism','fundamental rights','proportionality'],'proportionality: suitability→necessity→balancing','AI 감시의 공익과 개인정보·자유권을 비교형량한다.',['Alexy, A Theory of Constitutional Rights']],
+['행정과 규제','행정기관은 법률의 위임 아래 전문적 재량을 행사하지만 적법절차·이유제시·사법심사의 통제를 받는다.',['administrative discretion','delegation','judicial review'],'','고위험 AI 허가제에서 행정재량과 통제수단을 설계한다.',['Mashaw, Due Process in the Administrative State']],
+['절차·증거·재판','실체적 권리도 공정한 절차·입증책임·증거규칙·독립적 재판이 없으면 실현되기 어렵다.',['due process','burden of proof','evidence'],'P(E|H) vs legal standard','AI 로그가 불완전한 손해사건에서 증명위험 배분을 분석한다.',['Twining, Rethinking Evidence']],
+['법해석과 선례','문언·체계·목적·역사·선례는 서로 다른 해석근거를 제공하며 어려운 사건에서는 원칙과 제도적 정당성이 충돌한다.',['textualism','purposivism','precedent','principle'],'','새로운 기술이 기존 “대리인” 개념에 포함되는지 해석한다.',['Dworkin, Law’s Empire']],
+['법과 기술·AI','기술규제는 행위자·시스템·위험·데이터·감사·책임재산을 어떻게 법적으로 연결할지 설계하는 문제다.',['technology regulation','accountability','risk-based regulation'],'','Agentic AI의 권한위임·로그·보험·책임관리인 모델을 설계한다.',['Lessig, Code and Other Laws of Cyberspace']]
+]},
+'CORE-135':{overview:'심리학과 인간행동은 뇌·지각·학습·기억·판단·감정·발달·사회관계가 행동을 만드는 과정을 실험과 관찰에 기반해 학습한다.',texts:['Daniel Kahneman, Thinking, Fast and Slow','E. Bruce Goldstein, Cognitive Psychology','David Myers & Nathan DeWall, Psychology','Albert Bandura, Social Learning Theory','Richard Nisbett & Lee Ross, Human Inference'],lessons:[
+['심리학의 과학적 방법','심리학은 직관적 인간이해를 가설·측정·실험·통계로 검증하며 재현성과 윤리가 핵심이다.',['experiment','construct','replication'],'','사람이 AI 조언을 더 신뢰한다는 가설을 실험으로 설계한다.',['Myers & DeWall, Psychology']],
+['뇌·신경계·행동','뉴런·시냅스·신경전달물질과 뇌 영역의 기능이 행동에 기여하지만 단일 영역이 복잡한 심리를 전적으로 결정하지 않는다.',['neuron','synapse','plasticity'],'','전전두엽 기능과 충동통제의 관계를 단순한 일대일 대응으로 해석하지 않는다.',['Kandel et al., Principles of Neural Science']],
+['감각·지각·주의','지각은 감각입력을 수동적으로 복사하지 않고 기대·주의·맥락을 이용해 능동적으로 구성한다.',['sensation','perception','attention'],'Signal Detection: d′','경고가 너무 많을 때 중요한 AI 알림을 놓치는 현상을 신호탐지이론으로 설명한다.',['Goldstein, Cognitive Psychology']],
+['고전적·조작적 학습','조건형성과 강화·처벌은 행동의 빈도를 바꾸며 강화스케줄은 습관의 지속성에 영향을 준다.',['classical conditioning','operant conditioning','reinforcement'],'','앱 알림과 보상기제가 반복사용을 강화하는 방식을 분석한다.',['Skinner, Science and Human Behavior']],
+['기억의 구조','부호화·저장·인출과 작업기억의 한계를 이해하면 학습과 기억왜곡을 설명할 수 있다.',['working memory','encoding','retrieval'],'','목격자 기억이 질문방식에 따라 왜곡되는 사례를 분석한다.',['Baddeley, Working Memory','Loftus, Eyewitness Testimony']],
+['사고·문제해결·언어','범주화·휴리스틱·유추·문제표상이 사고효율을 높이지만 고정관념과 오류도 만들 수 있다.',['schema','heuristic','problem representation'],'','복잡한 법률문제를 유사사례에 과도하게 맞추는 오류를 분석한다.',['Goldstein, Cognitive Psychology']],
+['판단·편향·의사결정','전망이론은 손실회피와 준거점 의존성을 통해 기대효용이론에서 벗어나는 실제 선택을 설명한다.',['prospect theory','loss aversion','anchoring'],'v(x)=x^α if x≥0; -λ(-x)^β if x<0','AI 사고확률 1% 표현과 99% 안전 표현의 프레이밍 효과를 비교한다.',['Kahneman & Tversky, Prospect Theory']],
+['감정·동기','감정은 생리·인지·상황평가와 연결되고 동기는 보상뿐 아니라 자율성·유능감·관계성에도 영향을 받는다.',['emotion','motivation','self-determination'],'','성과보상이 창의적 작업의 내재동기를 약화시킬 수 있는 조건을 검토한다.',['Deci & Ryan, Self-Determination Theory']],
+['발달과 생애주기','인지·언어·도덕·사회성은 생물학적 성숙과 환경·문화의 상호작용 속에서 발달한다.',['development','attachment','cognitive development'],'','아동의 AI 교육도구 사용에서 연령별 인지능력을 고려한다.',['Piaget, The Origins of Intelligence in Children','Vygotsky, Mind in Society']],
+['성격과 개인차','특성 접근은 비교적 안정적인 행동경향을 측정하지만 상황과 문화가 행동표현을 조절한다.',['personality','Big Five','individual differences'],'','성격검사 점수로 채용결정을 자동화할 때 타당도와 차별위험을 분석한다.',['Costa & McCrae, Revised NEO Personality Inventory']],
+['사회심리와 집단행동','동조·복종·사회정체성·고정관념은 타인의 존재와 집단규범이 판단을 변화시키는 경로를 보여준다.',['conformity','obedience','social identity','stereotype'],'','AI가 제시한 집단평균이 개인판단을 동조시키는 실험을 설계한다.',['Asch, Opinions and Social Pressure','Tajfel & Turner, Social Identity Theory']],
+['인간과 AI의 상호작용','자동화편향·알고리즘 회피·의인화·신뢰보정은 인간이 AI 조언을 언제 과신하거나 거부하는지 설명한다.',['automation bias','algorithm aversion','trust calibration'],'','의료 AI 권고가 의사의 판단을 부당하게 고정하는 자동화편향을 분석한다.',['Parasuraman & Riley, Humans and Automation']]
+]}
+});})();
