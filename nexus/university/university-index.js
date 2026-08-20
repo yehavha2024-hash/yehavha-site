@@ -1,6 +1,6 @@
 (()=>{'use strict';
 const data=window.NEXUS_CURRICULUM;const coreHost=document.getElementById('coreStages');const collegeHost=document.getElementById('collegeCatalog');const interHost=document.getElementById('interCatalog');const search=document.getElementById('courseSearch');const searchStatus=document.getElementById('searchStatus');
-const esc=(v='')=>String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[m]));
+const esc=(v='')=>String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const stageMeta={1:['Stage 1 · Intellectual Foundation','사고·수학·문명·과학·컴퓨터의 기초 렌즈'],2:['Stage 2 · Fundamental Tools','전문지식을 읽고 분석하기 위한 기본 도구'],3:['Stage 3 · Disciplinary Expansion','여러 학문의 설명방식과 핵심 지식 확장'],4:['Stage 4 · Analysis & Integration','자료·모델·제도·기술을 통합 분석'],5:['Stage 5 · Synthesis','복합문제를 여러 학문으로 종합하는 Capstone']};
 const href=c=>c.id==='CORE-101'?'./core-101.html':`./course.html?id=${encodeURIComponent(c.id)}`;
 const lawId=id=>/^(LAW|PPA)-/.test(id);const aiId=id=>/^(CS|DS|AI|ROB|SEC)-/.test(id);
