@@ -158,15 +158,6 @@
     "baselineAt": "2026-08-20",
     "baselineLabel": "자료기준"
   },
-  "case-review-lab": {
-    "id": "case-review-lab",
-    "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
-    "lastUpdated": "2026-08-20",
-    "contentCount": 6,
-    "contentLabel": "자동 점검"
-  },
   "ai-music-archive": {
     "id": "ai-music-archive",
     "managedBy": "github",
