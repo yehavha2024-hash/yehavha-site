@@ -1,0 +1,14 @@
+{
+  "id": "ai-legal-glossary",
+  "publish": true,
+  "tracking": {
+    "paths": ["nexus/ai-legal-glossary"],
+    "freshDays": 7,
+    "staleDays": 30,
+    "count": {
+      "type": "static",
+      "value": 24,
+      "label": "핵심 용어"
+    }
+  }
+}
