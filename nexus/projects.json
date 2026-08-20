@@ -6,7 +6,6 @@
     {"id":"research","eyebrow":"RESEARCH & KNOWLEDGE","title":"연구·지식","icon":"⚖️","iconClass":"research-icon","description":"AI·법학을 중심으로 한 학술연구와 전문 지식 자료"},
     {"id":"publishing","eyebrow":"PUBLISHING & ARCHIVE","title":"출판·아카이브","icon":"📚","iconClass":"publishing-icon","description":"전자책과 주제별 공개 글을 읽는 출판·지식 아카이브"},
     {"id":"media","eyebrow":"MEDIA & CONTENT","title":"미디어·콘텐츠","icon":"🎬","iconClass":"media-icon","description":"찬양음악·영상·AI 동향·음악 제작 콘텐츠"},
-    {"id":"practice","eyebrow":"AI PRACTICE & IDEAS","title":"AI 실무·아이디어","icon":"✦","iconClass":"apps-icon","description":"AI 도구를 업무·연구·콘텐츠에 활용하는 실무 자료"},
     {"id":"education","eyebrow":"EDUCATION & COURSES","title":"교육·강좌","icon":"🎓","iconClass":"education-icon","description":"생성형 AI를 직접 배우고 결과물을 만드는 실습 강좌"},
     {"id":"initiatives","eyebrow":"IDEA HUB","title":"아이디어 허브","icon":"💡","iconClass":"apps-icon","description":"사업·연구·콘텐츠·서비스의 아이디어와 공개 프로젝트"}
   ],
@@ -36,9 +35,6 @@
     {"id":"youtube-hashem-yeshua","category":"media","meta":"YouTube Channel","title":"HASHEM YESHUA","description":"히브리어·영어·한국어 AI 찬양음악을 지속적으로 공개하는 다국어 음악채널입니다.","url":"https://www.youtube.com/@yehavha","actionLabel":"바로가기"},
     {"id":"ai-trends","category":"media","meta":"AI Intelligence · Trend Brief","title":"AI 동향 브리프","description":"국내외 AI 최신동향을 기술·법정책·연구·안전·국가사업별로 살펴보고 주요 변화와 연구 연결점을 확인할 수 있습니다.","url":"https://yehavha-nexus-hub.pages.dev/ai-trends/","actionLabel":"AI 동향 보기","external":false},
     {"id":"ai-music-archive","category":"media","meta":"AI Music Production Archive","title":"AI 음악 제작·배포 아카이브","description":"AI 음악의 기획·가사·생성부터 자막·영상 제작, 플랫폼 공개와 성과 확인까지 전체 제작 과정을 살펴볼 수 있습니다.","url":"https://yehavha-nexus-hub.pages.dev/ai-music-archive/","actionLabel":"제작 아카이브 보기","external":false},
-    {"id":"ai-practice-library","category":"practice","meta":"Execution Library","title":"AI 실무·아이디어 실행 자료실","description":"AI 자동화·웹·연구·콘텐츠 제작에 활용할 수 있는 도구와 실제 적용 방법을 절차와 결과물 중심으로 살펴볼 수 있습니다.","url":"https://yehavha-nexus-hub.pages.dev/ai-practice/","actionLabel":"실행 자료실 보기"},
-    {"id":"ai-governance-execution","category":"practice","meta":"AI Governance · Compliance","title":"AI 거버넌스 · 컴플라이언스","description":"AI 시스템을 책임 있게 운영하기 위한 역할·권한, 위험관리, 인간 감독, 보안, 사고대응과 기록 체계를 단계별로 살펴볼 수 있습니다.","url":"https://yehavha-nexus-hub.pages.dev/ai-governance/","actionLabel":"거버넌스 보기","external":false},
-    {"id":"ai-service-operations","category":"practice","meta":"AI Service Delivery Guide","title":"AI 서비스·납품 운영","description":"기관·기업을 위한 AI 업무지원·교육·콘텐츠 서비스의 범위와 진행절차, 품질 확인, 납품과 유지관리 방식을 안내합니다.","url":"https://yehavha-nexus-hub.pages.dev/ai-service-operations/","actionLabel":"서비스 안내 보기","external":false},
     {"id":"initiative-hub","category":"initiatives","meta":"Public Idea Board","title":"아이디어 허브","description":"사업·연구·콘텐츠·서비스에서 발전시키고 있는 아이디어와 공개 프로젝트의 목적과 현재 단계를 살펴볼 수 있습니다.","url":"https://yehavha-nexus-hub.pages.dev/initiatives/","actionLabel":"아이디어 보기"}
   ]
 }
