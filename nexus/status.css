@@ -23,3 +23,11 @@
   margin-right: 12px;
   color: #637b96;
 }
+.footer-meta .copyright::after {
+  content: "스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈";
+  display: block;
+  margin-top: 3px;
+  color: #9fb1c8;
+  font-size: 1em;
+  line-height: 1.55;
+}
