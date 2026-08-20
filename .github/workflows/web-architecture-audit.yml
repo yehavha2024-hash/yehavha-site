@@ -54,6 +54,11 @@ jobs:
         run: |
           node --check nexus/articles/articles.js
           node --check nexus/articles/article-seo.js
+      - name: Validate independent case review LAB runtime
+        run: |
+          node --check nexus/case-review-lab/engine.js
+          node --check nexus/case-review-lab/app.js
+          node -e "JSON.parse(require('fs').readFileSync('nexus/case-review-lab/case-review.schema.json','utf8')); console.log('Case review schema JSON OK')"
       - name: Validate legal philosophy citation coverage
         run: |
           node --check legal-philosophy/research-citations-6d.js
@@ -69,7 +74,7 @@ jobs:
           const audit = globalThis.LEGAL_PHILOSOPHY_CITATION_AUDIT;
           if (!audit) throw new Error('legal philosophy citation audit missing');
           if (audit.totalExpected !== 56) throw new Error(`expected 56 items, got ${audit.totalExpected}`);
-          if (audit.totalCovered !== 56 || audit.missingIds.length) throw new Error(`citation coverage incomplete: ${audit.totalCovered}/56; missing=${audit.missingIds.join(',')}`);
+          if (audit.totalCovered !== 56 || audit.missingIds.length) throw new Error(`citation coverage incomplete: ${audit.totalCovered}/${audit.totalExpected}; missing=${audit.missingIds.join(',')}`);
           if (audit.uniformVerified !== 19 || audit.uniformExpected !== 19 || !audit.uniformComplete) throw new Error(`remaining-item verification incomplete: ${audit.uniformVerified}/${audit.uniformExpected}`);
           if (audit.quoteVerified !== 19 || !audit.complete) throw new Error(`quote verification incomplete: ${audit.quoteVerified}/19`);
           console.log(`Legal philosophy citations: ${audit.totalCovered}/${audit.totalExpected}; remaining verification ${audit.uniformVerified}/${audit.uniformExpected}`);
