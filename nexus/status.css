@@ -53,3 +53,6 @@ body .quick-link-university .quick-icon::before {
   width: 19px !important;
   height: 19px !important;
 }
+
+/* Main portal title */
+.hero-card h1 { text-transform: uppercase; }
