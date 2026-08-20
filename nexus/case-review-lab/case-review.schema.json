@@ -1,27 +1,62 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://yehavha-nexus-hub.pages.dev/case-review-lab/case-review.schema.json",
-  "title": "Case Review LAB Record",
-  "description": "사건검토 LAB의 역할분담 검토 파이프라인이 사용하는 사건 단위 기록 스키마",
+  "title": "Case Review LAB Structure Check Record",
+  "description": "사용자가 입력한 사건자료의 구조·누락·자료연결 상태를 점검하는 사건 단위 기록 스키마",
   "type": "object",
   "required": ["schemaVersion", "pipelineVersion", "caseId", "metadata", "intake", "law", "evidence", "arguments", "analysis", "decision", "review", "audit"],
   "properties": {
-    "schemaVersion": {"type": "string", "const": "1.0"},
-    "pipelineVersion": {"type": "string", "const": "1.0"},
+    "schemaVersion": {"type": "string", "const": "1.1"},
+    "pipelineVersion": {"type": "string", "const": "1.1"},
     "caseId": {"type": "string", "minLength": 1},
-    "metadata": {"type":"object","required":["title","mode","area","level","question"],"properties":{"title":{"type":"string"},"mode":{"type":"string"},"area":{"type":"string"},"level":{"type":"string"},"question":{"type":"string"},"summary":{"type":"string"}},"additionalProperties":false},
-    "intake": {"type":"object","required":["facts","legalFacts","relations","issues"],"properties":{"facts":{"$ref":"#/$defs/nodes"},"legalFacts":{"$ref":"#/$defs/nodes"},"relations":{"$ref":"#/$defs/nodes"},"issues":{"$ref":"#/$defs/nodes"}},"additionalProperties":false},
-    "law": {"type":"object","required":["laws","precedents","officialSources"],"properties":{"laws":{"$ref":"#/$defs/nodes"},"precedents":{"$ref":"#/$defs/nodes"},"officialSources":{"type":"array","items":{"type":"object","required":["id","label","url"],"properties":{"id":{"type":"string"},"label":{"type":"string"},"url":{"type":"string"},"verificationStatus":{"type":"string"}},"additionalProperties":false}}},"additionalProperties":false},
+    "metadata": {
+      "type":"object",
+      "required":["title","mode","area","question","summary"],
+      "properties":{"title":{"type":"string"},"mode":{"type":"string"},"area":{"type":"string"},"question":{"type":"string"},"summary":{"type":"string"}},
+      "additionalProperties":false
+    },
+    "intake": {
+      "type":"object",
+      "required":["facts","legalFacts","relations","issues"],
+      "properties":{"facts":{"$ref":"#/$defs/nodes"},"legalFacts":{"$ref":"#/$defs/nodes"},"relations":{"$ref":"#/$defs/nodes"},"issues":{"$ref":"#/$defs/nodes"}},
+      "additionalProperties":false
+    },
+    "law": {
+      "type":"object",
+      "required":["laws","precedents","officialSources"],
+      "properties":{
+        "laws":{"$ref":"#/$defs/nodes"},
+        "precedents":{"$ref":"#/$defs/nodes"},
+        "officialSources":{"type":"array","items":{"type":"object","required":["id","label","url","linkValid"],"properties":{"id":{"type":"string"},"label":{"type":"string"},"url":{"type":"string"},"linkValid":{"type":"boolean"}},"additionalProperties":false}}
+      },
+      "additionalProperties":false
+    },
     "evidence": {"type":"object","required":["items","burdens"],"properties":{"items":{"$ref":"#/$defs/nodes"},"burdens":{"$ref":"#/$defs/nodes"}},"additionalProperties":false},
     "arguments": {"type":"object","required":["claimant","respondent"],"properties":{"claimant":{"$ref":"#/$defs/nodes"},"respondent":{"$ref":"#/$defs/nodes"}},"additionalProperties":false},
     "analysis": {"type":"object","required":["subsumption","procedure"],"properties":{"subsumption":{"$ref":"#/$defs/nodes"},"procedure":{"$ref":"#/$defs/nodes"}},"additionalProperties":false},
-    "decision": {"type":"object","required":["conclusions","variations"],"properties":{"conclusions":{"$ref":"#/$defs/nodes"},"variations":{"$ref":"#/$defs/nodes"}},"additionalProperties":false},
-    "review": {"type":"object","required":["status","stages","gates"],"properties":{"status":{"type":"string"},"stages":{"type":"object"},"gates":{"type":"object"}},"additionalProperties":false},
-    "audit": {"type":"object","required":["generatedAt","sourceCaseId","manualReviewRequired"],"properties":{"generatedAt":{"type":"string"},"sourceCaseId":{"type":"string"},"manualReviewRequired":{"type":"boolean"}},"additionalProperties":false}
+    "decision": {"type":"object","required":["conclusions"],"properties":{"conclusions":{"$ref":"#/$defs/nodes"}},"additionalProperties":false},
+    "review": {
+      "type":"object",
+      "required":["status","stages","gates","unresolved"],
+      "properties":{
+        "status":{"type":"string"},
+        "stages":{"type":"object","required":["inputCheck","lawCheck","evidenceCheck","argumentCheck","analysisCheck","summary"],"additionalProperties":{"$ref":"#/$defs/stage"}},
+        "gates":{"type":"object","required":["coreInput","sourceLinks","reviewReadiness"],"properties":{"coreInput":{"type":"string"},"sourceLinks":{"type":"string"},"reviewReadiness":{"type":"string"}},"additionalProperties":false},
+        "unresolved":{"type":"array","items":{"type":"string"}}
+      },
+      "additionalProperties":false
+    },
+    "audit": {
+      "type":"object",
+      "required":["generatedAt","automaticScope","manualLegalReviewRequired"],
+      "properties":{"generatedAt":{"type":"string"},"automaticScope":{"type":"string"},"manualLegalReviewRequired":{"type":"boolean"}},
+      "additionalProperties":false
+    }
   },
   "$defs": {
     "node": {"type":"object","required":["id","text"],"properties":{"id":{"type":"string"},"text":{"type":"string"},"refs":{"type":"array","items":{"type":"string"}}},"additionalProperties":false},
-    "nodes": {"type":"array","items":{"$ref":"#/$defs/node"}}
+    "nodes": {"type":"array","items":{"$ref":"#/$defs/node"}},
+    "stage": {"type":"object","required":["label","status","outputs","missing"],"properties":{"label":{"type":"string"},"status":{"type":"string"},"outputs":{"type":"array","items":{"type":"string"}},"missing":{"type":"array","items":{"type":"string"}}},"additionalProperties":false}
   },
   "additionalProperties": false
 }
