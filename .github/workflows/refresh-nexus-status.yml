@@ -38,19 +38,29 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Normalize intelligence copyright footer
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('nexus/intelligence-briefing/index.html')
+          s = p.read_text(encoding='utf-8')
+          s = s.replace('Copyright © 이명훈 2026. All rights reserved.', '© 2026 이명훈. All rights reserved.')
+          p.write_text(s, encoding='utf-8')
+          PY
+
       - name: Refresh Nexus project status
         run: node nexus/scripts/update-status.mjs
 
-      - name: Commit Nexus status when changed
+      - name: Commit Nexus updates when changed
         shell: bash
         run: |
-          if git diff --quiet -- nexus/project-status.json; then
-            echo "Nexus project status is already current."
+          if git diff --quiet -- nexus/intelligence-briefing/index.html nexus/project-status.json; then
+            echo "Nexus files are already current."
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add nexus/project-status.json
-          git commit -m "Refresh Nexus project status"
+          git add nexus/intelligence-briefing/index.html nexus/project-status.json
+          git commit -m "Correct intelligence briefing copyright"
           git push
