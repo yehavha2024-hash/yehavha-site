@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 
+// One-time idempotent migration: promote Strategic Intelligence to Nexus priority 00.
 const file = 'nexus/portal-v2.js';
 let source = fs.readFileSync(file, 'utf8');
 let next = source;
