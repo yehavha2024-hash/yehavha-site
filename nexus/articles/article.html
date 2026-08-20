@@ -3,99 +3,50 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="YEHAVHA Nexus 글·연구 아카이브 본문"/>
+<meta name="description" content="YEHAVHA NEXUS 글·연구 아카이브 본문"/>
 <meta name="theme-color" content="#081a30"/>
 <meta name="robots" content="index,follow,max-image-preview:large"/>
-<meta property="og:title" content="글 읽기 | YEHAVHA Nexus"/>
-<meta property="og:description" content="YEHAVHA Nexus 글·연구 아카이브에서 공개 글을 읽습니다."/>
+<meta property="og:title" content="글 읽기 | YEHAVHA NEXUS"/>
+<meta property="og:description" content="YEHAVHA NEXUS 글·연구 아카이브에서 공개 글을 읽습니다."/>
 <meta property="og:type" content="article"/>
-<title>글 읽기 | YEHAVHA Nexus</title>
-<link href="../portal-v2.css?v=20260813-articles" rel="stylesheet"/>
+<title>글 읽기 | YEHAVHA NEXUS</title>
+<link href="../portal-v2.css?v=20260820-public" rel="stylesheet"/>
 <link href="./articles.css?v=20260817-compact-scripture" rel="stylesheet"/>
+<link href="./public-layout-20260820.css?v=20260820-1" rel="stylesheet"/>
 <style>
-/* Nexus article typography standard */
-body[data-page="detail"] .reader-card{
-  font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-apple-system,sans-serif;
-}
+body[data-page="detail"] .reader-card{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-apple-system,sans-serif}
 body[data-page="detail"] .article-body,
 body[data-page="detail"] .article-body h2,
 body[data-page="detail"] .article-body h3,
 body[data-page="detail"] .scripture-block,
 body[data-page="detail"] .scripture-reference,
 body[data-page="detail"] .article-note,
-body[data-page="detail"] .reader-toc{
-  font-family:inherit!important;
-}
-/* Readability standard for secondary text */
+body[data-page="detail"] .reader-toc{font-family:inherit!important}
 body[data-page="detail"] .reader-subtitle{color:#c7d5e3}
 body[data-page="detail"] .reader-author{color:#b8cadb}
 body[data-page="detail"] .reader-summary{color:#bfd0df}
-body[data-page="detail"] .reader-toc h2{
-  color:#d6e1ec;
-  text-align:center;
-  margin:0 0 7px!important;
-  padding:0 0 7px!important;
-  border-bottom:1px solid rgba(255,255,255,.07);
-}
+body[data-page="detail"] .reader-toc h2{color:#d6e1ec;text-align:center;margin:0 0 7px!important;padding:0 0 7px!important;border-bottom:1px solid rgba(255,255,255,.07)}
 body[data-page="detail"] .reader-toc a{color:#b5c8da}
 body[data-page="detail"] .reader-toc a:hover{color:#e5eef7}
 body[data-page="detail"] .article-opening{color:#cedae6}
 body[data-page="detail"] .western-article-title,
 body[data-page="detail"] .western-book-title{font-style:italic}
-/* Compact two-column TOC for every article */
-body[data-page="detail"] .reader-toc ol{
-  display:block!important;
-  column-count:2;
-  column-gap:0;
-  column-rule:1px solid rgba(255,255,255,.07);
-}
-body[data-page="detail"] .reader-toc li{
-  break-inside:avoid;
-  -webkit-column-break-inside:avoid;
-  padding:3px 10px!important;
-}
+body[data-page="detail"] .reader-toc ol{display:block!important;column-count:2;column-gap:0;column-rule:1px solid rgba(255,255,255,.07)}
+body[data-page="detail"] .reader-toc li{break-inside:avoid;-webkit-column-break-inside:avoid;padding:3px 10px!important}
 body[data-page="detail"] .reader-toc .toc-subitem{padding-left:10px!important}
-body[data-page="detail"] .reader-toc a{
-  display:-webkit-box!important;
-  -webkit-box-orient:vertical;
-  -webkit-line-clamp:2;
-  overflow:hidden;
-  font-size:10.4px!important;
-  line-height:1.32!important;
-  word-break:keep-all;
-  overflow-wrap:anywhere;
-}
-/* Compact scripture cards */
-body[data-page="detail"] .article-body .scripture-block{
-  height:auto!important;
-  min-height:0!important;
-  margin:10px 0!important;
-  padding:8px 13px 7px!important;
-}
-body[data-page="detail"] .scripture-block .scripture-reference{
-  margin-bottom:2px!important;
-  line-height:1.3!important;
-}
-body[data-page="detail"] .scripture-block p{
-  margin:0!important;
-  line-height:1.48!important;
-}
+body[data-page="detail"] .reader-toc a{display:-webkit-box!important;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:10.4px!important;line-height:1.32!important;word-break:keep-all;overflow-wrap:anywhere}
+body[data-page="detail"] .article-body .scripture-block{height:auto!important;min-height:0!important;margin:10px 0!important;padding:8px 13px 7px!important}
+body[data-page="detail"] .scripture-block .scripture-reference{margin-bottom:2px!important;line-height:1.3!important}
+body[data-page="detail"] .scripture-block p{margin:0!important;line-height:1.48!important}
 @media(max-width:700px){
   body[data-page="detail"] .reader-toc{padding:8px 9px!important}
   body[data-page="detail"] .reader-toc h2{margin:0 0 6px!important;padding:0 0 6px!important;text-align:center}
   body[data-page="detail"] .reader-toc li{padding:3px 7px!important}
   body[data-page="detail"] .reader-toc .toc-subitem{padding-left:7px!important}
   body[data-page="detail"] .reader-toc a{font-size:9.8px!important;line-height:1.28!important}
-  body[data-page="detail"] .article-body .scripture-block{
-    margin:7px 0!important;
-    padding:6px 10px 5px!important;
-  }
-  body[data-page="detail"] .scripture-block .scripture-reference{
-    margin-bottom:1px!important;
-  }
-  body[data-page="detail"] .scripture-block p{
-    line-height:1.44!important;
-  }
+  body[data-page="detail"] .article-body .scripture-block{margin:7px 0!important;padding:6px 10px 5px!important}
+  body[data-page="detail"] .scripture-block .scripture-reference{margin-bottom:1px!important}
+  body[data-page="detail"] .scripture-block p{line-height:1.44!important}
 }
 </style>
 </head>
@@ -104,7 +55,7 @@ body[data-page="detail"] .scripture-block p{
 <header class="reader-top" id="top">
   <div class="container reader-nav">
     <a class="back-link" href="./">← 글·연구 아카이브</a>
-    <a class="nexus-link" href="../">YEHAVHA Nexus</a>
+    <a class="nexus-link" href="../">YEHAVHA NEXUS</a>
   </div>
 </header>
 <main class="reader-main">
@@ -135,7 +86,7 @@ body[data-page="detail"] .scripture-block p{
       </nav>
 
       <div class="article-closing">
-        <p>Copyright © 이명훈. All rights reserved.</p>
+        <a href="./">← 글 목록</a>
         <a href="#top">맨 위로 이동 ↑</a>
       </div>
     </article>
@@ -147,10 +98,14 @@ body[data-page="detail"] .scripture-block p{
     </section>
   </div>
 </main>
-<footer class="footer reader-site-footer">
+<footer class="footer reader-site-footer" data-footer-standard="v2">
   <div class="container">
     <div class="footer-card">
-      <strong>YEHAVHA Nexus · Articles</strong>
+      <strong>YEHAVHA NEXUS · Articles</strong>
+      <div class="footer-meta">
+        <p>Copyright © 이명훈 2026. All rights reserved.</p>
+        <p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p>
+      </div>
     </div>
   </div>
 </footer>
