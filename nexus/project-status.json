@@ -164,8 +164,8 @@
     "status": "최근 업데이트",
     "statusTone": "fresh",
     "lastUpdated": "2026-08-20",
-    "contentCount": 8,
-    "contentLabel": "검토 단계"
+    "contentCount": 6,
+    "contentLabel": "자동 점검"
   },
   "ai-music-archive": {
     "id": "ai-music-archive",
