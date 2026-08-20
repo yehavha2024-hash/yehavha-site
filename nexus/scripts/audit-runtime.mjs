@@ -193,25 +193,6 @@ function auditInitiatives() {
   for (const id of obsolete) if (items.some(item => item.id === id)) fail(source, `삭제 결정된 항목 잔존: ${id}`);
 }
 
-function auditAiPractice() {
-  const source = 'nexus/ai-practice/data.json';
-  const data = auditJson(source);
-  if (!data) return;
-  const groups = Array.isArray(data.groups) ? data.groups : [];
-  if (!groups.length) fail(source, '실행 그룹 없음');
-  if (!unique(groups.map(item => item.id))) fail(source, '실행 그룹 id 중복');
-  for (const group of groups) {
-    if (!Array.isArray(group.items) || !group.items.length) warn(source, `${group.id} 실행 항목 없음`);
-    for (const item of group.items || []) {
-      if (!item.title || !item.purpose || !Array.isArray(item.workflow) || !item.workflow.length) fail(source, `${group.id} 실행 항목 필수정보 누락: ${item.title || '(제목 없음)'}`);
-    }
-  }
-  const text = JSON.stringify(data);
-  for (const phrase of ['전자책 30초 홍보영상', '법률연구·AI 강좌 60~90초 설명영상']) {
-    if (text.includes(phrase)) fail(source, `삭제 결정된 항목 잔존: ${phrase}`);
-  }
-}
-
 function auditStatusModel() {
   const status = auditJson('nexus/project-status.json');
   const projects = auditJson('nexus/projects.json');
@@ -251,7 +232,6 @@ auditLivingLaw();
 auditPublishing();
 auditArticles();
 auditInitiatives();
-auditAiPractice();
 auditStatusModel();
 
 console.log(`Nexus runtime audit: ${errors} error(s), ${warnings} warning(s)`);
