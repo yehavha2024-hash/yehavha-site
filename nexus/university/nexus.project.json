@@ -7,8 +7,8 @@
     "staleDays": 30,
     "count": {
       "type": "static",
-      "value": 35,
-      "label": "University Core 과목"
+      "value": 496,
+      "label": "개설 과목"
     }
   }
 }
