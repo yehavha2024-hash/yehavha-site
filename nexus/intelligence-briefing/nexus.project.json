@@ -1,0 +1,20 @@
+{
+  "id": "strategic-intelligence-briefing",
+  "publish": true,
+  "review": {
+    "contentReviewedAt": "2026-08-21",
+    "baselineAt": "2026-08-21",
+    "baselineLabel": "운영기준"
+  },
+  "tracking": {
+    "paths": ["nexus/intelligence-briefing"],
+    "freshDays": 1,
+    "staleDays": 3,
+    "count": {
+      "type": "json-array",
+      "file": "nexus/intelligence-briefing/latest.json",
+      "path": "items",
+      "label": "핵심정보"
+    }
+  }
+}
