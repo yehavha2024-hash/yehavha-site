@@ -34,7 +34,6 @@
     research: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M6 6h12"/><path d="m7 6-3 6h6L7 6Zm10 0-3 6h6l-3-6Z"/><path d="M4 12c.5 2 5.5 2 6 0M14 12c.5 2 5.5 2 6 0M8 21h8"/></svg>',
     publishing: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5c3.2-.7 5.8 0 8 2v11c-2.2-2-4.8-2.7-8-2V5.5Z"/><path d="M20 5.5c-3.2-.7-5.8 0-8 2v11c2.2-2 4.8-2.7 8-2V5.5Z"/></svg>',
     media: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="m10 9 5 3-5 3V9Z"/><path d="M7 3v2M17 3v2"/></svg>',
-    practice: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m11.5 3 1.35 4.15L17 8.5l-4.15 1.35L11.5 14l-1.35-4.15L6 8.5l4.15-1.35L11.5 3Z"/><path d="m18.5 13 .75 2.25 2.25.75-2.25.75L18.5 19l-.75-2.25L15.5 16l2.25-.75L18.5 13Z"/><path d="M5.5 15.5 3 18l3 3 2.5-2.5"/></svg>',
     education: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-4 9 4-9 4-9-4Z"/><path d="M6.5 11v4.5c3.5 2.3 7.5 2.3 11 0V11"/><path d="M21 9v5"/></svg>',
     initiatives: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4"/><path d="M8.2 14.5C6.8 13.4 6 11.8 6 10a6 6 0 1 1 12 0c0 1.8-.8 3.4-2.2 4.5-.8.6-1.3 1.4-1.5 2.5H9.7c-.2-1.1-.7-1.9-1.5-2.5Z"/><path d="M12 5.5V8M7.8 7.2l1.7 1.7M16.2 7.2l-1.7 1.7"/></svg>'
   };
@@ -153,7 +152,6 @@
   function maturityFor(project) {
     if (project.category === 'intelligence') return { label: '최우선 정보', tone: 'research' };
     if (project.category === 'initiatives') return { label: '아이디어', tone: 'idea' };
-    if (project.category === 'practice') return { label: '실행·확장', tone: 'expanding' };
     if (project.category === 'research') return { label: '연구 운영', tone: 'research' };
     return { label: '운영', tone: 'operational' };
   }
