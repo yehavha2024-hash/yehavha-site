@@ -13,6 +13,7 @@ on:
       - 'scripts/audit-repo-hygiene.mjs'
       - 'scripts/audit-style-ownership.mjs'
       - 'WEB_PROJECT_STANDARD.md'
+      - 'COPYRIGHT_STANDARD.md'
       - '.github/workflows/web-architecture-audit.yml'
   pull_request:
     paths:
@@ -26,6 +27,7 @@ on:
       - 'scripts/audit-repo-hygiene.mjs'
       - 'scripts/audit-style-ownership.mjs'
       - 'WEB_PROJECT_STANDARD.md'
+      - 'COPYRIGHT_STANDARD.md'
       - '.github/workflows/web-architecture-audit.yml'
 
 permissions:
