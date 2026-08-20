@@ -1,0 +1,11 @@
+(()=>{'use strict';
+const id=new URLSearchParams(location.search).get('id');
+const law=window.NEXUS_LAW_TEXTBOOKS||{};const ai=window.NEXUS_AI_TEXTBOOKS||{};
+const kind=law[id]?'law':ai[id]?'ai':null;if(!kind)return;
+const text=kind==='law'?{badge:'LAW TEXTBOOK 2.0',note:'이 과목은 일반 자동강의가 아니라 과목별 조문·법리·학설·판례·비교법·사례 포섭을 직접 구성한 법학 전공 교재입니다.',theory:'조문·법리·학설·판례·비교법',case:'사례 포섭',read:'대표 원전·판례·문헌'}:{badge:'AI TEXTBOOK 2.0',note:'이 과목은 일반 자동강의가 아니라 과목별 알고리즘·수학모형·시스템 구조·대표논문·실험·실패모드를 직접 구성한 컴퓨팅·AI 전공 교재입니다.',theory:'알고리즘·시스템·대표논문·실패모드',case:'실험·기술사례·실패 재현',read:'대표논문·표준문헌'};
+const badges=[...document.querySelectorAll('.course-kicker .badge')];if(badges.length)badges[badges.length-1].textContent=text.badge;
+document.querySelectorAll('.course-meta span').forEach(el=>{if(el.textContent.trim()==='TEXTBOOK CORE')el.textContent=text.badge;});
+const note=document.querySelector('.textbook-note');if(note)note.textContent=text.note;
+document.querySelectorAll('.lesson-section h3').forEach(h=>{const t=h.textContent.trim();if(t==='핵심 이론·학설·개념')h.textContent=text.theory;else if(t==='사례')h.textContent=text.case;else if(t==='대표 원전·문헌')h.textContent=text.read;else if(kind==='ai'&&t==='공식·모형')h.textContent='수학모형·공식';});
+const overviewTag=document.querySelector('.section-head span');if(overviewTag&&overviewTag.textContent.includes('TEXTBOOK'))overviewTag.textContent=text.badge;
+})();
