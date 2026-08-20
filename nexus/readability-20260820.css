@@ -1,24 +1,24 @@
 /* 2026-08-20 readability adjustment: preserve compact layout, increase text only */
-body{font-size:16px}
-.description{font-size:15px!important;line-height:1.66!important}
-.quick-link{font-size:14px!important}.quick-label{font-size:14px!important}.quick-count{font-size:11.5px!important}
-.portal-search-head h2{font-size:16px!important}.portal-search-head p{font-size:12px!important}.portal-search-input{font-size:14.5px!important}.portal-search-clear{font-size:12.5px!important}
-.search-result strong{font-size:14px!important}.search-result span{font-size:12px!important;line-height:1.46!important}.search-empty{font-size:12.5px!important}
-.overview-item span{font-size:10.8px!important}.overview-item strong{font-size:12.5px!important}
-.tier-copy .eyebrow,.category-head .eyebrow,.research-subgroup-head .eyebrow{font-size:10px!important}
-.tier-copy h2{font-size:1.16rem!important}.tier-description{font-size:13px!important;line-height:1.5!important}
-.category-head h2{font-size:1.22rem!important}.category-description{font-size:13.5px!important;line-height:1.55!important}.category-count{font-size:10.2px!important}
-.research-subgroup-head h3{font-size:15px!important}.research-subgroup-description{font-size:12.5px!important;line-height:1.52!important}
-.item-meta,.item-domain,.project-status{font-size:11.2px!important}.maturity-chip{font-size:10px!important}
-.item-card h3{font-size:16.5px!important;line-height:1.4!important}.item-card p{font-size:14px!important;line-height:1.58!important}
-.project-live-meta,.project-review-meta{font-size:11px!important;line-height:1.45!important}.visit-link,.copy-btn{font-size:12.3px!important}
-.category-university .category-description{font-size:14px!important}.category-university .item-card p{font-size:14px!important;line-height:1.6!important}
-.footer-card p,.footer-card a{font-size:13px!important}.footer-meta p{font-size:12px!important}
+html body{font-size:16px}
+html body .description{font-size:15px!important;line-height:1.66!important}
+html body .quick-link{font-size:14px!important}html body .quick-label{font-size:14px!important}html body .quick-count{font-size:11.5px!important}
+html body .portal-search-head h2{font-size:16px!important}html body .portal-search-head p{font-size:12px!important}html body .portal-search-input{font-size:14.5px!important}html body .portal-search-clear{font-size:12.5px!important}
+html body .search-result strong{font-size:14px!important}html body .search-result span{font-size:12px!important;line-height:1.46!important}html body .search-empty{font-size:12.5px!important}
+html body .overview-item span{font-size:10.8px!important}html body .overview-item strong{font-size:12.5px!important}
+html body .tier-copy .eyebrow,html body .category-head .eyebrow,html body .research-subgroup-head .eyebrow{font-size:10px!important}
+html body .tier-copy h2{font-size:1.16rem!important}html body .tier-description{font-size:13px!important;line-height:1.5!important}
+html body .category-head h2{font-size:1.22rem!important}html body .category-description{font-size:13.5px!important;line-height:1.55!important}html body .category-count{font-size:10.2px!important}
+html body .research-subgroup-head h3{font-size:15px!important}html body .research-subgroup-description{font-size:12.5px!important;line-height:1.52!important}
+html body .item-meta,html body .item-domain,html body .project-status{font-size:11.2px!important}html body .maturity-chip{font-size:10px!important}
+html body .portal-grid .item-card h3{font-size:16.5px!important;line-height:1.4!important}html body .portal-grid .item-card p{font-size:14px!important;line-height:1.58!important}
+html body .project-live-meta,html body .project-review-meta{font-size:11px!important;line-height:1.45!important}html body .visit-link,html body .copy-btn{font-size:12.3px!important}
+html body .category-university .category-description{font-size:14px!important}html body .category-university .item-card p{font-size:14px!important;line-height:1.6!important}
+html body .footer-card p,html body .footer-card a{font-size:13px!important}html body .footer-meta p{font-size:12px!important}
 @media(max-width:620px){
- body{font-size:15px}
- .description{font-size:14px!important}.quick-link{font-size:13.5px!important}.quick-label{font-size:13.5px!important}
- .tier-description{font-size:12.5px!important}.category-description{font-size:13px!important}.research-subgroup-description{font-size:12px!important}
- .item-card h3{font-size:16px!important}.item-card p{font-size:13.5px!important;line-height:1.56!important}
- .item-meta,.item-domain,.project-status{font-size:10.8px!important}.project-live-meta,.project-review-meta{font-size:10.7px!important}.visit-link,.copy-btn{font-size:12px!important}
- .category-university .item-card p{font-size:13.5px!important}
+ html body{font-size:15px}
+ html body .description{font-size:14px!important}html body .quick-link{font-size:13.5px!important}html body .quick-label{font-size:13.5px!important}
+ html body .tier-description{font-size:12.5px!important}html body .category-description{font-size:13px!important}html body .research-subgroup-description{font-size:12px!important}
+ html body .portal-grid .item-card h3{font-size:16px!important}html body .portal-grid .item-card p{font-size:13.5px!important;line-height:1.56!important}
+ html body .item-meta,html body .item-domain,html body .project-status{font-size:10.8px!important}html body .project-live-meta,html body .project-review-meta{font-size:10.7px!important}html body .visit-link,html body .copy-btn{font-size:12px!important}
+ html body .category-university .item-card p{font-size:13.5px!important}
 }
