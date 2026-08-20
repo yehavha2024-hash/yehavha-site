@@ -1,0 +1,31 @@
+/* NEXUS UNIVERSITY · guided practice and worked-example layer */
+.guided-practice-intro{margin:8px 0 9px;padding:9px 10px;border-left:3px solid rgba(122,184,255,.45);border-radius:7px;background:rgba(122,184,255,.045);color:#bfd0e1;font-size:11.2px;line-height:1.55}
+.guided-practice-grid{display:grid;gap:7px;margin-top:8px}
+.guided-answer{padding:9px 10px;border:1px solid rgba(141,214,177,.13);border-radius:9px;background:rgba(141,214,177,.028)}
+.guided-answer-head{display:flex;align-items:center;gap:7px;margin-bottom:5px}
+.guided-answer-no{display:grid;place-items:center;flex:0 0 24px;width:24px;height:24px;border-radius:7px;background:rgba(122,184,255,.08);color:#a9d1ff;font-size:9.5px;font-weight:900}
+.guided-answer-head strong{color:#e7f0f8;font-size:11.4px;line-height:1.35}
+.guided-question{margin:0 0 6px;color:#9fb4c8;font-size:10.7px;line-height:1.5}
+.guided-answer-text{margin:0;color:#d0dce8;font-size:11.3px;line-height:1.62}
+.guided-why{margin:6px 0 0;padding-top:6px;border-top:1px solid rgba(255,255,255,.055);color:#9db2c5;font-size:10.6px;line-height:1.55}
+.guided-why strong{color:#afcde7}
+.guided-domain-path{display:flex;flex-wrap:wrap;gap:4px;margin:7px 0 0}
+.guided-domain-path span{display:inline-flex;align-items:center;min-height:22px;padding:2px 6px;border:1px solid rgba(122,184,255,.12);border-radius:999px;background:rgba(122,184,255,.035);color:#9fbfdd;font-size:9.3px;font-weight:750}
+.assessment-guide{margin-top:10px;padding:10px;border:1px solid rgba(122,184,255,.11);border-radius:9px;background:rgba(122,184,255,.025)}
+.assessment-guide h3{margin:0 0 6px!important;color:#e3edf7!important;font-size:12px!important}
+.assessment-guide p{margin:0;color:#b6c7d8;font-size:11px;line-height:1.6}
+.assessment-guide ol{margin:7px 0 0;padding-left:18px;color:#c5d3e0;font-size:10.8px;line-height:1.58}
+.assessment-guide li+li{margin-top:3px}
+.capstone-worked-example{margin-top:8px;padding:8px 9px;border-left:3px solid rgba(239,201,120,.36);background:rgba(239,201,120,.025);color:#c8d3df;font-size:10.8px;line-height:1.58}
+.capstone-worked-example strong{color:#ead9ad}
+.tutor-box .guided-tutor-note{color:#b6c8d9!important}
+@media(max-width:650px){
+  .guided-practice-intro{padding:8px 9px;font-size:10.8px}
+  .guided-answer{padding:8px 9px}
+  .guided-answer-head strong{font-size:11px}
+  .guided-question{font-size:10.3px}
+  .guided-answer-text{font-size:10.9px;line-height:1.58}
+  .guided-why{font-size:10.2px}
+  .assessment-guide{padding:9px}
+  .assessment-guide p,.assessment-guide ol,.capstone-worked-example{font-size:10.5px}
+}
