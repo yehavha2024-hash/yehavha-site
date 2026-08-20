@@ -1,0 +1,72 @@
+(()=>{'use strict';window.NEXUS_CORE_TEXTBOOK=window.NEXUS_CORE_TEXTBOOK||{};Object.assign(window.NEXUS_CORE_TEXTBOOK,{
+'CORE-141':{overview:'과학적 사고와 방법은 관찰·측정·가설·실험·모형·통계·재현을 통해 자연현상에 대한 설명을 검증하고 수정하는 지식생산의 원리를 학습한다.',texts:['Francis Bacon, Novum Organum','Karl Popper, The Logic of Scientific Discovery','Thomas Kuhn, The Structure of Scientific Revolutions','Imre Lakatos, The Methodology of Scientific Research Programmes','National Academies, Reproducibility and Replicability in Science'],lessons:[
+['관찰과 이론의 관계','관찰은 이론과 완전히 독립적이지 않지만 공개가능한 측정규칙과 반복가능한 절차를 통해 검증가능성을 높일 수 있다.',['observation','measurement','theory-ladenness'],'','같은 천체자료를 서로 다른 우주모형이 어떻게 해석하는지 비교한다.',['Hanson, Patterns of Discovery']],
+['귀납과 Bacon','개별 관찰에서 일반법칙을 도출하는 귀납은 과학의 핵심이지만 관찰수만으로 보편명제를 논리적으로 확정할 수는 없다.',['induction','enumeration','empiricism'],'','백조 관찰만으로 “모든 백조는 흰색”을 확정할 수 없는 이유를 설명한다.',['Bacon, Novum Organum','Hume, Enquiry']],
+['가설·연역과 반증가능성','Popper는 이론이 과학적이려면 잠재적으로 틀렸음을 보여줄 관찰조건을 제시할 수 있어야 한다고 보았다.',['falsifiability','hypothesis','deduction'],'Theory→Prediction; ¬Prediction ⇒ problem for theory','성능이 항상 향상된다는 AI 주장에 반증조건을 설계한다.',['Popper, Logic of Scientific Discovery']],
+['패러다임과 과학혁명','Kuhn은 정상과학이 공유된 문제풀이 틀 안에서 진행되다가 이상현상이 누적되면 패러다임 변화가 일어날 수 있다고 보았다.',['paradigm','normal science','anomaly'],'','고전역학에서 상대성이론으로의 전환을 연속성과 단절의 관점에서 분석한다.',['Kuhn, Structure of Scientific Revolutions']],
+['연구프로그램과 Lakatos','핵심가설을 보호하는 보조가설의 변화가 새로운 예측을 낳는 진보적 프로그램인지 실패를 피하는 퇴행적 프로그램인지 평가한다.',['research programme','hard core','protective belt'],'','이론이 반례마다 임시가설을 추가할 때 과학적으로 생산적인지 판단한다.',['Lakatos, Methodology of Scientific Research Programmes']],
+['측정·오차·불확실성','모든 측정은 해상도·계통오차·무작위오차를 가지며 유효숫자와 불확실성을 결과와 함께 보고해야 한다.',['systematic error','random error','uncertainty'],'x=x̄±u','두 센서의 정확도와 정밀도를 구분한다.',['JCGM, Guide to the Expression of Uncertainty in Measurement']],
+['실험·통제·무작위화','실험은 조작된 변수의 효과를 다른 원인과 분리하기 위해 통제·무작위화·맹검 등의 설계를 사용한다.',['control','randomization','blinding'],'','약물효과 실험에서 위약·이중맹검의 기능을 설명한다.',['Fisher, The Design of Experiments']],
+['모형과 이상화','과학모형은 현실의 모든 세부를 담지 않고 핵심관계를 이상화해 설명·예측·개입을 가능하게 한다.',['model','idealization','approximation'],'F=ma','마찰 없는 평면 가정이 언제 유용하고 언제 실패하는지 설명한다.',['Giere, Scientific Perspectivism']],
+['통계적 추론과 증거','효과크기·불확실성·사전확률·연구설계를 함께 고려해야 단일 p값보다 더 풍부한 증거평가가 가능하다.',['statistical evidence','effect size','likelihood'],'','p=.04인 작은 연구를 강한 사실로 단정할 수 있는지 평가한다.',['ASA Statement on p-Values']],
+['재현성과 반복가능성','같은 데이터·코드로 같은 결과를 얻는 재현과 독립 연구가 유사결과를 얻는 반복검증을 구분한다.',['reproducibility','replicability','open science'],'','분석코드가 공개되지 않은 연구의 검증가능성을 평가한다.',['National Academies, Reproducibility and Replicability in Science']],
+['과학의 사회적 제도','동료평가·연구비·학술지·이해상충·출판편향은 과학의 품질을 높이기도 하고 왜곡하기도 하는 제도적 조건이다.',['peer review','publication bias','conflict of interest'],'','기업 후원 연구에서 연구설계와 데이터 접근권을 점검한다.',['Merton, The Sociology of Science']],
+['과학·윤리·정책','과학은 사실과 불확실성을 제공하지만 위험수용·분배정의·예방원칙 같은 가치판단을 자동으로 결정하지 않는다.',['risk assessment','precautionary principle','science-policy interface'],'','새로운 생명공학의 규제를 과학적 위험과 사회적 가치로 분리해 논의한다.',['Douglas, Science, Policy, and the Value-Free Ideal']]
+]},
+'CORE-142':{overview:'물질·에너지·우주는 고전역학에서 열역학·전자기학·상대성이론·양자역학·우주론까지 물리세계의 기본 법칙과 적용범위를 개관한다.',texts:['Halliday, Resnick & Walker, Fundamentals of Physics','Richard Feynman, The Feynman Lectures on Physics','Young & Freedman, University Physics','Sean Carroll, Spacetime and Geometry'],lessons:[
+['측정·벡터·운동학','위치·속도·가속도를 시간의 함수로 표현하고 벡터의 방향과 크기를 구분한다.',['position','velocity','acceleration','vector'],'v=dx/dt, a=dv/dt','자율주행차의 위치로그에서 속도와 가속도를 계산한다.',['Halliday et al., Fundamentals of Physics']],
+['Newton 운동법칙','힘은 운동상태 변화의 원인이며 관성계에서 합력과 가속도의 관계를 Newton 제2법칙으로 표현한다.',['force','inertia','mass'],'ΣF=ma','차량 충돌 시 제동력과 감속도를 계산한다.',['Newton, Principia','Feynman Lectures Vol. I']],
+['일·에너지·운동량','에너지와 운동량 보존은 복잡한 운동을 상태변화와 충돌의 관점에서 분석하게 한다.',['work','energy','momentum'],'W=∫F·dr, p=mv','비탄성 충돌에서 운동량 보존과 에너지손실을 구분한다.',['Young & Freedman, University Physics']],
+['중력과 궤도','Newton의 만유인력은 지상 낙하와 천체 궤도를 하나의 법칙으로 설명한다.',['gravity','orbit','inverse-square law'],'F=Gm₁m₂/r²','위성궤도 속도가 고도에 따라 어떻게 달라지는지 계산한다.',['Newton, Principia']],
+['유체와 압력','유체는 압력·부력·연속성·에너지보존에 따라 흐르며 점성은 이상유체 모형을 수정한다.',['pressure','buoyancy','continuity'],'P=F/A, A₁v₁=A₂v₂','혈관 단면적 변화와 유속의 관계를 해석한다.',['Halliday et al.']],
+['열역학','열·일·내부에너지의 관계와 엔트로피 증가가 에너지변환의 방향성과 효율한계를 결정한다.',['temperature','entropy','heat engine'],'ΔU=Q-W, ΔS≥0','발전소 효율이 100%가 될 수 없는 이유를 설명한다.',['Feynman Lectures Vol. I']],
+['파동·소리','파동은 물질의 대규모 이동 없이 에너지와 정보를 전달하며 주파수·파장·속도가 연결된다.',['wave','frequency','wavelength'],'v=fλ','초음파 진단의 주파수와 해상도·침투깊이의 관계를 분석한다.',['Young & Freedman']],
+['전기·자기·회로','전하와 장, 전위, 전류, 저항의 관계와 전자기유도를 통해 전기시스템의 기본원리를 이해한다.',['electric field','voltage','current','magnetic field'],'V=IR, P=VI','배터리 회로에서 전압·전류·전력소모를 계산한다.',['Maxwell, Treatise on Electricity and Magnetism','Halliday et al.']],
+['빛과 광학','반사·굴절·간섭·회절은 빛의 파동성을 보여주며 광학시스템의 해상도와 영상형성을 결정한다.',['reflection','refraction','interference','diffraction'],'n₁sinθ₁=n₂sinθ₂','카메라 렌즈와 센서가 영상을 형성하는 원리를 설명한다.',['Hecht, Optics']],
+['특수상대성이론','빛의 속도 불변과 물리법칙의 동일성에서 시간지연·길이수축·질량에너지 등가성이 도출된다.',['relativity','time dilation','Lorentz transformation'],'E=mc², γ=1/√(1-v²/c²)','GPS 시간보정이 상대론과 연결되는 이유를 설명한다.',['Einstein, On the Electrodynamics of Moving Bodies']],
+['양자역학의 기초','미시세계는 상태벡터·확률진폭·불확정성·양자화로 기술되며 고전적 궤도개념이 그대로 적용되지 않는다.',['wavefunction','superposition','uncertainty'],'ΔxΔp≥ħ/2','전자 위치와 운동량을 동시에 임의정밀도로 측정할 수 없는 이유를 설명한다.',['Griffiths, Introduction to Quantum Mechanics']],
+['우주론과 현대물리','팽창우주·우주배경복사·핵합성·암흑물질·암흑에너지를 통해 우주의 역사와 현재 모형을 이해한다.',['Big Bang','dark matter','dark energy'],'H²=(8πG/3)ρ+…','적색편이와 은하거리의 관계가 우주팽창 증거가 되는 이유를 설명한다.',['Carroll, Spacetime and Geometry']]
+]},
+'CORE-143':{overview:'생명·진화·유전은 세포·대사·DNA·유전자발현·유전·진화·생태계가 연결되어 생명현상을 구성하는 원리를 학습한다.',texts:['Campbell Biology','Alberts et al., Molecular Biology of the Cell','Darwin, On the Origin of Species','Griffiths et al., Introduction to Genetic Analysis'],lessons:[
+['생명의 화학적 기반','물·탄소화합물·단백질·지질·탄수화물·핵산의 구조와 상호작용이 생명기능을 가능하게 한다.',['protein','lipid','carbohydrate','nucleic acid'],'','단백질 구조변화가 효소기능을 바꾸는 사례를 설명한다.',['Campbell Biology']],
+['세포 구조와 막','원핵·진핵세포의 구조와 막수송·소기관의 분업을 통해 세포를 기능적 단위로 이해한다.',['cell membrane','organelle','transport'],'J=-D dC/dx','농도구배에 따른 확산과 능동수송을 비교한다.',['Alberts et al., Molecular Biology of the Cell']],
+['에너지와 대사','ATP와 효소반응, 세포호흡·광합성을 통해 에너지와 물질의 변환을 설명한다.',['ATP','enzyme','metabolism'],'ΔG=ΔH-TΔS','효소가 활성화에너지를 낮추지만 평형 자체는 바꾸지 않는 이유를 설명한다.',['Campbell Biology']],
+['DNA와 복제','DNA 염기서열이 유전정보를 저장하고 상보적 결합과 효소를 통해 복제된다.',['DNA','replication','mutation'],'','복제오류가 돌연변이로 이어지는 과정을 설명한다.',['Watson & Crick, Molecular Structure of Nucleic Acids','Alberts et al.']],
+['유전자 발현','전사·RNA 처리·번역을 통해 DNA 정보가 단백질로 발현되며 조절기작이 세포별 기능을 만든다.',['transcription','translation','gene regulation'],'DNA→RNA→Protein','같은 유전체를 가진 세포가 서로 다른 단백질을 만드는 이유를 설명한다.',['Alberts et al.']],
+['Mendel 유전과 염색체','분리·독립의 법칙을 염색체 행동과 연결하고 우성·열성·연관·재조합을 이해한다.',['segregation','independent assortment','linkage'],'P(AA)=p² under simple random mating','가계도에서 유전형 가능성을 추론한다.',['Mendel, Experiments on Plant Hybridization']],
+['집단유전과 Hardy-Weinberg','대립유전자 빈도의 변화가 진화의 수학적 기반이며 선택·돌연변이·이동·유전적 표류가 이를 변화시킨다.',['allele frequency','genetic drift','selection'],'p²+2pq+q²=1','작은 집단에서 유전적 표류가 더 강한 이유를 설명한다.',['Griffiths et al., Introduction to Genetic Analysis']],
+['자연선택과 진화','변이·유전·차등생존·번식이 세대에 걸쳐 형질빈도를 변화시키며 진화는 개체가 아니라 집단에서 일어난다.',['natural selection','fitness','adaptation'],'wᵢ=offspringᵢ/mean offspring','항생제 내성을 진화과정으로 설명한다.',['Darwin, Origin of Species']],
+['종분화와 계통','생식적 격리와 지리·생태적 분화가 새로운 종을 만들며 계통수는 공통조상 관계를 가설적으로 표현한다.',['speciation','phylogeny','common ancestor'],'','DNA 서열유사도와 형태자료로 계통가설을 비교한다.',['Futuyma, Evolution']],
+['생태계와 에너지흐름','개체군·군집·먹이망·물질순환을 통해 생태계의 구조와 안정성을 이해한다.',['population','community','food web','ecosystem'],'dN/dt=rN(1-N/K)','로지스틱 성장에서 수용력 K의 의미를 설명한다.',['Odum, Fundamentals of Ecology']],
+['면역·미생물·공생','선천·적응면역과 미생물군집의 상호작용은 감염방어와 건강을 함께 좌우한다.',['innate immunity','adaptive immunity','microbiome'],'','백신이 면역기억을 만드는 원리를 설명한다.',['Janeway’s Immunobiology']],
+['생명공학과 유전자편집','PCR·염기서열분석·CRISPR는 생명정보를 측정·수정하게 하지만 안전·윤리·생태영향을 동반한다.',['PCR','sequencing','CRISPR'],'copies≈2ⁿ','배아 유전자편집의 과학적 가능성과 윤리적 한계를 분리한다.',['Doudna & Sternberg, A Crack in Creation']]
+]},
+'CORE-144':{overview:'인간의 몸·건강·의학은 정상 해부·생리에서 질병기전·진단·치료·예방으로 이어지는 임상의학의 기본 사고구조를 학습한다.',texts:['Guyton & Hall, Textbook of Medical Physiology','Robbins & Cotran, Pathologic Basis of Disease','Harrison’s Principles of Internal Medicine','Katzung, Basic & Clinical Pharmacology'],lessons:[
+['항상성과 인체조직','인체는 세포·조직·기관계의 상호작용과 음성피드백으로 내부환경을 일정 범위에 유지한다.',['homeostasis','negative feedback','tissue'],'','체온조절을 센서·조절중추·효과기의 피드백회로로 설명한다.',['Guyton & Hall']],
+['심혈관계','심장은 압력차를 만들어 혈액을 순환시키고 혈관저항과 혈액량이 조직관류를 결정한다.',['cardiac output','blood pressure','vascular resistance'],'CO=HR×SV, MAP≈CO×SVR','출혈 시 혈압유지를 위한 보상반응을 설명한다.',['Guyton & Hall']],
+['호흡계','환기·확산·관류의 조화가 산소와 이산화탄소 교환을 결정하며 불일치는 저산소혈증을 만든다.',['ventilation','perfusion','diffusion'],'V̇A=(VT-VD)f','폐렴에서 산소포화도가 떨어지는 기전을 설명한다.',['West, Respiratory Physiology']],
+['신장과 체액','신장은 여과·재흡수·분비를 통해 수분·전해질·산염기와 혈압을 조절한다.',['GFR','reabsorption','RAAS'],'Clearance=UV/P','탈수 시 ADH와 RAAS가 어떻게 반응하는지 설명한다.',['Guyton & Hall']],
+['소화·영양·간','소화관은 영양소를 분해·흡수하고 간은 대사·해독·합성의 중심기관으로 기능한다.',['digestion','absorption','metabolism'],'','간기능 저하가 단백질합성과 약물대사에 미치는 영향을 분석한다.',['Harrison’s Principles of Internal Medicine']],
+['내분비와 대사','호르몬은 수용체와 피드백을 통해 성장·스트레스·혈당·생식기능을 조절한다.',['hormone','receptor','feedback'],'HOMA-IR concept','인슐린 저항성과 제2형 당뇨병의 관계를 설명한다.',['Williams Textbook of Endocrinology']],
+['신경계와 감각','전기·화학신호가 감각·운동·인지기능을 연결하며 중추와 말초신경계가 기능적으로 분업한다.',['action potential','synapse','CNS','PNS'],'V≈ion conductance balance','뇌졸중 위치에 따라 운동장애가 달라지는 이유를 설명한다.',['Kandel et al., Principles of Neural Science']],
+['면역과 염증','선천면역은 빠른 비특이 방어를, 적응면역은 항원특이성과 기억을 제공하며 과도한 면역반응도 질병을 일으킨다.',['inflammation','antibody','T cell','autoimmunity'],'','감염과 자가면역에서 염증의 역할을 비교한다.',['Janeway’s Immunobiology']],
+['병리와 질병기전','세포손상·염증·종양·혈역학 장애 등 공통 병리기전이 다양한 임상질환의 기반이 된다.',['pathogenesis','necrosis','neoplasia'],'','흡연이 세포손상에서 폐암위험으로 이어지는 다단계 기전을 분석한다.',['Robbins & Cotran']],
+['진단추론과 검사','병력·신체진찰·검사결과를 사전확률과 검사특성에 결합해 감별진단을 갱신한다.',['differential diagnosis','sensitivity','specificity','likelihood ratio'],'Post-test odds=Pre-test odds×LR','희귀질환 양성검사의 실제 진단가치를 계산한다.',['Sackett et al., Evidence-Based Medicine']],
+['약리와 치료','약물의 흡수·분포·대사·배설과 수용체 작용, 용량반응·부작용을 통해 치료효과와 위험을 평가한다.',['pharmacokinetics','pharmacodynamics','dose-response'],'C(t)=C₀e^-kt','반감기가 긴 약물의 축적과 투여간격을 설명한다.',['Katzung, Basic & Clinical Pharmacology']],
+['예방·공중보건·의료윤리','개인치료와 함께 예방·역학·자원배분·자율성·선행·정의 원칙이 건강결정에 중요하다.',['prevention','screening','autonomy','justice'],'NNT=1/ARR','검진정책의 이익·위양성·비용과 공정성을 함께 평가한다.',['Beauchamp & Childress, Principles of Biomedical Ethics']]
+]},
+'CORE-145':{overview:'지구·환경·기후는 지권·대기·해양·생태계가 에너지와 물질을 교환하는 지구시스템을 이해하고 인간활동이 기후·생물다양성·오염·자원에 미치는 영향을 분석한다.',texts:['IPCC, Assessment Reports','Kump, Kasting & Crane, The Earth System','Wallace & Hobbs, Atmospheric Science','Odum & Barrett, Fundamentals of Ecology','Rockström et al., Planetary Boundaries'],lessons:[
+['지구시스템과 지질순환','지권·수권·대기권·생물권은 장기간의 물질순환과 에너지흐름으로 연결되어 있다.',['Earth system','geosphere','biosphere'],'','탄소가 암석·대기·생물체 사이를 이동하는 경로를 그린다.',['Kump et al., The Earth System']],
+['판구조론과 지질위험','맨틀대류와 판의 이동이 지진·화산·산맥·해저확장을 설명하는 통합이론을 제공한다.',['plate tectonics','subduction','seafloor spreading'],'','환태평양 지진분포를 판경계와 연결해 설명한다.',['USGS Plate Tectonics resources']],
+['대기구조와 기상','복사·대류·수증기·압력차·코리올리 효과가 날씨와 대기순환을 만든다.',['atmosphere','convection','Coriolis effect'],'p=ρRT','저기압계에서 바람과 강수가 형성되는 과정을 설명한다.',['Wallace & Hobbs, Atmospheric Science']],
+['해양과 지구열수송','해류와 심층순환은 열·탄소·영양염을 이동시켜 지역기후와 생태계를 조절한다.',['ocean circulation','thermohaline circulation'],'','El Niño가 해양-대기 상호작용으로 전지구 날씨에 영향을 주는 과정을 분석한다.',['NOAA ENSO resources']],
+['복사평형과 온실효과','지구온도는 들어오는 태양복사와 나가는 적외복사의 균형 및 온실기체의 흡수에 의해 결정된다.',['radiative balance','greenhouse effect','albedo'],'S(1-α)/4=σTₑ⁴','대기 없는 지구의 유효복사온도와 실제 평균온도의 차이를 설명한다.',['IPCC Assessment Reports']],
+['탄소순환과 인간영향','화석연료·토지이용 변화는 자연적 탄소순환보다 빠르게 대기 CO₂를 증가시켜 복사강제력을 바꾼다.',['carbon cycle','anthropogenic emissions','sink'],'ΔF≈5.35 ln(C/C₀)','CO₂ 농도 증가가 복사강제력에 미치는 방향을 설명한다.',['IPCC AR6']],
+['고기후와 기후증거','빙핵·퇴적물·나이테·산호 등 대리지표를 통해 직접관측 이전의 기후변화를 복원한다.',['paleoclimate','proxy','ice core'],'','빙핵의 기체방울이 과거 대기조성을 기록하는 이유를 설명한다.',['IPCC Paleoclimate chapters']],
+['기후모형과 불확실성','기후모형은 물리법칙을 격자화해 미래시나리오를 계산하며 구조·매개변수·배출경로 불확실성을 함께 가진다.',['climate model','scenario','ensemble'],'','단일 기온예측보다 모형앙상블 범위를 사용하는 이유를 설명한다.',['IPCC AR6']],
+['생태계와 생물다양성','종다양성·먹이망·서식지·교란은 생태계 기능과 회복력을 결정하며 인간활동은 멸종률을 높일 수 있다.',['biodiversity','resilience','ecosystem service'],'','서식지 단편화가 개체군과 유전자 흐름에 미치는 영향을 분석한다.',['IPBES Global Assessment']],
+['오염과 환경보건','대기·수질·토양오염은 배출원에서 이동·변환·노출경로를 거쳐 건강과 생태계에 영향을 준다.',['pollution','exposure pathway','dose-response'],'Risk≈Hazard×Exposure','미세먼지 규제를 배출원·노출·질병부담의 연쇄로 분석한다.',['WHO Air Quality Guidelines']],
+['에너지·자원·전환','에너지원은 에너지밀도·간헐성·탄소·토지·비용·안보 측면에서 서로 다른 장단점을 가진다.',['energy transition','EROI','renewables'],'LCOE≈discounted lifetime cost/energy','태양광·원전·가스발전을 비용과 탄소만이 아닌 계통안정성까지 비교한다.',['IEA World Energy Outlook']],
+['적응·완화·환경거버넌스','기후위험은 위험원·노출·취약성의 결합이며 배출완화와 적응, 정의로운 전환을 함께 설계해야 한다.',['mitigation','adaptation','climate justice'],'Risk=f(Hazard,Exposure,Vulnerability)','폭염정책을 도시열섬·취약계층·전력수요와 연결해 설계한다.',['IPCC AR6 WGII/WGIII']]
+]}
+});})();
