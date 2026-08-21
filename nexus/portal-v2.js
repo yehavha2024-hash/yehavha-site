@@ -9,13 +9,14 @@
   const portalMark = document.querySelector('.portal-mark');
   const portalMarkDot = portalMark?.querySelector('.dot');
   const portalMarkText = portalMark?.querySelector('span:last-child');
+  const heroVisual = document.querySelector('.hero-main>img');
   let toastTimer;
   let currentPortalData = null;
-  let pacificClockTimer;
+  let koreaClockTimer;
 
   const COUNTER_ENDPOINT = '/api/access';
-  const ENHANCEMENT_STYLES = './portal-enhancements.css?v=20260819-1018';
-  const PACIFIC_TIME_ZONE = 'America/Los_Angeles';
+  const ENHANCEMENT_STYLES = './portal-enhancements.css?v=20260821-2005';
+  const KOREA_TIME_ZONE = 'Asia/Seoul';
 
   function ensureEnhancementStyles() {
     if (document.querySelector('link[data-nexus-enhancements]')) return;
@@ -28,31 +29,35 @@
 
   ensureEnhancementStyles();
 
+  if (heroVisual) {
+    heroVisual.alt = '지식에서 전략으로, 전략에서 대응으로 이어지는 YEHAVHA NEXUS AI·AX 전략 시스템';
+  }
+
   if (accessCount) {
     accessCount.textContent = '0';
     accessCount.hidden = false;
   }
 
-  function updatePacificClock() {
+  function updateKoreaClock() {
     if (!portalMarkText) return;
     const now = new Date();
-    const dateParts = new Intl.DateTimeFormat('ko-KR', {
-      timeZone: PACIFIC_TIME_ZONE,
+    const dateText = new Intl.DateTimeFormat('en-US', {
+      timeZone: KOREA_TIME_ZONE,
       year: 'numeric',
       month: 'long',
       day: 'numeric'
     }).format(now);
-    const timeParts = new Intl.DateTimeFormat('en-US', {
-      timeZone: PACIFIC_TIME_ZONE,
-      hour: '2-digit',
+    const timeText = new Intl.DateTimeFormat('en-US', {
+      timeZone: KOREA_TIME_ZONE,
+      hour: 'numeric',
       minute: '2-digit',
       hour12: true
     }).format(now);
-    portalMarkText.textContent = `${dateParts} · ${timeParts} (태평양 기준)`;
-    portalMarkText.setAttribute('aria-label', `현재 태평양 시간 ${dateParts} ${timeParts}`);
+    portalMarkText.textContent = `${dateText} · ${timeText} KST (UTC+9)`;
+    portalMarkText.setAttribute('aria-label', `현재 한국 표준시 ${dateText} ${timeText}`);
   }
 
-  function installPacificClock() {
+  function installKoreaClock() {
     if (!portalMarkText) return;
     if (portalMarkDot) portalMarkDot.style.display = 'none';
     if (topbar) {
@@ -67,17 +72,17 @@
       portalMark.style.minWidth = '0';
     }
     portalMarkText.style.fontSize = '12px';
-    portalMarkText.style.fontWeight = '700';
+    portalMarkText.style.fontWeight = '650';
     portalMarkText.style.letterSpacing = '.01em';
-    portalMarkText.style.color = '#c6d6ea';
+    portalMarkText.style.color = '#a8bfd8';
     portalMarkText.style.whiteSpace = 'nowrap';
     portalMarkText.style.fontVariantNumeric = 'tabular-nums';
-    updatePacificClock();
-    window.clearInterval(pacificClockTimer);
-    pacificClockTimer = window.setInterval(updatePacificClock, 30000);
+    updateKoreaClock();
+    window.clearInterval(koreaClockTimer);
+    koreaClockTimer = window.setInterval(updateKoreaClock, 30000);
   }
 
-  installPacificClock();
+  installKoreaClock();
 
   const categoryIcons = {
     intelligence: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 20 6v5c0 5-3.4 8.2-8 10-4.6-1.8-8-5-8-10V6l8-3Z"/><path d="M8 12h8M12 8v8"/></svg>',
