@@ -10,6 +10,7 @@
   const portalMarkDot = portalMark?.querySelector('.dot');
   const portalMarkText = portalMark?.querySelector('span:last-child');
   const heroVisual = document.querySelector('.hero-main>img');
+  const heroSubtitle = document.querySelector('.hero-main>h1>span');
   let toastTimer;
   let currentPortalData = null;
   let koreaClockTimer;
@@ -28,6 +29,10 @@
   }
 
   ensureEnhancementStyles();
+
+  if (heroSubtitle) {
+    heroSubtitle.textContent = 'AI·AX 전략정보·지식·대응 시스템';
+  }
 
   if (heroVisual) {
     heroVisual.alt = '지식에서 전략으로, 전략에서 대응으로 이어지는 YEHAVHA NEXUS AI·AX 전략 시스템';
