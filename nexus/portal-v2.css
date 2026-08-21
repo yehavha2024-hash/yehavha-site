@@ -235,96 +235,27 @@ h1 span {
   outline-offset: 3px;
 }
 
-.footer { padding: 14px 0 24px; }
+.footer { padding: 0 0 36px; }
 .footer-card {
-  display: grid;
-  grid-template-columns: minmax(180px,.72fr) minmax(0,1.5fr);
-  gap: 20px;
-  align-items: start;
-  padding: 14px 0 0;
-  border-top: 1px solid rgba(255,255,255,.10);
-  text-align: left;
+  padding: 18px;
+  border-top: 1px solid rgba(255,255,255,.09);
+  text-align: center;
 }
-.footer-card > strong,
-.footer-card > p,
-.footer-card > a {
-  grid-column: 1;
+.footer-card strong { font-size: 1rem; }
+.footer-card p { margin: 6px auto 10px; font-size: .88rem; }
+.footer-card a { color: #9fc7ff; font-weight: 700; text-decoration: none; font-size: .88rem; }
+.footer-meta {
+  margin-top: 13px;
+  padding-top: 13px;
+  border-top: 1px solid rgba(255,255,255,.07);
 }
-.footer-card > strong { font-size: 13px; font-weight: 600; line-height: 1.5; text-transform: none; }
-.footer-card > p { margin: 2px 0 0; font-size: 11px; line-height: 1.7; }
-.footer-card > .footer-meta,
-.footer-card > .research-footer-meta {
-  grid-column: 2;
-  grid-row: 1 / span 3;
-  margin: 0;
-  padding: 0;
-  border: 0;
+.footer-meta p {
+  margin: 2px auto;
+  color: #9fb1c8;
+  font-size: .82rem;
+  line-height: 1.55;
 }
-.footer-card > .footer-meta::before,
-.footer-card > .research-footer-meta::before {
-  content: none !important;
-  display: none !important;
-}
-.footer-meta p,
-.research-footer-meta p {
-  margin: 0 0 3px;
-  color: #8fa1b3;
-  font-size: 12px;
-  line-height: 1.65;
-}
-.footer-meta .ai-disclosure,
-.research-footer-meta .ai-disclosure { font-size: 11.5px; }
-.footer-card a { color: #a9bfd2; font-weight: 600; text-decoration: none; font-size: 11px; line-height: 1.65; }
-.footer-card > a { margin-top: 4px; }
 .footer-meta .contact a { font-weight: 650; }
-
-/* Canonical Nexus article footer. This block owns final rendering even when article-specific CSS loads later. */
-.footer.reader-site-footer { padding: 14px 0 24px !important; }
-.footer.reader-site-footer .footer-card {
-  display: grid !important;
-  grid-template-columns: minmax(180px,.72fr) minmax(0,1.5fr) !important;
-  gap: 20px !important;
-  align-items: start !important;
-  padding: 14px 0 0 !important;
-  border: 0 !important;
-  border-top: 1px solid rgba(255,255,255,.10) !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  text-align: left !important;
-}
-.footer.reader-site-footer .footer-card > strong {
-  color: #d7e1ea !important;
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  line-height: 1.5 !important;
-}
-.footer.reader-site-footer .footer-card > p {
-  margin: 2px 0 0 !important;
-  color: #8fa1b3 !important;
-  font-size: 11px !important;
-  line-height: 1.7 !important;
-}
-.footer.reader-site-footer .footer-meta,
-.footer.reader-site-footer .research-footer-meta {
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
-}
-.footer.reader-site-footer .footer-meta p,
-.footer.reader-site-footer .research-footer-meta p {
-  margin: 0 0 3px !important;
-  color: #8fa1b3 !important;
-  font-size: 12px !important;
-  line-height: 1.65 !important;
-}
-.footer.reader-site-footer .ai-disclosure { font-size: 11.5px !important; }
-.footer.reader-site-footer a {
-  color: #a9bfd2 !important;
-  font-size: 11px !important;
-  font-weight: 600 !important;
-  line-height: 1.65 !important;
-  text-decoration: none !important;
-}
 
 .toast {
   position: fixed;
@@ -379,6 +310,17 @@ h1 span {
 .back[href="../"] {
   text-transform: uppercase;
 }
+.footer-card > strong {
+  text-transform: uppercase;
+}
+.footer-meta::before {
+  content: "스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈";
+  display: block;
+  margin: 2px auto;
+  color: #9fb1c8;
+  font-size: .82rem;
+  line-height: 1.55;
+}
 
 @media (max-width: 760px) {
   body { background-attachment: scroll; }
@@ -390,33 +332,6 @@ h1 span {
   .category-head h2 { font-size: 1.3rem; }
   .items-grid, .items-grid.one-item { grid-template-columns: 1fr; }
   .hero-grid { grid-template-columns: 1fr; }
-  .footer-card {
-    grid-template-columns: 1fr;
-    gap: 7px;
-    padding-top: 12px;
-    text-align: left;
-  }
-  .footer-card > strong,
-  .footer-card > p,
-  .footer-card > a,
-  .footer-card > .footer-meta,
-  .footer-card > .research-footer-meta {
-    grid-column: 1;
-    grid-row: auto;
-  }
-  .footer.reader-site-footer .footer-card {
-    grid-template-columns: 1fr !important;
-    gap: 7px !important;
-    padding-top: 12px !important;
-  }
-  .footer.reader-site-footer .footer-card > strong,
-  .footer.reader-site-footer .footer-card > p,
-  .footer.reader-site-footer .footer-card > a,
-  .footer.reader-site-footer .footer-card > .footer-meta,
-  .footer.reader-site-footer .footer-card > .research-footer-meta {
-    grid-column: 1 !important;
-    grid-row: auto !important;
-  }
 }
 @media (max-width: 560px) {
   .container { width: calc(100% - 18px); }
