@@ -59,7 +59,10 @@
 
   function installKoreaClock() {
     if (!portalMarkText) return;
-    if (portalMarkDot) portalMarkDot.style.display = 'none';
+    if (portalMarkDot && portalMark) {
+      portalMark.append(portalMarkDot);
+      portalMarkDot.style.display = 'none';
+    }
     if (topbar) {
       topbar.style.display = 'flex';
       topbar.style.width = '100%';
