@@ -91,3 +91,16 @@
 #manual-title{white-space:nowrap}
 #manual-title br{display:none}
 #manual-title br::after{content:' '}
+
+/* International AX status is one continuous reading section, not a card grid. */
+.international-status{border-top:1px solid rgba(255,255,255,.08)}
+.international-status-item{padding:18px 2px;border-bottom:1px solid rgba(255,255,255,.075)}
+.international-status-item:first-child{padding-top:8px}
+.international-status-item h3{margin:0;color:#edf5ff;font-size:17px;line-height:1.45;letter-spacing:-.015em}
+.international-status-item p{margin:7px 0 0;color:#b9c9da;font-size:13.5px;line-height:1.75}
+.international-status-item p strong{color:#e5f1ff;font-weight:760}
+.international-source{font-size:11.5px!important;color:#8faac6!important}
+.international-source a{color:#9dcaff;text-decoration:none;border-bottom:1px solid rgba(157,202,255,.28)}
+.international-source a:hover,.international-source a:focus-visible{color:#d9ecff;border-bottom-color:#d9ecff}
+.international-summary{margin-top:14px}
+@media(max-width:620px){.international-status-item{padding:15px 0}.international-status-item h3{font-size:15.5px}.international-status-item p{font-size:12.7px;line-height:1.7}.international-source{font-size:11px!important}}
