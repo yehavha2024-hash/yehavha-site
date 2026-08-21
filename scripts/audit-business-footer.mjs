@@ -13,33 +13,30 @@ const fail = (file, message) => {
 };
 
 const css = fs.readFileSync(PORTAL_CSS, 'utf8');
-if (!css.includes(BUSINESS_FOOTER)) {
-  fail(PORTAL_CSS, 'Nexus 전역 사업자정보 단일 원본이 누락됨');
-}
-if (!/\.footer-meta::before\s*,\s*\n?\s*\.research-footer-meta::before\s*\{/.test(css)) {
+if (!css.includes(BUSINESS_FOOTER)) fail(PORTAL_CSS, 'Nexus 전역 사업자정보 단일 원본이 누락됨');
+if (!/\.footer-meta::before\s*,\s*\.research-footer-meta::before\s*\{/.test(css.replace(/\n/g, ' '))) {
   fail(PORTAL_CSS, '일반 Footer와 전문 연구 Footer에 사업자정보가 함께 적용되지 않음');
 }
 
-const articleCss = fs.readFileSync(ARTICLE_CSS, 'utf8');
-const requiredArticleFooterTokens = [
-  'Canonical article footer — same type scale and spacing as the project footer standard.',
-  'font-size:13px!important',
-  'font-size:11px!important',
-  'font-size:12px!important',
-  'font-size:11.5px!important',
-  'grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)!important',
-  'text-align:right!important',
-  'text-align:left!important'
+const requiredPortalFooterTokens = [
+  '--nxs-footer-project:13px',
+  '--nxs-footer-description:11px',
+  '--nxs-footer-text:12px',
+  '--nxs-footer-ai:11.5px',
+  '--nxs-footer-link:11px',
+  'text-align:center!important',
+  'flex-direction:column!important',
+  'align-items:center!important'
 ];
-for (const token of requiredArticleFooterTokens) {
-  if (!articleCss.includes(token)) fail(ARTICLE_CSS, `글 아카이브 Footer 표준 규격 누락: ${token}`);
+for (const token of requiredPortalFooterTokens) {
+  if (!css.includes(token)) fail(PORTAL_CSS, `전역 Footer 규격 누락: ${token}`);
 }
-if (/\.reader-site-footer \.footer-card strong\{[^}]*font-size:10px/.test(articleCss)) {
-  fail(ARTICLE_CSS, '구형 10px 글 아카이브 Footer 브랜드 규칙이 재등장함');
+
+const articleCss = fs.readFileSync(ARTICLE_CSS, 'utf8');
+if (/(^|\n)\s*\.(?:footer|footer-card|footer-meta|reader-site-footer|research-footer)(?:\s|,|\{|:)/m.test(articleCss)) {
+  fail(ARTICLE_CSS, '글 아카이브가 전역 Footer 스타일을 다시 소유함');
 }
-if (/\.research-footer-brand strong\{[^}]*font-size:(?!13px)/.test(articleCss)) {
-  fail(ARTICLE_CSS, '전문 연구 Footer 브랜드 글자크기가 표준 13px과 다름');
-}
+if (articleCss.includes(BUSINESS_FOOTER)) fail(ARTICLE_CSS, '사업자정보가 로컬 CSS에 중복됨');
 
 const htmlFiles = [];
 const walk = dir => {
@@ -57,7 +54,9 @@ for (const file of htmlFiles) {
   if (!/class=["'][^"']*(?:\bfooter-meta\b|\bresearch-footer-meta\b)/.test(html)) {
     fail(file, '전역 사업자정보가 적용될 Footer meta 클래스가 없음');
   }
+  if (/Copyright ©/.test(html) && !/문의\s*<a[^>]+mailto:/s.test(html)) fail(file, 'Copyright는 있으나 문의 mailto가 없음');
+  if (/맨 위로 이동/.test(html) && !/href=["']#top["']/.test(html)) fail(file, '맨 위로 이동 링크 대상이 #top이 아님');
 }
 
-console.log(`Business/footer typography audit: ${errors} error(s)`);
+console.log(`Business/footer canonical audit: ${errors} error(s)`);
 if (errors) process.exit(1);
