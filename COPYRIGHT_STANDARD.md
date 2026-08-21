@@ -15,6 +15,8 @@ Copyright·문의·AI 활용 안내·맨 위로 이동은 실제 HTML 요소에 
 
 Footer 레이아웃은 각 프로젝트의 공통 스타일 파일 한 곳에서 소유합니다. 상세문서별 inline style에서 동일 Footer의 폭·그리드·정렬을 다시 정의하지 않습니다. Footer 내부 콘텐츠 래퍼는 `width` 또는 `max-width`만 지정하지 않고 `margin-inline:auto` 또는 동등한 중앙정렬을 반드시 명시하여 모바일과 데스크톱에서 본문 좌우 여백과 정렬축을 일치시킵니다.
 
+Nexus의 독립 상세글도 해당 아카이브의 공통 Footer 컴포넌트를 그대로 사용합니다. 상세글 전용 `research-footer`, `article-footer` 등 별도 Footer 구조를 새로 만들지 않습니다. `nexus/articles/` 하위 상세글은 공통 `footer → container → footer-card` 구조를 기준으로 하며, 글마다 별도의 Footer 그리드·정렬·Copyright 표시방식을 만들지 않습니다.
+
 ## 정보 구조
 
 왼쪽 영역
