@@ -70,9 +70,9 @@
     {
       id: 'publicsector',
       number: '03',
-      eyebrow: 'PUBLIC-SECTOR AX PRACTICE',
-      title: '정부·지방자치 AX 실전',
-      description: '정부·지방자치의 AX 과제를 정책·사람·승인·실행 순서로 다루는 공개 실무 매뉴얼',
+      eyebrow: 'GOVERNMENT AX STRATEGY & RESPONSE',
+      title: '정부 AX 전략·대응',
+      description: '중앙정부·지방자치단체의 AX 정책과 실행을 다루고 EU·UN·주요국 정부의 국제·비교정책으로 확장합니다.',
       categoryIds: ['publicsector'],
       variant: 'primary'
     },
@@ -568,7 +568,7 @@
       name: 'YEHAVHA Nexus',
       alternateName: '예하바 프로젝트 포털',
       url: canonicalUrl,
-      description: '전략정보·대학·웹앱·연구·공공부문 AX·출판·미디어·교육·아이디어 프로젝트를 연결하는 통합 포털',
+      description: '전략정보·대학·웹앱·연구·정부 AX 전략·대응·출판·미디어·교육·아이디어 프로젝트를 연결하는 통합 포털',
       potentialAction: {
         '@type': 'SearchAction',
         target: `${canonicalUrl}?q={search_term_string}`,
