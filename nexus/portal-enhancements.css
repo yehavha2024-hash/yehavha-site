@@ -66,3 +66,60 @@
   .quick-link-university .quick-label{white-space:nowrap!important;overflow:visible!important;text-overflow:clip!important}
   .quick-link:not(.quick-link-university){flex:1 1 calc(50% - 8px)!important;min-width:0!important;text-align:center!important}
 }
+
+/* 2026-08-21 final portal presentation: order, identity and icon hierarchy only. */
+.portal-mark>span:last-child{font-size:0!important}
+.portal-mark>span:last-child::after{content:'YEHAVHA NEXUS';font-size:13px;font-weight:800;letter-spacing:.1em;color:#c6d6ea}
+.hero-main>.eyebrow{font-size:0!important}
+.hero-main>.eyebrow::after{content:'AI · AX STRATEGIC INTELLIGENCE & RESPONSE SYSTEM';font-size:12px;font-weight:800;letter-spacing:.13em;color:#9ec6fa}
+.hero-main>h1>span{font-size:0!important}
+.hero-main>h1>span::after{content:'AI·AX 전략정보·지식·대응 시스템';font-size:clamp(1.05rem,1.9vw,1.5rem);font-weight:650;letter-spacing:-.02em;color:#d2dfef}
+
+/* Quick navigation order: University full row, then fixed left-right pairs. */
+.quick-link-university{order:1!important}
+.quick-link-publicsector{order:2!important}
+.quick-link-intelligence{order:3!important}
+.quick-link-research{order:4!important}
+.quick-link-apps{order:5!important}
+.quick-link-education{order:6!important}
+.quick-link-publishing{order:7!important}
+.quick-link-media{order:8!important}
+.quick-link-initiatives{order:9!important}
+
+/* Main portal: remove numeric layer headers and let category icons own the hierarchy. */
+.portal-grid{display:grid!important;grid-template-columns:1fr!important;gap:14px!important;align-items:start!important}
+.portal-tier,.portal-tier-grid{display:contents!important}
+.portal-tier-head{display:none!important}
+.category-university{order:1!important}
+.category-publicsector{order:2!important}
+.category-intelligence{order:3!important}
+.category-research{order:4!important}
+.category-apps{order:5!important}
+.category-education{order:6!important}
+.category-publishing{order:7!important}
+.category-media{order:8!important}
+.category-initiatives{order:9!important}
+
+/* Brighter, larger category icons replace the former 00/01/02 layer numbers. */
+.category-head{grid-template-columns:56px minmax(0,1fr)!important;gap:12px!important;align-items:center!important}
+.category-icon{width:56px!important;height:56px!important;border-radius:15px!important;border:1px solid rgba(173,211,255,.28)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 8px 22px rgba(21,93,164,.18)!important}
+.category-icon-glyph,.category-icon-glyph svg{display:block!important;width:29px!important;height:29px!important}
+.category-icon-glyph svg{stroke:#f0f7ff!important}
+.university-icon{background:linear-gradient(135deg,#3d75c8,#70b9ef)!important}
+.publicsector-icon{background:linear-gradient(135deg,#326da8,#55b9d8)!important}
+.intelligence-icon{background:linear-gradient(135deg,#355f9f,#63a9e8)!important}
+.category-university .category-icon{width:56px!important;height:56px!important;background:linear-gradient(135deg,#3d75c8,#70b9ef)!important}
+.category-university .category-icon-glyph{display:block!important}
+.category-university .category-icon::before{content:none!important}
+
+@media(max-width:620px){
+  .portal-mark>span:last-child::after{font-size:12px}
+  .hero-main>.eyebrow::after{font-size:11px;letter-spacing:.1em}
+  .hero-main>h1>span::after{font-size:1.06rem}
+  .quick-links{display:flex!important;flex-wrap:wrap!important;gap:8px!important}
+  .quick-link-university{flex:1 1 100%!important;max-width:none!important}
+  .quick-link:not(.quick-link-university){flex:1 1 calc(50% - 8px)!important;min-width:0!important}
+  .category-head{grid-template-columns:46px minmax(0,1fr)!important;gap:9px!important}
+  .category-icon,.category-university .category-icon{width:46px!important;height:46px!important;border-radius:13px!important}
+  .category-icon-glyph,.category-icon-glyph svg{width:24px!important;height:24px!important}
+}
