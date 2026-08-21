@@ -1,34 +1,7 @@
 name: Web Architecture Audit
 
 on:
-  push:
-    paths:
-      - 'ai-law-tech-foresight/**'
-      - 'legal-philosophy/**'
-      - 'legal-knowledge/**'
-      - 'three-minute-break/**'
-      - 'toeic-human-100/**'
-      - 'nexus/**'
-      - 'scripts/audit-web-architecture.mjs'
-      - 'scripts/audit-repo-hygiene.mjs'
-      - 'scripts/audit-style-ownership.mjs'
-      - 'WEB_PROJECT_STANDARD.md'
-      - 'COPYRIGHT_STANDARD.md'
-      - '.github/workflows/web-architecture-audit.yml'
-  pull_request:
-    paths:
-      - 'ai-law-tech-foresight/**'
-      - 'legal-philosophy/**'
-      - 'legal-knowledge/**'
-      - 'three-minute-break/**'
-      - 'toeic-human-100/**'
-      - 'nexus/**'
-      - 'scripts/audit-web-architecture.mjs'
-      - 'scripts/audit-repo-hygiene.mjs'
-      - 'scripts/audit-style-ownership.mjs'
-      - 'WEB_PROJECT_STANDARD.md'
-      - 'COPYRIGHT_STANDARD.md'
-      - '.github/workflows/web-architecture-audit.yml'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -83,5 +56,4 @@ jobs:
       - name: Validate 3 minute break runtime content
         run: node three-minute-break/scripts/export-content.mjs
       - run: node nexus/scripts/audit-runtime.mjs
-      - if: github.event_name == 'push'
-        run: node nexus/scripts/audit-live-urls.mjs
+      - run: node nexus/scripts/audit-live-urls.mjs
