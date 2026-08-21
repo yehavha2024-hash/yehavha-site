@@ -1,97 +1,128 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" role="img" aria-labelledby="title desc">
   <title id="title">YEHAVHA NEXUS AI·AX 전략 시스템</title>
-  <desc id="desc">지식에서 전략으로, 전략에서 대응으로 이어지는 YEHAVHA NEXUS의 AI·AX 전략 네트워크.</desc>
+  <desc id="desc">지식에서 전략으로 전략에서 대응으로 이어지는 YEHAVHA NEXUS의 AI·AX 전략 네트워크.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#04101f"/>
-      <stop offset=".52" stop-color="#082b50"/>
-      <stop offset="1" stop-color="#07182e"/>
+      <stop offset="0" stop-color="#03101f"/>
+      <stop offset=".38" stop-color="#072b52"/>
+      <stop offset=".72" stop-color="#0c3860"/>
+      <stop offset="1" stop-color="#08172d"/>
     </linearGradient>
-    <radialGradient id="blueGlow" cx="70%" cy="42%" r="58%">
-      <stop offset="0" stop-color="#2e8fe8" stop-opacity=".34"/>
-      <stop offset=".55" stop-color="#2e8fe8" stop-opacity=".08"/>
-      <stop offset="1" stop-color="#2e8fe8" stop-opacity="0"/>
+    <radialGradient id="cyanGlow" cx="73%" cy="44%" r="58%">
+      <stop offset="0" stop-color="#37c6ff" stop-opacity=".32"/>
+      <stop offset=".48" stop-color="#1697e5" stop-opacity=".12"/>
+      <stop offset="1" stop-color="#1697e5" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="violetGlow" cx="88%" cy="12%" r="42%">
-      <stop offset="0" stop-color="#8c6cff" stop-opacity=".26"/>
-      <stop offset="1" stop-color="#8c6cff" stop-opacity="0"/>
+    <radialGradient id="violetGlow" cx="88%" cy="18%" r="42%">
+      <stop offset="0" stop-color="#9d79ff" stop-opacity=".30"/>
+      <stop offset="1" stop-color="#9d79ff" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="core" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#123d69" stop-opacity=".96"/>
-      <stop offset="1" stop-color="#0a223e" stop-opacity=".96"/>
+    <radialGradient id="goldGlow" cx="58%" cy="72%" r="32%">
+      <stop offset="0" stop-color="#ffd56a" stop-opacity=".20"/>
+      <stop offset="1" stop-color="#ffd56a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="networkLine" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5de2ff" stop-opacity=".25"/>
+      <stop offset=".45" stop-color="#7cb7ff" stop-opacity=".82"/>
+      <stop offset=".78" stop-color="#a987ff" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#ffd66b" stop-opacity=".40"/>
     </linearGradient>
-    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#5bc7ff" stop-opacity=".2"/>
-      <stop offset=".5" stop-color="#7db8ff" stop-opacity=".76"/>
-      <stop offset="1" stop-color="#a87bff" stop-opacity=".3"/>
+    <linearGradient id="corePanel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#123f70" stop-opacity=".97"/>
+      <stop offset=".58" stop-color="#0c2b50" stop-opacity=".97"/>
+      <stop offset="1" stop-color="#111d3c" stop-opacity=".98"/>
     </linearGradient>
+    <linearGradient id="aurora1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1dc8ff" stop-opacity="0"/>
+      <stop offset=".42" stop-color="#1dc8ff" stop-opacity=".34"/>
+      <stop offset=".72" stop-color="#8c75ff" stop-opacity=".24"/>
+      <stop offset="1" stop-color="#8c75ff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="aurora2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffd86e" stop-opacity="0"/>
+      <stop offset=".56" stop-color="#ffd86e" stop-opacity=".20"/>
+      <stop offset="1" stop-color="#36d8ff" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#8bc9ff" stroke-opacity=".055" stroke-width="1"/>
+    </pattern>
     <filter id="softGlow" x="-80%" y="-80%" width="260%" height="260%">
-      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feGaussianBlur stdDeviation="8" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
     <filter id="nodeGlow" x="-100%" y="-100%" width="300%" height="300%">
-      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feGaussianBlur stdDeviation="5" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
 
   <rect width="1200" height="460" rx="28" fill="url(#bg)"/>
-  <rect width="1200" height="460" rx="28" fill="url(#blueGlow)"/>
+  <rect width="1200" height="460" rx="28" fill="url(#cyanGlow)"/>
   <rect width="1200" height="460" rx="28" fill="url(#violetGlow)"/>
-  <path d="M0 357C155 292 303 332 438 272S704 133 875 170s230 8 325-46v336H0Z" fill="#0d3f72" opacity=".12"/>
-  <path d="M0 422c193-104 335-42 474-97 160-63 283-181 449-148 115 23 184 8 277-47" fill="none" stroke="#40b8ff" stroke-opacity=".12" stroke-width="32"/>
-  <rect x="1" y="1" width="1198" height="458" rx="27" fill="none" stroke="#8dc8ff" stroke-opacity=".22"/>
+  <rect width="1200" height="460" rx="28" fill="url(#goldGlow)"/>
+  <rect width="1200" height="460" rx="28" fill="url(#grid)" opacity=".75"/>
 
-  <g fill="#8fd3ff" opacity=".35">
-    <circle cx="535" cy="70" r="2"/><circle cx="574" cy="93" r="2.4"/><circle cx="650" cy="60" r="1.8"/><circle cx="714" cy="98" r="2.2"/>
-    <circle cx="786" cy="66" r="1.7"/><circle cx="858" cy="104" r="2.3"/><circle cx="944" cy="74" r="1.8"/><circle cx="1050" cy="110" r="2.2"/>
-    <circle cx="520" cy="390" r="2"/><circle cx="612" cy="420" r="1.8"/><circle cx="706" cy="387" r="2.1"/><circle cx="820" cy="414" r="1.8"/>
-    <circle cx="931" cy="380" r="2.2"/><circle cx="1090" cy="397" r="1.7"/>
+  <path d="M-50 355C120 288 286 320 430 277c160-47 266-157 438-123 142 28 232 8 388-58" fill="none" stroke="url(#aurora1)" stroke-width="42" opacity=".55"/>
+  <path d="M-60 418c205-88 353-35 506-89 166-58 320-134 487-89 102 27 179 19 306-20" fill="none" stroke="url(#aurora2)" stroke-width="18" opacity=".6"/>
+  <path d="M482 36c174 19 220 65 338 72 142 8 222-39 374-27" fill="none" stroke="#66cbff" stroke-opacity=".13" stroke-width="2"/>
+  <path d="M513 416c126-30 218-10 317-32 126-29 196-88 333-84" fill="none" stroke="#d5a7ff" stroke-opacity=".13" stroke-width="2"/>
+
+  <g opacity=".6">
+    <circle cx="542" cy="60" r="2.2" fill="#6fe4ff"/><circle cx="590" cy="86" r="1.6" fill="#ffd86e"/><circle cx="650" cy="53" r="1.8" fill="#9ec9ff"/>
+    <circle cx="716" cy="91" r="2.1" fill="#89a9ff"/><circle cx="782" cy="58" r="1.7" fill="#ffd86e"/><circle cx="848" cy="92" r="2.3" fill="#6fe4ff"/>
+    <circle cx="933" cy="60" r="1.9" fill="#b49bff"/><circle cx="1038" cy="92" r="2.2" fill="#ffd86e"/><circle cx="1121" cy="63" r="1.7" fill="#75e7ff"/>
+    <circle cx="560" cy="400" r="1.8" fill="#6fe4ff"/><circle cx="646" cy="425" r="2.1" fill="#ffd86e"/><circle cx="752" cy="395" r="1.8" fill="#8aa9ff"/>
+    <circle cx="862" cy="420" r="2.1" fill="#7de8ff"/><circle cx="972" cy="394" r="1.9" fill="#c09cff"/><circle cx="1090" cy="415" r="2.1" fill="#ffd86e"/>
   </g>
 
-  <g font-family="Pretendard, 'Noto Sans KR', 'Apple SD Gothic Neo', Arial, sans-serif" text-anchor="start">
-    <text x="64" y="92" fill="#83c7ff" font-size="15" font-weight="800" letter-spacing="2.8">AI · AX STRATEGIC SYSTEM</text>
-    <text x="64" y="140" fill="#f4f8ff" font-size="31" font-weight="850">지식에서 전략으로,</text>
-    <text x="64" y="181" fill="#f4f8ff" font-size="31" font-weight="850">전략에서 대응으로</text>
-    <text x="64" y="219" fill="#a9bfd8" font-size="13" font-weight="600" letter-spacing=".3">KNOWLEDGE · INTELLIGENCE · GOVERNMENT AX · RESPONSE</text>
+  <g font-family="Pretendard, 'Noto Sans KR', 'Apple SD Gothic Neo', Arial, sans-serif" text-anchor="middle">
+    <text x="286" y="92" fill="#8ed6ff" font-size="18" font-weight="850" letter-spacing="3.1">AI · AX STRATEGIC SYSTEM</text>
+    <text x="286" y="154" fill="#f6f9ff" font-size="40" font-weight="900">지식에서 전략으로</text>
+    <text x="286" y="205" fill="#f6f9ff" font-size="40" font-weight="900">전략에서 대응으로</text>
+    <rect x="115" y="238" width="342" height="1" fill="#8fcfff" opacity=".32"/>
+    <text x="286" y="278" fill="#b7cee6" font-size="16" font-weight="700" letter-spacing="1.05">KNOWLEDGE · INTELLIGENCE</text>
+    <text x="286" y="309" fill="#b7cee6" font-size="16" font-weight="700" letter-spacing="1.05">GOVERNMENT AX · RESPONSE</text>
   </g>
 
-  <g fill="none" stroke="url(#line)" stroke-width="2">
-    <path d="M690 229C627 177 608 134 645 94"/><path d="M690 229C665 169 700 122 758 92"/>
-    <path d="M690 229C743 158 814 139 873 105"/><path d="M690 229C788 196 922 184 1031 139"/>
-    <path d="M690 229C635 282 619 329 650 371"/><path d="M690 229C690 302 728 342 787 383"/>
-    <path d="M690 229C769 284 863 309 928 365"/><path d="M690 229C840 248 1002 274 1081 331"/>
-    <path d="M645 94C693 78 724 77 758 92"/><path d="M758 92C803 86 839 91 873 105"/>
-    <path d="M873 105C935 99 988 112 1031 139"/><path d="M650 371C697 389 742 393 787 383"/>
-    <path d="M787 383C840 394 891 386 928 365"/><path d="M928 365C987 365 1035 350 1081 331"/>
+  <g fill="none" stroke="url(#networkLine)" stroke-width="2.5" stroke-linecap="round">
+    <path d="M815 229C739 171 719 126 738 84"/><path d="M815 229C789 157 824 107 884 83"/>
+    <path d="M815 229C872 150 942 140 1001 104"/><path d="M815 229C923 184 1034 178 1110 143"/>
+    <path d="M815 229C748 291 730 337 754 384"/><path d="M815 229C818 316 863 355 918 389"/>
+    <path d="M815 229C899 293 979 323 1036 371"/><path d="M815 229C946 253 1066 280 1133 325"/>
+    <path d="M738 84C789 68 840 70 884 83"/><path d="M884 83C928 79 970 87 1001 104"/>
+    <path d="M1001 104C1050 102 1084 117 1110 143"/><path d="M754 384C808 402 867 402 918 389"/>
+    <path d="M918 389C961 397 1006 388 1036 371"/><path d="M1036 371C1081 369 1115 349 1133 325"/>
   </g>
 
   <g filter="url(#nodeGlow)">
-    <circle cx="645" cy="94" r="25" fill="#0b355b" stroke="#68c7ff" stroke-width="1.5"/>
-    <circle cx="758" cy="92" r="25" fill="#122f62" stroke="#7aa8ff" stroke-width="1.5"/>
-    <circle cx="873" cy="105" r="25" fill="#182c5a" stroke="#9a83ff" stroke-width="1.5"/>
-    <circle cx="1031" cy="139" r="25" fill="#0d4258" stroke="#62dfdc" stroke-width="1.5"/>
-    <circle cx="650" cy="371" r="25" fill="#0f3b63" stroke="#5bc3ff" stroke-width="1.5"/>
-    <circle cx="787" cy="383" r="25" fill="#142e5e" stroke="#8b91ff" stroke-width="1.5"/>
-    <circle cx="928" cy="365" r="25" fill="#27305d" stroke="#ba80ff" stroke-width="1.5"/>
-    <circle cx="1081" cy="331" r="25" fill="#0d4056" stroke="#64d7c8" stroke-width="1.5"/>
+    <circle cx="738" cy="84" r="33" fill="#0d446a" stroke="#65ddff" stroke-width="2"/>
+    <circle cx="884" cy="83" r="33" fill="#173c72" stroke="#8ba7ff" stroke-width="2"/>
+    <circle cx="1001" cy="104" r="33" fill="#342d69" stroke="#b38cff" stroke-width="2"/>
+    <circle cx="1110" cy="143" r="33" fill="#174d59" stroke="#69e5d3" stroke-width="2"/>
+    <circle cx="754" cy="384" r="33" fill="#153f6c" stroke="#63caff" stroke-width="2"/>
+    <circle cx="918" cy="389" r="33" fill="#28346d" stroke="#909aff" stroke-width="2"/>
+    <circle cx="1036" cy="371" r="33" fill="#443066" stroke="#c28cff" stroke-width="2"/>
+    <circle cx="1133" cy="325" r="33" fill="#5a4526" stroke="#ffd66d" stroke-width="2"/>
   </g>
 
-  <g fill="none" stroke="#eef8ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-    <g transform="translate(632 81)"><path d="M1 10h24L13 2 1 10Z"/><path d="M4 12v10M9 12v10M17 12v10M22 12v10M1 24h24"/></g>
-    <g transform="translate(746 80)"><path d="M13 1 23 5v6c0 6-4 10-10 13C7 21 3 17 3 11V5l10-4Z"/><path d="M8 13h10M13 8v10"/></g>
-    <g transform="translate(861 93)"><path d="M3 7h20M5 4h16M6 11h14M8 15h10M10 19h6"/><circle cx="13" cy="19" r="2"/></g>
-    <g transform="translate(1019 127)"><path d="M3 4h20v18H3z"/><path d="M3 9h20M8 14h4v4H8zM16 14h4M16 18h4"/></g>
-    <g transform="translate(638 359)"><path d="M3 6c4-1 7 0 10 3v14c-3-3-6-4-10-3V6Z"/><path d="M23 6c-4-1-7 0-10 3v14c3-3 6-4 10-3V6Z"/></g>
-    <g transform="translate(775 371)"><path d="m2 8 11-5 11 5-11 5L2 8Z"/><path d="M6 11v6c4 3 10 3 14 0v-6M24 8v7"/></g>
-    <g transform="translate(916 353)"><rect x="2" y="4" width="22" height="17" rx="3"/><path d="m10 9 7 4-7 4V9Z"/></g>
-    <g transform="translate(1069 319)"><path d="M8 20h10M10 24h6"/><path d="M7 15c-2-2-3-4-3-7a9 9 0 1 1 18 0c0 3-1 5-3 7-1 1-2 3-2 5H9c0-2-1-4-2-5Z"/></g>
+  <g fill="none" stroke="#f4f9ff" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+    <g transform="translate(722 68) scale(1.2)"><path d="M1 10h24L13 2 1 10Z"/><path d="M4 12v10M9 12v10M17 12v10M22 12v10M1 24h24"/></g>
+    <g transform="translate(868 67) scale(1.2)"><path d="M13 1 23 5v6c0 6-4 10-10 13C7 21 3 17 3 11V5l10-4Z"/><path d="M8 13h10M13 8v10"/></g>
+    <g transform="translate(985 88) scale(1.2)"><path d="M3 7h20M5 4h16M6 11h14M8 15h10M10 19h6"/><circle cx="13" cy="19" r="2"/></g>
+    <g transform="translate(1094 127) scale(1.2)"><path d="M3 4h20v18H3z"/><path d="M3 9h20M8 14h4v4H8zM16 14h4M16 18h4"/></g>
+    <g transform="translate(738 368) scale(1.2)"><path d="M3 6c4-1 7 0 10 3v14c-3-3-6-4-10-3V6Z"/><path d="M23 6c-4-1-7 0-10 3v14c3-3 6-4 10-3V6Z"/></g>
+    <g transform="translate(902 373) scale(1.2)"><path d="m2 8 11-5 11 5-11 5L2 8Z"/><path d="M6 11v6c4 3 10 3 14 0v-6M24 8v7"/></g>
+    <g transform="translate(1020 355) scale(1.2)"><rect x="2" y="4" width="22" height="17" rx="3"/><path d="m10 9 7 4-7 4V9Z"/></g>
+    <g transform="translate(1117 309) scale(1.2)"><path d="M8 20h10M10 24h6"/><path d="M7 15c-2-2-3-4-3-7a9 9 0 1 1 18 0c0 3-1 5-3 7-1 1-2 3-2 5H9c0-2-1-4-2-5Z"/></g>
   </g>
 
   <g font-family="Pretendard, 'Noto Sans KR', 'Apple SD Gothic Neo', Arial, sans-serif">
-    <rect x="555" y="178" width="270" height="104" rx="23" fill="url(#core)" stroke="#8dcaff" stroke-opacity=".55" filter="url(#softGlow)"/>
-    <rect x="566" y="189" width="248" height="82" rx="17" fill="#081b32" fill-opacity=".66" stroke="#ffffff" stroke-opacity=".08"/>
-    <text x="590" y="218" fill="#79c7ff" font-size="12" font-weight="800" letter-spacing="2.2">AI · AX CORE</text>
-    <text x="590" y="249" fill="#ffffff" font-size="27" font-weight="900" letter-spacing=".6">YEHAVHA NEXUS</text>
+    <rect x="635" y="164" width="360" height="132" rx="27" fill="url(#corePanel)" stroke="#9dd7ff" stroke-opacity=".68" filter="url(#softGlow)"/>
+    <rect x="647" y="176" width="336" height="108" rx="20" fill="#071c34" fill-opacity=".66" stroke="#ffffff" stroke-opacity=".09"/>
+    <path d="M671 201h72" stroke="#ffd66d" stroke-width="3" stroke-linecap="round" opacity=".85"/>
+    <text x="671" y="229" fill="#8bd8ff" font-size="14" font-weight="850" letter-spacing="2.4">AI · AX CORE</text>
+    <text x="671" y="267" fill="#ffffff" font-size="35" font-weight="950" letter-spacing=".7">YEHAVHA NEXUS</text>
   </g>
+
+  <rect x="1" y="1" width="1198" height="458" rx="27" fill="none" stroke="#9bd0ff" stroke-opacity=".24"/>
 </svg>
