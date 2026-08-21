@@ -72,8 +72,8 @@
 .portal-mark>span:last-child::after{content:'YEHAVHA NEXUS';font-size:13px;font-weight:800;letter-spacing:.1em;color:#c6d6ea}
 .hero-main>.eyebrow{font-size:0!important}
 .hero-main>.eyebrow::after{content:'AI · AX STRATEGIC INTELLIGENCE & RESPONSE SYSTEM';font-size:12px;font-weight:800;letter-spacing:.13em;color:#9ec6fa}
-.hero-main>h1>span{font-size:0!important}
-.hero-main>h1>span::after{content:'AI·AX 전략정보·지식·대응 시스템';font-size:clamp(1.05rem,1.9vw,1.5rem);font-weight:650;letter-spacing:-.02em;color:#d2dfef}
+.hero-main>h1>span{font-size:clamp(1.05rem,1.9vw,1.5rem)!important;font-weight:650!important;letter-spacing:-.02em!important;color:#d2dfef!important}
+.hero-main>h1>span::after{content:none!important;display:none!important}
 
 /* Quick navigation order: University full row, then fixed left-right pairs. */
 .quick-link-university{order:1!important}
@@ -115,7 +115,7 @@
 @media(max-width:620px){
   .portal-mark>span:last-child::after{font-size:12px}
   .hero-main>.eyebrow::after{font-size:11px;letter-spacing:.1em}
-  .hero-main>h1>span::after{font-size:1.06rem}
+  .hero-main>h1>span{font-size:1.06rem!important}
   .quick-links{display:flex!important;flex-wrap:wrap!important;gap:8px!important}
   .quick-link-university{flex:1 1 100%!important;max-width:none!important}
   .quick-link:not(.quick-link-university){flex:1 1 calc(50% - 8px)!important;min-width:0!important}
