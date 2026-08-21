@@ -278,6 +278,54 @@ h1 span {
 .footer-card > a { margin-top: 4px; }
 .footer-meta .contact a { font-weight: 650; }
 
+/* Canonical Nexus article footer. This block owns final rendering even when article-specific CSS loads later. */
+.footer.reader-site-footer { padding: 14px 0 24px !important; }
+.footer.reader-site-footer .footer-card {
+  display: grid !important;
+  grid-template-columns: minmax(180px,.72fr) minmax(0,1.5fr) !important;
+  gap: 20px !important;
+  align-items: start !important;
+  padding: 14px 0 0 !important;
+  border: 0 !important;
+  border-top: 1px solid rgba(255,255,255,.10) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  text-align: left !important;
+}
+.footer.reader-site-footer .footer-card > strong {
+  color: #d7e1ea !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  line-height: 1.5 !important;
+}
+.footer.reader-site-footer .footer-card > p {
+  margin: 2px 0 0 !important;
+  color: #8fa1b3 !important;
+  font-size: 11px !important;
+  line-height: 1.7 !important;
+}
+.footer.reader-site-footer .footer-meta,
+.footer.reader-site-footer .research-footer-meta {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+.footer.reader-site-footer .footer-meta p,
+.footer.reader-site-footer .research-footer-meta p {
+  margin: 0 0 3px !important;
+  color: #8fa1b3 !important;
+  font-size: 12px !important;
+  line-height: 1.65 !important;
+}
+.footer.reader-site-footer .ai-disclosure { font-size: 11.5px !important; }
+.footer.reader-site-footer a {
+  color: #a9bfd2 !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  line-height: 1.65 !important;
+  text-decoration: none !important;
+}
+
 .toast {
   position: fixed;
   left: 50%;
@@ -355,6 +403,19 @@ h1 span {
   .footer-card > .research-footer-meta {
     grid-column: 1;
     grid-row: auto;
+  }
+  .footer.reader-site-footer .footer-card {
+    grid-template-columns: 1fr !important;
+    gap: 7px !important;
+    padding-top: 12px !important;
+  }
+  .footer.reader-site-footer .footer-card > strong,
+  .footer.reader-site-footer .footer-card > p,
+  .footer.reader-site-footer .footer-card > a,
+  .footer.reader-site-footer .footer-card > .footer-meta,
+  .footer.reader-site-footer .footer-card > .research-footer-meta {
+    grid-column: 1 !important;
+    grid-row: auto !important;
   }
 }
 @media (max-width: 560px) {
