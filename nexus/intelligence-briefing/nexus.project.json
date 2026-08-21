@@ -16,5 +16,39 @@
       "path": "items",
       "label": "핵심정보"
     }
+  },
+  "briefingStandard": {
+    "primaryLens": "신앙·종교·영적 흐름",
+    "interpretationRule": "확인된 사실과 종교적 맥락, 영적 해석을 분리하고 영적 흐름과 세계정세 사이의 직접 인과관계는 사실로 단정하지 않는다.",
+    "religiousScope": [
+      "한국 개신교",
+      "세계 개신교·복음주의·오순절",
+      "로마 가톨릭",
+      "동방정교회",
+      "오리엔트정교회·콥트·아르메니아·시리아",
+      "에티오피아·에리트레아 테와히도",
+      "유대교·이스라엘 종교정치",
+      "메시아닉 유대교 관련 주요 흐름",
+      "종교자유·박해·선교·개종",
+      "성경·신학·교리·생명윤리·AI"
+    ],
+    "religiousItemFields": [
+      "fact",
+      "religiousContext",
+      "spiritualAssessment",
+      "impact",
+      "watch",
+      "confidence",
+      "sources"
+    ],
+    "displayOrder": [
+      "신앙·종교·영적 흐름",
+      "외교·안보",
+      "전쟁·국제정세",
+      "경제·시장·산업",
+      "법·정책·규제",
+      "과학·기술·에너지",
+      "사회·보건·재난"
+    ]
   }
 }
