@@ -14,7 +14,7 @@
     "status": "최근 업데이트",
     "statusTone": "fresh",
     "lastUpdated": "2026-08-21",
-    "contentCount": 6,
+    "contentCount": 8,
     "contentLabel": "핵심정보",
     "contentReviewedAt": "2026-08-21",
     "baselineAt": "2026-08-21",
@@ -73,7 +73,7 @@
     "managedBy": "github",
     "status": "최근 업데이트",
     "statusTone": "fresh",
-    "lastUpdated": "2026-08-20",
+    "lastUpdated": "2026-08-21",
     "contentCount": 108,
     "contentLabel": "연구노트"
   },
@@ -91,7 +91,7 @@
     "managedBy": "github",
     "status": "최근 업데이트",
     "statusTone": "fresh",
-    "lastUpdated": "2026-08-19",
+    "lastUpdated": "2026-08-21",
     "contentCount": 217,
     "contentLabel": "연구문헌"
   },
@@ -100,7 +100,7 @@
     "managedBy": "github",
     "status": "최근 업데이트",
     "statusTone": "fresh",
-    "lastUpdated": "2026-08-17",
+    "lastUpdated": "2026-08-21",
     "contentCount": 19,
     "contentLabel": "기술연구"
   },
@@ -109,7 +109,7 @@
     "managedBy": "github",
     "status": "최근 업데이트",
     "statusTone": "fresh",
-    "lastUpdated": "2026-08-19",
+    "lastUpdated": "2026-08-21",
     "contentCount": 56,
     "contentLabel": "핵심 연구"
   },
