@@ -32,6 +32,7 @@
     university: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-5 9 5-9 5-9-5Z"/><path d="M5 12v7M9 14v5M15 14v5M19 12v7M3 20h18"/></svg>',
     apps: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="17" height="16" rx="2.5"/><path d="M3.5 8h17M7 6h.01M10 6h.01"/><path d="M7 12h4v4H7zM14 12h3M14 16h3"/></svg>',
     research: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M6 6h12"/><path d="m7 6-3 6h6L7 6Zm10 0-3 6h6l-3-6Z"/><path d="M4 12c.5 2 5.5 2 6 0M14 12c.5 2 5.5 2 6 0M8 21h8"/></svg>',
+    publicsector: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h18L12 4 3 9Z"/><path d="M5 10v8M9 10v8M15 10v8M19 10v8M3 20h18"/><path d="M2 18h20"/></svg>',
     publishing: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5c3.2-.7 5.8 0 8 2v11c-2.2-2-4.8-2.7-8-2V5.5Z"/><path d="M20 5.5c-3.2-.7-5.8 0-8 2v11c2.2-2 4.8-2.7 8-2V5.5Z"/></svg>',
     media: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="m10 9 5 3-5 3V9Z"/><path d="M7 3v2M17 3v2"/></svg>',
     education: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-4 9 4-9 4-9-4Z"/><path d="M6.5 11v4.5c3.5 2.3 7.5 2.3 11 0V11"/><path d="M21 9v5"/></svg>',
@@ -67,8 +68,17 @@
       variant: 'primary'
     },
     {
-      id: 'create',
+      id: 'publicsector',
       number: '03',
+      eyebrow: 'PUBLIC-SECTOR AX PRACTICE',
+      title: '정부·지방자치 AX 실전',
+      description: '정부·지방자치의 AX 과제를 정책·사람·승인·실행 순서로 다루는 공개 실무 매뉴얼',
+      categoryIds: ['publicsector'],
+      variant: 'primary'
+    },
+    {
+      id: 'create',
+      number: '04',
       eyebrow: 'CREATE · LEARN · SHARE',
       title: '제작·교육·공개',
       description: '교육·출판·미디어 결과물을 한 층위로 묶습니다.',
@@ -77,7 +87,7 @@
     },
     {
       id: 'ideas',
-      number: '04',
+      number: '05',
       eyebrow: 'PUBLIC IDEAS',
       title: '아이디어 허브',
       description: '공개 가능한 아이디어와 프로젝트 후보를 한곳에서 확인합니다.',
@@ -558,7 +568,7 @@
       name: 'YEHAVHA Nexus',
       alternateName: '예하바 프로젝트 포털',
       url: canonicalUrl,
-      description: '전략정보·대학·웹앱·연구·출판·미디어·교육·아이디어 프로젝트를 연결하는 통합 포털',
+      description: '전략정보·대학·웹앱·연구·공공부문 AX·출판·미디어·교육·아이디어 프로젝트를 연결하는 통합 포털',
       potentialAction: {
         '@type': 'SearchAction',
         target: `${canonicalUrl}?q={search_term_string}`,
@@ -596,7 +606,7 @@
     const extraCategories = visibleCategories.filter((category) => !tierIds.has(category.id));
     if (extraCategories.length) {
       const extraTier = {
-        id: 'more', number: '05', eyebrow: 'MORE', title: '기타 영역',
+        id: 'more', number: '06', eyebrow: 'MORE', title: '기타 영역',
         description: '추가된 프로젝트 영역입니다.', categoryIds: extraCategories.map((category) => category.id), variant: 'compact'
       };
       const tierSection = renderTier(extraTier, visibleCategories, projects, researchGroups);
