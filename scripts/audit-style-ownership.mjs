@@ -19,7 +19,8 @@ const forbiddenLegacy = [
   'three-minute-break/nexus-shell.css',
   'toeic-human-100/nexus-shell.css',
   'toeic-human-100/v2-ui-theme.css',
-  'nexus/research-groups.css'
+  'nexus/research-groups.css',
+  'nexus/articles/public-layout-20260820.css'
 ];
 
 const coreStyles = new Set([
@@ -34,7 +35,8 @@ const coreStyles = new Set([
   'toeic-human-100/style.css',
   'toeic-human-100/project-standard.css',
   'nexus/portal-v2.css',
-  'nexus/nexus-standard.css'
+  'nexus/nexus-standard.css',
+  'nexus/articles/articles.css'
 ]);
 
 let errors = 0;
@@ -52,6 +54,7 @@ const warn = (file, message) => {
   console.warn(`WARNING ${file}: ${message}`);
   console.log(`::warning file=${file}::${message}`);
 };
+const read = file => fs.readFileSync(file, 'utf8');
 
 function walk(dir, predicate) {
   if (!fs.existsSync(dir)) return [];
@@ -62,6 +65,10 @@ function walk(dir, predicate) {
     else if (predicate(full)) out.push(full);
   }
   return out;
+}
+
+function cssRefs(html) {
+  return [...html.matchAll(/<link\s+[^>]*href=["']([^"']+\.css(?:\?[^"']*)?)["'][^>]*>/gi)].map(match => match[1]);
 }
 
 function isPageLocalCore(resolved, indexFile) {
@@ -77,14 +84,15 @@ for (const relative of forbiddenLegacy) {
 
 const indexFiles = roots.flatMap(root => walk(root, file => path.basename(file) === 'index.html'));
 for (const indexFile of indexFiles) {
-  const html = fs.readFileSync(indexFile, 'utf8');
-  const refs = [...html.matchAll(/<link\s+[^>]*href=["']([^"']+\.css(?:\?[^"']*)?)["'][^>]*>/gi)].map(match => match[1]);
+  const html = read(indexFile);
+  const refs = cssRefs(html);
   const seen = new Set();
 
   for (const ref of refs) {
     if (/^(?:https?:|data:)/i.test(ref)) continue;
     const clean = ref.split('?')[0].split('#')[0];
-    const resolved = normalize(path.normalize(path.resolve(path.dirname(indexFile), clean)).replace(`${process.cwd().replaceAll('\\','/')}/`, ''));
+    const absolute = path.resolve(path.dirname(indexFile), clean);
+    const resolved = normalize(path.relative(process.cwd(), absolute));
     if (seen.has(resolved)) fail(indexFile, `동일 CSS 중복 로드: ${clean}`);
     seen.add(resolved);
     referencedCss.add(resolved);
@@ -93,7 +101,7 @@ for (const indexFile of indexFiles) {
       continue;
     }
 
-    const css = fs.readFileSync(resolved, 'utf8');
+    const css = read(resolved);
     if (isPageLocalCore(resolved, indexFile)) continue;
 
     const declaresNexusTheme = /YEHAVHA NEXUS[^\n]*(?:Visual Standard|Owned App Shell|UI Theme)/i.test(css)
@@ -108,25 +116,66 @@ for (const indexFile of indexFiles) {
       /(^|\n)\s*\.site-footer(?:\s|,|\{)/m
     ].filter(pattern => pattern.test(css)).length;
 
-    if (declaresNexusTheme) {
-      fail(resolved, '기능 CSS가 전역 Nexus 테마를 다시 선언함. project-standard/style 계열 핵심 파일로 이동 필요');
-    } else if (broadSelectors >= 4) {
-      fail(resolved, `기능 CSS가 전역 레이아웃 선택자 ${broadSelectors}종을 동시에 소유함`);
-    }
+    if (declaresNexusTheme) fail(resolved, '기능 CSS가 전역 Nexus 테마를 다시 선언함. canonical style로 통합 필요');
+    else if (broadSelectors >= 4) fail(resolved, `기능 CSS가 전역 레이아웃 선택자 ${broadSelectors}종을 동시에 소유함`);
   }
 }
 
+/* Article archive has a stricter two-layer contract: shared shell + article content. */
+const articlePages = [
+  'nexus/articles/index.html',
+  'nexus/articles/article.html',
+  'nexus/articles/judicial-ai-prompt-injection.html'
+];
+for (const page of articlePages) {
+  if (!fs.existsSync(page)) continue;
+  const html = read(page);
+  const refs = cssRefs(html).map(ref => ref.split('?')[0]);
+  if (refs.length !== 2) fail(page, `글 아카이브 CSS는 공통 shell + articles.css 2개만 허용: 현재 ${refs.length}개`);
+  if (!refs.some(ref => ref.endsWith('portal-v2.css'))) fail(page, '공통 shell portal-v2.css 누락');
+  if (!refs.some(ref => ref.endsWith('articles.css'))) fail(page, '콘텐츠 canonical articles.css 누락');
+  if (/public-layout-\d{8}\.css/i.test(html)) fail(page, '삭제된 날짜형 레이아웃 패치 참조');
+  if (/<style[\s>]/i.test(html)) fail(page, '페이지별 <style> 금지: articles.css에 통합해야 함');
+}
+
+const portal = 'nexus/portal-v2.css';
+if (fs.existsSync(portal)) {
+  const css = read(portal);
+  for (const token of [
+    '--nxs-body-size:15px',
+    '--nxs-footer-project:13px',
+    '--nxs-footer-text:12px',
+    '스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈'
+  ]) if (!css.includes(token)) fail(portal, `중앙 UI 토큰/법적 메타데이터 누락: ${token}`);
+  if (!/\.back-link\s*,\s*\.nexus-link\s*,\s*\.back/.test(css)) fail(portal, 'Nexus 복귀 링크 중앙 소유권 누락');
+  if (!/\.footer-card[^\{]*\{[^}]*text-align:center/is.test(css)) fail(portal, 'Footer 중앙정렬 canonical 규칙 누락');
+}
+
+const articleCss = 'nexus/articles/articles.css';
+if (fs.existsSync(articleCss)) {
+  const css = read(articleCss);
+  const forbiddenSharedOwners = [
+    ['footer', /(^|\n)\s*\.(?:footer|footer-card|footer-meta|reader-site-footer|research-footer)(?:\s|,|\{|:)/m],
+    ['Nexus 복귀 링크', /(^|\n)\s*\.(?:back-link|nexus-link|back)(?:\s|,|\{|:)/m],
+    ['공통 container', /(^|\n)\s*\.container(?:\s|,|\{|:)/m]
+  ];
+  for (const [name, pattern] of forbiddenSharedOwners) if (pattern.test(css)) fail(articleCss, `${name}를 로컬 CSS가 재소유함`);
+  if (!/\.archive-summary\s*\{[^}]*grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/s.test(css)) fail(articleCss, '아카이브 현황 3열 canonical 규칙 누락');
+  if (/\.archive-summary\s*\{[^}]*grid-template-columns:\s*1fr/s.test(css)) fail(articleCss, '아카이브 현황을 1열로 되돌리는 규칙 금지');
+  if (!/\.article-body\s*\{[^}]*font-size:15px/s.test(css)) fail(articleCss, '상세글 본문 15px canonical 규칙 누락');
+}
+
+/* Dated/fix/patch layers are technical debt. Existing ones are reported; new article patches are errors. */
+const patchName = /(?:\d{8}|(?:^|[-_.])(fix|patch|hotfix|override)(?:[-_.]|$))/i;
 for (const root of roots) {
   for (const cssFile of walk(root, file => file.endsWith('.css'))) {
     const relative = normalize(cssFile);
+    if (relative.startsWith('nexus/articles/') && patchName.test(path.basename(relative))) fail(relative, '글 아카이브에 날짜/patch형 CSS를 새 canonical 레이어로 유지할 수 없음');
     if (referencedCss.has(relative)) continue;
-    const css = fs.readFileSync(cssFile, 'utf8');
-    if (/contrast[-_]?fix|mobile[-_]?flow|card[-_]?density|hotfix|patch/i.test(path.basename(cssFile))) {
-      fail(relative, '참조되지 않는 패치형 CSS 잔존');
-    }
-    if (/YEHAVHA NEXUS[^\n]*(?:Visual Standard|Owned App Shell|UI Theme)/i.test(css)) {
-      warn(relative, '참조되지 않는 전역 스타일 후보');
-    }
+    const css = read(cssFile);
+    if (/contrast[-_]?fix|mobile[-_]?flow|card[-_]?density|hotfix|patch/i.test(path.basename(cssFile))) fail(relative, '참조되지 않는 패치형 CSS 잔존');
+    if (/YEHAVHA NEXUS[^\n]*(?:Visual Standard|Owned App Shell|UI Theme)/i.test(css)) warn(relative, '참조되지 않는 전역 스타일 후보');
+    if (!relative.startsWith('nexus/articles/') && patchName.test(path.basename(relative))) warn(relative, '날짜/patch형 CSS 기술부채: 기능 확인 후 canonical owner로 단계 통합 권장');
   }
 }
 
