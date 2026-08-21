@@ -8,6 +8,15 @@
     "contentCount": 8,
     "contentLabel": "연구축"
   },
+  "government-local-ax-manual": {
+    "id": "government-local-ax-manual",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-21",
+    "contentCount": 12,
+    "contentLabel": "실행 단계"
+  },
   "strategic-intelligence-briefing": {
     "id": "strategic-intelligence-briefing",
     "managedBy": "github",
