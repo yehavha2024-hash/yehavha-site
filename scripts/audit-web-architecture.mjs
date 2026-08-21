@@ -31,8 +31,14 @@ const nexusRuntimePages = [
 const nexusDetailPages = [
   'nexus/publishing/detail.html',
   'nexus/articles/article.html',
+  'nexus/articles/judicial-ai-prompt-injection.html',
   'nexus/university/course.html',
   'nexus/university/quality-audit.html'
+];
+
+const nexusFooterStyleFiles = [
+  'nexus/portal-v2.css',
+  'nexus/articles/articles.css'
 ];
 
 const nexusJsonFiles = [
@@ -121,7 +127,20 @@ const auditFooterStandard = file => {
   }
   if (!html.includes('mailto:kimbrighth@gmail.com')) report('ERROR', file, '표준 문의 mailto 누락');
   if (!html.includes('AI 활용 안내')) report('ERROR', file, 'AI 활용 안내 누락');
-  if (/\.footer::after/.test(html)) report('ERROR', file, 'HTML 안에 footer 가상요소 소유 흔적이 있음');
+  if (!html.includes('맨 위로 이동')) report('ERROR', file, '표준 맨 위로 이동 링크 누락');
+  if (!/data-footer-standard=["']v2["']/.test(html)) report('WARNING', file, 'Footer 표준 버전 v2 미적용');
+  if (/\.footer(?:-note)?::(?:before|after)/.test(html)) report('ERROR', file, 'HTML 안에 footer 가상요소 소유 흔적이 있음');
+};
+
+const auditFooterStyleOwnership = file => {
+  if (!fs.existsSync(file)) return report('ERROR', file, 'footer 스타일 감사 대상 CSS 없음');
+  const css = read(file);
+  const pseudoBlocks = [...css.matchAll(/[^{}]*(?:::before|::after)\s*\{[^{}]*\}/g)].map(match => match[0]);
+  for (const block of pseudoBlocks) {
+    if (/(?:footer|copyright)/i.test(block) && /content\s*:/.test(block) && /(?:Copyright|문의|AI 활용 안내|YEHAVHA NEXUS)/i.test(block)) {
+      report('ERROR', file, 'Footer 필수 문구를 CSS 가상요소 content로 생성하는 규칙이 잔존');
+    }
+  }
 };
 
 const auditNexusRuntimePages = () => {
@@ -143,6 +162,7 @@ const auditNexusRuntimePages = () => {
 
   auditFooterStandard('nexus/index.html');
   for (const file of nexusDetailPages) auditFooterStandard(file);
+  for (const file of nexusFooterStyleFiles) auditFooterStyleOwnership(file);
 
   for (const file of nexusJsonFiles) {
     if (!fs.existsSync(file)) {
