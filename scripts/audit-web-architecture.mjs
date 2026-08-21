@@ -36,6 +36,12 @@ const nexusDetailPages = [
   'nexus/university/quality-audit.html'
 ];
 
+const nexusArticleFooterPages = [
+  'nexus/articles/index.html',
+  'nexus/articles/article.html',
+  'nexus/articles/judicial-ai-prompt-injection.html'
+];
+
 const nexusFooterStyleFiles = [
   'nexus/portal-v2.css',
   'nexus/articles/articles.css'
@@ -132,6 +138,35 @@ const auditFooterStandard = file => {
   if (/\.footer(?:-note)?::(?:before|after)/.test(html)) report('ERROR', file, 'HTML 안에 footer 가상요소 소유 흔적이 있음');
 };
 
+const auditArticleFooterCanonical = file => {
+  if (!fs.existsSync(file)) return report('ERROR', file, '글 아카이브 footer 감사 대상 HTML 없음');
+  const html = read(file);
+  const footerMatch = html.match(/<footer\b[^>]*class=["'][^"']*\breader-site-footer\b[^"']*["'][^>]*>[\s\S]*?<\/footer>/i);
+  if (!footerMatch) return report('ERROR', file, '글 아카이브 공통 reader-site-footer 구조 누락');
+
+  const footer = footerMatch[0];
+  if (!/class=["'][^"']*\bfooter-card\b/.test(footer)) report('ERROR', file, 'footer-card 공통 컨테이너 누락');
+  if (!/class=["'][^"']*(?:\bfooter-meta\b|\bresearch-footer-meta\b)/.test(footer)) report('ERROR', file, 'footer 권리정보 블록 누락');
+
+  const ordered = [COPYRIGHT_STANDARD, '문의', 'AI 활용 안내', '맨 위로 이동'];
+  let cursor = -1;
+  for (const label of ordered) {
+    const index = footer.indexOf(label);
+    if (index < 0) {
+      report('ERROR', file, `footer 필수 항목 누락: ${label}`);
+      continue;
+    }
+    if (index <= cursor) report('ERROR', file, `footer 항목 순서 오류: ${ordered.join(' → ')}`);
+    cursor = index;
+  }
+
+  const topLinks = [...html.matchAll(/>\s*맨 위로 이동\s*↑?\s*</g)].length;
+  if (topLinks !== 1) report('ERROR', file, `맨 위로 이동 링크는 Footer에 1개만 허용: 현재 ${topLinks}개`);
+
+  const footerTopLink = /href=["']#top["'][^>]*>\s*맨 위로 이동/.test(footer);
+  if (!footerTopLink) report('ERROR', file, '맨 위로 이동 링크가 Footer 권리정보 블록에 없음');
+};
+
 const auditFooterStyleOwnership = file => {
   if (!fs.existsSync(file)) return report('ERROR', file, 'footer 스타일 감사 대상 CSS 없음');
   const css = read(file);
@@ -162,6 +197,7 @@ const auditNexusRuntimePages = () => {
 
   auditFooterStandard('nexus/index.html');
   for (const file of nexusDetailPages) auditFooterStandard(file);
+  for (const file of nexusArticleFooterPages) auditArticleFooterCanonical(file);
   for (const file of nexusFooterStyleFiles) auditFooterStyleOwnership(file);
 
   for (const file of nexusJsonFiles) {
