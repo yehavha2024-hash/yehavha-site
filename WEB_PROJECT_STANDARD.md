@@ -64,6 +64,10 @@
 - 캐시 정책은 `_headers` 한 곳에서 관리한다.
 - 임시 redirect/worker는 문제 해결 후 제거한다.
 - 자산 변경 시 명시적 버전 문자열을 사용하되, 임시 버전 파일을 별도로 누적하지 않는다.
+- Nexus 및 동일 저장소의 단순 코드 수정·본문 수정·CSS 수정은 별도 요청이 없는 한 `main`에 직접 반영한다.
+- 단순 수정에서 작업용 브랜치와 PR을 만들지 않는다. 이 저장소는 여러 Cloudflare Workers/Pages 프로젝트가 GitHub에 연결되어 있어 PR마다 Preview build와 bot 댓글이 생성되고 GitHub 메일이 `Re:` 스레드로 반복 발송될 수 있다.
+- PR은 사용자가 명시적으로 요청하거나 대규모 구조변경·검토가 필요한 경우에만 사용한다.
+- Cloudflare Preview가 필요하지 않은 프로젝트는 Cloudflare의 비생산 브랜치/Preview branch 자동 빌드를 사용하지 않는 것을 원칙으로 한다. 운영 배포는 production branch인 `main`을 기준으로 한다.
 
 ## 6. 규격 적용 완료 프로젝트
 
