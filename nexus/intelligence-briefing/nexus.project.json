@@ -2,8 +2,8 @@
   "id": "strategic-intelligence-briefing",
   "publish": true,
   "review": {
-    "contentReviewedAt": "2026-08-21",
-    "baselineAt": "2026-08-21",
+    "contentReviewedAt": "2026-08-22",
+    "baselineAt": "2026-08-22",
     "baselineLabel": "운영기준"
   },
   "tracking": {
@@ -18,47 +18,70 @@
     }
   },
   "briefingStandard": {
-    "primaryLens": "신앙·종교·영적 흐름",
-    "interpretationRule": "확인된 사실과 종교적 맥락, 영적 해석을 분리하고 영적 흐름과 세계정세 사이의 직접 인과관계는 사실로 단정하지 않는다.",
-    "religiousScope": [
-      "한국 개신교",
-      "세계 개신교·복음주의·오순절",
-      "로마 가톨릭",
-      "동방정교회",
-      "오리엔트정교회·콥트·아르메니아·시리아",
-      "에티오피아·에리트레아 테와히도",
-      "유대교·이스라엘 종교정치",
-      "메시아닉 유대교 관련 주요 흐름",
-      "종교자유·박해·선교·개종",
-      "성경·신학·교리·생명윤리·AI"
+    "primaryLens": "국내외 공개정보 기반 Executive Strategic Intelligence",
+    "interpretationRule": "확인된 사실, 분석적 판단, 영향과 전망을 분리한다. 정치적 찬반이나 당파적 논평을 배제하고 정부·법원·중앙은행·국제기구·기업공시 등 1차 자료를 우선하며 주요 통신사와 신뢰도 높은 언론으로 교차검증한다.",
+    "scope": [
+      "정치·정부",
+      "외교·안보",
+      "국제정세·전쟁",
+      "경제·시장·금융",
+      "산업·통상",
+      "법·정책·규제",
+      "과학·에너지·환경",
+      "사회·보건·재난"
     ],
-    "religiousItemFields": [
+    "exclusions": [
+      "인공지능 전문 동향은 별도 AI 동향 브리프와 중복하지 않는다",
+      "종교·신앙 이슈는 국가안보·외교·사회정책 등 전략적 공공영향이 직접적인 경우에만 포함한다"
+    ],
+    "selectionCriteria": [
+      "Strategic Importance",
+      "Immediacy",
+      "Impact",
+      "Uncertainty",
+      "Novelty"
+    ],
+    "itemFields": [
+      "priority",
+      "category",
+      "headline",
       "fact",
-      "religiousContext",
-      "spiritualAssessment",
+      "assessment",
       "impact",
       "watch",
       "confidence",
       "sources"
     ],
     "displayOrder": [
-      "신앙·종교·영적 흐름",
+      "정치·정부",
       "외교·안보",
-      "전쟁·국제정세",
-      "경제·시장·산업",
+      "국제정세·전쟁",
+      "경제·시장·금융",
+      "산업·통상",
       "법·정책·규제",
-      "과학·기술·에너지",
+      "과학·에너지·환경",
       "사회·보건·재난"
     ],
+    "window": {
+      "defaultHours": 24,
+      "backgroundRule": "중요한 중장기 배경은 현재 사건의 의미를 설명하는 데 필요한 범위에서만 보충한다."
+    },
+    "output": {
+      "itemCountMin": 5,
+      "itemCountMax": 8,
+      "includeExecutiveSummary": true,
+      "includeStrategicWatchlist": true,
+      "includeOutlookWeeks": 4
+    },
     "noveltyPolicy": {
       "baselineRule": "각 날짜의 첫 브리핑은 그날의 기준판으로 그대로 보존한다.",
-      "subsequentRule": "두 번째 이후 브리핑은 이전 브리핑에서 이미 다룬 동일하거나 실질적으로 유사한 핵심사건을 반복하지 않고 새로운 이슈로 전부 교체한다.",
+      "subsequentRule": "같은 날짜에 재생성할 경우 이미 다룬 동일하거나 실질적으로 유사한 핵심사건을 중복 생성하지 않고 기존 날짜 파일을 갱신한다.",
       "topicKeyRequired": true,
       "sameDayDuplicateAllowed": false,
       "rollingWindowDays": 7,
       "similarityRule": "제목만 바꾸거나 새 수치·새 발언·경미한 후속사실을 추가한 것은 새로운 이슈로 보지 않는다. 동일한 사건·정책·분쟁·시장충격은 같은 topicKey를 사용한다.",
-      "crossDayRepeatRule": "최근 7일 이내 동일 topicKey는 원칙적으로 제외한다. 판결 선고, 법률 통과·시행, 전쟁 발발·종결, 정책의 공식 전환, 피해규모의 질적 급변, 정권·지도부 교체와 같은 독립적 변곡점이 있을 때만 materialChange=true와 changeReason을 명시하여 재등장할 수 있다.",
-      "replacementRule": "중복 또는 유사성이 확인되면 해당 항목을 축약·재서술하지 말고 다른 신규 이슈로 완전히 교체한다."
+      "crossDayRepeatRule": "최근 7일 이내 동일 topicKey는 원칙적으로 제외하되 전략적 중요성이 지속되거나 판결 선고, 법률 통과·시행, 전쟁 발발·종결, 정책 공식 전환, 피해규모의 질적 급변, 정권·지도부 교체 등 독립적 변곡점이 있으면 materialChange를 확인해 재등장할 수 있다.",
+      "replacementRule": "중복 또는 유사성이 확인되면 중요도가 낮아진 항목을 다른 신규 이슈로 교체한다."
     }
   }
 }
