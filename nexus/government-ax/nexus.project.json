@@ -1,0 +1,14 @@
+{
+  "id": "government-local-ax-manual",
+  "publish": true,
+  "tracking": {
+    "paths": ["nexus/government-ax"],
+    "freshDays": 7,
+    "staleDays": 30,
+    "count": {
+      "type": "static",
+      "value": 12,
+      "label": "실행 단계"
+    }
+  }
+}
