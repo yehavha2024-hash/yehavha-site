@@ -4,6 +4,7 @@
 
 ## 고정 문구
 
+- `스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈`
 - `Copyright © 이명훈 2026. All rights reserved.`
 - `문의 kimbrighth@gmail.com`
 - `AI 활용 안내: ...`
@@ -11,22 +12,25 @@
 
 연도 외의 Copyright·문의 문장 순서와 표현은 임의로 바꾸지 않습니다. 프로젝트 URL은 하단에 중복 노출하지 않습니다.
 
-Copyright·문의·AI 활용 안내·맨 위로 이동은 실제 HTML 요소에 기록합니다. `::before`, `::after`, CSS `content`로 필수 문구를 생성하거나 원문을 투명하게 숨긴 뒤 가상요소로 대체하지 않습니다. 필수 정보의 단일 원본은 HTML이며 CSS는 배치·색상·크기만 담당합니다.
+Copyright·문의·AI 활용 안내·맨 위로 이동은 실제 HTML 요소에 기록합니다. `::before`, `::after`, CSS `content`로 이 네 필수 문구를 생성하거나 원문을 투명하게 숨긴 뒤 가상요소로 대체하지 않습니다. 이 네 정보의 단일 원본은 HTML이며 CSS는 배치·색상·크기만 담당합니다.
+
+사업자정보는 Nexus 전체에서 완전히 동일한 고정 법적 메타데이터이므로 중복 HTML 복사를 하지 않고 `nexus/portal-v2.css`의 전역 단일 원본으로 관리합니다. 일반 Footer의 `.footer-meta::before`와 전문 연구 Footer의 `.research-footer-meta::before`가 동일 사업자정보를 표시해야 하며, 둘 중 하나라도 빠지면 오류입니다. 사업자정보의 수정은 이 전역 단일 원본에서만 수행합니다.
 
 Footer 레이아웃은 각 프로젝트의 공통 스타일 파일 한 곳에서 소유합니다. 상세문서별 inline style에서 동일 Footer의 폭·그리드·정렬을 다시 정의하지 않습니다. Footer 내부 콘텐츠 래퍼는 `width` 또는 `max-width`만 지정하지 않고 `margin-inline:auto` 또는 동등한 중앙정렬을 반드시 명시하여 모바일과 데스크톱에서 본문 좌우 여백과 정렬축을 일치시킵니다.
 
-## 표준 DOM 순서
+## 표준 DOM 및 표시 순서
 
 Footer는 화면 종류와 관계없이 아래 순서를 고정합니다.
 
 1. 프로젝트명
 2. 프로젝트 영문명 또는 짧은 성격 설명
-3. Copyright
-4. 문의
-5. AI 활용 안내
-6. 맨 위로 이동
+3. 사업자정보
+4. Copyright
+5. 문의
+6. AI 활용 안내
+7. 맨 위로 이동
 
-Nexus의 `nexus/articles/` 하위 메인·동적 상세글·정적 전문글은 모두 같은 Footer 컴포넌트 구조를 사용합니다. 상세글마다 `research-footer`, `article-footer` 등 별도 Footer 컴포넌트를 새로 만들지 않습니다.
+Nexus의 `nexus/articles/` 하위 메인·동적 상세글·정적 전문글은 모두 같은 Footer 계열을 사용합니다. 상세글마다 사업자정보를 별도로 복사하지 않으며 일반글은 `footer-meta`, 전문글은 `research-footer-meta`를 통해 동일 전역 사업자정보를 받습니다.
 
 `맨 위로 이동`은 Footer의 권리정보 블록 안에서 마지막 항목으로 둡니다. 같은 상세글의 본문 종료영역에 동일한 `맨 위로 이동` 링크를 다시 배치하지 않습니다. 본문 종료영역에는 필요한 경우 `← 글 목록`만 둡니다.
 
@@ -39,6 +43,7 @@ Nexus의 `nexus/articles/` 하위 메인·동적 상세글·정적 전문글은 
       <strong>프로젝트명</strong>
       <p>프로젝트 성격 설명</p>
       <div class="footer-meta">
+        <!-- 사업자정보는 portal-v2.css 전역 단일 원본이 이 위치 앞에 표시 -->
         <p>Copyright © 이명훈 2026. All rights reserved.</p>
         <p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p>
         <p class="ai-disclosure">AI 활용 안내: ...</p>
@@ -51,17 +56,18 @@ Nexus의 `nexus/articles/` 하위 메인·동적 상세글·정적 전문글은 
 
 ## 정보 구조
 
-왼쪽 영역
+프로젝트 영역
 - 프로젝트명
-- 프로젝트 영문명 또는 짧은 영문 성격 설명
+- 프로젝트 영문명 또는 짧은 성격 설명
 
-오른쪽 영역
+권리정보 영역
+- 사업자정보
 - Copyright 문구
 - 문의 이메일
 - AI 활용 안내
 - 맨 위로 이동
 
-모바일에서는 왼쪽 영역 다음에 오른쪽 영역을 세로로 배치하며 모두 같은 좌측 정렬축을 사용합니다.
+모바일에서는 프로젝트 영역 다음에 권리정보 영역을 세로로 배치하며 모두 같은 정렬축을 사용합니다.
 
 ## AI 활용 안내 원칙
 
@@ -85,6 +91,7 @@ AI 활용 안내는 실제 제작과정을 과장하거나 AI를 단독 저자·
 
 - 프로젝트명: 13px / 600 / line-height 1.5
 - 영문 설명: 11px / 400 / line-height 1.7
+- 사업자정보: 11~13px / 400 / line-height 1.55~1.7
 - Copyright: 12px / 400 / line-height 1.7
 - 문의: 12px / 400 / line-height 1.7
 - AI 활용 안내: 11~12px / 400 / line-height 1.7
@@ -109,6 +116,6 @@ AI 활용 안내는 실제 제작과정을 과장하거나 AI를 단독 저자·
 
 상세 연구노트·연구문서·팝업 문서 등 자체적으로 Copyright와 문의를 표시하는 하위 본문도 같은 순서를 적용합니다.
 
-`Copyright → 문의 → 해당 콘텐츠에 맞는 AI 활용 안내 → 맨 위로 이동`
+`사업자정보 → Copyright → 문의 → 해당 콘텐츠에 맞는 AI 활용 안내 → 맨 위로 이동`
 
 메인 페이지에 AI 활용 안내가 있더라도 하위 본문이 독립적으로 열리거나 공유될 수 있다면 해당 본문 하단에도 별도로 표시합니다.
