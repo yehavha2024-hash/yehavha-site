@@ -5,11 +5,17 @@
   const quickLinks = document.getElementById('quickLinks');
   const portalGrid = document.getElementById('portalGrid');
   const accessCount = document.getElementById('accessCount');
+  const topbar = document.querySelector('.topbar');
+  const portalMark = document.querySelector('.portal-mark');
+  const portalMarkDot = portalMark?.querySelector('.dot');
+  const portalMarkText = portalMark?.querySelector('span:last-child');
   let toastTimer;
   let currentPortalData = null;
+  let pacificClockTimer;
 
   const COUNTER_ENDPOINT = '/api/access';
   const ENHANCEMENT_STYLES = './portal-enhancements.css?v=20260819-1018';
+  const PACIFIC_TIME_ZONE = 'America/Los_Angeles';
 
   function ensureEnhancementStyles() {
     if (document.querySelector('link[data-nexus-enhancements]')) return;
@@ -26,6 +32,52 @@
     accessCount.textContent = '0';
     accessCount.hidden = false;
   }
+
+  function updatePacificClock() {
+    if (!portalMarkText) return;
+    const now = new Date();
+    const dateParts = new Intl.DateTimeFormat('ko-KR', {
+      timeZone: PACIFIC_TIME_ZONE,
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }).format(now);
+    const timeParts = new Intl.DateTimeFormat('en-US', {
+      timeZone: PACIFIC_TIME_ZONE,
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    }).format(now);
+    portalMarkText.textContent = `${dateParts} · ${timeParts} (태평양 기준)`;
+    portalMarkText.setAttribute('aria-label', `현재 태평양 시간 ${dateParts} ${timeParts}`);
+  }
+
+  function installPacificClock() {
+    if (!portalMarkText) return;
+    if (portalMarkDot) portalMarkDot.style.display = 'none';
+    if (topbar) {
+      topbar.style.display = 'flex';
+      topbar.style.width = '100%';
+      topbar.style.alignItems = 'center';
+      topbar.style.justifyContent = 'space-between';
+      topbar.style.gap = '12px';
+    }
+    if (portalMark) {
+      portalMark.style.display = 'block';
+      portalMark.style.minWidth = '0';
+    }
+    portalMarkText.style.fontSize = '12px';
+    portalMarkText.style.fontWeight = '700';
+    portalMarkText.style.letterSpacing = '.01em';
+    portalMarkText.style.color = '#c6d6ea';
+    portalMarkText.style.whiteSpace = 'nowrap';
+    portalMarkText.style.fontVariantNumeric = 'tabular-nums';
+    updatePacificClock();
+    window.clearInterval(pacificClockTimer);
+    pacificClockTimer = window.setInterval(updatePacificClock, 30000);
+  }
+
+  installPacificClock();
 
   const categoryIcons = {
     intelligence: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 20 6v5c0 5-3.4 8.2-8 10-4.6-1.8-8-5-8-10V6l8-3Z"/><path d="M8 12h8M12 8v8"/></svg>',
