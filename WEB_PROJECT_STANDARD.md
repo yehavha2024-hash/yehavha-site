@@ -1,102 +1,160 @@
 # YEHAVHA 웹 프로젝트 구조 규격
 
+Version: 2.0  
+Updated: 2026-08-21
+
 ## 1. 기본 원칙
 
-모든 웹 프로젝트는 화면 구조, 디자인, 데이터, 동작의 책임을 분리한다. 동일한 UI 요소를 둘 이상의 파일이 다시 생성하거나 덮어쓰지 않는다.
+모든 프로젝트는 **한 기능에 한 소유자** 원칙을 사용합니다. 문제를 해결할 때 새 보정파일을 덧붙이기보다 기존 canonical owner를 수정합니다.
 
-### index.html
-- 페이지의 실제 구조와 정적 콘텐츠를 소유한다.
-- 메인 footer의 유일한 원본이다.
-- Copyright, 문의, AI 활용 안내, 맨 위로 이동을 footer에 직접 포함한다.
-- 대규모 인라인 CSS와 인라인 JavaScript를 두지 않는다.
+책임은 다음처럼 나눕니다.
 
-### CSS
-- 모든 시각적 표현은 CSS 파일이 소유한다.
-- JavaScript에서 `<style>`을 생성하거나 CSS 문자열을 주입하지 않는다.
-- 모바일 규칙도 CSS 파일에서 관리한다.
-- 정적 상세글의 목차가 `<ol>`을 사용하면 기본 순번을 유지한다. `list-style:none`으로 번호를 숨기지 않는다.
-- 디자인상 기본 순번을 숨겨야 하는 경우에는 CSS counter 또는 HTML의 명시적 번호처럼 화면에 실제 번호가 남는 대체 로직을 같은 소유 파일에 반드시 둔다.
-- 목차 번호는 본문 `h2` 장 번호와 동일한 순서를 유지하며 제목만 축약해도 장 번호는 제거하지 않는다.
+- HTML: 구조와 정적 콘텐츠
+- CSS: 시각 표현
+- data/config: 데이터
+- app/runtime JS: 사용자 동작과 데이터 렌더링
+- audit: 구조 위반 검증
 
-### config.js / data.js
-- 데이터만 보유한다.
-- `document`, `window.addEventListener`, `createElement`, `innerHTML` 등 DOM 조작을 하지 않는다.
-- 가격, 시간, 이메일, 연구데이터 등 값만 제공한다.
+동일 UI를 HTML·CSS·JS 여러 곳에서 다시 생성하거나 서로 덮지 않습니다.
 
-### app.js
-- 사용자 동작과 데이터 렌더링만 담당한다.
-- 메인 footer를 생성하거나 다시 쓰지 않는다.
-- 런타임 CSS를 삽입하지 않는다.
-- 페이지 전체를 감시하는 MutationObserver를 사용하지 않는다.
+## 2. Nexus 공통 shell
 
-### 동적 상세문서
-- 상세문서가 dialog/modal에서 생성되는 경우 상세문서 생성 함수 또는 전용 모듈이 상세 footer를 한 번만 생성한다.
-- 상세 footer에도 Copyright, 문의, AI 활용 안내를 포함한다.
-- 필요한 MutationObserver는 상세문서 컨테이너처럼 좁은 범위에 한정한다.
-- 동적 목차가 제목 자체의 번호를 사용한다면 CSS에서 번호를 다시 생성하지 않아 중복 번호를 방지한다.
+메인 저장소 `nexus/`의 공통 외곽 UI는 `nexus/portal-v2.css`가 소유합니다.
 
-## 2. Footer 표준
+공통 shell 범위:
 
-메인 footer 순서:
-1. 프로젝트명 및 보조 설명
-2. Copyright © 이명훈 2026. All rights reserved.
-3. 문의 kimbrighth@gmail.com
-4. 프로젝트 성격에 맞는 AI 활용 안내
-5. 맨 위로 이동
+- 기본 typography
+- 공통 container
+- Nexus 복귀 링크
+- 공통 배경 token
+- Footer
+- 사업자정보
+- 모바일 공통 여백
 
-메인 footer에는 `data-footer-standard="v1"`을 부여한다.
+하위 프로젝트는 이를 다시 정의하지 않습니다. 기능별 CSS는 자신의 카드·본문·목차·검색·표·학습 UI만 소유합니다.
 
-## 3. AI 활용 안내 원칙
+## 3. HTML
 
-- 프로젝트 성격에 맞게 구체적으로 작성한다.
-- AI가 무엇에 사용되었는지와 사람이 무엇을 검토·관리하는지 구분한다.
-- 법률·연구 프로젝트는 출처·원문·현행법 검증 필요성을 명시한다.
-- 교육 프로젝트는 예시·프롬프트·수업자료와 강사의 기획·검토·운영을 구분한다.
+- 실제 DOM 구조와 정적 텍스트의 원본입니다.
+- Copyright·문의·AI 활용 안내·맨 위로 이동은 Footer HTML에 직접 둡니다.
+- 사업자정보처럼 전 Nexus에서 완전히 동일한 고정 메타데이터만 중앙 shell에서 단일 생성할 수 있습니다.
+- production 페이지에 대규모 `<style>` 또는 `<script>` 블록을 두지 않습니다.
+- 새 상세문서가 생겨도 페이지 전용 CSS를 만들지 않고 기존 document type을 사용합니다.
 
-## 4. 금지 패턴
+## 4. CSS
 
-- `config.js`에서 DOM 수정
-- JavaScript에서 `.site-footer.innerHTML` 또는 메인 footer 전체 교체
-- JavaScript에서 `document.createElement('style')`
-- `document.documentElement` 또는 `document.body` 전체를 감시하는 MutationObserver
-- 문제 해결을 위한 임시 `_worker.js`, 중복 `home-v2.html`, 강제 배포용 파일을 영구 유지
-- 동일 고지문을 HTML과 여러 보정 JS에서 중복 소유
-- `<ol>` 목차의 번호를 제거한 뒤 대체 번호 표시를 두지 않는 CSS
+- Nexus 하위 일반 페이지는 원칙적으로 `공통 shell 1개 + 로컬 canonical CSS 1개`만 사용합니다.
+- 로컬 CSS가 `.container`, 공통 복귀링크, Footer를 다시 소유하지 않습니다.
+- 모바일 규칙도 같은 canonical CSS에서 관리합니다.
+- `!important`는 외부 라이브러리 충돌 또는 명확한 중앙 shell 강제처럼 소유권이 분명할 때만 사용합니다.
 
-## 5. 배포 규칙
+영구 추가 금지 파일명:
 
-- 운영 원본은 `index.html` 한 개로 유지한다.
-- 캐시 정책은 `_headers` 한 곳에서 관리한다.
-- 임시 redirect/worker는 문제 해결 후 제거한다.
-- 자산 변경 시 명시적 버전 문자열을 사용하되, 임시 버전 파일을 별도로 누적하지 않는다.
-- Nexus 및 동일 저장소의 단순 코드 수정·본문 수정·CSS 수정은 별도 요청이 없는 한 `main`에 직접 반영한다.
-- 단순 수정에서 작업용 브랜치와 PR을 만들지 않는다. 이 저장소는 여러 Cloudflare Workers/Pages 프로젝트가 GitHub에 연결되어 있어 PR마다 Preview build와 bot 댓글이 생성되고 GitHub 메일이 `Re:` 스레드로 반복 발송될 수 있다.
-- PR은 사용자가 명시적으로 요청하거나 대규모 구조변경·검토가 필요한 경우에만 사용한다.
-- Cloudflare Preview가 필요하지 않은 프로젝트는 Cloudflare의 비생산 브랜치/Preview branch 자동 빌드를 사용하지 않는 것을 원칙으로 한다. 운영 배포는 production branch인 `main`을 기준으로 한다.
+- `*-YYYYMMDD.css`
+- `*-fix.css`
+- `*-patch.css`
+- `*-hotfix.css`
+- `*-override.css`
+- 임시 `mobile-*`, `contrast-fix-*` 계열
 
-## 6. 규격 적용 완료 프로젝트
+임시 패치를 만들었다면 검증 후 canonical CSS에 흡수하고 패치파일은 삭제합니다.
 
-### 메인 저장소 `yehavha2024-hash/yehavha-site`
-- `nexus/`
-- `three-minute-break/`
-- `toeic-human-100/`
-- `legal-knowledge/`
-- `legal-philosophy/`
-- `ai-law-tech-foresight/`
+## 5. JavaScript
 
-위 6개 프로젝트는 `scripts/audit-web-architecture.mjs`와 `Web Architecture Audit` workflow로 지속 검사한다.
+### config/data
 
-### 별도 저장소
-- `yehavha2024-hash/ai-song-studio`
-- `yehavha2024-hash/ai-law-research-institute`
+- 데이터만 소유합니다.
+- DOM 조작 금지
+- CSS 주입 금지
+- Footer 생성 금지
 
-각 별도 저장소는 자체 `scripts/audit-architecture.mjs`와 `Architecture Audit` workflow로 지속 검사한다.
+### app/runtime
 
-## 7. 유지관리 기준
+- 사용자 동작과 데이터 렌더링만 담당합니다.
+- 메인 Footer를 `innerHTML`로 교체하지 않습니다.
+- `<style>`을 동적으로 만들지 않습니다.
+- 전역 MutationObserver를 사용하지 않습니다.
+- 같은 콘텐츠를 별도 후처리 JS가 재렌더링하지 않습니다.
 
-- 새 기능을 추가할 때 기존 소유 파일을 수정하고 보정용 JavaScript를 별도로 덧붙이지 않는다.
-- footer·AI 고지·Copyright 변경은 정적 HTML 원본에서 처리한다.
-- 상세문서 footer는 해당 상세문서 생성 모듈만 수정한다.
-- 정적 목차 수정 시 본문 장 번호와 목차 번호가 1:1로 대응하는지 함께 확인한다.
-- 감사 workflow가 실패하면 새 패치를 추가하기 전에 중복 소유·전역 감시·런타임 스타일 생성 여부부터 제거한다.
-- 임시 배포 우회파일은 원인 해결 후 반드시 삭제한다.
+## 6. 상세문서
+
+동적·정적 상세문서는 콘텐츠 생성방식이 달라도 같은 외곽 규격을 사용합니다.
+
+- 공통 shell
+- 해당 프로젝트 canonical content CSS
+- 동일 본문 type scale
+- 동일 복귀링크
+- 동일 Footer
+
+정적 전문글이라는 이유로 별도 `research-footer.css`, `reader-fix.css` 등을 만들지 않습니다.
+
+목차 번호는 본문 번호와 대응합니다. 번호를 숨기는 CSS를 사용할 경우 같은 canonical owner가 대체 번호를 책임집니다.
+
+## 7. Footer
+
+Footer 규격은 `COPYRIGHT_STANDARD.md` 한 문서를 기준으로 합니다.
+
+Nexus 메인과 동일한 중앙정렬 단일열을 사용하며 콘텐츠 CSS가 좌측정렬·2열·다른 글자크기로 바꾸지 않습니다.
+
+표시 순서:
+
+1. 프로젝트명
+2. 짧은 설명
+3. 사업자정보
+4. Copyright
+5. 문의
+6. AI 활용 안내
+7. 맨 위로 이동
+
+## 8. 캐시
+
+- 캐시 정책은 `_headers`가 소유합니다.
+- HTML과 운영 핵심 CSS에 `no-cache/no-store`가 적용된 경우 캐시 문제를 해결하기 위해 새 CSS 복사본을 만들지 않습니다.
+- 쿼리 버전은 배포 식별용이며 새로운 소유 파일을 의미하지 않습니다.
+- 구형 캐시 호환 규칙은 production CSS에 무기한 남기지 않습니다.
+
+## 9. 감사와 구조 검증
+
+기존 감사파일을 확장하여 사용합니다. 같은 목적의 감사파일을 계속 추가하지 않습니다.
+
+- `scripts/audit-web-architecture.mjs`: 전체 웹 구조
+- `scripts/audit-style-ownership.mjs`: CSS 소유권·중복 레이어·patch 파일
+- `scripts/audit-business-footer.mjs`: 사업자정보·Footer canonical 규격
+- `scripts/audit-repo-hygiene.mjs`: 삭제파일·불필요 생성물·단일 원본
+
+`Web Architecture Audit`은 메일 반복을 피하기 위해 수동 실행을 유지합니다.
+
+## 10. 변경 프로세스
+
+수정 전에 반드시 다음 순서를 따릅니다.
+
+1. 문제 화면 확인
+2. 현재 owner 확인
+3. 중복 owner 여부 확인
+4. canonical owner만 수정
+5. 기존 patch가 불필요해졌으면 삭제
+6. 감사 규칙으로 재발 차단
+7. 변경 파일 수를 검토
+8. production 반영
+
+새 파일 생성은 마지막 수단입니다. 기존 canonical owner로 해결 가능한 경우 새 CSS·JS·MD·DOM 제어파일을 만들지 않습니다.
+
+## 11. GitHub와 배포
+
+- production branch는 `main`입니다.
+- 단순 변경은 불필요한 PR을 만들지 않습니다.
+- 대규모 구조 변경은 안전한 작업 브랜치에서 수정·점검한 뒤, 별도 리뷰가 필요하지 않으면 PR 없이 fast-forward 방식으로 `main`에 반영할 수 있습니다.
+- PR은 사용자가 요청하거나 실제 코드리뷰가 필요한 경우에만 사용합니다.
+- Cloudflare Preview가 필요하지 않은 경우 PR/비생산 브랜치 자동배포를 작업 절차의 필수 단계로 만들지 않습니다.
+
+## 12. 현재 canonical 예시
+
+### Nexus 글·연구 아카이브
+
+- 공통: `nexus/portal-v2.css`
+- 콘텐츠: `nexus/articles/articles.css`
+- 데이터/렌더링: `articles.json` + `articles.js`
+- 날짜형 `public-layout-20260820.css`는 canonical CSS에 흡수 후 제거
+- `index.html`과 `article.html`의 페이지별 `<style>`은 제거
+
+이 패턴을 이후 Nexus 하위 문서 정리의 기준 모델로 사용합니다.
