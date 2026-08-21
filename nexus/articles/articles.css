@@ -168,8 +168,9 @@ body:has(.research-wrap) .meta span{padding:4px 7px!important;border:1px solid r
 body:has(.research-wrap) main{padding-bottom:8px!important}
 body:has(.research-wrap) .toc{margin:0 0 8px!important;padding:9px 12px!important}
 body:has(.research-wrap) .toc>strong{display:block!important;margin:0 0 6px!important;padding:0 0 6px!important;border-bottom:1px solid rgba(255,255,255,.07)!important;color:#cbdbea!important;text-align:center!important;font-size:12px!important;font-weight:800!important}
-body:has(.research-wrap) .toc ol{margin:0!important;padding:0!important;list-style:none!important;columns:2!important;column-gap:0!important;column-rule:1px solid rgba(255,255,255,.07)!important}
-body:has(.research-wrap) .toc li{margin:0!important;padding:3px 9px!important;break-inside:avoid!important}
+body:has(.research-wrap) .toc ol{margin:0!important;padding:0 0 0 24px!important;list-style:decimal!important;list-style-position:outside!important;columns:2!important;column-gap:0!important;column-rule:1px solid rgba(255,255,255,.07)!important}
+body:has(.research-wrap) .toc li{margin:0!important;padding:3px 9px 3px 2px!important;break-inside:avoid!important}
+body:has(.research-wrap) .toc li::marker{color:#6f8fa8!important;font-size:10.5px!important;font-weight:700!important}
 body:has(.research-wrap) .toc a{display:block!important;color:#9eb2c5!important;font-size:11px!important;line-height:1.38!important;text-decoration:none!important}
 body:has(.research-wrap) .toc a:hover{color:#e5eef7!important}
 body:has(.research-wrap) .research-body{padding:20px 26px 24px!important;margin-bottom:10px!important;font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,sans-serif!important;font-size:15px!important;line-height:1.74!important;letter-spacing:-.01em!important}
@@ -206,8 +207,8 @@ body:has(.research-wrap) .research-footer a{color:#a9bfd2!important;text-decorat
   body:has(.research-wrap) .research-body h3{font-size:1rem!important}
   body:has(.research-wrap) .research-body p{font-size:15px!important;line-height:1.72!important}
   body:has(.research-wrap) .toc{padding:8px 9px!important}
-  body:has(.research-wrap) .toc ol{columns:2!important}
-  body:has(.research-wrap) .toc li{padding:3px 7px!important}
+  body:has(.research-wrap) .toc ol{columns:2!important;padding-left:22px!important}
+  body:has(.research-wrap) .toc li{padding:3px 7px 3px 1px!important}
   body:has(.research-wrap) .toc a{font-size:10.8px!important;line-height:1.34!important}
   body:has(.research-wrap) .flow{grid-template-columns:repeat(2,minmax(0,1fr))!important}
   body:has(.research-wrap) .flow div{padding:7px 5px!important;font-size:11.5px!important}
