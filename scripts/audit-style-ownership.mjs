@@ -166,7 +166,7 @@ function normalizedCss(value) {
 
 function hasCanonicalReturnShape(blocks) {
   const compact = normalizedCss(blocks.join('\n'));
-  return canonicalReturnTokens.every(token => compact.includes(token));
+  return canonicalReturnTokens.every(token => compact.includes(normalizedCss(token)));
 }
 
 for (const relative of forbiddenLegacy) {
@@ -201,7 +201,7 @@ for (const indexFile of indexFiles) {
       /(^|\n)\s*h1(?:\s|,|\{)/m,
       /(^|\n)\s*\.app-shell(?:\s|,|\{)/m,
       /(^|\n)\s*\.wrap(?:\s|,|\{)/m,
-      /(^|\n)\s*\.container(?:\s|,|\{)/m,
+      /(^|\n)\s*\.container(?:\s|,|\{|:)/m,
       /(^|\n)\s*\.site-footer(?:\s|,|\{)/m
     ].filter(pattern => pattern.test(css)).length;
 
