@@ -1,0 +1,14 @@
+{
+  "id": "essential-vocabulary",
+  "publish": true,
+  "tracking": {
+    "paths": ["nexus/essential-vocabulary", "nexus/toeic-human-v2", "toeic-human-100"],
+    "freshDays": 14,
+    "staleDays": 60,
+    "count": {
+      "type": "static",
+      "value": 1000,
+      "label": "수능 필수 기준 어휘 + TOEIC 연동"
+    }
+  }
+}
