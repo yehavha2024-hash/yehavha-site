@@ -40,14 +40,22 @@ const linkedLocalCss = htmlFile => {
   return [...new Set(links)];
 };
 
-const walkHtml = (dir, out = []) => {
+const walkFiles = (dir, predicate, out = []) => {
   if (!fs.existsSync(dir)) return out;
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) walkHtml(full, out);
-    else if (entry.isFile() && entry.name.endsWith('.html')) out.push(normalize(full));
+    if (entry.isDirectory()) walkFiles(full, predicate, out);
+    else if (entry.isFile() && predicate(entry.name, full)) out.push(normalize(full));
   }
   return out;
+};
+
+const walkHtml = dir => walkFiles(dir, name => name.endsWith('.html'));
+const walkCss = dir => walkFiles(dir, name => name.endsWith('.css'));
+
+const extractSiteFooter = html => {
+  const match = html.match(/<footer\b[^>]*class=["'][^"']*\bsite-footer\b[^"']*["'][^>]*>[\s\S]*?<\/footer>/i);
+  return match ? match[0] : '';
 };
 
 // Nexus keeps one global business-metadata source in portal-v2.css.
@@ -108,28 +116,45 @@ for (const file of walkHtml('nexus')) {
   if (/맨 위로 이동/.test(html) && !/href=["']#top["']/.test(html)) fail(file, '맨 위로 이동 링크 대상이 #top이 아님');
 }
 
+// Reject stale patch/hotfix CSS that can later be re-linked and override canonical ownership.
+for (const root of STANDALONE_ROOTS) {
+  for (const file of walkCss(root)) {
+    const source = fs.readFileSync(file, 'utf8');
+    if (!hasSiteFooterSelector(source)) continue;
+    const base = path.basename(file);
+    if (/(?:override|patch|hotfix|footer[-_.]?(?:fix|override|patch|hotfix))/i.test(base)) {
+      fail(file, '사이트 Footer를 소유하는 임시 override/patch/hotfix CSS가 저장소에 남아 있음');
+    }
+  }
+}
+
 // Standalone projects must not rely on "last CSS wins". Each footer has one visual owner.
 const standaloneHtml = STANDALONE_ROOTS.flatMap(root => walkHtml(root));
 for (const file of standaloneHtml) {
   const html = fs.readFileSync(file, 'utf8');
-  const hasSiteFooter = /<footer\b[^>]*class=["'][^"']*\bsite-footer\b[^"']*["'][^>]*>/i.test(html);
+  const footerHtml = extractSiteFooter(html);
+  const hasSiteFooter = Boolean(footerHtml);
   const hasCopyright = html.includes(COPYRIGHT) || /Copyright ©/.test(html);
   if (!hasSiteFooter && !hasCopyright) continue;
 
-  if (!hasSiteFooter) fail(file, 'Copyright가 있으나 표준 site-footer DOM을 사용하지 않음');
-  if (!/data-footer-standard=["']v2["']/.test(html)) fail(file, 'Footer 표준 버전은 v2여야 함');
-  if (!html.includes(BUSINESS_FOOTER)) fail(file, '독립 프로젝트 Footer에 사업자정보 원문이 없음');
-  if (!html.includes(COPYRIGHT)) fail(file, '표준 Copyright 문구가 없음');
-  if (!/문의\s*<a[^>]+href=["']mailto:kimbrighth@gmail\.com["']/s.test(html)) fail(file, '표준 문의 mailto가 없음');
-  if (!/AI 활용 안내/.test(html)) fail(file, 'AI 활용 안내가 없음');
-  if (!/href=["']#top["']/.test(html) || !/맨 위로/.test(html)) fail(file, '맨 위로 이동 링크가 없음');
+  if (!hasSiteFooter) {
+    fail(file, 'Copyright가 있으나 표준 site-footer DOM을 사용하지 않음');
+    continue;
+  }
+  if (!/data-footer-standard=["']v2["']/.test(footerHtml)) fail(file, 'Footer 표준 버전은 v2여야 함');
+  if (!footerHtml.includes(BUSINESS_FOOTER)) fail(file, '독립 프로젝트 Footer에 사업자정보 원문이 없음');
+  if (!footerHtml.includes(COPYRIGHT)) fail(file, '표준 Copyright 문구가 없음');
+  if (!/문의\s*<a[^>]+href=["']mailto:kimbrighth@gmail\.com["']/s.test(footerHtml)) fail(file, '표준 문의 mailto가 없음');
+  if (!/AI 활용 안내/.test(footerHtml)) fail(file, 'AI 활용 안내가 없음');
+  if (!/href=["']#top["']/.test(footerHtml) || !/맨 위로/.test(footerHtml)) fail(file, '맨 위로 이동 링크가 없음');
 
-  const businessAt = html.indexOf(BUSINESS_FOOTER);
-  const copyrightAt = html.indexOf(COPYRIGHT);
-  const contactAt = html.indexOf('mailto:kimbrighth@gmail.com');
-  const aiAt = html.indexOf('AI 활용 안내');
-  const topAt = html.indexOf('href="#top"') >= 0 ? html.indexOf('href="#top"') : html.indexOf("href='#top'");
-  if (!(businessAt < copyrightAt && copyrightAt < contactAt && contactAt < aiAt && aiAt < topAt)) {
+  const businessAt = footerHtml.indexOf(BUSINESS_FOOTER);
+  const copyrightAt = footerHtml.indexOf(COPYRIGHT);
+  const contactAt = footerHtml.indexOf('mailto:kimbrighth@gmail.com');
+  const aiAt = footerHtml.indexOf('AI 활용 안내');
+  const topMatch = footerHtml.match(/href=["']#top["']/);
+  const topAt = topMatch ? topMatch.index : -1;
+  if (!(businessAt >= 0 && businessAt < copyrightAt && copyrightAt < contactAt && contactAt < aiAt && aiAt < topAt)) {
     fail(file, 'Footer 표시 순서가 사업자정보 → Copyright → 문의 → AI 활용 안내 → 맨 위로 이동 순서가 아님');
   }
 
@@ -154,11 +179,6 @@ for (const file of standaloneHtml) {
   }
   if (specificOwners.length === 1 && !hasCenteredSiteFooter(specificOwners[0].source)) {
     fail(specificOwners[0].file, 'canonical site-footer 소유자에 중앙정렬 규칙이 없음');
-  }
-  for (const owner of owners) {
-    if (/(?:footer|override|patch|hotfix)[^/]*\.css$/i.test(path.basename(owner.file))) {
-      fail(owner.file, 'Footer 전용 patch/override/hotfix CSS를 별도 소유자로 두지 말고 기존 canonical CSS에 통합해야 함');
-    }
   }
 }
 
