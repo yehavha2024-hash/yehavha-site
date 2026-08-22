@@ -20,29 +20,42 @@ Copyright·문의·AI 활용 안내·맨 위로 이동은 실제 HTML 요소에 
 
 사업자정보는 Nexus 전체에서 동일한 법적 메타데이터이므로 `nexus/portal-v2.css`의 전역 단일 원본으로 관리할 수 있습니다. 일반 Footer의 `.footer-meta::before`와 전문 연구 Footer의 `.research-footer-meta::before`가 동일 사업자정보를 표시합니다. 사업자정보를 수정할 때는 이 단일 원본만 수정합니다.
 
-독립 저장소 프로젝트는 해당 프로젝트의 공통 Footer 코드에서 동일한 사업자정보를 한 번만 관리합니다.
+독립 프로젝트와 독립 웹앱은 사업자정보를 해당 페이지의 실제 Footer HTML에 기록합니다. 독립 프로젝트에서는 CSS 가상요소를 사업자정보의 데이터 원본으로 사용하지 않습니다.
+
+## 단일 소유권 원칙
+
+하나의 페이지에서 사이트 Footer의 레이아웃·정렬·타이포그래피를 결정하는 CSS 파일은 **정확히 1개**만 둡니다. 기본 스타일, 상세문서 스타일, 콘텐츠 스타일, 반응형 보조 스타일이 같은 `.site-footer`를 다시 정의하지 않습니다.
+
+- `project-standard.css`가 존재하는 프로젝트는 원칙적으로 이 파일이 사이트 Footer의 최종 시각 소유자가 됩니다.
+- 단일 `style.css`만 사용하는 독립 웹앱은 그 파일 하나가 Footer를 소유할 수 있습니다.
+- `styles.css`와 `project-standard.css`가 동시에 `.site-footer`를 정의하여 로드 순서에 따라 결과가 달라지는 구조를 금지합니다.
+- 모바일 미디어쿼리에서 Footer를 다시 `left` 또는 `right`로 변경하지 않습니다.
+- `footer-fix.css`, `footer-override.css`, `patch.css`, `hotfix.css` 같은 임시 오버라이드 파일을 새로 만들어 문제를 덮지 않습니다. 수정은 기존 canonical 소유 파일에 통합합니다.
+- 상세 다이얼로그 안의 `.detail-footer`, `.document-footer` 등 문서 내부 Footer는 사이트 Footer와 별도 구성요소로 취급하며 선택자를 명확히 스코프합니다.
+
+이 원칙의 목적은 CSS cascade의 “마지막 파일이 이김” 방식으로 오류를 숨기는 것이 아니라, 애초에 같은 UI 영역을 여러 파일이 동시에 통제하지 못하게 하는 것입니다.
 
 ## 표준 DOM
 
+독립 프로젝트의 기본 구조는 다음과 같습니다.
+
 ```html
-<footer class="footer reader-site-footer" data-footer-standard="v2">
-  <div class="container">
-    <div class="footer-card">
-      <strong>프로젝트명</strong>
-      <p>프로젝트 영문명 또는 성격 설명</p>
-      <div class="footer-meta">
-        <!-- 사업자정보 단일 원본 -->
-        <p>Copyright © 이명훈 2026. All rights reserved.</p>
-        <p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p>
-        <p class="ai-disclosure">AI 활용 안내: ...</p>
-        <p><a href="#top">맨 위로 이동 ↑</a></p>
-      </div>
-    </div>
+<footer class="site-footer" data-footer-standard="v2">
+  <div class="footer-brand">
+    <strong>프로젝트명</strong>
+    <p>프로젝트 영문명 또는 성격 설명</p>
+  </div>
+  <div class="footer-meta">
+    <p class="business-meta">스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈</p>
+    <p>Copyright © 이명훈 2026. All rights reserved.</p>
+    <p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p>
+    <p class="ai-disclosure">AI 활용 안내: ...</p>
+    <a href="#top">맨 위로 이동 ↑</a>
   </div>
 </footer>
 ```
 
-클래스명은 프로젝트 구조에 따라 달라질 수 있지만 시각적 결과와 표시 순서는 동일해야 합니다.
+Nexus 내부 페이지는 전역 Footer 컴포넌트 구조를 사용할 수 있으며, 사업자정보만 `nexus/portal-v2.css`의 승인된 단일 원본을 공유합니다. 클래스명은 프로젝트 구조에 따라 달라질 수 있지만 시각적 결과와 표시 순서는 동일해야 합니다.
 
 ## 타이포그래피
 
@@ -85,10 +98,42 @@ AI 활용 안내는 Copyright와 문의 다음에 배치하며 콘텐츠 성격�
 
 AI를 단독 저자나 최종 검증주체로 표현하지 않습니다.
 
+## 캐시·배포 원칙
+
+형식이 최신 코드에서 과거 코드로 되돌아오는 것처럼 보이는 현상을 막기 위해 배포 자산의 버전과 브라우저 캐시도 Footer 구조와 함께 관리합니다.
+
+- canonical CSS를 수정하면 해당 HTML의 CSS query version도 함께 갱신합니다.
+- Service Worker가 있는 웹앱은 HTML·CSS 구조 변경 시 cache name을 함께 올립니다.
+- Service Worker 활성화 시 이전 cache name은 삭제합니다.
+- HTML·CSS·JS 같은 코드 자산은 가능한 한 network-first 또는 재검증 가능한 정책을 사용하며, 과거 캐시를 영구 우선하지 않습니다.
+- 오래된 파일을 단순히 뒤에 다시 로드하여 새 형식을 덮는 방식으로 캐시 문제를 해결하지 않습니다.
+
+## 업데이트 경계
+
+콘텐츠 업데이트와 UI 표준 업데이트의 책임을 분리합니다.
+
+- 데이터·연구내용·문안 업데이트는 Footer DOM, `data-footer-standard`, canonical Footer CSS 소유권을 임의로 변경하지 않습니다.
+- 콘텐츠 JS·JSON이 사이트 Footer DOM이나 정렬을 재작성하지 않습니다.
+- Footer 규격 변경이 필요한 경우 이 표준과 canonical CSS를 먼저 변경한 뒤 각 프로젝트에 반영합니다.
+- 날짜가 오래된 파일이라는 이유만으로 데이터·연구 모듈을 삭제하지 않습니다. 실제 런타임 중복 소유·덮어쓰기·미사용이 확인된 파일만 제거합니다.
+
+## 자동 회귀 방지
+
+`Web Architecture Audit`는 `main` push와 pull request에서 자동 실행합니다. `scripts/audit-business-footer.mjs`는 독립 프로젝트를 포함하여 다음 항목을 검사합니다.
+
+- Footer 표준 `v2`
+- 사업자정보·Copyright·문의·AI 안내·맨 위로 이동의 존재와 순서
+- 사이트 Footer의 CSS 소유자 1개 원칙
+- 중앙정렬 규칙 존재 여부
+- 별도 footer patch/override/hotfix CSS의 재도입 여부
+
+이 감사가 실패하는 변경은 형식 회귀로 간주합니다.
+
 ## 재발 방지 원칙
 
-- Footer 정렬을 프로젝트별 CSS에서 임의로 `left`, `right`, 2열 grid로 변경하지 않습니다.
+- Footer 정렬을 프로젝트별 보조 CSS에서 임의로 `left`, `right`, 2열 grid로 변경하지 않습니다.
 - 공통 Footer를 별도 상세페이지에서 다시 정의하지 않습니다.
 - 사업자정보·Copyright·문의·AI 안내의 글자크기를 본문 크기에 따라 확대하지 않습니다.
 - 새 프로젝트를 추가할 때 Nexus 메인 Footer와 시각적으로 대조한 뒤 배포합니다.
-- 구조 감사에서는 사업자정보 존재 여부, 표시 순서, 중앙정렬, 타이포그래피 규격을 함께 검사합니다.
+- 수정 시 새 override 파일을 만드는 대신 기존 소유 파일에서 충돌 원인을 제거합니다.
+- 구조 감사에서는 사업자정보 존재 여부, 표시 순서, 중앙정렬, 타이포그래피, CSS 소유권을 함께 검사합니다.
