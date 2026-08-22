@@ -74,8 +74,8 @@
     "status": "최근 업데이트",
     "statusTone": "fresh",
     "lastUpdated": "2026-08-22",
-    "contentCount": 1000,
-    "contentLabel": "수능 필수 기준 어휘 + TOEIC 연동"
+    "contentCount": null,
+    "contentLabel": "콘텐츠"
   },
   "legal-research-track": {
     "id": "legal-research-track",
