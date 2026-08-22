@@ -68,6 +68,15 @@
     "contentCount": 100,
     "contentLabel": "심화 학습일"
   },
+  "essential-vocabulary": {
+    "id": "essential-vocabulary",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-22",
+    "contentCount": 1000,
+    "contentLabel": "수능 필수 기준 어휘 + TOEIC 연동"
+  },
   "legal-research-track": {
     "id": "legal-research-track",
     "managedBy": "github",
