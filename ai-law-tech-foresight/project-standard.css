@@ -79,16 +79,17 @@ main,.method-bar,.browser-section,.index-section{background:transparent!importan
 .lineage-step{padding:9px 10px!important;background:#102f52!important;border-color:rgba(122,184,255,.20)!important}
 .lineage-step-number{color:#9bc7f2!important}.lineage-step-title{color:#e1ebf5!important}.master-link-status{color:#b9cadd!important}.master-link-status a{color:#9ed0ff!important}
 
-/* Copyright footer standard: visible two-column hierarchy. */
-.site-footer{padding:32px 0!important;background:#06111d!important;color:#8fa1b3!important;border-top:1px solid rgba(255,255,255,.10)!important;font-family:var(--project-font)!important;letter-spacing:0!important}
-.site-footer .wrap{display:grid!important;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)!important;gap:28px!important;align-items:start!important}
-.site-footer strong{display:block!important;color:#d7e1ea!important;font-size:13px!important;font-weight:600!important;line-height:1.5!important}
-.site-footer .footer-brand p{margin:4px 0 0!important;color:#8fa1b3!important;font-size:11px!important;line-height:1.7!important}
-.site-footer .footer-note{text-align:right!important}
-.site-footer .footer-note p{margin:2px 0!important;color:#8fa1b3!important;font-size:12px!important;line-height:1.7!important}
-.site-footer .footer-note .ai-disclosure{font-size:11.5px!important;line-height:1.7!important}
-.site-footer a{color:#a9bfd2!important;font-size:12px!important;text-decoration:none!important}
-.site-footer .top-link{display:inline-block!important;margin-top:6px!important;font-size:11px!important;font-weight:600!important}
+/* Site footer has one visual owner: this file. */
+.site-footer[data-footer-standard="v2"]{padding:32px 0 36px!important;background:#06111d!important;color:#8fa1b3!important;border-top:1px solid rgba(255,255,255,.10)!important;font-family:var(--project-font)!important;letter-spacing:0!important;text-align:center!important}
+.site-footer[data-footer-standard="v2"] .wrap{display:block!important;text-align:center!important}
+.site-footer[data-footer-standard="v2"] strong{display:block!important;color:#d7e1ea!important;font-size:13px!important;font-weight:600!important;line-height:1.5!important}
+.site-footer[data-footer-standard="v2"] .footer-brand p{margin:4px 0 0!important;color:#8fa1b3!important;font-size:11px!important;line-height:1.7!important}
+.site-footer[data-footer-standard="v2"] .footer-note{max-width:960px!important;margin:16px auto 0!important;padding-top:15px!important;border-top:1px solid rgba(255,255,255,.10)!important;text-align:center!important}
+.site-footer[data-footer-standard="v2"] .footer-note p{margin:3px 0!important;color:#8fa1b3!important;font-size:12px!important;line-height:1.7!important;text-align:center!important}
+.site-footer[data-footer-standard="v2"] .business-meta{color:#a9bac9!important}
+.site-footer[data-footer-standard="v2"] .footer-note .ai-disclosure{margin-top:6px!important;font-size:11.5px!important;line-height:1.7!important}
+.site-footer[data-footer-standard="v2"] a{color:#a9bfd2!important;font-size:12px!important;text-decoration:none!important}
+.site-footer[data-footer-standard="v2"] .top-link{display:inline-block!important;margin-top:6px!important;font-size:11px!important;font-weight:600!important}
 
 @media(max-width:900px){
   .stats{justify-content:flex-start!important}
@@ -114,8 +115,8 @@ main,.method-bar,.browser-section,.index-section{background:transparent!importan
   .research-question{margin-top:5px!important;padding:7px 8px!important}
   .row-action{grid-column:2!important;margin-top:0!important}
   .detail-button{width:100%!important}
-  .site-footer .wrap{grid-template-columns:1fr!important;gap:14px!important}
-  .site-footer .footer-note{text-align:left!important;padding-top:13px!important;border-top:1px solid rgba(255,255,255,.10)!important}
+  .site-footer[data-footer-standard="v2"]{padding:28px 0 32px!important}
+  .site-footer[data-footer-standard="v2"] .footer-note{margin-top:14px!important;padding-top:13px!important;text-align:center!important}
 }
 @media(max-width:430px){
   .method-bar .flow,.research-model .flow{grid-template-columns:1fr 1fr!important}
