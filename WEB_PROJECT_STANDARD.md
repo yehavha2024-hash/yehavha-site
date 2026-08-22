@@ -1,6 +1,6 @@
 # YEHAVHA 웹 프로젝트 구조 규격
 
-Version: 2.1  
+Version: 2.2  
 Updated: 2026-08-22
 
 ## 1. 기본 원칙
@@ -45,6 +45,9 @@ Nexus 하위 콘텐츠 CSS는 이를 다시 정의하지 않습니다. 기능별
 - production 페이지에 대규모 `<style>` 또는 `<script>` 블록을 두지 않습니다.
 - 새 상세문서가 생겨도 페이지 전용 CSS를 만들지 않고 기존 document type을 사용합니다.
 - 콘텐츠 JS·JSON이 사이트 Footer DOM을 생성·교체하지 않습니다.
+- `맨 위로 이동`은 기본적으로 `href="#top"`의 native fragment navigation을 사용합니다.
+- `#top` 대상은 sticky/fixed header가 아니라 `body`, `main`, 또는 문서 시작점의 비고정 요소에 둡니다. sticky header 자체에 `id="top"`을 두지 않습니다.
+- `맨 위로 이동`에 `onclick`, `scrollTo()`, `scrollTop` 보정 스크립트를 인라인으로 붙이지 않습니다.
 
 ## 4. CSS
 
@@ -83,6 +86,7 @@ Nexus 하위 콘텐츠 CSS는 이를 다시 정의하지 않습니다. 기능별
 - `<style>`을 동적으로 만들지 않습니다.
 - 전역 MutationObserver를 사용하지 않습니다.
 - 같은 콘텐츠를 별도 후처리 JS가 재렌더링하지 않습니다.
+- 상세문서를 JS로 렌더링하는 경우에도 Footer 법적 고지 구조를 임의의 구버전 문자열로 별도 소유하지 않습니다. 필요한 상세 Footer 구조는 해당 상세문서 canonical 규격과 감사 대상에 포함합니다.
 
 ## 6. 상세문서
 
@@ -114,7 +118,9 @@ Nexus 메인과 동일한 중앙정렬 단일열을 사용하며 콘텐츠 CSS�
 6. AI 활용 안내
 7. 맨 위로 이동
 
-사이트 Footer와 상세문서 내부의 `.detail-footer`, `.document-footer`는 다른 구성요소입니다. 상세문서 Footer는 반드시 dialog/document 범위로 스코프하여 사이트 Footer 소유권과 충돌하지 않게 합니다.
+사업자정보·Copyright·문의는 하나의 3행 법적 메타 블록으로 취급합니다. 이 세 행의 `margin`은 `0`으로 두어 행 사이에 별도 여백을 만들지 않습니다. AI 활용 안내는 3행 블록과 구분하기 위해 위쪽 간격을 둘 수 있고, `맨 위로 이동`도 AI 활용 안내와 별도로 간격을 둘 수 있습니다.
+
+사이트 Footer와 상세문서 내부의 `.detail-footer`, `.document-footer`는 다른 구성요소입니다. 상세문서 Footer는 반드시 dialog/document 범위로 스코프하여 사이트 Footer 소유권과 충돌하지 않게 합니다. 상세문서에 사업자정보·Copyright·문의가 표시되는 경우에도 동일한 3행 무간격 규칙을 적용합니다.
 
 ## 8. 캐시
 
@@ -133,7 +139,7 @@ Nexus 배포영역의 캐시 정책은 `_headers`가 소유합니다. Service Wo
 
 - `scripts/audit-web-architecture.mjs`: 전체 웹 구조
 - `scripts/audit-style-ownership.mjs`: CSS 소유권·중복 레이어·patch 파일
-- `scripts/audit-business-footer.mjs`: 사업자정보·Footer canonical 규격·Footer 단일 CSS 소유권
+- `scripts/audit-business-footer.mjs`: 사업자정보·Footer canonical 규격·Footer 단일 CSS 소유권·3행 무간격·native top fragment
 - `scripts/audit-repo-hygiene.mjs`: 삭제파일·불필요 생성물·단일 원본
 
 `Web Architecture Audit`은 `pull_request`와 `main` push에서 자동 실행하고 수동 실행도 허용합니다. “메일 반복을 피하기 위해 수동만 유지” 같은 과거 정책은 폐기합니다. 감사 실패는 구조 회귀로 취급하며 원인을 canonical owner에서 수정합니다.
