@@ -1,6 +1,6 @@
 {
-  "version": "3.2",
-  "description": "500~650단어 집중독해와 분리형 핵심어휘·숙어 학습을 결합한 100일 TOEIC+TEPS 커버리지 정책",
+  "version": "3.3",
+  "description": "500~650단어 집중독해와 분리형 핵심어휘·숙어 학습에 고등학교·수능 코퍼스 빈도 참고층을 결합한 100일 TOEIC+TEPS 커버리지 정책",
   "totalDays": 100,
   "blockSize": 10,
   "readingDesign": {
@@ -21,6 +21,20 @@
       "toeic-specific",
       "general-core",
       "academic-book-extension"
+    ],
+    "referenceVocabularyLayers": [
+      {
+        "id": "high-school-csat-1000",
+        "headwords": 1000,
+        "sourceFiles": [
+          "high-school-csat-1000.csv",
+          "high-school-csat-1000-meanings.csv"
+        ],
+        "role": "고등학교·수능 영어 비문학 어휘의 빈도·우선순위 참고층",
+        "sourceProfile": "영어 지문 코퍼스 약 20만 단어 분석, CEFR B1 이상, 초·중학 기초어휘와 구체 명사 제외",
+        "integrationRule": "기존 NGSL·TSL·NAWL 마스터 풀을 대체하거나 본문에 강제 삽입하지 않고, 중복 어휘의 우선 학습·재노출·TEPS 및 원서 확장 판단에 참고한다.",
+        "sourcePreservationRule": "제공자료의 표제어·빈도·한국어 뜻을 원자료 층에서 그대로 보존하고 정규화·뜻 검수는 별도 단계로 수행한다."
+      }
     ],
     "separationRule": "본문 독해량과 어휘 커버리지량을 분리하여 본문 가독성을 희생하지 않는다.",
     "extensionRule": "활성 2,520개 밖의 어휘는 TEPS 확장, 문제해설, 재독 및 후속 확장학습의 선별 풀로 사용한다."
@@ -54,6 +68,7 @@
     "semanticPlacementRequired": true,
     "removeLexicalBridgeFiller": true,
     "fullMasterPoolInReadingRequired": false,
+    "fullHighSchoolCsatLayerInReadingRequired": false,
     "countToeicReading": true,
     "countVocabularyStudy": true,
     "countPhraseStudy": true,
