@@ -20,7 +20,8 @@ const forbiddenLegacy = [
   'toeic-human-100/nexus-shell.css',
   'toeic-human-100/v2-ui-theme.css',
   'nexus/research-groups.css',
-  'nexus/articles/public-layout-20260820.css'
+  'nexus/articles/public-layout-20260820.css',
+  'nexus/intelligence-briefing/compact-top.css'
 ];
 
 const coreStyles = new Set([
@@ -38,6 +39,15 @@ const coreStyles = new Set([
   'nexus/nexus-standard.css',
   'nexus/articles/articles.css'
 ]);
+
+const returnClasses = ['back-link', 'nexus-link', 'back'];
+const canonicalReturnTokens = [
+  'min-height:36px',
+  'padding:0 12px',
+  'border-radius:10px',
+  'background:#081a30',
+  'font-size:11.5px'
+];
 
 let errors = 0;
 let warnings = 0;
@@ -71,11 +81,72 @@ function cssRefs(html) {
   return [...html.matchAll(/<link\s+[^>]*href=["']([^"']+\.css(?:\?[^"']*)?)["'][^>]*>/gi)].map(match => match[1]);
 }
 
+function cssImports(css) {
+  return [...css.matchAll(/@import\s+(?:url\()?['"]?([^'"\)\s]+\.css(?:\?[^'"\)\s]*)?)/gi)].map(match => match[1]);
+}
+
+function resolveCssRef(fromFile, ref) {
+  const clean = ref.split('?')[0].split('#')[0];
+  return normalize(path.relative(process.cwd(), path.resolve(path.dirname(fromFile), clean)));
+}
+
+function collectCssClosure(indexFile, refs) {
+  const out = [];
+  const seen = new Set();
+  const visit = (fromFile, ref) => {
+    if (/^(?:https?:|data:)/i.test(ref)) return;
+    const resolved = resolveCssRef(fromFile, ref);
+    if (seen.has(resolved)) return;
+    seen.add(resolved);
+    if (!fs.existsSync(resolved)) return;
+    out.push(resolved);
+    const css = read(resolved);
+    for (const imported of cssImports(css)) visit(resolved, imported);
+  };
+  for (const ref of refs) visit(indexFile, ref);
+  return out;
+}
+
 function isPageLocalCore(resolved, indexFile) {
   if (coreStyles.has(resolved)) return true;
   const base = path.basename(resolved).toLowerCase();
   if (!['style.css', 'styles.css'].includes(base)) return false;
   return normalize(path.dirname(resolved)) === normalize(path.dirname(indexFile));
+}
+
+function selectorOwnsClass(selector, className) {
+  return selector.split(',').some(part => {
+    const trimmed = part.trim();
+    return new RegExp(`^\\.${className}(?:$|[\\s:.#\\[])`).test(trimmed);
+  });
+}
+
+function ownerBlocks(css, className) {
+  const blocks = [];
+  const re = /([^{}]+)\{([^{}]*)\}/g;
+  for (const match of css.matchAll(re)) {
+    if (selectorOwnsClass(match[1], className)) blocks.push(`${match[1]}{${match[2]}}`);
+  }
+  return blocks;
+}
+
+function activeReturnClass(html) {
+  for (const match of html.matchAll(/<a\b[^>]*class=["']([^"']*)["'][^>]*>([\s\S]*?)<\/a>/gi)) {
+    if (!/YEHAVHA\s+NEXUS/i.test(match[2])) continue;
+    const classes = match[1].split(/\s+/);
+    const found = returnClasses.find(name => classes.includes(name));
+    if (found) return found;
+  }
+  return null;
+}
+
+function normalizedCss(value) {
+  return value.replace(/\/\*[\s\S]*?\*\//g, '').replace(/!important/g, '').replace(/\s+/g, '');
+}
+
+function hasCanonicalReturnShape(blocks) {
+  const compact = normalizedCss(blocks.join('\n'));
+  return canonicalReturnTokens.every(token => compact.includes(token));
 }
 
 for (const relative of forbiddenLegacy) {
@@ -90,14 +161,12 @@ for (const indexFile of indexFiles) {
 
   for (const ref of refs) {
     if (/^(?:https?:|data:)/i.test(ref)) continue;
-    const clean = ref.split('?')[0].split('#')[0];
-    const absolute = path.resolve(path.dirname(indexFile), clean);
-    const resolved = normalize(path.relative(process.cwd(), absolute));
-    if (seen.has(resolved)) fail(indexFile, `동일 CSS 중복 로드: ${clean}`);
+    const resolved = resolveCssRef(indexFile, ref);
+    if (seen.has(resolved)) fail(indexFile, `동일 CSS 중복 로드: ${ref.split('?')[0]}`);
     seen.add(resolved);
     referencedCss.add(resolved);
     if (!fs.existsSync(resolved)) {
-      fail(indexFile, `CSS 참조 대상 없음: ${clean}`);
+      fail(indexFile, `CSS 참조 대상 없음: ${ref.split('?')[0]}`);
       continue;
     }
 
@@ -118,6 +187,27 @@ for (const indexFile of indexFiles) {
 
     if (declaresNexusTheme) fail(resolved, '기능 CSS가 전역 Nexus 테마를 다시 선언함. canonical style로 통합 필요');
     else if (broadSelectors >= 4) fail(resolved, `기능 CSS가 전역 레이아웃 선택자 ${broadSelectors}종을 동시에 소유함`);
+  }
+
+  const returnClass = activeReturnClass(html);
+  if (returnClass) {
+    const closure = collectCssClosure(indexFile, refs);
+    const owners = [];
+    for (const cssFile of closure) {
+      const blocks = ownerBlocks(read(cssFile), returnClass);
+      if (blocks.length) owners.push({ source: cssFile, blocks });
+    }
+    const inlineStyles = [...html.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)].map(match => match[1]);
+    inlineStyles.forEach((css, i) => {
+      const blocks = ownerBlocks(css, returnClass);
+      if (blocks.length) owners.push({ source: `${indexFile}#inline-style-${i + 1}`, blocks });
+    });
+
+    if (!owners.length) fail(indexFile, `YEHAVHA NEXUS 복귀 셀 .${returnClass}의 스타일 소유자가 없음`);
+    if (owners.length > 1) fail(indexFile, `YEHAVHA NEXUS 복귀 셀 .${returnClass} 중복 소유: ${owners.map(x => x.source).join(', ')}`);
+    if (owners.length === 1 && !hasCanonicalReturnShape(owners[0].blocks)) {
+      fail(owners[0].source, `.${returnClass}이 표준 복귀 셀 규격(36px · 12px · radius 10 · #081a30 · 11.5px)과 불일치`);
+    }
   }
 }
 
@@ -148,6 +238,9 @@ if (fs.existsSync(portal)) {
     '스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈'
   ]) if (!css.includes(token)) fail(portal, `중앙 UI 토큰/법적 메타데이터 누락: ${token}`);
   if (!/\.back-link\s*,\s*\.nexus-link\s*,\s*\.back/.test(css)) fail(portal, 'Nexus 복귀 링크 중앙 소유권 누락');
+  const returnBlocks = ownerBlocks(css, 'back-link');
+  if (!hasCanonicalReturnShape(returnBlocks)) fail(portal, 'Nexus 복귀 링크가 표준 셀 규격과 불일치');
+  if (/@import[^;]*(?:fix|patch|hotfix|override|compact-top)/i.test(css)) fail(portal, '공통 shell이 patch/override CSS를 import함');
   if (!/\.footer-card[^\{]*\{[^}]*text-align:center/is.test(css)) fail(portal, 'Footer 중앙정렬 canonical 규칙 누락');
 }
 
