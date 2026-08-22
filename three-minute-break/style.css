@@ -64,7 +64,7 @@ h1{margin:0;font-size:32px;line-height:1.15;letter-spacing:-.04em;color:var(--nx
 .site-footer[data-footer-standard="v2"] .footer-brand strong{display:block;color:#d7e1ea;font-size:13px;font-weight:600;line-height:1.5}
 .site-footer[data-footer-standard="v2"] .footer-brand p{margin:4px 0 0;color:#8fa1b3;font-size:11px;line-height:1.7}
 .site-footer[data-footer-standard="v2"]>.footer-meta{margin:13px auto 0;padding-top:12px;border-top:1px solid var(--nxs-line);text-align:center!important}
-.site-footer[data-footer-standard="v2"] .footer-meta p{margin:3px 0;color:var(--nxs-subtle);font-size:12px;line-height:1.65;text-align:center!important}
+.site-footer[data-footer-standard="v2"] .footer-meta p{margin:0;color:var(--nxs-subtle);font-size:12px;line-height:1.65;text-align:center!important}
 .site-footer[data-footer-standard="v2"] .footer-meta .business-meta{color:#a9bac9}
 .site-footer[data-footer-standard="v2"] .footer-meta .ai-disclosure{margin-top:6px;font-size:11.5px;line-height:1.7}
 .site-footer[data-footer-standard="v2"] .footer-meta a{color:#bdd9f2;font-size:11px;font-weight:600;text-decoration:none}
