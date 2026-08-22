@@ -1,4 +1,4 @@
-const CACHE_NAME = "three-minute-break-v15-core-style";
+const CACHE_NAME = "three-minute-break-v16-canonical-footer";
 const ASSETS = [
   "./",
   "./index.html",
