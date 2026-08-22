@@ -91,15 +91,17 @@ h1{font-size:var(--project-h1)!important;font-weight:780!important;line-height:1
 .open-detail{color:#91bae0!important;font-size:13px!important;font-weight:750!important}.open-detail:hover{color:#c7ddf1!important}
 .empty{padding:16px!important;border-color:var(--nxs-line)!important}
 
-/* Public footer standard. */
-.site-footer{font-family:var(--project-font)!important;background:#06111d!important;color:var(--nxs-subtle)!important;border-top:1px solid var(--nxs-line)!important;padding:32px max(24px,calc((100% - 1160px)/2))!important;font-size:12px!important;line-height:1.7!important;letter-spacing:0!important;text-align:left!important;display:flex;justify-content:space-between;align-items:flex-start;gap:28px}
-.site-footer>div:first-child strong{display:block;font-size:13px!important;font-weight:600!important;color:#d7e1ea!important}
-.site-footer>div:first-child p{margin:4px 0 0!important;font-size:11px!important;color:#8fa1b3!important}
-.site-footer .footer-note{text-align:right!important;max-width:660px}
-.site-footer .footer-note p{margin:2px 0!important;font-size:12px!important;color:#8fa1b3!important}
-.site-footer .ai-disclosure{margin-top:4px!important;font-size:11.5px!important;line-height:1.7!important}
-.site-footer a{color:#a9bfd2!important;text-decoration:none!important}
-.site-footer .footer-note>a{display:inline-block;margin-top:6px!important;font-size:11px!important;font-weight:600!important}
+/* Site footer has one visual owner: this file. */
+.site-footer[data-footer-standard="v2"]{font-family:var(--project-font)!important;background:#06111d!important;color:#8fa1b3!important;border-top:1px solid rgba(255,255,255,.09)!important;padding:32px max(24px,calc((100% - 1160px)/2)) 36px!important;font-size:12px!important;line-height:1.7!important;letter-spacing:0!important;text-align:center!important;display:block!important}
+.site-footer[data-footer-standard="v2"]>div:first-child{text-align:center!important}
+.site-footer[data-footer-standard="v2"]>div:first-child strong{display:block;font-size:13px!important;font-weight:600!important;color:#d7e1ea!important}
+.site-footer[data-footer-standard="v2"]>div:first-child p{margin:4px 0 0!important;font-size:11px!important;color:#8fa1b3!important}
+.site-footer[data-footer-standard="v2"] .footer-note{max-width:960px!important;margin:16px auto 0!important;padding-top:15px!important;border-top:1px solid rgba(255,255,255,.09)!important;text-align:center!important}
+.site-footer[data-footer-standard="v2"] .footer-note p{margin:3px 0!important;font-size:12px!important;color:#8fa1b3!important;text-align:center!important}
+.site-footer[data-footer-standard="v2"] .business-meta{color:#a9bac9!important}
+.site-footer[data-footer-standard="v2"] .ai-disclosure{margin-top:6px!important;font-size:11.5px!important;line-height:1.7!important}
+.site-footer[data-footer-standard="v2"] a{color:#a9bfd2!important;text-decoration:none!important}
+.site-footer[data-footer-standard="v2"] .footer-note>a{display:inline-block;margin-top:6px!important;font-size:11px!important;font-weight:600!important}
 .site-footer>.footer-top-link{display:none!important}
 
 /* Dialog colors stay scoped here; dimensions and type are owned by document-controls.css. */
@@ -128,8 +130,8 @@ h1{font-size:var(--project-h1)!important;font-weight:780!important;line-height:1
   .card{padding:12px 13px!important}.card h3{font-size:17px!important}
   .filter-btn{font-size:12.5px!important;border-radius:8px!important}
   .badge,.level,.card-keywords span,.exam-chips span,.meta-chips span{font-size:11.5px!important}
-  .site-footer{display:block;padding:28px 16px!important}
-  .site-footer .footer-note{text-align:left!important;margin-top:14px;padding-top:13px;border-top:1px solid var(--nxs-line)!important}
+  .site-footer[data-footer-standard="v2"]{padding:28px 16px 32px!important;text-align:center!important}
+  .site-footer[data-footer-standard="v2"] .footer-note{margin-top:14px!important;padding-top:13px!important;text-align:center!important}
 }
 @media(max-width:430px){
   .standard-grid{grid-template-columns:1fr!important}
