@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#071627">
+  <meta name="description" content="수능·고등학교 필수 어휘와 TOEIC 핵심 단어·숙어를 한곳에서 반복 암기하는 영어 필수 어휘 웹앱">
+  <title>영어 필수 어휘 | YEHAVHA NEXUS</title>
+  <link rel="stylesheet" href="style.css?v=20260822-1">
+  <script src="data-highschool-01.js?v=20260822-1" defer></script>
+  <script src="data-highschool-02.js?v=20260822-1" defer></script>
+  <script src="data-highschool-03.js?v=20260822-1" defer></script>
+  <script src="data-highschool-04.js?v=20260822-1" defer></script>
+  <script src="data-highschool-05.js?v=20260822-1" defer></script>
+  <script src="../toeic-human-v2/data.js?v=20260822" defer></script>
+  <script src="../toeic-human-v2/learning-data.js?v=20260822" defer></script>
+  <script src="https://yehavha-toeicman.pages.dev/content.js" defer></script>
+  <script src="app.js?v=20260822-1" defer></script>
+</head>
+<body id="top">
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../">← YEHAVHA NEXUS</a>
+      <span class="header-label">VOCABULARY MEMORY</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">HIGH SCHOOL · CSAT · TOEIC</p>
+        <h1>영어 필수 어휘</h1>
+        <p class="subtitle">수능 · TOEIC 단어/숙어 암기</p>
+        <p class="lead">강의나 문제풀이를 덜어내고 단어와 숙어 자체를 반복해서 보는 암기용 웹앱입니다. 고등학교 필수 어휘 1,000개와 기존 TOEIC 학습자료의 어휘를 합쳐 중복 표제어를 통합하며, 자료가 늘어날수록 전체 어휘도 계속 확장됩니다.</p>
+        <div class="stats" aria-label="어휘 현황">
+          <span>전체 단어 <b id="totalWords">-</b></span>
+          <span>수능 필수 <b id="highSchoolCount">1,000</b></span>
+          <span>TOEIC 어휘 <b id="toeicCount">-</b></span>
+          <span>숙어·연어 <b id="phraseCount">-</b></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace wrap">
+      <div class="mode-tabs" role="tablist" aria-label="학습 유형">
+        <button class="mode-tab active" data-mode="word" type="button">단어</button>
+        <button class="mode-tab" data-mode="phrase" type="button">숙어</button>
+      </div>
+
+      <div class="toolbar">
+        <div class="source-filters" id="sourceFilters" aria-label="출처 필터">
+          <button class="filter active" data-source="all" type="button">전체</button>
+          <button class="filter" data-source="수능" type="button">수능 필수 1,000</button>
+          <button class="filter" data-source="TOEIC" type="button">TOEIC</button>
+        </div>
+        <label class="search-box"><span>검색</span><input id="searchInput" type="search" placeholder="영어 또는 한글 뜻 검색" autocomplete="off"></label>
+      </div>
+
+      <section class="memory-card" id="memoryCard" aria-live="polite">
+        <div class="card-topline"><div id="sourceBadges" class="source-badges"></div><span id="positionLabel">-</span></div>
+        <div id="term" class="term">불러오는 중...</div>
+        <div id="meaning" class="meaning"></div>
+        <div id="meta" class="meta"></div>
+        <div id="relations" class="relations"></div>
+      </section>
+
+      <div class="card-actions">
+        <button id="prevBtn" type="button">← 이전</button>
+        <button id="reviewBtn" type="button">다시 보기</button>
+        <button id="knownBtn" type="button">외움</button>
+        <button id="randomBtn" type="button">무작위</button>
+        <button id="nextBtn" type="button">다음 →</button>
+      </div>
+      <p class="progress-note" id="progressNote"></p>
+    </section>
+  </main>
+
+  <footer class="site-footer" data-footer-standard="v2">
+    <div class="wrap footer-card">
+      <strong>영어 필수 어휘</strong>
+      <p>High School · CSAT · TOEIC Vocabulary Memory</p>
+      <div class="footer-meta">
+        <p>스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈</p>
+        <p>Copyright © 이명훈 2026. All rights reserved.</p>
+        <p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p>
+        <p class="ai-disclosure">AI 활용 안내: 어휘자료의 정리·중복통합·관련어 연결에 생성형 AI를 일부 활용하며, 원자료의 표제어·빈도·뜻과 최종 편집은 운영자가 관리합니다.</p>
+        <p><a href="#top">맨 위로 이동 ↑</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
