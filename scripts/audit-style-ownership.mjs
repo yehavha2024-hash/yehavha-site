@@ -41,6 +41,26 @@ const coreStyles = new Set([
 ]);
 
 const returnClasses = ['back-link', 'nexus-link', 'back'];
+const requiredReturnPages = new Set([
+  'ai-law-tech-foresight/index.html',
+  'legal-philosophy/index.html',
+  'legal-knowledge/index.html',
+  'three-minute-break/index.html',
+  'toeic-human-100/index.html',
+  'nexus/ai-legal-glossary/index.html',
+  'nexus/ai-music-archive/index.html',
+  'nexus/ai-trends/index.html',
+  'nexus/articles/index.html',
+  'nexus/education-hub/index.html',
+  'nexus/government-ax/index.html',
+  'nexus/initiatives/index.html',
+  'nexus/intelligence-briefing/index.html',
+  'nexus/living-law/index.html',
+  'nexus/publishing/index.html',
+  'nexus/research-track/index.html',
+  'nexus/toeic-human-v2/index.html',
+  'nexus/university/index.html'
+]);
 const canonicalReturnTokens = [
   'min-height:36px',
   'padding:0 12px',
@@ -189,7 +209,11 @@ for (const indexFile of indexFiles) {
     else if (broadSelectors >= 4) fail(resolved, `기능 CSS가 전역 레이아웃 선택자 ${broadSelectors}종을 동시에 소유함`);
   }
 
+  const normalizedIndex = normalize(indexFile);
   const returnClass = activeReturnClass(html);
+  if (requiredReturnPages.has(normalizedIndex) && !returnClass) {
+    fail(indexFile, 'YEHAVHA NEXUS 복귀 셀 누락');
+  }
   if (returnClass) {
     const closure = collectCssClosure(indexFile, refs);
     const owners = [];
