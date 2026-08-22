@@ -37,16 +37,54 @@ function auditForbiddenArtifacts() {
 function auditWorkflowPermissions() {
   const dir = path.join(ROOT, '.github/workflows');
   if (!fs.existsSync(dir)) return;
-  const writeAllowlist = new Set([
-    'refresh-nexus-status.yml',
-    'toeic-master-lexicon-build.yml'
+
+  // Repository write access is exceptional. Each approved writer owns only the
+  // generated data paths listed here; UI shell/CSS/HTML are never workflow outputs.
+  const writePolicies = new Map([
+    ['refresh-nexus-status.yml', {
+      required: ['git add nexus/project-status.json'],
+      allowedPathTokens: ['nexus/project-status.json']
+    }],
+    ['toeic-master-lexicon-build.yml', {
+      required: ['git add toeic-human-100/master-lexicon-v2.json'],
+      allowedPathTokens: ['toeic-human-100/master-lexicon-v2.json']
+    }],
+    ['intelligence-briefing-archive.yml', {
+      required: ['git add -- nexus/intelligence-briefing/archive nexus/intelligence-briefing/archive-index.json'],
+      allowedPathTokens: ['nexus/intelligence-briefing/archive', 'nexus/intelligence-briefing/archive-index.json']
+    }]
   ]);
+
   for (const file of fs.readdirSync(dir).filter(name => /\.ya?ml$/i.test(name))) {
     const source = fs.readFileSync(path.join(dir, file), 'utf8');
     const hasContentsWrite = /^\s*contents:\s*write\s*$/m.test(source);
-    if (hasContentsWrite && !writeAllowlist.has(file)) error(`.github/workflows/${file}`, '저장소 쓰기 권한이 불필요하게 부여됨');
+    const policy = writePolicies.get(file);
+
+    if (hasContentsWrite && !policy) {
+      error(`.github/workflows/${file}`, '저장소 쓰기 권한이 불필요하게 부여됨');
+      continue;
+    }
     if (!hasContentsWrite && !/^permissions:\s*\n(?:[ \t]+.*\n)*?[ \t]+contents:\s*read\s*$/m.test(source)) {
       warn(`.github/workflows/${file}`, 'contents: read 권한이 명시되지 않음');
+    }
+    if (!hasContentsWrite || !policy) continue;
+
+    for (const token of policy.required) {
+      if (!source.includes(token)) error(`.github/workflows/${file}`, `승인된 write 대상 명령 누락: ${token}`);
+    }
+    if (/git\s+add\s+(?:-A|--all|\.)\b/.test(source) || /git\s+commit\s+-a\b/.test(source) || /git\s+push\s+[^\n]*(?:--force|-f)\b/.test(source)) {
+      error(`.github/workflows/${file}`, 'write workflow가 광범위 add/commit 또는 force push를 사용함');
+    }
+
+    for (const match of source.matchAll(/git\s+add\s+(?:--\s+)?([^\n]+)/g)) {
+      const addArgs = match[1].trim();
+      const tokens = addArgs.split(/\s+/).filter(Boolean);
+      for (const token of tokens) {
+        if (token.startsWith('-')) continue;
+        if (!policy.allowedPathTokens.some(allowed => token === allowed)) {
+          error(`.github/workflows/${file}`, `승인 범위를 벗어난 git add 대상: ${token}`);
+        }
+      }
     }
   }
 }
@@ -180,12 +218,48 @@ function auditSingleSourceRules() {
   }
 }
 
+function auditStandardsDrift() {
+  const webStandard = 'WEB_PROJECT_STANDARD.md';
+  const copyrightStandard = 'COPYRIGHT_STANDARD.md';
+  const architectureWorkflow = '.github/workflows/web-architecture-audit.yml';
+
+  if (exists(webStandard)) {
+    const source = read(webStandard);
+    for (const token of [
+      '한 기능에 한 소유자',
+      '사이트 Footer를 소유하는 파일을 정확히 1개',
+      '`pull_request`와 `main` push에서 자동 실행',
+      '자동 workflow는 자신이 명시적으로 소유하는 데이터·산출물만 수정'
+    ]) {
+      if (!source.includes(token)) error(webStandard, `최신 구조 규격 누락: ${token}`);
+    }
+    if (/수동 실행을 유지합니다/.test(source)) error(webStandard, '폐기된 수동-only 감사 정책이 다시 들어옴');
+  }
+
+  if (exists(copyrightStandard)) {
+    const source = read(copyrightStandard);
+    for (const token of ['단일 소유권 원칙', '정확히 1개', '캐시·배포 원칙', '자동 회귀 방지']) {
+      if (!source.includes(token)) error(copyrightStandard, `Footer 최신 규격 누락: ${token}`);
+    }
+  }
+
+  if (exists(architectureWorkflow)) {
+    const source = read(architectureWorkflow);
+    if (!/pull_request:/.test(source)) error(architectureWorkflow, 'PR 구조 감사 트리거 누락');
+    if (!/push:\s*\n\s*branches:\s*\n\s*- main/m.test(source)) error(architectureWorkflow, 'main push 구조 감사 트리거 누락');
+    if (!source.includes('node scripts/audit-business-footer.mjs')) error(architectureWorkflow, 'Footer canonical 감사 실행 누락');
+    if (!source.includes('node scripts/audit-repo-hygiene.mjs')) error(architectureWorkflow, '저장소 위생 감사 실행 누락');
+    if (!source.includes('node scripts/audit-style-ownership.mjs')) error(architectureWorkflow, 'CSS 소유권 감사 실행 누락');
+  }
+}
+
 auditForbiddenArtifacts();
 auditWorkflowPermissions();
 auditServiceWorkerAssets('three-minute-break');
 auditServiceWorkerAssets('toeic-human-100');
 auditToeicCanonicalOwnership();
 auditSingleSourceRules();
+auditStandardsDrift();
 
 console.log(`Repository hygiene audit: ${errors} error(s), ${warnings} warning(s)`);
 if (errors) process.exit(1);
