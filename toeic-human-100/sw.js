@@ -1,4 +1,4 @@
-const CACHE = "toeic-human-100-v13-project-standard";
+const CACHE = "toeic-human-100-v14-canonical-footer";
 const ASSETS = [
   "./",
   "index.html",
