@@ -30,8 +30,9 @@ h1{font-size:var(--project-h1)!important;font-weight:780!important;line-height:1
 .principle-line span{font-size:13.5px!important;line-height:1.58!important}
 
 /* Main navigation and page rhythm. */
-.nexus-link,.back-link{display:inline-flex!important;align-items:center;min-height:32px;margin-bottom:14px!important;padding:0 9px;border:1px solid rgba(155,194,231,.20);border-radius:8px;color:#b8cce0!important;background:rgba(255,255,255,.035);text-decoration:none!important;font-size:11px!important;font-weight:800!important;letter-spacing:.06em!important;line-height:1!important}
-.nexus-link:hover,.back-link:hover{background:rgba(255,255,255,.07);border-color:rgba(155,194,231,.34)}
+.nexus-link,.back-link{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:36px!important;margin:0 0 12px!important;padding:0 12px!important;border:1px solid rgba(143,190,255,.24)!important;border-radius:10px!important;background:#081a30!important;color:#eef6ff!important;text-decoration:none!important;font-size:11.5px!important;font-weight:800!important;letter-spacing:.04em!important;line-height:1!important}
+.nexus-link:hover,.back-link:hover{background:var(--nxs-panel-strong)!important;border-color:rgba(143,190,255,.42)!important;color:#fff!important}
+.nexus-link:focus-visible,.back-link:focus-visible{outline:2px solid rgba(143,190,255,.65)!important;outline-offset:3px!important}
 .site-header{padding:30px 0 32px!important;background:linear-gradient(180deg,#081a30,#071225)!important;color:var(--nxs-text)!important;border-color:var(--nxs-line)!important}
 .method-bar,.index-section{padding:28px 0!important}
 .browser-section{padding:30px 0 34px!important}
@@ -99,7 +100,7 @@ main,.method-bar,.browser-section,.index-section{background:transparent!importan
   .site-header{padding:24px 0 26px!important}
   .method-bar,.index-section,.browser-section,.thesis-section{padding:24px 0!important}
   .lead{font-size:14.5px!important;line-height:1.68!important}
-  .method-head>p,.browser-head p,.section-title p,.thesis-box p,.row-summary,.research-question,.index-card p,.index-card li,.master-link-status{font-size:14px!important;line-height:1.66!important}
+  .method-head>p,.browser-head p,.section-title p,.thesis-box p,.row-summary,.research-question,.index-card p,.index-card li,.master-link-status{font-size:14px!important;line-height:1.66!important;color:var(--nxs-muted)!important}
   .controls,.stats,.research-grid,.thesis-box{grid-template-columns:1fr!important}
   .method-bar .flow,.research-model .flow{grid-template-columns:repeat(2,minmax(0,1fr))!important}
   .method-bar .flow>span,.research-model .flow>span{min-height:0!important;padding:19px 8px 7px!important;font-size:13.5px!important}
