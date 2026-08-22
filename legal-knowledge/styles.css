@@ -19,7 +19,8 @@ body{margin:0;background:var(--paper);color:var(--ink);line-height:1.75}
 a{color:inherit}
 .hero{background:linear-gradient(135deg,var(--navy-950),var(--navy-800));color:#fff;border-bottom:1px solid rgba(255,255,255,.08)}
 .hero-inner{max-width:1160px;margin:0 auto;padding:64px 28px 56px}
-.back-link{display:inline-flex;text-decoration:none;font-size:13px;letter-spacing:.08em;color:#c8d4e2;margin-bottom:42px}
+.back-link{display:inline-flex;align-items:center;justify-content:center;min-height:36px;margin:0 0 12px;padding:0 12px;border:1px solid rgba(143,190,255,.24);border-radius:10px;background:#081a30;color:#eef6ff;text-decoration:none;font-size:11.5px;font-weight:800;letter-spacing:.04em;line-height:1}
+.back-link:hover{background:var(--navy-800);border-color:rgba(143,190,255,.42);color:#fff}.back-link:focus-visible{outline:2px solid rgba(143,190,255,.65);outline-offset:3px}
 .eyebrow,.section-kicker{font-size:12px;font-weight:700;letter-spacing:.18em;color:var(--accent);text-transform:uppercase}
 .hero .eyebrow{color:#d5ad69}
 h1,h2{font-family:"Noto Serif KR",serif;margin:0}
