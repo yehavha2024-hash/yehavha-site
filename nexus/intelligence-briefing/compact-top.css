@@ -1,0 +1,15 @@
+/* Intelligence briefing compact header override. Scoped by #generated to avoid changing other Nexus pages. */
+@supports selector(body:has(#generated)) {
+  body:has(#generated) header.hero#top {
+    padding: 0 0 8px !important;
+  }
+  body:has(#generated) header.hero#top .back {
+    min-height: 18px !important;
+    margin: 0 0 2px !important;
+    padding: 0 !important;
+    line-height: 1.1 !important;
+  }
+  body:has(#generated) header.hero#top .hero-card {
+    margin-top: 0 !important;
+  }
+}
