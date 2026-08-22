@@ -7,7 +7,7 @@
     "staleDays": 30,
     "count": {
       "type": "static",
-      "value": 24,
+      "value": 220,
       "label": "핵심 용어"
     }
   }
