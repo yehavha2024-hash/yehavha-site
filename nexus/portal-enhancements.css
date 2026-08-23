@@ -125,7 +125,7 @@
 }
 
 /* 2026-08-21 University icon cleanup and Nexus strategy-system hero visual. */
-.hero-main>img{display:block!important;width:100%!important;max-width:100%!important;height:auto!important;margin:18px 0 14px!important;border:1px solid rgba(122,184,255,.22)!important;border-radius:18px!important;background:#071426!important;box-shadow:0 16px 34px rgba(0,0,0,.18)!important;content:url('./assets/nexus-strategy-map.svg')!important}
+.hero-main>img{display:block!important;width:100%!important;max-width:100%!important;height:auto!important;margin:18px 0 14px!important;border:1px solid rgba(122,184,255,.22)!important;border-radius:18px!important;background:#ffffff!important;box-shadow:0 16px 34px rgba(0,0,0,.18)!important;content:url('./assets/nexus-strategy-map.svg')!important}
 .category-university .category-icon-glyph{display:none!important}
 .category-university .category-icon::before{content:''!important;display:block!important;width:30px!important;height:30px!important;background:center/contain no-repeat url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCcgZmlsbD0nbm9uZScgc3Ryb2tlPScjZjBmN2ZmJyBzdHJva2Utd2lkdGg9JzEuOCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz48cGF0aCBkPSdNMyA5aDE4TDEyIDQgMyA5WicvPjxwYXRoIGQ9J001IDEwdjhNOSAxMHY4TTE1IDEwdjhNMTkgMTB2OE0zIDIwaDE4Jy8+PC9zdmc+')!important}
 .quick-link-university .quick-icon svg{display:none!important}
