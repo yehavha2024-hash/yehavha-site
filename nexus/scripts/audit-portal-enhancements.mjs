@@ -13,6 +13,13 @@ const fail = (source, message) => {
 };
 const unique = values => new Set(values).size === values.length;
 const isoDate = value => /^\d{4}-\d{2}-\d{2}$/.test(String(value || ''));
+const STATUS_KEYS = new Set([
+  'id','managedBy','status','statusTone','lastUpdated','contentCount','contentLabel',
+  'contentReviewedAt','baselineAt','baselineLabel'
+]);
+const CONTENT_KEYS = new Set([
+  'title','description','url','category','meta','actionLabel','external','researchGroup','eyebrow','icon','iconClass'
+]);
 
 function auditPortalSources() {
   const projectsPath = 'nexus/projects.json';
@@ -60,6 +67,10 @@ function auditPortalSources() {
   for (const id of Object.keys(status)) {
     if (!approvedIds.has(id)) fail(statusPath, `승인 manifest가 소유하지 않는 상태 id: ${id}`);
     const item = status[id];
+    for (const key of Object.keys(item || {})) {
+      if (CONTENT_KEYS.has(key)) fail(statusPath, `${id}: 표시 콘텐츠 필드 '${key}'는 projects.json만 소유할 수 있음`);
+      if (!STATUS_KEYS.has(key)) fail(statusPath, `${id}: 허용되지 않은 상태 필드 '${key}'`);
+    }
     if (item.contentReviewedAt && !isoDate(item.contentReviewedAt)) fail(statusPath, `${id} contentReviewedAt 형식 오류`);
     if (item.baselineAt && !isoDate(item.baselineAt)) fail(statusPath, `${id} baselineAt 형식 오류`);
     const review = reviewById.get(id) || {};
