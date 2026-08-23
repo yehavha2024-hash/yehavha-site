@@ -51,6 +51,7 @@
   installKoreaClock();
 
   const categoryIcons = {
+    commentary: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19h4L19 9a2.1 2.1 0 0 0-3-3L6 16l-1 3Z"/><path d="m14.5 7.5 2 2"/><path d="M12.5 19H19"/></svg>',
     intelligence: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 19 6.2v5.1c0 4.4-2.9 7.4-7 9.2-4.1-1.8-7-4.8-7-9.2V6.2L12 3.5Z"/><path d="M8.2 12h2.1l1.2-2.5 1.8 5 1.1-2.5h1.7"/></svg>',
     university: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3.2 8.5 8.8-4.2 8.8 4.2-8.8 4.2-8.8-4.2Z"/><path d="M6.2 11.2v5.3c3.7 2.2 7.9 2.2 11.6 0v-5.3M20.8 8.5v5.3"/></svg>',
     apps: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="17" height="16" rx="3"/><path d="M3.5 8.2h17M7.2 12h3.8v3.8H7.2zM14.2 12h2.8M14.2 15.8h2.8"/></svg>',
@@ -63,12 +64,13 @@
   };
 
   const portalTiers = [
-    { id: 'intelligence', number: '00', eyebrow: 'STRATEGIC INTELLIGENCE', title: '정보·전략', description: '국내외 핵심 정보를 선별·검증·분석해 판단에 필요한 변화와 위험·기회를 가장 먼저 제시합니다.', categoryIds: ['intelligence'], variant: 'primary' },
-    { id: 'university', number: '01', eyebrow: 'NEXUS UNIVERSITY', title: 'NEXUS UNIVERSITY', description: '대학 수준의 체계적 학습과 연구 기반을 연결합니다.', categoryIds: ['university'], variant: 'primary' },
-    { id: 'core', number: '02', eyebrow: 'CORE WORKSPACES', title: '핵심 작업영역', description: '직접 사용하는 웹서비스와 장기 연구 기반을 배치합니다.', categoryIds: ['apps', 'research'], variant: 'primary' },
-    { id: 'publicsector', number: '03', eyebrow: 'GOVERNMENT AX STRATEGY & RESPONSE', title: '정부 AX 전략·대응', description: '중앙정부·지방자치단체의 AX 정책과 실행을 다루고 EU·UN·주요국 정부의 국제·비교정책으로 확장합니다.', categoryIds: ['publicsector'], variant: 'primary' },
-    { id: 'create', number: '04', eyebrow: 'CREATE · LEARN · SHARE', title: '제작·교육·공개', description: '교육·출판·미디어 결과물을 한 층위로 묶습니다.', categoryIds: ['education', 'publishing', 'media'], variant: 'compact' },
-    { id: 'ideas', number: '05', eyebrow: 'PUBLIC IDEAS', title: '아이디어 허브', description: '공개 가능한 아이디어와 프로젝트 후보를 한곳에서 확인합니다.', categoryIds: ['initiatives'], variant: 'compact' }
+    { id: 'commentary', number: '00', eyebrow: 'NEXUS COMMENTARY', title: '넥서스 논평', description: '국내외 주요 현안에 대한 판단·비판·제언을 제시합니다.', categoryIds: ['commentary'], variant: 'primary' },
+    { id: 'intelligence', number: '01', eyebrow: 'STRATEGIC INTELLIGENCE', title: '정보·전략', description: '국내외 핵심 정보를 선별·검증·분석해 판단에 필요한 변화와 위험·기회를 가장 먼저 제시합니다.', categoryIds: ['intelligence'], variant: 'primary' },
+    { id: 'university', number: '02', eyebrow: 'NEXUS UNIVERSITY', title: 'NEXUS UNIVERSITY', description: '대학 수준의 체계적 학습과 연구 기반을 연결합니다.', categoryIds: ['university'], variant: 'primary' },
+    { id: 'core', number: '03', eyebrow: 'CORE WORKSPACES', title: '핵심 작업영역', description: '직접 사용하는 웹서비스와 장기 연구 기반을 배치합니다.', categoryIds: ['apps', 'research'], variant: 'primary' },
+    { id: 'publicsector', number: '04', eyebrow: 'GOVERNMENT AX STRATEGY & RESPONSE', title: '정부 AX 전략·대응', description: '중앙정부·지방자치단체의 AX 정책과 실행을 다루고 EU·UN·주요국 정부의 국제·비교정책으로 확장합니다.', categoryIds: ['publicsector'], variant: 'primary' },
+    { id: 'create', number: '05', eyebrow: 'CREATE · LEARN · SHARE', title: '제작·교육·공개', description: '교육·출판·미디어 결과물을 한 층위로 묶습니다.', categoryIds: ['education', 'publishing', 'media'], variant: 'compact' },
+    { id: 'ideas', number: '06', eyebrow: 'PUBLIC IDEAS', title: '아이디어 허브', description: '공개 가능한 아이디어와 프로젝트 후보를 한곳에서 확인합니다.', categoryIds: ['initiatives'], variant: 'compact' }
   ];
 
   const featuredDefinitions = [
@@ -135,6 +137,7 @@
   }
 
   function maturityFor(project) {
+    if (project.category === 'commentary') return { label: '논평', tone: 'research' };
     if (project.category === 'intelligence') return { label: '최우선 정보', tone: 'research' };
     if (project.category === 'initiatives') return { label: '아이디어', tone: 'idea' };
     if (project.category === 'research') return { label: '연구 운영', tone: 'research' };
@@ -504,7 +507,7 @@
       name: 'YEHAVHA Nexus',
       alternateName: '예하바 프로젝트 포털',
       url: canonicalUrl,
-      description: '전략정보·대학·웹앱·연구·정부 AX 전략·대응·출판·미디어·교육·아이디어 프로젝트를 연결하는 통합 포털',
+      description: '논평·전략정보·대학·웹앱·연구·정부 AX 전략·대응·출판·미디어·교육·아이디어 프로젝트를 연결하는 통합 포털',
       potentialAction: {'@type': 'SearchAction', target: `${canonicalUrl}?q={search_term_string}`, 'query-input': 'required name=search_term_string'},
       hasPart: (data.projects || []).map(project => ({'@type': 'WebPage', name: project.title, url: project.url, description: project.description}))
     });
@@ -529,7 +532,7 @@
     const tierIds = new Set(portalTiers.flatMap(tier => tier.categoryIds));
     const extraCategories = visibleCategories.filter(category => !tierIds.has(category.id));
     if (extraCategories.length) {
-      const extraTier = {id:'more',number:'06',eyebrow:'MORE',title:'기타 영역',description:'추가된 프로젝트 영역입니다.',categoryIds:extraCategories.map(category => category.id),variant:'compact'};
+      const extraTier = {id:'more',number:'07',eyebrow:'MORE',title:'기타 영역',description:'추가된 프로젝트 영역입니다.',categoryIds:extraCategories.map(category => category.id),variant:'compact'};
       const tierSection = renderTier(extraTier, visibleCategories, projects, researchGroups);
       if (tierSection) portalGrid.append(tierSection);
     }
