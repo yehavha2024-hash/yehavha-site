@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'scripts/normalize-nexus-icons-footer-20260823.mjs'
+      - '.github/workflows/nexus-icon-footer-normalize.yml'
 
 permissions:
   contents: write
