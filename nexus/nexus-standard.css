@@ -83,10 +83,10 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
 
 /* Main portal hierarchy v2 */
 .hero-card{position:relative;overflow:hidden;background:#ffffff!important}
-.hero-card::before{content:"";position:absolute;inset:-120px -80px auto auto;width:330px;height:330px;border-radius:50%;background:none;pointer-events:none}
-.hero-card::after{content:"";position:absolute;left:30px;right:30px;top:0;height:1px;background:none;pointer-events:none}
+.hero-card::before{content:"";position:absolute;inset:-120px -80px auto auto;width:330px;height:330px;border-radius:50%;background:#ffffff;pointer-events:none}
+.hero-card::after{content:"";position:absolute;left:30px;right:30px;top:0;height:1px;background:#ffffff;pointer-events:none}
 .hero-main{position:relative;z-index:1}
-.hero-main>img{border-color:rgba(143,190,255,.28)!important;box-shadow:0 20px 48px rgba(0,0,0,.34),0 0 0 1px rgba(122,184,255,.045)!important;filter:saturate(.9) contrast(1.03)}
+.hero-main>img{border-color:#cfd4dc!important;box-shadow:0 20px 48px rgba(0,0,0,.34),0 0 0 1px rgba(122,184,255,.045)!important;filter:saturate(.9) contrast(1.03)}
 
 .quick-links{display:grid!important;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px!important;margin-top:18px!important}
 .quick-link{display:grid!important;grid-template-columns:26px minmax(0,1fr) auto;gap:8px!important;align-items:center;min-width:0;min-height:52px!important;padding:8px 10px!important;border-radius:11px!important;background:#ffffff!important;border-color:#cfd4dc!important}
@@ -123,7 +123,7 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
 .portal-tier-operate .portal-tier-grid{grid-template-columns:1fr}
 
 .category-card{position:relative;margin:0!important;overflow:hidden;border-color:#cfd4dc!important;background:#ffffff!important}
-.category-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:none}
+.category-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:#ffffff}
 .category-title-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .category-title-row h2{margin:2px 0 4px}
 .category-count{flex:0 0 auto;color:#111111;font-size:8.5px;font-weight:850;letter-spacing:.08em}
@@ -139,13 +139,13 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
 .category-compact .item-card p{font-size:12.5px;line-height:1.66}
 .category-compact .item-actions{margin-top:13px}
 
-.category-apps::before{background:none}
-.category-research::before{background:none}
-.category-practice::before{background:none}
-.category-education::before{background:none}
-.category-publishing::before{background:none}
-.category-media::before{background:none}
-.category-initiatives::before{background:none}
+.category-apps::before{background:#ffffff}
+.category-research::before{background:#ffffff}
+.category-practice::before{background:#ffffff}
+.category-education::before{background:#ffffff}
+.category-publishing::before{background:#ffffff}
+.category-media::before{background:#ffffff}
+.category-initiatives::before{background:#ffffff}
 .category-apps .category-icon{color:#7fd0ff!important;background:linear-gradient(145deg,rgba(64,168,224,.17),rgba(54,116,167,.055))!important}
 .category-research .category-icon{color:#93bbff!important;background:linear-gradient(145deg,rgba(93,145,229,.18),rgba(78,120,194,.06))!important}
 .category-practice .category-icon{color:#7fe0d0!important;background:linear-gradient(145deg,rgba(67,190,167,.17),rgba(46,126,116,.055))!important}
@@ -193,7 +193,7 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
 /* Unified title icon hierarchy v1 */
 /* L1: portal tier title — medium outlined icon, number remains the structural index. */
 .tier-copy h2{display:flex;align-items:center;gap:8px;min-width:0}
-.tier-copy h2::before{display:grid;place-items:center;flex:0 0 26px;width:26px;height:26px;border:1px solid #cfd4dc;border-radius:8px;background:none;color:#111111;font-size:13px;font-weight:850;line-height:1}
+.tier-copy h2::before{display:grid;place-items:center;flex:0 0 26px;width:26px;height:26px;border:1px solid #cfd4dc;border-radius:8px;background:#ffffff;color:#111111;font-size:13px;font-weight:850;line-height:1}
 .portal-tier-core .tier-copy h2::before{content:"◆"}
 .portal-tier-create .tier-copy h2::before{content:"✦"}
 .portal-tier-operate .tier-copy h2::before{content:"◎"}
@@ -207,7 +207,7 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
 
 /* L3: subgroup title — compact boxed symbol directly before the subgroup heading. */
 .research-subgroup-head h3{display:flex;align-items:center;gap:8px;min-width:0}
-.research-subgroup-head h3::before{display:grid;place-items:center;flex:0 0 28px;width:28px;height:28px;border:1px solid #cfd4dc;border-radius:8px;background:none;color:#111111;font-size:12px;font-weight:850;line-height:1}
+.research-subgroup-head h3::before{display:grid;place-items:center;flex:0 0 28px;width:28px;height:28px;border:1px solid #cfd4dc;border-radius:8px;background:#ffffff;color:#111111;font-size:12px;font-weight:850;line-height:1}
 .research-subgroup-institute .research-subgroup-head h3::before{content:"◇"}
 .research-subgroup-track .research-subgroup-head h3::before{content:"↗"}
 .research-subgroup-knowledge .research-subgroup-head h3::before{content:"▦"}
