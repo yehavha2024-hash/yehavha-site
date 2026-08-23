@@ -1,97 +1,39 @@
-/* YEHAVHA NEXUS Visual Standard v4 — Legal Philosophy */
+/* YEHAVHA NEXUS Visual Standard v5 — Legal Philosophy
+   Canonical final theme only. Base files own structure, dimensions and content layout. */
 :root{
-  --nxs-bg:#071225;
-  --nxs-panel:rgba(8,18,38,.78);
-  --nxs-panel-solid:#0b1d33;
-  --nxs-panel-strong:#0d2948;
-  --nxs-text:#f2f6ff;
-  --nxs-muted:#c2cfdb;
-  --nxs-accent:#7ab8ff;
-  --nxs-line:rgba(255,255,255,.11);
+  --nxs-bg:#ffffff;
+  --nxs-panel:#ffffff;
+  --nxs-panel-solid:#f7f9fc;
+  --nxs-panel-strong:#eef3f8;
+  --nxs-text:#111111;
+  --nxs-muted:#4b5563;
+  --nxs-accent:#326da8;
+  --nxs-line:#cfd4dc;
   --nxs-font:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-apple-system,sans-serif;
-  --nxs-h1:clamp(34px,4.8vw,52px);
-  --nxs-h2:clamp(22px,3vw,28px);
-  --nxs-h3:18px;
 }
 *{box-sizing:border-box}
 html,body,button,input,select,textarea{font-family:var(--nxs-font)!important}
-html,body{background:var(--nxs-bg)!important}
-body{color:var(--nxs-text)!important;font-size:15px!important;line-height:1.76!important;letter-spacing:-.014em!important}
-.site-header{background:linear-gradient(180deg,#081a30,#071225)!important;border-color:var(--nxs-line)!important}
-h1{font-size:var(--nxs-h1)!important;line-height:1.15!important}
-h2{font-size:var(--nxs-h2)!important;line-height:1.3!important;color:var(--nxs-text)!important}
-h3,.card h3,.synthesis-head h3,.debate-top h3{font-size:var(--nxs-h3)!important;line-height:1.42!important;color:var(--nxs-text)!important}
-.lead,.synthesis-intro>p,.synthesis-proposition,.argument-step p,.synthesis-caution p,.debate-heading>p,.debate-thesis,.debate-sides p,.orientation-copy p,.card .thesis,.detail-head .lead-detail,.detail-section p,.detail-section li{font-size:14.5px!important;line-height:1.72!important;color:var(--nxs-muted)!important}
-.eyebrow,.badge,.number,.count,.keywords span,.doctoral-meta-row span{font-size:11px!important}
-.research-synthesis,.debate-section,.doctoral-citation-section,.orientation,.archive{background:transparent!important;border-color:var(--nxs-line)!important}
-.synthesis-card,.debate-card,.doctoral-citation-card,.controls,.card,.empty,.synthesis-detail,.debate-sides>div,.doctoral-block{background:var(--nxs-panel)!important;border-color:var(--nxs-line)!important;color:var(--nxs-text)!important;box-shadow:none!important}
-.synthesis-head,.synthesis-detail,.synthesis-caution,.doctoral-draft,.doctoral-caution,.doctoral-quote{background:var(--nxs-panel-solid)!important;border-color:var(--nxs-line)!important}
-.synthesis-head h3,.debate-top h3,.doctoral-summary-copy strong,.doctoral-source-head h4,.doctoral-block>strong{color:var(--nxs-text)!important}
-.synthesis-chain,.argument-step p,.synthesis-caution p,.debate-thesis,.debate-sides p,.doctoral-summary-copy small,.doctoral-source-head p,.doctoral-block p,.doctoral-quote-ko{color:var(--nxs-muted)!important}
-.doctoral-author-en,.doctoral-title-en{color:var(--nxs-text)!important}.doctoral-author-ko,.doctoral-title-ko{color:#a3b5c6!important}.doctoral-quote{color:#dce8f5!important}.doctoral-footnote{color:#d6e3f1!important}
-.doctoral-citation-summary span,.doctoral-meta-row span,.badge,.keywords span{min-height:23px!important;padding:3px 6px!important;background:#0f2945!important;border-color:rgba(122,184,255,.18)!important;color:#b9ccde!important;font-size:11.5px!important;line-height:1.2!important}
-.controls{padding:11px 12px!important;border-radius:12px!important}
-.controls input,.controls select,.open-btn{min-height:38px!important;background:#0d2948!important;color:#dce5ee!important;border-color:rgba(255,255,255,.14)!important;border-radius:8px!important;font-size:13px!important}
-.controls span{color:#b9c8d6!important;font-size:12px!important}.open-btn{font-size:13px!important}
-.lead,.synthesis-intro>p,.synthesis-proposition,.argument-step p,.synthesis-caution p,.debate-heading>p,.debate-thesis,.debate-sides p,.orientation-copy p,.card .thesis,.doctoral-summary-copy small,.doctoral-source-head p,.doctoral-block p,.doctoral-quote-ko{color:#c2cfdb!important}
-.synthesis-chain,.count,.number,.card h3 small,.doctoral-author-ko,.doctoral-title-ko{color:#a3b5c6!important}
-.synthesis-grid,.debate-grid,.debate-sides,.cards{gap:9px!important;align-items:start!important}
-.synthesis-card,.debate-card,.card,.debate-sides>div{height:auto!important;min-height:0!important;padding:13px 14px!important}
-.doctoral-block{padding:12px 13px!important}.synthesis-detail,.synthesis-caution,.doctoral-draft,.doctoral-caution,.doctoral-quote{padding:11px 12px!important}
+html,body{background:#fff!important}
+body{color:var(--nxs-text)!important;letter-spacing:-.014em!important}
+.site-header{background:#fff!important;color:var(--nxs-text)!important;border-color:var(--nxs-line)!important}
+h1,h2,h3,h4,.card h3,.synthesis-head h3,.debate-top h3{color:var(--nxs-text)!important}
+.lead,.synthesis-intro>p,.synthesis-proposition,.argument-step p,.synthesis-caution p,.debate-heading>p,.debate-thesis,.debate-sides p,.orientation-copy p,.card .thesis,.detail-head .lead-detail,.detail-section p,.detail-section li{color:var(--nxs-muted)!important}
+.eyebrow,.badge,.number,.count,.keywords span,.doctoral-meta-row span{color:var(--nxs-accent)!important}
+.research-synthesis,.debate-section,.doctoral-citation-section,.orientation,.archive{background:#fff!important;border-color:var(--nxs-line)!important}
+.synthesis-card,.debate-card,.doctoral-citation-card,.controls,.card,.empty,.synthesis-detail,.debate-sides>div,.doctoral-block,.synthesis-head,.synthesis-caution,.doctoral-draft,.doctoral-caution,.doctoral-quote{background:#fff!important;border-color:var(--nxs-line)!important;color:var(--nxs-text)!important;box-shadow:none!important}
+.synthesis-chain,.debate-thesis,.debate-sides p,.doctoral-summary-copy small,.doctoral-source-head p,.doctoral-block p,.doctoral-quote-ko,.doctoral-author-ko,.doctoral-title-ko{color:var(--nxs-muted)!important}
+.doctoral-author-en,.doctoral-title-en,.doctoral-summary-copy strong,.doctoral-source-head h4,.doctoral-block>strong{color:var(--nxs-text)!important}
+.doctoral-citation-summary span,.doctoral-meta-row span,.badge,.keywords span{background:#eaf3fb!important;border-color:rgba(50,109,168,.20)!important;color:#285f94!important}
+.controls input,.controls select,.open-btn{background:#fff!important;color:var(--nxs-text)!important;border-color:var(--nxs-line)!important;box-shadow:none!important}
+.controls input::placeholder{color:#7b8794!important}
+.open-btn{background:#326da8!important;color:#fff!important;border-color:#326da8!important}
+.nexus-link{background:#fff!important;color:#111!important;border-color:var(--nxs-line)!important;box-shadow:none!important}.nexus-link:hover{background:#f7f9fc!important;border-color:#aeb8c5!important}
 
-/* Site footer has one visual owner: this file. */
-.site-footer[data-footer-standard="v2"]{padding:32px 0 36px!important;background:#06111d!important;color:#8fa1b3!important;border-top:1px solid rgba(255,255,255,.09)!important;font-family:var(--nxs-font)!important;letter-spacing:0!important;text-align:center!important}
-.site-footer[data-footer-standard="v2"] .footer-inner{display:block!important;margin:0 auto!important;text-align:center!important}
-.site-footer[data-footer-standard="v2"] .footer-brand{text-align:center!important}
-.site-footer[data-footer-standard="v2"] .footer-brand strong{display:block!important;color:#d7e1ea!important;font-size:13px!important;font-weight:600!important;line-height:1.5!important}
-.site-footer[data-footer-standard="v2"] .footer-brand p{margin:5px 0 0!important;color:#8fa1b3!important;font-size:11px!important;line-height:1.7!important}
-.site-footer[data-footer-standard="v2"] .footer-meta{max-width:960px!important;margin:16px auto 0!important;padding-top:15px!important;border-top:1px solid rgba(255,255,255,.09)!important;text-align:center!important}
-.site-footer[data-footer-standard="v2"] .footer-meta p{margin:0!important;color:#8fa1b3!important;font-size:12px!important;line-height:1.7!important;text-align:center!important}
-.site-footer[data-footer-standard="v2"] .footer-meta .business-meta{color:#a9bac9!important}
-.site-footer[data-footer-standard="v2"] .footer-meta .ai-disclosure{margin-top:6px!important;font-size:11.5px!important;line-height:1.7!important}
-.site-footer[data-footer-standard="v2"] a{color:#a9bfd2!important;text-decoration:none!important}
-.site-footer[data-footer-standard="v2"] .top-link{display:inline-block!important;margin-top:4px!important;font-size:11px!important;font-weight:600!important}
+/* Footer: one light owner, DOM order remains authoritative. */
+.site-footer[data-footer-standard="v2"]{background:#fff!important;color:var(--nxs-muted)!important;border-top:1px solid var(--nxs-line)!important;font-family:var(--nxs-font)!important;letter-spacing:0!important;text-align:center!important}
+.site-footer[data-footer-standard="v2"] .footer-inner,.site-footer[data-footer-standard="v2"] .footer-brand,.site-footer[data-footer-standard="v2"] .footer-meta{text-align:center!important}
+.site-footer[data-footer-standard="v2"] .footer-brand strong{color:var(--nxs-text)!important}.site-footer[data-footer-standard="v2"] .footer-brand p,.site-footer[data-footer-standard="v2"] .footer-meta p{color:var(--nxs-muted)!important}.site-footer[data-footer-standard="v2"] .footer-meta{border-color:var(--nxs-line)!important}.site-footer[data-footer-standard="v2"] a{color:var(--nxs-accent)!important;text-decoration:none!important}
 
-/* Research dialog is the single light reading surface. */
-.detail-dialog{
-  --doc-bg:#f7f9fc;
-  --doc-panel:#ffffff;
-  --doc-panel-soft:#eef3f8;
-  --doc-text:#172335;
-  --doc-muted:#42586d;
-  --doc-subtle:#65788a;
-  --doc-blue:#2e679d;
-  --doc-line:#d7e0e9;
-  background:var(--doc-bg)!important;
-  color:var(--doc-text)!important;
-  border-color:#c6d2de!important;
-}
-.detail-dialog article,.detail-dialog .detail-body,.detail-dialog .detail-head,.detail-dialog .detail-section{background:var(--doc-bg)!important;color:var(--doc-text)!important}
-.detail-dialog article,.detail-dialog .detail-body{padding-top:26px!important;padding-bottom:30px!important}
-.detail-dialog .dialog-close{background:#eef3f8!important;color:#17324d!important;border-color:var(--doc-line)!important}
-.detail-dialog .detail-head{padding-bottom:16px!important;border-color:var(--doc-line)!important}
-.detail-dialog .detail-head .meta{color:#58758f!important;font-size:11.5px!important}
-.detail-dialog .detail-head h3,.detail-dialog .detail-section h4,.detail-dialog .works-block .subhead{color:#17324d!important}
-.detail-dialog .detail-head h3 small{color:#6c7f91!important}
-.detail-dialog .detail-head .lead-detail,.detail-dialog .detail-section p,.detail-dialog .detail-section li,.detail-dialog .study-list li,.detail-dialog .debate-list li,.detail-dialog .application-list li,.detail-dialog .reading-list li,.detail-dialog .work-list li{color:var(--doc-muted)!important;font-size:15px!important;line-height:1.76!important}
-.detail-dialog .detail-section{padding-top:18px!important;padding-bottom:18px!important;border-color:var(--doc-line)!important}
-.detail-dialog .detail-section h4{font-size:16.5px!important;line-height:1.42!important}
-.detail-dialog .detail-section .secno{color:var(--doc-blue)!important;font-size:11px!important}
-.detail-dialog .source-link,.detail-dialog .citation-link{color:#1f5f91!important}
-.detail-dialog .detail-focus,.detail-dialog .axis-explain-row,.detail-dialog .term-row,.detail-dialog .verification-note,.detail-dialog .research-conclusion,.detail-dialog .citation-item,.detail-dialog .citation-status,.detail-dialog .citation-row,.detail-dialog .citation-boundary,.detail-dialog .citation-boundary.caution{background:var(--doc-panel)!important;border-color:var(--doc-line)!important;color:var(--doc-text)!important;box-shadow:none!important}
-.detail-dialog .detail-focus{padding:10px 11px!important;background:var(--doc-panel-soft)!important;border-left-color:#6f9dca!important;color:#263f56!important}
-.detail-dialog .axis-explain-row strong,.detail-dialog .term-row strong,.detail-dialog .research-conclusion strong,.detail-dialog .citation-heading strong,.detail-dialog .citation-group-title,.detail-dialog .citation-boundary strong,.detail-dialog .citation-boundary.caution strong{color:#285b82!important}
-.detail-dialog .axis-explain-row p,.detail-dialog .term-row p,.detail-dialog .verification-note p,.detail-dialog .research-conclusion p,.detail-dialog .citation-status p,.detail-dialog .citation-text,.detail-dialog .citation-pinpoint,.detail-dialog .citation-title,.detail-dialog .citation-boundary p{color:var(--doc-muted)!important}
-.detail-dialog .citation-title{font-size:14.5px!important;line-height:1.68!important}.detail-dialog .citation-pinpoint{font-size:13.5px!important;line-height:1.66!important}.detail-dialog .citation-pinpoint strong{color:#58738c!important}
-.detail-dialog .citation-status span,.detail-dialog .citation-type,.detail-dialog .evidence-ready{background:#e3eee9!important;color:#285d49!important;border-color:#cbded4!important}.detail-dialog .citation-heading span{color:#6e8092!important}
-.detail-dialog .detail-footer{color:#65788a!important;border-color:var(--doc-line)!important;font-size:11.5px!important;line-height:1.7!important}.detail-dialog .detail-footer strong{color:#17324d!important;font-size:13px!important}.detail-dialog .detail-footer button{background:#173f60!important;color:#fff!important;border-color:#173f60!important}.detail-dialog .detail-footer-meta>p{margin:0!important;color:#65788a!important;line-height:1.7!important}.detail-dialog .detail-footer-meta>.business-meta{color:#526b81!important}.detail-dialog .detail-footer-meta>.ai-disclosure{margin-top:6px!important;color:#65788a!important;font-size:11px!important}.detail-dialog .detail-footer-meta a{color:#285f8a!important;text-decoration:none!important}
-
-@media(max-width:620px){
-  body{font-size:15px!important;line-height:1.74!important}
-  .lead,.synthesis-intro>p,.synthesis-proposition,.argument-step p,.synthesis-caution p,.debate-heading>p,.debate-thesis,.debate-sides p,.orientation-copy p,.card .thesis{font-size:14px!important;line-height:1.7!important}
-  .synthesis-card,.debate-card,.card,.debate-sides>div{padding:12px 13px!important}
-  .site-footer[data-footer-standard="v2"]{padding:28px 0 32px!important}
-  .site-footer[data-footer-standard="v2"] .footer-meta{margin-top:14px!important;padding-top:13px!important}
-  .detail-dialog .detail-head .lead-detail,.detail-dialog .detail-section p,.detail-dialog .detail-section li,.detail-dialog .study-list li,.detail-dialog .debate-list li,.detail-dialog .application-list li,.detail-dialog .reading-list li,.detail-dialog .work-list li{font-size:15px!important;line-height:1.74!important}
-  .detail-dialog .detail-section h4{font-size:16px!important}
-}
+/* Research dialog remains a light reading surface. */
+.detail-dialog{--doc-bg:#f7f9fc;--doc-panel:#fff;--doc-panel-soft:#eef3f8;--doc-text:#172335;--doc-muted:#42586d;--doc-blue:#2e679d;--doc-line:#d7e0e9;background:var(--doc-bg)!important;color:var(--doc-text)!important;border-color:#c6d2de!important}
+.detail-dialog article,.detail-dialog .detail-body,.detail-dialog .detail-head,.detail-dialog .detail-section{background:var(--doc-bg)!important;color:var(--doc-text)!important}.detail-dialog .dialog-close{background:#eef3f8!important;color:#17324d!important;border-color:var(--doc-line)!important}.detail-dialog .detail-head,.detail-dialog .detail-section{border-color:var(--doc-line)!important}.detail-dialog .detail-head h3,.detail-dialog .detail-section h4,.detail-dialog .works-block .subhead{color:#17324d!important}.detail-dialog .detail-head .lead-detail,.detail-dialog .detail-section p,.detail-dialog .detail-section li,.detail-dialog .study-list li,.detail-dialog .debate-list li,.detail-dialog .application-list li,.detail-dialog .reading-list li,.detail-dialog .work-list li{color:var(--doc-muted)!important}.detail-dialog .source-link,.detail-dialog .citation-link,.detail-dialog .secno{color:var(--doc-blue)!important}

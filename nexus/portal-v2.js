@@ -5,10 +5,7 @@
   const quickLinks = document.getElementById('quickLinks');
   const portalGrid = document.getElementById('portalGrid');
   const accessCount = document.getElementById('accessCount');
-  const topbar = document.querySelector('.topbar');
-  const portalMark = document.querySelector('.portal-mark');
-  const portalMarkDot = portalMark?.querySelector('.dot');
-  const portalMarkText = portalMark?.querySelector('span:last-child');
+  const portalMarkText = document.querySelector('.portal-mark span:last-child');
   const heroVisual = document.querySelector('.hero-main>img');
   const heroSubtitle = document.querySelector('.hero-main>h1>span');
   let toastTimer;
@@ -16,75 +13,36 @@
   let koreaClockTimer;
 
   const COUNTER_ENDPOINT = '/api/access';
-  const ENHANCEMENT_STYLES = './portal-enhancements.css?v=20260821-2005';
   const KOREA_TIME_ZONE = 'Asia/Seoul';
 
-  function ensureEnhancementStyles() {
-    if (document.querySelector('link[data-nexus-enhancements]')) return;
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = ENHANCEMENT_STYLES;
-    link.dataset.nexusEnhancements = 'true';
-    document.head.append(link);
-  }
-
-  ensureEnhancementStyles();
-
-  if (heroSubtitle) {
-    heroSubtitle.textContent = 'AI·AX 전략정보·지식·대응 시스템';
-  }
-
-  if (heroVisual) {
-    heroVisual.alt = '지식에서 전략으로, 전략에서 대응으로 이어지는 YEHAVHA NEXUS AI·AX 전략 시스템';
-  }
-
+  if (heroSubtitle) heroSubtitle.textContent = 'AI·AX 전략정보·지식·대응 시스템';
+  if (heroVisual) heroVisual.alt = '지식에서 전략으로, 전략에서 대응으로 이어지는 YEHAVHA NEXUS AI·AX 전략 시스템';
   if (accessCount) {
-    accessCount.textContent = '0';
+    accessCount.textContent = '확인 중';
     accessCount.hidden = false;
   }
 
   function updateKoreaClock() {
     if (!portalMarkText) return;
     const now = new Date();
-    const dateText = new Intl.DateTimeFormat('en-US', {
+    const dateText = new Intl.DateTimeFormat('en-CA', {
       timeZone: KOREA_TIME_ZONE,
       year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+      month: '2-digit',
+      day: '2-digit'
     }).format(now);
-    const timeText = new Intl.DateTimeFormat('en-US', {
+    const timeText = new Intl.DateTimeFormat('en-GB', {
       timeZone: KOREA_TIME_ZONE,
-      hour: 'numeric',
+      hour: '2-digit',
       minute: '2-digit',
-      hour12: true
+      hour12: false
     }).format(now);
-    portalMarkText.textContent = `${dateText} · ${timeText} KST (UTC+9)`;
+    portalMarkText.textContent = `${dateText} · ${timeText} KST`;
     portalMarkText.setAttribute('aria-label', `현재 한국 표준시 ${dateText} ${timeText}`);
   }
 
   function installKoreaClock() {
     if (!portalMarkText) return;
-    if (portalMarkDot && portalMark) {
-      portalMark.append(portalMarkDot);
-      portalMarkDot.style.display = 'none';
-    }
-    if (topbar) {
-      topbar.style.display = 'flex';
-      topbar.style.width = '100%';
-      topbar.style.alignItems = 'center';
-      topbar.style.justifyContent = 'space-between';
-      topbar.style.gap = '12px';
-    }
-    if (portalMark) {
-      portalMark.style.display = 'block';
-      portalMark.style.minWidth = '0';
-    }
-    portalMarkText.style.fontSize = '12px';
-    portalMarkText.style.fontWeight = '650';
-    portalMarkText.style.letterSpacing = '.01em';
-    portalMarkText.style.color = '#a8bfd8';
-    portalMarkText.style.whiteSpace = 'nowrap';
-    portalMarkText.style.fontVariantNumeric = 'tabular-nums';
     updateKoreaClock();
     window.clearInterval(koreaClockTimer);
     koreaClockTimer = window.setInterval(updateKoreaClock, 30000);
@@ -105,60 +63,12 @@
   };
 
   const portalTiers = [
-    {
-      id: 'intelligence',
-      number: '00',
-      eyebrow: 'STRATEGIC INTELLIGENCE',
-      title: '정보·전략',
-      description: '국내외 핵심 정보를 선별·검증·분석해 판단에 필요한 변화와 위험·기회를 가장 먼저 제시합니다.',
-      categoryIds: ['intelligence'],
-      variant: 'primary'
-    },
-    {
-      id: 'university',
-      number: '01',
-      eyebrow: 'NEXUS UNIVERSITY',
-      title: 'NEXUS UNIVERSITY',
-      description: '대학 수준의 체계적 학습과 연구 기반을 연결합니다.',
-      categoryIds: ['university'],
-      variant: 'primary'
-    },
-    {
-      id: 'core',
-      number: '02',
-      eyebrow: 'CORE WORKSPACES',
-      title: '핵심 작업영역',
-      description: '직접 사용하는 웹서비스와 장기 연구 기반을 배치합니다.',
-      categoryIds: ['apps', 'research'],
-      variant: 'primary'
-    },
-    {
-      id: 'publicsector',
-      number: '03',
-      eyebrow: 'GOVERNMENT AX STRATEGY & RESPONSE',
-      title: '정부 AX 전략·대응',
-      description: '중앙정부·지방자치단체의 AX 정책과 실행을 다루고 EU·UN·주요국 정부의 국제·비교정책으로 확장합니다.',
-      categoryIds: ['publicsector'],
-      variant: 'primary'
-    },
-    {
-      id: 'create',
-      number: '04',
-      eyebrow: 'CREATE · LEARN · SHARE',
-      title: '제작·교육·공개',
-      description: '교육·출판·미디어 결과물을 한 층위로 묶습니다.',
-      categoryIds: ['education', 'publishing', 'media'],
-      variant: 'compact'
-    },
-    {
-      id: 'ideas',
-      number: '05',
-      eyebrow: 'PUBLIC IDEAS',
-      title: '아이디어 허브',
-      description: '공개 가능한 아이디어와 프로젝트 후보를 한곳에서 확인합니다.',
-      categoryIds: ['initiatives'],
-      variant: 'compact'
-    }
+    { id: 'intelligence', number: '00', eyebrow: 'STRATEGIC INTELLIGENCE', title: '정보·전략', description: '국내외 핵심 정보를 선별·검증·분석해 판단에 필요한 변화와 위험·기회를 가장 먼저 제시합니다.', categoryIds: ['intelligence'], variant: 'primary' },
+    { id: 'university', number: '01', eyebrow: 'NEXUS UNIVERSITY', title: 'NEXUS UNIVERSITY', description: '대학 수준의 체계적 학습과 연구 기반을 연결합니다.', categoryIds: ['university'], variant: 'primary' },
+    { id: 'core', number: '02', eyebrow: 'CORE WORKSPACES', title: '핵심 작업영역', description: '직접 사용하는 웹서비스와 장기 연구 기반을 배치합니다.', categoryIds: ['apps', 'research'], variant: 'primary' },
+    { id: 'publicsector', number: '03', eyebrow: 'GOVERNMENT AX STRATEGY & RESPONSE', title: '정부 AX 전략·대응', description: '중앙정부·지방자치단체의 AX 정책과 실행을 다루고 EU·UN·주요국 정부의 국제·비교정책으로 확장합니다.', categoryIds: ['publicsector'], variant: 'primary' },
+    { id: 'create', number: '04', eyebrow: 'CREATE · LEARN · SHARE', title: '제작·교육·공개', description: '교육·출판·미디어 결과물을 한 층위로 묶습니다.', categoryIds: ['education', 'publishing', 'media'], variant: 'compact' },
+    { id: 'ideas', number: '05', eyebrow: 'PUBLIC IDEAS', title: '아이디어 허브', description: '공개 가능한 아이디어와 프로젝트 후보를 한곳에서 확인합니다.', categoryIds: ['initiatives'], variant: 'compact' }
   ];
 
   const featuredDefinitions = [
@@ -248,6 +158,10 @@
       return value;
     } catch (error) {
       console.warn('Nexus D1 access counter unavailable:', error);
+      if (accessCount) {
+        accessCount.textContent = '확인 불가';
+        accessCount.hidden = false;
+      }
       return null;
     }
   }
@@ -259,47 +173,37 @@
   }
 
   function orderedCategories(categories, projects) {
-    const byId = new Map(categories.map((category) => [category.id, category]));
+    const byId = new Map(categories.map(category => [category.id, category]));
     const ordered = [];
-    portalTiers.forEach((tier) => tier.categoryIds.forEach((id) => {
+    portalTiers.forEach(tier => tier.categoryIds.forEach(id => {
       const category = byId.get(id);
-      if (category && projects.some((project) => project.category === id)) ordered.push(category);
+      if (category && projects.some(project => project.category === id)) ordered.push(category);
     }));
-    categories.forEach((category) => {
-      if (!ordered.some((item) => item.id === category.id) && projects.some((project) => project.category === category.id)) ordered.push(category);
+    categories.forEach(category => {
+      if (!ordered.some(item => item.id === category.id) && projects.some(project => project.category === category.id)) ordered.push(category);
     });
     return ordered;
   }
 
   function renderQuickLinks(categories, projects) {
+    if (!quickLinks) return;
     quickLinks.replaceChildren();
-    categories.forEach((category) => {
-      const count = projects.filter((project) => project.category === category.id).length;
+    categories.forEach(category => {
+      const count = projects.filter(project => project.category === category.id).length;
       const link = make('a', `quick-link quick-link-${category.id}`);
       link.href = `#${category.id}`;
       link.dataset.category = category.id;
-      link.append(
-        makeCategoryIcon(category.id, 'quick-icon'),
-        make('span', 'quick-label', category.title),
-        make('span', 'quick-count', String(count))
-      );
+      link.append(makeCategoryIcon(category.id, 'quick-icon'), make('span', 'quick-label', category.title), make('span', 'quick-count', String(count)));
       quickLinks.append(link);
     });
   }
 
   function renderHeroOverview(categories, projects, updatedAt) {
-    const old = document.querySelector('.portal-overview');
-    if (old) old.remove();
+    document.querySelector('.portal-overview')?.remove();
     if (!quickLinks) return;
     const overview = make('div', 'portal-overview');
-    const managed = projects.filter((project) => project.managedBy === 'github' || project.managedBy === 'github-external').length;
-    const values = [
-      ['분야', categories.length],
-      ['프로젝트', projects.length],
-      ['자동관리', managed],
-      ['업데이트', formatDate(updatedAt) || '상시']
-    ];
-    values.forEach(([label, value]) => {
+    const managed = projects.filter(project => project.managedBy === 'github' || project.managedBy === 'github-external').length;
+    [['분야', categories.length], ['프로젝트', projects.length], ['자동관리', managed], ['업데이트', formatDate(updatedAt) || '상시']].forEach(([label, value]) => {
       const item = make('div', 'overview-item');
       item.append(make('span', '', label), make('strong', '', String(value)));
       overview.append(item);
@@ -308,12 +212,9 @@
   }
 
   function projectSearchText(project, categories, researchGroups) {
-    const category = categories.find((item) => item.id === project.category);
-    const group = researchGroups.find((item) => item.id === project.researchGroup);
-    return [project.id, project.title, project.meta, project.description, category?.title, category?.description, group?.title, group?.description, project.contentLabel]
-      .filter(Boolean)
-      .join(' ')
-      .toLocaleLowerCase('ko-KR');
+    const category = categories.find(item => item.id === project.category);
+    const group = researchGroups.find(item => item.id === project.researchGroup);
+    return [project.id, project.title, project.meta, project.description, category?.title, category?.description, group?.title, group?.description, project.contentLabel].filter(Boolean).join(' ').toLocaleLowerCase('ko-KR');
   }
 
   function renderSearch(data, host) {
@@ -344,15 +245,13 @@
       const query = input.value.trim().toLocaleLowerCase('ko-KR');
       results.replaceChildren();
       if (!query) return;
-      const matches = projects
-        .filter((project) => projectSearchText(project, categories, researchGroups).includes(query))
-        .slice(0, 10);
+      const matches = projects.filter(project => projectSearchText(project, categories, researchGroups).includes(query)).slice(0, 10);
       if (!matches.length) {
         results.append(make('p', 'search-empty', '일치하는 등록 프로젝트가 없습니다. 다른 핵심어로 검색해 주세요.'));
         return;
       }
-      matches.forEach((project) => {
-        const category = categories.find((item) => item.id === project.category);
+      matches.forEach(project => {
+        const category = categories.find(item => item.id === project.category);
         const link = make('a', 'search-result');
         link.href = trackedProjectUrl(project);
         link.dataset.trackAccess = 'project';
@@ -368,7 +267,7 @@
     };
 
     input.addEventListener('input', renderResults);
-    input.addEventListener('keydown', (event) => {
+    input.addEventListener('keydown', event => {
       if (event.key !== 'Enter') return;
       const query = input.value.trim();
       if (!query) return;
@@ -385,7 +284,6 @@
       history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
       input.focus();
     });
-
     const initialQuery = new URL(window.location.href).searchParams.get('q');
     if (initialQuery) {
       input.value = initialQuery;
@@ -401,8 +299,8 @@
     title.id = 'featured-title';
     titleRow.append(title, make('span', '', 'RESEARCH · PRACTICAL · PUBLICATIONS'));
     const grid = make('div', 'featured-grid');
-    featuredDefinitions.forEach((definition) => {
-      const project = projects.find((item) => item.id === definition.id);
+    featuredDefinitions.forEach(definition => {
+      const project = projects.find(item => item.id === definition.id);
       if (!project) return;
       const link = make('a', 'featured-link');
       link.href = trackedProjectUrl(project);
@@ -419,10 +317,7 @@
   }
 
   function renderRecent(projects, host) {
-    const recent = projects
-      .filter((project) => project.lastUpdated)
-      .sort((a, b) => String(b.lastUpdated).localeCompare(String(a.lastUpdated)) || String(a.title).localeCompare(String(b.title), 'ko'))
-      .slice(0, 8);
+    const recent = projects.filter(project => project.lastUpdated).sort((a, b) => String(b.lastUpdated).localeCompare(String(a.lastUpdated)) || String(a.title).localeCompare(String(b.title), 'ko')).slice(0, 8);
     if (!recent.length) return;
     const block = make('section', 'portal-recent');
     block.setAttribute('aria-labelledby', 'recent-title');
@@ -431,7 +326,7 @@
     title.id = 'recent-title';
     titleRow.append(title, make('span', '', '최신 8개'));
     const list = make('div', 'recent-list');
-    recent.forEach((project) => {
+    recent.forEach(project => {
       const link = make('a', 'recent-link');
       link.href = trackedProjectUrl(project);
       link.dataset.trackAccess = 'project';
@@ -454,13 +349,7 @@
     title.id = 'trust-title';
     titleRow.append(title, make('span', '', 'TRUST LAYER'));
     const grid = make('div', 'trust-grid');
-    const items = [
-      ['단일 원본', '프로젝트 표시정보와 자동 상태정보의 소유권을 분리합니다.'],
-      ['원출처 우선', '법령·논문·정책·연구자료는 가능한 한 공식 원문과 연결합니다.'],
-      ['업데이트 추적', '승인된 프로젝트만 최근 수정일과 콘텐츠 수를 자동 집계합니다.'],
-      ['AI 활용 고지', '생성형 AI를 활용하되 기획·검토·편집·운영 책임을 분명히 표시합니다.']
-    ];
-    items.forEach(([label, text]) => {
+    [['단일 원본', '프로젝트 표시정보와 자동 상태정보의 소유권을 분리합니다.'], ['원출처 우선', '법령·논문·정책·연구자료는 가능한 한 공식 원문과 연결합니다.'], ['업데이트 추적', '승인된 프로젝트만 최근 수정일과 콘텐츠 수를 자동 집계합니다.'], ['AI 활용 고지', '생성형 AI를 활용하되 기획·검토·편집·운영 책임을 분명히 표시합니다.']].forEach(([label, text]) => {
       const item = make('div', 'trust-item');
       item.append(make('strong', '', label), make('span', '', text));
       grid.append(item);
@@ -526,7 +415,7 @@
 
   function renderItemsGrid(projects) {
     const grid = make('div', `items-grid${projects.length === 1 ? ' one-item' : ''}`);
-    projects.forEach((project) => grid.append(renderProject(project)));
+    projects.forEach(project => grid.append(renderProject(project)));
     return grid;
   }
 
@@ -534,7 +423,7 @@
     const block = make('section', `research-subgroup research-subgroup-${group.id}`);
     block.setAttribute('aria-labelledby', `research-group-${group.id}`);
     const head = make('div', 'research-subgroup-head');
-    head.append(make('p','eyebrow',group.eyebrow || 'RESEARCH'), make('h3','',group.title), make('p','research-subgroup-description',group.description || ''));
+    head.append(make('p', 'eyebrow', group.eyebrow || 'RESEARCH'), make('h3', '', group.title), make('p', 'research-subgroup-description', group.description || ''));
     head.querySelector('h3').id = `research-group-${group.id}`;
     block.append(head, renderItemsGrid(projects));
     return block;
@@ -545,37 +434,36 @@
     section.id = category.id;
     section.dataset.category = category.id;
     section.setAttribute('aria-labelledby', `${category.id}-title`);
-
     const head = make('div', 'category-head');
     const icon = make('div', `category-icon ${category.iconClass || ''}`);
     icon.append(makeCategoryIcon(category.id, 'category-icon-glyph'));
     icon.setAttribute('aria-hidden', 'true');
-
     const headText = make('div', 'category-copy');
     const titleRow = make('div', 'category-title-row');
     const title = make('h2', '', category.title);
     title.id = `${category.id}-title`;
     titleRow.append(title, make('span', 'category-count', `${projects.length} PROJECT${projects.length > 1 ? 'S' : ''}`));
-    headText.append(make('p','eyebrow',category.eyebrow), titleRow, make('p','category-description',category.description));
+    headText.append(make('p', 'eyebrow', category.eyebrow), titleRow, make('p', 'category-description', category.description));
     head.append(icon, headText);
-
     if (category.id === 'research' && researchGroups.length) {
       const groups = make('div', 'research-groups');
       const assigned = new Set();
-      researchGroups.forEach((group) => {
-        const groupProjects = projects.filter((project) => {
+      researchGroups.forEach(group => {
+        const groupProjects = projects.filter(project => {
           const projectGroup = project.researchGroup || 'knowledge';
-          if (projectGroup === group.id) { assigned.add(project.id); return true; }
+          if (projectGroup === group.id) {
+            assigned.add(project.id);
+            return true;
+          }
           return false;
         });
         if (groupProjects.length) groups.append(renderResearchGroup(group, groupProjects));
       });
-      const unassigned = projects.filter((project) => !assigned.has(project.id));
+      const unassigned = projects.filter(project => !assigned.has(project.id));
       if (unassigned.length) groups.append(renderResearchGroup({id:'other',eyebrow:'OTHER RESEARCH',title:'기타 연구',description:'기존 연구자료와 독립 프로젝트입니다.'}, unassigned));
       section.append(head, groups);
       return section;
     }
-
     section.append(head, renderItemsGrid(projects));
     return section;
   }
@@ -583,23 +471,20 @@
   function renderTier(tier, categories, projects, researchGroups) {
     const section = make('section', `portal-tier portal-tier-${tier.id}`);
     section.setAttribute('aria-labelledby', `tier-${tier.id}-title`);
-
     const head = make('div', 'portal-tier-head');
     const number = make('span', 'tier-number', tier.number);
     const copy = make('div', 'tier-copy');
     copy.append(make('p', 'eyebrow', tier.eyebrow), make('h2', '', tier.title), make('p', 'tier-description', tier.description));
     copy.querySelector('h2').id = `tier-${tier.id}-title`;
     head.append(number, copy);
-
     const grid = make('div', 'portal-tier-grid');
-    tier.categoryIds.forEach((id) => {
-      const category = categories.find((item) => item.id === id);
+    tier.categoryIds.forEach(id => {
+      const category = categories.find(item => item.id === id);
       if (!category) return;
-      const categoryProjects = projects.filter((project) => project.category === id);
+      const categoryProjects = projects.filter(project => project.category === id);
       if (!categoryProjects.length) return;
       grid.append(renderCategory(category, categoryProjects, researchGroups, tier.variant));
     });
-
     if (!grid.childElementCount) return null;
     section.append(head, grid);
     return section;
@@ -614,7 +499,6 @@
       document.head.append(canonical);
     }
     canonical.href = canonicalUrl;
-
     let robots = document.querySelector('meta[name="robots"]');
     if (!robots) {
       robots = document.createElement('meta');
@@ -622,7 +506,6 @@
       document.head.append(robots);
     }
     robots.content = 'index,follow,max-image-preview:large';
-
     document.querySelector('script[data-nexus-structured-data]')?.remove();
     const script = document.createElement('script');
     script.type = 'application/ld+json';
@@ -634,17 +517,8 @@
       alternateName: '예하바 프로젝트 포털',
       url: canonicalUrl,
       description: '전략정보·대학·웹앱·연구·정부 AX 전략·대응·출판·미디어·교육·아이디어 프로젝트를 연결하는 통합 포털',
-      potentialAction: {
-        '@type': 'SearchAction',
-        target: `${canonicalUrl}?q={search_term_string}`,
-        'query-input': 'required name=search_term_string'
-      },
-      hasPart: (data.projects || []).map((project) => ({
-        '@type': 'WebPage',
-        name: project.title,
-        url: project.url,
-        description: project.description
-      }))
+      potentialAction: {'@type': 'SearchAction', target: `${canonicalUrl}?q={search_term_string}`, 'query-input': 'required name=search_term_string'},
+      hasPart: (data.projects || []).map(project => ({'@type': 'WebPage', name: project.title, url: project.url, description: project.description}))
     });
     document.head.append(script);
   }
@@ -655,25 +529,20 @@
     const researchGroups = Array.isArray(data.researchGroups) ? data.researchGroups : [];
     const visibleCategories = orderedCategories(categories, projects);
     currentPortalData = { ...data, categories, projects, researchGroups };
-
     renderQuickLinks(visibleCategories, projects);
     renderHeroOverview(visibleCategories, projects, data.updatedAt);
     renderDiscovery(currentPortalData);
     installSeo(currentPortalData);
+    if (!portalGrid) return;
     portalGrid.replaceChildren();
-
-    portalTiers.forEach((tier) => {
+    portalTiers.forEach(tier => {
       const tierSection = renderTier(tier, visibleCategories, projects, researchGroups);
       if (tierSection) portalGrid.append(tierSection);
     });
-
-    const tierIds = new Set(portalTiers.flatMap((tier) => tier.categoryIds));
-    const extraCategories = visibleCategories.filter((category) => !tierIds.has(category.id));
+    const tierIds = new Set(portalTiers.flatMap(tier => tier.categoryIds));
+    const extraCategories = visibleCategories.filter(category => !tierIds.has(category.id));
     if (extraCategories.length) {
-      const extraTier = {
-        id: 'more', number: '06', eyebrow: 'MORE', title: '기타 영역',
-        description: '추가된 프로젝트 영역입니다.', categoryIds: extraCategories.map((category) => category.id), variant: 'compact'
-      };
+      const extraTier = {id:'more',number:'06',eyebrow:'MORE',title:'기타 영역',description:'추가된 프로젝트 영역입니다.',categoryIds:extraCategories.map(category => category.id),variant:'compact'};
       const tierSection = renderTier(extraTier, visibleCategories, projects, researchGroups);
       if (tierSection) portalGrid.append(tierSection);
     }
@@ -694,18 +563,15 @@
       } catch (statusError) {
         console.warn('Nexus project status unavailable; rendering canonical project data only.', statusError);
       }
-      const projects = (Array.isArray(data.projects) ? data.projects : []).map((project) => ({
-        ...project,
-        ...(statusMap?.[project.id] || {})
-      }));
+      const projects = (Array.isArray(data.projects) ? data.projects : []).map(project => ({...project, ...(statusMap?.[project.id] || {})}));
       renderPortal({ ...data, projects });
     } catch (error) {
       console.error('YEHAVHA Nexus data load failed:', error);
-      portalGrid.replaceChildren(make('section', 'category-card', '프로젝트 정보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.'));
+      if (portalGrid) portalGrid.replaceChildren(make('section', 'category-card', '프로젝트 정보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.'));
     }
   }
 
-  document.addEventListener('click', async (event) => {
+  document.addEventListener('click', async event => {
     const button = event.target.closest('.copy-btn');
     if (button) {
       const url = button.dataset.url;
@@ -734,15 +600,14 @@
     if (link) {
       const targetId = link.getAttribute('href');
       if (!targetId || targetId === '#') return;
-      const target = document.querySelector(targetId);
-      if (target) target.setAttribute('tabindex', '-1');
+      document.querySelector(targetId)?.setAttribute('tabindex', '-1');
     }
   });
 
   window.setTimeout(async () => {
     const value = await requestAccessCount('get');
     if (value === null) window.setTimeout(() => { void requestAccessCount('get'); }, 1800);
-  }, 250);
+  }, 700);
 
   loadPortal();
 })();
