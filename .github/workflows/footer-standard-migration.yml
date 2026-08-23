@@ -1,0 +1,32 @@
+name: Nexus Footer Standard Migration
+
+on:
+  push:
+    paths:
+      - 'scripts/migrate-nexus-footer-v2.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - name: Migrate Nexus footers
+        run: node scripts/migrate-nexus-footer-v2.mjs
+      - name: Commit migration
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nexus
+          if git diff --cached --quiet; then
+            echo "No footer migration changes"
+          else
+            git commit -m "Normalize Nexus footer standard v2"
+            git push
+          fi
