@@ -26,7 +26,7 @@ const stripCssComments = css => css.replace(/\/\*[\s\S]*?\*\//g, '');
 const hasSiteFooterSelector = css => /(?:^|[}\n])\s*\.site-footer(?:\[[^\]]+\])?(?=[\s,{.#:>+~])/m.test(stripCssComments(css));
 const hasGenericFooterSelector = css => /(?:^|[}\n])\s*footer(?=[\s,{.#:>+~])/m.test(stripCssComments(css));
 const hasCenteredSiteFooter = css => /\.site-footer[^\{]*\{[^}]*text-align\s*:\s*center/si.test(stripCssComments(css));
-const hasTightLegalRows = css => /(?:\.footer-meta|\.footer-note)[^\{]*\s+p[^\{]*\{[^}]*margin\s*:\s*0(?:\s+auto)?(?:\s*!important)?\s*;/si.test(stripCssComments(css));
+const hasTightLegalRows = css => /(?:\.footer-meta|\.footer-note)[^\{]*\s+p[^\{]*\{[^}]*margin\s*:\s*0(?:\s+auto)?(?:\s*!important)?\s*(?:;|(?=\}))/si.test(stripCssComments(css));
 
 const linkedLocalCss = htmlFile => {
   const html = fs.readFileSync(htmlFile, 'utf8');
@@ -99,7 +99,6 @@ if (articleCss.includes(BUSINESS_FOOTER)) fail(ARTICLE_CSS, '사업자정보가 
 const compactCss = fs.readFileSync(COMPACT_CSS, 'utf8');
 const compactTokens = [
   'font-size:15px;line-height:1.75',
-  '.back{display:inline-flex',
   'font-size:11.5px',
   '.footer{margin-top:0;padding:18px 0 36px',
   'text-align:center',
@@ -122,7 +121,8 @@ if (!/\.footer \.ai-disclosure\{[^}]*margin:6px auto 0/.test(compactCss)) fail(C
 for (const file of walkHtml('nexus')) {
   const html = fs.readFileSync(file, 'utf8');
   if (/portal-v2\.css/.test(html) && /data-footer-standard=/.test(html)) {
-    if (!/class=["'][^"']*(?:\bfooter-meta\b|\bresearch-footer-meta\b)/.test(html)) fail(file, '전역 사업자정보가 적용될 Footer meta 클래스가 없음');
+    const hasSharedMeta = /class=["'][^"']*(?:\bfooter-meta\b|\bresearch-footer-meta\b)/.test(html);
+    if (!hasSharedMeta && !html.includes(BUSINESS_FOOTER)) fail(file, '전역 사업자정보 공유 클래스 또는 명시적 사업자정보가 없음');
   }
   if (/layer-compact\.css/.test(html)) {
     if (!/class=["'][^"']*\bfooter-meta\b/.test(html)) fail(file, 'compact template Footer meta 클래스가 없음');

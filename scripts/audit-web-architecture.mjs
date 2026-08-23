@@ -108,7 +108,7 @@ const auditLocalReferences = (root, index) => {
   const refs = [...index.matchAll(/\b(?:src|href)=["']([^"']+)["']/g)].map(match => match[1]);
   const seen = new Set();
   for (const ref of refs) {
-    if (!ref || ref.startsWith('#') || /^(?:https?:|mailto:|tel:|data:|javascript:)/i.test(ref)) continue;
+    if (!ref || ref.includes('${') || ref.startsWith('#') || /^(?:https?:|mailto:|tel:|data:|javascript:)/i.test(ref)) continue;
     const clean = ref.split('#')[0].split('?')[0];
     if (!clean) continue;
     if (seen.has(clean) && /\.(?:js|css)$/i.test(clean)) {
@@ -319,8 +319,8 @@ for (const project of projects) {
     continue;
   }
 
-  if (!index.includes('data-footer-standard="v1"')) {
-    report('ERROR', root, '메인 footer에 data-footer-standard="v1" 없음');
+  if (!index.includes('data-footer-standard="v2"')) {
+    report('ERROR', root, '메인 footer에 data-footer-standard="v2" 없음');
   }
   if (!index.includes('Copyright ©')) report('ERROR', root, 'Copyright 없음');
   if (!index.includes('mailto:')) report('ERROR', root, '문의 mailto 없음');

@@ -143,9 +143,10 @@ function selectorOwnsClass(selector, className) {
 
 function ownerBlocks(css, className) {
   const blocks = [];
+  const cleanCss = css.replace(/\/\*[\s\S]*?\*\//g, '');
   const re = /([^{}]+)\{([^{}]*)\}/g;
-  for (const match of css.matchAll(re)) {
-    if (selectorOwnsClass(match[1], className)) blocks.push(`${match[1]}{${match[2]}}`);
+  for (const match of cleanCss.matchAll(re)) {
+    if (selectorOwnsClass(match[1], className)) blocks.push(match[1] + '{' + match[2] + '}');
   }
   return blocks;
 }
