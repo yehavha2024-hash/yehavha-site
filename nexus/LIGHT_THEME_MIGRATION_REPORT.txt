@@ -60,3 +60,44 @@ nexus/portal-v2.css: --nxs-card-title #ffffff -> 18px
 nexus/portal-v2.css: --nxs-card-text #111111 -> 13.5px
 nexus/portal-v2.css: --nxs-footer-text #111111 -> 12px
 nexus/portal-v2.css: --nxs-footer-link #111111 -> 11px
+
+BACKGROUND INVENTORY
+non-white background declarations: 37
+nexus/articles/articles.css | .article-hero-icon | background: linear-gradient(145deg,rgba(75,196,174,.16),rgba(49,122,113,.045))
+nexus/initiatives/initiatives.css | .capture-icon | background: rgba(122,184,255,.08)
+nexus/nexus-standard.css | .category-icon | background: linear-gradient(145deg,rgba(122,184,255,.15),rgba(122,184,255,.055))!important
+nexus/nexus-standard.css | .research-icon | background: linear-gradient(145deg,rgba(93,145,229,.18),rgba(78,120,194,.06))!important
+nexus/nexus-standard.css | .publishing-icon | background: linear-gradient(145deg,rgba(137,124,230,.18),rgba(98,87,185,.06))!important
+nexus/nexus-standard.css | .media-icon | background: linear-gradient(145deg,rgba(211,119,151,.16),rgba(161,83,116,.055))!important
+nexus/nexus-standard.css | .education-icon | background: linear-gradient(145deg,rgba(196,157,76,.17),rgba(151,114,49,.055))!important
+nexus/nexus-standard.css | .quick-icon | background: rgba(255,255,255,.035)
+nexus/nexus-standard.css | .category-apps .category-icon | background: linear-gradient(145deg,rgba(64,168,224,.17),rgba(54,116,167,.055))!important
+nexus/nexus-standard.css | .category-research .category-icon | background: linear-gradient(145deg,rgba(93,145,229,.18),rgba(78,120,194,.06))!important
+nexus/nexus-standard.css | .category-practice .category-icon | background: linear-gradient(145deg,rgba(67,190,167,.17),rgba(46,126,116,.055))!important
+nexus/nexus-standard.css | .category-education .category-icon | background: linear-gradient(145deg,rgba(196,157,76,.17),rgba(151,114,49,.055))!important
+nexus/nexus-standard.css | .category-publishing .category-icon | background: linear-gradient(145deg,rgba(137,124,230,.18),rgba(98,87,185,.06))!important
+nexus/nexus-standard.css | .category-media .category-icon | background: linear-gradient(145deg,rgba(211,119,151,.16),rgba(161,83,116,.055))!important
+nexus/nexus-standard.css | .category-initiatives .category-icon | background: linear-gradient(145deg,rgba(220,164,73,.19),rgba(153,105,38,.055))!important
+nexus/portal-enhancements.css | .category-university .category-icon | background: rgba(122,184,255,.09)!important
+nexus/portal-enhancements.css | .university-icon | background: linear-gradient(135deg,#3d75c8,#70b9ef)!important
+nexus/portal-enhancements.css | .publicsector-icon | background: linear-gradient(135deg,#326da8,#55b9d8)!important
+nexus/portal-enhancements.css | .intelligence-icon | background: linear-gradient(135deg,#355f9f,#63a9e8)!important
+nexus/portal-enhancements.css | .category-university .category-icon | background: linear-gradient(135deg,#3d75c8,#70b9ef)!important
+nexus/portal-enhancements.css | .hero-main>img | background: #071426!important
+nexus/portal-enhancements.css | .category-university .category-icon::before | background: center/contain no-repeat url('data:image/svg+xml
+nexus/portal-enhancements.css | .quick-link-university .quick-icon::before | background: center/contain no-repeat url('data:image/svg+xml
+nexus/portal-v2.css | .dot | background: #7ab8ff
+nexus/portal-v2.css | .media-icon | background: linear-gradient(135deg,#376fcb,#65a9e9)
+nexus/portal-v2.css | .publishing-icon | background: linear-gradient(135deg,#5f58c9,#8b79dc)
+nexus/portal-v2.css | .research-icon | background: linear-gradient(135deg,#2f67b8,#43a5d7)
+nexus/portal-v2.css | .apps-icon | background: linear-gradient(135deg,#2782c5,#55b9df)
+nexus/portal-v2.css | .education-icon | background: linear-gradient(135deg,#9c6c25,#c8a85e)
+nexus/status.css | body .category-university .category-icon::before,
+body .quick-link-university .quick-icon::before | background: linear-gradient(145deg,#d9ecff,#79b9ff) !important
+nexus/toeic-human-v2/style.css | .progress-ring | background: conic-gradient(var(--blue) var(--progress,1%),#e5ecf5 0)
+nexus/toeic-human-v2/style.css | .progress-track | background: #e4ebf3
+nexus/toeic-human-v2/style.css | .progress-track span | background: linear-gradient(90deg,var(--navy),#4a86d8)
+nexus/toeic-human-v2/style.css | .lexicon-item | background: #f9fbfe
+nexus/university/university.css | .progress-card | background: rgba(8,18,38,.78)
+nexus/university/university.css | .progress-track | background: #06101f
+nexus/university/university.css | .progress-bar | background: linear-gradient(90deg,#5da8ff,#8dd6b1)
