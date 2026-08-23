@@ -5,46 +5,25 @@
   font-size: .75rem;
   font-weight: 750;
 }
-.status-fresh { color: #9fd6ff; }
-.status-active { color: #b8cee8; }
-.status-stable { color: #aebac8; }
-.status-unknown { color: #d8bd8b; }
-.project-live-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 12px;
-  color: #94a9c2;
-  font-size: .76rem;
-  font-weight: 650;
+.status-fresh {color:#111111; }
+.status-active {color:#111111; }
+.status-stable {color:#111111; }
+.status-unknown {color:#111111; }
+.project-live-meta {display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;color:#111111;font-size:.76rem;font-weight:650;
 }
-.project-live-meta span + span::before {
-  content: "·";
-  margin-right: 12px;
-  color: #637b96;
+.project-live-meta span + span::before {content:"·";margin-right:12px;color:#111111;
 }
 
 /* NEXUS UNIVERSITY academic emblem: replaces the old NU text mark */
 body .category-university .category-icon::before,
-body .quick-link-university .quick-icon::before {
-  content: "" !important;
-  display: block !important;
-  flex: 0 0 auto;
-  background: linear-gradient(145deg,#d9ecff,#79b9ff) !important;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 2.8 27 6.5v8.2c0 7-4.5 11.6-11 14.3C9.5 26.3 5 21.7 5 14.7V6.5L16 2.8Z'/%3E%3Cpath d='m9 13 7-5 7 5M10 14h12M11.5 14v7M16 14v7M20.5 14v7M9.5 22h13'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 2.8 27 6.5v8.2c0 7-4.5 11.6-11 14.3C9.5 26.3 5 21.7 5 14.7V6.5L16 2.8Z'/%3E%3Cpath d='m9 13 7-5 7 5M10 14h12M11.5 14v7M16 14v7M20.5 14v7M9.5 22h13'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;
+body .quick-link-university .quick-icon::before {content:"" !important;display:block !important;flex:0 0 auto;background:linear-gradient(145deg,#d9ecff,#79b9ff) !important;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 2.8 27 6.5v8.2c0 7-4.5 11.6-11 14.3C9.5 26.3 5 21.7 5 14.7V6.5L16 2.8Z'/%3E%3Cpath d='m9 13 7-5 7 5M10 14h12M11.5 14v7M16 14v7M20.5 14v7M9.5 22h13'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 2.8 27 6.5v8.2c0 7-4.5 11.6-11 14.3C9.5 26.3 5 21.7 5 14.7V6.5L16 2.8Z'/%3E%3Cpath d='m9 13 7-5 7 5M10 14h12M11.5 14v7M16 14v7M20.5 14v7M9.5 22h13'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;
 }
-body .category-university .category-icon::before {
-  width: 31px !important;
-  height: 31px !important;
+body .category-university .category-icon::before {width:31px !important;height:31px !important;
 }
-body .quick-link-university .quick-icon svg {
-  display: none !important;
+body .quick-link-university .quick-icon svg {display:none !important;
 }
-body .quick-link-university .quick-icon::before {
-  width: 19px !important;
-  height: 19px !important;
+body .quick-link-university .quick-icon::before {width:19px !important;height:19px !important;
 }
 
 /* Main portal title */
-.hero-card h1 { text-transform: uppercase; }
+.hero-card h1 {text-transform:uppercase; }

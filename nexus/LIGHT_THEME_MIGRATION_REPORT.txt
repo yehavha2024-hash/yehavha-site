@@ -1,0 +1,50 @@
+NEXUS LIGHT THEME MIGRATION
+changed files: 43
+changed declarations: 1329
+remaining structural color issues: 0
+
+
+CHANGED FILES
+nexus/articles/articles.css
+nexus/essential-vocabulary/style.css
+nexus/government-ax/style.css
+nexus/initiatives/initiatives.css
+nexus/layer-compact.css
+nexus/living-law/style.css
+nexus/nexus-standard.css
+nexus/portal-enhancements.css
+nexus/portal-v2.css
+nexus/publishing/publishing.css
+nexus/research-track/project-standard.css
+nexus/research-track/style.css
+nexus/status.css
+nexus/toeic-human-v2/learning.css
+nexus/toeic-human-v2/style.css
+nexus/toeic-human-v2/transfer-answers.css
+nexus/university/guided-practice-20260820.css
+nexus/university/quality-audit.css
+nexus/university/quality-course.css
+nexus/university/university-catalog-final.css
+nexus/university/university-catalog-humanities.css
+nexus/university/university-catalog.css
+nexus/university/university-textbook.css
+nexus/university/university.css
+nexus/ai-legal-glossary/index.html
+nexus/ai-trends/index.html
+nexus/articles/article.html
+nexus/articles/index.html
+nexus/articles/judicial-ai-prompt-injection.html
+nexus/essential-vocabulary/index.html
+nexus/government-ax/index.html
+nexus/index.html
+nexus/initiatives/index.html
+nexus/intelligence-briefing/index.html
+nexus/living-law/index.html
+nexus/publishing/detail.html
+nexus/publishing/index.html
+nexus/research-track/index.html
+nexus/toeic-human-v2/index.html
+nexus/university/course.html
+nexus/university/index.html
+nexus/university/quality-audit.html
+NEXUS_UI_STANDARD.md

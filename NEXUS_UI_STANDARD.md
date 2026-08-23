@@ -1,7 +1,7 @@
 # YEHAVHA Nexus UI & Document Standard
 
-Version: 2.0  
-Updated: 2026-08-21
+Version: 3.0  
+Updated: 2026-08-23
 
 ## 1. 목적
 
@@ -22,7 +22,6 @@ Nexus와 직접 운영하는 하위 페이지는 기능과 콘텐츠는 달라�
 - `.container` 기본 폭과 중앙정렬
 - `← YEHAVHA NEXUS` 등 상위 복귀 링크
 - 공통 Footer의 배경·정렬·간격·타이포그래피
-- 사업자정보 고정 문자열
 - 모바일에서의 공통 외곽 여백
 
 하위 CSS는 위 선택자를 다시 정의하지 않습니다. 특히 `.container`, `.back-link`, `.nexus-link`, `.back`, `.footer`, `.footer-card`, `.footer-meta`, `.reader-site-footer`, `.research-footer`, `.research-footer-meta`를 콘텐츠 CSS가 재소유하지 않습니다.
@@ -52,16 +51,19 @@ Nexus 일반 하위 페이지의 기본 CSS 계층은 다음 두 개입니다.
 
 ## 5. 공통 시각 규격
 
-- 기본 배경: `#071225` 계열
-- Panel: `rgba(8,18,38,.78)` 또는 `#0B1D33`
-- Panel 강조: `#0D2948`
-- 기본 글자: `#F2F6FF`
-- 보조 글자: `#B8C9DF`
-- 강조색: `#7AB8FF`
-- 구분선: `rgba(255,255,255,.10)`
+- 기본 배경: `#FFFFFF`
+- 카드·Panel·셀 배경: `#FFFFFF`
+- 입력창·검색창·버튼 기본 배경: `#FFFFFF`
+- Footer 배경: `#FFFFFF`
+- 기본 글자: `#111111`
+- 보조·설명 글자도 기본적으로 `#111111`을 사용하며, 정보 위계는 크기·굵기·여백으로 구분
+- 구분선·테두리: `#CFD4DC` 또는 더 옅은 `#E5E7EB`
+- 구분선과 셀 테두리에 흰색 사용 금지
+- 이미지와 아이콘의 고유색은 유지
+- 링크·텍스트를 색상만으로 구별하지 않고 밑줄·굵기·버튼 형태를 함께 사용
 - 기본 서체: Pretendard → Noto Sans KR → Apple SD Gothic Neo → system sans-serif
 
-페이지 전체를 흰색이나 별도 고유색으로 덮지 않습니다. 장식용 serif를 연구본문의 기본서체로 별도 지정하지 않습니다.
+Nexus의 인터페이스 기본값은 라이트 테마입니다. 페이지 전체 배경, 카드, 셀, Footer를 다크 계열로 되돌리지 않습니다. 새 인터페이스나 하위 페이지가 추가되더라도 흰색 바탕과 검정 글자, 회색 테두리를 기본 원판으로 사용합니다. 다크 테마가 필요해지는 경우 별도 테마 기능으로 명시적으로 설계하며 기본 파일을 다시 다크 색상으로 변경하지 않습니다.
 
 ## 6. 너비·여백·셀 규격
 
@@ -155,6 +157,9 @@ Nexus HTML·핵심 CSS·하위 페이지는 `_headers`의 `no-cache, no-store, m
 - JavaScript에서 `<style>` 생성
 - JavaScript가 Footer 전체를 다시 생성
 - 동일 법적 고지문을 여러 JS/CSS/HTML에서 각각 소유
+- Footer 사업자정보·Copyright·문의·AI 안내를 CSS `content` 또는 JavaScript로 생성
+- 기본 배경을 다크 색상으로 복구하거나 흰색 텍스트를 기본 본문색으로 사용
+- 테두리·구분선에 흰색 또는 반투명 흰색을 사용
 - 하위 콘텐츠 CSS에서 공통 `.container`·복귀링크·Footer 재정의
 - 오류를 해결하기 위해 새 보정파일을 먼저 추가하는 방식
 
