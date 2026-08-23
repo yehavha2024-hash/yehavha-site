@@ -1,0 +1,37 @@
+name: Nexus Icon Footer Normalize
+
+on:
+  push:
+    paths:
+      - 'scripts/normalize-nexus-icons-footer-20260823.mjs'
+
+permissions:
+  contents: write
+
+jobs:
+  normalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - name: Normalize Nexus icons and footer metadata
+        run: node scripts/normalize-nexus-icons-footer-20260823.mjs
+      - name: Validate canonical footer and light theme rules
+        run: |
+          node scripts/audit-nexus-footer-standard.mjs
+          node scripts/audit-nexus-light-theme.mjs
+      - name: Commit normalized canonical sources
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nexus COPYRIGHT_STANDARD.md scripts/audit-nexus-footer-standard.mjs
+          if git diff --cached --quiet; then
+            echo "No normalization changes."
+            exit 0
+          fi
+          git commit -m "Unify Nexus icons and register footer metadata"
+          git push
