@@ -61,7 +61,7 @@ Nexus 내부 페이지와 독립 프로젝트를 구분하지 않고 위 사업�
 
 ## 4. 단일 소유권 원칙
 
-한 페이지에서 사이트 Footer의 레이아웃·정렬·타이포그래피를 결정하는 CSS 파일은 정확히 하나의 canonical owner를 둡니다.
+한 페이지에서 사이트 Footer의 레이아웃·정렬·타이포그래피를 결정하는 CSS 파일은 정확히 1개의 canonical owner만 둡니다.
 
 - Nexus 공통 Footer는 `nexus/portal-v2.css`가 공통 shell을 소유합니다.
 - compact 문서는 해당 canonical compact CSS가 Footer를 소유합니다.
