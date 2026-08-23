@@ -1,6 +1,6 @@
 {
   "id": "ai-music-archive",
-  "publish": true,
+  "publish": false,
   "tracking": {
     "paths": ["nexus/ai-music-archive"],
     "freshDays": 7,
