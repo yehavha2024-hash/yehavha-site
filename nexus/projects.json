@@ -5,17 +5,17 @@
     {"id":"intelligence","eyebrow":"STRATEGIC INTELLIGENCE","title":"정보·전략","icon":"◆","iconClass":"intelligence-icon","description":"국내외 공개정보를 검증·분석해 중요한 변화와 위험·기회·향후 관찰지점을 압축하는 최우선 전략정보 영역"},
     {"id":"university","eyebrow":"NEXUS UNIVERSITY","title":"NEXUS UNIVERSITY","icon":"","iconClass":"university-icon","description":"대학 수준 지식을 기초부터 전문·융합까지 배우는 자기주도형 디지털 학습 플랫폼"},
     {"id":"apps","eyebrow":"WEB APPS & SERVICES","title":"웹앱·서비스","icon":"📱","iconClass":"apps-icon","description":"일상과 학습에 활용할 수 있는 모바일 중심 웹서비스"},
-    {"id":"research","eyebrow":"RESEARCH & KNOWLEDGE","title":"연구·지식","icon":"⚖️","iconClass":"research-icon","description":"AI·법학을 중심으로 한 학술연구와 전문 지식 자료"},
+    {"id":"research","eyebrow":"RESEARCH & KNOWLEDGE","title":"연구·지식","icon":"⚖️","iconClass":"research-icon","description":"AI·법학·기술 동향을 중심으로 한 학술연구와 전문 지식 자료"},
     {"id":"publicsector","eyebrow":"GOVERNMENT AX STRATEGY & RESPONSE","title":"정부 AX 전략·대응","icon":"🏛️","iconClass":"publicsector-icon","description":"중앙정부·지방자치단체의 AX 정책·조직·법제·예산·사업·의사결정과 실행을 다루고 EU·UN·주요국 정부의 국제·비교정책으로 확장하는 전략 영역"},
     {"id":"publishing","eyebrow":"PUBLISHING & ARCHIVE","title":"출판·아카이브","icon":"📚","iconClass":"publishing-icon","description":"전자책과 주제별 공개 글을 읽는 출판·지식 아카이브"},
-    {"id":"media","eyebrow":"MEDIA & CONTENT","title":"미디어·콘텐츠","icon":"🎬","iconClass":"media-icon","description":"찬양음악·영상·AI 동향·음악 제작 콘텐츠"},
+    {"id":"media","eyebrow":"MEDIA & CONTENT","title":"미디어·콘텐츠","icon":"🎬","iconClass":"media-icon","description":"찬양음악·영상 콘텐츠"},
     {"id":"education","eyebrow":"EDUCATION & COURSES","title":"교육·강좌","icon":"🎓","iconClass":"education-icon","description":"생성형 AI를 직접 배우고 결과물을 만드는 실습 강좌"},
     {"id":"initiatives","eyebrow":"IDEA HUB","title":"아이디어 허브","icon":"💡","iconClass":"apps-icon","description":"사업·연구·콘텐츠·서비스의 아이디어와 공개 프로젝트"}
   ],
   "researchGroups": [
     {"id":"institute","eyebrow":"INDEPENDENT RESEARCH INSTITUTE","title":"독립 연구기관","description":"AI 책임법과 신기술의 법적 쟁점을 다루는 독립 연구"},
     {"id":"track","eyebrow":"ACADEMIC RESEARCH TRACK","title":"법학 연구 트랙","description":"AI 책임법 연구의 학술성과와 후속 연구 흐름"},
-    {"id":"knowledge","eyebrow":"RESEARCH KNOWLEDGE BASE","title":"연구 지식 기반","description":"법리·판례·문헌·법철학·용어·선제연구를 연결한 전문 자료"}
+    {"id":"knowledge","eyebrow":"RESEARCH KNOWLEDGE BASE","title":"연구 지식 기반","description":"법리·판례·문헌·법철학·용어·선제연구·AI 동향을 연결한 전문 자료"}
   ],
   "projects": [
     {"id":"nexus-commentary","category":"commentary","meta":"Editorial Commentary","title":"넥서스 논평","description":"국내외 주요 현안을 대상으로 확인된 사실과 공개자료를 바탕으로 판단·비판·제언을 제시합니다. 언론사 사설에 가장 가까운 형식으로 운영하되 특정 언론사의 공식 사설이 아닌 독립 논평을 싣습니다.","url":"https://yehavha-nexus-hub.pages.dev/commentary/","actionLabel":"논평 읽기","external":false},
@@ -37,11 +37,10 @@
     {"id":"ai-law-tech-foresight","category":"research","researchGroup":"knowledge","meta":"AI Law & Technology Foresight","title":"AI 법·기술 선제연구 아카이브","description":"새로운 AI 기술이 현행법·법적 공백·비교법·정책·책임 문제와 어떻게 연결되는지 선제적으로 살펴봅니다.","url":"https://yehavha-ai-foresight-v2.pages.dev/","actionLabel":"선제연구 보기"},
     {"id":"legal-philosophy","category":"research","researchGroup":"knowledge","meta":"Legal Philosophy & Fundamental Rights","title":"법철학·기본권 연구","description":"AI 책임귀속·법적 지위·기본권·정의론·법적 논증을 이해하는 데 필요한 주요 법철학 이론을 살펴볼 수 있습니다.","url":"https://yehavha-legal-philosophy.pages.dev/","actionLabel":"법철학 연구 보기"},
     {"id":"ai-legal-glossary","category":"research","researchGroup":"knowledge","meta":"AI · Law Terminology","title":"AI·법학 통합 용어·개념","description":"AI 기술과 법학의 핵심 용어를 영문 원어·한글 통용명·기능·법적 쟁점과 함께 확인할 수 있습니다.","url":"https://yehavha-nexus-hub.pages.dev/ai-legal-glossary/","actionLabel":"용어·개념 보기","external":false},
+    {"id":"ai-trends","category":"research","researchGroup":"knowledge","meta":"AI Intelligence · Trend Brief","title":"AI 동향 브리프","description":"국내외 AI 최신동향을 기술·법정책·연구·안전·국가사업별로 살펴보고 주요 변화와 연구 연결점을 확인할 수 있습니다.","url":"https://yehavha-nexus-hub.pages.dev/ai-trends/","actionLabel":"AI 동향 보기","external":false},
     {"id":"publishing-hub","category":"publishing","meta":"Selected Publications","title":"대표 출간 도서","description":"Amazon Kindle과 유페이퍼에서 출간한 대표 전자책의 주제와 주요 내용을 살펴보고 판매처로 이동할 수 있습니다.","url":"https://yehavha-nexus-hub.pages.dev/publishing/","actionLabel":"출간 도서 보기"},
     {"id":"article-library","category":"publishing","meta":"Direct Reading Archive","title":"글·연구 아카이브","description":"성경·신학, AI·Suno, AI 법 연구 등 주제별 공개 글을 웹에서 직접 읽을 수 있는 아카이브입니다.","url":"https://yehavha-nexus-hub.pages.dev/articles/","actionLabel":"글 읽기"},
     {"id":"youtube-hashem-yeshua","category":"media","meta":"YouTube Channel","title":"HASHEM YESHUA","description":"히브리어·영어·한국어 AI 찬양음악을 지속적으로 공개하는 다국어 음악채널입니다.","url":"https://www.youtube.com/@yehavha","actionLabel":"바로가기"},
-    {"id":"ai-trends","category":"media","meta":"AI Intelligence · Trend Brief","title":"AI 동향 브리프","description":"국내외 AI 최신동향을 기술·법정책·연구·안전·국가사업별로 살펴보고 주요 변화와 연구 연결점을 확인할 수 있습니다.","url":"https://yehavha-nexus-hub.pages.dev/ai-trends/","actionLabel":"AI 동향 보기","external":false},
-    {"id":"ai-music-archive","category":"media","meta":"AI Music Production Archive","title":"AI 음악 제작·배포 아카이브","description":"AI 음악의 기획·가사·생성부터 자막·영상 제작, 플랫폼 공개와 성과 확인까지 전체 제작 과정을 살펴볼 수 있습니다.","url":"https://yehavha-nexus-hub.pages.dev/ai-music-archive/","actionLabel":"제작 아카이브 보기","external":false},
     {"id":"initiative-hub","category":"initiatives","meta":"Public Idea Board","title":"아이디어 허브","description":"사업·연구·콘텐츠·서비스에서 발전시키고 있는 아이디어와 공개 프로젝트의 목적과 현재 단계를 살펴볼 수 있습니다.","url":"https://yehavha-nexus-hub.pages.dev/initiatives/","actionLabel":"아이디어 보기"}
   ]
 }
