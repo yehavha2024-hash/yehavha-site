@@ -16,17 +16,11 @@
   Cache-Control: no-cache, no-store, must-revalidate
   Pragma: no-cache
   Expires: 0
-/portal-enhancements.css
-  Cache-Control: no-cache, no-store, must-revalidate
-  Pragma: no-cache
-  Expires: 0
 /portal-v2.js
   Cache-Control: no-cache, no-store, must-revalidate
   Pragma: no-cache
   Expires: 0
 /nexus-standard.css
-  Cache-Control: no-cache, no-store, must-revalidate
-/status.css
   Cache-Control: no-cache, no-store, must-revalidate
 /layer-compact.css
   Cache-Control: no-cache, no-store, must-revalidate
