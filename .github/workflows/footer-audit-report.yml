@@ -3,7 +3,7 @@ name: Nexus Footer Audit Report
 on:
   push:
     paths:
-      - 'scripts/audit-nexus-footer-standard.mjs'
+      - 'scripts/footer-audit-trigger.txt'
   workflow_dispatch:
 
 permissions:
@@ -17,17 +17,31 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: '22'
-      - name: Capture footer audit
+      - name: Capture full footer and architecture audits
         run: |
           set +e
-          node scripts/audit-nexus-footer-standard.mjs > nexus/footer-audit-report.txt 2>&1
-          code=$?
-          echo "AUDIT_EXIT_CODE=$code" >> nexus/footer-audit-report.txt
+          report=nexus/footer-full-audit-report.txt
+          : > "$report"
+          run_audit() {
+            name="$1"
+            shift
+            echo "===== $name =====" >> "$report"
+            "$@" >> "$report" 2>&1
+            code=$?
+            echo "EXIT_CODE=$code" >> "$report"
+            echo >> "$report"
+          }
+          run_audit "audit-business-footer" node scripts/audit-business-footer.mjs
+          run_audit "audit-nexus-footer-standard" node scripts/audit-nexus-footer-standard.mjs
+          run_audit "audit-research-track-footer" node scripts/audit-research-track-footer.mjs
+          run_audit "audit-style-ownership" node scripts/audit-style-ownership.mjs
+          run_audit "audit-web-architecture" node scripts/audit-web-architecture.mjs
+          run_audit "audit-repo-hygiene" node scripts/audit-repo-hygiene.mjs
           exit 0
       - name: Commit audit report
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add nexus/footer-audit-report.txt
-          git commit -m "Record Nexus footer audit report" || exit 0
+          git add nexus/footer-full-audit-report.txt
+          git commit -m "Record full Nexus footer audit report" || exit 0
           git push
