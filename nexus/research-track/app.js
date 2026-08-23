@@ -2,11 +2,13 @@
   'use strict';
 
   const data = window.RESEARCH_TRACK || {};
+  const caseStudies = window.RESEARCH_CASES || [];
   const overviewGrid = document.getElementById('overviewGrid');
   const researchAxes = document.getElementById('researchAxes');
   const methodGrid = document.getElementById('methodGrid');
   const standardsList = document.getElementById('standardsList');
   const track = document.getElementById('track');
+  const legalCases = document.getElementById('legalCases');
   const knowledge = document.getElementById('knowledgeGrid');
   const updatedAt = document.getElementById('updatedAt');
 
@@ -159,6 +161,84 @@
     return article;
   }
 
+  function renderCaseBlock(label, items) {
+    const section = make('section', 'thesis-brief');
+    const head = make('div', 'brief-head');
+    head.append(make('span', 'brief-label', label));
+    section.append(head);
+
+    const grid = make('div', 'brief-grid');
+    items.forEach((item, index) => {
+      const card = make('article', 'brief-section');
+      const title = make('div', 'brief-section-title');
+      title.append(make('span', '', String(index + 1).padStart(2, '0')), make('h4', '', item.title));
+      card.append(title, make('p', '', item.text));
+      grid.append(card);
+    });
+    section.append(grid);
+    return section;
+  }
+
+  function renderCaseStudy(item) {
+    const article = make('article', 'stage-card tone-active');
+    article.id = item.id;
+    article.style.display = 'block';
+
+    const body = make('div', 'stage-body');
+    const top = make('div', 'stage-top');
+    const titleWrap = make('div', 'stage-title-wrap');
+    titleWrap.append(make('p', 'eyebrow', item.eyebrow || 'LEGAL CASE STUDY'));
+
+    const heading = make('div', 'stage-heading');
+    heading.style.display = 'flex';
+    heading.style.alignItems = 'baseline';
+    heading.style.gap = '10px';
+    heading.append(make('span', 'stage-order', item.order || 'CASE'), make('h2', '', item.title));
+    titleWrap.append(heading);
+
+    top.append(titleWrap, make('span', 'stage-status', item.status || '검토'));
+    body.append(top, make('p', 'stage-summary', item.summary));
+    if (item.classification) body.append(make('p', 'brief-note', item.classification));
+
+    if (Array.isArray(item.focus) && item.focus.length) {
+      const focus = make('div', 'stage-focus');
+      item.focus.forEach((tag) => focus.append(make('span', '', tag)));
+      body.append(focus);
+    }
+
+    if (Array.isArray(item.facts) && item.facts.length) body.append(renderCaseBlock('검증된 사실관계', item.facts));
+    if (Array.isArray(item.legalIssues) && item.legalIssues.length) body.append(renderCaseBlock('핵심 법적 쟁점', item.legalIssues));
+    if (Array.isArray(item.researchLinks) && item.researchLinks.length) body.append(renderCaseBlock('박사연구 연결', item.researchLinks));
+
+    if (Array.isArray(item.sources) && item.sources.length) {
+      const section = make('section', 'thesis-brief');
+      const head = make('div', 'brief-head');
+      head.append(make('span', 'brief-label', '원자료·법령 원문'));
+      section.append(head);
+
+      const items = make('div', 'stage-items');
+      item.sources.forEach((source) => {
+        const box = make('div', 'stage-item');
+        box.append(make('span', 'item-type', source.type), make('strong', '', source.title));
+        if (source.note) box.append(make('p', '', source.note));
+        if (source.url) {
+          const link = make('a', 'item-link', '원자료 보기 →');
+          link.href = source.url;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          box.append(link);
+        }
+        items.append(box);
+      });
+      section.append(items);
+      if (item.sourcePolicy) section.append(make('p', 'brief-note', item.sourcePolicy));
+      body.append(section);
+    }
+
+    article.append(body);
+    return article;
+  }
+
   function renderKnowledge(item) {
     const article = make('article', 'knowledge-card');
     article.append(make('h3', '', item.title), make('p', '', item.description));
@@ -179,6 +259,7 @@
     standardsList?.append(li);
   });
   (data.stages || []).forEach((stage) => track?.append(renderStage(stage)));
+  caseStudies.forEach((item) => legalCases?.append(renderCaseStudy(item)));
   (data.knowledge || []).forEach((item) => knowledge?.append(renderKnowledge(item)));
 
   if (updatedAt && data.updatedAt) updatedAt.textContent = `업데이트 ${String(data.updatedAt).replaceAll('-', '.')}`;
