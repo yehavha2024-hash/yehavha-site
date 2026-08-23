@@ -1,4 +1,0 @@
-/* Legacy compatibility shim.
-   portal-v2.js still requests this historical stylesheet, but it must not own layout,
-   identity, clock, icon, typography or card rules. All active portal presentation now
-   lives in portal-v2.css and nexus-standard.css. */
