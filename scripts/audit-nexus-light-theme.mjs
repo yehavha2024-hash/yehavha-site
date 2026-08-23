@@ -5,8 +5,6 @@ const ROOT = 'nexus';
 const LIGHT_BG = new Set(['#fff', '#ffffff', 'white', 'transparent', 'none']);
 const TRACK_BG = new Set(['#e5e7eb', '#e4ebf3']);
 const BLACK_TEXT = new Set(['#111', '#111111', '#000', '#000000', 'black', 'inherit', 'currentcolor']);
-const preservedVisual = /(?:icon|glyph|svg|logo|mark|dot|artwork|avatar|illustration|pictogram|emoji|swatch|progress-(?:bar|fill|ring)|meter-(?:bar|fill)|chart|spark)/i;
-const trackSelector = /(?:progress|meter)-track/i;
 let errors = 0;
 let checkedRules = 0;
 
@@ -28,6 +26,23 @@ function walk(dir, predicate, out = []) {
   return out;
 }
 
+function isActualVisual(selector) {
+  const tokens = selector.toLowerCase().split(/[^a-z0-9_-]+/).filter(Boolean);
+  return tokens.some(token =>
+    token === 'icon' || token.endsWith('-icon') || token.endsWith('_icon') ||
+    token === 'glyph' || token.endsWith('-glyph') || token.endsWith('_glyph') ||
+    token === 'svg' || token === 'logo' || token.endsWith('-logo') ||
+    token === 'mark' || token.endsWith('-mark') || token === 'dot' || token.endsWith('-dot') ||
+    token === 'artwork' || token === 'avatar' || token === 'illustration' || token === 'pictogram' || token === 'emoji' || token === 'swatch' ||
+    token === 'progress-ring' || token === 'progress-bar' || token === 'progress-fill' ||
+    token === 'meter-bar' || token === 'meter-fill' || token === 'chart' || token === 'spark'
+  );
+}
+
+function isTrack(selector) {
+  return /(?:^|[^a-z0-9_-])(?:progress|meter)-track(?:$|[^a-z0-9_-])/i.test(selector);
+}
+
 function stripImportant(value) {
   return value.replace(/\s*!important\s*$/i, '').trim().toLowerCase();
 }
@@ -41,18 +56,17 @@ function auditCss(css, file) {
   const rule = /([^{}]+)\{([^{}]*)\}/g;
   for (const match of clean.matchAll(rule)) {
     const selector = match[1].trim();
-    if (!selector || selector.startsWith('@') || preservedVisual.test(selector)) continue;
+    if (!selector || selector.startsWith('@') || isActualVisual(selector)) continue;
     checkedRules += 1;
     for (const [prop, raw] of declarations(match[2])) {
       const value = stripImportant(raw);
       if (prop === 'background' || prop === 'background-color') {
-        if (/url\(/i.test(value) && !/(?:^|,)\s*(?:html|body)(?:\b|[.:#\[])/i.test(selector)) continue;
-        if (trackSelector.test(selector) && TRACK_BG.has(value)) continue;
-        if (!LIGHT_BG.has(value)) fail(file, `비시각 요소 배경이 흰색이 아님: ${selector} { ${prop}:${raw} }`);
+        if (/url\(/i.test(value)) continue;
+        if (isTrack(selector) && TRACK_BG.has(value)) continue;
+        if (!LIGHT_BG.has(value)) fail(file, `구조 배경이 흰색이 아님: ${selector} { ${prop}:${raw} }`);
       }
-      if (prop === 'color') {
-        if (value.startsWith('var(')) continue;
-        if (!BLACK_TEXT.has(value)) fail(file, `텍스트 색상이 검정이 아님: ${selector} { color:${raw} }`);
+      if (prop === 'color' || prop === 'caret-color') {
+        if (!BLACK_TEXT.has(value)) fail(file, `일반 글자색이 검정이 아님: ${selector} { ${prop}:${raw} }`);
       }
       if (/^border(?:-(?:top|right|bottom|left))?(?:-color)?$/.test(prop)) {
         if (/rgba?\(\s*255\s*,\s*255\s*,\s*255|#fff(?:fff)?\b|\bwhite\b/i.test(value)) {
@@ -61,9 +75,7 @@ function auditCss(css, file) {
       }
     }
   }
-  if (/footer-meta::before[\s\S]{0,500}content\s*:\s*["']스카이예슈아/i.test(clean)) {
-    fail(file, 'Footer 법적 고지문을 CSS content로 생성하고 있음');
-  }
+  if (/footer-meta::before[\s\S]{0,500}content\s*:\s*["']스카이예슈아/i.test(clean)) fail(file, 'Footer 법적 고지문을 CSS content로 생성하고 있음');
 }
 
 for (const file of walk(ROOT, file => file.endsWith('.css'))) auditCss(fs.readFileSync(file, 'utf8'), file);
