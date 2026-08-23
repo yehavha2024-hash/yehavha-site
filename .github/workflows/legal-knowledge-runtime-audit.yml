@@ -1,11 +1,6 @@
 name: Legal Knowledge Runtime Audit
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'legal-knowledge/**'
-      - '.github/workflows/legal-knowledge-runtime-audit.yml'
   workflow_dispatch:
 
 permissions:
