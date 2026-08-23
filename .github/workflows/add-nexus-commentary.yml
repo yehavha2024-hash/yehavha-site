@@ -1,0 +1,23 @@
+name: Add NEXUS Commentary
+on:
+  push:
+    paths:
+      - '.github/workflows/add-nexus-commentary.yml'
+permissions:
+  contents: write
+jobs:
+  register:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/add-nexus-commentary.mjs
+      - run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nexus/projects.json nexus/portal-v2.js nexus/index.html
+          git commit -m "Register NEXUS Commentary as first portal section"
+          git push
