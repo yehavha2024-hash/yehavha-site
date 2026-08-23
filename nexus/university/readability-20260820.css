@@ -1,37 +1,37 @@
-/* NEXUS UNIVERSITY readability v2 — consistent type scale, compact geometry preserved */
-body{font-size:15px;line-height:1.74}
-.back,.utility-link{font-size:12.5px}.stamp,.badge{font-size:11px}
-.eyebrow{font-size:11px}.lead{font-size:15px;line-height:1.68}.notice{font-size:13.5px;line-height:1.62}
-.button{font-size:12.5px}.metric span{font-size:11px}.metric strong{font-size:15px}
-.section-head span{font-size:11.5px}.section-intro{font-size:14px;line-height:1.64}
-.stage h3{font-size:16px}.stage p{font-size:13.5px;line-height:1.56}
-.course-code{font-size:11.5px}.course-copy strong{font-size:14.5px}.course-copy small{font-size:12px}.course-state{font-size:11px}
-.college .num{font-size:11px}.college strong{font-size:14.5px}.college p{font-size:13.5px;line-height:1.56}
-.path span{font-size:13px}.footer{font-size:11.5px;line-height:1.7}
-.catalog-search input{font-size:14px!important}.catalog-search>span{font-size:13px!important;line-height:1.55!important}
-.college-index{font-size:11.5px!important}.college-catalog>summary strong{font-size:14.5px!important}.college-catalog>summary small{font-size:12px!important}.college-catalog>summary .course-state{font-size:11px!important}
-.department-head strong{font-size:14px!important}.department-head span{font-size:11.5px!important}
-.course-subtitle{font-size:14px;line-height:1.58}.course-meta span{font-size:11.5px}.progress-head{font-size:11.5px}.progress-head strong{font-size:12.5px}
-.toc a strong{font-size:13px}.toc a span{font-size:11.5px}.module-head p{font-size:13px;line-height:1.56}
-.lesson-no{font-size:11.5px}.lesson-title strong{font-size:15px;line-height:1.36}.lesson-title span{font-size:12px}.lesson-check{font-size:11px}
-.lesson-section h3{font-size:16px}.lesson-section p{font-size:15px;line-height:1.74}.lesson-section ul,.lesson-section ol{font-size:14.5px;line-height:1.68}
-.concepts span{font-size:11.5px}.case{font-size:14.5px;line-height:1.7}.exercise strong{font-size:12.5px}.exercise{font-size:14px;line-height:1.65}
-.tutor-box p{font-size:13.5px;line-height:1.6}.tutor-copy{font-size:11.5px}.assessment h3{font-size:15px}.assessment p,.assessment li{font-size:14px;line-height:1.66}
-.qa-hero p{font-size:14px!important;line-height:1.64!important}.qa-status{font-size:11px!important}
-.qa-metric span{font-size:11px!important}.qa-metric strong{font-size:15px!important}.qa-metric small{font-size:10.5px!important}
-.qa-policy strong{font-size:12.5px!important}.qa-policy p{font-size:12.5px!important;line-height:1.56!important}
-.qa-batch strong{font-size:13px!important}.qa-batch span{font-size:11px!important}.qa-batch p{font-size:12.5px!important;line-height:1.55!important}.qa-batch em{font-size:10.5px!important}
-.qa-controls select,.qa-controls input{font-size:12.5px!important}.qa-controls span{font-size:11.5px!important}
-.qa-issue-top span{font-size:10.8px!important}.qa-issue-top strong{font-size:11.5px!important}.qa-issue-top em{font-size:10.5px!important}.qa-issue h3{font-size:13.5px!important}.qa-issue p{font-size:12.8px!important;line-height:1.56!important}.qa-issue small{font-size:11.2px!important;line-height:1.5!important}.qa-actions a,.qa-actions button{font-size:11.5px!important}.qa-rule,.qa-limit{font-size:12.5px!important;line-height:1.56!important}
+/* NEXUS UNIVERSITY readability v3 — readable mobile-first type scale */
+body{font-size:16.5px;line-height:1.8}
+.back,.utility-link{font-size:14px}.stamp,.badge{font-size:12.5px}
+.eyebrow{font-size:13px}.lead{font-size:16.5px;line-height:1.78}.notice{font-size:15.5px;line-height:1.75}
+.button{font-size:14px}.metric span{font-size:13px}.metric strong{font-size:17px}
+.section-head h2{font-size:22px}.section-head span{font-size:13px}.section-intro{font-size:16px;line-height:1.78}
+.stage h3{font-size:19px}.stage p{font-size:15.5px;line-height:1.72}
+.course-code{font-size:13px}.course-copy strong{font-size:16.5px}.course-copy small{font-size:14px}.course-state{font-size:12.5px}
+.college .num{font-size:12.5px}.college strong{font-size:16.5px}.college p{font-size:15.5px;line-height:1.72}
+.path span{font-size:14.5px}.footer{font-size:14px;line-height:1.75}
+.catalog-search input{font-size:16px!important}.catalog-search>span{font-size:14.5px!important;line-height:1.7!important}
+.college-index{font-size:13px!important}.college-catalog>summary strong{font-size:16.5px!important}.college-catalog>summary small{font-size:14px!important}.college-catalog>summary .course-state{font-size:12.5px!important}
+.department-head strong{font-size:16px!important}.department-head span{font-size:13px!important}
+.course-subtitle{font-size:16px;line-height:1.72}.course-meta span{font-size:13px}.progress-head{font-size:13px}.progress-head strong{font-size:14px}
+.toc a strong{font-size:15px}.toc a span{font-size:13.5px}.module-head p{font-size:15px;line-height:1.7}
+.lesson-no{font-size:13px}.lesson-title strong{font-size:17px;line-height:1.42}.lesson-title span{font-size:14px}.lesson-check{font-size:12.5px}
+.lesson-section h3{font-size:19px}.lesson-section p{font-size:16.5px;line-height:1.82}.lesson-section ul,.lesson-section ol{font-size:16px;line-height:1.78}
+.concepts span{font-size:13px}.case{font-size:16px;line-height:1.78}.exercise strong{font-size:14px}.exercise{font-size:15.5px;line-height:1.75}
+.tutor-box p{font-size:15.5px;line-height:1.72}.tutor-copy{font-size:13px}.assessment h3{font-size:17px}.assessment p,.assessment li{font-size:15.5px;line-height:1.75}
+.qa-hero p{font-size:16px!important;line-height:1.75!important}.qa-status{font-size:12.5px!important}
+.qa-metric span{font-size:12.5px!important}.qa-metric strong{font-size:17px!important}.qa-metric small{font-size:12px!important}
+.qa-policy strong{font-size:14.5px!important}.qa-policy p{font-size:15px!important;line-height:1.72!important}
+.qa-batch strong{font-size:15px!important}.qa-batch span{font-size:13px!important}.qa-batch p{font-size:15px!important;line-height:1.72!important}.qa-batch em{font-size:12px!important}
+.qa-controls select,.qa-controls input{font-size:14px!important}.qa-controls span{font-size:13px!important}
+.qa-issue-top span{font-size:12.5px!important}.qa-issue-top strong{font-size:13.5px!important}.qa-issue-top em{font-size:12px!important}.qa-issue h3{font-size:16px!important}.qa-issue p{font-size:15px!important;line-height:1.72!important}.qa-issue small{font-size:13px!important;line-height:1.6!important}.qa-actions a,.qa-actions button{font-size:13.5px!important}.qa-rule,.qa-limit{font-size:15px!important;line-height:1.72!important}
 @media(max-width:650px){
- body{font-size:15px;line-height:1.72}.back,.utility-link{font-size:12.5px}
- .lead{font-size:14.5px;line-height:1.64}.notice{font-size:13px}.button{font-size:12px}.metric span{font-size:10.8px}.metric strong{font-size:14px}
- .section-intro{font-size:13.5px;line-height:1.6}.stage h3{font-size:15px}.stage p{font-size:13px;line-height:1.52}
- .course-code{font-size:11px}.course-copy strong{font-size:14px}.course-copy small{font-size:11.5px}.course-state{font-size:10.8px}
- .college strong{font-size:14px}.college p{font-size:13px;line-height:1.52}.path span{font-size:12.5px}.footer{font-size:11.5px}
- .catalog-search input{font-size:13.5px!important}.catalog-search>span{font-size:12.5px!important}.college-catalog>summary strong{font-size:14px!important}.college-catalog>summary small{font-size:11.5px!important}.college-catalog>summary .course-state{font-size:10.8px!important}.department-head strong{font-size:13.5px!important}.department-head span{font-size:11px!important}
- .course-subtitle{font-size:13.5px}.course-meta span{font-size:11px}.toc a strong{font-size:12.5px}.toc a span{font-size:11px}.module-head p{font-size:12.5px}
- .lesson-title strong{font-size:14.5px}.lesson-title span{font-size:11.5px}.lesson-section h3{font-size:15.5px}.lesson-section p{font-size:15px;line-height:1.72}.lesson-section ul,.lesson-section ol{font-size:14px;line-height:1.64}
- .concepts span{font-size:11px}.case{font-size:14px}.exercise{font-size:13.5px}.tutor-box p{font-size:13px}.assessment p,.assessment li{font-size:13.5px}
- .qa-hero p{font-size:13.5px!important}.qa-policy p{font-size:12px!important}.qa-batch p{font-size:12px!important}.qa-controls select,.qa-controls input{font-size:12px!important}.qa-issue h3{font-size:13px!important}.qa-issue p{font-size:12.5px!important}.qa-issue small{font-size:11px!important}.qa-rule,.qa-limit{font-size:12px!important}
+ body{font-size:16px;line-height:1.8}.back,.utility-link{font-size:14px}
+ .lead{font-size:16px;line-height:1.8}.notice{font-size:15px;line-height:1.75}.button{font-size:14px}.metric span{font-size:12.5px}.metric strong{font-size:16.5px}
+ .section-intro{font-size:16px;line-height:1.8}.stage h3{font-size:18px}.stage p{font-size:15.5px;line-height:1.75}
+ .course-code{font-size:12.5px}.course-copy strong{font-size:16px}.course-copy small{font-size:14px}.course-state{font-size:12.5px}
+ .college strong{font-size:16px}.college p{font-size:15.5px;line-height:1.75}.path span{font-size:14px}.footer{font-size:14px}
+ .catalog-search input{font-size:16px!important}.catalog-search>span{font-size:14px!important}.college-catalog>summary strong{font-size:16px!important}.college-catalog>summary small{font-size:14px!important}.college-catalog>summary .course-state{font-size:12.5px!important}.department-head strong{font-size:15.5px!important}.department-head span{font-size:13px!important}
+ .course-subtitle{font-size:16px}.course-meta span{font-size:13px}.toc a strong{font-size:15px}.toc a span{font-size:13.5px}.module-head p{font-size:15px}
+ .lesson-title strong{font-size:17px}.lesson-title span{font-size:14px}.lesson-section h3{font-size:19px}.lesson-section p{font-size:16px;line-height:1.82}.lesson-section ul,.lesson-section ol{font-size:16px;line-height:1.78}
+ .concepts span{font-size:13px}.case{font-size:16px}.exercise{font-size:15.5px}.tutor-box p{font-size:15.5px}.assessment p,.assessment li{font-size:15.5px}
+ .qa-hero p{font-size:16px!important}.qa-policy p{font-size:15px!important}.qa-batch p{font-size:15px!important}.qa-controls select,.qa-controls input{font-size:14px!important}.qa-issue h3{font-size:16px!important}.qa-issue p{font-size:15px!important}.qa-issue small{font-size:13px!important}.qa-rule,.qa-limit{font-size:15px!important}
 }
