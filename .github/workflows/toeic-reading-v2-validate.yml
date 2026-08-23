@@ -1,10 +1,6 @@
 name: TOEIC Reading V2 Validate
 
 on:
-  push:
-    paths:
-      - 'toeic-human-100/**'
-      - '.github/workflows/toeic-reading-v2-validate.yml'
   workflow_dispatch:
 
 permissions:
