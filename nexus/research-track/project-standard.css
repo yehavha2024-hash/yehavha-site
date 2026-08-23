@@ -1,10 +1,10 @@
 .site-footer{width:min(1080px,calc(100% - 32px));margin:0 auto;padding:18px 0 34px;border-top:1px solid #cfd4dc;color:#111111;text-align:center;font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-apple-system,sans-serif;letter-spacing:0}
 .footer-brand{display:flex;flex-direction:column;align-items:center}
-.footer-brand strong{display:block;color:#111111;font-size:13px;font-weight:600;line-height:1.5}
-.footer-brand p{margin:2px 0 0;color:#111111;font-size:11px;font-weight:400;line-height:1.7}
-.footer-meta{display:flex;flex-direction:column;align-items:center;width:100%;margin-top:10px;padding-top:10px;border-top:1px solid #cfd4dc}
-.footer-meta p{margin:0 auto;color:#111111;font-size:12px;font-weight:400;line-height:1.7}
-.footer-meta .ai-disclosure{max-width:880px;margin:6px auto 0;font-size:11.5px;line-height:1.7}
-.footer-meta a{color:#111111;text-decoration:none;font-size:11px;font-weight:600;line-height:1.7}
-.footer-meta>a{margin-top:5px}
+.footer-brand strong{display:block;color:#111111;font-size:15px;font-weight:650;line-height:1.5}
+.footer-brand p{margin:3px 0 0;color:#4b5563;font-size:13.5px;font-weight:400;line-height:1.72}
+.footer-meta{display:flex;flex-direction:column;align-items:center;width:100%;margin-top:12px;padding-top:12px;border-top:1px solid #cfd4dc}
+.footer-meta p{margin:0 auto;color:#4b5563;font-size:14px;font-weight:400;line-height:1.75}
+.footer-meta .ai-disclosure{max-width:880px;margin:7px auto 0;font-size:13.5px;line-height:1.75}
+.footer-meta a{color:#326da8;text-decoration:none;font-size:13.5px;font-weight:650;line-height:1.7}
+.footer-meta>a{margin-top:7px}
 @media(max-width:760px){.site-footer{width:calc(100% - 18px);padding:16px 0 32px;text-align:center}.footer-brand,.footer-meta{align-items:center}.footer-meta .ai-disclosure{max-width:100%}}
