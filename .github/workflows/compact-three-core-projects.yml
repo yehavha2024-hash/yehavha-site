@@ -1,0 +1,30 @@
+name: Compact Three Core Projects
+on:
+  push:
+    paths:
+      - '.github/workflows/compact-three-core-projects.yml'
+permissions:
+  contents: write
+jobs:
+  compact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Compact canonical CSS
+        run: node scripts/compact-three-core-projects.mjs
+      - name: Commit canonical CSS changes
+        run: |
+          if git diff --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add legal-knowledge/legal-mind/style.css legal-knowledge/legal-mind/index.html toeic-human-100/project-standard.css toeic-human-100/index.html three-minute-break/style.css three-minute-break/index.html
+          git commit -m "Compact Legal Mind TOEIC and 3-minute Break layouts"
+          git push
