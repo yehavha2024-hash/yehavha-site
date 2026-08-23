@@ -104,14 +104,18 @@ const compactTokens = [
   '.footer{margin-top:0;padding:18px 0 36px',
   'text-align:center',
   '.footer>strong{display:block;color:#d7e1ea;font-size:13px',
+  '.footer-description{margin:3px auto 0',
+  '.footer-meta::before{content:none!important;display:none!important}',
   '.footer-meta>p{margin:0 auto;color:var(--footer-text);font-size:12px',
-  '.footer .ai-disclosure{order:3',
+  '.footer .ai-disclosure{max-width:920px;margin:6px auto 0',
   'font-size:11.5px',
-  '.footer-meta>a{order:4',
+  '.footer-meta>a{display:inline-block;margin-top:6px',
   'font-size:11px'
 ];
 for (const token of compactTokens) if (!compactCss.includes(token)) fail(COMPACT_CSS, `compact template 공통 규격 누락: ${token}`);
-if (!/\.footer-meta>p:nth-child\(2\)\{order:0/.test(compactCss)) fail(COMPACT_CSS, 'compact Footer 사업자정보가 Copyright 앞으로 재정렬되지 않음');
+if (/\.footer-meta>\*\{order:|\.footer-meta>p:nth-child\([^)]*\)\{order:/.test(compactCss)) {
+  fail(COMPACT_CSS, 'compact Footer에 legacy CSS order 재배치가 남아 있음');
+}
 if (!/\.footer \.ai-disclosure\{[^}]*margin:6px auto 0/.test(compactCss)) fail(COMPACT_CSS, 'compact Footer AI 안내 분리 간격이 명시되지 않음');
 
 // Nexus HTML continues to use the global portal owner or the compact template owner.
