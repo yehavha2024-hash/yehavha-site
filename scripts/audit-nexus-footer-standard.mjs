@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+// Repository-wide guard: every Nexus copyright footer is checked, not only named runtime pages.
 const ROOT = 'nexus';
 const BUSINESS = '스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈';
 const COPYRIGHT = 'Copyright © 이명훈 2026. All rights reserved.';
