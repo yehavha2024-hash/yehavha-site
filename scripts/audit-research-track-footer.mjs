@@ -20,9 +20,11 @@ if (!errors) {
   const css = fs.readFileSync(CSS_FILE, 'utf8');
   const footerMatch = html.match(/<footer\b[^>]*class=["'][^"']*\bsite-footer\b[^"']*["'][^>]*>[\s\S]*?<\/footer>/i);
   const footer = footerMatch ? footerMatch[0] : '';
+  const footerTags = [...html.matchAll(/<footer\b[^>]*class=["']([^"']*)["'][^>]*>/gi)];
+  const usesLegacyFooterClass = footerTags.some(match => match[1].split(/\s+/).includes('footer'));
 
   if (!footer) fail('표준 site-footer DOM을 사용하지 않음');
-  if (/<footer\b[^>]*class=["'][^"']*\bfooter\b/i.test(html)) fail('구형 footer 클래스가 다시 사용됨');
+  if (usesLegacyFooterClass) fail('구형 footer 클래스가 다시 사용됨');
   if (!/data-footer-standard=["']v2["']/.test(footer)) fail('Footer 표준 버전 v2 누락');
   if (!/project-standard\.css\?v=/.test(html)) fail('canonical Footer CSS가 버전 쿼리와 함께 연결되지 않음');
 
