@@ -1,0 +1,26 @@
+name: Remove Nexus Overview Stats
+on:
+  push:
+    paths:
+      - '.github/workflows/remove-nexus-overview.yml'
+permissions:
+  contents: write
+jobs:
+  remove-overview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Remove overview statistics
+        run: node scripts/remove-nexus-overview.mjs
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nexus/portal-v2.js nexus/nexus-standard.css nexus/index.html
+          git commit -m "Remove Nexus overview statistics"
+          git push
