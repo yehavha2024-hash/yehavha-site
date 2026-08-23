@@ -43,6 +43,10 @@ img{max-width:100%}
 .skip-link:focus{top:16px}
 .container{width:min(var(--nxs-content),calc(100% - 32px));margin:0 auto}
 
+/* Tier is a logical ordering/grouping layer only. Category card owns the visible heading. */
+.portal-tier-head{display:none!important}
+.portal-tier{gap:0!important}
+
 /* Shared navigation only. Project-specific navigation belongs to the local owner. */
 .back-link,.nexus-link,.back{
   display:inline-flex;
