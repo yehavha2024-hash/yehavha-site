@@ -48,3 +48,15 @@ nexus/university/course.html
 nexus/university/index.html
 nexus/university/quality-audit.html
 NEXUS_UI_STANDARD.md
+
+TOKEN TYPE REPAIR
+repaired files: 2
+restored layout tokens: 6
+missing required portal tokens: 0
+
+nexus/articles/articles.css: --article-card-title #ffffff -> 16px
+nexus/portal-v2.css: --nxs-body-line #cfd4dc -> 1.75
+nexus/portal-v2.css: --nxs-card-title #ffffff -> 18px
+nexus/portal-v2.css: --nxs-card-text #111111 -> 13.5px
+nexus/portal-v2.css: --nxs-footer-text #111111 -> 12px
+nexus/portal-v2.css: --nxs-footer-link #111111 -> 11px

@@ -1,7 +1,7 @@
 /* YEHAVHA NEXUS · Direct Reading Archive
    Ownership: article/archive content only.
    Shared shell, Nexus return links, container and footer are owned by ../portal-v2.css. */
-:root{--article-line:#cfd4dc;--article-text:#111111;--article-accent:#8fd3c5;--article-muted:#111111;--article-card:#ffffff;--article-title:18px;--article-card-title:#ffffff;--article-copy:13.5px;--article-meta:10.5px;
+:root{--article-line:#cfd4dc;--article-text:#111111;--article-accent:#8fd3c5;--article-muted:#111111;--article-card:#ffffff;--article-title:18px;--article-card-title:16px;--article-copy:13.5px;--article-meta:10.5px;
 }
 body{background:#ffffff;color:#111111}
 .article-hero,.reader-top{padding:24px 0 8px}
