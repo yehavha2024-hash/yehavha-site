@@ -170,15 +170,6 @@
     "baselineAt": "2026-08-20",
     "baselineLabel": "자료기준"
   },
-  "ai-music-archive": {
-    "id": "ai-music-archive",
-    "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
-    "lastUpdated": "2026-08-23",
-    "contentCount": 8,
-    "contentLabel": "운영 모듈"
-  },
   "education-hub": {
     "id": "education-hub",
     "managedBy": "github",
