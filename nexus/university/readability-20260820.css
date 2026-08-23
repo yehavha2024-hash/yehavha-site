@@ -11,7 +11,7 @@ body{font-size:16.5px;line-height:1.8}
 .catalog-search input{font-size:16px!important}.catalog-search>span{font-size:14.5px!important;line-height:1.7!important}
 .college-index{font-size:13px!important}.college-catalog>summary strong{font-size:16.5px!important}.college-catalog>summary small{font-size:14px!important}.college-catalog>summary .course-state{font-size:12.5px!important}
 .department-head strong{font-size:16px!important}.department-head span{font-size:13px!important}
-.course-subtitle{font-size:16px;line-height:1.72}.course-meta span{font-size:13px}.progress-head{font-size:13px}.progress-head strong{font-size:14px}
+.course-subtitle{font-size:16px;line-height:1.72}.course-meta span{font-size:13px;color:#111111;background:#eef4f8;}.progress-head{font-size:13px}.progress-head strong{font-size:14px}
 .toc a strong{font-size:15px}.toc a span{font-size:13.5px}.module-head p{font-size:15px;line-height:1.7}
 .lesson-no{font-size:13px}.lesson-title strong{font-size:17px;line-height:1.42}.lesson-title span{font-size:14px}.lesson-check{font-size:12.5px}
 .lesson-section h3{font-size:19px}.lesson-section p{font-size:16.5px;line-height:1.82}.lesson-section ul,.lesson-section ol{font-size:16px;line-height:1.78}
@@ -30,7 +30,7 @@ body{font-size:16.5px;line-height:1.8}
  .course-code{font-size:12.5px}.course-copy strong{font-size:16px}.course-copy small{font-size:14px}.course-state{font-size:12.5px}
  .college strong{font-size:16px}.college p{font-size:15.5px;line-height:1.75}.path span{font-size:14px}.footer{font-size:14px}
  .catalog-search input{font-size:16px!important}.catalog-search>span{font-size:14px!important}.college-catalog>summary strong{font-size:16px!important}.college-catalog>summary small{font-size:14px!important}.college-catalog>summary .course-state{font-size:12.5px!important}.department-head strong{font-size:15.5px!important}.department-head span{font-size:13px!important}
- .course-subtitle{font-size:16px}.course-meta span{font-size:13px}.toc a strong{font-size:15px}.toc a span{font-size:13.5px}.module-head p{font-size:15px}
+ .course-subtitle{font-size:16px}.course-meta span{font-size:13px;color:#111111;background:#eef4f8;}.toc a strong{font-size:15px}.toc a span{font-size:13.5px}.module-head p{font-size:15px}
  .lesson-title strong{font-size:17px}.lesson-title span{font-size:14px}.lesson-section h3{font-size:19px}.lesson-section p{font-size:16px;line-height:1.82}.lesson-section ul,.lesson-section ol{font-size:16px;line-height:1.78}
  .concepts span{font-size:13px}.case{font-size:16px}.exercise{font-size:15.5px}.tutor-box p{font-size:15.5px}.assessment p,.assessment li{font-size:15.5px}
  .qa-hero p{font-size:16px!important}.qa-policy p{font-size:15px!important}.qa-batch p{font-size:15px!important}.qa-controls select,.qa-controls input{font-size:14px!important}.qa-issue h3{font-size:16px!important}.qa-issue p{font-size:15px!important}.qa-issue small{font-size:13px!important}.qa-rule,.qa-limit{font-size:15px!important}

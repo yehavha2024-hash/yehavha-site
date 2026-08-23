@@ -21,7 +21,7 @@ body{background:#ffffff;color:#111111;font-size:16px;line-height:1.8}
 .archive-head>p:last-child{margin:0;color:#111111;font-size:15px;line-height:1.7}
 .article-list-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
 .featured-research{display:block;padding:13px 14px;border:1px solid #cfd4dc;border-radius:11px;background:#ffffff;text-decoration:none;color:#111111}
-.featured-research .tag{display:inline-block;margin-bottom:6px;padding:4px 7px;border:1px solid #cfd4dc;border-radius:999px;background:#eef4f8;color:#111111;font-size:12.5px;font-weight:850}
+.featured-research .tag{display:inline-block;margin-bottom:6px;padding:4px 7px;border:1px solid #b8c6d3;border-radius:999px;background:#eef4f8;color:#111111;font-size:12.5px;font-weight:850}
 .featured-research h3{margin:0 0 5px;color:#111111;font-size:19px;line-height:1.45;letter-spacing:-.02em}
 .featured-research p{margin:0;color:#111111;font-size:15.5px;line-height:1.75}
 .featured-research:hover{border-color:#aeb8c5;background:#f7f9fc}
