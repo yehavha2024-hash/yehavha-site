@@ -1,9 +1,7 @@
 name: Nexus Light Theme Migration
 
 on:
-  push:
-    paths:
-      - 'scripts/migrate-nexus-light-theme.mjs'
+  workflow_dispatch:
 
 permissions:
   contents: write
