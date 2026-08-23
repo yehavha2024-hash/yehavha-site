@@ -17,9 +17,10 @@ const ICON_A = '#225f96';
 const ICON_B = '#43a6cf';
 const ICON_BORDER = '#1d5a8c';
 const CELL_BG = '#eef4f8';
+const DETAIL_BG = '#f7f9fc';
 const CELL_BORDER = '#b8c6d3';
 const PALE_TEXT = new Set([
-  '#4b5563','#667085','#6b7280','#64748b','#737373','#7b8490','#94a3b8','#9ca3af','#a0aec0','#cbd5e1','#d1d5db','#d6d9de','#e2e8f0'
+  '#34465a','#425469','#42586d','#425f78','#4b5563','#4f6072','#536579','#625b4e','#64748b','#65768a','#667085','#6b7280','#718096','#737373','#75879a','#7b8490','#94a3b8','#9ca3af','#a0aec0','#aebed0','#b0c0d0','#cbd5e1','#d1d5db','#d6d9de','#e2e8f0'
 ]);
 
 function walk(dir, out = []) {
@@ -35,8 +36,8 @@ function walk(dir, out = []) {
 
 function normalizeVars(css) {
   return css
-    .replace(/(--[\w-]*(?:muted|subtle|paperMuted|text-muted|text-secondary|secondary-text)[\w-]*\s*:)\s*(?:#[0-9a-fA-F]{3,8}|rgba?\([^;]+\)|var\([^;]+\))/g, `$1${BLACK}`)
-    .replace(/color\s*:\s*var\(--[\w-]*(?:muted|subtle|paperMuted|text-muted|text-secondary|secondary-text)[\w-]*\)(\s*!important)?/gi, `color:${BLACK}$1`)
+    .replace(/(--[\w-]*(?:muted|subtle|paperMuted|text-muted|text-secondary|secondary-text|dim)[\w-]*\s*:)\s*(?:#[0-9a-fA-F]{3,8}|rgba?\([^;]+\)|var\([^;]+\))/g, `$1${BLACK}`)
+    .replace(/color\s*:\s*var\(--[\w-]*(?:muted|subtle|paperMuted|text-muted|text-secondary|secondary-text|dim)[\w-]*\)(\s*!important)?/gi, `color:${BLACK}$1`)
     .replace(/color\s*:\s*(#[0-9a-fA-F]{6})(\s*!important)?/gi, (m, hex, imp = '') => PALE_TEXT.has(hex.toLowerCase()) ? `color:${BLACK}${imp}` : m);
 }
 
@@ -46,21 +47,39 @@ function setDecl(body, prop, value) {
   return `${body.trim().replace(/;?$/, ';')}${prop}:${value};`;
 }
 
+function classNames(selector) {
+  return [...selector.matchAll(/\.([A-Za-z0-9_-]+)/g)].map(match => match[1]);
+}
+
+function classHasToken(name, token) {
+  const parts = name.toLowerCase().split(/[-_]+/).filter(Boolean);
+  return parts.includes(token) || parts.includes(`${token}s`);
+}
+
 function selectorHasClass(selector, terms) {
-  return terms.some(term => new RegExp(`\\.${term}(?:$|[\\s:>.#,+~\\[])`, 'i').test(selector));
+  const names = classNames(selector);
+  return terms.some(term => names.includes(term));
+}
+
+function selectorHasToken(selector, tokens) {
+  const names = classNames(selector);
+  return names.some(name => tokens.some(token => classHasToken(name, token)));
 }
 
 const iconClasses = [
-  'quick-icon','category-icon','section-icon','feature-icon','project-icon','hero-icon','profile-icon','result-icon','public-icon','course-icon','icon-box','card-icon','item-icon','nav-icon','tool-icon','badge-icon','footer-icon'
+  'quick-icon','category-icon','section-icon','feature-icon','project-icon','hero-icon','profile-icon','result-icon','public-icon','course-icon','icon-box','card-icon','item-icon','nav-icon','tool-icon','badge-icon','footer-icon','header-icon','stat-icon','topic-icon'
 ];
-const tagClasses = [
-  'tag','chip','badge','pill','meta-chip','status-chip','maturity-chip','item-type','brief-label','priority','type-label','hero-meta','case-meta','detail-meta','filter-label'
+const tagExactClasses = [
+  'meta-chip','status-chip','maturity-chip','item-type','brief-label','priority','type-label','hero-meta','case-meta','detail-meta','detail-meta-row','course-meta','project-status'
+];
+const detailCellClasses = [
+  'argument-box','fact-row','source-card','research-note','brief-section','detail-card','detail-box','variation-case','variation-question','variation-answer','document-toc','citation-box'
 ];
 
 function isReadingSelector(selector) {
   if (/(?:button|\.active|:hover|:focus|::before|::after|icon|svg)/i.test(selector)) return false;
   return /(^|[\s,>+~])(p|li|dd|dt|blockquote|figcaption)(?=$|[\s,>+~.:#\[])/i.test(selector)
-    || /(?:description|summary|lead|copy|bibliography|translated-title|card-use|research-content|research-body|article-body|detail-section|step-body|thinking-note|argument-box|source-card|brief-section|notice|question|explanation|content-text|body-copy)/i.test(selector);
+    || /(?:description|summary|lead|copy|bibliography|translated-title|card-use|research-content|research-body|article-body|article-lead|article-section-body|detail-section|detail-sub|step-body|thinking-note|argument-box|source-card|brief-section|notice|question|explanation|content-text|body-copy|document-footer-copy)/i.test(selector);
 }
 
 function transformBlocks(css) {
@@ -73,11 +92,26 @@ function transformBlocks(css) {
       body = body.replace(/color\s*:\s*(?:#[0-9a-fA-F]{3,8}|rgba?\([^;]+\)|var\([^;]+\))(\s*!important)?/gi, `color:${BLACK}$1`);
     }
 
-    const isTag = selectorHasClass(selector, tagClasses) || /(?:hero-meta\s+span|case-meta\s+span|detail-meta\s+span)/i.test(selector);
+    const isTag = selectorHasToken(selector, ['tag','chip','badge','pill'])
+      || selectorHasClass(selector, tagExactClasses)
+      || /(?:hero-meta\s+span|case-meta\s+span|detail-meta(?:-row)?\s+span|course-meta\s+span|row-tags\s+span|article-tags\s+span|chip-grid\s+span|mini-chips\s+span)/i.test(selector);
     if (isTag && !/(?:\.active|:hover|:focus)/i.test(selector)) {
       body = setDecl(body, 'color', BLACK);
       body = setDecl(body, 'background', CELL_BG);
-      if (/border(?:-color)?\s*:/i.test(body)) body = body.replace(/border-color\s*:[^;}]*/gi, `border-color:${CELL_BORDER}`);
+      if (/border(?:-color)?\s*:/i.test(body)) {
+        body = body.replace(/border-color\s*:[^;}]*/gi, `border-color:${CELL_BORDER}`);
+        body = body.replace(/border\s*:[^;}]*/i, `border:1px solid ${CELL_BORDER}`);
+      }
+    }
+
+    const isDetailCell = selectorHasClass(selector, detailCellClasses);
+    if (isDetailCell && !/(?:\.active|:hover|:focus)/i.test(selector)) {
+      body = setDecl(body, 'color', BLACK);
+      body = setDecl(body, 'background', DETAIL_BG);
+      if (/border(?:-color)?\s*:/i.test(body)) {
+        body = body.replace(/border-color\s*:[^;}]*/gi, `border-color:${CELL_BORDER}`);
+        body = body.replace(/border\s*:[^;}]*/i, `border:1px solid ${CELL_BORDER}`);
+      }
     }
 
     const isIcon = selectorHasClass(selector, iconClasses);
@@ -124,8 +158,8 @@ function normalizePortalJs(text) {
 
 function bumpHtml(text) {
   return text
-    .replace(/(href=["'][^"']+\.css)(?:\?v=[^"']*)?(["'])/g, '$1?v=20260824-contrast-icons-1$2')
-    .replace(/(src=["'][^"']+portal-v2\.js)(?:\?v=[^"']*)?(["'])/g, '$1?v=20260824-contrast-icons-1$2');
+    .replace(/(href=["'][^"']+\.css)(?:\?v=[^"']*)?(["'])/g, '$1?v=20260824-contrast-icons-2$2')
+    .replace(/(src=["'][^"']+portal-v2\.js)(?:\?v=[^"']*)?(["'])/g, '$1?v=20260824-contrast-icons-2$2');
 }
 
 const files = TARGET_ROOTS.flatMap(root => walk(path.join(ROOT, root)));
@@ -156,17 +190,6 @@ if (fs.existsSync(portalJs)) {
   if (after !== before) {
     fs.writeFileSync(portalJs, after);
     changed.push('nexus/portal-v2.js');
-  }
-}
-
-const standard = path.join(ROOT, 'NEXUS_UI_STANDARD.md');
-if (fs.existsSync(standard)) {
-  let text = fs.readFileSync(standard, 'utf8');
-  const marker = '\n## 4.1 시각 대비·아이콘 표준 (2026-08-24)\n';
-  if (!text.includes(marker.trim())) {
-    text += `${marker}- 읽기 본문·설명·연구내용·상세보기의 기본 글자색은 #111111로 고정합니다.\n- muted/subtle은 레이아웃 의미를 위해 남기더라도 읽기 텍스트의 색상으로 사용하지 않습니다.\n- 태그·배지·상태 셀은 밝은 청회색 배경과 검정 글자를 사용합니다.\n- 큰·작은 기능 아이콘은 동일한 청색 계열 컨테이너와 흰색 1.95px 선형 SVG를 기본으로 합니다.\n- 상세보기 셀은 흰색 또는 밝은 청회색을 사용하고 본문 대비를 낮추지 않습니다.\n`;
-    fs.writeFileSync(standard, text);
-    changed.push('NEXUS_UI_STANDARD.md');
   }
 }
 
