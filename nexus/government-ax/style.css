@@ -34,6 +34,7 @@
 .workflow-list small{display:block;margin-top:5px;color:#111111;font-size:13px;font-weight:680;line-height:1.6}
 .role-table{overflow:hidden;border:1px solid #cfd4dc;border-radius:13px}
 .role-row{display:grid;grid-template-columns:1.05fr 2fr 1fr;gap:12px;padding:11px 13px;border-top:1px solid #cfd4dc;color:#111111;font-size:15px;line-height:1.68}
+.role-row>*{min-width:0;overflow-wrap:anywhere;word-break:keep-all}
 .role-row:first-child{border-top:0}
 .role-row span:first-child{color:#111111;font-weight:720}
 .role-row span:last-child{color:#111111}
@@ -80,8 +81,8 @@
   .workflow-list article{grid-template-columns:38px 1fr;gap:9px;padding:12px}
   .step-no{width:34px;height:34px;border-radius:9px;font-size:12.5px}
   .workflow-list p,.principle-grid p,.lens-grid p,.expansion-grid p,.question-list li,.boundary-grid ul{font-size:15.5px}
-  .role-table{overflow-x:auto}
-  .role-row{min-width:660px;font-size:15px}
+  .role-table{overflow:hidden}
+  .role-row{grid-template-columns:minmax(0,1.05fr) minmax(0,2fr) minmax(0,1fr);min-width:0;gap:8px;padding:10px 9px;font-size:14.5px}
   .first-output-list{grid-template-columns:1fr 1fr}
 }
 @media(max-width:420px){
