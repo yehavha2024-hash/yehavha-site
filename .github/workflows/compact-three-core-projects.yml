@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: '22'
       - name: Compact canonical CSS
-        run: node scripts/compact-three-core-projects.mjs
+        run: node scripts/run-compact-three-relaxed.mjs
       - name: Commit canonical CSS changes
         run: |
           if git diff --quiet; then
