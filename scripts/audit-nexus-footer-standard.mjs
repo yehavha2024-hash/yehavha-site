@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const ROOT = 'nexus';
+const BUSINESS = '스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈';
 const COPYRIGHT = 'Copyright © 이명훈 2026. All rights reserved.';
 const PORTAL = 'nexus/portal-v2.css';
 const COMPACT = 'nexus/layer-compact.css';
@@ -44,18 +45,20 @@ for (const file of walk(ROOT, f => f.endsWith('.html'))) {
     if (!footer.includes('Copyright ©') && !/data-footer-standard=/i.test(footer)) continue;
     checked += 1;
     if (!/data-footer-standard=["']v2["']/i.test(footer)) fail(file, 'Footer 표준 버전 v2 누락');
+    if (!footer.includes(BUSINESS)) fail(file, '사업자등록 정보 누락');
     if (!footer.includes(COPYRIGHT)) fail(file, '표준 Copyright 문구 불일치');
     if (!/문의\s*<a[^>]+href=["']mailto:kimbrighth@gmail\.com["']/is.test(footer)) fail(file, '표준 문의 mailto 누락');
     if (!footer.includes('AI 활용 안내')) fail(file, 'AI 활용 안내 누락');
     if (!/href=["']#top["']/i.test(footer) || !footer.includes('맨 위로 이동')) fail(file, '표준 맨 위로 이동 링크 누락');
 
+    const businessAt = footer.indexOf(BUSINESS);
     const copyrightAt = footer.indexOf(COPYRIGHT);
     const contactAt = footer.indexOf('mailto:kimbrighth@gmail.com');
     const aiAt = footer.indexOf('AI 활용 안내');
     const topMatch = footer.match(/href=["']#top["']/i);
     const topAt = topMatch ? topMatch.index : -1;
-    if (!(copyrightAt >= 0 && copyrightAt < contactAt && contactAt < aiAt && aiAt < topAt)) {
-      fail(file, 'HTML 원문 순서가 Copyright → 문의 → AI 활용 안내 → 맨 위로 이동 순서가 아님');
+    if (!(businessAt >= 0 && businessAt < copyrightAt && copyrightAt < contactAt && contactAt < aiAt && aiAt < topAt)) {
+      fail(file, 'HTML 원문 순서가 사업자정보 → Copyright → 문의 → AI 활용 안내 → 맨 위로 이동 순서가 아님');
     }
   }
 }
@@ -69,6 +72,7 @@ else {
   if (!footerCss) fail(PORTAL, 'canonical Footer 스타일 블록을 찾을 수 없음');
   if (/\border\s*:/i.test(footerCss)) fail(PORTAL, 'Footer CSS에서 order 재배치 금지: HTML DOM 순서가 유일한 순서 원본이어야 함');
   if (/nth-child\([^)]*\)[^{]*\{[^}]*\border\s*:/is.test(footerCss)) fail(PORTAL, 'nth-child 기반 Footer 순서 보정 금지');
+  if (/footer-meta::before[\s\S]{0,500}content\s*:/is.test(footerCss)) fail(PORTAL, '사업자정보를 CSS content로 생성하면 안 됨');
 }
 
 if (!fs.existsSync(COMPACT)) fail(COMPACT, 'compact canonical CSS 없음');
@@ -78,7 +82,7 @@ else {
   const footerStart = css.indexOf('.footer{');
   const footerCss = footerStart >= 0 ? css.slice(footerStart) : '';
   if (/\border\s*:/i.test(footerCss)) fail(COMPACT, 'compact Footer CSS에 order 재배치가 남아 있음');
-  if (/footer-meta::before/i.test(footerCss)) fail(COMPACT, 'compact Footer가 상위 CSS 가상요소를 무효화하는 override 구조를 사용함');
+  if (/footer-meta::before/i.test(footerCss)) fail(COMPACT, 'compact Footer가 사업자정보를 가상요소로 생성함');
 }
 
 const universityIndex = 'nexus/university/index.html';
