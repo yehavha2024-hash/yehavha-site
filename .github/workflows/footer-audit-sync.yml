@@ -1,0 +1,25 @@
+name: Footer Audit Sync
+
+on:
+  push:
+    paths:
+      - 'scripts/sync-footer-audit.mjs'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - run: node scripts/sync-footer-audit.mjs
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/audit-business-footer.mjs
+          git commit -m "Align footer audit with canonical v2 order" || exit 0
+          git push
