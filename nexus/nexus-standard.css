@@ -42,10 +42,6 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
 .quick-icon svg{width:22px!important;height:22px!important;fill:none;stroke:#ffffff;stroke-width:1.95;stroke-linecap:round;stroke-linejoin:round}
 .quick-label{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px;font-weight:800}
 .quick-count{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;padding:0 7px;border-radius:999px;background:var(--portal-blue-soft);color:var(--portal-blue);font-size:12px;font-weight:850;font-variant-numeric:tabular-nums}
-.portal-overview{display:flex;align-items:center;flex-wrap:wrap;gap:0;margin-top:14px;padding-top:14px;border-top:1px solid var(--portal-line-soft)}
-.overview-item{display:flex;align-items:baseline;gap:7px;padding:0 18px;border-right:1px solid var(--portal-line-soft)}
-.overview-item:first-child{padding-left:0}.overview-item:last-child{border-right:0}
-.overview-item span{color:#111111;font-size:12px;font-weight:760;letter-spacing:.03em}.overview-item strong{color:var(--portal-text);font-size:14px;font-weight:820;font-variant-numeric:tabular-nums}
 .portal-discovery{display:grid;gap:10px;width:min(1160px,calc(100% - 32px));margin:12px auto 0}
 .portal-featured,.portal-recent,.portal-trust{display:none!important}
 .portal-search{padding:14px;border:1px solid var(--portal-line);border-radius:12px;background:#fff}

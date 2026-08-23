@@ -198,18 +198,6 @@
     });
   }
 
-  function renderHeroOverview(categories, projects, updatedAt) {
-    document.querySelector('.portal-overview')?.remove();
-    if (!quickLinks) return;
-    const overview = make('div', 'portal-overview');
-    const managed = projects.filter(project => project.managedBy === 'github' || project.managedBy === 'github-external').length;
-    [['분야', categories.length], ['프로젝트', projects.length], ['자동관리', managed], ['업데이트', formatDate(updatedAt) || '상시']].forEach(([label, value]) => {
-      const item = make('div', 'overview-item');
-      item.append(make('span', '', label), make('strong', '', String(value)));
-      overview.append(item);
-    });
-    quickLinks.insertAdjacentElement('afterend', overview);
-  }
 
   function projectSearchText(project, categories, researchGroups) {
     const category = categories.find(item => item.id === project.category);
@@ -530,7 +518,6 @@
     const visibleCategories = orderedCategories(categories, projects);
     currentPortalData = { ...data, categories, projects, researchGroups };
     renderQuickLinks(visibleCategories, projects);
-    renderHeroOverview(visibleCategories, projects, data.updatedAt);
     renderDiscovery(currentPortalData);
     installSeo(currentPortalData);
     if (!portalGrid) return;
