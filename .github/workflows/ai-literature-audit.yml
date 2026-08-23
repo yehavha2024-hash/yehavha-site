@@ -1,11 +1,6 @@
 name: AI Literature Audit
 
 on:
-  push:
-    paths:
-      - 'legal-knowledge/ai-literature/**'
-      - 'scripts/audit-ai-literature.mjs'
-      - '.github/workflows/ai-literature-audit.yml'
   workflow_dispatch:
 
 permissions:
