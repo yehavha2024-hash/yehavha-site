@@ -20,6 +20,6 @@ jobs:
       - run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add nexus/portal-enhancements.css nexus/toeic-human-v2/style.css nexus/university/university.css
-          git commit -m "Remove remaining dark Nexus surfaces" || exit 0
+          git add nexus
+          git commit -m "Normalize all Nexus white surfaces and black text" || exit 0
           git push
