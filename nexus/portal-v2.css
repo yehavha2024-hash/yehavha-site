@@ -110,19 +110,16 @@ h1 span{display:block;margin-top:8px;color:#d2dfef;font-size:clamp(1.05rem,1.9vw
 .visit-link:hover,.copy-btn:hover{border-color:rgba(143,190,255,.28)}
 .visit-link:focus-visible,.copy-btn:focus-visible,.quick-link:focus-visible,.footer-card a:focus-visible{outline:2px solid rgba(143,190,255,.7);outline-offset:3px}
 
-/* Canonical Nexus footer. Local/project CSS must not redefine these selectors. */
+/* Canonical Nexus footer. DOM order is the source of truth. CSS must never reorder footer content. */
 .footer,.reader-site-footer,.research-footer{padding:0 0 36px!important;background:#06111d!important;color:#8fa1b3!important;font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-apple-system,sans-serif!important;letter-spacing:0!important}
 .footer-card,.research-footer-grid{display:block!important;width:min(var(--nxs-content),100%)!important;margin:0 auto!important;padding:18px 10px!important;border-top:1px solid rgba(255,255,255,.10)!important;background:transparent!important;box-shadow:none!important;text-align:center!important}
 .footer-card>strong,.research-footer-brand strong{display:block!important;color:#d7e1ea!important;font-size:var(--nxs-footer-project)!important;font-weight:600!important;line-height:1.5!important;letter-spacing:0!important;text-transform:none!important}
 .footer-card>p,.research-footer-brand span{margin:4px 0 0!important;color:#8fa1b3!important;font-size:var(--nxs-footer-description)!important;font-weight:400!important;line-height:1.7!important}
 .footer-meta,.research-footer-meta{display:flex!important;flex-direction:column!important;align-items:center!important;width:100%!important;margin:13px 0 0!important;padding:13px 0 0!important;border-top:1px solid rgba(255,255,255,.07)!important;text-align:center!important}
-.footer-meta>* , .research-footer-meta>*{order:2}
-.footer-meta::before,.research-footer-meta::before{content:"스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈";order:0;display:block;margin:0 auto;color:#8fa1b3;font-size:var(--nxs-footer-text);font-weight:400;line-height:1.7;text-align:center}
+.footer-meta::before,.research-footer-meta::before{content:"스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈";display:block;margin:0 auto;color:#8fa1b3;font-size:var(--nxs-footer-text);font-weight:400;line-height:1.7;text-align:center}
 .footer-meta p,.research-footer-meta p{margin:0 auto!important;color:#8fa1b3!important;font-size:var(--nxs-footer-text)!important;font-weight:400!important;line-height:1.7!important;text-align:center!important}
-.footer-meta p:first-child,.research-footer-meta p:first-child{order:1}
-.footer-meta .ai-disclosure,.research-footer-meta .ai-disclosure{order:3;max-width:920px;margin-top:6px!important;font-size:var(--nxs-footer-ai)!important;line-height:1.7!important}
+.footer-meta .ai-disclosure,.research-footer-meta .ai-disclosure{max-width:920px;margin-top:6px!important;font-size:var(--nxs-footer-ai)!important;line-height:1.7!important}
 .footer-card a,.research-footer a{color:#a9bfd2!important;font-size:var(--nxs-footer-text)!important;font-weight:600!important;text-decoration:none!important}
-.footer-meta p:last-child,.research-footer-meta p:last-child{order:4}
 .footer-meta p:last-child a,.research-footer-meta p:last-child a,.footer-top{display:inline-block!important;margin-top:6px!important;font-size:var(--nxs-footer-link)!important;line-height:1.7!important}
 
 .toast{position:fixed;left:50%;bottom:22px;z-index:50;transform:translate(-50%,20px);padding:10px 14px;border:1px solid rgba(255,255,255,.14);border-radius:999px;background:rgba(4,12,27,.95);color:#fff;font-size:.86rem;font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease}
