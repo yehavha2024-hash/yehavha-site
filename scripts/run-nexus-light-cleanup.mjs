@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { spawnSync } from 'node:child_process';
 
 const ROOT = 'nexus';
 const WHITE = '#ffffff';
@@ -57,21 +58,15 @@ function transformRule(selector, body) {
     const p = prop.toLowerCase();
     const value = raw.trim();
     let next = value;
-
     if (p.startsWith('--')) return whole;
 
     if (p === 'color' || p === 'caret-color') {
       if (!visual) next = keepImportant(value, BLACK);
     } else if (p === 'background' || p === 'background-color') {
-      if (visual) {
-        next = value;
-      } else if (isTrack(selector)) {
-        next = keepImportant(value, TRACK);
-      } else if (/url\(/i.test(value)) {
-        next = value;
-      } else {
-        next = keepImportant(value, WHITE);
-      }
+      if (visual) next = value;
+      else if (isTrack(selector)) next = keepImportant(value, TRACK);
+      else if (/url\(/i.test(value)) next = value;
+      else next = keepImportant(value, WHITE);
     } else if (p === 'background-image') {
       if (!visual && !/url\(/i.test(value)) next = keepImportant(value, 'none');
     } else if (/^border(?:-(?:top|right|bottom|left))?$/.test(p)) {
@@ -111,5 +106,15 @@ for (const file of walk(ROOT, f => f.endsWith('.html'))) {
   write(file, next);
 }
 
-console.log(`Precise Nexus light cleanup: ${changed.length} file(s), ${declarationChanges} declaration(s)`);
-changed.forEach(file => console.log(`- ${file}`));
+const audit = spawnSync(process.execPath, ['scripts/audit-nexus-light-theme.mjs'], { encoding: 'utf8' });
+const auditOutput = `${audit.stdout || ''}${audit.stderr || ''}`.trim();
+const report = [
+  'NEXUS LIGHT THEME FINAL AUDIT',
+  `cleanup files changed: ${changed.length}`,
+  `cleanup declarations changed: ${declarationChanges}`,
+  `audit exit code: ${audit.status ?? 0}`,
+  '',
+  auditOutput
+].join('\n').trim() + '\n';
+fs.writeFileSync('nexus/LIGHT_THEME_FINAL_AUDIT.txt', report);
+console.log(report);
