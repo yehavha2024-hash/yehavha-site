@@ -51,15 +51,15 @@
   installKoreaClock();
 
   const categoryIcons = {
-    intelligence: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 20 6v5c0 5-3.4 8.2-8 10-4.6-1.8-8-5-8-10V6l8-3Z"/><path d="M8 12h8M12 8v8"/></svg>',
-    university: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-5 9 5-9 5-9-5Z"/><path d="M5 12v7M9 14v5M15 14v5M19 12v7M3 20h18"/></svg>',
-    apps: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="17" height="16" rx="2.5"/><path d="M3.5 8h17M7 6h.01M10 6h.01"/><path d="M7 12h4v4H7zM14 12h3M14 16h3"/></svg>',
-    research: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M6 6h12"/><path d="m7 6-3 6h6L7 6Zm10 0-3 6h6l-3-6Z"/><path d="M4 12c.5 2 5.5 2 6 0M14 12c.5 2 5.5 2 6 0M8 21h8"/></svg>',
-    publicsector: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h18L12 4 3 9Z"/><path d="M5 10v8M9 10v8M15 10v8M19 10v8M3 20h18"/><path d="M2 18h20"/></svg>',
-    publishing: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5c3.2-.7 5.8 0 8 2v11c-2.2-2-4.8-2.7-8-2V5.5Z"/><path d="M20 5.5c-3.2-.7-5.8 0-8 2v11c2.2-2 4.8-2.7 8-2V5.5Z"/></svg>',
-    media: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="m10 9 5 3-5 3V9Z"/><path d="M7 3v2M17 3v2"/></svg>',
-    education: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-4 9 4-9 4-9-4Z"/><path d="M6.5 11v4.5c3.5 2.3 7.5 2.3 11 0V11"/><path d="M21 9v5"/></svg>',
-    initiatives: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4"/><path d="M8.2 14.5C6.8 13.4 6 11.8 6 10a6 6 0 1 1 12 0c0 1.8-.8 3.4-2.2 4.5-.8.6-1.3 1.4-1.5 2.5H9.7c-.2-1.1-.7-1.9-1.5-2.5Z"/><path d="M12 5.5V8M7.8 7.2l1.7 1.7M16.2 7.2l-1.7 1.7"/></svg>'
+    intelligence: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 19 6.2v5.1c0 4.4-2.9 7.4-7 9.2-4.1-1.8-7-4.8-7-9.2V6.2L12 3.5Z"/><path d="M8.2 12h2.1l1.2-2.5 1.8 5 1.1-2.5h1.7"/></svg>',
+    university: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3.2 8.5 8.8-4.2 8.8 4.2-8.8 4.2-8.8-4.2Z"/><path d="M6.2 11.2v5.3c3.7 2.2 7.9 2.2 11.6 0v-5.3M20.8 8.5v5.3"/></svg>',
+    apps: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="17" height="16" rx="3"/><path d="M3.5 8.2h17M7.2 12h3.8v3.8H7.2zM14.2 12h2.8M14.2 15.8h2.8"/></svg>',
+    research: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h9.2a2.8 2.8 0 0 1 2.8 2.8v10.2H7.8A2.8 2.8 0 0 0 5 20.3V4.5Z"/><path d="M7.8 20.3H19V7.8M8.5 9h5M8.5 12h4"/></svg>',
+    publicsector: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-5 9 5H3Z"/><path d="M5 10.5v7M9.5 10.5v7M14.5 10.5v7M19 10.5v7M3 19.5h18"/></svg>',
+    publishing: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5c3.3-.6 5.9.1 8 2.1v11c-2.1-2-4.7-2.7-8-2.1v-11Z"/><path d="M20 5.5c-3.3-.6-5.9.1-8 2.1v11c2.1-2 4.7-2.7 8-2.1v-11Z"/></svg>',
+    media: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="m10 9 5 3-5 3V9Z"/></svg>',
+    education: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 8.7 9-4.2 9 4.2-9 4.2-9-4.2Z"/><path d="M6 11.1v5c3.8 2.4 8.2 2.4 12 0v-5"/><path d="M21 8.7v5.1"/></svg>',
+    initiatives: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4"/><path d="M8 14.7A6 6 0 1 1 16 14.7c-.9.7-1.4 1.5-1.6 2.4H9.6c-.2-.9-.7-1.7-1.6-2.4Z"/><path d="M12 5.7v2.2M7.9 7.4l1.5 1.5M16.1 7.4l-1.5 1.5"/></svg>'
   };
 
   const portalTiers = [
