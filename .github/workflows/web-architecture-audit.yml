@@ -64,4 +64,6 @@ jobs:
       - name: Validate 3 minute break runtime content
         run: node three-minute-break/scripts/export-content.mjs
       - run: node nexus/scripts/audit-runtime.mjs
-      - run: node nexus/scripts/audit-live-urls.mjs
+      - name: Validate deployed live URLs
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: node nexus/scripts/audit-live-urls.mjs
