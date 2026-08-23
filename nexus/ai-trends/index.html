@@ -6,7 +6,7 @@
 <meta name="description" content="YEHAVHA Nexus AI 동향 브리프. 프런티어 AI, Agentic AI, Multi-Agent Systems, Physical AI, 로봇, 자율주행, 드론, 컴퓨팅, 법·정책, 연구논문과 국가사업을 원출처와 함께 추적합니다."/>
 <meta name="theme-color" content="#ffffff"/>
 <title>AI 동향 브리프 | YEHAVHA Nexus</title>
-<link href="../portal-v2.css?v=20260822-2" rel="stylesheet"/>
+<link href="../portal-v2.css?v=20260823-footer-v3" rel="stylesheet"/>
 <style>
 :root{--accent:#7ab8ff;--line:#cfd4dc;--panel:#ffffff;--panel2:#ffffff;--soft:rgba(122,184,255,.08);--muted:#111111}
 *{box-sizing:border-box}html{scroll-behavior:smooth;max-width:100%;overflow-x:hidden}body{margin:0;max-width:100%;overflow-x:hidden;background:#ffffff;color:#111111}
@@ -45,200 +45,54 @@
     </section>
   </div>
 </header>
-
 <main class="main">
   <div class="container dashboard">
-    <section class="section-card" aria-labelledby="radarTitle">
-      <div class="section-head"><div><p class="eyebrow">CURRENT READING</p><h2 id="radarTitle">현재 AI 풍향계</h2></div><p class="section-note">사실을 나열한 뒤, 변화의 방향을 별도 해석으로 정리합니다.</p></div>
-      <div class="radar-grid" id="radarGrid"></div>
-    </section>
-
-    <section class="section-card" aria-labelledby="scopeTitle">
-      <div class="section-head"><div><p class="eyebrow">WATCH SCOPE</p><h2 id="scopeTitle">상시 관찰 범위</h2></div></div>
-      <div class="scope-grid" id="scopeGrid"></div>
-    </section>
-
-    <div class="controls" aria-label="AI 동향 필터">
-      <div class="control-card">
-        <div class="filter-row" id="filterRow"></div>
-        <label class="search"><span class="sr-only">브리프 검색</span><input id="searchInput" type="search" placeholder="기술·법·논문·기관 검색"/></label>
-      </div>
-    </div>
-
-    <section class="section-card" aria-labelledby="feedTitle">
-      <div class="section-head"><div><p class="eyebrow">CHRONOLOGICAL BRIEF</p><h2 id="feedTitle">최신 동향 타임라인</h2></div><p class="section-note" id="resultCount">전체 항목을 불러오는 중입니다.</p></div>
-      <div class="feed" id="briefFeed"></div>
-    </section>
+    <section class="section-card" aria-labelledby="radarTitle"><div class="section-head"><div><p class="eyebrow">CURRENT READING</p><h2 id="radarTitle">현재 AI 풍향계</h2></div><p class="section-note">사실을 나열한 뒤, 변화의 방향을 별도 해석으로 정리합니다.</p></div><div class="radar-grid" id="radarGrid"></div></section>
+    <section class="section-card" aria-labelledby="scopeTitle"><div class="section-head"><div><p class="eyebrow">WATCH SCOPE</p><h2 id="scopeTitle">상시 관찰 범위</h2></div></div><div class="scope-grid" id="scopeGrid"></div></section>
+    <div class="controls" aria-label="AI 동향 필터"><div class="control-card"><div class="filter-row" id="filterRow"></div><label class="search"><span class="sr-only">브리프 검색</span><input id="searchInput" type="search" placeholder="기술·법·논문·기관 검색"/></label></div></div>
+    <section class="section-card" aria-labelledby="feedTitle"><div class="section-head"><div><p class="eyebrow">CHRONOLOGICAL BRIEF</p><h2 id="feedTitle">최신 동향 타임라인</h2></div><p class="section-note" id="resultCount">전체 항목을 불러오는 중입니다.</p></div><div class="feed" id="briefFeed"></div></section>
   </div>
 </main>
-
 <footer class="footer" data-footer-standard="v2">
-  <div class="container">
-    <div class="footer-card">
-      <strong>AI 동향 브리프</strong>
-      <p>AI Intelligence & Trend Brief · 기술·정책·연구·사건의 변화 추적</p>
-      <div class="footer-meta">
-        <p>Copyright © 이명훈 2026. All rights reserved.</p>
-        <p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p>
-        <p class="ai-disclosure">AI 활용 안내: 공개된 원출처의 탐색·분류·요약과 초안 구조화에 생성형 AI를 활용할 수 있으며, 최종 분류·해석·연구 연결과 공개 여부는 관리자가 검토합니다.</p>
-        <p><a href="#top">맨 위로 이동 ↑</a></p>
-      </div>
+  <div class="container"><div class="footer-card">
+    <strong>AI 동향 브리프</strong>
+    <p>AI Intelligence & Trend Brief · 기술·정책·연구·사건의 변화 추적</p>
+    <div class="footer-meta">
+      <p class="business-meta">스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈</p>
+      <p>Copyright © 이명훈 2026. All rights reserved.</p>
+      <p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p>
+      <p class="ai-disclosure">AI 활용 안내: 공개된 원출처의 탐색·분류·요약과 초안 구조화에 생성형 AI를 활용할 수 있으며, 최종 분류·해석·연구 연결과 공개 여부는 관리자가 검토합니다.</p>
+      <p><a href="#top">맨 위로 이동 ↑</a></p>
     </div>
-  </div>
+  </div></div>
 </footer>
-
 <script>
 (() => {
   'use strict';
   const $ = (id) => document.getElementById(id);
   const state = { data:null, filter:'all', query:'' };
   const scopeDetails = {
-    '01': {
-      title:'Frontier AI (프런티어 AI) · AGI (범용인공지능) · ASI (초지능)',
-      text:'Frontier Model (프런티어 모델)의 출시·버전·성능·가격·컨텍스트 윈도우를 추적하고, Reasoning (추론)·Benchmark (벤치마크) 변화와 AGI·ASI 논의가 실제 시스템 능력과 어느 정도 일치하는지 비교합니다.'
-    },
-    '02': {
-      title:'Agentic AI (에이전틱 AI) · Multi-Agent Systems (다중 인공지능 에이전트 시스템)',
-      text:'Autonomous Agent (자율 에이전트)의 Tool Use (도구 사용), Memory (메모리), Planning (계획), Long-horizon Task (장기 과업) 수행 능력을 보고, 복수 에이전트의 협업·역할분담·프로토콜·상호운용성·권한관리 변화를 추적합니다.'
-    },
-    '03': {
-      title:'Physical AI (피지컬 AI) · Humanoid Robotics (휴머노이드 로봇)',
-      text:'VLA, Vision-Language-Action Model (시각-언어-행동 모델), Embodied Reasoning (체화 추론), On-device AI (온디바이스 AI)를 중심으로 휴머노이드·산업로봇의 자율 작업, 환경 적응, 센서·제어·안전 기술과 실제 배치 사례를 확인합니다.'
-    },
-    '04': {
-      title:'Autonomous Driving (자율주행) · UAS/Drone (무인항공시스템·드론)',
-      text:'자율주행차의 운전자 개입 수준·실도로 운행·사고·책임 문제와 UAS (무인항공시스템), BVLOS (가시권 밖 비행), 드론 배송·군집비행의 운항 승인, 안전기준, 규제 변화와 상용화 범위를 추적합니다.'
-    },
-    '05': {
-      title:'AI Compute (AI 컴퓨팅) · Memory Architecture (메모리 아키텍처)',
-      text:'GPU (그래픽처리장치), NPU (신경망처리장치), VRAM (비디오 메모리), Unified Memory (통합 메모리), AI PC의 사양 변화를 보고, Local Inference (로컬 추론)와 클라우드 추론의 비용·성능·전력·개인정보 처리 구조를 비교합니다.'
-    },
-    '06': {
-      title:'AI Law & Governance (AI 법·거버넌스) · Standards (표준)',
-      text:'한국 인공지능기본법, EU AI Act (EU 인공지능법), 미국 연방·주 정책과 NIST·ISO/IEC 표준을 중심으로 시행일, 적용대상, 사업자 의무, 고위험·고영향 분류, 투명성·안전·책임 규범과 실제 집행 동향을 추적합니다.'
-    },
-    '07': {
-      title:'AI Research & Evaluation (AI 연구·평가)',
-      text:'주요 Journal Article (학술논문), Preprint (사전공개논문), Benchmark (벤치마크), Evaluation Harness (평가 실행환경)를 선별해 핵심 주장·방법론·성능지표·재현성·한계를 정리하고, 법학·정책 연구에 직접 연결할 수 있는 자료를 구분합니다.'
-    },
-    '08': {
-      title:'AI Safety (AI 안전) · National Strategy (국가전략)',
-      text:'Prompt Injection (프롬프트 인젝션), Red Teaming (레드팀 검증), 모델·에이전트 오작동, 보안사고와 실제 피해 사례를 추적하고, 국가 GPU 인프라·데이터센터·R&D (연구개발)·인재양성·산업지원 사업과 국가 AI 전략의 변화를 함께 봅니다.'
-    }
+    '01': {title:'Frontier AI (프런티어 AI) · AGI (범용인공지능) · ASI (초지능)',text:'Frontier Model (프런티어 모델)의 출시·버전·성능·가격·컨텍스트 윈도우를 추적하고, Reasoning (추론)·Benchmark (벤치마크) 변화와 AGI·ASI 논의가 실제 시스템 능력과 어느 정도 일치하는지 비교합니다.'},
+    '02': {title:'Agentic AI (에이전틱 AI) · Multi-Agent Systems (다중 인공지능 에이전트 시스템)',text:'Autonomous Agent (자율 에이전트)의 Tool Use (도구 사용), Memory (메모리), Planning (계획), Long-horizon Task (장기 과업) 수행 능력을 보고, 복수 에이전트의 협업·역할분담·프로토콜·상호운용성·권한관리 변화를 추적합니다.'},
+    '03': {title:'Physical AI (피지컬 AI) · Humanoid Robotics (휴머노이드 로봇)',text:'VLA, Vision-Language-Action Model (시각-언어-행동 모델), Embodied Reasoning (체화 추론), On-device AI (온디바이스 AI)를 중심으로 휴머노이드·산업로봇의 자율 작업, 환경 적응, 센서·제어·안전 기술과 실제 배치 사례를 확인합니다.'},
+    '04': {title:'Autonomous Driving (자율주행) · UAS/Drone (무인항공시스템·드론)',text:'자율주행차의 운전자 개입 수준·실도로 운행·사고·책임 문제와 UAS (무인항공시스템), BVLOS (가시권 밖 비행), 드론 배송·군집비행의 운항 승인, 안전기준, 규제 변화와 상용화 범위를 추적합니다.'},
+    '05': {title:'AI Compute (AI 컴퓨팅) · Memory Architecture (메모리 아키텍처)',text:'GPU (그래픽처리장치), NPU (신경망처리장치), VRAM (비디오 메모리), Unified Memory (통합 메모리), AI PC의 사양 변화를 보고, Local Inference (로컬 추론)와 클라우드 추론의 비용·성능·전력·개인정보 처리 구조를 비교합니다.'},
+    '06': {title:'AI Law & Governance (AI 법·거버넌스) · Standards (표준)',text:'한국 인공지능기본법, EU AI Act (EU 인공지능법), 미국 연방·주 정책과 NIST·ISO/IEC 표준을 중심으로 시행일, 적용대상, 사업자 의무, 고위험·고영향 분류, 투명성·안전·책임 규범과 실제 집행 동향을 추적합니다.'},
+    '07': {title:'AI Research & Evaluation (AI 연구·평가)',text:'주요 Journal Article (학술논문), Preprint (사전공개논문), Benchmark (벤치마크), Evaluation Harness (평가 실행환경)를 선별해 핵심 주장·방법론·성능지표·재현성·한계를 정리하고, 법학·정책 연구에 직접 연결할 수 있는 자료를 구분합니다.'},
+    '08': {title:'AI Safety (AI 안전) · National Strategy (국가전략)',text:'Prompt Injection (프롬프트 인젝션), Red Teaming (레드팀 검증), 모델·에이전트 오작동, 보안사고와 실제 피해 사례를 추적하고, 국가 GPU 인프라·데이터센터·R&D (연구개발)·인재양성·산업지원 사업과 국가 AI 전략의 변화를 함께 봅니다.'}
   };
-
-  function make(tag, cls, text) {
-    const el = document.createElement(tag);
-    if (cls) el.className = cls;
-    if (text !== undefined) el.textContent = text;
-    return el;
-  }
-  const norm = (v) => String(v || '').toLocaleLowerCase('ko-KR');
-  const formatDate = (v) => String(v || '').replaceAll('-', '.');
-
-  function renderMeta(data) {
-    $('updated').textContent = `기준일 ${formatDate(data.updatedAt)}`;
-    $('cadence').textContent = data.updateCadence || '상시 업데이트';
-    $('count').textContent = `브리프 ${(data.entries || []).length}건`;
-  }
-  function renderRadar(items) {
-    const root = $('radarGrid'); root.replaceChildren();
-    (items || []).forEach(item => {
-      const card = make('article','radar-card');
-      const top = make('div','radar-top');
-      top.append(make('span','num',item.number), make('span','radar-label',item.label));
-      card.append(top, make('h3','',item.title), make('p','',item.text));
-      root.append(card);
-    });
-  }
-  function renderScope(items) {
-    const root = $('scopeGrid'); root.replaceChildren();
-    (items || []).forEach(item => {
-      const copy = scopeDetails[item.number] || item;
-      const card = make('article','scope-item');
-      const head = make('div','scope-head');
-      head.append(make('span','num',item.number), make('strong','',copy.title));
-      card.append(head, make('p','',copy.text));
-      root.append(card);
-    });
-  }
-  function renderFilters(items) {
-    const root = $('filterRow'); root.replaceChildren();
-    (items || []).forEach(item => {
-      const b = make('button','filter-btn',item.label);
-      b.type = 'button'; b.dataset.filter = item.id;
-      if (item.id === state.filter) b.classList.add('active');
-      b.addEventListener('click', () => {
-        state.filter = item.id;
-        root.querySelectorAll('.filter-btn').forEach(x => x.classList.toggle('active', x.dataset.filter === item.id));
-        renderFeed();
-      });
-      root.append(b);
-    });
-  }
-  function matchEntry(item) {
-    if (state.filter !== 'all' && item.category !== state.filter) return false;
-    if (!state.query) return true;
-    const hay = norm([item.title,item.summary,item.importance,item.research,item.categoryLabel,...(item.topics || [])].join(' '));
-    return hay.includes(state.query);
-  }
-  function entryCard(item, index) {
-    const article = make('article','brief-card');
-    const top = make('div','brief-top');
-    top.append(make('span','brief-date',formatDate(item.date)), make('span','brief-category',item.categoryLabel));
-    top.append(make('span','brief-signal',`${String(index + 1).padStart(2,'0')} · ${item.signal}`));
-    article.append(top, make('h3','',item.title), make('p','brief-summary',item.summary));
-
-    const grid = make('div','analysis-grid');
-    const why = make('div','analysis-box'); why.append(make('strong','', '왜 중요한가'), make('p','',item.importance));
-    const research = make('div','analysis-box'); research.append(make('strong','', '연구 연결점'), make('p','',item.research));
-    grid.append(why,research); article.append(grid);
-
-    if (Array.isArray(item.topics) && item.topics.length) {
-      const tags = make('div','tags'); item.topics.forEach(t => tags.append(make('span','tag',t))); article.append(tags);
-    }
-    if (Array.isArray(item.sources) && item.sources.length) {
-      const sources = make('div','sources');
-      item.sources.forEach(source => {
-        const a = make('a','source-link',`${source.label} ↗`);
-        a.href = source.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
-        sources.append(a);
-      });
-      article.append(sources);
-    }
-    return article;
-  }
-  function renderFeed() {
-    const root = $('briefFeed');
-    const entries = [...(state.data?.entries || [])]
-      .filter(matchEntry)
-      .sort((a,b) => String(b.date).localeCompare(String(a.date)));
-    root.replaceChildren();
-    $('resultCount').textContent = `${entries.length}건 표시 · 기준일 ${formatDate(state.data?.updatedAt)}`;
-    if (!entries.length) { root.append(make('div','empty','조건에 맞는 브리프가 없습니다.')); return; }
-    entries.forEach((item,index) => root.append(entryCard(item,index)));
-  }
-
-  async function load() {
-    try {
-      const response = await fetch(`./data.json?v=${Date.now()}`, {cache:'no-store'});
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      state.data = await response.json();
-      renderMeta(state.data);
-      renderRadar(state.data.radar);
-      renderScope(state.data.scope);
-      renderFilters(state.data.filters);
-      renderFeed();
-    } catch (error) {
-      console.error('AI trend brief data load failed:', error);
-      $('briefFeed').replaceChildren(make('div','empty','동향 데이터를 불러오지 못했습니다.'));
-      $('resultCount').textContent = '데이터 확인 필요';
-    }
-  }
-  $('searchInput').addEventListener('input', (event) => {
-    state.query = norm(event.target.value.trim());
-    renderFeed();
-  });
+  function make(tag, cls, text) {const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el;}
+  const norm=v=>String(v||'').toLocaleLowerCase('ko-KR');
+  const formatDate=v=>String(v||'').replaceAll('-','.');
+  function renderMeta(data){$('updated').textContent=`기준일 ${formatDate(data.updatedAt)}`;$('cadence').textContent=data.updateCadence||'상시 업데이트';$('count').textContent=`브리프 ${(data.entries||[]).length}건`;}
+  function renderRadar(items){const root=$('radarGrid');root.replaceChildren();(items||[]).forEach(item=>{const card=make('article','radar-card');const top=make('div','radar-top');top.append(make('span','num',item.number),make('span','radar-label',item.label));card.append(top,make('h3','',item.title),make('p','',item.text));root.append(card);});}
+  function renderScope(items){const root=$('scopeGrid');root.replaceChildren();(items||[]).forEach(item=>{const copy=scopeDetails[item.number]||item;const card=make('article','scope-item');const head=make('div','scope-head');head.append(make('span','num',item.number),make('strong','',copy.title));card.append(head,make('p','',copy.text));root.append(card);});}
+  function renderFilters(items){const root=$('filterRow');root.replaceChildren();(items||[]).forEach(item=>{const b=make('button','filter-btn',item.label);b.type='button';b.dataset.filter=item.id;if(item.id===state.filter)b.classList.add('active');b.addEventListener('click',()=>{state.filter=item.id;root.querySelectorAll('.filter-btn').forEach(x=>x.classList.toggle('active',x.dataset.filter===item.id));renderFeed();});root.append(b);});}
+  function matchEntry(item){if(state.filter!=='all'&&item.category!==state.filter)return false;if(!state.query)return true;const hay=norm([item.title,item.summary,item.importance,item.research,item.categoryLabel,...(item.topics||[])].join(' '));return hay.includes(state.query);}
+  function entryCard(item,index){const article=make('article','brief-card');const top=make('div','brief-top');top.append(make('span','brief-date',formatDate(item.date)),make('span','brief-category',item.categoryLabel));top.append(make('span','brief-signal',`${String(index+1).padStart(2,'0')} · ${item.signal}`));article.append(top,make('h3','',item.title),make('p','brief-summary',item.summary));const grid=make('div','analysis-grid');const why=make('div','analysis-box');why.append(make('strong','','왜 중요한가'),make('p','',item.importance));const research=make('div','analysis-box');research.append(make('strong','','연구 연결점'),make('p','',item.research));grid.append(why,research);article.append(grid);if(Array.isArray(item.topics)&&item.topics.length){const tags=make('div','tags');item.topics.forEach(t=>tags.append(make('span','tag',t)));article.append(tags);}if(Array.isArray(item.sources)&&item.sources.length){const sources=make('div','sources');item.sources.forEach(source=>{const a=make('a','source-link',`${source.label} ↗`);a.href=source.url;a.target='_blank';a.rel='noopener noreferrer';sources.append(a);});article.append(sources);}return article;}
+  function renderFeed(){const root=$('briefFeed');const entries=[...(state.data?.entries||[])].filter(matchEntry).sort((a,b)=>String(b.date).localeCompare(String(a.date)));root.replaceChildren();$('resultCount').textContent=`${entries.length}건 표시 · 기준일 ${formatDate(state.data?.updatedAt)}`;if(!entries.length){root.append(make('div','empty','조건에 맞는 브리프가 없습니다.'));return;}entries.forEach((item,index)=>root.append(entryCard(item,index)));}
+  async function load(){try{const response=await fetch(`./data.json?v=${Date.now()}`,{cache:'no-store'});if(!response.ok)throw new Error(`HTTP ${response.status}`);state.data=await response.json();renderMeta(state.data);renderRadar(state.data.radar);renderScope(state.data.scope);renderFilters(state.data.filters);renderFeed();}catch(error){console.error('AI trend brief data load failed:',error);$('briefFeed').replaceChildren(make('div','empty','동향 데이터를 불러오지 못했습니다.'));$('resultCount').textContent='데이터 확인 필요';}}
+  $('searchInput').addEventListener('input',event=>{state.query=norm(event.target.value.trim());renderFeed();});
   load();
 })();
 </script>
