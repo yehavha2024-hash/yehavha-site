@@ -1,0 +1,2 @@
+Nexus footer standard audit: 0 error(s); standardized footers checked=20
+AUDIT_EXIT_CODE=0
