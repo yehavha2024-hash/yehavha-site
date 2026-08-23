@@ -22,6 +22,7 @@ jobs:
           node-version: '22'
       - run: node scripts/audit-web-architecture.mjs
       - run: node scripts/audit-business-footer.mjs
+      - run: node scripts/audit-research-track-footer.mjs
       - run: node scripts/audit-repo-hygiene.mjs
       - run: node scripts/audit-style-ownership.mjs
       - name: Validate Nexus portal enhancement runtime
