@@ -50,7 +50,6 @@ const requiredReturnPages = [
   'nexus/articles/index.html',
   'nexus/education-hub/index.html',
   'nexus/government-ax/index.html',
-  'nexus/initiatives/index.html',
   'nexus/intelligence-briefing/index.html',
   'nexus/living-law/index.html',
   'nexus/publishing/index.html',
