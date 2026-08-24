@@ -78,9 +78,7 @@ h1{margin:0 0 28px;font-size:clamp(2.15rem,5vw,3.45rem);line-height:1.22;letter-
   .article-head h1{font-size:2.15rem;line-height:1.22}
   .article-subtitle{font-size:17px}
   .commentary-toc{margin-top:15px;padding:11px 12px}
-  .commentary-toc ol{grid-template-columns:1fr;grid-template-rows:none;grid-auto-flow:row}
-  .commentary-toc li,.commentary-toc li:nth-child(-n+6){padding:6px 5px;border-left:0;border-top:1px solid #eef1f4}
-  .commentary-toc li:first-child{border-top:0}
+  .commentary-toc li{padding:6px 5px}
   .commentary-toc a{font-size:13.5px}
   .commentary-body h2{margin-top:25px;font-size:1.34rem}
   .commentary-body p{margin-bottom:12px}
