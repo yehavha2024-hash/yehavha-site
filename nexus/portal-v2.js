@@ -59,8 +59,7 @@
     publicsector: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-5 9 5H3Z"/><path d="M5 10.5v7M9.5 10.5v7M14.5 10.5v7M19 10.5v7M3 19.5h18"/></svg>',
     publishing: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5c3.3-.6 5.9.1 8 2.1v11c-2.1-2-4.7-2.7-8-2.1v-11Z"/><path d="M20 5.5c-3.3-.6-5.9.1-8 2.1v11c2.1-2 4.7-2.7 8-2.1v-11Z"/></svg>',
     media: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="m10 9 5 3-5 3V9Z"/></svg>',
-    education: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 8.7 9-4.2 9 4.2-9 4.2-9-4.2Z"/><path d="M6 11.1v5c3.8 2.4 8.2 2.4 12 0v-5"/><path d="M21 8.7v5.1"/></svg>',
-    initiatives: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4"/><path d="M8 14.7A6 6 0 1 1 16 14.7c-.9.7-1.4 1.5-1.6 2.4H9.6c-.2-.9-.7-1.7-1.6-2.4Z"/><path d="M12 5.7v2.2M7.9 7.4l1.5 1.5M16.1 7.4l-1.5 1.5"/></svg>'
+    education: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 8.7 9-4.2 9 4.2-9 4.2-9-4.2Z"/><path d="M6 11.1v5c3.8 2.4 8.2 2.4 12 0v-5"/><path d="M21 8.7v5.1"/></svg>'
   };
 
   const portalTiers = [
@@ -69,8 +68,7 @@
     { id: 'university', number: '02', eyebrow: 'NEXUS UNIVERSITY', title: 'NEXUS UNIVERSITY', description: '대학 수준의 체계적 학습과 연구 기반을 연결합니다.', categoryIds: ['university'], variant: 'primary' },
     { id: 'core', number: '03', eyebrow: 'CORE WORKSPACES', title: '핵심 작업영역', description: '직접 사용하는 웹서비스와 장기 연구 기반을 배치합니다.', categoryIds: ['apps', 'research'], variant: 'primary' },
     { id: 'publicsector', number: '04', eyebrow: 'GOVERNMENT AX STRATEGY & RESPONSE', title: '정부 AX 전략·대응', description: '중앙정부·지방자치단체의 AX 정책과 실행을 다루고 EU·UN·주요국 정부의 국제·비교정책으로 확장합니다.', categoryIds: ['publicsector'], variant: 'primary' },
-    { id: 'create', number: '05', eyebrow: 'CREATE · LEARN · SHARE', title: '제작·교육·공개', description: '교육·출판·미디어 결과물을 한 층위로 묶습니다.', categoryIds: ['education', 'publishing', 'media'], variant: 'compact' },
-    { id: 'ideas', number: '06', eyebrow: 'PUBLIC IDEAS', title: '아이디어 허브', description: '공개 가능한 아이디어와 프로젝트 후보를 한곳에서 확인합니다.', categoryIds: ['initiatives'], variant: 'compact' }
+    { id: 'create', number: '05', eyebrow: 'CREATE · LEARN · SHARE', title: '제작·교육·공개', description: '교육·출판·미디어 결과물을 한 층위로 묶습니다.', categoryIds: ['education', 'publishing', 'media'], variant: 'compact' }
   ];
 
   const featuredDefinitions = [
@@ -139,7 +137,6 @@
   function maturityFor(project) {
     if (project.category === 'commentary') return { label: '논평', tone: 'research' };
     if (project.category === 'intelligence') return { label: '최우선 정보', tone: 'research' };
-    if (project.category === 'initiatives') return { label: '아이디어', tone: 'idea' };
     if (project.category === 'research') return { label: '연구 운영', tone: 'research' };
     return { label: '운영', tone: 'operational' };
   }
@@ -507,7 +504,7 @@
       name: 'YEHAVHA Nexus',
       alternateName: '예하바 프로젝트 포털',
       url: canonicalUrl,
-      description: '논평·전략정보·대학·웹앱·연구·정부 AX 전략·대응·출판·미디어·교육·아이디어 프로젝트를 연결하는 통합 포털',
+      description: '논평·전략정보·대학·웹앱·연구·정부 AX 전략·대응·출판·미디어·교육 프로젝트를 연결하는 통합 포털',
       potentialAction: {'@type': 'SearchAction', target: `${canonicalUrl}?q={search_term_string}`, 'query-input': 'required name=search_term_string'},
       hasPart: (data.projects || []).map(project => ({'@type': 'WebPage', name: project.title, url: project.url, description: project.description}))
     });
@@ -532,7 +529,7 @@
     const tierIds = new Set(portalTiers.flatMap(tier => tier.categoryIds));
     const extraCategories = visibleCategories.filter(category => !tierIds.has(category.id));
     if (extraCategories.length) {
-      const extraTier = {id:'more',number:'07',eyebrow:'MORE',title:'기타 영역',description:'추가된 프로젝트 영역입니다.',categoryIds:extraCategories.map(category => category.id),variant:'compact'};
+      const extraTier = {id:'more',number:'06',eyebrow:'MORE',title:'기타 영역',description:'추가된 프로젝트 영역입니다.',categoryIds:extraCategories.map(category => category.id),variant:'compact'};
       const tierSection = renderTier(extraTier, visibleCategories, projects, researchGroups);
       if (tierSection) portalGrid.append(tierSection);
     }
