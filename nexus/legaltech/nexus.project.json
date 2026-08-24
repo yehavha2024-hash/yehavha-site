@@ -1,0 +1,14 @@
+{
+  "id": "legaltech-self-litigation",
+  "publish": true,
+  "tracking": {
+    "paths": ["nexus/legaltech"],
+    "freshDays": 30,
+    "staleDays": 90,
+    "count": {
+      "type": "static",
+      "value": 12,
+      "label": "실무 항목"
+    }
+  }
+}
