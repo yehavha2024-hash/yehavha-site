@@ -17,6 +17,15 @@
     "contentCount": 12,
     "contentLabel": "실행 단계"
   },
+  "legaltech-self-litigation": {
+    "id": "legaltech-self-litigation",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-24",
+    "contentCount": 12,
+    "contentLabel": "실무 항목"
+  },
   "strategic-intelligence-briefing": {
     "id": "strategic-intelligence-briefing",
     "managedBy": "github",
