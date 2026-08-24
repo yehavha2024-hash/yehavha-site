@@ -35,9 +35,8 @@ h1{margin:0 0 28px;font-size:clamp(2.15rem,5vw,3.45rem);line-height:1.22;letter-
 .article-meta span{display:inline-flex;align-items:center;min-height:27px;padding:0 8px;border:1px solid var(--line);border-radius:999px;background:#f7f9fc;color:#111;font-size:var(--meta-size);font-weight:760}
 .commentary-toc{margin:18px 0 8px;padding:13px 14px;border:1px solid var(--line);border-radius:12px;background:#fff}
 .commentary-toc>strong{display:block;margin:0 0 8px;padding:0 0 8px;border-bottom:1px solid var(--line);font-size:14px;font-weight:850;text-align:center}
-.commentary-toc ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(6,auto);grid-auto-flow:column;margin:0;padding:0;list-style:none}
-.commentary-toc li{min-width:0;margin:0;padding:6px 10px;border-left:1px solid var(--line)}
-.commentary-toc li:nth-child(-n+6){border-left:0}
+.commentary-toc ol{display:block;margin:0;padding:0;list-style:none;column-count:2;column-gap:0;column-rule:1px solid var(--line)}
+.commentary-toc li{break-inside:avoid;-webkit-column-break-inside:avoid;margin:0;padding:6px 10px}
 .commentary-toc a{display:block;color:#111;font-size:13.5px;font-weight:700;line-height:1.48;text-decoration:none;overflow-wrap:anywhere}
 .commentary-toc a:hover,.commentary-toc a:focus-visible{color:var(--blue);text-decoration:underline;text-underline-offset:2px}
 .commentary-body{padding-top:6px;font-size:var(--article-size);line-height:1.86;letter-spacing:-.01em}
@@ -78,8 +77,8 @@ h1{margin:0 0 28px;font-size:clamp(2.15rem,5vw,3.45rem);line-height:1.22;letter-
   .article-head h1{font-size:2.15rem;line-height:1.22}
   .article-subtitle{font-size:17px}
   .commentary-toc{margin-top:15px;padding:11px 12px}
-  .commentary-toc li{padding:6px 5px}
-  .commentary-toc a{font-size:13.5px}
+  .commentary-toc li{padding:6px 7px}
+  .commentary-toc a{font-size:13px}
   .commentary-body h2{margin-top:25px;font-size:1.34rem}
   .commentary-body p{margin-bottom:12px}
   .sources li{font-size:13.5px}
