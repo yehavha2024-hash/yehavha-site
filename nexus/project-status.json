@@ -196,14 +196,5 @@
     "lastUpdated": "2026-08-23",
     "contentCount": 496,
     "contentLabel": "개설 과목"
-  },
-  "initiative-hub": {
-    "id": "initiative-hub",
-    "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
-    "lastUpdated": "2026-08-23",
-    "contentCount": 12,
-    "contentLabel": "공개 항목"
   }
 }
