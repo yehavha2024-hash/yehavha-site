@@ -2,6 +2,7 @@
   "manifests": [
     "nexus.project.json",
     "nexus/government-ax/nexus.project.json",
+    "nexus/legaltech/nexus.project.json",
     "nexus/intelligence-briefing/nexus.project.json",
     "three-minute-break/nexus.project.json",
     "nexus/living-law/nexus.project.json",
