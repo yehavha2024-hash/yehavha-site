@@ -35,9 +35,9 @@ h1{margin:0 0 28px;font-size:clamp(2.15rem,5vw,3.45rem);line-height:1.22;letter-
 .article-meta span{display:inline-flex;align-items:center;min-height:27px;padding:0 8px;border:1px solid var(--line);border-radius:999px;background:#f7f9fc;color:#111;font-size:var(--meta-size);font-weight:760}
 .commentary-toc{margin:18px 0 8px;padding:13px 14px;border:1px solid var(--line);border-radius:12px;background:#fff}
 .commentary-toc>strong{display:block;margin:0 0 8px;padding:0 0 8px;border-bottom:1px solid var(--line);font-size:14px;font-weight:850;text-align:center}
-.commentary-toc ol{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:0;padding:0;list-style:none}
+.commentary-toc ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(6,auto);grid-auto-flow:column;margin:0;padding:0;list-style:none}
 .commentary-toc li{min-width:0;margin:0;padding:6px 10px;border-left:1px solid var(--line)}
-.commentary-toc li:nth-child(3n+1){border-left:0}
+.commentary-toc li:nth-child(-n+6){border-left:0}
 .commentary-toc a{display:block;color:#111;font-size:13.5px;font-weight:700;line-height:1.48;text-decoration:none;overflow-wrap:anywhere}
 .commentary-toc a:hover,.commentary-toc a:focus-visible{color:var(--blue);text-decoration:underline;text-underline-offset:2px}
 .commentary-body{padding-top:6px;font-size:var(--article-size);line-height:1.86;letter-spacing:-.01em}
@@ -61,11 +61,6 @@ h1{margin:0 0 28px;font-size:clamp(2.15rem,5vw,3.45rem);line-height:1.22;letter-
 .footer-inner a{font-weight:800}
 .ai-disclosure{max-width:780px}
 .top-link{display:inline-block;margin-top:7px;font-size:14px;font-weight:800;text-decoration:none}
-@media(max-width:760px){
-  .commentary-toc ol{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .commentary-toc li,.commentary-toc li:nth-child(3n+1){border-left:1px solid var(--line)}
-  .commentary-toc li:nth-child(odd){border-left:0}
-}
 @media(max-width:640px){
   :root{--body-size:16px;--article-size:16.5px}
   body{line-height:1.82}
@@ -83,8 +78,8 @@ h1{margin:0 0 28px;font-size:clamp(2.15rem,5vw,3.45rem);line-height:1.22;letter-
   .article-head h1{font-size:2.15rem;line-height:1.22}
   .article-subtitle{font-size:17px}
   .commentary-toc{margin-top:15px;padding:11px 12px}
-  .commentary-toc ol{grid-template-columns:1fr}
-  .commentary-toc li,.commentary-toc li:nth-child(3n+1),.commentary-toc li:nth-child(odd){padding:6px 5px;border-left:0;border-top:1px solid #eef1f4}
+  .commentary-toc ol{grid-template-columns:1fr;grid-template-rows:none;grid-auto-flow:row}
+  .commentary-toc li,.commentary-toc li:nth-child(-n+6){padding:6px 5px;border-left:0;border-top:1px solid #eef1f4}
   .commentary-toc li:first-child{border-top:0}
   .commentary-toc a{font-size:13.5px}
   .commentary-body h2{margin-top:25px;font-size:1.34rem}
