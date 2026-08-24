@@ -7,7 +7,7 @@
     "staleDays": 90,
     "count": {
       "type": "static",
-      "value": 12,
+      "value": 15,
       "label": "실무 항목"
     }
   }
