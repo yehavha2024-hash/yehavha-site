@@ -27,7 +27,8 @@ function auditForbiddenArtifacts() {
     'toeic-human-100/V2_FINAL_STATUS_20260809.md',
     'toeic-human-100/READING_PROGRAM_V2.md',
     'toeic-human-100/COVERAGE_CORRECTION_SYSTEM.md',
-    'nexus/ai-practice'
+    'nexus/ai-practice',
+    'nexus/initiatives'
   ];
   for (const relative of forbidden) {
     if (exists(relative)) error(relative, '정리 완료된 구버전·삭제 프로젝트가 다시 추가됨');
@@ -199,8 +200,21 @@ function auditSingleSourceRules() {
   const headers = 'nexus/_headers';
   if (exists(headers)) {
     const source = read(headers);
-    for (const retired of ['/ai-governance/*', '/ai-service-operations/*', '/research-groups.css']) {
+    for (const retired of ['/ai-governance/*', '/ai-service-operations/*', '/research-groups.css', '/initiatives/*']) {
       if (source.includes(retired)) error(headers, `삭제된 경로의 캐시 규칙 잔존: ${retired}`);
+    }
+  }
+
+  const retiredIdeaHubRefs = [
+    ['nexus/projects.json', ['"id":"initiatives"', '"id":"initiative-hub"', '/initiatives/']],
+    ['nexus/portal-v2.js', ["id: 'ideas'", "categoryIds: ['initiatives']", "project.category === 'initiatives'"]],
+    ['nexus/nexus-standard.css', ['.portal-tier-ideas']]
+  ];
+  for (const [relative, markers] of retiredIdeaHubRefs) {
+    if (!exists(relative)) continue;
+    const source = read(relative);
+    for (const marker of markers) {
+      if (source.includes(marker)) error(relative, `삭제된 아이디어 허브 참조 잔존: ${marker}`);
     }
   }
 
