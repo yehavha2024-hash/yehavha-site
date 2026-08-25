@@ -1,0 +1,179 @@
+{
+  "generatedAt": "2026-08-26T06:32:00+09:00",
+  "window": "2026-08-25 06:32–2026-08-26 06:32 KST · 최근 24시간 중심 · 동일 이슈는 material change가 있을 때만 본문 재진입",
+  "schedule": "06:30 KST daily",
+  "executiveSummary": "오늘의 핵심은 기존 지속위험의 반복이 아니라 외교·통상·통화정책·국내 권력구조·디지털 규제·기후에서 새로 확인된 단계 변화다. 미국 CIA 국장의 모스크바 방문 보도는 미·러 간 공식 외교채널이 약한 상황에서 2021년 이후 처음 알려진 최고위급 정보기관 접촉이라는 점에서 최우선 불확실성 요인이다. 호르무즈에서는 미국이 국제수역의 기뢰 제거 완료를 주장해 물리적 통항위험이 일부 낮아졌지만 실제 원유 통항량은 전쟁 전의 약 4분의 1 수준에 머물러 있어 정상화로 보기는 이르다. 캐나다는 미국의 고율관세에 맞서 9월 8일부터 276억 캐나다달러 규모의 미국산 제품에 15·25·50% 보복관세를 확정했고, 연준 내부에서는 4개 지역은행 이사회가 7월 회의 전 할인율 인상을 권고했던 사실이 공개돼 인플레이션 대응을 둘러싼 긴축 압력이 확인됐다. 한국에서는 검찰 수사권 폐지 이후 경찰로 권한이 집중되는 구조에 대응해 대통령이 총리실 차원의 경찰개혁기구 검토를 지시했고, 브라질은 TikTok의 청소년 개인정보 처리 위반에 대규모 과징금과 데이터 삭제·준수계획을 명령했다. 국내 폭염일수는 20.1일로 평년의 약 두 배에 달했고 9월까지 고온 지속 가능성이 제기됐다.",
+  "items": [
+    {
+      "topicKey": "us-cia-director-moscow-visit-20260826",
+      "priority": "CRITICAL",
+      "category": "외교·안보·국제정세",
+      "headline": "미 CIA 국장, 모스크바 방문 보도…2021년 이후 첫 미 정보수장 방러로 미·러 비공개 협상 가능성 부상",
+      "fact": "Reuters는 미국 매체 보도를 인용해 CIA 국장 John Ratcliffe가 8월 25일 모스크바를 방문해 러시아 당국자들과 회의했다고 전했다. 누구를 만났고 의제가 무엇인지는 공개되지 않았으며 CIA와 크렘린은 확인하지 않았다. Reuters는 미국이 최근 우크라이나 측에 미 고위당국자 항공편과 관련해 모스크바·상트페테르부르크 등 일부 지역에 대한 공습을 자제해달라고 요청했다는 소식도 함께 전했다.",
+      "assessment": "공식 확인이 부족해 의제를 단정할 수 없지만, 미국 대사가 부재한 상황에서 CIA 수장의 직접 방러가 사실이라면 우크라이나 전쟁, 이란 전쟁, 전략안보 문제를 포함한 비공개 고위 채널이 가동되고 있을 가능성을 시사한다. 2021년 William Burns 당시 CIA 국장의 푸틴 면담 이후 처음 알려진 사례라는 점에서 외교적 신호가 크다.",
+      "impact": "미·러 간 비공개 조정이 성립하면 우크라이나 전쟁의 군사행동 범위, 대이란 제재 집행, 러시아의 대이란 지원, 포로·핵위험 관리 등 여러 현안의 계산이 달라질 수 있다. 반대로 의제가 제한적이거나 접촉이 결렬될 경우 현재의 전략적 대립구도는 유지된다.",
+      "watch": "CIA 또는 크렘린의 공식 확인, Ratcliffe의 실제 면담 상대, 우크라이나 공습자제 요청 범위, 미·러 후속 고위급 접촉, 이란 또는 우크라이나 관련 합의 신호를 본다.",
+      "confidence": "중간",
+      "sources": [
+        {
+          "label": "Reuters · US spy chief visits Russia for meetings, media reports",
+          "url": "https://www.reuters.com/world/us-spy-chief-visits-russia-meetings-media-reports-2026-08-25/"
+        }
+      ]
+    },
+    {
+      "topicKey": "hormuz-demining-us-zero-tolerance-20260826",
+      "priority": "HIGH",
+      "category": "에너지·안보·해운",
+      "headline": "호르무즈 국제수역 기뢰 제거 완료 주장…물리적 통항위험 완화 신호에도 원유 통항량은 전쟁 전의 약 4분의 1",
+      "fact": "트럼프 미국 대통령은 8월 25일 호르무즈 해협 국제수역의 기뢰가 모두 폭파되거나 제거됐다고 밝히고, 추가 기뢰 부설 선박은 파괴하겠다는 '제로 톨러런스' 방침을 발표했다. Reuters가 인용한 Vortexa 잠정치에 따르면 8월 24일 해협을 통과한 원유는 하루 약 500만 배럴로 전쟁 전 2,000만 배럴 이상에 크게 못 미쳤다.",
+      "assessment": "수일간 반복됐던 '호르무즈 봉쇄 위험'과 달리 이번에는 물리적 장애물 제거라는 단계 변화가 발생했다. 다만 선박 피격 위험, 이란의 통항규칙·블랙리스트, 보험·제재 위험은 남아 있어 해협이 정상화됐다고 보기는 어렵다.",
+      "impact": "기뢰위험이 실제로 감소하면 해운보험료와 에너지 가격의 극단적 위험 프리미엄은 일부 낮아질 수 있다. 그러나 통항량 회복이 지연되면 원유·LNG 공급과 아시아 수입국의 비용 부담은 지속된다.",
+      "watch": "일일 통항량의 지속 회복 여부, 신규 기뢰 발견, 선박 공격, 이란의 블랙리스트 집행, 보험료와 Brent 가격의 반응을 추적한다.",
+      "confidence": "높음",
+      "sources": [
+        {
+          "label": "Reuters · Trump says Strait of Hormuz has been demined, warns Iran not to plant more",
+          "url": "https://www.reuters.com/world/middle-east/trump-says-strait-hormuz-has-been-demined-warns-iran-not-plant-more-2026-08-25/"
+        },
+        {
+          "label": "Reuters · Oil settles down more than 3% as investors shrug off sanctions",
+          "url": "https://finance.yahoo.com/energy/articles/oil-prices-steady-investors-weigh-011547751.html"
+        }
+      ]
+    },
+    {
+      "topicKey": "canada-us-retaliatory-tariffs-20260826",
+      "priority": "HIGH",
+      "category": "경제·통상·산업",
+      "headline": "캐나다, 미국산 276억 캐나다달러에 15·25·50% 보복관세 확정…북미 통상분쟁 실행 단계 진입",
+      "fact": "캐나다 정부는 미국이 8월 22일부터 캐나다산 276억 캐나다달러 규모 제품에 50% 관세를 부과한 데 대응해 9월 8일부터 같은 규모의 미국산 제품에 15%, 25%, 50% 관세를 적용한다고 발표했다. 대상은 철강, 유제품, 가전, 농기계, 펄프·종이, 전자제품 등이며 캐나다는 근로자·기업 지원을 위한 75억 캐나다달러 패키지도 내놨다.",
+      "assessment": "전날까지는 보복관세가 예고 단계였지만 이제 품목·세율·시행일이 확정돼 실제 공급망 비용으로 전환됐다. 장기간 통합돼 온 북미 제조·농식품 공급망에 비용을 누적시키는 구조다.",
+      "impact": "자동차·철강·알루미늄·기계·식품의 가격과 조달비용이 상승할 수 있고, 미국 중간선거를 앞두고 정치적 압박도 커질 수 있다. 북미 생산거점을 둔 한국 기업은 원산지·부품조달·가격전가 구조를 다시 점검해야 한다.",
+      "watch": "9월 8일 실제 발효 여부, 자동차 부문 추가관세, 협상 재개, 캐나다의 에너지·전력 분야 추가보복 여부, 기업의 공급망 재배치를 본다.",
+      "confidence": "매우 높음",
+      "sources": [
+        {
+          "label": "Canada Department of Finance · targeted countermeasures and support",
+          "url": "https://www.canada.ca/en/department-finance/news/2026/08/canada-announces-targeted-countermeasures-and-substantive-support-for-workers-and-businesses-in-response-to-us-tariffs.html"
+        },
+        {
+          "label": "Reuters · Canada slaps retaliatory tariffs on US goods worth $20 billion",
+          "url": "https://www.reuters.com/business/canada-announces-20-bln-retaliatory-tariffs-us-goods-unveils-support-measures-2026-08-25/"
+        }
+      ]
+    },
+    {
+      "topicKey": "fed-regional-banks-hike-pressure-20260826",
+      "priority": "HIGH",
+      "category": "경제·시장·통화정책",
+      "headline": "연준 4개 지역은행 이사회, 7월 회의 전 할인율 인상 권고…미 통화정책 내부 긴축 압력 확인",
+      "fact": "연방준비제도는 8월 25일 7월 20일·29일 할인율 회의 의사록을 공개했다. Reuters에 따르면 Dallas, Cleveland, Minneapolis, Kansas City 연은 이사회가 상업은행 긴급대출에 적용되는 할인율을 0.25%포인트 올리도록 권고했다. FOMC는 7월 28~29일 정책금리를 3.5~3.75%로 9대3 동결했다.",
+      "assessment": "지역은행 이사회가 정책금리를 결정하지는 않지만, 4개 지역에서 동시에 인상 선호가 나타난 것은 인플레이션 압력이 충분히 낮아졌다고 보기 어렵다는 내부 인식이 넓다는 신호다. 향후 금리인하 기대를 제약하는 요인이다.",
+      "impact": "미 장단기 금리, 달러, 글로벌 자산가격과 신흥국 통화정책에 영향을 줄 수 있다. 한국은행도 8월 27일 통화정책회의를 앞두고 있어 미국 긴축 지속 가능성은 원화·자본흐름 판단에 참고 변수다.",
+      "watch": "Jackson Hole 발언, 미국 PCE 물가, 9월 FOMC 기대확률, 미 국채금리, 8월 27일 한국은행 결정과 환율 반응을 본다.",
+      "confidence": "매우 높음",
+      "sources": [
+        {
+          "label": "Federal Reserve · Minutes of discount rate meetings on July 20 and July 29, 2026",
+          "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260825a.htm"
+        },
+        {
+          "label": "Reuters · Four Fed bank boards wanted rate hike, minutes show",
+          "url": "https://www.reuters.com/markets/us/four-fed-bank-boards-wanted-rate-hike-minutes-show-2026-08-25/"
+        }
+      ]
+    },
+    {
+      "topicKey": "korea-police-reform-power-concentration-20260826",
+      "priority": "HIGH",
+      "category": "정부·법·정책·치안",
+      "headline": "검찰 수사권 폐지 이후 경찰권 집중 대응…대통령, 총리실에 경찰개혁기구 구상 지시",
+      "fact": "이재명 대통령은 8월 25일 국무회의에서 최근 경찰의 기강 해이와 치안상 무책임 문제를 지적하며 총리실에 경찰개혁기구 방안과 국민 의견수렴 절차를 검토하라고 지시했다. 발언은 형사소송법 개정으로 검찰의 수사권이 사라지고 경찰의 권한이 확대되는 제도 변화와 최근 부실수사 논란을 배경으로 나왔다.",
+      "assessment": "전날의 개별 실종사건 전수조사 수준을 넘어, 수사권 재배분 이후 경찰 권한과 책임·감독체계를 다시 설계하는 구조개혁 논의로 확대됐다. 핵심은 경찰 내부 통제, 지휘책임, 외부감독 장치의 형태다.",
+      "impact": "향후 경찰 조직·감찰·수사지휘·사건종결 절차가 바뀔 수 있고, 검찰개혁과 결합해 형사사법체계 전체의 권력배분에 영향을 미친다.",
+      "watch": "총리실 개혁기구 구성안, 여당 경찰개혁추진단의 입법안, 수사권 분산 또는 외부감독 모델, 경찰 지휘책임 강화 조치를 추적한다.",
+      "confidence": "높음",
+      "sources": [
+        {
+          "label": "Yonhap · Lee says police will wield biggest power, calls for reform body",
+          "url": "https://www.koreatimes.co.kr/amp/southkorea/politics/20260825/lee-says-police-will-be-biggest-power-stresses-need-for-reform-by-govt-body"
+        },
+        {
+          "label": "경향신문 · 대통령 경찰개혁기구 검토 지시",
+          "url": "https://www.khan.co.kr/article/202608251025001"
+        }
+      ]
+    },
+    {
+      "topicKey": "brazil-tiktok-minor-data-enforcement-20260826",
+      "priority": "WATCH",
+      "category": "법·규제·디지털권리",
+      "headline": "브라질, TikTok에 청소년 개인정보 위반 1.537억헤알 제재…데이터 삭제·연령확인까지 명령",
+      "fact": "브라질 개인정보보호기관 ANPD는 8월 25일 ByteDance에 1억5,370만 헤알의 과징금을 부과하고, 불법 수집된 아동·청소년 데이터 삭제와 준수계획 이행을 명령했다. ANPD는 미가입 피드 이용시간·기능 제한, 광고 중단, 최소정보 처리, 신뢰할 수 있는 연령확인 절차 등을 요구했다.",
+      "assessment": "단순 과징금보다 중요한 것은 데이터 삭제와 서비스 설계 변경을 동시에 요구했다는 점이다. 미성년자 플랫폼 규제가 개인정보 법집행에서 제품설계·연령확인 의무로 확대되는 흐름이다.",
+      "impact": "글로벌 플랫폼은 국가별 아동·청소년 보호 규정을 반영해 가입·추천·광고·라이브 기능을 차등 설계해야 할 가능성이 커진다. 유사한 규제가 다른 국가의 플랫폼 규제로 확산될 수 있다.",
+      "watch": "ByteDance의 이행 여부, 추가 일일제재, 브라질 ECA Digital 연령확인 지침, 다른 플랫폼에 대한 ANPD 후속조사를 본다.",
+      "confidence": "매우 높음",
+      "sources": [
+        {
+          "label": "Brazil ANPD · TikTok fine and compliance order",
+          "url": "https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-multa-tiktok-em-r-153-7-milhoes-por-falhas-na-protecao-de-dados-de-criancas-e-adolescentes"
+        },
+        {
+          "label": "Reuters · Brazil fines TikTok owner ByteDance for unlawful processing of teenagers' data",
+          "url": "https://www.reuters.com/legal/government/brazil-fines-tiktok-owner-bytedance-unlawful-processing-teenagers-data-2026-08-25/"
+        }
+      ]
+    },
+    {
+      "topicKey": "korea-heatwave-20days-september-risk-20260826",
+      "priority": "WATCH",
+      "category": "환경·사회·재난",
+      "headline": "한국 폭염일수 20.1일로 평년의 약 2배…기상청, 9월까지 이중 열돔 영향 고온 지속 전망",
+      "fact": "기상청 자료를 인용한 연합뉴스에 따르면 8월 24일까지 전국 평균 폭염일수는 20.1일로 평년 10.4일의 약 두 배였다. 열대야일수도 16.4일로 1994년 16.8일에 이어 두 번째로 많았고, 8월 2일 경남 양산에서는 42.5도가 기록돼 국내 근대 관측 이후 최고기온을 경신했다. 기상청은 북태평양고기압과 티베트고기압의 '이중 열돔' 영향으로 9월에도 더위가 이어질 것으로 전망했다.",
+      "assessment": "일회성 폭염이 아니라 고온 지속기간과 야간열이 동시에 장기화되는 양상이다. 단순 기상 이슈를 넘어 전력수요, 노동안전, 농축산물 수급, 취약계층 건강위험을 함께 봐야 한다.",
+      "impact": "냉방 전력수요, 산업현장 작업중지·안전비용, 농산물 가격, 온열질환과 취약계층 보호 비용이 상승할 수 있다.",
+      "watch": "9월 고온 지속 여부, 최대전력 수요, 온열질환·사망 통계, 농축산물 생산피해, 지자체 작업중지·돌봄대책을 추적한다.",
+      "confidence": "높음",
+      "sources": [
+        {
+          "label": "Yonhap · S. Korea records 20 heat wave days this year, double long-term average",
+          "url": "https://en.yna.co.kr/view/AEN20260825008900315"
+        }
+      ]
+    }
+  ],
+  "strategicWatchlist": [
+    {
+      "topic": "이스라엘–튀르키예 시리아 군사충돌 위험",
+      "status": "CRITICAL WATCH",
+      "reason": "전날 핵심사안이었으나 지난 24시간에 추가 공습·튀르키예군 피해라는 material change는 확인되지 않았다. 튀르키예 방공망 또는 병력의 실제 시리아 배치와 이스라엘 추가타격이 발생하면 즉시 본문 재진입."
+    },
+    {
+      "topic": "호르무즈 통항 정상화",
+      "status": "HIGH WATCH",
+      "reason": "기뢰 제거 주장은 단계 변화지만 통항량은 전쟁 전의 약 4분의 1 수준이다. 선박공격·이란 통항규칙·보험·제재위험이 남아 있다."
+    },
+    {
+      "topic": "미·러 비공개 고위채널",
+      "status": "HIGH WATCH",
+      "reason": "CIA 국장 모스크바 방문의 의제와 상대가 확인될 경우 우크라이나·이란 전쟁의 외교적 분기점이 될 수 있다."
+    },
+    {
+      "topic": "한국은행 8월 27일 통화정책방향",
+      "status": "HIGH WATCH",
+      "reason": "7월 인상 이후 추가 인상 여부와 물가·환율 판단이 국내 금융시장에 직접 영향을 줄 수 있다."
+    },
+    {
+      "topic": "콩고 Bundibugyo 에볼라",
+      "status": "WATCH",
+      "reason": "지속적으로 중요하지만 오늘은 새로운 국제확산·WHO 단계 변경이 확인되지 않아 본문에서 제외. 신규 국가 지속전파나 위험단계 변경 시 재진입."
+    }
+  ],
+  "outlook": {
+    "oneWeek": "향후 1주에는 CIA 국장 모스크바 방문의 실제 의제가 드러나는지, 호르무즈 통항량이 기뢰 제거 이후 의미 있게 회복하는지, 8월 27일 한국은행이 추가 금리인상에 나서는지가 가장 중요한 단기 분기점이다. 캐나다의 보복관세는 9월 8일 발효 전 협상 재개 여부가 핵심이다.",
+    "twoWeeks": "향후 2주에는 미·캐나다 관세전의 실제 발효 여부, 미국 PCE·Jackson Hole 이후 연준의 긴축 경로, 한국 경찰개혁기구의 구체적 설계가 정책 리스크를 좌우한다. 브라질의 TikTok 제재가 다른 플랫폼 규제로 확산되는지도 확인할 필요가 있다.",
+    "fourWeeks": "향후 4주에는 미·러 비공개 협상채널이 우크라이나·이란 전쟁의 제한적 합의로 이어지는지, 이스라엘–튀르키예가 시리아에서 직접 교전으로 넘어가는지, 북미 통상분쟁이 자동차·에너지 등 핵심 공급망으로 확대되는지가 구조적 위험이다. 국내에서는 9월까지 이어지는 폭염과 통화긴축이 동시에 소비·물가·전력수요에 미치는 영향을 봐야 한다."
+  }
+}
