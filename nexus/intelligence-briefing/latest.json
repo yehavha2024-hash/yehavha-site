@@ -1,124 +1,123 @@
 {
-  "generatedAt": "2026-08-25T07:47:00+09:00",
-  "window": "2026-08-24 07:47–2026-08-25 07:47 KST · 최근 24시간 중심 · 반복 지속이슈는 material change 없으면 Watchlist로 이동",
+  "generatedAt": "2026-08-26T06:32:00+09:00",
+  "window": "2026-08-25 06:32–2026-08-26 06:32 KST · 최근 24시간 중심 · 동일 이슈는 material change가 있을 때만 본문 재진입",
   "schedule": "06:30 KST daily",
-  "executiveSummary": "오늘의 핵심은 지속 중인 기존 위험의 반복이 아니라 새롭게 단계가 바뀐 사건들이다. 최우선 사안은 시리아를 둘러싼 이스라엘과 튀르키예의 군사적 레드라인 충돌이다. 이스라엘은 튀르키예군 및 방공체계 배치 가능성을 이유로 시리아 Abu al-Duhur 공군기지를 실제 타격했고, 미국은 양국 간 직접 충돌을 막기 위한 deconfliction 체계를 추진하고 있다. 동시에 미국에서는 대법원의 우편투표 관련 결정이 중간선거 직전 선거행정의 불확실성을 키웠고, 중국은 8,000억 위안 규모 정책금융 도구의 프로젝트 신청을 개시해 경기부양을 재가동했다. 한국에서는 전체 임금근로 일자리가 증가했지만 20대 이하와 40대 일자리가 감소하고 60대 이상 증가가 대부분을 차지해 고용의 세대·산업 구조 문제가 부각됐다. 자동차·이차전지 등 7개 업종을 통합환경허가 대상으로 편입하는 규제개편과 전국 실종사건 전수조사·수사체계 쇄신도 새 정책변화다. 인도네시아 동부 지진은 사망 100명, 이재민 약 18만 명으로 피해가 확대됐다.",
+  "executiveSummary": "오늘의 핵심은 기존 지속위험의 반복이 아니라 외교·통상·통화정책·국내 권력구조·디지털 규제·기후에서 새로 확인된 단계 변화다. 미국 CIA 국장의 모스크바 방문 보도는 미·러 간 공식 외교채널이 약한 상황에서 2021년 이후 처음 알려진 최고위급 정보기관 접촉이라는 점에서 최우선 불확실성 요인이다. 호르무즈에서는 미국이 국제수역의 기뢰 제거 완료를 주장해 물리적 통항위험이 일부 낮아졌지만 실제 원유 통항량은 전쟁 전의 약 4분의 1 수준에 머물러 있어 정상화로 보기는 이르다. 캐나다는 미국의 고율관세에 맞서 9월 8일부터 276억 캐나다달러 규모의 미국산 제품에 15·25·50% 보복관세를 확정했고, 연준 내부에서는 4개 지역은행 이사회가 7월 회의 전 할인율 인상을 권고했던 사실이 공개돼 인플레이션 대응을 둘러싼 긴축 압력이 확인됐다. 한국에서는 검찰 수사권 폐지 이후 경찰로 권한이 집중되는 구조에 대응해 대통령이 총리실 차원의 경찰개혁기구 검토를 지시했고, 브라질은 TikTok의 청소년 개인정보 처리 위반에 대규모 과징금과 데이터 삭제·준수계획을 명령했다. 국내 폭염일수는 20.1일로 평년의 약 두 배에 달했고 9월까지 고온 지속 가능성이 제기됐다.",
   "items": [
     {
-      "topicKey": "israel-turkey-syria-direct-clash-risk-20260825",
+      "topicKey": "us-cia-director-moscow-visit-20260826",
       "priority": "CRITICAL",
-      "category": "국제정세·안보·외교",
-      "headline": "이스라엘–튀르키예, 시리아에서 직접 군사충돌 위험 상승…공군기지 선제타격과 레드라인 충돌",
-      "fact": "이스라엘은 시리아 Abu al-Duhur 공군기지를 타격한 뒤 튀르키예 병력 또는 방공체계가 시리아에 배치되는 것을 안보위협으로 본다고 밝혔다. 튀르키예는 실제 병력 배치 계획과 기지 내 자국 병력 존재를 부인하고 이스라엘의 공격을 불법적이고 위험한 확전이라고 비판했다. 미국은 이스라엘·튀르키예·시리아 사이의 군사적 오인과 우발충돌을 막기 위한 deconfliction 및 정보공유 메커니즘을 추진하고 있으며, 최근 미 중재 시리아–이스라엘 회담에서도 이스라엘–튀르키예 긴장 억제가 논의됐다.",
-      "assessment": "경쟁의 핵심은 시리아 영토 자체보다 시리아 상공의 군사적 접근권과 방공통제권이다. 이스라엘이 튀르키예의 잠재적 군사배치를 실제 선제타격 사유로 삼았다는 점에서 양국 관계는 외교적 경쟁을 넘어 군사적 레드라인 충돌 단계에 들어갔다. 아직 튀르키예군 사상자나 직접 교전은 없어 전면전 결정이 내려졌다고 볼 근거는 없지만, 다음 타격에서 튀르키예 병력이 피해를 입을 경우 급격한 확전 경로가 열린다.",
-      "impact": "직접 교전 시 미국의 중동 동맹관리, NATO 내부정치, 시리아 안정화, 이스라엘의 공중우세, 튀르키예의 중동 영향력 경쟁이 동시에 흔들릴 수 있다. NATO 회원국인 튀르키예와 미국의 핵심 중동 파트너인 이스라엘의 군사충돌은 지역분쟁을 동맹체계 문제로 확대할 수 있다.",
-      "watch": "튀르키예 방공체계·레이더·병력의 실제 시리아 배치, 이스라엘의 추가 공습, 튀르키예군 피해 발생 여부, 앙카라의 군사적 대응, 미국 주도의 충돌방지체계 가동 여부를 최우선 추적한다.",
-      "confidence": "높음",
+      "category": "외교·안보·국제정세",
+      "headline": "미 CIA 국장, 모스크바 방문 보도…2021년 이후 첫 미 정보수장 방러로 미·러 비공개 협상 가능성 부상",
+      "fact": "Reuters는 미국 매체 보도를 인용해 CIA 국장 John Ratcliffe가 8월 25일 모스크바를 방문해 러시아 당국자들과 회의했다고 전했다. 누구를 만났고 의제가 무엇인지는 공개되지 않았으며 CIA와 크렘린은 확인하지 않았다. Reuters는 미국이 최근 우크라이나 측에 미 고위당국자 항공편과 관련해 모스크바·상트페테르부르크 등 일부 지역에 대한 공습을 자제해달라고 요청했다는 소식도 함께 전했다.",
+      "assessment": "공식 확인이 부족해 의제를 단정할 수 없지만, 미국 대사가 부재한 상황에서 CIA 수장의 직접 방러가 사실이라면 우크라이나 전쟁, 이란 전쟁, 전략안보 문제를 포함한 비공개 고위 채널이 가동되고 있을 가능성을 시사한다. 2021년 William Burns 당시 CIA 국장의 푸틴 면담 이후 처음 알려진 사례라는 점에서 외교적 신호가 크다.",
+      "impact": "미·러 간 비공개 조정이 성립하면 우크라이나 전쟁의 군사행동 범위, 대이란 제재 집행, 러시아의 대이란 지원, 포로·핵위험 관리 등 여러 현안의 계산이 달라질 수 있다. 반대로 의제가 제한적이거나 접촉이 결렬될 경우 현재의 전략적 대립구도는 유지된다.",
+      "watch": "CIA 또는 크렘린의 공식 확인, Ratcliffe의 실제 면담 상대, 우크라이나 공습자제 요청 범위, 미·러 후속 고위급 접촉, 이란 또는 우크라이나 관련 합의 신호를 본다.",
+      "confidence": "중간",
       "sources": [
-        {"label": "Reuters · Israel and Turkey step up warnings over Syria after airbase bombing", "url": "https://www.reuters.com/world/middle-east/syria-says-no-turkish-military-build-up-planned-airbase-struck-by-israel-2026-08-20/"},
-        {"label": "Reuters · Syria, Israel hold US-mediated talks to ease tensions", "url": "https://www.reuters.com/world/middle-east/syria-israel-hold-us-mediated-talks-ease-tensions-syria-news-agency-says-2026-08-23/"},
-        {"label": "AP · US envoy clarification and Israeli strike dispute", "url": "https://apnews.com/article/39328b1c38cb00e2cd545745a375741d"}
+        {"label": "Reuters · US spy chief visits Russia for meetings, media reports", "url": "https://www.reuters.com/world/us-spy-chief-visits-russia-meetings-media-reports-2026-08-25/"}
       ]
     },
     {
-      "topicKey": "us-supreme-court-mail-ballot-midterms-20260825",
+      "topicKey": "hormuz-demining-us-zero-tolerance-20260826",
       "priority": "HIGH",
-      "category": "법·정책·정치",
-      "headline": "미 대법원, 트럼프 우편투표 제한 조치의 법적 장벽 일부 제거…중간선거 직전 선거행정 불확실성 확대",
-      "fact": "미 연방대법원은 8월 24일 우편투표 제한을 담은 트럼프 행정부 조치에 대한 소송에서 주정부 측의 당사자적격 문제를 이유로 행정부에 유리한 결정을 내렸다. 다만 조치의 합헌성 자체를 최종 판단한 것은 아니며 별도의 하급심 금지명령과 추가 소송이 남아 있다. USPS의 새로운 우편투표 규정도 중간선거 우편투표 개시를 앞두고 시행 여부가 법정 다툼에 놓여 있다.",
-      "assessment": "이번 결정의 전략적 의미는 특정 정당의 유불리가 아니라 연방정부와 주정부의 선거관리 권한 경계가 중간선거 직전에 불확실해졌다는 데 있다. 법원이 본안 판단을 유보한 상태라 시행과 재중단이 반복될 가능성이 있다.",
-      "impact": "주별 투표절차 변경비용, 해외·군인·고령층 등 우편투표 의존 유권자의 행정 혼선, 선거 결과에 대한 사후 소송 가능성이 커질 수 있다. 11월 선거 전 연방대법원이 다시 개입할 가능성도 있다.",
-      "watch": "남아 있는 전국 단위 금지명령의 처리, USPS 규정의 실제 시행시점, 주정부의 후속소송, 9월 초 해외·군인 우편투표 발송 일정에 미치는 영향을 본다.",
+      "category": "에너지·안보·해운",
+      "headline": "호르무즈 국제수역 기뢰 제거 완료 주장…물리적 통항위험 완화 신호에도 원유 통항량은 전쟁 전의 약 4분의 1",
+      "fact": "트럼프 미국 대통령은 8월 25일 호르무즈 해협 국제수역의 기뢰가 모두 폭파되거나 제거됐다고 밝히고, 추가 기뢰 부설 선박은 파괴하겠다는 '제로 톨러런스' 방침을 발표했다. Reuters가 인용한 Vortexa 잠정치에 따르면 8월 24일 해협을 통과한 원유는 하루 약 500만 배럴로 전쟁 전 2,000만 배럴 이상에 크게 못 미쳤다.",
+      "assessment": "수일간 반복됐던 '호르무즈 봉쇄 위험'과 달리 이번에는 물리적 장애물 제거라는 단계 변화가 발생했다. 다만 선박 피격 위험, 이란의 통항규칙·블랙리스트, 보험·제재 위험은 남아 있어 해협이 정상화됐다고 보기는 어렵다.",
+      "impact": "기뢰위험이 실제로 감소하면 해운보험료와 에너지 가격의 극단적 위험 프리미엄은 일부 낮아질 수 있다. 그러나 통항량 회복이 지연되면 원유·LNG 공급과 아시아 수입국의 비용 부담은 지속된다.",
+      "watch": "일일 통항량의 지속 회복 여부, 신규 기뢰 발견, 선박 공격, 이란의 블랙리스트 집행, 보험료와 Brent 가격의 반응을 추적한다.",
       "confidence": "높음",
       "sources": [
-        {"label": "AP · Supreme Court sides with Trump administration on mail voting restrictions", "url": "https://apnews.com/article/157afc3c195ce0a62c522da5ce904b04"},
-        {"label": "AP · USPS mail-ballot rule and remaining legal uncertainty", "url": "https://apnews.com/article/b4b9ef095b4d6bceab18adbb34814640"},
-        {"label": "US Supreme Court filing · underlying Massachusetts order", "url": "https://www.supremecourt.gov/DocketPDF/26/26A124/418732/20260812103120524_Trump%20v.%20California%20stay%20supp%20brief%20and%20appendix.pdf"}
+        {"label": "Reuters · Trump says Strait of Hormuz has been demined, warns Iran not to plant more", "url": "https://www.reuters.com/world/middle-east/trump-says-strait-hormuz-has-been-demined-warns-iran-not-plant-more-2026-08-25/"},
+        {"label": "Reuters · Oil settles down more than 3% as investors shrug off sanctions", "url": "https://finance.yahoo.com/energy/articles/oil-prices-steady-investors-weigh-011547751.html"}
       ]
     },
     {
-      "topicKey": "china-800b-yuan-policy-financing-20260825",
+      "topicKey": "canada-us-retaliatory-tariffs-20260826",
       "priority": "HIGH",
-      "category": "경제·정책·산업",
-      "headline": "중국, 8,000억 위안 정책금융 프로젝트 신청 개시…성장둔화 대응 위한 투자부양 재가동",
-      "fact": "중국이 8,000억 위안(약 1,190억 달러) 규모의 정책기반 금융도구에 대한 지방정부 프로젝트 신청을 시작했다. 이 제도는 프로젝트의 초기 자본을 공급해 은행·민간자금을 추가로 끌어들이는 구조이며 인프라와 전략산업 투자를 겨냥한다. 중국의 2분기 성장률은 4.3%로 둔화됐고 1~7월 고정자산투자는 전년 대비 6.7% 감소했다.",
-      "assessment": "중국이 부동산 중심 부양보다 정책금융을 통한 인프라·전략산업 투자 확대를 선택하고 있다는 신호다. 다만 적격 프로젝트 부족과 집행지연 때문에 2026년 성장률을 즉각 크게 끌어올리기보다는 연말과 2027년 초 효과가 집중될 가능성이 높다.",
-      "impact": "중국 내 산업재·기계·건설·원자재 수요와 지방정부 투자회복 여부에 영향을 주며 한국의 대중 수출에도 간접적인 수요효과가 발생할 수 있다. 정책금융이 과잉생산 능력을 다시 확대하면 미국·EU와의 통상마찰은 오히려 커질 수 있다.",
-      "watch": "실제 자금 집행속도, 프로젝트 승인 규모, 지방정부 부채와의 연계, 제조업·인프라 투자 반등, 미국·EU의 중국 과잉생산 대응을 추적한다.",
-      "confidence": "높음",
-      "sources": [
-        {"label": "Reuters · China's $119 billion policy financing tool begins project applications", "url": "https://www.reuters.com/world/asia-pacific/chinas-119-billion-policy-financing-tool-begins-project-applications-faces-roll-2026-08-24/"}
-      ]
-    },
-    {
-      "topicKey": "korea-employment-age-industry-divergence-20260825",
-      "priority": "HIGH",
-      "category": "경제·사회·고용",
-      "headline": "한국 임금근로 일자리 29.2만개 증가했지만 청년·40대 감소…고령층 중심 고용증가 구조 뚜렷",
-      "fact": "국가데이터처가 8월 24일 발표한 2026년 1분기 임금근로 일자리동향에서 전체 일자리는 2,082.8만개로 전년 동기보다 29.2만개 증가했다. 그러나 20대 이하는 7.6만개, 40대는 1.9만개 감소한 반면 60대 이상은 23.3만개, 30대는 11.5만개 증가했다. 제조업은 소폭 감소했고 건설업 감소도 지속됐다.",
-      "assessment": "총량만 보면 고용이 개선되고 있지만 증가분 상당 부분이 고령층과 보건·사회복지에 집중돼 있다. 청년층 감소가 14분기 연속 이어지고 제조·건설의 회복이 약하다는 점은 고용의 질과 세대별 진입기회 측면에서 별도의 구조문제를 보여준다.",
-      "impact": "청년 고용·주거·혼인, 숙련인력 형성, 제조업 인력구조와 재정지출에 중장기 영향을 줄 수 있다. 경기회복이 고용시장 전체로 확산되는지 판단할 때 총취업자보다 연령·산업별 구성을 함께 볼 필요가 있다.",
-      "watch": "20대 이하 일자리 감소 지속 여부, 제조·건설 고용의 전환점, 30대 증가가 인구효과를 넘어서는지, 고령층 일자리 증가의 산업별 질적 구성을 본다.",
+      "category": "경제·통상·산업",
+      "headline": "캐나다, 미국산 276억 캐나다달러에 15·25·50% 보복관세 확정…북미 통상분쟁 실행 단계 진입",
+      "fact": "캐나다 정부는 미국이 8월 22일부터 캐나다산 276억 캐나다달러 규모 제품에 50% 관세를 부과한 데 대응해 9월 8일부터 같은 규모의 미국산 제품에 15%, 25%, 50% 관세를 적용한다고 발표했다. 대상은 철강, 유제품, 가전, 농기계, 펄프·종이, 전자제품 등이며 캐나다는 근로자·기업 지원을 위한 75억 캐나다달러 패키지도 내놨다.",
+      "assessment": "전날까지는 보복관세가 예고 단계였지만 이제 품목·세율·시행일이 확정돼 실제 공급망 비용으로 전환됐다. 장기간 통합돼 온 북미 제조·농식품 공급망에 비용을 누적시키는 구조다.",
+      "impact": "자동차·철강·알루미늄·기계·식품의 가격과 조달비용이 상승할 수 있고, 미국 중간선거를 앞두고 정치적 압박도 커질 수 있다. 북미 생산거점을 둔 한국 기업은 원산지·부품조달·가격전가 구조를 다시 점검해야 한다.",
+      "watch": "9월 8일 실제 발효 여부, 자동차 부문 추가관세, 협상 재개, 캐나다의 에너지·전력 분야 추가보복 여부, 기업의 공급망 재배치를 본다.",
       "confidence": "매우 높음",
       "sources": [
-        {"label": "국가데이터처 · 2026년 1분기 임금근로 일자리동향", "url": "https://www.korea.kr/briefing/pressReleaseView.do?endDate=2026-08-24&newsId=156775272&pageIndex=1&period=&repCode=&repCodeType=&srchWord=&startDate=2025-08-24"}
+        {"label": "Canada Department of Finance · targeted countermeasures and support", "url": "https://www.canada.ca/en/department-finance/news/2026/08/canada-announces-targeted-countermeasures-and-substantive-support-for-workers-and-businesses-in-response-to-us-tariffs.html"},
+        {"label": "Reuters · Canada slaps retaliatory tariffs on US goods worth $20 billion", "url": "https://www.reuters.com/business/canada-announces-20-bln-retaliatory-tariffs-us-goods-unveils-support-measures-2026-08-25/"}
       ]
     },
     {
-      "topicKey": "korea-integrated-environmental-permit-expansion-20260825",
-      "priority": "WATCH",
-      "category": "환경·규제·산업",
-      "headline": "자동차·이차전지 등 7개 업종 통합환경허가 편입 추진…산업규제 범위 확대와 중소기업 부담완화 병행",
-      "fact": "기후에너지환경부는 자동차·이차전지 등 7개 업종을 통합환경허가 대상으로 추가하는 환경오염시설법 시행령·시행규칙 개정안을 8월 26일부터 10월 6일까지 입법예고한다고 밝혔다. 동시에 연간보고서 작성 대행 기준을 만들고 중소기업의 통합환경관리인 선임기준은 완화한다.",
-      "assessment": "한국의 핵심 제조업에 환경허가가 개별 매체별 관리에서 통합관리 방식으로 확대되는 변화다. 대기업에는 허가·배출관리 체계의 재설계가 요구되고 중소기업에는 일부 행정부담 완화가 병행된다.",
-      "impact": "자동차·배터리 생산시설의 신규 투자와 증설 일정, 환경설비 투자, 컴플라이언스 비용에 영향을 줄 수 있다. 규제 예측가능성을 높이면 장기적으로는 인허가 효율성이 개선될 수 있지만 전환기 비용은 발생한다.",
-      "watch": "입법예고 의견수렴 결과, 대상 7개 업종의 세부범위, 기존 시설의 전환기간, 대형 배터리·자동차 생산시설의 추가 투자계획에 미치는 영향을 확인한다.",
+      "topicKey": "fed-regional-banks-hike-pressure-20260826",
+      "priority": "HIGH",
+      "category": "경제·시장·통화정책",
+      "headline": "연준 4개 지역은행 이사회, 7월 회의 전 할인율 인상 권고…미 통화정책 내부 긴축 압력 확인",
+      "fact": "연방준비제도는 8월 25일 7월 20일·29일 할인율 회의 의사록을 공개했다. Reuters에 따르면 Dallas, Cleveland, Minneapolis, Kansas City 연은 이사회가 상업은행 긴급대출에 적용되는 할인율을 0.25%포인트 올리도록 권고했다. FOMC는 7월 28~29일 정책금리를 3.5~3.75%로 9대3 동결했다.",
+      "assessment": "지역은행 이사회가 정책금리를 결정하지는 않지만, 4개 지역에서 동시에 인상 선호가 나타난 것은 인플레이션 압력이 충분히 낮아졌다고 보기 어렵다는 내부 인식이 넓다는 신호다. 향후 금리인하 기대를 제약하는 요인이다.",
+      "impact": "미 장단기 금리, 달러, 글로벌 자산가격과 신흥국 통화정책에 영향을 줄 수 있다. 한국은행도 8월 27일 통화정책회의를 앞두고 있어 미국 긴축 지속 가능성은 원화·자본흐름 판단에 참고 변수다.",
+      "watch": "Jackson Hole 발언, 미국 PCE 물가, 9월 FOMC 기대확률, 미 국채금리, 8월 27일 한국은행 결정과 환율 반응을 본다.",
       "confidence": "매우 높음",
       "sources": [
-        {"label": "기후에너지환경부 · 통합허가 대상 넓히고 우수·중소기업 부담은 줄인다", "url": "https://admin2.korea.kr/briefing/pressReleaseView.do?gubun=pressRelease&newsId=156775171&pageIndex=1&repCode=B00015"}
+        {"label": "Federal Reserve · Minutes of discount rate meetings on July 20 and July 29, 2026", "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260825a.htm"},
+        {"label": "Reuters · Four Fed bank boards wanted rate hike, minutes show", "url": "https://www.reuters.com/markets/us/four-fed-bank-boards-wanted-rate-hike-minutes-show-2026-08-25/"}
       ]
     },
     {
-      "topicKey": "korea-missing-person-police-system-review-20260825",
-      "priority": "WATCH",
-      "category": "정부·사회·치안",
-      "headline": "정부, 전국 실종사건 전수조사와 수사체계 쇄신 지시…사건 처리·종결 담당 분리 검토",
-      "fact": "한성숙 국무총리는 8월 24일 최근 제주 실종사건 부실대응과 관련해 경찰청이 착수한 전국 실종사건 전수조사를 철저히 진행하고 부당·불법 처리사례가 확인되면 엄중 조치하라고 지시했다. 전수조사를 통해 사건 처리와 종결 담당자를 분리하는 등 실종수사 관리체계 개선도 추진하도록 했다.",
-      "assessment": "개별 사건 문책을 넘어 전국 사건기록 전수조사와 업무분장 개편으로 확대됐다는 점에서 치안 거버넌스 문제로 전환됐다. 향후 감사·징계 결과보다 사건 종결 권한과 감독체계가 실제로 어떻게 바뀌는지가 중요하다.",
-      "impact": "경찰의 실종사건 처리기준, 장기미제 관리, 내부통제와 책임소재가 재설계될 수 있다. 제도개편이 현실화되면 전국 경찰서의 사건관리 업무와 인력배분에도 영향을 준다.",
-      "watch": "전수조사 범위와 완료시점, 부실·불법 처리 적발 규모, 사건 처리·종결 분리제도의 구체안, 경찰청 후속 지침 개정을 본다.",
-      "confidence": "매우 높음",
-      "sources": [
-        {"label": "국무조정실 · 경찰 실종사건 전수조사 및 수사체계 쇄신 지시", "url": "https://admin2.korea.kr/briefing/pressReleaseView.do?newsId=156775278&pWise=mSub&pWiseSub=C3"}
-      ]
-    },
-    {
-      "topicKey": "indonesia-earthquake-death-toll-100-20260825",
-      "priority": "WATCH",
-      "category": "재난·사회·인프라",
-      "headline": "인도네시아 동부 7.7 지진 사망 100명…주택 7.3만채 피해·약 18만명 대피",
-      "fact": "인도네시아 재난당국은 8월 15일 동누사텡가라를 강타한 규모 7.7 지진의 사망자가 100명으로 늘었다고 24일 밝혔다. 부상자는 1,600명 이상이며 주택 7만3,000채 이상이 피해를 입고 약 18만 명이 대피했다. 수천 차례의 여진 속에 구호작업이 열흘째 이어지고 있다.",
-      "assessment": "급성 구조단계에서 대규모 이재민 보호와 인프라 복구 단계로 전환되고 있다. 피해주택과 대피인구 규모가 커 단순한 국지적 지진보다 장기 복구비용과 보건·생활인프라 위험을 봐야 한다.",
-      "impact": "동부 인도네시아 지역의 주거·의료·도로·지역경제 복구 부담이 커지고, 장기 대피가 지속될 경우 감염병·식수·교육중단 문제가 뒤따를 수 있다.",
-      "watch": "여진과 추가 붕괴, 대피인구 감소 속도, 병원·도로·전력 복구, 국제지원 확대 여부를 추적한다.",
+      "topicKey": "korea-police-reform-power-concentration-20260826",
+      "priority": "HIGH",
+      "category": "정부·법·정책·치안",
+      "headline": "검찰 수사권 폐지 이후 경찰권 집중 대응…대통령, 총리실에 경찰개혁기구 구상 지시",
+      "fact": "이재명 대통령은 8월 25일 국무회의에서 최근 경찰의 기강 해이와 치안상 무책임 문제를 지적하며 총리실에 경찰개혁기구 방안과 국민 의견수렴 절차를 검토하라고 지시했다. 발언은 형사소송법 개정으로 검찰의 수사권이 사라지고 경찰의 권한이 확대되는 제도 변화와 최근 부실수사 논란을 배경으로 나왔다.",
+      "assessment": "전날의 개별 실종사건 전수조사 수준을 넘어, 수사권 재배분 이후 경찰 권한과 책임·감독체계를 다시 설계하는 구조개혁 논의로 확대됐다. 핵심은 경찰 내부 통제, 지휘책임, 외부감독 장치의 형태다.",
+      "impact": "향후 경찰 조직·감찰·수사지휘·사건종결 절차가 바뀔 수 있고, 검찰개혁과 결합해 형사사법체계 전체의 권력배분에 영향을 미친다.",
+      "watch": "총리실 개혁기구 구성안, 여당 경찰개혁추진단의 입법안, 수사권 분산 또는 외부감독 모델, 경찰 지휘책임 강화 조치를 추적한다.",
       "confidence": "높음",
       "sources": [
-        {"label": "Reuters · Indonesia earthquake death toll reaches 100", "url": "https://www.reuters.com/business/environment/indonesia-says-death-toll-august-15-earthquake-reaches-100-2026-08-24/"}
+        {"label": "Yonhap · Lee says police will wield biggest power, calls for reform body", "url": "https://www.koreatimes.co.kr/amp/southkorea/politics/20260825/lee-says-police-will-be-biggest-power-stresses-need-for-reform-by-govt-body"},
+        {"label": "경향신문 · 대통령 경찰개혁기구 검토 지시", "url": "https://www.khan.co.kr/article/202608251025001"}
+      ]
+    },
+    {
+      "topicKey": "brazil-tiktok-minor-data-enforcement-20260826",
+      "priority": "WATCH",
+      "category": "법·규제·디지털권리",
+      "headline": "브라질, TikTok에 청소년 개인정보 위반 1.537억헤알 제재…데이터 삭제·연령확인까지 명령",
+      "fact": "브라질 개인정보보호기관 ANPD는 8월 25일 ByteDance에 1억5,370만 헤알의 과징금을 부과하고, 불법 수집된 아동·청소년 데이터 삭제와 준수계획 이행을 명령했다. ANPD는 미가입 피드 이용시간·기능 제한, 광고 중단, 최소정보 처리, 신뢰할 수 있는 연령확인 절차 등을 요구했다.",
+      "assessment": "단순 과징금보다 중요한 것은 데이터 삭제와 서비스 설계 변경을 동시에 요구했다는 점이다. 미성년자 플랫폼 규제가 개인정보 법집행에서 제품설계·연령확인 의무로 확대되는 흐름이다.",
+      "impact": "글로벌 플랫폼은 국가별 아동·청소년 보호 규정을 반영해 가입·추천·광고·라이브 기능을 차등 설계해야 할 가능성이 커진다. 유사한 규제가 다른 국가의 플랫폼 규제로 확산될 수 있다.",
+      "watch": "ByteDance의 이행 여부, 추가 일일제재, 브라질 ECA Digital 연령확인 지침, 다른 플랫폼에 대한 ANPD 후속조사를 본다.",
+      "confidence": "매우 높음",
+      "sources": [
+        {"label": "Brazil ANPD · TikTok fine and compliance order", "url": "https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-multa-tiktok-em-r-153-7-milhoes-por-falhas-na-protecao-de-dados-de-criancas-e-adolescentes"},
+        {"label": "Reuters · Brazil fines TikTok owner ByteDance for unlawful processing of teenagers' data", "url": "https://www.reuters.com/legal/government/brazil-fines-tiktok-owner-bytedance-unlawful-processing-teenagers-data-2026-08-25/"}
+      ]
+    },
+    {
+      "topicKey": "korea-heatwave-20days-september-risk-20260826",
+      "priority": "WATCH",
+      "category": "환경·사회·재난",
+      "headline": "한국 폭염일수 20.1일로 평년의 약 2배…기상청, 9월까지 이중 열돔 영향 고온 지속 전망",
+      "fact": "기상청 자료를 인용한 연합뉴스에 따르면 8월 24일까지 전국 평균 폭염일수는 20.1일로 평년 10.4일의 약 두 배였다. 열대야일수도 16.4일로 1994년 16.8일에 이어 두 번째로 많았고, 8월 2일 경남 양산에서는 42.5도가 기록돼 국내 근대 관측 이후 최고기온을 경신했다. 기상청은 북태평양고기압과 티베트고기압의 '이중 열돔' 영향으로 9월에도 더위가 이어질 것으로 전망했다.",
+      "assessment": "일회성 폭염이 아니라 고온 지속기간과 야간열이 동시에 장기화되는 양상이다. 단순 기상 이슈를 넘어 전력수요, 노동안전, 농축산물 수급, 취약계층 건강위험을 함께 봐야 한다.",
+      "impact": "냉방 전력수요, 산업현장 작업중지·안전비용, 농산물 가격, 온열질환과 취약계층 보호 비용이 상승할 수 있다.",
+      "watch": "9월 고온 지속 여부, 최대전력 수요, 온열질환·사망 통계, 농축산물 생산피해, 지자체 작업중지·돌봄대책을 추적한다.",
+      "confidence": "높음",
+      "sources": [
+        {"label": "Yonhap · S. Korea records 20 heat wave days this year, double long-term average", "url": "https://en.yna.co.kr/view/AEN20260825008900315"}
       ]
     }
   ],
   "strategicWatchlist": [
-    "이스라엘–튀르키예: 시리아 내 튀르키예 방공망·병력 배치와 추가 이스라엘 공습 여부",
-    "호르무즈: 신규 선박 억류·통항 급감·세컨더리 제재 확대가 발생할 때만 본문 재진입",
-    "콩고 에볼라: 신규 국가의 지속적 지역전파 또는 WHO 위험단계 변경 시 본문 재진입",
-    "우크라이나: 방공·탄약 지원은 지속 모니터링하되 실제 대규모 인도·전선변곡 발생 시 재진입",
-    "미 장기금리: 단순 5%대 지속은 반복하지 않고 정책결정·급등락·시장기능 이상 발생 시 재진입",
-    "미국 중간선거: 우편투표 규정의 실제 시행 및 추가 연방대법원 판단",
-    "중국 경기부양: 8,000억 위안 정책금융의 실제 집행과 추가 부양책"
+    {"topic": "이스라엘–튀르키예 시리아 군사충돌 위험", "status": "CRITICAL WATCH", "reason": "전날 핵심사안이었으나 지난 24시간에 추가 공습·튀르키예군 피해라는 material change는 확인되지 않았다. 튀르키예 방공망 또는 병력의 실제 시리아 배치와 이스라엘 추가타격이 발생하면 즉시 본문 재진입."},
+    {"topic": "호르무즈 통항 정상화", "status": "HIGH WATCH", "reason": "기뢰 제거 주장은 단계 변화지만 통항량은 전쟁 전의 약 4분의 1 수준이다. 선박공격·이란 통항규칙·보험·제재위험이 남아 있다."},
+    {"topic": "미·러 비공개 고위채널", "status": "HIGH WATCH", "reason": "CIA 국장 모스크바 방문의 의제와 상대가 확인될 경우 우크라이나·이란 전쟁의 외교적 분기점이 될 수 있다."},
+    {"topic": "한국은행 8월 27일 통화정책방향", "status": "HIGH WATCH", "reason": "7월 인상 이후 추가 인상 여부와 물가·환율 판단이 국내 금융시장에 직접 영향을 줄 수 있다."},
+    {"topic": "콩고 Bundibugyo 에볼라", "status": "WATCH", "reason": "지속적으로 중요하지만 오늘은 새로운 국제확산·WHO 단계 변경이 확인되지 않아 본문에서 제외. 신규 국가 지속전파나 위험단계 변경 시 재진입."}
   ],
   "outlook": {
-    "oneWeek": "향후 1주 최우선 위험은 시리아에서의 이스라엘–튀르키예 군사적 오인이다. 튀르키예 병력이나 방공자산이 실제 배치되고 이스라엘이 추가 타격할 경우 직접 교전 위험이 급격히 높아진다. 미국에서는 우편투표 규칙의 실제 적용 여부가 9월 초 해외·군인 투표 일정과 맞물려 다시 법원 판단을 받을 가능성이 있다.",
-    "twoWeeks": "향후 2주에는 중국 정책금융의 초기 프로젝트 승인, 한국 통합환경허가 개정안의 산업계 반응, 전국 실종사건 전수조사의 초기 결과가 정책변화의 실체를 보여줄 수 있다. 한국 고용에서는 청년·건설·제조업 고용의 부진이 다른 지표에서도 확인되는지가 중요하다.",
-    "fourWeeks": "향후 4주에는 이스라엘–튀르키예가 충돌방지 메커니즘으로 관리 가능한 경쟁관계에 머무를지, 아니면 시리아 내 군사거점 문제로 직접 교전할지가 중동 질서의 핵심 분기점이다. 중국의 투자부양이 실물경기 회복으로 연결되는지와 미국 중간선거를 앞둔 선거법 소송의 확대도 글로벌 정책 불확실성을 좌우한다. 지속 위험인 호르무즈·에볼라·우크라이나는 새로운 단계변화가 발생할 때만 핵심 본문으로 재상향한다."
+    "oneWeek": "향후 1주에는 CIA 국장 모스크바 방문의 실제 의제가 드러나는지, 호르무즈 통항량이 기뢰 제거 이후 의미 있게 회복하는지, 8월 27일 한국은행이 추가 금리인상에 나서는지가 가장 중요한 단기 분기점이다. 캐나다의 보복관세는 9월 8일 발효 전 협상 재개 여부가 핵심이다.",
+    "twoWeeks": "향후 2주에는 미·캐나다 관세전의 실제 발효 여부, 미국 PCE·Jackson Hole 이후 연준의 긴축 경로, 한국 경찰개혁기구의 구체적 설계가 정책 리스크를 좌우한다. 브라질의 TikTok 제재가 다른 플랫폼 규제로 확산되는지도 확인할 필요가 있다.",
+    "fourWeeks": "향후 4주에는 미·러 비공개 협상채널이 우크라이나·이란 전쟁의 제한적 합의로 이어지는지, 이스라엘–튀르키예가 시리아에서 직접 교전으로 넘어가는지, 북미 통상분쟁이 자동차·에너지 등 핵심 공급망으로 확대되는지가 구조적 위험이다. 국내에서는 9월까지 이어지는 폭염과 통화긴축이 동시에 소비·물가·전력수요에 미치는 영향을 봐야 한다."
   }
 }
