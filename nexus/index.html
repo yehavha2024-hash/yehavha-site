@@ -14,7 +14,7 @@
 <link href="./portal-v2.css?v=20260824-contrast-icons-2" rel="stylesheet"/>
 <link href="./nexus-standard.css?v=20260824-remove-overview-1" rel="stylesheet"/>
 <style>
-.investment-entry{margin:22px 0 0}.investment-entry-card{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;padding:24px;border:1px solid #d9e1e8;border-radius:18px;background:linear-gradient(135deg,#f8fafc,#eef4f8)}.investment-entry .eyebrow{margin:0 0 6px;color:#245f96;font-size:12px;font-weight:800;letter-spacing:.1em}.investment-entry h2{margin:0 0 8px;font-size:25px}.investment-entry p{margin:0;color:#5e6a75;line-height:1.6}.investment-entry .asset-line{margin-top:10px;color:#33495d;font-size:13px;font-weight:700}.investment-entry a{display:inline-flex;align-items:center;justify-content:center;min-width:148px;padding:11px 16px;border-radius:10px;background:#245f96;color:#fff;text-decoration:none;font-weight:800;font-size:14px}@media(max-width:720px){.investment-entry-card{grid-template-columns:1fr;padding:18px}.investment-entry a{width:100%}}
+.investment-category{margin-top:0}.investment-category .category-card{padding:16px!important}.investment-category .category-head{grid-template-columns:48px minmax(0,1fr)!important;gap:11px!important;margin-bottom:10px!important}.investment-category .category-icon{width:48px!important;height:48px!important;border-radius:13px!important}.investment-category .category-icon svg{width:26px;height:26px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.investment-category .category-head .eyebrow{margin-bottom:2px!important}.investment-category .category-title-row h2{margin:0 0 2px!important;font-size:1.35rem!important}.investment-category .category-description{margin:2px 0 0!important;font-size:14.5px!important;line-height:1.55!important}.investment-category .items-grid{grid-template-columns:1fr!important;gap:0!important}.investment-category .item-card{padding:12px 14px!important}.investment-category .item-top{gap:6px}.investment-category .item-card h3{margin:7px 0 4px!important;font-size:18px!important;line-height:1.35!important}.investment-category .item-card p{font-size:14.5px!important;line-height:1.58!important}.investment-category .item-actions{margin-top:9px!important}.investment-category .visit-link{min-height:38px!important;padding:0 13px!important;font-size:13.5px!important}@media(max-width:700px){.investment-category .category-card{padding:14px!important}.investment-category .category-head{grid-template-columns:44px minmax(0,1fr)!important}.investment-category .category-icon{width:44px!important;height:44px!important}.investment-category .item-card{padding:11px 12px!important}}
 </style>
 <title>YEHAVHA Nexus | 예하바 프로젝트 포털</title>
 </head>
@@ -42,15 +42,24 @@
 </header>
 <main class="main" id="projects">
 <div class="container portal-grid" id="portalGrid" aria-live="polite"></div>
-<div class="container investment-entry" aria-labelledby="investment-entry-title">
-<section class="investment-entry-card">
-<div>
-<p class="eyebrow">NEXUS INVESTMENT STRATEGY</p>
-<h2 id="investment-entry-title">투자 전략 · 자산분석</h2>
-<p>특정 자산을 추천하는 공간이 아니라 시장·가격·가치·위험을 객관적으로 읽기 위한 분석 기준과 실제 사례를 축적합니다.</p>
-<p class="asset-line">증권 · 가상자산 · 예금·적금 · 금·대체자산 · 경매·공매·입찰 · 일반 금융상품</p>
+<div class="container investment-category" id="investment">
+<section class="category-card category-compact" aria-labelledby="investment-category-title">
+<div class="category-head">
+<div class="category-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18V10M10 18V6M16 18v-5M3 20h18"/><path d="m4 8 5-4 6 5 5-5"/></svg></div>
+<div class="category-copy">
+<p class="eyebrow">INVESTMENT &amp; ASSET STRATEGY</p>
+<div class="category-title-row"><h2 id="investment-category-title">투자·자산</h2><span class="category-count">1 PROJECT</span></div>
+<p class="category-description">증권·가상자산·금융상품·대체자산·경매·입찰을 시장자료와 위험요인에 따라 분석하는 투자전략 영역</p>
 </div>
-<a href="./investment-strategy/">투자 전략 보기</a>
+</div>
+<div class="items-grid investment-items">
+<article class="item-card">
+<div class="item-top"><span class="item-meta">Investment Strategy · Asset Analysis</span><span class="maturity-chip">분석·참고</span></div>
+<h3>투자 전략 · 자산분석</h3>
+<p>증권, 가상자산, 예금·적금, 금·대체자산, 경매·공매·입찰과 일반 금융상품을 가격·가치·시장환경·위험 기준으로 검토합니다.</p>
+<div class="item-actions"><a class="visit-link" href="./investment-strategy/">투자 전략 보기</a></div>
+</article>
+</div>
 </section>
 </div>
 </main>
@@ -71,5 +80,8 @@
 </footer>
 <div aria-live="polite" class="toast" id="toast" role="status"></div>
 <script defer src="./portal-v2.js?v=20260824-commentary-1"></script>
+<script>
+window.addEventListener('load',()=>{const host=document.getElementById('quickLinks');if(!host||host.querySelector('[data-category="investment"]'))return;const link=document.createElement('a');link.className='quick-link quick-link-investment';link.href='#investment';link.dataset.category='investment';link.innerHTML='<span class="quick-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18V10M10 18V6M16 18v-5M3 20h18"/><path d="m4 8 5-4 6 5 5-5"/></svg></span><span class="quick-label">투자·자산</span><span class="quick-count">1</span>';host.append(link);});
+</script>
 </body>
 </html>
