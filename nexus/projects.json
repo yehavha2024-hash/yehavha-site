@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-24",
+  "updatedAt": "2026-08-26",
   "categories": [
     {"id":"commentary","eyebrow":"NEXUS COMMENTARY","title":"넥서스 논평","icon":"","iconClass":"commentary-icon","description":"국내외 주요 현안을 대상으로 사실관계를 바탕으로 판단·비판·제언을 제시하는 논평 영역"},
     {"id":"intelligence","eyebrow":"STRATEGIC INTELLIGENCE","title":"정보·전략","icon":"◆","iconClass":"intelligence-icon","description":"국내외 공개정보를 검증·분석해 중요한 변화와 위험·기회·향후 관찰지점을 압축하는 전략정보 영역"},
@@ -23,6 +23,7 @@
     {"id":"toeicman-v2","category":"learningapps","meta":"Advanced English · 100-Day Web App","title":"심화 토익인간 V2","description":"고급 어휘·복문·문단 논리·추론·정책문서·원서형 독해까지 확장하는 100일 심화 영어 학습과정입니다.","url":"https://yehavha-nexus-hub.pages.dev/toeic-human-v2/","actionLabel":"심화과정 실행"},
     {"id":"essential-vocabulary","category":"learningapps","meta":"CSAT · TOEIC Vocabulary Memory","title":"영어 필수 어휘","description":"고등학교·수능 필수 어휘와 기존 TOEIC 핵심 어휘·숙어를 하나로 합쳐 단어 뜻, 관련어, 유사어·반대어를 반복 암기하는 전용 웹앱입니다.","url":"https://yehavha-nexus-hub.pages.dev/essential-vocabulary/","actionLabel":"단어·숙어 암기","external":false},
     {"id":"legaltech-self-litigation","category":"legalpractice","meta":"LegalTech · Practical Law","title":"리걸테크 · 나홀로소송 실무 가이드","description":"법률문서를 처음 보는 사람이 민사소장·청구취지·청구원인·증거, 소액사건·지급명령·전자소송과 형사 고소장의 구조를 실제 가상사례로 이해하는 실무 학습자료입니다.","url":"https://yehavha-nexus-hub.pages.dev/legaltech/","actionLabel":"실무 가이드 보기","external":false},
+    {"id":"education-hub","category":"education","meta":"Practical Learning Hub","title":"교육 허브","description":"AI 실습 강좌의 대상·목표·준비물·학습 단계·결과물·피드백을 한곳에서 확인하고 현재 제공 강좌로 연결하는 교육 운영 허브입니다.","url":"https://yehavha-nexus-hub.pages.dev/education-hub/","actionLabel":"교육 허브 보기","external":false},
     {"id":"ai-song-course","category":"education","meta":"AI Practical Course","title":"AI 노래 만들기 2시간 실습","description":"주제 선정부터 가사 작성, 음악 생성, 선택과 저장까지 직접 진행해 두 시간 안에 한 곡을 완성하는 실습 강좌입니다.","url":"https://ai-song-studio.pages.dev/#top","actionLabel":"강좌 보기"},
     {"id":"ai-law-institute","category":"legalresearch","meta":"Research Institute","title":"AI 법률연구소","description":"AI 민사책임, Agentic AI·Multi-Agent Systems, 제조물책임, 증명위험과 책임배분 등 신기술의 법적 쟁점을 연구합니다.","url":"https://yehavha-ai-law-institute.pages.dev/","actionLabel":"연구소 방문"},
     {"id":"government-local-ax-manual","category":"publicsector","meta":"Government AX · Strategy & Response","title":"정부 AX 전략·대응","description":"중앙정부와 지방자치단체의 AX 정책·조직·법제·예산·사업·의사결정과 실행을 체계적으로 다루고, 국제·비교정책 아래 EU·UN·주요국 정부의 AI 정책과 거버넌스를 비교·축적하는 전략·실무 체계입니다.","url":"https://yehavha-nexus-hub.pages.dev/government-ax/","actionLabel":"전략·대응 보기","external":false},
