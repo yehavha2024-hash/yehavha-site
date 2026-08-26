@@ -1,0 +1,109 @@
+{
+  "generatedAt": "2026-08-27T06:30:00+09:00",
+  "window": "2026-08-26 06:30–2026-08-27 06:30 KST · 최근 24시간 중심 · 동일 이슈는 material change가 있을 때만 본문 재진입",
+  "schedule": "06:30 KST daily",
+  "executiveSummary": "오늘의 핵심은 전일 지속위험의 반복보다 외교·거시경제·국토정책·디지털 규제·국방에너지에서 확인된 새로운 단계 변화다. 미국 CIA 국장 John Ratcliffe의 모스크바 방문은 크렘린이 러시아 정보당국자들과의 회담 사실을 공식 확인하면서 전날의 미확인 보도에서 검증된 미·러 고위 정보채널로 격상됐다. 중국과 인도는 국경문제 특별대표 회담에서 국경획정 전문가그룹, 국경관리 작업그룹, 추가 군사회담 지점과 핫라인 등 8개 합의사항을 도출해 2020년 이후의 군사적 긴장을 제도적 관리 단계로 더 이동시켰다. 미국에서는 7월 PCE 물가가 전년 대비 3.7%, 근원 PCE가 3.3%를 기록하고 실질 소비가 사실상 정체돼 인플레이션과 성장둔화가 동시에 정책부담으로 부상했다. 한국 정부는 5극3특 중심의 국토대전환과 대통령 세종집무실 2029년 완성 등 국가공간·산업정책의 중장기 재설계를 발표했다. 미국 47개 주와 준주들은 Meta와 최대 171억 달러 규모의 아동·청소년 보호 합의를 도출했고, 미 육군은 5개 기지에 핵 마이크로리액터를 배치하기 위해 최대 22억 달러를 5개 기업에 투입하기로 하며 국방에너지 자립을 실증 단계로 전환했다.",
+  "items": [
+    {
+      "topicKey": "us-russia-cia-moscow-confirmed-20260827",
+      "priority": "HIGH",
+      "category": "외교·안보·국제정세",
+      "headline": "크렘린, CIA 국장 모스크바 회담 공식 확인…미·러 비공개 고위채널 실재 확인",
+      "fact": "크렘린은 8월 26일 John Ratcliffe 미국 CIA 국장이 최근 모스크바를 방문해 러시아 정보당국자들과 회담했다고 공식 확인했다. Dmitry Peskov 크렘린 대변인은 Ratcliffe가 Vladimir Putin 대통령을 직접 만나지는 않았지만 Putin이 회담 결과를 즉시 보고받았다고 밝혔다. 전날까지 방문 사실은 언론 보도 수준이었으며 이번 확인으로 접촉의 실재가 검증됐다.",
+      "assessment": "이 사안은 전일 브리핑의 동일 이슈가 단순 반복된 것이 아니라 '미확인 방문 보도'에서 '러시아 정부의 공식 확인'으로 단계가 바뀐 경우다. 다만 의제가 공개되지 않아 우크라이나·이란·전략안보 관련 협상 성과를 추정해서는 안 된다. 정보기관 채널이 작동하고 있다는 사실 자체가 위기관리와 비공개 조정 가능성의 신호다.",
+      "impact": "우크라이나 전쟁의 군사적 확전 관리, 포로·핵위험 관리, 러시아-이란 관계와 대이란 제재 집행 등에서 비공개 조정 공간이 생길 수 있다. 반대로 접촉이 제한적 정보교환에 그칠 경우 전략적 대립에는 큰 변화가 없을 수 있다.",
+      "watch": "미·러 후속 정보기관 또는 외교채널 접촉, 백악관·CIA의 공식 설명, 우크라이나 군사행동 변화, 이란 관련 미·러 메시지의 동조 여부를 추적한다.",
+      "confidence": "높음",
+      "sources": [
+        {"label": "Reuters · Kremlin says US spy chief met with Russian counterparts during Moscow visit", "url": "https://www.reuters.com/world/kremlin-says-us-spy-chief-held-talks-with-russian-counterparts-during-moscow-2026-08-26/"}
+      ]
+    },
+    {
+      "topicKey": "china-india-border-eight-point-consensus-20260827",
+      "priority": "HIGH",
+      "category": "외교·안보·아시아",
+      "headline": "중·인도, 국경문제 8개 합의 도출…추가 핫라인·군사회담 채널로 LAC 관리 제도화",
+      "fact": "중국과 인도는 8월 25일 베이징에서 제25차 국경문제 특별대표 회담을 열고 8개 합의사항을 도출했다. 양측은 국경획정 전문가그룹과 국경관리 작업그룹을 가동하고, 동부·중부 구간에 군사 핫라인 2개를 추가하며, 고위 군사회담 지점도 2곳 추가하기로 했다. 국경무역·순례·수자원 정보공유 협력도 재개·확대하기로 했다.",
+      "assessment": "2020년 갈완 충돌 이후 중·인도 관계의 핵심 불안요인이었던 실질통제선(LAC) 문제가 단순 병력분리보다 상시 관리기제 확충 단계로 이동하고 있다. 최종 국경획정과 영유권 갈등이 해결된 것은 아니지만 오판·우발충돌 위험을 낮추는 제도적 안전장치가 늘어났다.",
+      "impact": "중·인도 군사긴장 완화는 히말라야 국경의 우발전 위험을 낮추고 양국의 무역·외교 복원 여지를 키울 수 있다. 미국의 대중 견제 구도와 인도의 전략적 자율성, 중국의 남아시아 전략에도 영향을 준다.",
+      "watch": "새 핫라인·군사회담 채널의 실제 가동, 병력배치 변화, 국경획정 전문가그룹의 조기 성과, 무역·항공·비자 정상화 확대를 본다.",
+      "confidence": "매우 높음",
+      "sources": [
+        {"label": "China MFA · Eight Points of Outcomes and Consensus for the 25th Round of Talks", "url": "https://www.mfa.gov.cn/eng/wjbzhd/202608/t20260826_12011002.html"},
+        {"label": "Reuters · China, India reaffirm border peace, expand communication channels", "url": "https://www.reuters.com/world/china/china-india-reaffirm-border-peace-expand-communication-channels-2026-08-26/"}
+      ]
+    },
+    {
+      "topicKey": "us-pce-inflation-growth-mix-20260827",
+      "priority": "HIGH",
+      "category": "경제·시장·통화정책",
+      "headline": "미 7월 PCE 물가 3.7%·근원 3.3%…실질 소비 정체 속 금리인상 기대 상승",
+      "fact": "미 상무부 BEA는 8월 26일 7월 PCE 물가지수가 전년 대비 3.7%, 근원 PCE가 3.3% 상승했다고 발표했다. 전월 대비로는 둘 다 0.2% 올랐다. 개인소득은 0.4%, 명목 소비는 0.2% 증가했지만 실질 소비는 거의 변동이 없었다. 같은 날 시장에서는 9월 연준 금리인상 가능성이 약 40%까지 상승했다.",
+      "assessment": "인플레이션이 연준 목표를 크게 웃도는 가운데 실질 소비가 정체된 것은 정책 난도를 높인다. 전날 공개된 일부 지역 연은 이사회의 인상 선호와 결합하면 '빠른 인하' 기대는 더 약해지고, 금리 동결 또는 추가 인상 가능성이 시장가격에 반영되는 구간이다.",
+      "impact": "미 국채금리·달러·주식 밸류에이션과 신흥국 자본흐름에 영향을 주며, 한국은행을 포함한 주요 중앙은행의 정책 여지를 제약한다. 소비 둔화가 지속되면 고금리 장기화와 성장둔화가 동시에 나타날 위험이 있다.",
+      "watch": "Jackson Hole 연준 의장 발언, 9월 FOMC 기대확률, 고용·소비지표, 미 2년·10년 국채금리와 달러 반응을 추적한다.",
+      "confidence": "매우 높음",
+      "sources": [
+        {"label": "U.S. BEA · Personal Income and Outlays, July 2026", "url": "https://www.bea.gov/news/2026/personal-income-and-outlays-july-2026"},
+        {"label": "Reuters · US data buoys dollar as Fed hike expectations nudged higher", "url": "https://www.reuters.com/world/asia-pacific/dollar-moves-narrow-range-ahead-inflation-data-jackson-hole-2026-08-26/"}
+      ]
+    },
+    {
+      "topicKey": "korea-national-territory-transformation-20260827",
+      "priority": "HIGH",
+      "category": "정부·정책·산업·국토",
+      "headline": "정부, 5극3특 중심 '국토대전환' 발표…세종 행정수도·권역별 성장엔진 동시 추진",
+      "fact": "정부는 8월 26일 대통령 주재 중앙지방협력회의에서 '국토대전환 추진전략'과 권역별 성장엔진 육성방안을 발표했다. 5극3특 권역별 성장거점을 중심으로 국토공간 재설계, 전략산업 육성, 지방 활력 기반 조성을 추진하며 대통령 세종집무실은 2029년 8월, 국회 세종의사당은 2033년 하반기 완성을 목표로 제시했다. 기업형 첨단도시, RE100 산단, 광역교통망 확충도 포함됐다.",
+      "assessment": "개별 지역개발사업을 넘어 행정수도 기능, 산업입지, 에너지, 교통을 하나의 국가공간 전략으로 묶은 장기 정책이다. 집행기간이 길고 법·예산·지방정부 협력이 필요해 선언과 실제 성과의 차이가 클 수 있으나 국가 산업·인구 재배치에 영향을 줄 수 있는 구조적 정책이다.",
+      "impact": "세종·충청권 행정기능, 비수도권 산업입지와 부동산·교통, RE100 산업단지와 기업투자, 지방재정에 장기 영향을 줄 수 있다. 수도권 집중 완화 여부와 권역 간 재정·인프라 배분이 핵심 쟁점이 된다.",
+      "watch": "후속 법률·예산, 대통령 세종집무실·국회 세종의사당 실제 일정, 권역별 성장엔진의 기업투자 확정, 광역철도·RE100 산단 사업 집행을 본다.",
+      "confidence": "매우 높음",
+      "sources": [
+        {"label": "국무조정실 · 대한민국 국토대전환 추진전략", "url": "https://admin2.korea.kr/briefing/pressReleaseView.do?newsId=156775618&pWise=mSub&pWiseSub=C3"},
+        {"label": "대한민국 정책브리핑 · 지방 주도 성장 국토대전환 본격 시동", "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148970677&pWise=main&pWiseMain=L3"}
+      ]
+    },
+    {
+      "topicKey": "meta-us-states-teen-safety-settlement-20260827",
+      "priority": "HIGH",
+      "category": "법·규제·사회·디지털",
+      "headline": "Meta, 미국 47개 주 등과 최대 171억달러 합의…청소년 플랫폼 설계 자체를 규제 대상으로 전환",
+      "fact": "Meta는 8월 26일 47개 주와 워싱턴 D.C., Puerto Rico, American Samoa, Northern Mariana Islands 등과 최대 171억 달러 규모의 합의에 도달했다. 합의는 법원 승인을 전제로 하며 Instagram·Facebook의 미성년자 계정에 일일 이용제한, 야간 차단, 학교시간 알림 제한, 강화된 연령확인과 부모통제 등 광범위한 안전조치를 요구한다.",
+      "assessment": "과징금 중심의 전통적 플랫폼 규제를 넘어 서비스의 기본 설계와 사용시간·알림·연령확인 구조를 직접 규율하는 단계로 이동한 사례다. 특히 일부 지급액이 경쟁 플랫폼의 유사 조치 채택과 연동되는 구조는 사실상 업계표준 형성을 압박한다.",
+      "impact": "미국 소셜미디어 산업 전반에서 미성년자 계정설계·연령확인·추천·광고·부모통제 기준이 강화될 수 있다. 다른 국가의 아동·청소년 디지털 보호 규제에도 참고모델이 될 가능성이 높다.",
+      "watch": "법원 승인 여부, Meta의 1년 내 제품변경 이행, TikTok·YouTube·Snap의 후속 합의, 연령확인 과정의 개인정보보호 논쟁을 추적한다.",
+      "confidence": "매우 높음",
+      "sources": [
+        {"label": "Georgia Attorney General · Carr Announces Largest Big Tech Settlement in History", "url": "https://law.georgia.gov/press-releases/2026-08-26/carr-announces-largest-big-tech-settlement-history"},
+        {"label": "Reuters · Meta reaches $16.68 billion settlement over social media harms to children", "url": "https://www.reuters.com/world/us/meta-settles-with-us-states-over-social-media-harms-2026-08-26/"}
+      ]
+    },
+    {
+      "topicKey": "us-army-janus-microreactors-20260827",
+      "priority": "WATCH",
+      "category": "에너지·국방·과학·산업",
+      "headline": "미 육군, 5개 기지 핵 마이크로리액터에 최대 22억달러…군사기지 전력자립 실증 단계 진입",
+      "fact": "미 육군은 Janus Program을 통해 Antares Nuclear, BWXT, General Atomics, Radiant Industries, Westinghouse 등 5개 기업에 최대 22억 달러 규모의 계약을 부여해 5개 군사기지에 1~20MW급 마이크로리액터를 개발·운영하기로 했다. 첫 배치는 2028년을 목표로 하며 군은 상업전력망 장애나 공격 시에도 독립적으로 임무를 유지할 수 있는 에너지 회복탄력성을 목표로 제시했다.",
+      "assessment": "미군의 마이크로리액터 구상은 연구개발 단계를 넘어 특정 기업·기지·자금이 배정되는 실증·조달 단계로 이동했다. 다만 경제성, 핵연료 공급, 폐기물·안전규제, 실제 가동신뢰성은 아직 검증되지 않았다.",
+      "impact": "군사기지 전력망 회복탄력성뿐 아니라 미국의 소형원자로 공급망·TRISO 연료·민간 마이크로리액터 시장 형성에 영향을 줄 수 있다. 군 조달이 초기 수요를 만들어 기술 상용화를 앞당길 가능성이 있다.",
+      "watch": "기지별 사업자·설계 확정, 2028년 첫 가동 일정, Army Reactor Regulatory Office의 인허가, 연료공급·폐기물 관리와 비용을 추적한다.",
+      "confidence": "높음",
+      "sources": [
+        {"label": "Reuters · US Army awards up to $2.2 billion to five companies to build microreactors on bases", "url": "https://www.reuters.com/business/energy/us-army-awards-up-22-billion-five-companies-build-microreactors-bases-2026-08-26/"},
+        {"label": "U.S. Army · Janus Program background and 2028 deployment objective", "url": "https://www.army.mil/article/293057/department_of_energy_and_u_s_army_reach_a_major_milestone_on_advanced_microreactors"}
+      ]
+    }
+  ],
+  "strategicWatchlist": [
+    {"priority":"CRITICAL","topic":"이스라엘–튀르키예 시리아 군사충돌 위험","status":"추가 튀르키예군 사상·대규모 배치·이스라엘의 신규 대튀르키예 표적 공격은 확인되지 않아 본문 반복 제외. 튀르키예 방공체계 또는 병력의 실제 시리아 배치가 확인되면 즉시 재상향."},
+    {"priority":"HIGH","topic":"호르무즈 통항 정상화","status":"기뢰 제거 발표 이후 실제 원유·LNG 통항량과 이란의 선박 블랙리스트 집행을 계속 추적. 물리적 제거와 상업적 정상화는 별개."},
+    {"priority":"HIGH","topic":"한국은행 8월 통화정책 결정","status":"8월 27일 예정. 미 PCE 3.7%, 환율·가계부채·국내 경기 판단이 결합되는 즉시성 높은 국내 변수."},
+    {"priority":"HIGH","topic":"미국 우편투표 규제 소송","status":"연방대법원 절차 판단 이후 새 주정부 소송과 USPS 규정 집행이 병행 중. 9월 초 군인·해외 우편투표 일정이 첫 실무 분기점."},
+    {"priority":"WATCH","topic":"콩고 Bundibugyo 에볼라","status":"지속적으로 중대한 보건위기이나 최근 24시간 내 국제단계 변경이 없어 본문 반복 제외. 신규 국가 지역전파·WHO 단계 변경 시 재상향."}
+  ],
+  "outlook": {
+    "oneWeek":"향후 1주에는 한국은행의 8월 통화정책 결정, 미 연준의 Jackson Hole 메시지, 중·인도 국경관리 합의의 실제 군사채널 가동 여부가 즉각적인 정책·시장 분기점이다. 이스라엘–튀르키예는 시리아 내 튀르키예 군사자산 배치가 확인될 경우 다시 최상위 위험으로 올라간다.",
+    "twoWeeks":"향후 2주에는 Meta 합의의 법원 승인·업계 확산, 미국 중간선거 우편투표 규정의 실제 집행, 캐나다의 9월 8일 대미 보복관세 발효가 법·통상 리스크를 좌우한다. 한국 국토대전환 전략은 부처별 예산·사업계획이 구체화되는지가 중요하다.",
+    "fourWeeks":"향후 4주에는 미·러 정보기관 채널이 단발성 접촉인지 지속적 위기관리 채널인지, 중·인도 국경완화가 무역·외교 정상화로 연결되는지, 미국의 고물가·저성장 조합이 실제 추가 금리인상으로 이어지는지가 글로벌 전략환경의 핵심 변수다. 국방에너지 분야에서는 Janus Program의 기지별 사업설계와 민간 투자 연계가 상용화 가능성을 가늠하는 초기 지표가 된다."
+  }
+}
