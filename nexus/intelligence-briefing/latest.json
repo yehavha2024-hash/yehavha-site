@@ -1,123 +1,109 @@
 {
-  "generatedAt": "2026-08-26T06:32:00+09:00",
-  "window": "2026-08-25 06:32–2026-08-26 06:32 KST · 최근 24시간 중심 · 동일 이슈는 material change가 있을 때만 본문 재진입",
+  "generatedAt": "2026-08-27T06:30:00+09:00",
+  "window": "2026-08-26 06:30–2026-08-27 06:30 KST · 최근 24시간 중심 · 동일 이슈는 material change가 있을 때만 본문 재진입",
   "schedule": "06:30 KST daily",
-  "executiveSummary": "오늘의 핵심은 기존 지속위험의 반복이 아니라 외교·통상·통화정책·국내 권력구조·디지털 규제·기후에서 새로 확인된 단계 변화다. 미국 CIA 국장의 모스크바 방문 보도는 미·러 간 공식 외교채널이 약한 상황에서 2021년 이후 처음 알려진 최고위급 정보기관 접촉이라는 점에서 최우선 불확실성 요인이다. 호르무즈에서는 미국이 국제수역의 기뢰 제거 완료를 주장해 물리적 통항위험이 일부 낮아졌지만 실제 원유 통항량은 전쟁 전의 약 4분의 1 수준에 머물러 있어 정상화로 보기는 이르다. 캐나다는 미국의 고율관세에 맞서 9월 8일부터 276억 캐나다달러 규모의 미국산 제품에 15·25·50% 보복관세를 확정했고, 연준 내부에서는 4개 지역은행 이사회가 7월 회의 전 할인율 인상을 권고했던 사실이 공개돼 인플레이션 대응을 둘러싼 긴축 압력이 확인됐다. 한국에서는 검찰 수사권 폐지 이후 경찰로 권한이 집중되는 구조에 대응해 대통령이 총리실 차원의 경찰개혁기구 검토를 지시했고, 브라질은 TikTok의 청소년 개인정보 처리 위반에 대규모 과징금과 데이터 삭제·준수계획을 명령했다. 국내 폭염일수는 20.1일로 평년의 약 두 배에 달했고 9월까지 고온 지속 가능성이 제기됐다.",
+  "executiveSummary": "오늘의 핵심은 전일 지속위험의 반복보다 외교·거시경제·국토정책·디지털 규제·국방에너지에서 확인된 새로운 단계 변화다. 미국 CIA 국장 John Ratcliffe의 모스크바 방문은 크렘린이 러시아 정보당국자들과의 회담 사실을 공식 확인하면서 전날의 미확인 보도에서 검증된 미·러 고위 정보채널로 격상됐다. 중국과 인도는 국경문제 특별대표 회담에서 국경획정 전문가그룹, 국경관리 작업그룹, 추가 군사회담 지점과 핫라인 등 8개 합의사항을 도출해 2020년 이후의 군사적 긴장을 제도적 관리 단계로 더 이동시켰다. 미국에서는 7월 PCE 물가가 전년 대비 3.7%, 근원 PCE가 3.3%를 기록하고 실질 소비가 사실상 정체돼 인플레이션과 성장둔화가 동시에 정책부담으로 부상했다. 한국 정부는 5극3특 중심의 국토대전환과 대통령 세종집무실 2029년 완성 등 국가공간·산업정책의 중장기 재설계를 발표했다. 미국 47개 주와 준주들은 Meta와 최대 171억 달러 규모의 아동·청소년 보호 합의를 도출했고, 미 육군은 5개 기지에 핵 마이크로리액터를 배치하기 위해 최대 22억 달러를 5개 기업에 투입하기로 하며 국방에너지 자립을 실증 단계로 전환했다.",
   "items": [
     {
-      "topicKey": "us-cia-director-moscow-visit-20260826",
-      "priority": "CRITICAL",
-      "category": "외교·안보·국제정세",
-      "headline": "미 CIA 국장, 모스크바 방문 보도…2021년 이후 첫 미 정보수장 방러로 미·러 비공개 협상 가능성 부상",
-      "fact": "Reuters는 미국 매체 보도를 인용해 CIA 국장 John Ratcliffe가 8월 25일 모스크바를 방문해 러시아 당국자들과 회의했다고 전했다. 누구를 만났고 의제가 무엇인지는 공개되지 않았으며 CIA와 크렘린은 확인하지 않았다. Reuters는 미국이 최근 우크라이나 측에 미 고위당국자 항공편과 관련해 모스크바·상트페테르부르크 등 일부 지역에 대한 공습을 자제해달라고 요청했다는 소식도 함께 전했다.",
-      "assessment": "공식 확인이 부족해 의제를 단정할 수 없지만, 미국 대사가 부재한 상황에서 CIA 수장의 직접 방러가 사실이라면 우크라이나 전쟁, 이란 전쟁, 전략안보 문제를 포함한 비공개 고위 채널이 가동되고 있을 가능성을 시사한다. 2021년 William Burns 당시 CIA 국장의 푸틴 면담 이후 처음 알려진 사례라는 점에서 외교적 신호가 크다.",
-      "impact": "미·러 간 비공개 조정이 성립하면 우크라이나 전쟁의 군사행동 범위, 대이란 제재 집행, 러시아의 대이란 지원, 포로·핵위험 관리 등 여러 현안의 계산이 달라질 수 있다. 반대로 의제가 제한적이거나 접촉이 결렬될 경우 현재의 전략적 대립구도는 유지된다.",
-      "watch": "CIA 또는 크렘린의 공식 확인, Ratcliffe의 실제 면담 상대, 우크라이나 공습자제 요청 범위, 미·러 후속 고위급 접촉, 이란 또는 우크라이나 관련 합의 신호를 본다.",
-      "confidence": "중간",
-      "sources": [
-        {"label": "Reuters · US spy chief visits Russia for meetings, media reports", "url": "https://www.reuters.com/world/us-spy-chief-visits-russia-meetings-media-reports-2026-08-25/"}
-      ]
-    },
-    {
-      "topicKey": "hormuz-demining-us-zero-tolerance-20260826",
+      "topicKey": "us-russia-cia-moscow-confirmed-20260827",
       "priority": "HIGH",
-      "category": "에너지·안보·해운",
-      "headline": "호르무즈 국제수역 기뢰 제거 완료 주장…물리적 통항위험 완화 신호에도 원유 통항량은 전쟁 전의 약 4분의 1",
-      "fact": "트럼프 미국 대통령은 8월 25일 호르무즈 해협 국제수역의 기뢰가 모두 폭파되거나 제거됐다고 밝히고, 추가 기뢰 부설 선박은 파괴하겠다는 '제로 톨러런스' 방침을 발표했다. Reuters가 인용한 Vortexa 잠정치에 따르면 8월 24일 해협을 통과한 원유는 하루 약 500만 배럴로 전쟁 전 2,000만 배럴 이상에 크게 못 미쳤다.",
-      "assessment": "수일간 반복됐던 '호르무즈 봉쇄 위험'과 달리 이번에는 물리적 장애물 제거라는 단계 변화가 발생했다. 다만 선박 피격 위험, 이란의 통항규칙·블랙리스트, 보험·제재 위험은 남아 있어 해협이 정상화됐다고 보기는 어렵다.",
-      "impact": "기뢰위험이 실제로 감소하면 해운보험료와 에너지 가격의 극단적 위험 프리미엄은 일부 낮아질 수 있다. 그러나 통항량 회복이 지연되면 원유·LNG 공급과 아시아 수입국의 비용 부담은 지속된다.",
-      "watch": "일일 통항량의 지속 회복 여부, 신규 기뢰 발견, 선박 공격, 이란의 블랙리스트 집행, 보험료와 Brent 가격의 반응을 추적한다.",
+      "category": "외교·안보·국제정세",
+      "headline": "크렘린, CIA 국장 모스크바 회담 공식 확인…미·러 비공개 고위채널 실재 확인",
+      "fact": "크렘린은 8월 26일 John Ratcliffe 미국 CIA 국장이 최근 모스크바를 방문해 러시아 정보당국자들과 회담했다고 공식 확인했다. Dmitry Peskov 크렘린 대변인은 Ratcliffe가 Vladimir Putin 대통령을 직접 만나지는 않았지만 Putin이 회담 결과를 즉시 보고받았다고 밝혔다. 전날까지 방문 사실은 언론 보도 수준이었으며 이번 확인으로 접촉의 실재가 검증됐다.",
+      "assessment": "이 사안은 전일 브리핑의 동일 이슈가 단순 반복된 것이 아니라 '미확인 방문 보도'에서 '러시아 정부의 공식 확인'으로 단계가 바뀐 경우다. 다만 의제가 공개되지 않아 우크라이나·이란·전략안보 관련 협상 성과를 추정해서는 안 된다. 정보기관 채널이 작동하고 있다는 사실 자체가 위기관리와 비공개 조정 가능성의 신호다.",
+      "impact": "우크라이나 전쟁의 군사적 확전 관리, 포로·핵위험 관리, 러시아-이란 관계와 대이란 제재 집행 등에서 비공개 조정 공간이 생길 수 있다. 반대로 접촉이 제한적 정보교환에 그칠 경우 전략적 대립에는 큰 변화가 없을 수 있다.",
+      "watch": "미·러 후속 정보기관 또는 외교채널 접촉, 백악관·CIA의 공식 설명, 우크라이나 군사행동 변화, 이란 관련 미·러 메시지의 동조 여부를 추적한다.",
       "confidence": "높음",
       "sources": [
-        {"label": "Reuters · Trump says Strait of Hormuz has been demined, warns Iran not to plant more", "url": "https://www.reuters.com/world/middle-east/trump-says-strait-hormuz-has-been-demined-warns-iran-not-plant-more-2026-08-25/"},
-        {"label": "Reuters · Oil settles down more than 3% as investors shrug off sanctions", "url": "https://finance.yahoo.com/energy/articles/oil-prices-steady-investors-weigh-011547751.html"}
+        {"label": "Reuters · Kremlin says US spy chief met with Russian counterparts during Moscow visit", "url": "https://www.reuters.com/world/kremlin-says-us-spy-chief-held-talks-with-russian-counterparts-during-moscow-2026-08-26/"}
       ]
     },
     {
-      "topicKey": "canada-us-retaliatory-tariffs-20260826",
+      "topicKey": "china-india-border-eight-point-consensus-20260827",
       "priority": "HIGH",
-      "category": "경제·통상·산업",
-      "headline": "캐나다, 미국산 276억 캐나다달러에 15·25·50% 보복관세 확정…북미 통상분쟁 실행 단계 진입",
-      "fact": "캐나다 정부는 미국이 8월 22일부터 캐나다산 276억 캐나다달러 규모 제품에 50% 관세를 부과한 데 대응해 9월 8일부터 같은 규모의 미국산 제품에 15%, 25%, 50% 관세를 적용한다고 발표했다. 대상은 철강, 유제품, 가전, 농기계, 펄프·종이, 전자제품 등이며 캐나다는 근로자·기업 지원을 위한 75억 캐나다달러 패키지도 내놨다.",
-      "assessment": "전날까지는 보복관세가 예고 단계였지만 이제 품목·세율·시행일이 확정돼 실제 공급망 비용으로 전환됐다. 장기간 통합돼 온 북미 제조·농식품 공급망에 비용을 누적시키는 구조다.",
-      "impact": "자동차·철강·알루미늄·기계·식품의 가격과 조달비용이 상승할 수 있고, 미국 중간선거를 앞두고 정치적 압박도 커질 수 있다. 북미 생산거점을 둔 한국 기업은 원산지·부품조달·가격전가 구조를 다시 점검해야 한다.",
-      "watch": "9월 8일 실제 발효 여부, 자동차 부문 추가관세, 협상 재개, 캐나다의 에너지·전력 분야 추가보복 여부, 기업의 공급망 재배치를 본다.",
+      "category": "외교·안보·아시아",
+      "headline": "중·인도, 국경문제 8개 합의 도출…추가 핫라인·군사회담 채널로 LAC 관리 제도화",
+      "fact": "중국과 인도는 8월 25일 베이징에서 제25차 국경문제 특별대표 회담을 열고 8개 합의사항을 도출했다. 양측은 국경획정 전문가그룹과 국경관리 작업그룹을 가동하고, 동부·중부 구간에 군사 핫라인 2개를 추가하며, 고위 군사회담 지점도 2곳 추가하기로 했다. 국경무역·순례·수자원 정보공유 협력도 재개·확대하기로 했다.",
+      "assessment": "2020년 갈완 충돌 이후 중·인도 관계의 핵심 불안요인이었던 실질통제선(LAC) 문제가 단순 병력분리보다 상시 관리기제 확충 단계로 이동하고 있다. 최종 국경획정과 영유권 갈등이 해결된 것은 아니지만 오판·우발충돌 위험을 낮추는 제도적 안전장치가 늘어났다.",
+      "impact": "중·인도 군사긴장 완화는 히말라야 국경의 우발전 위험을 낮추고 양국의 무역·외교 복원 여지를 키울 수 있다. 미국의 대중 견제 구도와 인도의 전략적 자율성, 중국의 남아시아 전략에도 영향을 준다.",
+      "watch": "새 핫라인·군사회담 채널의 실제 가동, 병력배치 변화, 국경획정 전문가그룹의 조기 성과, 무역·항공·비자 정상화 확대를 본다.",
       "confidence": "매우 높음",
       "sources": [
-        {"label": "Canada Department of Finance · targeted countermeasures and support", "url": "https://www.canada.ca/en/department-finance/news/2026/08/canada-announces-targeted-countermeasures-and-substantive-support-for-workers-and-businesses-in-response-to-us-tariffs.html"},
-        {"label": "Reuters · Canada slaps retaliatory tariffs on US goods worth $20 billion", "url": "https://www.reuters.com/business/canada-announces-20-bln-retaliatory-tariffs-us-goods-unveils-support-measures-2026-08-25/"}
+        {"label": "China MFA · Eight Points of Outcomes and Consensus for the 25th Round of Talks", "url": "https://www.mfa.gov.cn/eng/wjbzhd/202608/t20260826_12011002.html"},
+        {"label": "Reuters · China, India reaffirm border peace, expand communication channels", "url": "https://www.reuters.com/world/china/china-india-reaffirm-border-peace-expand-communication-channels-2026-08-26/"}
       ]
     },
     {
-      "topicKey": "fed-regional-banks-hike-pressure-20260826",
+      "topicKey": "us-pce-inflation-growth-mix-20260827",
       "priority": "HIGH",
       "category": "경제·시장·통화정책",
-      "headline": "연준 4개 지역은행 이사회, 7월 회의 전 할인율 인상 권고…미 통화정책 내부 긴축 압력 확인",
-      "fact": "연방준비제도는 8월 25일 7월 20일·29일 할인율 회의 의사록을 공개했다. Reuters에 따르면 Dallas, Cleveland, Minneapolis, Kansas City 연은 이사회가 상업은행 긴급대출에 적용되는 할인율을 0.25%포인트 올리도록 권고했다. FOMC는 7월 28~29일 정책금리를 3.5~3.75%로 9대3 동결했다.",
-      "assessment": "지역은행 이사회가 정책금리를 결정하지는 않지만, 4개 지역에서 동시에 인상 선호가 나타난 것은 인플레이션 압력이 충분히 낮아졌다고 보기 어렵다는 내부 인식이 넓다는 신호다. 향후 금리인하 기대를 제약하는 요인이다.",
-      "impact": "미 장단기 금리, 달러, 글로벌 자산가격과 신흥국 통화정책에 영향을 줄 수 있다. 한국은행도 8월 27일 통화정책회의를 앞두고 있어 미국 긴축 지속 가능성은 원화·자본흐름 판단에 참고 변수다.",
-      "watch": "Jackson Hole 발언, 미국 PCE 물가, 9월 FOMC 기대확률, 미 국채금리, 8월 27일 한국은행 결정과 환율 반응을 본다.",
+      "headline": "미 7월 PCE 물가 3.7%·근원 3.3%…실질 소비 정체 속 금리인상 기대 상승",
+      "fact": "미 상무부 BEA는 8월 26일 7월 PCE 물가지수가 전년 대비 3.7%, 근원 PCE가 3.3% 상승했다고 발표했다. 전월 대비로는 둘 다 0.2% 올랐다. 개인소득은 0.4%, 명목 소비는 0.2% 증가했지만 실질 소비는 거의 변동이 없었다. 같은 날 시장에서는 9월 연준 금리인상 가능성이 약 40%까지 상승했다.",
+      "assessment": "인플레이션이 연준 목표를 크게 웃도는 가운데 실질 소비가 정체된 것은 정책 난도를 높인다. 전날 공개된 일부 지역 연은 이사회의 인상 선호와 결합하면 '빠른 인하' 기대는 더 약해지고, 금리 동결 또는 추가 인상 가능성이 시장가격에 반영되는 구간이다.",
+      "impact": "미 국채금리·달러·주식 밸류에이션과 신흥국 자본흐름에 영향을 주며, 한국은행을 포함한 주요 중앙은행의 정책 여지를 제약한다. 소비 둔화가 지속되면 고금리 장기화와 성장둔화가 동시에 나타날 위험이 있다.",
+      "watch": "Jackson Hole 연준 의장 발언, 9월 FOMC 기대확률, 고용·소비지표, 미 2년·10년 국채금리와 달러 반응을 추적한다.",
       "confidence": "매우 높음",
       "sources": [
-        {"label": "Federal Reserve · Minutes of discount rate meetings on July 20 and July 29, 2026", "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260825a.htm"},
-        {"label": "Reuters · Four Fed bank boards wanted rate hike, minutes show", "url": "https://www.reuters.com/markets/us/four-fed-bank-boards-wanted-rate-hike-minutes-show-2026-08-25/"}
+        {"label": "U.S. BEA · Personal Income and Outlays, July 2026", "url": "https://www.bea.gov/news/2026/personal-income-and-outlays-july-2026"},
+        {"label": "Reuters · US data buoys dollar as Fed hike expectations nudged higher", "url": "https://www.reuters.com/world/asia-pacific/dollar-moves-narrow-range-ahead-inflation-data-jackson-hole-2026-08-26/"}
       ]
     },
     {
-      "topicKey": "korea-police-reform-power-concentration-20260826",
+      "topicKey": "korea-national-territory-transformation-20260827",
       "priority": "HIGH",
-      "category": "정부·법·정책·치안",
-      "headline": "검찰 수사권 폐지 이후 경찰권 집중 대응…대통령, 총리실에 경찰개혁기구 구상 지시",
-      "fact": "이재명 대통령은 8월 25일 국무회의에서 최근 경찰의 기강 해이와 치안상 무책임 문제를 지적하며 총리실에 경찰개혁기구 방안과 국민 의견수렴 절차를 검토하라고 지시했다. 발언은 형사소송법 개정으로 검찰의 수사권이 사라지고 경찰의 권한이 확대되는 제도 변화와 최근 부실수사 논란을 배경으로 나왔다.",
-      "assessment": "전날의 개별 실종사건 전수조사 수준을 넘어, 수사권 재배분 이후 경찰 권한과 책임·감독체계를 다시 설계하는 구조개혁 논의로 확대됐다. 핵심은 경찰 내부 통제, 지휘책임, 외부감독 장치의 형태다.",
-      "impact": "향후 경찰 조직·감찰·수사지휘·사건종결 절차가 바뀔 수 있고, 검찰개혁과 결합해 형사사법체계 전체의 권력배분에 영향을 미친다.",
-      "watch": "총리실 개혁기구 구성안, 여당 경찰개혁추진단의 입법안, 수사권 분산 또는 외부감독 모델, 경찰 지휘책임 강화 조치를 추적한다.",
-      "confidence": "높음",
-      "sources": [
-        {"label": "Yonhap · Lee says police will wield biggest power, calls for reform body", "url": "https://www.koreatimes.co.kr/amp/southkorea/politics/20260825/lee-says-police-will-be-biggest-power-stresses-need-for-reform-by-govt-body"},
-        {"label": "경향신문 · 대통령 경찰개혁기구 검토 지시", "url": "https://www.khan.co.kr/article/202608251025001"}
-      ]
-    },
-    {
-      "topicKey": "brazil-tiktok-minor-data-enforcement-20260826",
-      "priority": "WATCH",
-      "category": "법·규제·디지털권리",
-      "headline": "브라질, TikTok에 청소년 개인정보 위반 1.537억헤알 제재…데이터 삭제·연령확인까지 명령",
-      "fact": "브라질 개인정보보호기관 ANPD는 8월 25일 ByteDance에 1억5,370만 헤알의 과징금을 부과하고, 불법 수집된 아동·청소년 데이터 삭제와 준수계획 이행을 명령했다. ANPD는 미가입 피드 이용시간·기능 제한, 광고 중단, 최소정보 처리, 신뢰할 수 있는 연령확인 절차 등을 요구했다.",
-      "assessment": "단순 과징금보다 중요한 것은 데이터 삭제와 서비스 설계 변경을 동시에 요구했다는 점이다. 미성년자 플랫폼 규제가 개인정보 법집행에서 제품설계·연령확인 의무로 확대되는 흐름이다.",
-      "impact": "글로벌 플랫폼은 국가별 아동·청소년 보호 규정을 반영해 가입·추천·광고·라이브 기능을 차등 설계해야 할 가능성이 커진다. 유사한 규제가 다른 국가의 플랫폼 규제로 확산될 수 있다.",
-      "watch": "ByteDance의 이행 여부, 추가 일일제재, 브라질 ECA Digital 연령확인 지침, 다른 플랫폼에 대한 ANPD 후속조사를 본다.",
+      "category": "정부·정책·산업·국토",
+      "headline": "정부, 5극3특 중심 '국토대전환' 발표…세종 행정수도·권역별 성장엔진 동시 추진",
+      "fact": "정부는 8월 26일 대통령 주재 중앙지방협력회의에서 '국토대전환 추진전략'과 권역별 성장엔진 육성방안을 발표했다. 5극3특 권역별 성장거점을 중심으로 국토공간 재설계, 전략산업 육성, 지방 활력 기반 조성을 추진하며 대통령 세종집무실은 2029년 8월, 국회 세종의사당은 2033년 하반기 완성을 목표로 제시했다. 기업형 첨단도시, RE100 산단, 광역교통망 확충도 포함됐다.",
+      "assessment": "개별 지역개발사업을 넘어 행정수도 기능, 산업입지, 에너지, 교통을 하나의 국가공간 전략으로 묶은 장기 정책이다. 집행기간이 길고 법·예산·지방정부 협력이 필요해 선언과 실제 성과의 차이가 클 수 있으나 국가 산업·인구 재배치에 영향을 줄 수 있는 구조적 정책이다.",
+      "impact": "세종·충청권 행정기능, 비수도권 산업입지와 부동산·교통, RE100 산업단지와 기업투자, 지방재정에 장기 영향을 줄 수 있다. 수도권 집중 완화 여부와 권역 간 재정·인프라 배분이 핵심 쟁점이 된다.",
+      "watch": "후속 법률·예산, 대통령 세종집무실·국회 세종의사당 실제 일정, 권역별 성장엔진의 기업투자 확정, 광역철도·RE100 산단 사업 집행을 본다.",
       "confidence": "매우 높음",
       "sources": [
-        {"label": "Brazil ANPD · TikTok fine and compliance order", "url": "https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-multa-tiktok-em-r-153-7-milhoes-por-falhas-na-protecao-de-dados-de-criancas-e-adolescentes"},
-        {"label": "Reuters · Brazil fines TikTok owner ByteDance for unlawful processing of teenagers' data", "url": "https://www.reuters.com/legal/government/brazil-fines-tiktok-owner-bytedance-unlawful-processing-teenagers-data-2026-08-25/"}
+        {"label": "국무조정실 · 대한민국 국토대전환 추진전략", "url": "https://admin2.korea.kr/briefing/pressReleaseView.do?newsId=156775618&pWise=mSub&pWiseSub=C3"},
+        {"label": "대한민국 정책브리핑 · 지방 주도 성장 국토대전환 본격 시동", "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148970677&pWise=main&pWiseMain=L3"}
       ]
     },
     {
-      "topicKey": "korea-heatwave-20days-september-risk-20260826",
+      "topicKey": "meta-us-states-teen-safety-settlement-20260827",
+      "priority": "HIGH",
+      "category": "법·규제·사회·디지털",
+      "headline": "Meta, 미국 47개 주 등과 최대 171억달러 합의…청소년 플랫폼 설계 자체를 규제 대상으로 전환",
+      "fact": "Meta는 8월 26일 47개 주와 워싱턴 D.C., Puerto Rico, American Samoa, Northern Mariana Islands 등과 최대 171억 달러 규모의 합의에 도달했다. 합의는 법원 승인을 전제로 하며 Instagram·Facebook의 미성년자 계정에 일일 이용제한, 야간 차단, 학교시간 알림 제한, 강화된 연령확인과 부모통제 등 광범위한 안전조치를 요구한다.",
+      "assessment": "과징금 중심의 전통적 플랫폼 규제를 넘어 서비스의 기본 설계와 사용시간·알림·연령확인 구조를 직접 규율하는 단계로 이동한 사례다. 특히 일부 지급액이 경쟁 플랫폼의 유사 조치 채택과 연동되는 구조는 사실상 업계표준 형성을 압박한다.",
+      "impact": "미국 소셜미디어 산업 전반에서 미성년자 계정설계·연령확인·추천·광고·부모통제 기준이 강화될 수 있다. 다른 국가의 아동·청소년 디지털 보호 규제에도 참고모델이 될 가능성이 높다.",
+      "watch": "법원 승인 여부, Meta의 1년 내 제품변경 이행, TikTok·YouTube·Snap의 후속 합의, 연령확인 과정의 개인정보보호 논쟁을 추적한다.",
+      "confidence": "매우 높음",
+      "sources": [
+        {"label": "Georgia Attorney General · Carr Announces Largest Big Tech Settlement in History", "url": "https://law.georgia.gov/press-releases/2026-08-26/carr-announces-largest-big-tech-settlement-history"},
+        {"label": "Reuters · Meta reaches $16.68 billion settlement over social media harms to children", "url": "https://www.reuters.com/world/us/meta-settles-with-us-states-over-social-media-harms-2026-08-26/"}
+      ]
+    },
+    {
+      "topicKey": "us-army-janus-microreactors-20260827",
       "priority": "WATCH",
-      "category": "환경·사회·재난",
-      "headline": "한국 폭염일수 20.1일로 평년의 약 2배…기상청, 9월까지 이중 열돔 영향 고온 지속 전망",
-      "fact": "기상청 자료를 인용한 연합뉴스에 따르면 8월 24일까지 전국 평균 폭염일수는 20.1일로 평년 10.4일의 약 두 배였다. 열대야일수도 16.4일로 1994년 16.8일에 이어 두 번째로 많았고, 8월 2일 경남 양산에서는 42.5도가 기록돼 국내 근대 관측 이후 최고기온을 경신했다. 기상청은 북태평양고기압과 티베트고기압의 '이중 열돔' 영향으로 9월에도 더위가 이어질 것으로 전망했다.",
-      "assessment": "일회성 폭염이 아니라 고온 지속기간과 야간열이 동시에 장기화되는 양상이다. 단순 기상 이슈를 넘어 전력수요, 노동안전, 농축산물 수급, 취약계층 건강위험을 함께 봐야 한다.",
-      "impact": "냉방 전력수요, 산업현장 작업중지·안전비용, 농산물 가격, 온열질환과 취약계층 보호 비용이 상승할 수 있다.",
-      "watch": "9월 고온 지속 여부, 최대전력 수요, 온열질환·사망 통계, 농축산물 생산피해, 지자체 작업중지·돌봄대책을 추적한다.",
+      "category": "에너지·국방·과학·산업",
+      "headline": "미 육군, 5개 기지 핵 마이크로리액터에 최대 22억달러…군사기지 전력자립 실증 단계 진입",
+      "fact": "미 육군은 Janus Program을 통해 Antares Nuclear, BWXT, General Atomics, Radiant Industries, Westinghouse 등 5개 기업에 최대 22억 달러 규모의 계약을 부여해 5개 군사기지에 1~20MW급 마이크로리액터를 개발·운영하기로 했다. 첫 배치는 2028년을 목표로 하며 군은 상업전력망 장애나 공격 시에도 독립적으로 임무를 유지할 수 있는 에너지 회복탄력성을 목표로 제시했다.",
+      "assessment": "미군의 마이크로리액터 구상은 연구개발 단계를 넘어 특정 기업·기지·자금이 배정되는 실증·조달 단계로 이동했다. 다만 경제성, 핵연료 공급, 폐기물·안전규제, 실제 가동신뢰성은 아직 검증되지 않았다.",
+      "impact": "군사기지 전력망 회복탄력성뿐 아니라 미국의 소형원자로 공급망·TRISO 연료·민간 마이크로리액터 시장 형성에 영향을 줄 수 있다. 군 조달이 초기 수요를 만들어 기술 상용화를 앞당길 가능성이 있다.",
+      "watch": "기지별 사업자·설계 확정, 2028년 첫 가동 일정, Army Reactor Regulatory Office의 인허가, 연료공급·폐기물 관리와 비용을 추적한다.",
       "confidence": "높음",
       "sources": [
-        {"label": "Yonhap · S. Korea records 20 heat wave days this year, double long-term average", "url": "https://en.yna.co.kr/view/AEN20260825008900315"}
+        {"label": "Reuters · US Army awards up to $2.2 billion to five companies to build microreactors on bases", "url": "https://www.reuters.com/business/energy/us-army-awards-up-22-billion-five-companies-build-microreactors-bases-2026-08-26/"},
+        {"label": "U.S. Army · Janus Program background and 2028 deployment objective", "url": "https://www.army.mil/article/293057/department_of_energy_and_u_s_army_reach_a_major_milestone_on_advanced_microreactors"}
       ]
     }
   ],
   "strategicWatchlist": [
-    {"topic": "이스라엘–튀르키예 시리아 군사충돌 위험", "status": "CRITICAL WATCH", "reason": "전날 핵심사안이었으나 지난 24시간에 추가 공습·튀르키예군 피해라는 material change는 확인되지 않았다. 튀르키예 방공망 또는 병력의 실제 시리아 배치와 이스라엘 추가타격이 발생하면 즉시 본문 재진입."},
-    {"topic": "호르무즈 통항 정상화", "status": "HIGH WATCH", "reason": "기뢰 제거 주장은 단계 변화지만 통항량은 전쟁 전의 약 4분의 1 수준이다. 선박공격·이란 통항규칙·보험·제재위험이 남아 있다."},
-    {"topic": "미·러 비공개 고위채널", "status": "HIGH WATCH", "reason": "CIA 국장 모스크바 방문의 의제와 상대가 확인될 경우 우크라이나·이란 전쟁의 외교적 분기점이 될 수 있다."},
-    {"topic": "한국은행 8월 27일 통화정책방향", "status": "HIGH WATCH", "reason": "7월 인상 이후 추가 인상 여부와 물가·환율 판단이 국내 금융시장에 직접 영향을 줄 수 있다."},
-    {"topic": "콩고 Bundibugyo 에볼라", "status": "WATCH", "reason": "지속적으로 중요하지만 오늘은 새로운 국제확산·WHO 단계 변경이 확인되지 않아 본문에서 제외. 신규 국가 지속전파나 위험단계 변경 시 재진입."}
+    {"priority":"CRITICAL","topic":"이스라엘–튀르키예 시리아 군사충돌 위험","status":"추가 튀르키예군 사상·대규모 배치·이스라엘의 신규 대튀르키예 표적 공격은 확인되지 않아 본문 반복 제외. 튀르키예 방공체계 또는 병력의 실제 시리아 배치가 확인되면 즉시 재상향."},
+    {"priority":"HIGH","topic":"호르무즈 통항 정상화","status":"기뢰 제거 발표 이후 실제 원유·LNG 통항량과 이란의 선박 블랙리스트 집행을 계속 추적. 물리적 제거와 상업적 정상화는 별개."},
+    {"priority":"HIGH","topic":"한국은행 8월 통화정책 결정","status":"8월 27일 예정. 미 PCE 3.7%, 환율·가계부채·국내 경기 판단이 결합되는 즉시성 높은 국내 변수."},
+    {"priority":"HIGH","topic":"미국 우편투표 규제 소송","status":"연방대법원 절차 판단 이후 새 주정부 소송과 USPS 규정 집행이 병행 중. 9월 초 군인·해외 우편투표 일정이 첫 실무 분기점."},
+    {"priority":"WATCH","topic":"콩고 Bundibugyo 에볼라","status":"지속적으로 중대한 보건위기이나 최근 24시간 내 국제단계 변경이 없어 본문 반복 제외. 신규 국가 지역전파·WHO 단계 변경 시 재상향."}
   ],
   "outlook": {
-    "oneWeek": "향후 1주에는 CIA 국장 모스크바 방문의 실제 의제가 드러나는지, 호르무즈 통항량이 기뢰 제거 이후 의미 있게 회복하는지, 8월 27일 한국은행이 추가 금리인상에 나서는지가 가장 중요한 단기 분기점이다. 캐나다의 보복관세는 9월 8일 발효 전 협상 재개 여부가 핵심이다.",
-    "twoWeeks": "향후 2주에는 미·캐나다 관세전의 실제 발효 여부, 미국 PCE·Jackson Hole 이후 연준의 긴축 경로, 한국 경찰개혁기구의 구체적 설계가 정책 리스크를 좌우한다. 브라질의 TikTok 제재가 다른 플랫폼 규제로 확산되는지도 확인할 필요가 있다.",
-    "fourWeeks": "향후 4주에는 미·러 비공개 협상채널이 우크라이나·이란 전쟁의 제한적 합의로 이어지는지, 이스라엘–튀르키예가 시리아에서 직접 교전으로 넘어가는지, 북미 통상분쟁이 자동차·에너지 등 핵심 공급망으로 확대되는지가 구조적 위험이다. 국내에서는 9월까지 이어지는 폭염과 통화긴축이 동시에 소비·물가·전력수요에 미치는 영향을 봐야 한다."
+    "oneWeek":"향후 1주에는 한국은행의 8월 통화정책 결정, 미 연준의 Jackson Hole 메시지, 중·인도 국경관리 합의의 실제 군사채널 가동 여부가 즉각적인 정책·시장 분기점이다. 이스라엘–튀르키예는 시리아 내 튀르키예 군사자산 배치가 확인될 경우 다시 최상위 위험으로 올라간다.",
+    "twoWeeks":"향후 2주에는 Meta 합의의 법원 승인·업계 확산, 미국 중간선거 우편투표 규정의 실제 집행, 캐나다의 9월 8일 대미 보복관세 발효가 법·통상 리스크를 좌우한다. 한국 국토대전환 전략은 부처별 예산·사업계획이 구체화되는지가 중요하다.",
+    "fourWeeks":"향후 4주에는 미·러 정보기관 채널이 단발성 접촉인지 지속적 위기관리 채널인지, 중·인도 국경완화가 무역·외교 정상화로 연결되는지, 미국의 고물가·저성장 조합이 실제 추가 금리인상으로 이어지는지가 글로벌 전략환경의 핵심 변수다. 국방에너지 분야에서는 Janus Program의 기지별 사업설계와 민간 투자 연계가 상용화 가능성을 가늠하는 초기 지표가 된다."
   }
 }
