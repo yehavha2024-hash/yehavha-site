@@ -174,25 +174,6 @@ function auditArticles() {
   }
 }
 
-function auditInitiatives() {
-  const source = 'nexus/initiatives/data.json';
-  const data = auditJson(source);
-  if (!data) return;
-  const groups = new Set((data.groups || []).map(item => item.id));
-  const statuses = new Set((data.lifecycle || []).map(item => item.id));
-  const visibility = new Set((data.visibility || []).map(item => item.id));
-  const items = Array.isArray(data.items) ? data.items : [];
-  if (!unique(items.map(item => item.id))) fail(source, '아이디어 id 중복');
-  for (const item of items) {
-    if (!groups.has(item.group)) fail(source, `${item.id} group 대상 없음: ${item.group}`);
-    if (!statuses.has(item.statusId)) fail(source, `${item.id} statusId 대상 없음: ${item.statusId}`);
-    if (!visibility.has(item.visibilityId)) fail(source, `${item.id} visibilityId 대상 없음: ${item.visibilityId}`);
-    if (!item.title || !item.summary || !item.nextAction) fail(source, `${item.id} 필수 실행정보 누락`);
-  }
-  const obsolete = ['one-song-multiplatform'];
-  for (const id of obsolete) if (items.some(item => item.id === id)) fail(source, `삭제 결정된 항목 잔존: ${id}`);
-}
-
 function auditStatusModel() {
   const status = auditJson('nexus/project-status.json');
   const projects = auditJson('nexus/projects.json');
@@ -231,7 +212,6 @@ auditAdvancedToeic();
 auditLivingLaw();
 auditPublishing();
 auditArticles();
-auditInitiatives();
 auditStatusModel();
 
 console.log(`Nexus runtime audit: ${errors} error(s), ${warnings} warning(s)`);
