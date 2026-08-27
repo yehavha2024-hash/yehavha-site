@@ -1,0 +1,113 @@
+{
+  "generatedAt": "2026-08-28T06:30:00+09:00",
+  "window": "2026-08-27 06:30–2026-08-28 06:30 KST · 최근 24시간 중심 · 동일 이슈는 material change가 있을 때만 본문 재진입",
+  "schedule": "06:30 KST daily",
+  "executiveSummary": "오늘의 최우선 신규 사안은 네팔–티베트 접경에서 발생한 대규모 빙하·암석 붕괴와 돌발홍수다. 수백 명이 숨지고 약 1천 명이 실종된 것으로 집계되는 가운데 국경도로·교량·전력·수력발전·Gyirong 통상거점이 광범위하게 파괴됐고 추가 빙하호 붕괴 위험까지 제기됐다. 한국에서는 한국은행이 기준금리를 2.75%에서 3.00%로 0.25%p 인상해 두 회의 연속 인상에 나섰고, 2026년 성장률 전망을 3.3%로 상향했다. 유럽 안보에서는 러시아의 대규모 우크라이나 공습 과정에서 드론들이 몰도바 영공을 반복 침범해 전쟁의 국경외 확산 위험이 다시 부각됐다. 프랑스에서는 2027년 대선을 앞둔 재정·정치 불확실성이 국채·은행주에 직접 반영되기 시작했고, 한국은 장기간 논란이 이어진 신규댐 7곳 가운데 5곳 건설과 2곳 대체안 추진을 확정했다. 보건에서는 우간다가 Bundibugyo 에볼라에 대해 42일 무신규 확진 기준을 충족해 종식을 선언하면서, 동일 지역위험이 '우간다 종식·DRC 지속확산'의 비대칭 단계로 전환됐다.",
+  "items": [
+    {
+      "topicKey": "nepal-tibet-glacier-collapse-flood-20260828",
+      "priority": "CRITICAL",
+      "category": "재난·환경·국제정세·인프라",
+      "headline": "네팔–티베트 빙하·암석 붕괴로 대형 돌발홍수…수백 명 사망·약 1천 명 실종, 국경인프라 붕괴",
+      "fact": "8월 26일 네팔 Langtang Lirung 인근에서 대규모 빙하와 암석이 붕괴해 Lhende Khola 수계로 쏟아지면서 네팔과 중국 티베트 접경에 고속 토석류와 돌발홍수가 발생했다. Reuters 집계 기준 8월 27일까지 사망자는 수백 명, 실종자는 약 1천 명에 달하며 외국인도 다수 포함됐다. 도로·교량·전력시설·수력발전시설과 Gyirong 국경 통상거점이 파괴됐고, 새로 형성된 빙하호의 추가 붕괴 위험도 제기됐다.",
+      "assessment": "단순 홍수보다 고산 빙하·암반 붕괴가 하류 토석류와 국경 인프라 파괴로 연쇄된 복합재난이다. 직접 원인을 기후변화 하나로 단정할 수는 없지만 장기적 빙하 감소와 동결·융해 변화가 산악지형 불안정을 높인다는 전문가 평가가 나온다. 피해 규모와 2차 재난 가능성 때문에 오늘 최우선 사안으로 본다.",
+      "impact": "네팔–중국 간 주요 육상교역·관광·순례 루트와 지역 수력발전, 구조·구호 물류가 동시에 타격을 받는다. 향후 히말라야권 기후적응·빙하호 감시·국경 인프라 설계 기준 강화로 이어질 가능성이 높다.",
+      "watch": "사망·실종자 최종 집계, 추가 빙하호 붕괴 여부, Gyirong 통관 재개시점, 네팔·중국의 대규모 복구계획, 국제구호 확대를 추적한다.",
+      "confidence": "높음",
+      "sources": [
+        {"label": "Reuters · Hundreds killed and more than 1,000 missing after Himalayan flood", "url": "https://www.reuters.com/business/environment/rescuers-search-survivors-after-devastating-nepal-flood-2026-08-27/"},
+        {"label": "Reuters · How a glacier collapse triggered deadly flooding along Nepal-China border", "url": "https://www.reuters.com/world/asia-pacific/how-glacier-collapse-triggered-deadly-landslide-flooding-along-nepal-china-2026-08-27/"},
+        {"label": "Reuters · Climate change boosted risk of devastating Himalayan flood, experts say", "url": "https://www.reuters.com/sustainability/cop/climate-change-boosted-risk-devastating-himalayan-flood-experts-say-2026-08-27/"}
+      ]
+    },
+    {
+      "topicKey": "bok-back-to-back-rate-hike-growth-upgrade-20260828",
+      "priority": "HIGH",
+      "category": "경제·시장·통화정책·한국",
+      "headline": "한국은행, 기준금리 3.00%로 연속 인상…성장률 3.3% 상향 속 물가·금융안정 선제대응",
+      "fact": "한국은행 금융통화위원회는 8월 27일 기준금리를 2.75%에서 3.00%로 0.25%p 인상했다. 7명 중 6명이 인상에 찬성했고 1명은 동결 의견을 냈다. 한국은행은 반도체 수출과 내수 회복을 반영해 2026년 성장률 전망을 3.3%, 2027년을 2.9%로 상향했고, 소비자물가는 각각 2.7%, 2.3%로 전망했다.",
+      "assessment": "이번 결정은 경기둔화 방어보다 물가 기대와 금융안정 리스크를 선제적으로 억제하는 쪽으로 정책축이 이동했음을 보여준다. 특히 성장률 전망을 큰 폭으로 올리면서 동시에 금리를 인상했기 때문에 '강한 성장·높은 물가' 조합에 대응한 긴축 성격이 분명하다.",
+      "impact": "주택·가계대출·기업자금 조달비용과 원화·채권금리에 직접 영향을 주며, 반도체 호황의 실물 파급과 내수 회복이 금리부담을 얼마나 상쇄하는지가 중요해진다.",
+      "watch": "9월 물가와 주택·가계대출, 원/달러 환율, 추가 인상 시사 여부, 4분기 소비·건설 회복을 본다.",
+      "confidence": "매우 높음",
+      "sources": [
+        {"label": "Bank of Korea · Monetary Policy Decision (August 27, 2026)", "url": "https://www.bok.or.kr/eng/bbs/E0000634/view.do?depth=400423&menuNo=400423&nttId=11064193&programType=newsDataEng&relate=Y"},
+        {"label": "Bank of Korea · Economic Outlook (August 2026)", "url": "https://www.bok.or.kr/eng/bbs/E0000634/view.do?depth=400069&menuNo=400069&nttId=11064205&oldMenuNo=400007&programType=newsDataEng&relate=Y"},
+        {"label": "Reuters · South Korea central bank delivers back-to-back rate hike", "url": "https://www.reuters.com/world/asia-pacific/south-korea-central-bank-delivers-back-to-back-rate-hike-expected-2026-08-27/"}
+      ]
+    },
+    {
+      "topicKey": "russia-ukraine-strikes-moldova-airspace-20260828",
+      "priority": "HIGH",
+      "category": "안보·국제정세·유럽",
+      "headline": "러시아 대규모 우크라이나 공습 중 드론 몰도바 영공 반복 침범…전쟁의 국경외 확산 위험 재부각",
+      "fact": "8월 27일 러시아는 키이우·하르키우·오데사·폴타바·자포리자 등 우크라이나 여러 지역의 항만·에너지·산업·유통시설을 겨냥한 대규모 미사일·드론 공격을 실시했다. 같은 새벽 몰도바 국경경찰은 여러 드론의 자국 영공 침범을 공식 확인했고, 최소 세 개의 구체적 비행경로를 공개했다.",
+      "assessment": "우크라이나 공습 자체는 지속 이슈지만, 이번에는 비NATO 인접국 몰도바 영공으로 드론이 반복 진입한 점이 material change다. 반복 침범이 고착되면 몰도바의 방공·중립정책과 EU 안보지원 문제가 더 직접적인 군사안보 의제로 전환될 수 있다.",
+      "impact": "몰도바의 방공 투자와 EU·루마니아와의 안보협력 강화, 우크라이나 남서부 항만·물류의 위험 프리미엄 확대, 러시아–서방 간 우발적 확전 위험 상승으로 이어질 수 있다.",
+      "watch": "몰도바 내 드론 잔해·피해 확인, 추가 영공침범, 몰도바·EU의 방공 지원조치, 러시아의 공격축 변화와 오데사 항만 피해를 본다.",
+      "confidence": "높음",
+      "sources": [
+        {"label": "Moldova Border Police · 27 August drone airspace incidents", "url": "https://border.gov.md/informare-55"},
+        {"label": "Reuters · Russian air attacks target Kyiv retailers, ports and industrial sites", "url": "https://www.reuters.com/world/europe/explosions-heard-ukraines-kyiv-reuters-witness-says-2026-08-27/"}
+      ]
+    },
+    {
+      "topicKey": "france-election-fiscal-market-risk-20260828",
+      "priority": "HIGH",
+      "category": "정치·경제·시장·유럽",
+      "headline": "프랑스 대선·재정 불확실성 금융시장에 전이…국채 스프레드 확대·은행주 급락",
+      "fact": "2027년 프랑스 대선을 앞두고 첫 주요 경제정책 토론이 진행된 가운데 재정적자와 국가부채를 둘러싼 후보 간 정책차이가 부각됐다. Reuters에 따르면 8월 27일 CAC 40은 1.7~1.8% 하락했고 BNP Paribas·Societe Generale·Credit Agricole 등 주요 은행주는 4~5% 급락했다. 프랑스 국채의 독일 대비 스프레드도 2024년 이후 높은 수준으로 확대됐다.",
+      "assessment": "선거정치가 단순 여론 이슈를 넘어 국가재정 신뢰와 금융가격에 직접 반영되기 시작한 단계다. 소수정부가 2027년 예산을 통과시켜야 하는 상황에서 대선 후보들의 부채·연금·지출 공약이 시장의 위험평가와 충돌하고 있다.",
+      "impact": "프랑스 국채조달비용과 은행주 밸류에이션, 유로존 재정규율 논쟁, ECB의 통화정책 판단에 영향을 줄 수 있다. 신용등급 검토와 예산교착이 겹치면 유럽 금융시장 변동성이 확대될 수 있다.",
+      "watch": "2027년 예산안의 적자목표, Fitch 등 신용평가, 국채 스프레드, 대선후보 경제공약 구체화, 의회 예산통과 여부를 본다.",
+      "confidence": "높음",
+      "sources": [
+        {"label": "Reuters · Europe's STOXX 600 slides as France's fiscal, election risks rattle investors", "url": "https://www.reuters.com/markets/europe/european-shares-flat-nvidia-boost-offsets-sector-weakness-2026-08-27/"},
+        {"label": "Reuters · Record debt and election politics raise stakes for French budget", "url": "https://www.reuters.com/business/finance/record-debt-election-politics-raise-stakes-french-budget-2026-08-27/"},
+        {"label": "Reuters · Le Pen seeks to woo French business leaders at first presidential debate", "url": "https://www.reuters.com/world/no-reason-fear-us-le-pen-tells-business-leaders-ahead-presidential-debate-2026-08-27/"}
+      ]
+    },
+    {
+      "topicKey": "korea-new-dams-five-build-two-alternatives-20260828",
+      "priority": "WATCH",
+      "category": "환경·에너지·국토·정책",
+      "headline": "정부, 논란 이어진 신규댐 7곳 최종방향 확정…5곳 건설·2곳 대체안",
+      "fact": "기후에너지환경부는 8월 27일 재검토가 진행되던 신규댐 7곳 가운데 지천·아미천·병영천·회야강·고현천 5곳은 건설 또는 기능확대를 추진하고, 감천·가례천은 기존댐 활용·하천정비·저수지 연계운영 등 대체안으로 전환한다고 발표했다. 관련 사업비는 약 1조6,700억원 규모다.",
+      "assessment": "2024년 제시된 신규댐 계획을 그대로 강행하거나 전면 폐기한 것이 아니라, 지역별 홍수·용수수요와 대체수단을 다시 평가해 선별 추진하는 방식으로 정책이 확정됐다. 기후적응 인프라와 환경·지역갈등을 조정하는 정책사례라는 점에서 의미가 있다.",
+      "impact": "충청·임진강권 용수공급과 전국 홍수방어 인프라, 지역개발·환경영향평가·주민수용성에 중장기 영향을 준다. 향후 극한강우 대응에서 댐과 자연기반·하천정비 수단의 비용효과 비교가 중요한 기준이 될 수 있다.",
+      "watch": "환경영향평가, 주민협의, 사업비와 공사일정, 대체안의 실제 홍수저감 성과, 추가 신규댐 정책변화를 추적한다.",
+      "confidence": "매우 높음",
+      "sources": [
+        {"label": "대한민국 정책브리핑 · 신규댐 7곳 추진여부 확정", "url": "https://m.korea.kr/news/policyNewsView.do?newsId=148970733&pWise=mSub&pWiseSub=RT3"},
+        {"label": "기후에너지환경부 · 신규댐 7곳 추진 여부 확정", "url": "https://m.korea.kr/briefing/pressReleaseView.do?gubun=pressRelease&newsId=156775699&pageIndex=3&repCode="}
+      ]
+    },
+    {
+      "topicKey": "uganda-ebola-outbreak-ended-drc-continues-20260828",
+      "priority": "WATCH",
+      "category": "보건·국제기구·아프리카",
+      "headline": "우간다, Bundibugyo 에볼라 종식 선언…DRC 지속확산과 대비되는 국경보건 분기",
+      "fact": "WHO와 Africa CDC는 8월 27일 우간다가 마지막 확진자 퇴원 이후 42일 동안 신규 확진이 없어 Bundibugyo 에볼라 유행의 종식을 충족했다고 발표했다. 우간다는 총 20명 확진, 18명 회복, 2명 사망을 보고했으며 800명 이상의 접촉자를 추적했다. 반면 인접 DRC에서는 대규모 유행이 계속되고 있다.",
+      "assessment": "에볼라를 매일 반복하는 것이 아니라 '우간다 전파 종료'라는 명확한 단계 변화 때문에 본문에 재진입시킨다. 동일 바이러스라도 국경감시·접촉추적·의료대응 역량에 따라 국가별 유행경로가 크게 달라질 수 있음을 보여준다.",
+      "impact": "우간다는 광범위한 여행·무역 제한 없이 정상화할 여지가 커졌지만 DRC로부터 재유입 위험은 남는다. 동아프리카 국경보건과 검역체계의 지속 운영이 핵심이다.",
+      "watch": "우간다 재유입 여부, DRC 신규 확진·사망 추세, 인접국 확산, WHO PHEIC 유지 여부와 백신·치료제 임상 결과를 본다.",
+      "confidence": "매우 높음",
+      "sources": [
+        {"label": "WHO Africa · Uganda ends Ebola outbreak following completion of 42-day countdown", "url": "https://www.afro.who.int/countries/uganda/news/uganda-ends-ebola-outbreak-following-completion-42-day-countdown"},
+        {"label": "WHO · Ebola outbreak - DRC 2026", "url": "https://www.who.int/emergencies/situations/ebola-outbreak---drc-2026"}
+      ]
+    }
+  ],
+  "strategicWatchlist": [
+    "이스라엘–튀르키예 시리아 군사충돌: 튀르키예 병력·방공체계의 실제 시리아 배치 또는 이스라엘 추가 대튀르키예 표적 공격 시 CRITICAL 본문 재진입",
+    "호르무즈: 기뢰 제거 이후 실제 원유·LNG 통항 정상화, 이란 통항규칙·블랙리스트 집행과 신규 선박피격 여부",
+    "미·러 비공개 고위채널: CIA 모스크바 접촉 이후 후속 외교·정보기관 회담 및 우크라이나·이란 관련 정책변화",
+    "미국 통화정책: Jackson Hole 발언과 9월 FOMC에서 추가 인상 가능성",
+    "DRC 에볼라: 우간다 종식과 별개로 DRC 지속확산·인접국 재유입 여부"
+  ],
+  "outlook": {
+    "oneWeek": "향후 1주에는 네팔–티베트 재난의 최종 인명피해와 2차 빙하호 붕괴 위험, 한국은행 인상 이후 원화·채권·주택금융 반응, 몰도바 영공침범의 추가 발생 여부가 핵심이다.",
+    "twoWeeks": "향후 2주에는 프랑스 2027년 예산협상의 초기 윤곽과 신용평가 압력, 한국 신규댐 사업의 후속 행정절차, 우간다 종식 이후 DRC발 재유입 여부를 본다.",
+    "fourWeeks": "향후 4주에는 유럽의 재정·정치 불확실성이 국채시장 스트레스로 확대되는지, 러시아–우크라이나 공격이 몰도바·루마니아 등 인접국 안보 문제로 더 번지는지, 한국의 금리인상 사이클이 추가 긴축으로 이어지는지가 주요 구조적 분기점이다. 이스라엘–튀르키예와 호르무즈는 material change가 있을 때만 핵심 본문으로 재상향한다."
+  }
+}
