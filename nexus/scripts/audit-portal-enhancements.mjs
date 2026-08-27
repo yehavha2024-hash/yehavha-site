@@ -87,8 +87,7 @@ const surfaces = [
   ['nexus/articles/article.html', ['id="readerCard"','id="articleBody"','id="articleToc"','id="relatedArticles"','./articles.js']],
   ['nexus/ai-trends/index.html', ['id="radarGrid"','id="scopeGrid"','id="filterRow"','id="briefFeed"']],
   ['nexus/intelligence-briefing/index.html', ['id="executiveSummary"','id="briefFeed"','id="archiveList"']],
-  ['nexus/publishing/index.html', ['id="top"','id="bookGrid"']],
-  ['nexus/initiatives/index.html', ['id="top"','id="initiativeBoard"']]
+  ['nexus/publishing/index.html', ['id="top"','id="bookGrid"']]
 ];
 for (const [file, markers] of surfaces) {
   if (!exists(file)) {
