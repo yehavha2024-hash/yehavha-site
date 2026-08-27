@@ -75,15 +75,15 @@ if (!exists(portal)) {
 } else {
   const css = read(portal);
   for (const token of [
-    '--nxs-body-size:15px',
-    '--nxs-footer-project:13px',
-    '--nxs-footer-text:12px',
+    '--nxs-body-size:16.5px',
+    '--nxs-footer-project:15px',
+    '--nxs-footer-text:14px',
     '.back-link,.nexus-link,.back',
-    'min-height:36px',
-    'padding:0 12px',
+    'min-height:42px',
+    'padding:0 14px',
     'border-radius:10px',
     'background:#fff',
-    'font-size:11.5px'
+    'font-size:14px'
   ]) {
     if (!css.replace(/\s+/g, '').includes(token.replace(/\s+/g, ''))) fail(portal, `공통 shell 핵심 규격 누락: ${token}`);
   }
