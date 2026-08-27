@@ -24,8 +24,7 @@ const nexusRuntimePages = [
   'nexus/articles',
   'nexus/ai-trends',
   'nexus/ai-music-archive',
-  'nexus/education-hub',
-  'nexus/initiatives'
+  'nexus/education-hub'
 ];
 
 const nexusDetailPages = [
@@ -55,14 +54,14 @@ const nexusJsonFiles = [
   'nexus/intelligence-briefing/archive-index.json',
   'nexus/publishing/books.json',
   'nexus/articles/articles.json',
-  'nexus/ai-trends/data.json',
-  'nexus/initiatives/data.json'
+  'nexus/ai-trends/data.json'
 ];
 
 const retiredNexusPaths = [
   'nexus/ai-practice',
   'nexus/ai-governance',
-  'nexus/ai-service-operations'
+  'nexus/ai-service-operations',
+  'nexus/initiatives'
 ];
 
 const COPYRIGHT_STANDARD = 'Copyright © 이명훈 2026. All rights reserved.';
