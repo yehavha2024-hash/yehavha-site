@@ -24,7 +24,7 @@
       <div class="hero-meta">
         <span>운영: 주제 단위 누적형</span>
         <span id="contentCount">연구 항목 0</span>
-        <span>법령·판례 기준 2026.08.09</span>
+        <span>법령·판례 기준 2026.08.27</span>
       </div>
     </div>
   </header>
@@ -146,7 +146,6 @@
   <script src="data-refinement-round2-ip-special.js"></script>
   <script src="data-refinement-round2-reasoning.js"></script>
   <script src="data-refinement-ai-round3.js"></script>
-
   <script src="data-variation-solutions-manual-round1.js"></script>
   <script src="data-variation-solutions-manual-round2.js"></script>
   <script src="data-variation-solutions-manual-round3.js"></script>
@@ -177,6 +176,35 @@
   <script src="data-source-manual-review-round2-20260809.js"></script>
   <script src="data-article-manual-review-round2-20260809.js"></script>
   <script src="data-source-article-citation-audit-20260809.js"></script>
+  <script>
+  (() => {
+    const checked = '2026.08.27';
+    const data = window.LEGAL_KNOWLEDGE || [];
+    data.forEach(item => {
+      if (item.lawChecked) item.lawChecked = checked;
+      if (typeof item.currentnessStatus === 'string') item.currentnessStatus = item.currentnessStatus.replace('2026-08-09 현행법 대조', '2026-08-27 현행법 대조');
+      if (Array.isArray(item.currentLawVersions)) {
+        item.currentLawVersions.forEach(version => {
+          if (version.name === '저작권법') {
+            version.effective = '2026.08.11';
+            version.ref = '법률 제21336호';
+            version.note = '';
+          }
+          if (version.name === '신용정보의 이용 및 보호에 관한 법률') {
+            version.effective = '2026.08.13';
+            version.ref = '법률 제21646호';
+            version.note = '';
+          }
+        });
+      }
+      if (Array.isArray(item.pendingLawChanges)) {
+        item.pendingLawChanges = item.pendingLawChanges.filter(change => !change.includes('저작권법 — 2026.08.11 시행 예정') && !change.includes('신용정보의 이용 및 보호에 관한 법률 — 2026.08.13 시행 예정'));
+      }
+      if (item.id === 'ai-copyright-training-output') item.lawDate = '2026.08.11';
+      if (item.id === 'ai-credit-automated-evaluation') item.lawDate = '2026.08.13';
+    });
+  })();
+  </script>
 
   <script src="app.js?v=20260809-2026"></script>
   <script src="status-ui.js?v=20260817-2"></script>
