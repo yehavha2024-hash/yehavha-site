@@ -1,4 +1,5 @@
 name: Web Architecture Audit
+# Read-only regression audit for Nexus and related web projects.
 
 on:
   workflow_dispatch:
