@@ -45,10 +45,10 @@ if (!exists(portalFile)) {
     '--bg:#ffffff',
     '--text:#111111',
     '--line:#cfd4dc',
-    '--nxs-body-size:15px',
-    '--nxs-body-line:1.75',
-    '--nxs-footer-text:12px',
-    '--nxs-footer-link:11px',
+    '--nxs-body-size:16.5px',
+    '--nxs-body-line:1.78',
+    '--nxs-footer-text:14px',
+    '--nxs-footer-link:13.5px',
     'body{',
     'background:var(--bg)',
     'color:var(--text)'
@@ -65,7 +65,7 @@ if (!exists(mainFile)) {
   const css = read(mainFile).replace(/\s+/g, '');
   const required = [
     '--portal-text:#111111',
-    '--portal-muted:#4b5563',
+    '--portal-muted:#111111',
     '--portal-line:#cfd4dc',
     'body{',
     'background:#fff',
