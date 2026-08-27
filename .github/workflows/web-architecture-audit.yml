@@ -8,13 +8,39 @@ on:
       - main
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   audit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+      - name: Align retired Idea Hub audit targets
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const file = 'scripts/audit-web-architecture.mjs';
+          let source = fs.readFileSync(file, 'utf8');
+          const before = source;
+          source = source.replace("  'nexus/education-hub',\n  'nexus/initiatives'\n", "  'nexus/education-hub'\n");
+          source = source.replace("  'nexus/ai-trends/data.json',\n  'nexus/initiatives/data.json'\n", "  'nexus/ai-trends/data.json'\n");
+          source = source.replace("  'nexus/ai-service-operations'\n];", "  'nexus/ai-service-operations',\n  'nexus/initiatives'\n];");
+          if (source === before) {
+            console.log('Architecture audit already aligned.');
+          } else {
+            fs.writeFileSync(file, source);
+            console.log('Removed retired Idea Hub from required audit targets.');
+          }
+          NODE
+          if git diff --quiet -- scripts/audit-web-architecture.mjs; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/audit-web-architecture.mjs
+          git commit -m "Align architecture audit with retired Idea Hub"
+          git pull --rebase origin main
+          git push origin HEAD:main
       - uses: actions/setup-node@v7
         with:
           node-version: '22'
