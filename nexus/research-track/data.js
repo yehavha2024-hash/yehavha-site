@@ -1,5 +1,5 @@
 window.RESEARCH_TRACK = {
-  updatedAt: '2026-08-17',
+  updatedAt: '2026-08-27',
   currentStage: 'phd-plan',
   profile: {
     title: 'AI 책임법제의 장기 연구계보 구축',
@@ -38,7 +38,8 @@ window.RESEARCH_TRACK = {
       focus: ['인공지능 행위', '행위귀속', '책임귀속', '기능적 단위 법인격', '공정한 귀속', '번들 이론'],
       deliverable: '석사학위논문 · 대학원 우수논문상',
       items: [
-        { type: '석사학위논문', title: 'AI 행위에 대한 책임귀속 및 범위에 관한 원칙과 그 실현 방안에 대한 연구', note: '기능적 단위의 법인격 부여라는 수단을 중심으로' },
+        { type: '석사학위논문', title: 'AI 행위에 대한 책임귀속 및 범위에 관한 원칙과 그 실현 방안에 대한 연구', note: '기능적 단위의 법인격 부여라는 수단을 중심으로 · 한국방송통신대학교 대학원 법학과 2026년도 학위논문 · dCollection 원문 공개', url: 'https://knou.dcollection.net/public_resource/pdf/200001040576_20260827145954.pdf' },
+        { type: 'dCollection', title: '한국방송통신대학교 dCollection 학위논문 상세정보', note: '논문의 서지정보·초록·원문 제공 정보를 확인할 수 있습니다.', url: 'https://knou.dcollection.net/srch/srchDetail/200001040576?insCode=211057&query=%28ins_code%3A211057%29+AND+%28coll_id%3A200000005489%29&navigationSize=10&start=0&pageSize=10&searthTotalPage=0&rows=10&locale=ko&ajax=false&pageNum=1&sortField=pub_year&collId=200000005489&searchTotalCount=0&sortDir=desc' },
         { type: '학술성과', title: '석사학위논문 논문우수상 수상', note: '학과 추천을 거쳐 대학원 우수논문으로 선정' }
       ],
       detail: {
@@ -85,7 +86,7 @@ window.RESEARCH_TRACK = {
           { title: '제도설계의 기여', text: '기능적 법적 지위를 책임재산·보험·등록·남용통제와 결합하여 책임집행 구조로 구체화합니다.' },
           { title: '후속연구의 기반', text: '단일 AI의 책임 문제를 Agentic AI·다중 에이전트의 창발적 손해와 계층적 책임귀속 연구로 확장할 수 있습니다.' }
         ],
-        note: '이 페이지는 석사학위논문의 핵심 연구내용을 압축한 요약본입니다.'
+        note: '이 페이지는 석사학위논문의 핵심 연구내용을 압축한 요약본이며, 한국방송통신대학교 dCollection에서 논문 상세정보와 원문 PDF를 확인할 수 있습니다.'
       }
     },
     {
