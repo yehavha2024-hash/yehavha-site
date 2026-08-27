@@ -43,8 +43,12 @@ function auditWorkflowPermissions() {
   // generated data paths listed here; UI shell/CSS/HTML are never workflow outputs.
   const writePolicies = new Map([
     ['refresh-nexus-status.yml', {
-      required: ['git add nexus/project-status.json'],
-      allowedPathTokens: ['nexus/project-status.json']
+      required: ['git add nexus/project-status.json nexus/sitemap.xml'],
+      allowedPathTokens: ['nexus/project-status.json', 'nexus/sitemap.xml']
+    }],
+    ['refresh-investment-strategy.yml', {
+      required: ['git add nexus/investment-strategy/index.html'],
+      allowedPathTokens: ['nexus/investment-strategy/index.html']
     }],
     ['toeic-master-lexicon-build.yml', {
       required: ['git add toeic-human-100/master-lexicon-v2.json'],
