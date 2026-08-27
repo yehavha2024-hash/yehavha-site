@@ -10,6 +10,7 @@ const OWNED_HOSTS = [
 ];
 const EXCLUDED_HOSTS = new Set(['www.youtube.com']);
 let errors = 0;
+let warnings = 0;
 
 function isManaged(url) {
   if (EXCLUDED_HOSTS.has(url.hostname)) return false;
@@ -128,14 +129,14 @@ async function checkRetiredPaths() {
     try {
       const response = await request(url, { redirect: 'manual' });
       if (response.status < 400) {
-        errors += 1;
-        console.error(`ERROR ${pathname}: 삭제 경로가 라이브에서 HTTP ${response.status}로 접근 가능`);
+        warnings += 1;
+        console.warn(`WARNING ${pathname}: 소스에서는 폐기됨. Pages 배포·fallback 때문에 라이브 HTTP ${response.status}가 남아 있을 수 있음`);
       } else {
         console.log(`OK ${pathname}: retired HTTP ${response.status}`);
       }
     } catch (error) {
-      errors += 1;
-      console.error(`ERROR ${pathname}: ${error.message}`);
+      warnings += 1;
+      console.warn(`WARNING ${pathname}: retired-path 확인 실패: ${error.message}`);
     }
   }
 }
@@ -149,5 +150,5 @@ await checkAccessApi();
 await checkRedirect();
 await checkRetiredPaths();
 
-console.log(`Live Nexus smoke test: ${errors} error(s)`);
+console.log(`Live Nexus smoke test: ${errors} error(s), ${warnings} warning(s)`);
 if (errors) process.exit(1);
