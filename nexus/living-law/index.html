@@ -24,7 +24,7 @@
   "operatingSystem":"Web",
   "isAccessibleForFree":true,
   "inLanguage":"ko",
-  "dateModified":"2026-08-15",
+  "dateModified":"2026-08-27",
   "author":{"@type":"Person","name":"이명훈"},
   "isPartOf":{"@type":"WebSite","name":"YEHAVHA NEXUS","url":"https://yehavha-nexus-hub.pages.dev/"}
 }
@@ -42,14 +42,14 @@
       <div class="hero-stats">
         <span>총 <strong id="totalCount">100</strong>개</span>
         <span>10개 생활영역</span>
-        <span>법령 기준 <strong id="baselineDate">2026.08.15</strong></span>
-        <span>업데이트 <strong id="updatedAt">2026.08.15</strong></span>
+        <span>법령 기준 <strong id="baselineDate">2026.08.27</strong></span>
+        <span>업데이트 <strong id="updatedAt">2026.08.27</strong></span>
       </div>
       <aside class="current-law-note">
         <div class="current-law-icon">!</div>
         <div>
           <strong>2026년 형사절차 전환기 안내</strong>
-          <p>2026년 8월 15일 현재 형사소송법은 고소·고발을 검사 또는 사법경찰관에게 서면이나 구술로 할 수 있도록 규정하고 있습니다. 검찰청법 폐지와 공소청·중대범죄수사청 출범은 2026년 10월 2일 시행 예정이므로, 그 전후 사건은 접수 직전에 공식기관의 최신 안내를 다시 확인해야 합니다.</p>
+          <p>2026년 8월 27일 현재 형사소송법은 고소·고발을 검사 또는 사법경찰관에게 서면이나 구술로 할 수 있도록 규정하고 있습니다. 검찰청법 폐지와 공소청·중대범죄수사청 출범은 2026년 10월 2일 시행 예정이므로, 그 전후 사건은 접수 직전에 공식기관의 최신 안내를 다시 확인해야 합니다.</p>
         </div>
       </aside>
     </section>
@@ -92,6 +92,12 @@
   </div>
 </dialog>
 <script src="./data.js?v=20260815-1"></script>
+<script>
+(() => {
+  const item = window.LIVING_LAW_DATA?.items?.find(entry => entry.n === 10);
+  if (item) item.summary = '2026년 8월 27일 현재 검찰청 체계는 아직 존속합니다. 검찰청법 폐지와 공소청·중대범죄수사청 설치 법률은 2026년 10월 2일 시행 예정입니다.';
+})();
+</script>
 <script src="./app.js?v=20260815-4"></script>
 <script src="./law-provision-details.js?v=20260815-2"></script>
 </body>
