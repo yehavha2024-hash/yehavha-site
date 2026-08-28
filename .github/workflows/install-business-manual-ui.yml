@@ -1,0 +1,35 @@
+name: Install business manual UI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/install-business-manual-ui.py'
+      - 'nexus/local-government-planning/business-manual-render.js'
+      - '.github/workflows/install-business-manual-ui.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Install business manual renderer
+        run: python scripts/install-business-manual-ui.py
+      - name: Commit index change
+        shell: bash
+        run: |
+          if git diff --quiet -- nexus/local-government-planning/index.html; then
+            echo 'Already installed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add nexus/local-government-planning/index.html
+          git commit -m 'Connect detailed business operations manual'
+          git push
