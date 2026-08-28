@@ -36,9 +36,10 @@
   }, {});
 
   if (summary) {
+    const researchStatus = String(meta.status || '연구논문 투입').replace(/^박사논문/, '연구논문');
     summary.innerHTML = [
       `<span class="strong">핵심문헌 ${pack.length}개</span>`,
-      `<span>${txt(meta.status || '박사논문 투입')}</span>`,
+      `<span>${txt(researchStatus)}</span>`,
       ...Object.entries(axisCounts).map(([axis, count]) => `<span>${txt(axis)} ${count}</span>`),
       `<span>검증일 ${esc(meta.checked || '')}</span>`
     ].join('');
