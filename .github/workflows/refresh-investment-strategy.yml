@@ -7,8 +7,8 @@ on:
       - 'scripts/refresh-investment-strategy.mjs'
       - '.github/workflows/refresh-investment-strategy.yml'
   schedule:
-    # GitHub Actions cron uses UTC. 11:30 UTC = 20:30 KST.
-    - cron: '30 11 * * 1-5'
+    # GitHub Actions cron uses UTC. 08:30 UTC = 17:30 KST, after the Korean regular-session close.
+    - cron: '30 8 * * 1-5'
   workflow_dispatch:
 
 permissions:
@@ -36,11 +36,9 @@ jobs:
         run: node --check scripts/refresh-investment-strategy.mjs
 
       - name: Refresh existing investment strategy content
-        if: github.event_name != 'push'
         run: node scripts/refresh-investment-strategy.mjs
 
       - name: Commit refreshed investment strategy when changed
-        if: github.event_name != 'push'
         shell: bash
         run: |
           if git diff --quiet -- nexus/investment-strategy/index.html; then
