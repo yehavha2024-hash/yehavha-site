@@ -1,4 +1,4 @@
-window.RESEARCH_TRACK.updatedAt = '2026-08-23';
+window.RESEARCH_TRACK.updatedAt = '2026-08-28';
 
 window.RESEARCH_CASES = [
   {
@@ -56,7 +56,7 @@ window.RESEARCH_CASES = [
     ],
     researchLinks: [
       {
-        title: '박사연구 연결',
+        title: '심화연구 연결',
         text: '이 사례는 단일 AI의 결과책임보다 Agentic AI의 다단계 실행과 인간 통제의 관계를 분석하는 자료로 사용합니다. 특히 행위효과와 책임귀속의 분리, 계층적 책임귀속, 증명위험 배분을 실제 범죄구조에 대입할 수 있습니다.'
       },
       {
