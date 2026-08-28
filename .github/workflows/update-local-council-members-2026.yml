@@ -39,12 +39,27 @@ jobs:
       - name: Install council UI hooks
         run: python scripts/install-local-council-ui.py
 
+      - name: Use browser request headers
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('scripts/update-local-council-members-2026.py')
+          s = p.read_text(encoding='utf-8')
+          s = s.replace(
+              '"User-Agent": "YEHAVHA-NEXUS/1.0 (+https://yehavha-nexus.pages.dev/)"',
+              '"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",\n    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",\n    "Accept-Language": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",\n    "Referer": "https://cpmadang.org/"'
+          )
+          p.write_text(s, encoding='utf-8')
+          PY
+
       - name: Build elected council member database
         run: python scripts/update-local-council-members-2026.py
 
       - name: Commit councillor database when changed
         shell: bash
         run: |
+          git checkout -- scripts/update-local-council-members-2026.py
           if git diff --quiet -- nexus/local-government-planning/index.html nexus/local-government-planning/council-members-2026.js; then
             echo "Council member database is already current."
             exit 0
