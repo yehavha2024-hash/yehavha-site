@@ -39,38 +39,11 @@ jobs:
       - name: Install council UI hooks
         run: python scripts/install-local-council-ui.py
 
-      - name: Probe public council data text feed
+      - name: Inspect public council data fields
         shell: bash
         run: |
-          curl -fLsS --max-time 45 'https://r.jina.ai/https://cpmadang.org/people/list_of_candidates_2026/winner' | sed -n '1,140p'
+          curl -fLsS --max-time 60 'https://r.jina.ai/https://cpmadang.org/people/list_of_candidates_2026/winner' > /tmp/council.md
+          grep -nE '당선인|선거구|시·도의회의원선거|구·시·군의회의원선거|광역의원비례대표|기초의원비례대표|더불어민주당|국민의힘|조국혁신당|진보당|무소속' /tmp/council.md | head -n 240 || true
 
-      - name: Use browser request headers
-        shell: bash
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          p = Path('scripts/update-local-council-members-2026.py')
-          s = p.read_text(encoding='utf-8')
-          s = s.replace(
-              '"User-Agent": "YEHAVHA-NEXUS/1.0 (+https://yehavha-nexus.pages.dev/)"',
-              '"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",\n    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",\n    "Accept-Language": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",\n    "Referer": "https://cpmadang.org/"'
-          )
-          p.write_text(s, encoding='utf-8')
-          PY
-
-      - name: Build elected council member database
-        run: python scripts/update-local-council-members-2026.py
-
-      - name: Commit councillor database when changed
-        shell: bash
-        run: |
-          git checkout -- scripts/update-local-council-members-2026.py
-          if git diff --quiet -- nexus/local-government-planning/index.html nexus/local-government-planning/council-members-2026.js; then
-            echo "Council member database is already current."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add nexus/local-government-planning/index.html nexus/local-government-planning/council-members-2026.js
-          git commit -m "Update 2026 local council member database"
-          git push
+      - name: Hold generation until parser update
+        run: echo 'Text feed inspected; parser update follows.'
