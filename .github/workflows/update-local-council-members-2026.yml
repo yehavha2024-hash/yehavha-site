@@ -39,6 +39,11 @@ jobs:
       - name: Install council UI hooks
         run: python scripts/install-local-council-ui.py
 
+      - name: Probe public council data text feed
+        shell: bash
+        run: |
+          curl -fLsS --max-time 45 'https://r.jina.ai/https://cpmadang.org/people/list_of_candidates_2026/winner' | sed -n '1,140p'
+
       - name: Use browser request headers
         shell: bash
         run: |
