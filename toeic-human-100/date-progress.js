@@ -62,6 +62,7 @@
     const dateLabel = document.getElementById('dateLabel');
     const completeBtn = document.getElementById('completeBtn');
     const resetBtn = document.getElementById('resetBtn');
+    const toast = document.getElementById('toast');
 
     const currentDay = () => Number((dayLabel?.textContent || '').match(/\d+/)?.[0] || 0);
     const formatKoreanDate = (dateKey) => {
@@ -77,8 +78,14 @@
       if (completeBtn) completeBtn.textContent = completeBtn.classList.contains('completed') ? '완료 기록됨 ✓' : '완료 기록';
     };
 
+    const syncToast = () => {
+      if (!toast || !/다음 학습은 DAY/.test(toast.textContent)) return;
+      toast.textContent = '완료 기록을 저장했습니다. 다음 학습은 날짜가 바뀌면 자동으로 진행됩니다.';
+    };
+
     if (dayLabel) new MutationObserver(syncDailyLabels).observe(dayLabel, { childList: true, characterData: true, subtree: true });
     if (completeBtn) new MutationObserver(syncDailyLabels).observe(completeBtn, { attributes: true, attributeFilter: ['class'] });
+    if (toast) new MutationObserver(syncToast).observe(toast, { childList: true, characterData: true, subtree: true });
 
     resetBtn?.addEventListener('click', (event) => {
       event.preventDefault();
