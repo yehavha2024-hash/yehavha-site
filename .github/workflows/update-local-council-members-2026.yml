@@ -36,14 +36,26 @@ jobs:
       - name: Install parser dependencies
         run: python -m pip install --disable-pip-version-check requests beautifulsoup4
 
-      - name: Install council UI hooks
-        run: python scripts/install-local-council-ui.py
-
-      - name: Inspect public council data fields
+      - name: Probe official NEC council winner codes
         shell: bash
         run: |
-          curl -fLsS --max-time 60 'https://r.jina.ai/https://cpmadang.org/people/list_of_candidates_2026/winner' > /tmp/council.md
-          grep -nE '당선인|선거구|시·도의회의원선거|구·시·군의회의원선거|광역의원비례대표|기초의원비례대표|더불어민주당|국민의힘|조국혁신당|진보당|무소속' /tmp/council.md | head -n 240 || true
-
-      - name: Hold generation until parser update
-        run: echo 'Text feed inspected; parser update follows.'
+          python - <<'PY'
+          import requests
+          from bs4 import BeautifulSoup
+          base='https://info.nec.go.kr/electioninfo/electionInfo_report.xhtml'
+          common={
+            'electionId':'0000000000','requestURI':'/WEB-INF/jsp/electioninfo/0000000000/ep/epei01.jsp',
+            'topMenuId':'EP','secondMenuId':'EPEI01','menuId':'EPEI01','statementId':'EPEI01_#1',
+            'oldElectionType':'1','electionType':'4','electionName':'20260603','cityCode':'1100',
+            'proportionalRepresentationCode':'-1','townCode':'-1'
+          }
+          s=requests.Session(); s.headers['User-Agent']='Mozilla/5.0'
+          for code in range(3,11):
+            p=common|{'electionCode':str(code)}
+            r=s.get(base,params=p,timeout=30)
+            soup=BeautifulSoup(r.text,'html.parser')
+            table=soup.select_one('#table01')
+            text=' '.join(table.stripped_strings)[:900] if table else 'NO TABLE'
+            print('CODE',code,'HTTP',r.status_code,'LEN',len(r.text),'TABLE',bool(table))
+            print(text)
+          PY
