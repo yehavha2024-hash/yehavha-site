@@ -208,7 +208,7 @@
 
     if (Array.isArray(item.facts) && item.facts.length) body.append(renderCaseBlock('검증된 사실관계', item.facts));
     if (Array.isArray(item.legalIssues) && item.legalIssues.length) body.append(renderCaseBlock('핵심 법적 쟁점', item.legalIssues));
-    if (Array.isArray(item.researchLinks) && item.researchLinks.length) body.append(renderCaseBlock('박사연구 연결', item.researchLinks));
+    if (Array.isArray(item.researchLinks) && item.researchLinks.length) body.append(renderCaseBlock('심화연구 연결', item.researchLinks));
 
     if (Array.isArray(item.sources) && item.sources.length) {
       const section = make('section', 'thesis-brief');
