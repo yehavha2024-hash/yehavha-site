@@ -1,0 +1,1 @@
+window.COUNCIL_MEMBERS_2026={"version":"pending","generatedAt":null,"source":{"name":"중앙선거관리위원회 제9회 전국동시지방선거 당선인 명부","url":"https://info.nec.go.kr/"},"counts":{"metro":0,"local":0,"total":0},"regions":{}};
