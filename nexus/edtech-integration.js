@@ -1,8 +1,8 @@
 (()=>{
   'use strict';
   const CATEGORY_ID='edtechresearch';
-  const PROJECT_ID='ai-edtech-research-lab';
   const icon='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h9a3 3 0 0 1 3 3v10H7a3 3 0 0 0-3 3v-16Z"/><path d="M16 8.5h4v9h-4M8 10h4M8 13h5"/></svg>';
+  let installing=false;
   const make=(tag,className,text)=>{const el=document.createElement(tag);if(className)el.className=className;if(text!==undefined)el.textContent=text;return el;};
   const trackedUrl=project=>`/go?${new URLSearchParams({to:project.url,id:project.id}).toString()}`;
   function installQuickLink(category,count){
@@ -25,20 +25,19 @@
   }
   async function install(){
     const knowledgeGrid=document.querySelector('.portal-tier-knowledge .portal-tier-grid');
-    if(!knowledgeGrid||document.getElementById(CATEGORY_ID))return false;
+    if(!knowledgeGrid||document.getElementById(CATEGORY_ID)||installing)return false;
+    installing=true;
     try{
       const response=await fetch('./projects.json',{cache:'no-store'});if(!response.ok)return false;const data=await response.json();
       const category=(data.categories||[]).find(item=>item.id===CATEGORY_ID);const projects=(data.projects||[]).filter(item=>item.category===CATEGORY_ID);
-      if(!category||!projects.length)return false;
+      if(!category||!projects.length||document.getElementById(CATEGORY_ID))return false;
       knowledgeGrid.insertBefore(buildCategory(category,projects),knowledgeGrid.firstChild);
       installQuickLink(category,projects.length);
       return true;
-    }catch{return false;}
+    }catch{return false;}finally{installing=false;}
   }
   const portal=document.getElementById('portalGrid');
   if(portal){const observer=new MutationObserver(()=>{void install();});observer.observe(portal,{childList:true,subtree:true});}
-  const quick=document.getElementById('quickLinks');
-  if(quick){const qObserver=new MutationObserver(()=>{if(!quick.querySelector(`[data-category="${CATEGORY_ID}"]`))void install();});qObserver.observe(quick,{childList:true});}
   window.addEventListener('load',()=>{void install();});
   void install();
 })();
