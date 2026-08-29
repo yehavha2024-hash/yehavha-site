@@ -1,4 +1,4 @@
-const CACHE_NAME = "three-minute-break-v16-canonical-footer";
+const CACHE_NAME = "three-minute-break-v17-bible-scripture";
 const ASSETS = [
   "./",
   "./index.html",
@@ -8,6 +8,7 @@ const ASSETS = [
   "./legal-philosophy-quotes.js",
   "./legal-quizzes.js",
   "./content-expansion-20260814.js",
+  "./bible-scripture.js",
   "./manifest.webmanifest",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
