@@ -7,6 +7,7 @@ const ASSETS = [
   "teps-extension-v2.css",
   "project-standard.css",
   "app-v2.js",
+  "date-progress.js",
   "teps-extension-ui-v2.js",
   "reading-ready-sync.js",
   "focused-reading-ui.js",
