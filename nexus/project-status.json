@@ -196,5 +196,14 @@
     "lastUpdated": "2026-08-23",
     "contentCount": 496,
     "contentLabel": "개설 과목"
+  },
+  "ai-edtech-research-lab": {
+    "id": "ai-edtech-research-lab",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-30",
+    "contentCount": 10,
+    "contentLabel": "연구 영역"
   }
 }
