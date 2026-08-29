@@ -1,0 +1,14 @@
+{
+  "id": "ai-edtech-research-lab",
+  "publish": true,
+  "tracking": {
+    "paths": ["nexus/edtech-research"],
+    "freshDays": 14,
+    "staleDays": 45,
+    "count": {
+      "type": "static",
+      "value": 10,
+      "label": "연구 영역"
+    }
+  }
+}
