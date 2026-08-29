@@ -23,6 +23,30 @@ function urlNode({ loc, lastmod }) {
   return lines.join('\n');
 }
 
+async function findProjectIndexPages(dir, relative = '') {
+  const entries = await fs.readdir(dir, { withFileTypes: true });
+  const found = [];
+
+  for (const entry of entries) {
+    if (entry.name.startsWith('.')) continue;
+    if (relative === '' && ['articles', 'scripts'].includes(entry.name)) continue;
+
+    const absolute = path.join(dir, entry.name);
+    const nextRelative = path.posix.join(relative, entry.name);
+
+    if (entry.isDirectory()) {
+      found.push(...await findProjectIndexPages(absolute, nextRelative));
+      continue;
+    }
+
+    if (entry.isFile() && entry.name === 'index.html' && relative) {
+      found.push(relative);
+    }
+  }
+
+  return found;
+}
+
 const archive = JSON.parse(
   await fs.readFile(path.join(articlesDir, 'articles.json'), 'utf8')
 );
@@ -55,6 +79,13 @@ for (const fileName of staticArticleFiles) {
   urls.push({
     loc: `${SITE_URL}/articles/${encodeURIComponent(fileName)}`,
     lastmod: archiveUpdatedAt
+  });
+}
+
+const projectIndexPages = (await findProjectIndexPages(nexusDir)).sort();
+for (const relativeDir of projectIndexPages) {
+  urls.push({
+    loc: `${SITE_URL}/${relativeDir.split('/').map(encodeURIComponent).join('/')}/`
   });
 }
 
