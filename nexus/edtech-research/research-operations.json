@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "updatedAt": "2026-08-30",
   "operatingMode": "living-research-lab",
   "policy": {
@@ -13,12 +13,45 @@
     {
       "id": "R08-001",
       "title": "Agentic AI 기반 개인화 원격학습과 성인학습자의 자기조절학습·학업지속",
-      "status": "literature-review",
+      "status": "model-design",
       "priority": "A",
       "lastReviewed": "2026-08-30",
-      "theory": ["Self-Regulated Learning", "Self-Determination Theory"],
-      "outcomes": ["SRL", "메타인지", "학업지속", "성취"],
-      "nextAction": "핵심 변수와 측정도구 후보를 정리하고 비교조건을 확정한다.",
+      "theory": ["Self-Regulated Learning", "Self-Determination Theory", "Bounded Autonomy"],
+      "outcomes": ["SRL", "메타인지", "학업지속", "성취", "학습자 통제감"],
+      "evidenceSummary": "최근 SRL 체계적 문헌고찰과 메타분석은 AI가 목표설정·진행모니터링·전략추천·피드백 등 SRL 전 단계에 개입할 수 있음을 보여준다. 반면 2026년 Agentic AI 교육 scoping review는 기술적 자율성과 교육이론의 연결, 장기·현장 실증, 인간감독이 여전히 부족하다고 지적한다. 따라서 핵심 연구공백은 AI 자율성의 유무가 아니라 어떤 수준의 bounded autonomy가 SRL과 지속성을 높이면서 학습자 조절기능을 대체하지 않는가에 있다.",
+      "evidence": [
+        {
+          "type": "systematic-review",
+          "citation": "Xia, Liu, Tlili & Chiu (2026), Computers & Education 240, 105465",
+          "doi": "10.1016/j.compedu.2025.105465",
+          "finding": "73편 분석. 개인화 목표설정, 자료 탐색·통합, 진행 모니터링, 전략추천, 기록·피드백, 아이디어 생성의 6개 GenAI-SRL affordance를 제시."
+        },
+        {
+          "type": "systematic-review",
+          "citation": "Using artificial intelligence to support self-regulated learning (2026), Learning and Individual Differences 128, 102917",
+          "doi": "10.1016/j.lindif.2026.102917",
+          "finding": "25개 실증연구를 종합하고 learner layer와 instructor layer를 포함한 AI-SRL framework를 제안."
+        },
+        {
+          "type": "scoping-review",
+          "citation": "A scoping review of generative AI-powered agentic AI in education (2026), Computers and Education: Artificial Intelligence, 100653",
+          "doi": "10.1016/j.caeai.2026.100653",
+          "finding": "2020~2026년 474개 연구 중 교육이론을 명시적으로 사용한 연구는 138개. 장기·현장 검증과 human oversight, governed adoption이 주요 연구공백."
+        },
+        {
+          "type": "meta-analysis",
+          "citation": "AI support in self-regulated learning: A decade of technological evolution and meta-analysis (2026), British Journal of Educational Technology",
+          "doi": "10.1111/bjet.70058",
+          "finding": "2013~2025년 35개 실증연구를 Zimmerman SRL 순환모형으로 종합하고 rule-based, adaptive, generative AI의 공존적 발전을 확인."
+        },
+        {
+          "type": "perspective",
+          "citation": "The regulation paradox: agentic AI, bounded autonomy, and self-regulated learning in higher education (2026), Frontiers in Education",
+          "doi": "10.3389/feduc.2026.1902833",
+          "finding": "Agentic AI가 학습자의 조절작업을 대체할 위험을 지적하고 scope·timing·transparency·contestability·duration을 제한하는 bounded autonomy를 제안."
+        }
+      ],
+      "nextAction": "Agentic AI 자율성을 3단계로 조작한다: L1 학습자 요청형 지원, L2 조건부 능동개입, L3 고자율 계획·개입. 각 조건에서 SRL, 메타인지, 지속성, 성취, 통제감을 측정하는 연구모형을 확정한다.",
       "linkedField": ["F09-001"],
       "linkedDoctoral": ["D10-A1"]
     },
@@ -63,11 +96,14 @@
     {
       "id": "F09-001",
       "title": "성인학습자 Agentic AI 학습코치",
-      "status": "prototype-design",
+      "status": "protocol-design",
       "lastReviewed": "2026-08-30",
       "stage": "Prototype",
-      "evidence": [],
-      "nextAction": "최소 기능을 목표설정·일일계획·진도점검·회고·재학습 제안으로 제한해 프로토타입 명세를 작성한다.",
+      "evidence": [
+        "R08-001 문헌검토에서 SRL 전 단계 지원 가능성과 동시에 과잉자율성에 따른 regulatory displacement 위험을 확인.",
+        "프로토타입은 bounded autonomy를 반영해 AI가 모든 학습조절을 대행하지 않도록 설계해야 함."
+      ],
+      "nextAction": "L1 요청형, L2 조건부 능동개입, L3 고자율의 세 프로토타입 조건을 정의하고 개입 로그·학습자 승인·중단 기능을 공통으로 둔다.",
       "linkedResearch": ["R08-001"],
       "linkedDoctoral": ["D10-A1"]
     },
@@ -112,8 +148,9 @@
       "status": "priority-a",
       "rank": 1,
       "lastReviewed": "2026-08-30",
-      "evidenceLevel": "high-potential",
-      "nextAction": "R08-001의 문헌검토와 F09-001의 프로토타입 결과를 누적해 연구계획서 수준으로 압축한다.",
+      "evidenceLevel": "evidence-supported-gap",
+      "evidenceSummary": "SRL 지원에 대한 체계적 근거는 빠르게 축적되고 있으나 Agentic AI의 자율성 수준과 SRL 간 인과효과, 장기 지속성, 실제 원격학습 환경의 현장검증은 아직 부족하다. 이 공백이 박사 연구의 핵심 차별점이 된다.",
+      "nextAction": "박사 연구 핵심모형을 AI autonomy level → SRL/metacognition → persistence/achievement로 설정하고 learner control을 조절·보호변수로 포함한다.",
       "linkedResearch": ["R08-001"],
       "linkedField": ["F09-001"]
     },
