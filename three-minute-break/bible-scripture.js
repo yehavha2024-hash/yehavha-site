@@ -24,7 +24,8 @@
     const text = scriptureByMeta[rawMeta];
 
     if (text) {
-      cardMeta.textContent = `(${rawMeta})`;
+      const formattedMeta = `(${rawMeta})`;
+      if (cardMeta.textContent !== formattedMeta) cardMeta.textContent = formattedMeta;
       scripture.textContent = text;
       scripture.hidden = false;
     } else {
