@@ -8,6 +8,19 @@
 
   const standaloneArticles = [
     {
+      id: 'nepal-disaster-repentance-warning-en',
+      section: 'bible-theology',
+      sectionLabel: 'Bible & Theology',
+      language: 'en',
+      translationOf: 'nepal-disaster-repentance-warning',
+      series: 'Bible Message · English',
+      title: 'What We Must Examine First in the Face of Disaster',
+      summary: 'A biblical reflection on the 2026 Nepal Himalayan tragedy, the danger of judging victims, God’s patience, repentance, and the call to remain watchful.',
+      author: 'MyungHun Lee',
+      publishedAt: '2026-08-30',
+      href: './nepal-disaster-repentance-warning-en.html'
+    },
+    {
       id: 'judicial-ai-prompt-injection',
       section: 'ai-law-essay',
       language: 'ko',
