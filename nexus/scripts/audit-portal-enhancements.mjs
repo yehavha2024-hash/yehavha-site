@@ -25,6 +25,7 @@ requireFiles([
   'nexus/portal-v2.css',
   'nexus/nexus-standard.css',
   'nexus/articles/articles.json',
+  'nexus/articles/archive-index.js',
   'nexus/ai-trends/data.json',
   'nexus/intelligence-briefing/latest.json'
 ]);
@@ -83,7 +84,7 @@ if (exists('nexus/portal-v2.js') && exists('nexus/index.html')) {
 }
 
 const surfaces = [
-  ['nexus/articles/index.html', ['id="articleArchive"','id="sectionCount"','id="articleCount"','id="topicGrid"','id="articleGrid"','./articles.js']],
+  ['nexus/articles/index.html', ['id="articleArchive"','id="articleCount"','id="updatedAt"','id="latestTitle"','id="articleGrid"','./archive-index.js']],
   ['nexus/articles/article.html', ['id="readerCard"','id="articleBody"','id="articleToc"','id="relatedArticles"','./articles.js']],
   ['nexus/ai-trends/index.html', ['id="radarGrid"','id="scopeGrid"','id="filterRow"','id="briefFeed"']],
   ['nexus/intelligence-briefing/index.html', ['id="executiveSummary"','id="briefFeed"','id="archiveList"']],
