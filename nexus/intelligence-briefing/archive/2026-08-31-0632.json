@@ -1,0 +1,165 @@
+{
+  "generatedAt": "2026-08-31T06:32:00+09:00",
+  "window": "2026-08-30 06:32–2026-08-31 06:32 KST · 최근 24시간 중심 · 동일 이슈는 material change가 있을 때만 본문 재진입",
+  "schedule": "06:30 KST daily",
+  "executiveSummary": "오늘의 핵심은 호르무즈 해협에서 미국과 이란의 군사충돌이 다시 직접 타격 단계로 올라선 점, 한국의 경제·안보 라인 개편과 기준금리 인상 이후 정책조합 변화, 북한 군 수뇌부 재편, 미국의 베네수엘라 원유 확보 및 전략비축유 재충전 계획, G20을 앞둔 미국 재정·채권시장과 국제금융 공조의 긴장, 히말라야 초대형 빙하붕괴 재난의 피해 확대, 콩고민주공화국 Bundibugyo 에볼라의 PHEIC 지속이다. 특히 호르무즈에서는 미군이 이란의 기뢰·미사일 준비 거점을 직접 타격해 한 달여 만에 군사행동이 재개됐고, 이는 원유수송·보험·해운비용의 즉각적 상방위험을 다시 높였다. 한국에서는 신임 경제부총리·법무·국방 인선과 함께 2027년 예산 발표가 임박해 확장재정과 통화긴축의 조합이 시장의 핵심 변수가 됐다. 북한은 국방상 교체와 군 핵심인사 복귀를 통해 러시아 연계와 군수산업 중심의 지휘체계를 재정비하고 있다. 한편 네팔–티베트 접경 재난은 사망자가 약 800명, 실종자가 3천명 이상으로 확대됐고, WHO는 DRC 에볼라가 60개 보건구역·5,794명 확진·2,786명 사망으로 확대된 상태에서 국제적 공중보건비상사태를 유지하고 있다.",
+  "items": [
+    {
+      "topicKey": "iran-hormuz-us-strikes-20260831",
+      "priority": "CRITICAL",
+      "category": "안보·국제정세·에너지·해운",
+      "headline": "미군, 호르무즈 해협 인근 이란 미사일 발사대 직접 타격…기뢰전·해상봉쇄 재격화 위험",
+      "fact": "8월 30일 미군은 이란 Larak 섬의 미사일 발사대 2곳을 타격했다. 미국 측은 이란 혁명수비대가 해상 기뢰를 전개하고 국제선박을 위협할 준비를 하고 있었다고 설명했다. 이란은 군인·민간인 사상자가 발생했다고 밝히고 보복을 예고했다. 이번 공격은 7월 말 이후 처음 알려진 미국의 직접 타격이다.",
+      "assessment": "최근 미국이 군사행동보다 제재·경제압박을 강화하는 방향으로 기울었던 흐름에서 다시 직접 군사행동이 재개됐다는 점이 핵심이다. 이란이 기뢰·미사일·드론을 통해 해협 통항을 실질적으로 제약할 능력을 유지하고 있어 군사적 확전이 아니더라도 보험료·선박우회·원유수송비용은 즉각 반응할 수 있다.",
+      "impact": "한국을 포함한 아시아 원유수입국의 에너지비용, 정유·석화업계 원가, 해운·보험료, 글로벌 인플레이션과 중앙은행 긴축기조에 직접적 상방압력으로 작용할 수 있다.",
+      "watch": "이란의 보복 방식, 추가 기뢰 설치·탱커 공격 여부, 해협 통항량, 미국·이스라엘 후속 타격, 국제유가와 해상보험료 변화를 추적한다.",
+      "confidence": "높음",
+      "sources": [
+        {
+          "label": "Reuters · US forces strike two Iranian launchers on Iran's Larak island",
+          "url": "https://www.reuters.com/world/middle-east/us-forces-strike-two-iranian-launchers-irans-larak-island-us-official-says-2026-08-30/"
+        },
+        {
+          "label": "AP · US forces strike Iranian rocket launchers on the Strait of Hormuz",
+          "url": "https://apnews.com/article/6b098da673ac3161a266ee459d5eff44"
+        }
+      ]
+    },
+    {
+      "topicKey": "korea-cabinet-reshuffle-finance-defense-20260831",
+      "priority": "HIGH",
+      "category": "정부·경제정책·안보·법무",
+      "headline": "한국, 경제부총리·법무·국방 라인 개편…2027년 예산 앞두고 정책조합 재정렬",
+      "fact": "8월 30일 정부는 이형일 제1차관을 신임 경제부총리 겸 재정경제부 장관으로 지명하고 법무부와 국방부 장관도 교체하는 개각을 발표했다. 한국은행은 8월 27일 기준금리를 2.75%에서 3.00%로 인상했고, 2026년 성장률 전망을 3.3%로 상향했다. 정부는 다음 주 2027년 예산안을 공개할 예정이다.",
+      "assessment": "경제는 반도체 호황으로 성장세가 강하지만 물가·주택·채권시장의 부담도 커져 확장재정과 통화긴축이 동시에 작동하는 구간에 진입했다. 새 경제팀의 핵심 과제는 성장지원과 국채시장 안정, 가계부채·부동산 리스크 관리의 균형이다.",
+      "impact": "국고채 금리, 원화, 주택·가계대출, 재정지출 우선순위, 방위정책과 사법·수사정책 방향에 영향을 줄 수 있다.",
+      "watch": "2027년 예산 총지출·국채발행 규모, 신임 경제부총리의 재정기조, 부동산·가계부채 대책, 국방부 지휘체계 변화와 국회 인사검증을 본다.",
+      "confidence": "높음",
+      "sources": [
+        {
+          "label": "Reuters · South Korea names Lee Hyoung-il as new finance chief",
+          "url": "https://www.reuters.com/world/asia-pacific/south-korea-vice-finance-minister-lee-hyoung-il-named-finance-minister-yonhap-2026-08-30/"
+        },
+        {
+          "label": "Bank of Korea · 통화정책방향 2026.8.27",
+          "url": "https://www.bok.or.kr/portal/main/main.do"
+        }
+      ]
+    },
+    {
+      "topicKey": "north-korea-defense-leadership-reshuffle-20260831",
+      "priority": "HIGH",
+      "category": "한반도·안보·북한·군사",
+      "headline": "북한, 국방상 교체·박정천 복귀…러시아 연계 속 군수·작전지휘 재정비",
+      "fact": "북한은 김성기를 신임 국방상으로 임명하고 노광철을 군수공업부의 고위직으로 이동시켰다. 박정천도 당 중앙군사위원회 부위원장으로 복귀했다. 김정은은 동시에 국방과학자들의 신형 전투무기 개발 성과를 강조했다.",
+      "assessment": "단순 인사보다 군 지휘·정치통제·군수산업의 역할을 재배치하는 성격이 강하다. 우크라이나 전쟁을 매개로 한 러시아와의 군사협력, 탄약·미사일 생산 확대, 신형무기 실전경험 반영이 인사 배경일 가능성이 있다.",
+      "impact": "한미 연합방위, 북한의 대러 군사지원, 미사일·드론·포병 전력 고도화, 향후 북미대화에서의 군사적 협상력에 영향을 줄 수 있다.",
+      "watch": "신임 국방상의 공개행보, 노광철의 군수산업 역할, 박정천의 작전지휘 권한, 대러 무기·병력 협력, 9월 한미훈련 전후 북한 반응을 확인한다.",
+      "confidence": "높음",
+      "sources": [
+        {
+          "label": "Reuters · North Korea names new defense minister, KCNA says",
+          "url": "https://www.reuters.com/world/asia-pacific/north-korea-names-new-defense-minister-kcna-says-2026-08-30/"
+        }
+      ]
+    },
+    {
+      "topicKey": "venezuela-us-oil-spr-20260831",
+      "priority": "HIGH",
+      "category": "에너지·외교·시장·산업",
+      "headline": "미국, 베네수엘라와 25년 에너지협력 추진…원유로 전략비축유 재충전 계획",
+      "fact": "베네수엘라 임시정부는 미국과의 에너지협력이 25년간 지속되며 17개 전략 유전 개발과 하루 150만 배럴 생산목표를 포함한다고 밝혔다. 트럼프 대통령은 이 합의로 확보할 베네수엘라산 원유를 약 2억9천만 배럴 수준까지 감소한 미국 전략비축유 보충에 사용할 것이라고 발표했다.",
+      "assessment": "미국의 대베네수엘라 정책이 제재·압박 중심에서 직접적인 공급망 확보와 장기 개발 참여로 이동하는 신호다. 다만 노후 인프라와 투자부족 때문에 단기 생산증대 효과는 제한적일 가능성이 높다.",
+      "impact": "중장기적으로 미국의 중질유 공급, 걸프산 원유 의존도, OPEC 수급구조와 국제유가에 영향을 줄 수 있으며 중국·러시아의 베네수엘라 에너지 이해관계와도 충돌할 수 있다.",
+      "watch": "실제 계약서·생산권 구조, Chevron 등 미국기업 참여, 생산증대 일정, 미국 SPR 입고 시점, 베네수엘라 국내 정치·법적 반발을 본다.",
+      "confidence": "중간",
+      "sources": [
+        {
+          "label": "Reuters · Venezuela's interim president says US energy deal will last 25 years",
+          "url": "https://www.reuters.com/business/energy/venezuelas-interim-president-says-us-energy-deal-will-last-25-years-2026-08-30/"
+        },
+        {
+          "label": "Reuters · Trump says US will refill Strategic Petroleum Reserve using Venezuelan oil",
+          "url": "https://www.reuters.com/business/energy/trump-says-us-will-refill-strategic-petroleum-reserve-using-venezuelan-oil-2026-08-30/"
+        }
+      ]
+    },
+    {
+      "topicKey": "g20-us-fiscal-bond-tensions-20260831",
+      "priority": "WATCH",
+      "category": "거시경제·국제금융·통상·G20",
+      "headline": "G20 앞두고 미국 재정·관세·채권시장 불안이 국제금융 공조의 핵심 리스크로 부상",
+      "fact": "미 재무장관 Scott Bessent는 G20 회의를 앞두고 무역불균형, 이란 제재, 성장 문제를 주요 의제로 추진하고 있다. 동시에 미국 국가부채가 40조달러를 넘고 장기금리가 높은 수준을 유지하면서 재정신뢰 문제가 부각됐다. 유럽 중앙은행 관계자들은 최근 미 재무부의 외환시장 개입과 장기국채 매입확대 가능성 등 비전통적 개입에 우려를 나타냈다.",
+      "assessment": "통화정책보다 재정·무역·외환정책의 정치적 개입이 글로벌 금융변동성의 주요 원천이 되고 있다. 미 국채시장의 불안이 확대되면 달러유동성·장기금리·신흥국 자본흐름에 동시에 영향을 줄 수 있다.",
+      "impact": "한국의 원달러 환율, 국고채 금리, 외국인 자금흐름, 수출기업 환헤지 비용과 글로벌 위험자산 가격에 파급될 수 있다.",
+      "watch": "G20 공동성명, 미국 장기채 금리와 국채매입 정책, 달러 스왑라인 관련 발언, 추가 관세조치와 중국·EU의 대응을 확인한다.",
+      "confidence": "중간",
+      "sources": [
+        {
+          "label": "Reuters · US Treasury's Bessent faces G20 diplomacy test",
+          "url": "https://www.reuters.com/world/china/us-treasurys-bessent-faces-g20-diplomacy-test-amid-tariffs-iran-war-bond-turmoil-2026-08-30/"
+        },
+        {
+          "label": "Reuters · Europe's central bankers fear more turbulence in testy U.S. relations",
+          "url": "https://www.reuters.com/business/finance/europes-central-bankers-fear-more-turbulence-testy-u.s.-relations-2026-08-30/"
+        }
+      ]
+    },
+    {
+      "topicKey": "himalaya-glacier-disaster-20260831",
+      "priority": "CRITICAL",
+      "category": "재난·환경·인프라·국제협력",
+      "headline": "히말라야 빙하붕괴 재난 사망 약 800명·실종 3천명 이상…국경 조기경보체계 실패 쟁점화",
+      "fact": "네팔과 중국 접경의 빙하 붕괴·산사태 재난으로 8월 30일 기준 사망자가 약 800명, 실종자가 3천명 이상으로 늘었다. 9만명 이상이 영향을 받은 것으로 추산되며 수력발전소·교량·도로가 광범위하게 파괴됐다. 네팔은 중국에 빙하·수위 데이터의 더 빈번한 공유를 요구해왔으나 충분한 조기경보 정보가 제공되지 않았다는 지적이 제기됐다.",
+      "assessment": "단순 자연재난을 넘어 기후변화, 국경간 데이터공유, 수력인프라 안전, 조기경보 거버넌스가 결합된 복합위기다. 기후위험이 국경을 넘는 상황에서 정보공유 실패가 피해를 확대할 수 있다는 점이 핵심이다.",
+      "impact": "네팔의 전력·도로·관광·재정에 장기 충격을 주고, 중국–네팔 간 재난정보협력과 히말라야권 국가들의 빙하·수자원 모니터링 정책을 재편할 가능성이 높다.",
+      "watch": "추가 빙하호 붕괴, 신규 홍수경보, 실종자 수색, 수력발전 복구, 중국–네팔 데이터공유 협정과 국제재건지원 규모를 추적한다.",
+      "confidence": "높음",
+      "sources": [
+        {
+          "label": "Reuters · Rescuers battle floods and debris as Himalayan disaster death toll nears 800",
+          "url": "https://www.reuters.com/world/china/china-identifies-countries-261-foreigners-missing-himalayan-mudslide-2026-08-30/"
+        },
+        {
+          "label": "Reuters · Before flood catastrophe, Nepal asked China for early warnings",
+          "url": "https://www.reuters.com/business/environment/before-flood-catastrophe-nepal-asked-china-early-warnings-risks-mounted-2026-08-30/"
+        },
+        {
+          "label": "AP · Nepal warns of possible fresh flooding",
+          "url": "https://apnews.com/article/afec20e612514ca3598c65b29f485303"
+        }
+      ]
+    },
+    {
+      "topicKey": "drc-bundibugyo-ebola-20260831",
+      "priority": "HIGH",
+      "category": "보건·국제기구·재난",
+      "headline": "DRC Bundibugyo 에볼라 5,794명 확진·2,786명 사망…WHO, PHEIC 유지",
+      "fact": "WHO는 8월 28일 업데이트에서 DRC의 Bundibugyo 에볼라가 6개 주 60개 보건구역으로 확대됐으며 8월 26일 기준 확진 5,794명, 사망 2,786명, 치명률 48.1%라고 밝혔다. 프랑스와 우간다에서는 42일 강화감시기간이 종료됐지만 DRC 내 전파는 계속되고 있고 WHO는 국제적 공중보건비상사태(PHEIC)를 유지했다.",
+      "assessment": "국외 지속전파는 아직 제한적이지만 DRC 내부 전파규모가 계속 커지고 있고 의료접근·치안·보건시설 공격이 대응을 제약하고 있다. 국제 확산위험보다 현지의 대규모 지속전파와 보건체계 붕괴가 현재의 핵심위험이다.",
+      "impact": "중앙아프리카 국경보건 강화, 여행·물류 검역, 백신·치료제 공급과 국제보건 재원 압박이 지속될 가능성이 높다.",
+      "watch": "신규 주·국가 유입, 보건종사자 감염, 백신배분과 치료센터 확대, WHO 임시권고 변경 여부를 본다.",
+      "confidence": "높음",
+      "sources": [
+        {
+          "label": "WHO · Disease Outbreak News, 28 August 2026",
+          "url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON616"
+        },
+        {
+          "label": "WHO · Ebola outbreak - DRC 2026",
+          "url": "https://www.who.int/emergencies/situations/ebola-outbreak---drc-2026"
+        }
+      ]
+    }
+  ],
+  "strategicWatchlist": [
+    "호르무즈 해협의 기뢰·미사일·탱커 공격과 국제유가·보험료",
+    "한국 2027년 예산안과 확장재정·기준금리 3.00%의 정책조합",
+    "북한 군 수뇌부 재편과 대러 군수협력의 실제 확대 여부",
+    "미국 베네수엘라 원유 확보의 법적 구조와 생산증대 속도",
+    "G20에서 미국 재정·관세·외환정책을 둘러싼 국제공조 균열",
+    "히말라야 추가 홍수와 중국–네팔 조기경보 데이터 공유",
+    "DRC Bundibugyo 에볼라의 신규 국가 유입 및 백신대응"
+  ],
+  "outlook": "향후 1~4주는 에너지·금융·한반도 안보가 동시에 변동성을 높일 가능성이 있다. 단기적으로는 호르무즈 해협의 군사행동과 통항량이 국제유가의 핵심 변수가 되고, 한국은 2027년 예산안 발표 이후 국채발행·재정확대 규모가 금리·환율·주택시장과 연결될 전망이다. 북한의 군 인사개편은 9월 한미훈련과 맞물려 추가 무력시위 또는 대러 협력발표로 이어질 수 있다. 미국의 베네수엘라 원유 확보정책은 단기 공급효과보다 중장기 에너지질서 재편 신호로 봐야 하며, G20에서는 미국의 재정·관세·외환정책을 둘러싼 동맹국의 불신이 표면화될 수 있다. 히말라야 재난과 DRC 에볼라는 각각 기후재난 거버넌스와 국제보건 대응 역량을 시험하는 중기 리스크로 남는다."
+}
