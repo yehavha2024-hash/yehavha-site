@@ -77,7 +77,7 @@
   };
 
   const style = document.createElement('style');
-  style.textContent = '.card-scripture{margin:10px 0 0;padding:10px 12px;border-top:1px solid rgba(0,0,0,.12);white-space:pre-line;font-size:.95rem;line-height:1.7;color:inherit}.card-scripture[hidden]{display:none}';
+  style.textContent = '.card-scripture{margin:10px 0 0;padding:10px 12px;border-top:1px solid rgba(0,0,0,.12);white-space:pre-line;font-size:.95rem;line-height:1.7;color:inherit}.card-scripture-note{margin:6px 12px 0;font-size:.78rem;line-height:1.5;opacity:.72}.card-scripture[hidden],.card-scripture-note[hidden]{display:none}';
   document.head.append(style);
 
   const card = document.getElementById('card');
@@ -89,6 +89,13 @@
   scripture.className = 'card-scripture';
   scripture.hidden = true;
   cardMeta.insertAdjacentElement('afterend', scripture);
+
+  const scriptureNote = document.createElement('p');
+  scriptureNote.id = 'cardScriptureNote';
+  scriptureNote.className = 'card-scripture-note';
+  scriptureNote.textContent = '표기 안내: 개역한글 본문의 ‘예수’는 히브리어 원래 이름인 ‘예슈아’로 표기했습니다.';
+  scriptureNote.hidden = true;
+  scripture.insertAdjacentElement('afterend', scriptureNote);
 
   const bookCache = new Map();
   let requestSequence = 0;
@@ -117,6 +124,20 @@
   function hideScripture() {
     scripture.textContent = '';
     scripture.hidden = true;
+    scriptureNote.hidden = true;
+  }
+
+  function normalizeNames(text) {
+    return String(text || '')
+      .replaceAll('예수', '예슈아')
+      .replaceAll('여호와', '야훼');
+  }
+
+  function showPassage(originalText) {
+    const source = String(originalText || '');
+    scripture.textContent = normalizeNames(source);
+    scripture.hidden = false;
+    scriptureNote.hidden = !source.includes('예수');
   }
 
   function loadBook(file) {
@@ -159,6 +180,7 @@
 
     scripture.textContent = '개역한글 본문을 불러오는 중입니다.';
     scripture.hidden = false;
+    scriptureNote.hidden = true;
 
     try {
       const bookData = await loadBook(reference.file);
@@ -170,19 +192,18 @@
         return;
       }
 
-      scripture.textContent = text;
-      scripture.hidden = false;
+      showPassage(text);
     } catch (error) {
       if (sequence !== requestSequence) return;
       console.warn('KRV scripture load failed:', error);
 
       const fallback = fallbackByMeta[rawMeta];
       if (fallback) {
-        scripture.textContent = fallback;
-        scripture.hidden = false;
+        showPassage(fallback);
       } else {
         scripture.textContent = '개역한글 본문을 불러오지 못했습니다.';
         scripture.hidden = false;
+        scriptureNote.hidden = true;
       }
     }
   }
