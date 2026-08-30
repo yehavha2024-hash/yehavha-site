@@ -26,6 +26,7 @@
     intelligence: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 19 6.2v5.1c0 4.4-2.9 7.4-7 9.2-4.1-1.8-7-4.8-7-9.2V6.2L12 3.5Z"/><path d="M8.2 12h2.1l1.2-2.5 1.8 5 1.1-2.5h1.7"/></svg>',
     publicsector: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-5 9 5H3Z"/><path d="M5 10.5v7M9.5 10.5v7M14.5 10.5v7M19 10.5v7M3 19.5h18"/></svg>',
     university: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3.2 8.5 8.8-4.2 8.8 4.2-8.8 4.2-8.8-4.2Z"/><path d="M6.2 11.2v5.3c3.7 2.2 7.9 2.2 11.6 0v-5.3M20.8 8.5v5.3"/></svg>',
+    edtechresearch: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h9a3 3 0 0 1 3 3v10H7a3 3 0 0 0-3 3v-16Z"/><path d="M16 8.5h4v9h-4M8 10h4M8 13h5"/></svg>',
     learningapps: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="17" height="16" rx="3"/><path d="M3.5 8.2h17M7.2 12h3.8v3.8H7.2zM14.2 12h2.8M14.2 15.8h2.8"/></svg>',
     legalpractice: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15M6 7h12M7.5 7 4.5 13h6L7.5 7ZM16.5 7l-3 6h6l-3-6ZM8 20h8"/></svg>',
     education: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 8.7 9-4.2 9 4.2-9 4.2-9-4.2Z"/><path d="M6 11.1v5c3.8 2.4 8.2 2.4 12 0v-5"/><path d="M21 8.7v5.1"/></svg>',
@@ -38,7 +39,7 @@
   const portalTiers = [
     { id: 'strategy', number: '01', eyebrow: 'JUDGMENT · STRATEGY', title: '판단·전략', description: '현안을 판단하고 핵심 정보를 분석하며 공공 AX 전략과 대응으로 연결합니다.', categoryIds: ['commentary', 'intelligence', 'publicsector'], variant: 'primary' },
     { id: 'learning', number: '02', eyebrow: 'LEARNING · PRACTICE', title: '학습·실무', description: '대학형 학습, 웹앱 반복학습, 법률 실무훈련과 AI 실습강좌를 연결합니다.', categoryIds: ['university', 'learningapps', 'legalpractice', 'education'], variant: 'primary' },
-    { id: 'knowledge', number: '03', eyebrow: 'RESEARCH · KNOWLEDGE', title: '연구·지식', description: '법학·AI 연구와 빠르게 변하는 AI 지식·동향을 분리해 전문적으로 축적합니다.', categoryIds: ['legalresearch', 'aiknowledge'], variant: 'primary' },
+    { id: 'knowledge', number: '03', eyebrow: 'RESEARCH · KNOWLEDGE', title: '연구·지식', description: '에듀테크와 법학·AI 연구, 빠르게 변하는 AI 지식·동향을 분리해 전문적으로 축적합니다.', categoryIds: ['edtechresearch', 'legalresearch', 'aiknowledge'], variant: 'primary' },
     { id: 'publishing', number: '04', eyebrow: 'PUBLISH · MEDIA', title: '출판·미디어', description: '연구와 창작의 결과물을 출판·아카이브와 미디어 콘텐츠로 공개합니다.', categoryIds: ['publishing', 'media'], variant: 'compact' }
   ];
 
@@ -112,6 +113,7 @@
     if (project.category === 'commentary') return {label:'논평',tone:'research'};
     if (project.category === 'intelligence') return {label:'전략정보',tone:'research'};
     if (project.category === 'publicsector') return {label:'전략·대응',tone:'research'};
+    if (project.category === 'edtechresearch') return {label:'전문 연구',tone:'research'};
     if (project.category === 'legalresearch') return {label:'전문 연구',tone:'research'};
     if (project.category === 'aiknowledge') return {label:'지식·동향',tone:'research'};
     if (project.category === 'legalpractice') return {label:'실무·훈련',tone:'operational'};
