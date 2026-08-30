@@ -1,4 +1,4 @@
-const CACHE_NAME = "three-minute-break-v17-bible-scripture";
+const CACHE_NAME = "three-minute-break-v18-bible-display";
 const ASSETS = [
   "./",
   "./index.html",
@@ -47,7 +47,7 @@ self.addEventListener("fetch", event => {
         return response;
       })
       .catch(async () => {
-        const cached = await caches.match(event.request);
+        const cached = await caches.match(event.request, { ignoreSearch: true });
         if (cached) return cached;
         if (event.request.mode === "navigate") return caches.match("./index.html");
         return Response.error();
