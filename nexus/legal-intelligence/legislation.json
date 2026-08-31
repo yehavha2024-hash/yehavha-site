@@ -240,7 +240,10 @@
           "date": "2026-08-21",
           "stage": "입법예고"
         }
-      ]
+      ],
+      "processStages": [],
+      "documents": [],
+      "officialLbicId": "2000000325806"
     },
     {
       "recordKey": "government:88128",
@@ -268,25 +271,6 @@
           "stage": "입법예고"
         }
       ]
-    },
-    {
-      "sourceType": "government",
-      "sourceId": "2000000325806",
-      "officialLbicId": "2000000325806",
-      "title": "고등교육법 시행령",
-      "ministry": "교육부",
-      "lawType": "대통령령",
-      "statusCode": "government_process",
-      "statusLabel": "국무회의",
-      "statusDate": "",
-      "active": true,
-      "topics": [
-        "교육·에듀테크"
-      ],
-      "summary": "법제처 정부입법 공식자료에서 자동 선별된 법령안입니다. 현재 추진단계는 국무회의이며 세부 내용은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://opinion.lawmaking.go.kr/lmSts/govLm/2000000325806/detailRP",
-      "history": [],
-      "recordKey": "government:2000000325806"
     },
     {
       "sourceType": "government",
