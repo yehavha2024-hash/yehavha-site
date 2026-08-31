@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-31",
+  "mode": "NEXUS에 필요한 자료를 깊게 축적",
+  "selectionPrinciple": "최신 자료를 일괄 수집하지 않고 NEXUS 관심영역과 직접 연결되는 판례·연구자료만 선별하여 축적한다.",
+  "priorityOrder": [
+    "AI·책임귀속",
+    "데이터·개인정보",
+    "자동화된 의사결정·행정",
+    "피지컬 AI·로봇",
+    "플랫폼·소비자책임",
+    "교육·에듀테크",
+    "LegalTech·법조제도"
+  ],
+  "requiredAnalysis": [
+    "issue",
+    "legalRule",
+    "researchPoint"
+  ],
+  "caseAnalysisBoundary": {
+    "issue": "판결에서 실제로 다투어진 법적 쟁점을 요약한다.",
+    "legalRule": "판결문·판례공보·법원 공식자료에서 판시하거나 설시한 법리만 요약한다. NEXUS 관점의 확장해석, AI·Agentic AI 적용 가능성, 연구자의 평가를 섞지 않는다.",
+    "researchPoint": "판례 자체의 법리와 구별하여 NEXUS 관심영역에 대한 적용 가능성, 비교·확장 연구방향, AI·Agentic AI 관련 해석을 기록한다."
+  },
+  "researchAnalysisBoundary": {
+    "issue": "연구가 해결하려는 법적·제도적 문제를 요약한다.",
+    "legalRule": "연구에서 분석한 현행 법규범, 판례법리, 규율구조를 사실에 근거해 정리한다.",
+    "researchPoint": "NEXUS의 기존 연구축과 직접 연결되는 후속 연구 질문과 활용 지점을 별도로 기록한다."
+  },
+  "editorialRules": [
+    "단순 최신순 수집 금지",
+    "NEXUS 관심영역과 직접 연결되지 않는 자료는 제외",
+    "판례의 사실·판시사항과 NEXUS의 연구적 해석을 분리",
+    "법리에 연구자의 추론을 삽입하지 않음",
+    "AI·Agentic AI로의 확장해석은 NEXUS 연구 포인트에만 기록",
+    "동일 자료는 중복 생성하지 않고 기존 기록을 갱신"
+  ]
+}
