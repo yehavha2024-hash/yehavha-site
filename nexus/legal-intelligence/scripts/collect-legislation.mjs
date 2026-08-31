@@ -23,11 +23,12 @@ const decodeXml = value => clean(value)
 
 async function request(url, options = {}, retries = 2) {
   let lastError;
+  const {accept = '*/*', headers = {}, ...fetchOptions} = options;
   for (let attempt = 0; attempt <= retries; attempt += 1) {
     try {
       const response = await fetch(url, {
-        ...options,
-        headers: {'User-Agent': 'YEHAVHA-Nexus-Legal-Intelligence/1.0', Accept: options.accept || '*/*', ...(options.headers || {})},
+        ...fetchOptions,
+        headers: {'User-Agent': 'YEHAVHA-Nexus-Legal-Intelligence/1.0', Accept: accept, ...headers},
         signal: AbortSignal.timeout(30000)
       });
       if (!response.ok) throw new Error(`HTTP ${response.status} ${url}`);
@@ -98,7 +99,7 @@ function dotDate(date) {
   const y = date.getFullYear();
   const m = date.getMonth() + 1;
   const d = date.getDate();
-  return `${y}.+${m}.+${d}.`;
+  return `${y}. ${m}. ${d}.`;
 }
 
 async function governmentCall(params) {
@@ -168,20 +169,26 @@ async function collectGovernment() {
   const end = new Date();
   const start = new Date(Date.now() - lookback * 86400000);
   const candidates = new Map();
+  const existingGovernment = (current.records || []).filter(record => record.sourceType === 'government');
+  const existingByTitle = new Map(existingGovernment.filter(record => record.title).map(record => [clean(record.title), record]));
 
   for (const keyword of config.discoveryKeywords || []) {
     const rows = await governmentCall({stDtFmt: dotDate(start), edDtFmt: dotDate(end), lsNmKo: keyword});
-    for (const row of rows) candidates.set(clean(row.lbicId), row);
+    for (const row of rows) {
+      const previous = existingByTitle.get(clean(row.lsNmKo));
+      const canonicalId = previous?.sourceId || clean(row.lbicId);
+      if (canonicalId) candidates.set(canonicalId, {...row, canonicalSourceId: canonicalId, officialLbicId: clean(row.lbicId)});
+    }
   }
 
-  for (const record of current.records || []) {
-    if (record.sourceType !== 'government' || !record.title) continue;
+  for (const record of existingGovernment) {
+    if (!record.title) continue;
     const rows = await governmentCall({lsNmKo: record.title});
-    const exact = rows.find(row => clean(row.lbicId) === clean(record.sourceId)) || rows.find(row => clean(row.lsNmKo) === clean(record.title));
-    if (exact?.lbicId) candidates.set(clean(exact.lbicId), exact);
+    const exact = rows.find(row => clean(row.lbicId) === clean(record.officialLbicId || record.sourceId)) || rows.find(row => clean(row.lsNmKo) === clean(record.title));
+    if (exact?.lbicId) candidates.set(clean(record.sourceId), {...exact, canonicalSourceId: clean(record.sourceId), officialLbicId: clean(exact.lbicId)});
   }
 
-  return [...candidates.values()].filter(row => row.lbicId).map(row => ({sourceType: 'government', sourceId: clean(row.lbicId), raw: row}));
+  return [...candidates.entries()].map(([sourceId, raw]) => ({sourceType: 'government', sourceId, raw}));
 }
 
 const existing = recordMap();
