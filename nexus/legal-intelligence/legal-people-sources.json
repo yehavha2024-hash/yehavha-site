@@ -1,7 +1,7 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "maxAgeDays": 240,
-  "detailLimitPerSource": 5,
+  "detailLimitPerSource": 6,
   "sources": [
     {
       "id": "scourt",
@@ -18,6 +18,13 @@
       "excludeKeywords": ["부음", "부고", "결혼", "화촉"]
     },
     {
+      "id": "ccourt-news",
+      "label": "헌법재판연구원",
+      "url": "https://www.ccourt.go.kr/site/kor/ex/bbs/List.do?cbIdx=1127",
+      "includeKeywords": ["국제학술심포지엄", "헌법재판연구", "학술", "심포지엄", "연구원"],
+      "excludeKeywords": ["채용", "구인", "방청", "견학", "합격자"]
+    },
+    {
       "id": "moj",
       "label": "법무부",
       "url": "https://www.moj.go.kr/moj/221/subview.do",
@@ -28,8 +35,15 @@
       "id": "koreanbar",
       "label": "대한변호사협회",
       "url": "https://www.koreanbar.or.kr/pages/news/list.asp?types=1",
-      "includeKeywords": ["변호사대회", "세미나", "포럼", "학술", "학술상", "전문변호사", "변호사시험", "법무법인"],
-      "excludeKeywords": ["부음", "부고", "결혼", "화촉", "모친상", "부친상", "장모상", "장인상", "공시송달", "등록취소", "징계", "연수 안내", "특별연수 실시계획"]
+      "includeKeywords": ["세미나", "포럼", "학술", "전문변호사", "변호사시험", "법무법인"],
+      "excludeKeywords": ["부음", "부고", "결혼", "화촉", "모친상", "부친상", "장모상", "장인상", "공시송달", "등록취소", "징계", "연수 안내", "특별연수 실시계획", "학술상 수상자 공고", "변호사대회」 개최 안내"]
+    },
+    {
+      "id": "koreanbar-press",
+      "label": "대한변호사협회",
+      "url": "https://www.koreanbar.or.kr/pages/news/list.asp?types=3",
+      "includeKeywords": ["변호사대회", "학술대회", "심포지엄", "토론회", "법률문화상", "학술상", "법조 시장", "변호사 과잉", "AI", "법률서비스", "인권보고서", "판결집", "자료집"],
+      "excludeKeywords": ["우수언론인", "집회", "성명서", "논평", "기부", "봉사"]
     },
     {
       "id": "kimchang",
