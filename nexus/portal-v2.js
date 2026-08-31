@@ -31,6 +31,7 @@
     legalpractice: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15M6 7h12M7.5 7 4.5 13h6L7.5 7ZM16.5 7l-3 6h6l-3-6ZM8 20h8"/></svg>',
     education: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 8.7 9-4.2 9 4.2-9 4.2-9-4.2Z"/><path d="M6 11.1v5c3.8 2.4 8.2 2.4 12 0v-5"/><path d="M21 8.7v5.1"/></svg>',
     legalresearch: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h9.2a2.8 2.8 0 0 1 2.8 2.8v10.2H7.8A2.8 2.8 0 0 0 5 20.3V4.5Z"/><path d="M7.8 20.3H19V7.8M8.5 9h5M8.5 12h4"/></svg>',
+    legalintelligence: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h14v15H5z"/><path d="M8 8h8M8 11.5h8M8 15h5"/><path d="M3 7.5h2M3 12h2M3 16.5h2"/></svg>',
     aiknowledge: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3M5.8 5.8l2.1 2.1M16.1 16.1l2.1 2.1M18.2 5.8l-2.1 2.1M7.9 16.1l-2.1 2.1"/><circle cx="12" cy="12" r="4.2"/></svg>',
     publishing: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5c3.3-.6 5.9.1 8 2.1v11c-2.1-2-4.7-2.7-8-2.1v-11Z"/><path d="M20 5.5c-3.3-.6-5.9.1-8 2.1v11c2.1-2 4.7-2.7 8-2.1v-11Z"/></svg>',
     media: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="m10 9 5 3-5 3V9Z"/></svg>'
@@ -40,7 +41,8 @@
     { id: 'strategy', number: '01', eyebrow: 'JUDGMENT · STRATEGY', title: '판단·전략', description: '현안을 판단하고 핵심 정보를 분석하며 공공 AX 전략과 대응으로 연결합니다.', categoryIds: ['commentary', 'intelligence', 'publicsector'], variant: 'primary' },
     { id: 'learning', number: '02', eyebrow: 'LEARNING · PRACTICE', title: '학습·실무', description: '대학형 학습, 웹앱 반복학습, 법률 실무훈련과 AI 실습강좌를 연결합니다.', categoryIds: ['university', 'learningapps', 'legalpractice', 'education'], variant: 'primary' },
     { id: 'knowledge', number: '03', eyebrow: 'RESEARCH · KNOWLEDGE', title: '연구·지식', description: '에듀테크와 법학·AI 연구, 빠르게 변하는 AI 지식·동향을 분리해 전문적으로 축적합니다.', categoryIds: ['edtechresearch', 'legalresearch', 'aiknowledge'], variant: 'primary' },
-    { id: 'publishing', number: '04', eyebrow: 'PUBLISH · MEDIA', title: '출판·미디어', description: '연구와 창작의 결과물을 출판·아카이브와 미디어 콘텐츠로 공개합니다.', categoryIds: ['publishing', 'media'], variant: 'compact' }
+    { id: 'legal', number: '04', eyebrow: 'LEGAL INTELLIGENCE', title: '법률정보', description: '현행 규범, 입법 변화, 법조계 동향과 주요 법률쟁점을 독립된 법률정보 포털에서 연결합니다.', categoryIds: ['legalintelligence'], variant: 'primary' },
+    { id: 'publishing', number: '05', eyebrow: 'PUBLISH · MEDIA', title: '출판·미디어', description: '연구와 창작의 결과물을 출판·아카이브와 미디어 콘텐츠로 공개합니다.', categoryIds: ['publishing', 'media'], variant: 'compact' }
   ];
 
   function updateKoreaClock() {
@@ -115,6 +117,7 @@
     if (project.category === 'publicsector') return {label:'전략·대응',tone:'research'};
     if (project.category === 'edtechresearch') return {label:'전문 연구',tone:'research'};
     if (project.category === 'legalresearch') return {label:'전문 연구',tone:'research'};
+    if (project.category === 'legalintelligence') return {label:'법률정보',tone:'research'};
     if (project.category === 'aiknowledge') return {label:'지식·동향',tone:'research'};
     if (project.category === 'legalpractice') return {label:'실무·훈련',tone:'operational'};
     if (project.category === 'learningapps' || project.category === 'university') return {label:'학습',tone:'operational'};
@@ -360,8 +363,8 @@
       name:'YEHAVHA Nexus',
       alternateName:'예하바 프로젝트 포털',
       url:canonicalUrl,
-      description:'논평·전략정보·정부 AX·학습·법률실무·법학 AI 연구·AI 지식동향·출판·미디어를 연결하는 통합 포털',
-      potentialAction:{'@type':'SearchAction',target:`${canonicalUrl}?q={search_term_string}`,'query-input':'required name=search_term_string'},
+      description:'논평·전략정보·정부 AX·학습·법률실무·법학 AI 연구·법률정보·AI 지식동향·출판·미디어를 연결하는 통합 포털',
+      potentialAction:{'@type':'SearchAction',target:`${canonicalUrl}?q={search_term_string}`,'query-input':'required name=query'},
       hasPart:data.projects.map(project => ({'@type':'WebPage',name:project.title,url:project.url,description:project.description}))
     });
     document.head.append(script);
