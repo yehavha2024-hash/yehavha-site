@@ -11,8 +11,6 @@ const outputPath = process.argv[2] ? path.resolve(process.cwd(), process.argv[2]
 const assemblyKey = process.env.OPEN_ASSEMBLY_API_KEY?.trim();
 const lawmakingOc = process.env.LAWMAKING_OC?.trim();
 
-if (!assemblyKey) throw new Error('OPEN_ASSEMBLY_API_KEY is required.');
-
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 const clean = value => value == null ? '' : String(value).replace(/\s+/g, ' ').trim();
 const decodeXml = value => clean(value)
@@ -59,6 +57,7 @@ function parseAssemblyPayload(data, endpoint) {
 }
 
 async function assemblyCall(endpoint, params) {
+  if (!assemblyKey) throw new Error('OPEN_ASSEMBLY_API_KEY is not configured.');
   const url = new URL(`https://open.assembly.go.kr/portal/openapi/${endpoint}`);
   const merged = {KEY: assemblyKey, Type: 'json', ...params};
   for (const [key, value] of Object.entries(merged)) if (value !== '' && value != null) url.searchParams.set(key, String(value));
@@ -158,6 +157,7 @@ function recordMap() {
 }
 
 async function collectAssembly() {
+  if (!assemblyKey) throw new Error('OPEN_ASSEMBLY_API_KEY is not configured; Assembly source skipped.');
   const cfg = config.assembly;
   const candidates = new Map();
   const tracked = new Set((current.records || []).filter(record => record.sourceType === 'assembly').map(record => clean(record.sourceId)));
