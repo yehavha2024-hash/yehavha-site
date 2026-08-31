@@ -5,8 +5,8 @@
     "endpoint": "nzmimeepazxkubdpn",
     "detailEndpoint": "ALLBILL",
     "reviewEndpoint": "nwbpacrgavhjryiph",
-    "pageSize": 100,
-    "maxPagesPerKeyword": 3
+    "pageSize": 50,
+    "maxPagesPerKeyword": 1
   },
   "government": {
     "endpoint": "https://www.lawmaking.go.kr/rest/govLmSts.xml",
