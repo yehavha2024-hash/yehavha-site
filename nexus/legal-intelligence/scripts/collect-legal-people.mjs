@@ -34,21 +34,46 @@ function ageDays(value) {
 
 function cleanTitle(value) {
   return clean(value)
+    .replace(/^\[보도자료\]\s*/u, '')
     .replace(/^(기타|위촉|소식|뉴스)\s+/u, '')
     .replace(/\s+20\d{2}[.\-/]\s*\d{1,2}[.\-/]\s*\d{1,2}\.?\s*$/u, '')
     .replace(/\s+20\d{2}\.\s*\d{1,2}\.\s*\d{1,2}\.?\s*$/u, '');
 }
 
 function categoryFor(title) {
-  if (/(학술|세미나|포럼|심포지엄|연구|학술대회|변호사대회|논문|저서|발간|출간|학술상|변호사시험|전문변호사)/u.test(title)) return '연구·학술';
+  if (/(학술|세미나|포럼|심포지엄|토론회|연구|학술대회|변호사대회|논문|저서|발간|출간|학술상|법률문화상|법률문화|판결집|자료집|변호사시험|전문변호사)/u.test(title)) return '연구·학술';
   if (/(전문팀|센터|TF|팀 출범|서비스|법률시장|LegalTech|리걸테크|리걸 AI|AI.*운영|컴플라이언스.*체계)/iu.test(title)) return '법률시장';
   if (/(개업|이직|영입|합류|파트너|승진)/u.test(title)) return '이동·개업';
   if (/(인사|임명|임용|전보|퇴임|보직|위촉|재판관|연구관)/u.test(title)) return '인사';
   return '법률시장';
 }
 
+function canonicalSourceUrl(value) {
+  if (!value) return '';
+  try {
+    const url = new URL(value);
+    url.hash = '';
+    if (/^(www\.)?koreanbar\.or\.kr$/i.test(url.hostname)) {
+      url.hostname = 'www.koreanbar.or.kr';
+      if (/\/pages\/news\/view\.asp$/i.test(url.pathname)) {
+        const seq = url.searchParams.get('seq');
+        const types = url.searchParams.get('types');
+        url.search = '';
+        if (seq) url.searchParams.set('seq', seq);
+        if (types) url.searchParams.set('types', types);
+      }
+    }
+    for (const key of [...url.searchParams.keys()]) {
+      if (/^(utm_|fbclid$|gclid$)/i.test(key)) url.searchParams.delete(key);
+    }
+    return url.href;
+  } catch {
+    return clean(value);
+  }
+}
+
 function stableId(sourceId, url, title) {
-  const digest = crypto.createHash('sha256').update(`${sourceId}|${url}|${title}`).digest('hex').slice(0, 16);
+  const digest = crypto.createHash('sha256').update(`${sourceId}|${canonicalSourceUrl(url)}|${title}`).digest('hex').slice(0, 16);
   return `legalpeople:${sourceId}:${digest}`;
 }
 
@@ -57,7 +82,7 @@ async function fetchText(url) {
   for (let attempt = 0; attempt < 3; attempt += 1) {
     try {
       const response = await fetch(url, {
-        headers: {'User-Agent': 'YEHAVHA-Nexus-Legal-People/1.4', Accept: 'text/html,application/xhtml+xml'},
+        headers: {'User-Agent': 'YEHAVHA-Nexus-Legal-People/1.5', Accept: 'text/html,application/xhtml+xml'},
         signal: AbortSignal.timeout(22000)
       });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -114,6 +139,7 @@ function candidateScore(text, title) {
   if (/(개최|출범|영입|합류|임명|임용|전보|선정|수상|위촉|발간|연구|발표|주제|대응|강화)/u.test(text)) score += 3;
   if (/(참가비|입금|계좌|수도권 지역 회원|비수도권 지역 회원|\d{2,3},\d{3}원)/u.test(text)) score -= 9;
   if (/^(①|②|③|1\.|2\.|3\.)/.test(text) && text.length < 120) score -= 4;
+  if (text.length < 110 && !/(다\.|니다\.|[.!?])$/u.test(text)) score -= 6;
   return score;
 }
 
@@ -128,7 +154,7 @@ function detailSummary(title, category, html) {
 }
 
 function tagsFor(title, source, category) {
-  const dictionary = ['AI', '인공지능', 'LegalTech', '리걸AI', '검사', '법관', '헌법재판소', '변호사', '영입', '세미나', '학술', '공정거래', '금융', '노동', '개인정보', '정보보호', '컴플라이언스'];
+  const dictionary = ['AI', '인공지능', 'LegalTech', '리걸AI', '검사', '법관', '헌법재판소', '변호사', '영입', '세미나', '토론회', '학술', '공정거래', '금융', '노동', '개인정보', '정보보호', '컴플라이언스'];
   const tags = [source, category];
   for (const keyword of dictionary) if (title.toLocaleLowerCase('ko-KR').includes(keyword.toLocaleLowerCase('ko-KR'))) tags.push(keyword);
   return [...new Set(tags)].slice(0, 6);
@@ -148,7 +174,7 @@ function discover(source, html) {
     if (/^(javascript:|#)/i.test(href)) continue;
 
     let sourceUrl;
-    try { sourceUrl = new URL(href, source.url).href; } catch { continue; }
+    try { sourceUrl = canonicalSourceUrl(new URL(href, source.url).href); } catch { continue; }
     const index = match.index || 0;
     const context = stripTags(html.slice(Math.max(0, index - 320), Math.min(html.length, index + match[0].length + 480)));
     const publishedAt = normalizeDate(context);
@@ -169,7 +195,7 @@ function discover(source, html) {
     });
   }
   const unique = new Map();
-  for (const record of records) unique.set(record.sourceUrl, record);
+  for (const record of records) unique.set(canonicalSourceUrl(record.sourceUrl), record);
   return [...unique.values()].sort((a, b) => String(b.publishedAt).localeCompare(String(a.publishedAt)));
 }
 
@@ -195,19 +221,21 @@ async function enrich(records, source) {
 const existing = Array.isArray(data.records) ? data.records : [];
 const curatedRecords = Array.isArray(curated.records) ? curated.records : [];
 const maxAgeDays = Number(config.maxAgeDays || 240);
+const normalizedCurated = curatedRecords.map(record => ({...record, sourceUrl: canonicalSourceUrl(record.sourceUrl), curated: true, autoCollected: false}));
 const retainedManual = existing.filter(record => !record.autoCollected);
-const baseline = new Map(retainedManual.map(record => [record.recordKey, record]));
-for (const record of curatedRecords) baseline.set(record.recordKey, {...record, curated: true, autoCollected: false});
+const baseline = new Map(retainedManual.map(record => [record.recordKey, {...record, sourceUrl: canonicalSourceUrl(record.sourceUrl)}]));
+for (const record of normalizedCurated) baseline.set(record.recordKey, record);
 
-const curatedUrls = new Set(curatedRecords.map(record => record.sourceUrl).filter(Boolean));
-const curatedTitles = new Set(curatedRecords.map(record => `${record.source}|${record.title}`));
+const curatedUrls = new Set(normalizedCurated.map(record => canonicalSourceUrl(record.sourceUrl)).filter(Boolean));
+const curatedTitles = new Set(normalizedCurated.map(record => `${record.source}|${cleanTitle(record.title)}`));
 const retainedAutos = existing.filter(record => record.autoCollected && record.publishedAt && ageDays(record.publishedAt) <= maxAgeDays)
+  .map(record => ({...record, title: cleanTitle(record.title), sourceUrl: canonicalSourceUrl(record.sourceUrl), category: categoryFor(cleanTitle(record.title))}))
   .filter(record => !baseline.has(record.recordKey))
-  .filter(record => !curatedUrls.has(record.sourceUrl))
-  .filter(record => !curatedTitles.has(`${record.source}|${record.title}`));
+  .filter(record => !curatedUrls.has(canonicalSourceUrl(record.sourceUrl)))
+  .filter(record => !curatedTitles.has(`${record.source}|${cleanTitle(record.title)}`));
 const retained = [...baseline.values(), ...retainedAutos];
-const byUrl = new Map(retained.filter(record => record.sourceUrl).map(record => [record.sourceUrl, record]));
-const byTitle = new Map(retained.map(record => [`${record.source}|${record.title}`, record]));
+const byUrl = new Map(retained.filter(record => record.sourceUrl).map(record => [canonicalSourceUrl(record.sourceUrl), record]));
+const byTitle = new Map(retained.map(record => [`${record.source}|${cleanTitle(record.title)}`, record]));
 const merged = new Map(retained.map(record => [record.recordKey, record]));
 const failures = [];
 
@@ -216,13 +244,14 @@ for (const source of config.sources || []) {
     const html = await fetchText(source.url);
     const found = await enrich(discover(source, html), source);
     for (const record of found) {
-      const previous = byUrl.get(record.sourceUrl) || byTitle.get(`${record.source}|${record.title}`);
+      const previous = byUrl.get(canonicalSourceUrl(record.sourceUrl)) || byTitle.get(`${record.source}|${cleanTitle(record.title)}`);
       if (previous?.curated) continue;
       const key = previous?.recordKey || record.recordKey;
       merged.set(key, {
         ...(previous || {}),
         ...record,
         recordKey: key,
+        sourceUrl: canonicalSourceUrl(record.sourceUrl),
         tags: [...new Set([...(previous?.tags || []), ...(record.tags || [])])].slice(0, 8)
       });
     }
@@ -233,14 +262,37 @@ for (const source of config.sources || []) {
   }
 }
 
-for (const record of curatedRecords) {
+for (const record of normalizedCurated) {
+  const recordUrl = canonicalSourceUrl(record.sourceUrl);
+  const recordTitle = `${record.source}|${cleanTitle(record.title)}`;
   for (const [key, item] of merged) {
     if (key === record.recordKey) continue;
-    const sameUrl = record.sourceUrl && item.sourceUrl === record.sourceUrl;
-    const sameTitle = item.source === record.source && item.title === record.title;
+    const sameUrl = recordUrl && canonicalSourceUrl(item.sourceUrl) === recordUrl;
+    const sameTitle = `${item.source}|${cleanTitle(item.title)}` === recordTitle;
     if (sameUrl || sameTitle) merged.delete(key);
   }
-  merged.set(record.recordKey, {...record, curated: true, autoCollected: false});
+  merged.set(record.recordKey, record);
+}
+
+const semanticSeen = new Map();
+for (const [key, record] of [...merged]) {
+  const urlKey = canonicalSourceUrl(record.sourceUrl);
+  if (!urlKey) continue;
+  const previousKey = semanticSeen.get(urlKey);
+  if (!previousKey) {
+    semanticSeen.set(urlKey, key);
+    continue;
+  }
+  const previous = merged.get(previousKey);
+  if (previous?.curated && !record.curated) merged.delete(key);
+  else if (record.curated && !previous?.curated) {
+    merged.delete(previousKey);
+    semanticSeen.set(urlKey, key);
+  } else if (String(previous?.summary || '').length >= String(record.summary || '').length) merged.delete(key);
+  else {
+    merged.delete(previousKey);
+    semanticSeen.set(urlKey, key);
+  }
 }
 
 const today = new Intl.DateTimeFormat('en-CA', {timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit'}).format(new Date());
@@ -252,4 +304,4 @@ const records = [...merged.values()]
 if (!records.length) throw new Error('Legal people collector produced zero records.');
 const output = {...data, updatedAt: today, sourceFailures: failures, records};
 await fs.writeFile(dataPath, `${JSON.stringify(output, null, 2)}\n`, 'utf8');
-console.log(`Legal people data updated: ${records.length} record(s), curated=${curatedRecords.length}, failures=${failures.length}`);
+console.log(`Legal people data updated: ${records.length} record(s), curated=${normalizedCurated.length}, failures=${failures.length}`);
