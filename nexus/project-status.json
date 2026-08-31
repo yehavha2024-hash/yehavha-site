@@ -31,8 +31,8 @@
     "managedBy": "github",
     "status": "최근 업데이트",
     "statusTone": "fresh",
-    "lastUpdated": "2026-08-31",
-    "contentCount": 7,
+    "lastUpdated": "2026-09-01",
+    "contentCount": 6,
     "contentLabel": "핵심정보",
     "contentReviewedAt": "2026-08-23",
     "baselineAt": "2026-08-22",
@@ -107,8 +107,8 @@
   "legal-mind-training": {
     "id": "legal-mind-training",
     "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-08-23",
     "contentCount": 16,
     "contentLabel": "훈련 사례"
@@ -116,8 +116,8 @@
   "ai-law-literature": {
     "id": "ai-law-literature",
     "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-08-23",
     "contentCount": 217,
     "contentLabel": "연구문헌"
@@ -125,8 +125,8 @@
   "ai-law-tech-foresight": {
     "id": "ai-law-tech-foresight",
     "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-08-23",
     "contentCount": 19,
     "contentLabel": "기술연구"
@@ -143,8 +143,8 @@
   "ai-legal-glossary": {
     "id": "ai-legal-glossary",
     "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-08-24",
     "contentCount": 220,
     "contentLabel": "핵심 용어"
@@ -182,8 +182,8 @@
   "education-hub": {
     "id": "education-hub",
     "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-08-23",
     "contentCount": 6,
     "contentLabel": "운영 모듈"
@@ -191,8 +191,8 @@
   "nexus-university": {
     "id": "nexus-university",
     "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-08-23",
     "contentCount": 496,
     "contentLabel": "개설 과목"
