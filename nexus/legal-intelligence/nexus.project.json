@@ -7,6 +7,7 @@
       "nexus/legal-intelligence/style.css",
       "nexus/legal-intelligence/legislation.json",
       "nexus/legal-intelligence/legislation.js",
+      "nexus/legal-intelligence/legal-materials.json",
       "nexus/legal-intelligence/collector-config.json",
       "nexus/legal-intelligence/legal-people.json",
       "nexus/legal-intelligence/legal-people-curated.json",
@@ -16,6 +17,7 @@
       "nexus/legal-intelligence/scripts/upsert-legislation.mjs",
       "nexus/legal-intelligence/scripts/normalize-legislation.mjs",
       "nexus/legal-intelligence/scripts/audit-legislation.mjs",
+      "nexus/legal-intelligence/scripts/audit-legal-materials.mjs",
       "nexus/legal-intelligence/scripts/collect-legal-people.mjs",
       "nexus/legal-intelligence/scripts/audit-legal-people.mjs"
     ],
@@ -31,6 +33,6 @@
   "review": {
     "contentReviewedAt": "2026-08-31",
     "baselineAt": "2026-08-31",
-    "baselineLabel": "입법·법조동향 자료 기준"
+    "baselineLabel": "판례·법령·연구·입법·법조동향 자료 기준"
   }
 }
