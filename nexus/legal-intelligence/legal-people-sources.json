@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 4,
+  "schemaVersion": 5,
   "maxAgeDays": 240,
   "detailLimitPerSource": 6,
   "sources": [
@@ -42,8 +42,9 @@
       "id": "koreanbar-press",
       "label": "대한변호사협회",
       "url": "https://www.koreanbar.or.kr/pages/news/list.asp?types=3",
+      "detailLimit": 12,
       "includeKeywords": ["변호사대회", "학술대회", "심포지엄", "토론회", "법률문화상", "학술상", "법조 시장", "변호사 과잉", "AI", "법률서비스", "인권보고서", "판결집", "자료집"],
-      "excludeKeywords": ["우수언론인", "집회", "성명서", "논평", "기부", "봉사"]
+      "excludeKeywords": ["결 의 문", "결의문", "우수언론인", "집회", "성명서", "논평", "기부", "봉사"]
     },
     {
       "id": "kimchang",
