@@ -1,0 +1,89 @@
+name: Refresh Legal Intelligence legislation tracker
+
+on:
+  schedule:
+    - cron: '20 0 * * 1-5'
+    - cron: '20 9 * * 1-5'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: legal-intelligence-legislation-refresh
+  cancel-in-progress: true
+
+env:
+  OPEN_ASSEMBLY_API_KEY: ${{ secrets.OPEN_ASSEMBLY_API_KEY }}
+  LAWMAKING_OC: ${{ secrets.LAWMAKING_OC }}
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Validate collector credentials
+        id: credentials
+        shell: bash
+        run: |
+          if [ -z "$OPEN_ASSEMBLY_API_KEY" ] || [ -z "$LAWMAKING_OC" ]; then
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "### LEGAL INTELLIGENCE 수집 비활성" >> "$GITHUB_STEP_SUMMARY"
+            echo "OPEN_ASSEMBLY_API_KEY와 LAWMAKING_OC 저장소 Secret이 모두 필요합니다." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          echo "ready=true" >> "$GITHUB_OUTPUT"
+
+      - name: Syntax and canonical data audit
+        if: steps.credentials.outputs.ready == 'true'
+        run: |
+          node --check nexus/legal-intelligence/scripts/collect-legislation.mjs
+          node --check nexus/legal-intelligence/scripts/select-legislation.mjs
+          node --check nexus/legal-intelligence/scripts/upsert-legislation.mjs
+          node --check nexus/legal-intelligence/scripts/audit-legislation.mjs
+          node nexus/legal-intelligence/scripts/audit-legislation.mjs
+
+      - name: Collect official legislation candidates
+        if: steps.credentials.outputs.ready == 'true'
+        run: node nexus/legal-intelligence/scripts/collect-legislation.mjs /tmp/legal-collected.json
+
+      - name: Select Nexus-relevant legislation
+        if: steps.credentials.outputs.ready == 'true'
+        run: node nexus/legal-intelligence/scripts/select-legislation.mjs /tmp/legal-collected.json /tmp/legal-selected.json
+
+      - name: Validate selected records
+        if: steps.credentials.outputs.ready == 'true'
+        run: node nexus/legal-intelligence/scripts/audit-legislation.mjs /tmp/legal-selected.json
+
+      - name: Upsert canonical legislation records
+        if: steps.credentials.outputs.ready == 'true'
+        run: node nexus/legal-intelligence/scripts/upsert-legislation.mjs /tmp/legal-selected.json
+
+      - name: Validate canonical result
+        if: steps.credentials.outputs.ready == 'true'
+        run: node nexus/legal-intelligence/scripts/audit-legislation.mjs
+
+      - name: Commit legislation data when changed
+        if: steps.credentials.outputs.ready == 'true'
+        shell: bash
+        run: |
+          if git diff --quiet -- nexus/legal-intelligence/legislation.json; then
+            echo "No legislation changes detected."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nexus/legal-intelligence/legislation.json
+          git commit -m "Refresh Legal Intelligence legislation data"
+          git pull --rebase origin main
+          git push origin main
