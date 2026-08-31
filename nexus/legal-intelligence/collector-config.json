@@ -13,8 +13,10 @@
   },
   "government": {
     "endpoint": "https://www.lawmaking.go.kr/rest/govLmSts.xml",
+    "detailBase": "https://www.lawmaking.go.kr/rest/govLmSts",
     "lookbackDays": 45,
-    "publicPages": 12
+    "publicPages": 12,
+    "detailLimit": 80
   },
   "topicRules": [
     {
