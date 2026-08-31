@@ -16,7 +16,8 @@
   }
 
   function sourceLabel(record) {
-    return record.sourceType === 'assembly' ? `국회 ${record.sourceId}` : `정부 ${record.sourceId}`;
+    if (record.sourceType === 'assembly') return `국회 ${record.sourceId}`;
+    return record.officialLbicId ? `정부 ${record.officialLbicId}` : `정부 ${record.sourceId}`;
   }
 
   function metaItems(record) {
@@ -27,7 +28,7 @@
         ['상태 기준일', formatDate(record.statusDate)],
         ['제안자', record.proposer || '-'],
         ['제안일', formatDate(record.proposedAt)],
-        ['레코드 키', record.recordKey]
+        ['의안번호', record.sourceId]
       ];
     }
     return [
@@ -40,20 +41,39 @@
     ];
   }
 
-  function appendGovernmentDetails(card, record) {
+  function usefulSummary(record) {
+    const summary = String(record.summary || '').trim();
+    const generic = /공식 (국회|정부|법제처).*자동 선별|공식 공개자료에서 .* 확인된/.test(summary);
+    if (!generic && summary) return summary;
+    if (record.mainContent) return record.mainContent;
+    if (record.amendmentReason) return record.amendmentReason;
+    const topics = Array.isArray(record.topics) ? record.topics.join(' · ') : '';
+    return topics ? `${topics} 영역과 직접 연결되는 입법으로 현재 ${record.statusLabel || '진행상태'} 단계입니다.` : summary;
+  }
+
+  function appendHistory(card, record) {
+    const history = Array.isArray(record.history) ? record.history.filter(item => item?.date && item?.stage) : [];
     const stages = Array.isArray(record.processStages) ? record.processStages : [];
     const documents = Array.isArray(record.documents) ? record.documents : [];
-    if (!record.mainContent && !record.amendmentReason && !record.legislativePlan && !stages.length && !documents.length) return;
+    const hasGovernmentContent = record.mainContent || record.amendmentReason || record.legislativePlan || documents.length;
+    if (!history.length && !stages.length && !hasGovernmentContent) return;
 
     const detail = el('details', 'tracker-detail');
-    detail.append(el('summary', '', '상세 내용·추진경과'));
+    detail.append(el('summary', '', record.sourceType === 'government' ? '핵심내용·추진경과' : '추진경과 보기'));
+
     if (record.mainContent) detail.append(el('p', 'tracker-detail-row', `주요내용 · ${record.mainContent}`));
-    if (record.amendmentReason) detail.append(el('p', 'tracker-detail-row', `제개정이유 · ${record.amendmentReason}`));
+    if (record.amendmentReason) detail.append(el('p', 'tracker-detail-row', `제·개정이유 · ${record.amendmentReason}`));
     if (record.legislativePlan) detail.append(el('p', 'tracker-detail-row', `입법계획·정비의견 · ${record.legislativePlan}`));
+
+    if (history.length) {
+      const list = el('div', 'tracker-stage-list');
+      for (const item of history.slice(-10)) list.append(el('p', 'tracker-detail-row', `${formatDate(item.date)} · ${item.stage}`));
+      detail.append(list);
+    }
 
     if (stages.length) {
       const list = el('div', 'tracker-stage-list');
-      for (const item of stages.slice(-8)) {
+      for (const item of stages.slice(-10)) {
         const label = [item.phase, item.stage, item.status].filter(Boolean).join(' · ');
         if (label) list.append(el('p', 'tracker-detail-row', label));
       }
@@ -79,7 +99,7 @@
     const card = el('article', 'tracker-panel');
     const head = el('div', 'tracker-head');
     head.append(el('span', '', sourceLabel(record)), el('h3', '', record.title));
-    card.append(head, el('p', '', record.summary || ''));
+    card.append(head, el('p', '', usefulSummary(record)));
 
     const fields = el('div', 'field-grid');
     for (const [label, value] of metaItems(record)) {
@@ -88,20 +108,21 @@
       fields.append(item);
     }
     card.append(fields);
-
-    if (record.sourceType === 'government') appendGovernmentDetails(card, record);
+    appendHistory(card, record);
 
     const tags = el('div', 'tag-row');
     for (const topic of record.topics || []) tags.append(el('span', '', topic));
     if (tags.childElementCount) card.append(tags);
 
-    const actions = el('div', 'source-actions');
-    const source = el('a', '', '공식 원문·진행상황 ↗');
-    source.href = record.sourceUrl;
-    source.target = '_blank';
-    source.rel = 'noopener noreferrer';
-    actions.append(source);
-    card.append(actions);
+    if (record.sourceUrl) {
+      const actions = el('div', 'source-actions');
+      const source = el('a', '', '공식 원문·진행상황 ↗');
+      source.href = record.sourceUrl;
+      source.target = '_blank';
+      source.rel = 'noopener noreferrer';
+      actions.append(source);
+      card.append(actions);
+    }
     return card;
   }
 
@@ -116,17 +137,39 @@
     return wrap;
   }
 
+  function appendSummaryCell(host, label, value) {
+    const cell = el('div', 'summary-cell');
+    cell.append(el('b', '', label), el('span', '', value));
+    host.append(cell);
+  }
+
+  function renderLegislationSummary(records, data) {
+    const host = document.getElementById('legislation-live-summary');
+    if (!host) return;
+    host.replaceChildren();
+    const assembly = records.filter(record => record.sourceType === 'assembly');
+    const government = records.filter(record => record.sourceType === 'government');
+    const latest = records.map(record => record.statusDate).filter(Boolean).sort().at(-1) || data.updatedAt || '';
+    const topicCounts = new Map();
+    for (const record of records) for (const topic of record.topics || []) topicCounts.set(topic, (topicCounts.get(topic) || 0) + 1);
+    const leadingTopic = [...topicCounts.entries()].sort((a, b) => b[1] - a[1])[0];
+    appendSummaryCell(host, '선별 추적', `${records.length}건`);
+    appendSummaryCell(host, '국회 / 정부', `${assembly.length} / ${government.length}건`);
+    appendSummaryCell(host, '최근 상태변경', formatDate(latest));
+    appendSummaryCell(host, '최다 관심영역', leadingTopic ? `${leadingTopic[0]} ${leadingTopic[1]}건` : '-');
+  }
+
   function renderLegislation(data) {
     const section = document.getElementById('legislation-tracker');
     const anchor = section?.querySelector('.watch-wrap');
     if (!section || !anchor) return;
-
     section.querySelectorAll('[data-live-legislation]').forEach(node => node.remove());
 
     const records = (Array.isArray(data.records) ? data.records : [])
       .filter(record => record && record.active !== false)
       .sort((a, b) => String(b.statusDate || '').localeCompare(String(a.statusDate || '')));
 
+    renderLegislationSummary(records, data);
     const assembly = records.filter(record => record.sourceType === 'assembly');
     const government = records.filter(record => record.sourceType === 'government');
     const host = el('div');
@@ -134,14 +177,13 @@
 
     const info = el('div', 'exclusion-note');
     info.append(
-      el('strong', '', `선별 추적 ${records.length}건`),
-      el('span', '', `데이터 기준 ${formatDate(data.updatedAt)} · 동일 의안번호·정부입법 식별자는 새 항목을 만들지 않고 기존 레코드를 갱신합니다.`)
+      el('strong', '', `데이터 기준 ${formatDate(data.updatedAt)}`),
+      el('span', '', '의안번호와 정부입법 식별자를 기준으로 중복을 통제하고, 동일 법안의 새 심사단계는 기존 기록의 추진경과에 누적합니다.')
     );
     host.append(info);
 
-    if (assembly.length) host.append(renderGroup('국회 입법 · 선별 추적', 'NEXUS 관심영역과 직접 연결되는 국회 법률안을 의안번호 기준으로 추적합니다.', assembly));
-    if (government.length) host.append(renderGroup('정부 입법 · 선별 추적', '정부입법 lbicId를 기준으로 목록·상세 API의 추진단계와 주요내용을 함께 추적합니다.', government));
-
+    if (assembly.length) host.append(renderGroup('국회 입법 · 선별 추적', '법안의 제안 취지와 소관위원회, 현재 심사단계, 날짜별 추진경과를 같은 카드에서 확인합니다.', assembly));
+    if (government.length) host.append(renderGroup('정부 입법 · 선별 추적', '정부입법 목록·상세자료에서 소관부처, 제·개정이유, 세부 심사단계와 법령안 파일을 연결합니다.', government));
     anchor.insertAdjacentElement('afterend', host);
   }
 
@@ -154,7 +196,7 @@
     const date = record.effectiveAt
       ? `발표 ${formatDate(record.publishedAt)} · 시행 ${formatDate(record.effectiveAt)}`
       : `기준 ${formatDate(record.publishedAt)}`;
-    card.append(el('p', 'people-live-date', date), el('p', 'people-live-summary', record.summary || ''));
+    card.append(el('p', 'people-live-date', date), el('p', 'people-live-summary', record.summary || '공식 공개자료의 주요 내용을 확인합니다.'));
 
     const tags = el('div', 'people-live-tags');
     for (const tag of record.tags || []) tags.append(el('span', '', tag));
@@ -172,6 +214,19 @@
     return card;
   }
 
+  function renderPeopleSummary(records, data) {
+    const host = document.getElementById('people-live-summary');
+    if (!host) return;
+    host.replaceChildren();
+    const counts = new Map();
+    for (const record of records) counts.set(record.category || '기타', (counts.get(record.category || '기타') || 0) + 1);
+    const latest = records.map(record => record.publishedAt).filter(Boolean).sort().at(-1) || data.updatedAt || '';
+    appendSummaryCell(host, '선별 동향', `${records.length}건`);
+    appendSummaryCell(host, '인사 / 이동·개업', `${counts.get('인사') || 0} / ${counts.get('이동·개업') || 0}건`);
+    appendSummaryCell(host, '연구·학술 / 시장', `${counts.get('연구·학술') || 0} / ${counts.get('법률시장') || 0}건`);
+    appendSummaryCell(host, '최근 공개자료', formatDate(latest));
+  }
+
   function renderLegalPeople(data) {
     const section = document.getElementById('legal-people');
     const anchor = section?.querySelector('.exclusion-note');
@@ -181,14 +236,15 @@
     const records = (Array.isArray(data.records) ? data.records : [])
       .filter(record => record && record.active !== false)
       .sort((a, b) => String(b.publishedAt || '').localeCompare(String(a.publishedAt || '')))
-      .slice(0, 16);
+      .slice(0, 20);
 
+    renderPeopleSummary(records, data);
     const host = el('div', 'legal-people-live');
     host.dataset.liveLegalPeople = 'true';
     const info = el('div', 'exclusion-note people-live-info');
     info.append(
-      el('strong', '', `선별 동향 ${records.length}건`),
-      el('span', '', `데이터 기준 ${formatDate(data.updatedAt)} · 법원·검찰·헌재·변호사단체·학술 공개자료를 갱신하며 경조사와 가십은 제외합니다.`)
+      el('strong', '', `데이터 기준 ${formatDate(data.updatedAt)}`),
+      el('span', '', '공식기관·변호사단체·주요 로펌의 공개자료를 정기 확인하고, 동일 URL·동일 제목은 기존 기록을 갱신합니다.')
     );
     host.append(info);
 
@@ -220,16 +276,14 @@
       loadJson(PEOPLE_URL)
     ]);
 
-    if (legislationResult.status === 'fulfilled') {
-      renderLegislation(legislationResult.value);
-    } else {
+    if (legislationResult.status === 'fulfilled') renderLegislation(legislationResult.value);
+    else {
       console.error('LEGAL INTELLIGENCE legislation data load failed:', legislationResult.reason);
       renderLoadError('legislation-tracker', '.watch-wrap', 'liveLegislation', '선별 입법 데이터를 불러오지 못했습니다. 공식 원천 링크는 계속 사용할 수 있습니다.');
     }
 
-    if (peopleResult.status === 'fulfilled') {
-      renderLegalPeople(peopleResult.value);
-    } else {
+    if (peopleResult.status === 'fulfilled') renderLegalPeople(peopleResult.value);
+    else {
       console.error('LEGAL INTELLIGENCE people data load failed:', peopleResult.reason);
       renderLoadError('legal-people', '.exclusion-note', 'liveLegalPeople', '법조계 동향 데이터를 불러오지 못했습니다. 공식 원천 확인은 계속 가능합니다.');
     }
