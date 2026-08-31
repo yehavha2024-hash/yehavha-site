@@ -1,0 +1,55 @@
+name: Refresh Legal Intelligence curated materials
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'nexus/legal-intelligence/legal-materials-additions.json'
+      - 'nexus/legal-intelligence/scripts/merge-legal-materials.mjs'
+      - 'nexus/legal-intelligence/scripts/audit-legal-materials.mjs'
+      - '.github/workflows/refresh-legal-materials.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: legal-intelligence-materials-refresh
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Merge curated additions
+        run: |
+          node --check nexus/legal-intelligence/scripts/merge-legal-materials.mjs
+          node nexus/legal-intelligence/scripts/merge-legal-materials.mjs
+
+      - name: Validate legal materials
+        run: node nexus/legal-intelligence/scripts/audit-legal-materials.mjs
+
+      - name: Commit canonical material data when changed
+        shell: bash
+        run: |
+          if git diff --quiet -- nexus/legal-intelligence/legal-materials.json; then
+            echo "No legal material changes detected."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nexus/legal-intelligence/legal-materials.json
+          git commit -m "Refresh curated Legal Intelligence materials"
+          git pull --rebase origin main
+          git push origin main
