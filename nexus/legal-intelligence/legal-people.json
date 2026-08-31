@@ -408,10 +408,5 @@
       "autoCollected": true
     }
   ],
-  "sourceFailures": [
-    {
-      "source": "scourt",
-      "message": "fetch failed"
-    }
-  ]
+  "sourceFailures": []
 }
