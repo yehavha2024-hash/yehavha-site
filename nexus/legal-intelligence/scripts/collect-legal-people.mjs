@@ -57,7 +57,7 @@ async function fetchText(url) {
   for (let attempt = 0; attempt < 3; attempt += 1) {
     try {
       const response = await fetch(url, {
-        headers: {'User-Agent': 'YEHAVHA-Nexus-Legal-People/1.3', Accept: 'text/html,application/xhtml+xml'},
+        headers: {'User-Agent': 'YEHAVHA-Nexus-Legal-People/1.4', Accept: 'text/html,application/xhtml+xml'},
         signal: AbortSignal.timeout(22000)
       });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -86,16 +86,18 @@ function extractMetaDescription(html) {
 function meaningfulParagraphs(html) {
   return [...String(html || '').matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)]
     .map(match => stripTags(match[1]))
-    .filter(text => text.length >= 35 && text.length <= 900)
-    .filter(text => !/(copyright|all rights reserved|개인정보|이메일무단수집|서울시|Tel\.|Fax\.|오시는 길|목록으로)/i.test(text));
+    .filter(text => text.length >= 35 && text.length <= 1200)
+    .filter(text => !/(copyright|all rights reserved|개인정보|이메일무단수집|Tel\.|Fax\.|오시는 길|목록으로)/i.test(text));
 }
 
-function clip(text, max = 300) {
+function clip(text, max = 340) {
   const value = clean(text);
   if (value.length <= max) return value;
   const cut = value.slice(0, max);
-  const sentence = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('다.'));
-  return `${(sentence > 120 ? cut.slice(0, sentence + 2) : cut).trim()}…`;
+  const sentenceEnds = [cut.lastIndexOf('다.'), cut.lastIndexOf('니다.'), cut.lastIndexOf('. ')];
+  const sentence = Math.max(...sentenceEnds);
+  const result = sentence > 130 ? cut.slice(0, sentence + 2) : cut;
+  return `${result.trim()}…`;
 }
 
 function fallbackSummary(title, category) {
@@ -105,15 +107,24 @@ function fallbackSummary(title, category) {
   return `${title} 관련 법률시장 변화입니다. 전문조직·서비스·LegalTech 등 법률업무 구조의 변화를 확인합니다.`;
 }
 
+function candidateScore(text, title) {
+  let score = Math.min(text.length / 70, 5);
+  const titleWords = clean(title).replace(/[^0-9A-Za-z가-힣 ]/g, ' ').split(/\s+/).filter(word => word.length >= 2);
+  for (const word of titleWords) if (text.includes(word)) score += 1;
+  if (/(개최|출범|영입|합류|임명|임용|전보|선정|수상|위촉|발간|연구|발표|주제|대응|강화)/u.test(text)) score += 3;
+  if (/(참가비|입금|계좌|수도권 지역 회원|비수도권 지역 회원|\d{2,3},\d{3}원)/u.test(text)) score -= 9;
+  if (/^(①|②|③|1\.|2\.|3\.)/.test(text) && text.length < 120) score -= 4;
+  return score;
+}
+
 function detailSummary(title, category, html) {
-  const candidates = [extractMetaDescription(html), ...meaningfulParagraphs(html)];
-  for (const candidate of candidates) {
-    const text = clean(candidate);
-    if (!text || text === title || text.length < 35) continue;
-    if (/공식 홈페이지|최적의 솔루션|본문으로 바로가기|메뉴 열기/i.test(text)) continue;
-    return clip(text);
-  }
-  return fallbackSummary(title, category);
+  const candidates = [extractMetaDescription(html), ...meaningfulParagraphs(html)]
+    .map(clean)
+    .filter(text => text && text !== title && text.length >= 35)
+    .filter(text => !/공식 홈페이지|최적의 솔루션|본문으로 바로가기|메뉴 열기/i.test(text))
+    .sort((a, b) => candidateScore(b, title) - candidateScore(a, title));
+  const best = candidates[0];
+  return best && candidateScore(best, title) > 0 ? clip(best) : fallbackSummary(title, category);
 }
 
 function tagsFor(title, source, category) {
@@ -186,12 +197,15 @@ const curatedRecords = Array.isArray(curated.records) ? curated.records : [];
 const maxAgeDays = Number(config.maxAgeDays || 240);
 const retainedManual = existing.filter(record => !record.autoCollected);
 const baseline = new Map(retainedManual.map(record => [record.recordKey, record]));
-for (const record of curatedRecords) baseline.set(record.recordKey, {...record, curated: true});
+for (const record of curatedRecords) baseline.set(record.recordKey, {...record, curated: true, autoCollected: false});
 
-const retained = [
-  ...baseline.values(),
-  ...existing.filter(record => record.autoCollected && record.publishedAt && ageDays(record.publishedAt) <= maxAgeDays)
-];
+const curatedUrls = new Set(curatedRecords.map(record => record.sourceUrl).filter(Boolean));
+const curatedTitles = new Set(curatedRecords.map(record => `${record.source}|${record.title}`));
+const retainedAutos = existing.filter(record => record.autoCollected && record.publishedAt && ageDays(record.publishedAt) <= maxAgeDays)
+  .filter(record => !baseline.has(record.recordKey))
+  .filter(record => !curatedUrls.has(record.sourceUrl))
+  .filter(record => !curatedTitles.has(`${record.source}|${record.title}`));
+const retained = [...baseline.values(), ...retainedAutos];
 const byUrl = new Map(retained.filter(record => record.sourceUrl).map(record => [record.sourceUrl, record]));
 const byTitle = new Map(retained.map(record => [`${record.source}|${record.title}`, record]));
 const merged = new Map(retained.map(record => [record.recordKey, record]));
@@ -203,13 +217,13 @@ for (const source of config.sources || []) {
     const found = await enrich(discover(source, html), source);
     for (const record of found) {
       const previous = byUrl.get(record.sourceUrl) || byTitle.get(`${record.source}|${record.title}`);
+      if (previous?.curated) continue;
       const key = previous?.recordKey || record.recordKey;
       merged.set(key, {
         ...(previous || {}),
         ...record,
         recordKey: key,
-        tags: [...new Set([...(previous?.tags || []), ...(record.tags || [])])].slice(0, 8),
-        ...(previous?.curated ? {curated: true} : {})
+        tags: [...new Set([...(previous?.tags || []), ...(record.tags || [])])].slice(0, 8)
       });
     }
     console.log(`${source.id}: ${found.length} candidate(s)`);
@@ -217,6 +231,16 @@ for (const source of config.sources || []) {
     failures.push({source: source.id, message: error.message});
     console.warn(`${source.id}: ${error.message}`);
   }
+}
+
+for (const record of curatedRecords) {
+  for (const [key, item] of merged) {
+    if (key === record.recordKey) continue;
+    const sameUrl = record.sourceUrl && item.sourceUrl === record.sourceUrl;
+    const sameTitle = item.source === record.source && item.title === record.title;
+    if (sameUrl || sameTitle) merged.delete(key);
+  }
+  merged.set(record.recordKey, {...record, curated: true, autoCollected: false});
 }
 
 const today = new Intl.DateTimeFormat('en-CA', {timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit'}).format(new Date());
