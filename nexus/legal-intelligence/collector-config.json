@@ -4,7 +4,10 @@
     "age": "22",
     "endpoint": "nzmimeepazxkubdpn",
     "detailEndpoint": "ALLBILL",
-    "reviewEndpoint": "nwbpacrgavhjryiph",
+    "reviewEndpoint": "BILLJUDGE",
+    "committeeMeetingEndpoint": "BILLJUDGECONF",
+    "subcommitteeServicePageId": "OOWY4R001216HX11542",
+    "subcommitteeServicePageUrl": "https://open.assembly.go.kr/portal/data/service/selectAPIServicePage.do/OOWY4R001216HX11542",
     "pageSize": 50,
     "maxPagesPerKeyword": 1
   },
