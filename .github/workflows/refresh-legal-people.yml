@@ -1,0 +1,63 @@
+name: Refresh Legal Intelligence people and market
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'nexus/legal-intelligence/legal-people.json'
+      - 'nexus/legal-intelligence/legal-people-sources.json'
+      - 'nexus/legal-intelligence/scripts/collect-legal-people.mjs'
+      - 'nexus/legal-intelligence/scripts/audit-legal-people.mjs'
+      - '.github/workflows/refresh-legal-people.yml'
+  schedule:
+    - cron: '40 0 * * 1-5'
+    - cron: '40 9 * * 1-5'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: legal-intelligence-people-refresh
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Validate collector and current data
+        run: |
+          node --check nexus/legal-intelligence/scripts/collect-legal-people.mjs
+          node --check nexus/legal-intelligence/scripts/audit-legal-people.mjs
+          node nexus/legal-intelligence/scripts/audit-legal-people.mjs
+
+      - name: Collect public legal people and market updates
+        run: node nexus/legal-intelligence/scripts/collect-legal-people.mjs
+
+      - name: Validate refreshed data
+        run: node nexus/legal-intelligence/scripts/audit-legal-people.mjs
+
+      - name: Commit data when changed
+        shell: bash
+        run: |
+          if git diff --quiet -- nexus/legal-intelligence/legal-people.json; then
+            echo "No legal people changes detected."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nexus/legal-intelligence/legal-people.json
+          git commit -m "Refresh Legal Intelligence people data"
+          git pull --rebase origin main
+          git push origin main
