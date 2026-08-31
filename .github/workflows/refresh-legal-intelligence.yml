@@ -1,6 +1,12 @@
 name: Refresh Legal Intelligence legislation tracker
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'nexus/legal-intelligence/collector-config.json'
+      - 'nexus/legal-intelligence/scripts/**'
+      - '.github/workflows/refresh-legal-intelligence.yml'
   schedule:
     - cron: '20 0 * * 1-5'
     - cron: '20 9 * * 1-5'
@@ -31,6 +37,14 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Syntax and canonical data audit
+        run: |
+          node --check nexus/legal-intelligence/scripts/collect-legislation.mjs
+          node --check nexus/legal-intelligence/scripts/select-legislation.mjs
+          node --check nexus/legal-intelligence/scripts/upsert-legislation.mjs
+          node --check nexus/legal-intelligence/scripts/audit-legislation.mjs
+          node nexus/legal-intelligence/scripts/audit-legislation.mjs
+
       - name: Validate collector credentials
         id: credentials
         shell: bash
@@ -42,15 +56,6 @@ jobs:
             exit 0
           fi
           echo "ready=true" >> "$GITHUB_OUTPUT"
-
-      - name: Syntax and canonical data audit
-        if: steps.credentials.outputs.ready == 'true'
-        run: |
-          node --check nexus/legal-intelligence/scripts/collect-legislation.mjs
-          node --check nexus/legal-intelligence/scripts/select-legislation.mjs
-          node --check nexus/legal-intelligence/scripts/upsert-legislation.mjs
-          node --check nexus/legal-intelligence/scripts/audit-legislation.mjs
-          node nexus/legal-intelligence/scripts/audit-legislation.mjs
 
       - name: Collect official legislation candidates
         if: steps.credentials.outputs.ready == 'true'
