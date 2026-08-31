@@ -364,7 +364,7 @@
       alternateName:'예하바 프로젝트 포털',
       url:canonicalUrl,
       description:'논평·전략정보·정부 AX·학습·법률실무·법학 AI 연구·법률정보·AI 지식동향·출판·미디어를 연결하는 통합 포털',
-      potentialAction:{'@type':'SearchAction',target:`${canonicalUrl}?q={search_term_string}`,'query-input':'required name=query'},
+      potentialAction:{'@type':'SearchAction',target:`${canonicalUrl}?q={search_term_string}`,'query-input':'required name=search_term_string'},
       hasPart:data.projects.map(project => ({'@type':'WebPage',name:project.title,url:project.url,description:project.description}))
     });
     document.head.append(script);
