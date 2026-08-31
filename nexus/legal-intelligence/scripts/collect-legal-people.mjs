@@ -27,10 +27,16 @@ function normalizeDate(text) {
   return match ? `${match[1]}-${match[2].padStart(2, '0')}-${match[3].padStart(2, '0')}` : '';
 }
 
+function ageDays(value) {
+  if (!value) return Number.POSITIVE_INFINITY;
+  const time = Date.parse(`${value}T00:00:00+09:00`);
+  return Number.isFinite(time) ? Math.floor((Date.now() - time) / 86400000) : Number.POSITIVE_INFINITY;
+}
+
 function categoryFor(title) {
-  if (/(학술|세미나|포럼|심포지엄|연구|학술대회)/.test(title)) return '연구·학술';
-  if (/(개업|이직|영입|파트너|등록|승진)/.test(title)) return '이동·개업';
-  if (/(회원|법무법인|전문팀|시장|LegalTech|리걸테크)/i.test(title)) return '법률시장';
+  if (/(학술|세미나|포럼|심포지엄|연구|학술대회|논문|저서|발행)/.test(title)) return '연구·학술';
+  if (/(개업|이직|영입|합류|파트너|승진)/.test(title)) return '이동·개업';
+  if (/(전문팀|센터|TF|팀 출범|서비스|법률시장|LegalTech|리걸테크|리걸 AI|AI.*운영)/i.test(title)) return '법률시장';
   return '인사';
 }
 
@@ -44,7 +50,7 @@ async function fetchText(url) {
   for (let attempt = 0; attempt < 3; attempt += 1) {
     try {
       const response = await fetch(url, {
-        headers: {'User-Agent': 'YEHAVHA-Nexus-Legal-People/1.0', Accept: 'text/html,application/xhtml+xml'},
+        headers: {'User-Agent': 'YEHAVHA-Nexus-Legal-People/1.1', Accept: 'text/html,application/xhtml+xml'},
         signal: AbortSignal.timeout(30000)
       });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -59,11 +65,12 @@ async function fetchText(url) {
 
 function discover(source, html) {
   const records = [];
+  const maxAgeDays = Number(config.maxAgeDays || 240);
   const anchorRegex = /<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
   for (const match of html.matchAll(anchorRegex)) {
     const href = clean(match[1]);
     const title = stripTags(match[2]);
-    if (!href || !title || title.length < 4 || title.length > 140 || /^(더보기|목록|이전|다음|홈|Home)$/i.test(title)) continue;
+    if (!href || !title || title.length < 5 || title.length > 150 || /^(더보기|목록|이전|다음|홈|Home|회원현황|연수 안내 및 신청)$/i.test(title)) continue;
     if (!(source.includeKeywords || []).some(keyword => title.includes(keyword))) continue;
     if ((source.excludeKeywords || []).some(keyword => title.includes(keyword))) continue;
     if (/^(javascript:|#)/i.test(href)) continue;
@@ -71,8 +78,10 @@ function discover(source, html) {
     let sourceUrl;
     try { sourceUrl = new URL(href, source.url).href; } catch { continue; }
     const index = match.index || 0;
-    const context = stripTags(html.slice(Math.max(0, index - 220), Math.min(html.length, index + match[0].length + 260)));
+    const context = stripTags(html.slice(Math.max(0, index - 300), Math.min(html.length, index + match[0].length + 420)));
     const publishedAt = normalizeDate(context);
+    if (!publishedAt || ageDays(publishedAt) < -7 || ageDays(publishedAt) > maxAgeDays) continue;
+
     const category = categoryFor(title);
     records.push({
       recordKey: stableId(source.id, sourceUrl, title),
@@ -80,7 +89,7 @@ function discover(source, html) {
       source: source.label,
       title,
       publishedAt,
-      summary: `${source.label} 공개자료에서 자동 선별된 ${category} 관련 동향입니다. 세부 내용은 공식 원문에서 확인할 수 있습니다.`,
+      summary: `${source.label} 공식 공개자료에서 ${publishedAt} 확인된 ${category} 동향입니다. 영입·인사·전문조직·학술활동의 변화를 추적하며 세부 내용은 원문을 연결합니다.`,
       sourceUrl,
       tags: [source.label, category],
       active: true,
@@ -91,9 +100,11 @@ function discover(source, html) {
 }
 
 const existing = Array.isArray(data.records) ? data.records : [];
-const byUrl = new Map(existing.filter(r => r.sourceUrl).map(r => [r.sourceUrl, r]));
-const byTitle = new Map(existing.map(r => [`${r.source}|${r.title}`, r]));
-const merged = new Map(existing.map(r => [r.recordKey, r]));
+const maxAgeDays = Number(config.maxAgeDays || 240);
+const retained = existing.filter(record => !record.autoCollected || (record.publishedAt && ageDays(record.publishedAt) <= maxAgeDays));
+const byUrl = new Map(retained.filter(r => r.sourceUrl).map(r => [r.sourceUrl, r]));
+const byTitle = new Map(retained.map(r => [`${r.source}|${r.title}`, r]));
+const merged = new Map(retained.filter(record => !record.autoCollected).map(r => [r.recordKey, r]));
 const failures = [];
 
 for (const source of config.sources || []) {
@@ -107,12 +118,11 @@ for (const source of config.sources || []) {
         ...(previous || {}),
         ...record,
         recordKey: key,
-        publishedAt: record.publishedAt || previous?.publishedAt || '',
         summary: previous?.summary && !previous.autoCollected ? previous.summary : record.summary,
         tags: [...new Set([...(previous?.tags || []), ...(record.tags || [])])]
       });
     }
-    console.log(`${source.id}: ${found.length} candidate(s)`);
+    console.log(`${source.id}: ${found.length} high-quality candidate(s)`);
   } catch (error) {
     failures.push({source: source.id, message: error.message});
     console.warn(`${source.id}: ${error.message}`);
