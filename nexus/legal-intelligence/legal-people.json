@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-31",
+  "policy": {
+    "description": "법원·검찰·헌법재판소·변호사단체·법률연구 현장의 공개 전문동향만 선별하며 경조사·가십은 제외한다.",
+    "categories": ["인사", "이동·개업", "연구·학술", "법률시장"]
+  },
+  "records": [
+    {
+      "recordKey": "legalpeople:moj:20260824-prosecutor-transfer",
+      "category": "인사",
+      "source": "법무부",
+      "title": "2026년 하반기 일반검사 인사",
+      "publishedAt": "2026-08-24",
+      "effectiveAt": "2026-08-31",
+      "summary": "법무부가 일반검사 16명에 대한 전보 인사를 발표했으며 2026년 8월 31일자로 시행됩니다.",
+      "sourceUrl": "https://www.moj.go.kr/bbs/moj/182/609605/artclView.do",
+      "tags": ["검사", "전보", "검찰"],
+      "active": true
+    },
+    {
+      "recordKey": "legalpeople:ccourt:20260814-research-assistant",
+      "category": "인사",
+      "source": "헌법재판소",
+      "title": "헌법재판소 인사 <2026. 8. 18. 자>",
+      "publishedAt": "2026-08-14",
+      "effectiveAt": "2026-08-18",
+      "summary": "헌법재판소가 김은정·김성현·유병민·이예림·박건우·장혁훈·이예지 등 7명의 헌법연구관보 임용을 발표했습니다.",
+      "sourceUrl": "https://www.ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=4267331&cbIdx=1128",
+      "tags": ["헌법연구관보", "임용", "헌법재판소"],
+      "active": true
+    },
+    {
+      "recordKey": "legalpeople:ccourt:20260730-researchers",
+      "category": "인사",
+      "source": "헌법재판소",
+      "title": "헌법재판소 인사 <2026. 8. 1. 자>",
+      "publishedAt": "2026-07-30",
+      "effectiveAt": "2026-08-01",
+      "summary": "선임헌법연구관 보직과 헌법연구관·헌법연구관보 신규 임용을 포함한 8월 1일자 인사가 발표됐습니다.",
+      "sourceUrl": "https://www.ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=4267192&cbIdx=1128",
+      "tags": ["헌법연구관", "헌법연구관보", "인사"],
+      "active": true
+    },
+    {
+      "recordKey": "legalpeople:scourt:20260130-court-heads",
+      "category": "인사",
+      "source": "대한민국 법원",
+      "title": "법원장·고등법원 부장판사 및 고등법원 판사 등 인사",
+      "publishedAt": "2026-01-30",
+      "effectiveAt": "2026-02-09",
+      "summary": "대법원이 법원장과 수석부장판사, 고등법원 판사 등의 정기 인사를 발표했으며 일부 회생법원장 인사는 3월 1일자로 시행됐습니다.",
+      "sourceUrl": "https://sc.scourt.go.kr/portal/news/NewsViewAction.work?gubun=6&searchOption=&searchWord=&seqnum=2927",
+      "tags": ["법관", "법원장", "고등법원"],
+      "active": true
+    },
+    {
+      "recordKey": "legalpeople:scourt:20260105-career-judges",
+      "category": "인사",
+      "source": "대한민국 법원",
+      "title": "2026년 일반 법조경력자 법관임용절차",
+      "publishedAt": "2026-01-05",
+      "effectiveAt": "2026-10-02",
+      "summary": "일반 법조경력자 법관임용 절차가 진행 중이며 최종면접 이후 2026년 10월 2일 임용 일정이 제시돼 있습니다.",
+      "sourceUrl": "https://www.scourt.go.kr/portal/news/NewsViewAction.work?gubun=3&searchOption=&searchWord=&seqnum=2717",
+      "tags": ["법관임용", "법조경력자", "채용"],
+      "active": true
+    },
+    {
+      "recordKey": "legalpeople:scourt:20260710-registration-conference",
+      "category": "연구·학술",
+      "source": "대한민국 법원",
+      "title": "부진정등기로 인한 피해보상제도 설계 학술대회",
+      "publishedAt": "2026-07-10",
+      "summary": "법원행정처와 서강대 법학연구소가 피해보상 모델과 법령 정비 방안을 논의했으며 법관·변호사·법학교수·법무사 등 실무와 학계 전문가가 참여했습니다.",
+      "sourceUrl": "https://www.scourt.go.kr/portal/news/NewsViewAction.work?gubun=6&searchOption=&searchWord=&seqnum=3017",
+      "tags": ["학술대회", "등기", "법제연구"],
+      "active": true
+    },
+    {
+      "recordKey": "legalpeople:koreanbar:20260826-member-market",
+      "category": "법률시장",
+      "source": "대한변호사협회",
+      "title": "대한변호사협회 회원·개업 현황 기준 업데이트",
+      "publishedAt": "2026-08-26",
+      "summary": "대한변협 회원현황 기준 서울 지역은 개업회원 24,612명, 준회원 5,388명으로 소계 30,000명이 집계돼 법률시장 규모 변화의 기준 지표로 활용할 수 있습니다.",
+      "sourceUrl": "https://koreanbar.or.kr/pages/introduce/stat.asp",
+      "tags": ["변호사", "개업", "회원현황", "법률시장"],
+      "active": true
+    }
+  ]
+}
