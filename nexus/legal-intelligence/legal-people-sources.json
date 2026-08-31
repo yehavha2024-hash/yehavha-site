@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "scourt",
+      "label": "대한민국 법원",
+      "url": "https://www.scourt.go.kr/portal/main.jsp",
+      "includeKeywords": ["인사", "임용", "임명", "대법관", "법관", "재판연구원", "학술대회", "국제회의"],
+      "excludeKeywords": ["부음", "부고", "결혼", "화촉", "모친상", "부친상", "장모상", "장인상"]
+    },
+    {
+      "id": "ccourt",
+      "label": "헌법재판소",
+      "url": "https://www.ccourt.go.kr/site/kor/ex/bbs/List.do?cbIdx=1128",
+      "includeKeywords": ["인사", "임용", "연구관", "재판관", "학술", "세미나"],
+      "excludeKeywords": ["부음", "부고", "결혼", "화촉"]
+    },
+    {
+      "id": "moj",
+      "label": "법무부",
+      "url": "https://www.moj.go.kr/moj/221/subview.do",
+      "includeKeywords": ["검사 인사", "검찰 고위", "검사 임용", "변호사", "공소청"],
+      "excludeKeywords": ["부음", "부고", "결혼", "화촉"]
+    },
+    {
+      "id": "koreanbar",
+      "label": "대한변호사협회",
+      "url": "https://www.koreanbar.or.kr/pages/news/list.asp?types=1",
+      "includeKeywords": ["등록", "개업", "변호사시험", "연수", "세미나", "법무법인", "전문변호사", "회원현황"],
+      "excludeKeywords": ["부음", "부고", "결혼", "화촉", "모친상", "부친상", "장모상", "장인상"]
+    }
+  ]
+}
