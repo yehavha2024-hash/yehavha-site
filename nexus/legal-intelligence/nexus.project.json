@@ -1,0 +1,26 @@
+{
+  "id": "legal-intelligence-portal",
+  "publish": true,
+  "tracking": {
+    "paths": [
+      "nexus/legal-intelligence/index.html",
+      "nexus/legal-intelligence/style.css",
+      "nexus/legal-intelligence/legislation.json",
+      "nexus/legal-intelligence/legislation.js",
+      "nexus/legal-intelligence/scripts/upsert-legislation.mjs"
+    ],
+    "freshDays": 7,
+    "staleDays": 30,
+    "count": {
+      "type": "json-array",
+      "file": "nexus/legal-intelligence/legislation.json",
+      "path": "records",
+      "label": "입법 추적"
+    }
+  },
+  "review": {
+    "contentReviewedAt": "2026-08-31",
+    "baselineAt": "2026-08-31",
+    "baselineLabel": "입법자료 기준"
+  }
+}
