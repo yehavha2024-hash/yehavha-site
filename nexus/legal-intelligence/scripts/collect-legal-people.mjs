@@ -13,16 +13,13 @@ const config = JSON.parse(await fs.readFile(sourcePath, 'utf8'));
 const curated = JSON.parse(await fs.readFile(curatedPath, 'utf8'));
 
 const clean = value => String(value ?? '').replace(/\s+/g, ' ').trim();
-const stripTags = html => clean(String(html || '')
+const decode = value => clean(String(value || '')
+  .replaceAll('&nbsp;', ' ').replaceAll('&amp;', '&').replaceAll('&lt;', '<').replaceAll('&gt;', '>')
+  .replaceAll('&quot;', '"').replaceAll('&#39;', "'"));
+const stripTags = html => decode(String(html || '')
   .replace(/<script[\s\S]*?<\/script>/gi, ' ')
   .replace(/<style[\s\S]*?<\/style>/gi, ' ')
-  .replace(/<[^>]+>/g, ' ')
-  .replaceAll('&nbsp;', ' ')
-  .replaceAll('&amp;', '&')
-  .replaceAll('&lt;', '<')
-  .replaceAll('&gt;', '>')
-  .replaceAll('&quot;', '"')
-  .replaceAll('&#39;', "'"));
+  .replace(/<[^>]+>/g, ' '));
 
 function normalizeDate(text) {
   const match = clean(text).match(/(20\d{2})[.\-/년\s]+(\d{1,2})[.\-/월\s]+(\d{1,2})/);
@@ -35,11 +32,19 @@ function ageDays(value) {
   return Number.isFinite(time) ? Math.floor((Date.now() - time) / 86400000) : Number.POSITIVE_INFINITY;
 }
 
+function cleanTitle(value) {
+  return clean(value)
+    .replace(/^(기타|위촉|소식|뉴스)\s+/u, '')
+    .replace(/\s+20\d{2}[.\-/]\s*\d{1,2}[.\-/]\s*\d{1,2}\.?\s*$/u, '')
+    .replace(/\s+20\d{2}\.\s*\d{1,2}\.\s*\d{1,2}\.?\s*$/u, '');
+}
+
 function categoryFor(title) {
-  if (/(학술|세미나|포럼|심포지엄|연구|학술대회|논문|저서|발행)/.test(title)) return '연구·학술';
-  if (/(개업|이직|영입|합류|파트너|승진)/.test(title)) return '이동·개업';
-  if (/(전문팀|센터|TF|팀 출범|서비스|법률시장|LegalTech|리걸테크|리걸 AI|AI.*운영)/i.test(title)) return '법률시장';
-  return '인사';
+  if (/(학술|세미나|포럼|심포지엄|연구|학술대회|변호사대회|논문|저서|발간|출간|학술상|변호사시험|전문변호사)/u.test(title)) return '연구·학술';
+  if (/(전문팀|센터|TF|팀 출범|서비스|법률시장|LegalTech|리걸테크|리걸 AI|AI.*운영|컴플라이언스.*체계)/iu.test(title)) return '법률시장';
+  if (/(개업|이직|영입|합류|파트너|승진)/u.test(title)) return '이동·개업';
+  if (/(인사|임명|임용|전보|퇴임|보직|위촉|재판관|연구관)/u.test(title)) return '인사';
+  return '법률시장';
 }
 
 function stableId(sourceId, url, title) {
@@ -52,17 +57,70 @@ async function fetchText(url) {
   for (let attempt = 0; attempt < 3; attempt += 1) {
     try {
       const response = await fetch(url, {
-        headers: {'User-Agent': 'YEHAVHA-Nexus-Legal-People/1.2', Accept: 'text/html,application/xhtml+xml'},
-        signal: AbortSignal.timeout(30000)
+        headers: {'User-Agent': 'YEHAVHA-Nexus-Legal-People/1.3', Accept: 'text/html,application/xhtml+xml'},
+        signal: AbortSignal.timeout(22000)
       });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       return await response.text();
     } catch (error) {
       lastError = error;
-      if (attempt < 2) await new Promise(resolve => setTimeout(resolve, 900 * (attempt + 1)));
+      if (attempt < 2) await new Promise(resolve => setTimeout(resolve, 700 * (attempt + 1)));
     }
   }
   throw lastError;
+}
+
+function extractMetaDescription(html) {
+  const patterns = [
+    /<meta\b[^>]*(?:name|property)=["'](?:description|og:description)["'][^>]*content=["']([^"']+)["'][^>]*>/i,
+    /<meta\b[^>]*content=["']([^"']+)["'][^>]*(?:name|property)=["'](?:description|og:description)["'][^>]*>/i
+  ];
+  for (const pattern of patterns) {
+    const match = html.match(pattern);
+    const text = match ? stripTags(match[1]) : '';
+    if (text.length >= 35) return text;
+  }
+  return '';
+}
+
+function meaningfulParagraphs(html) {
+  return [...String(html || '').matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)]
+    .map(match => stripTags(match[1]))
+    .filter(text => text.length >= 35 && text.length <= 900)
+    .filter(text => !/(copyright|all rights reserved|개인정보|이메일무단수집|서울시|Tel\.|Fax\.|오시는 길|목록으로)/i.test(text));
+}
+
+function clip(text, max = 300) {
+  const value = clean(text);
+  if (value.length <= max) return value;
+  const cut = value.slice(0, max);
+  const sentence = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('다.'));
+  return `${(sentence > 120 ? cut.slice(0, sentence + 2) : cut).trim()}…`;
+}
+
+function fallbackSummary(title, category) {
+  if (category === '인사') return `${title} 관련 공식 인사 발표입니다. 대상·보직·시행일 등 인사 변동의 핵심사항을 원문과 함께 추적합니다.`;
+  if (category === '이동·개업') return `${title} 관련 법조인·전문인력 이동입니다. 합류 배경과 강화되는 전문분야를 중심으로 추적합니다.`;
+  if (category === '연구·학술') return `${title} 관련 연구·학술 활동입니다. 발표 주제, 연구성과와 법률실무에 연결되는 쟁점을 확인합니다.`;
+  return `${title} 관련 법률시장 변화입니다. 전문조직·서비스·LegalTech 등 법률업무 구조의 변화를 확인합니다.`;
+}
+
+function detailSummary(title, category, html) {
+  const candidates = [extractMetaDescription(html), ...meaningfulParagraphs(html)];
+  for (const candidate of candidates) {
+    const text = clean(candidate);
+    if (!text || text === title || text.length < 35) continue;
+    if (/공식 홈페이지|최적의 솔루션|본문으로 바로가기|메뉴 열기/i.test(text)) continue;
+    return clip(text);
+  }
+  return fallbackSummary(title, category);
+}
+
+function tagsFor(title, source, category) {
+  const dictionary = ['AI', '인공지능', 'LegalTech', '리걸AI', '검사', '법관', '헌법재판소', '변호사', '영입', '세미나', '학술', '공정거래', '금융', '노동', '개인정보', '정보보호', '컴플라이언스'];
+  const tags = [source, category];
+  for (const keyword of dictionary) if (title.toLocaleLowerCase('ko-KR').includes(keyword.toLocaleLowerCase('ko-KR'))) tags.push(keyword);
+  return [...new Set(tags)].slice(0, 6);
 }
 
 function discover(source, html) {
@@ -71,16 +129,17 @@ function discover(source, html) {
   const anchorRegex = /<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
   for (const match of html.matchAll(anchorRegex)) {
     const href = clean(match[1]);
-    const title = stripTags(match[2]);
+    const rawTitle = stripTags(match[2]);
+    const title = cleanTitle(rawTitle);
     if (!href || !title || title.length < 5 || title.length > 150 || /^(더보기|목록|이전|다음|홈|Home|회원현황|연수 안내 및 신청)$/i.test(title)) continue;
-    if (!(source.includeKeywords || []).some(keyword => title.includes(keyword))) continue;
-    if ((source.excludeKeywords || []).some(keyword => title.includes(keyword))) continue;
+    if (!(source.includeKeywords || []).some(keyword => rawTitle.includes(keyword) || title.includes(keyword))) continue;
+    if ((source.excludeKeywords || []).some(keyword => rawTitle.includes(keyword) || title.includes(keyword))) continue;
     if (/^(javascript:|#)/i.test(href)) continue;
 
     let sourceUrl;
     try { sourceUrl = new URL(href, source.url).href; } catch { continue; }
     const index = match.index || 0;
-    const context = stripTags(html.slice(Math.max(0, index - 300), Math.min(html.length, index + match[0].length + 420)));
+    const context = stripTags(html.slice(Math.max(0, index - 320), Math.min(html.length, index + match[0].length + 480)));
     const publishedAt = normalizeDate(context);
     if (!publishedAt || ageDays(publishedAt) < -7 || ageDays(publishedAt) > maxAgeDays) continue;
 
@@ -91,14 +150,35 @@ function discover(source, html) {
       source: source.label,
       title,
       publishedAt,
-      summary: `${source.label} 공식 공개자료에서 ${publishedAt} 확인된 ${category} 동향입니다. 영입·인사·전문조직·학술활동의 변화를 추적하며 세부 내용은 원문을 연결합니다.`,
+      summary: fallbackSummary(title, category),
       sourceUrl,
-      tags: [source.label, category],
+      tags: tagsFor(title, source.label, category),
       active: true,
       autoCollected: true
     });
   }
-  return records;
+  const unique = new Map();
+  for (const record of records) unique.set(record.sourceUrl, record);
+  return [...unique.values()].sort((a, b) => String(b.publishedAt).localeCompare(String(a.publishedAt)));
+}
+
+async function enrich(records, source) {
+  const limit = Number(source.detailLimit || config.detailLimitPerSource || 5);
+  const enriched = [];
+  for (let index = 0; index < records.length; index += 1) {
+    const record = records[index];
+    if (index >= limit) {
+      enriched.push(record);
+      continue;
+    }
+    try {
+      const html = await fetchText(record.sourceUrl);
+      enriched.push({...record, summary: detailSummary(record.title, record.category, html)});
+    } catch {
+      enriched.push(record);
+    }
+  }
+  return enriched;
 }
 
 const existing = Array.isArray(data.records) ? data.records : [];
@@ -112,15 +192,15 @@ const retained = [
   ...baseline.values(),
   ...existing.filter(record => record.autoCollected && record.publishedAt && ageDays(record.publishedAt) <= maxAgeDays)
 ];
-const byUrl = new Map(retained.filter(r => r.sourceUrl).map(r => [r.sourceUrl, r]));
-const byTitle = new Map(retained.map(r => [`${r.source}|${r.title}`, r]));
-const merged = new Map(baseline);
+const byUrl = new Map(retained.filter(record => record.sourceUrl).map(record => [record.sourceUrl, record]));
+const byTitle = new Map(retained.map(record => [`${record.source}|${record.title}`, record]));
+const merged = new Map(retained.map(record => [record.recordKey, record]));
 const failures = [];
 
 for (const source of config.sources || []) {
   try {
     const html = await fetchText(source.url);
-    const found = discover(source, html);
+    const found = await enrich(discover(source, html), source);
     for (const record of found) {
       const previous = byUrl.get(record.sourceUrl) || byTitle.get(`${record.source}|${record.title}`);
       const key = previous?.recordKey || record.recordKey;
@@ -128,12 +208,11 @@ for (const source of config.sources || []) {
         ...(previous || {}),
         ...record,
         recordKey: key,
-        summary: previous?.summary && !previous.autoCollected ? previous.summary : record.summary,
-        tags: [...new Set([...(previous?.tags || []), ...(record.tags || [])])],
+        tags: [...new Set([...(previous?.tags || []), ...(record.tags || [])])].slice(0, 8),
         ...(previous?.curated ? {curated: true} : {})
       });
     }
-    console.log(`${source.id}: ${found.length} high-quality candidate(s)`);
+    console.log(`${source.id}: ${found.length} candidate(s)`);
   } catch (error) {
     failures.push({source: source.id, message: error.message});
     console.warn(`${source.id}: ${error.message}`);
@@ -144,7 +223,7 @@ const today = new Intl.DateTimeFormat('en-CA', {timeZone: 'Asia/Seoul', year: 'n
 const records = [...merged.values()]
   .filter(record => record.active !== false)
   .sort((a, b) => String(b.publishedAt || '').localeCompare(String(a.publishedAt || '')) || String(a.recordKey).localeCompare(String(b.recordKey)))
-  .slice(0, 80);
+  .slice(0, 100);
 
 if (!records.length) throw new Error('Legal people collector produced zero records.');
 const output = {...data, updatedAt: today, sourceFailures: failures, records};
