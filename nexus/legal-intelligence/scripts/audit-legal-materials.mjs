@@ -10,6 +10,20 @@ const datePattern = /^20\d{2}-\d{2}-\d{2}$/;
 const seenKeys = new Set();
 const seenRefs = new Set();
 
+// 2026-08-31 이전에 간략 형식으로 이미 등록된 자료만 예외로 둔다.
+// 이 목록에 없는 신규 판례·연구자료는 반드시 쟁점·법리·연구 포인트 3단 분석을 가져야 한다.
+const legacyCompactKeys = new Set([
+  'case:scourt:2026da201223',
+  'case:scourt:2026da202771',
+  'case:scourt:2025da217842',
+  'research:klri:2381',
+  'research:klri:2379',
+  'research:klri:2367',
+  'research:klri:2368',
+  'research:klri:2337',
+  'research:klri:2308'
+]);
+
 if (!Array.isArray(data.records)) throw new Error('legal-materials records[] is required.');
 if (!data.records.length) throw new Error('legal-materials must contain at least one record.');
 
@@ -33,6 +47,15 @@ for (const record of data.records) {
 
   if (String(record.summary).trim().length < 40) throw new Error(`summary too short: ${key}`);
   if (String(record.legalPoint).trim().length < 30) throw new Error(`legalPoint too short: ${key}`);
+
+  const requiresThreeLayerAnalysis = record.type === '판례' || record.type === '연구자료';
+  if (requiresThreeLayerAnalysis && !legacyCompactKeys.has(key)) {
+    for (const field of ['issue', 'legalRule', 'researchPoint']) {
+      const value = String(record[field] || '').trim();
+      if (!value) throw new Error(`${field} is required for curated ${record.type}: ${key}`);
+      if (value.length < 35) throw new Error(`${field} too short for curated ${record.type}: ${key}`);
+    }
+  }
 }
 
-console.log(`Legal materials audit passed: ${data.records.length} unique record(s).`);
+console.log(`Legal materials audit passed: ${data.records.length} unique record(s). Three-layer analysis enforced for new cases and research materials.`);
