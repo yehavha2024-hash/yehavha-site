@@ -11,7 +11,18 @@ const data = JSON.parse(await fs.readFile(targetPath, 'utf8'));
 const allowedSources = new Set(['assembly', 'government']);
 const allowedTopics = new Set((config.topicRules || []).map(rule => rule.topic));
 const seen = new Set();
+const governmentSemanticSeen = new Map();
 const datePattern = /^20\d{2}-\d{2}-\d{2}$/;
+const clean = value => value == null ? '' : String(value).replace(/\s+/g, ' ').trim();
+
+function governmentTitleKey(title) {
+  return clean(title)
+    .replace(/\s+(일부|전부)?개정(?:법률|령|규칙)?안$/u, '')
+    .replace(/\s+제정(?:법률|령|규칙)?안$/u, '')
+    .replace(/\s+개정안$/u, '')
+    .replace(/\s+/g, '')
+    .toLocaleLowerCase('ko-KR');
+}
 
 if (!Array.isArray(data.records)) throw new Error('records[] is required.');
 for (const record of data.records) {
@@ -30,6 +41,13 @@ for (const record of data.records) {
   if (!Array.isArray(record.topics) || !record.topics.length) throw new Error(`topics[] required: ${key}`);
   for (const topic of record.topics) if (!allowedTopics.has(topic)) throw new Error(`Unknown topic '${topic}' in ${key}`);
   if (record.sourceUrl && !/^https:\/\//.test(record.sourceUrl)) throw new Error(`Invalid sourceUrl: ${key}`);
+
+  if (record.sourceType === 'government') {
+    const semanticKey = `${governmentTitleKey(record.title)}|${clean(record.ministry).toLocaleLowerCase('ko-KR')}|${clean(record.lawType).toLocaleLowerCase('ko-KR')}`;
+    const previous = governmentSemanticSeen.get(semanticKey);
+    if (previous) throw new Error(`Semantic government duplicate: ${previous} <-> ${key}`);
+    governmentSemanticSeen.set(semanticKey, key);
+  }
 }
 
 console.log(`Legislation audit passed: ${data.records.length} unique record(s).`);
