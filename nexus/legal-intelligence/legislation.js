@@ -1,7 +1,8 @@
 (() => {
   'use strict';
 
-  const DATA_URL = './legislation.json';
+  const LEGISLATION_URL = './legislation.json';
+  const PEOPLE_URL = './legal-people.json';
 
   function el(tag, className, text) {
     const node = document.createElement(tag);
@@ -78,7 +79,7 @@
     return wrap;
   }
 
-  function render(data) {
+  function renderLegislation(data) {
     const section = document.getElementById('legislation-tracker');
     const anchor = section?.querySelector('.watch-wrap');
     if (!section || !anchor) return;
@@ -101,31 +102,99 @@
     );
     host.append(info);
 
-    if (assembly.length) {
-      host.append(renderGroup('국회 입법 · 선별 추적', 'NEXUS 관심영역과 직접 연결되는 국회 법률안을 의안번호 기준으로 추적합니다.', assembly));
-    }
-    if (government.length) {
-      host.append(renderGroup('정부 입법 · 선별 추적', '현재 입법예고 또는 후속 절차를 진행 중인 정부 법령안을 정부입법 식별자 기준으로 추적합니다.', government));
-    }
+    if (assembly.length) host.append(renderGroup('국회 입법 · 선별 추적', 'NEXUS 관심영역과 직접 연결되는 국회 법률안을 의안번호 기준으로 추적합니다.', assembly));
+    if (government.length) host.append(renderGroup('정부 입법 · 선별 추적', '현재 입법예고 또는 후속 절차를 진행 중인 정부 법령안을 정부입법 식별자 기준으로 추적합니다.', government));
 
     anchor.insertAdjacentElement('afterend', host);
   }
 
+  function renderPeopleCard(record) {
+    const card = el('article', 'people-live-card');
+    const top = el('div', 'people-live-top');
+    top.append(el('span', 'people-live-category', record.category || '법조계'), el('span', 'people-live-source', record.source || '공개자료'));
+    card.append(top, el('h3', '', record.title || ''));
+
+    const date = record.effectiveAt
+      ? `발표 ${formatDate(record.publishedAt)} · 시행 ${formatDate(record.effectiveAt)}`
+      : `기준 ${formatDate(record.publishedAt)}`;
+    card.append(el('p', 'people-live-date', date), el('p', 'people-live-summary', record.summary || ''));
+
+    const tags = el('div', 'people-live-tags');
+    for (const tag of record.tags || []) tags.append(el('span', '', tag));
+    if (tags.childElementCount) card.append(tags);
+
+    if (record.sourceUrl) {
+      const actions = el('div', 'source-actions');
+      const link = el('a', '', '공식 원문 ↗');
+      link.href = record.sourceUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      actions.append(link);
+      card.append(actions);
+    }
+    return card;
+  }
+
+  function renderLegalPeople(data) {
+    const section = document.getElementById('legal-people');
+    const anchor = section?.querySelector('.exclusion-note');
+    if (!section || !anchor) return;
+    section.querySelectorAll('[data-live-legal-people]').forEach(node => node.remove());
+
+    const records = (Array.isArray(data.records) ? data.records : [])
+      .filter(record => record && record.active !== false)
+      .sort((a, b) => String(b.publishedAt || '').localeCompare(String(a.publishedAt || '')))
+      .slice(0, 16);
+
+    const host = el('div', 'legal-people-live');
+    host.dataset.liveLegalPeople = 'true';
+    const info = el('div', 'exclusion-note people-live-info');
+    info.append(
+      el('strong', '', `선별 동향 ${records.length}건`),
+      el('span', '', `데이터 기준 ${formatDate(data.updatedAt)} · 법원·검찰·헌재·변호사단체·학술 공개자료를 갱신하며 경조사와 가십은 제외합니다.`)
+    );
+    host.append(info);
+
+    const grid = el('div', 'legal-people-live-grid');
+    for (const record of records) grid.append(renderPeopleCard(record));
+    host.append(grid);
+    anchor.insertAdjacentElement('afterend', host);
+  }
+
+  function renderLoadError(sectionId, anchorSelector, type, message) {
+    const section = document.getElementById(sectionId);
+    const anchor = section?.querySelector(anchorSelector);
+    if (!anchor) return;
+    const note = el('div', 'exclusion-note');
+    note.dataset[type] = 'true';
+    note.append(el('strong', '', '데이터'), el('span', '', message));
+    anchor.insertAdjacentElement('afterend', note);
+  }
+
+  async function loadJson(url) {
+    const response = await fetch(url, {cache: 'no-store'});
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return response.json();
+  }
+
   async function load() {
-    try {
-      const response = await fetch(DATA_URL, {cache: 'no-store'});
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const data = await response.json();
-      render(data);
-    } catch (error) {
-      console.error('LEGAL INTELLIGENCE legislation data load failed:', error);
-      const section = document.getElementById('legislation-tracker');
-      const anchor = section?.querySelector('.watch-wrap');
-      if (!anchor) return;
-      const note = el('div', 'exclusion-note');
-      note.dataset.liveLegislation = 'true';
-      note.append(el('strong', '', '입법 데이터'), el('span', '', '선별 입법 데이터를 불러오지 못했습니다. 공식 원천 링크는 계속 사용할 수 있습니다.'));
-      anchor.insertAdjacentElement('afterend', note);
+    const [legislationResult, peopleResult] = await Promise.allSettled([
+      loadJson(LEGISLATION_URL),
+      loadJson(PEOPLE_URL)
+    ]);
+
+    if (legislationResult.status === 'fulfilled') {
+      renderLegislation(legislationResult.value);
+    } else {
+      console.error('LEGAL INTELLIGENCE legislation data load failed:', legislationResult.reason);
+      renderLoadError('legislation-tracker', '.watch-wrap', 'liveLegislation', '선별 입법 데이터를 불러오지 못했습니다. 공식 원천 링크는 계속 사용할 수 있습니다.');
+    }
+
+    if (peopleResult.status === 'fulfilled') {
+      renderLegalPeople(peopleResult.value);
+    } else {
+      console.error('LEGAL INTELLIGENCE people data load failed:', peopleResult.reason);
+      renderLoadError('legal-people', '.exclusion-note', 'liveLegalPeople', '법조계 동향 데이터를 불러오지 못했습니다. 공식 원천 확인은 계속 가능합니다.');
     }
   }
 
