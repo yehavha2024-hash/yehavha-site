@@ -22,6 +22,12 @@ function normalizeDate(value) {
   return `${match[1]}-${match[2].padStart(2, '0')}-${match[3].padStart(2, '0')}`;
 }
 
+function dateFromText(value) {
+  const text = clean(value);
+  const match = text.match(/(20\d{2})\D+(\d{1,2})\D+(\d{1,2})/);
+  return match ? `${match[1]}-${match[2].padStart(2, '0')}-${match[3].padStart(2, '0')}` : '';
+}
+
 function first(raw, keys) {
   for (const key of keys) {
     const value = clean(raw?.[key]);
@@ -113,21 +119,62 @@ function governmentStatusLabel(raw) {
   return first(raw, ['lbPrcStsNm', 'lbPrcStsCdGrpNm']) || '정부입법 진행';
 }
 
+function governmentDetailHistory(raw, statusDate, statusLabel) {
+  const rows = [];
+  if (statusDate) rows.push({date: statusDate, stage: statusLabel});
+  for (const item of Array.isArray(raw.processStages) ? raw.processStages : []) {
+    const date = dateFromText(item?.status);
+    const stage = [clean(item?.phase), clean(item?.stage), clean(item?.status)].filter(Boolean).join(' · ');
+    if (date && stage) rows.push({date, stage});
+  }
+  return rows;
+}
+
+function cleanProcessStages(value) {
+  if (!Array.isArray(value)) return [];
+  return value.map(item => ({
+    phase: clean(item?.phase),
+    stage: clean(item?.stage),
+    status: clean(item?.status)
+  })).filter(item => item.phase || item.stage || item.status);
+}
+
+function cleanDocuments(value) {
+  if (!Array.isArray(value)) return [];
+  const map = new Map();
+  for (const item of value) {
+    const name = clean(item?.name);
+    const url = clean(item?.url);
+    if (!name && !url) continue;
+    map.set(`${url}|${name}`, {name, url});
+  }
+  return [...map.values()];
+}
+
 function mapGovernment(item) {
   const raw = item.raw || {};
   const key = `government:${item.sourceId}`;
   const previous = existingByKey.get(key);
   const title = first(raw, ['lsNmKo']);
-  const ministry = first(raw, ['cptOfiOrgNm', 'asndOfiCdNm']);
-  const lawType = first(raw, ['lsKndNm', 'lsKndCdNm']);
+  const ministry = first(raw, ['asndOfiCdNm', 'cptOfiOrgNm']);
+  const department = first(raw, ['asndDptCdNm']);
+  const lawType = first(raw, ['lsKndCdNm', 'lsKndNm']);
+  const revisionType = first(raw, ['rrFrCdNm', 'rrFrNm']);
+  const mainContent = first(raw, ['rrRsn']);
+  const amendmentReason = first(raw, ['essCts']);
+  const legislativePlan = first(raw, ['strCts', 'StrCts']);
+  const budgetRequired = first(raw, ['bgtAttdYn']);
+  const plainLanguage = first(raw, ['abYn']);
+  const planIncluded = first(raw, ['lmPlnIncludeYn']);
   const statusLabel = governmentStatusLabel(raw);
   const statusDate = normalizeDate(first(raw, ['lbPrcStsDt'])) || previous?.statusDate || '';
-  const topics = topicsFor([title, ministry, first(raw, ['rrRsn', 'essCts'])].join(' '));
+  const topics = topicsFor([title, ministry, department, mainContent, amendmentReason, legislativePlan].join(' '));
   if (!previous && !topics.length) return null;
   const statusCode = /(폐기|철회)/.test(statusLabel) ? 'withdrawn' : /(공포)/.test(statusLabel) ? 'promulgated' : /(국회)/.test(statusLabel) ? 'submitted_to_assembly' : /(심사)/.test(statusLabel) ? 'review' : /(심의|의결)/.test(statusLabel) ? 'deliberation' : 'government_process';
-  const details = first(raw, ['rrRsn', 'essCts']);
   const officialLbicId = first(raw, ['officialLbicId', 'lbicId']) || previous?.officialLbicId || '';
   const officialSourceUrl = first(raw, ['publicSourceUrl']) || previous?.sourceUrl || 'https://opinion.lawmaking.go.kr/lmSts/govLm';
+  const processStages = cleanProcessStages(raw.processStages);
+  const documents = cleanDocuments(raw.documents);
 
   return {
     sourceType: 'government',
@@ -141,9 +188,19 @@ function mapGovernment(item) {
     statusDate,
     active: !/(폐기|철회|공포)/.test(statusLabel),
     topics: topics.length ? topics : previous?.topics || [],
-    ...(previous ? {} : {summary: details || `법제처 정부입법 공식자료에서 자동 선별된 법령안입니다. 현재 추진단계는 ${statusLabel}이며 세부 내용은 공식 원문을 기준으로 보강합니다.`}),
+    ...(department ? {department} : {}),
+    ...(revisionType ? {revisionType} : {}),
+    ...(budgetRequired ? {budgetRequired} : {}),
+    ...(plainLanguage ? {plainLanguage} : {}),
+    ...(planIncluded ? {planIncluded} : {}),
+    ...(mainContent ? {mainContent} : {}),
+    ...(amendmentReason ? {amendmentReason} : {}),
+    ...(legislativePlan ? {legislativePlan} : {}),
+    ...(processStages.length ? {processStages} : {}),
+    ...(documents.length ? {documents} : {}),
+    ...(previous ? {} : {summary: mainContent || amendmentReason || `법제처 정부입법 공식자료에서 자동 선별된 법령안입니다. 현재 추진단계는 ${statusLabel}이며 상세 API를 기준으로 내용을 보강합니다.`}),
     sourceUrl: officialSourceUrl,
-    history: statusDate ? [{date: statusDate, stage: statusLabel}] : []
+    history: governmentDetailHistory(raw, statusDate, statusLabel)
   };
 }
 
