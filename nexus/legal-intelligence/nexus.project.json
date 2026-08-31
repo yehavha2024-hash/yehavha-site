@@ -7,7 +7,11 @@
       "nexus/legal-intelligence/style.css",
       "nexus/legal-intelligence/legislation.json",
       "nexus/legal-intelligence/legislation.js",
-      "nexus/legal-intelligence/scripts/upsert-legislation.mjs"
+      "nexus/legal-intelligence/collector-config.json",
+      "nexus/legal-intelligence/scripts/collect-legislation.mjs",
+      "nexus/legal-intelligence/scripts/select-legislation.mjs",
+      "nexus/legal-intelligence/scripts/upsert-legislation.mjs",
+      "nexus/legal-intelligence/scripts/audit-legislation.mjs"
     ],
     "freshDays": 7,
     "staleDays": 30,
