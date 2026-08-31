@@ -7,8 +7,10 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..');
 const dataPath = path.join(root, 'legal-people.json');
 const sourcePath = path.join(root, 'legal-people-sources.json');
+const curatedPath = path.join(root, 'legal-people-curated.json');
 const data = JSON.parse(await fs.readFile(dataPath, 'utf8'));
 const config = JSON.parse(await fs.readFile(sourcePath, 'utf8'));
+const curated = JSON.parse(await fs.readFile(curatedPath, 'utf8'));
 
 const clean = value => String(value ?? '').replace(/\s+/g, ' ').trim();
 const stripTags = html => clean(String(html || '')
@@ -50,7 +52,7 @@ async function fetchText(url) {
   for (let attempt = 0; attempt < 3; attempt += 1) {
     try {
       const response = await fetch(url, {
-        headers: {'User-Agent': 'YEHAVHA-Nexus-Legal-People/1.1', Accept: 'text/html,application/xhtml+xml'},
+        headers: {'User-Agent': 'YEHAVHA-Nexus-Legal-People/1.2', Accept: 'text/html,application/xhtml+xml'},
         signal: AbortSignal.timeout(30000)
       });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -100,11 +102,19 @@ function discover(source, html) {
 }
 
 const existing = Array.isArray(data.records) ? data.records : [];
+const curatedRecords = Array.isArray(curated.records) ? curated.records : [];
 const maxAgeDays = Number(config.maxAgeDays || 240);
-const retained = existing.filter(record => !record.autoCollected || (record.publishedAt && ageDays(record.publishedAt) <= maxAgeDays));
+const retainedManual = existing.filter(record => !record.autoCollected);
+const baseline = new Map(retainedManual.map(record => [record.recordKey, record]));
+for (const record of curatedRecords) baseline.set(record.recordKey, {...record, curated: true});
+
+const retained = [
+  ...baseline.values(),
+  ...existing.filter(record => record.autoCollected && record.publishedAt && ageDays(record.publishedAt) <= maxAgeDays)
+];
 const byUrl = new Map(retained.filter(r => r.sourceUrl).map(r => [r.sourceUrl, r]));
 const byTitle = new Map(retained.map(r => [`${r.source}|${r.title}`, r]));
-const merged = new Map(retained.filter(record => !record.autoCollected).map(r => [r.recordKey, r]));
+const merged = new Map(baseline);
 const failures = [];
 
 for (const source of config.sources || []) {
@@ -119,7 +129,8 @@ for (const source of config.sources || []) {
         ...record,
         recordKey: key,
         summary: previous?.summary && !previous.autoCollected ? previous.summary : record.summary,
-        tags: [...new Set([...(previous?.tags || []), ...(record.tags || [])])]
+        tags: [...new Set([...(previous?.tags || []), ...(record.tags || [])])],
+        ...(previous?.curated ? {curated: true} : {})
       });
     }
     console.log(`${source.id}: ${found.length} high-quality candidate(s)`);
@@ -138,4 +149,4 @@ const records = [...merged.values()]
 if (!records.length) throw new Error('Legal people collector produced zero records.');
 const output = {...data, updatedAt: today, sourceFailures: failures, records};
 await fs.writeFile(dataPath, `${JSON.stringify(output, null, 2)}\n`, 'utf8');
-console.log(`Legal people data updated: ${records.length} record(s), failures=${failures.length}`);
+console.log(`Legal people data updated: ${records.length} record(s), curated=${curatedRecords.length}, failures=${failures.length}`);
