@@ -126,10 +126,12 @@ function mapGovernment(item) {
   if (!previous && !topics.length) return null;
   const statusCode = /(폐기|철회)/.test(statusLabel) ? 'withdrawn' : /(공포)/.test(statusLabel) ? 'promulgated' : /(국회)/.test(statusLabel) ? 'submitted_to_assembly' : /(심사)/.test(statusLabel) ? 'review' : /(심의|의결)/.test(statusLabel) ? 'deliberation' : 'government_process';
   const details = first(raw, ['rrRsn', 'essCts']);
+  const officialLbicId = first(raw, ['officialLbicId', 'lbicId']);
 
   return {
     sourceType: 'government',
     sourceId: item.sourceId,
+    ...(officialLbicId ? {officialLbicId} : {}),
     title,
     ministry,
     lawType,
