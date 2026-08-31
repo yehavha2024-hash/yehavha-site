@@ -8,7 +8,31 @@ const target = process.argv[2] ? path.resolve(process.cwd(), process.argv[2]) : 
 const data = JSON.parse(await fs.readFile(target, 'utf8'));
 const allowed = new Set(['인사', '이동·개업', '연구·학술', '법률시장']);
 const seen = new Set();
+const seenUrls = new Map();
 const datePattern = /^20\d{2}-\d{2}-\d{2}$/;
+const clean = value => String(value ?? '').replace(/\s+/g, ' ').trim();
+
+function canonicalSourceUrl(value) {
+  if (!value) return '';
+  try {
+    const url = new URL(value);
+    url.hash = '';
+    if (/^(www\.)?koreanbar\.or\.kr$/i.test(url.hostname)) {
+      url.hostname = 'www.koreanbar.or.kr';
+      if (/\/pages\/news\/view\.asp$/i.test(url.pathname)) {
+        const seq = url.searchParams.get('seq');
+        const types = url.searchParams.get('types');
+        url.search = '';
+        if (seq) url.searchParams.set('seq', seq);
+        if (types) url.searchParams.set('types', types);
+      }
+    }
+    for (const key of [...url.searchParams.keys()]) if (/^(utm_|fbclid$|gclid$)/i.test(key)) url.searchParams.delete(key);
+    return url.href;
+  } catch {
+    return clean(value);
+  }
+}
 
 if (!Array.isArray(data.records)) throw new Error('records[] is required.');
 for (const record of data.records) {
@@ -22,6 +46,12 @@ for (const record of data.records) {
   if (!Array.isArray(record.tags)) throw new Error(`tags[] required: ${record.recordKey}`);
   if (!/^https:\/\//.test(record.sourceUrl || '')) throw new Error(`Valid sourceUrl required: ${record.recordKey}`);
   if (/(부음|부고|결혼|화촉|모친상|부친상|장모상|장인상)/.test(record.title)) throw new Error(`Excluded personal event found: ${record.recordKey}`);
+  if (!clean(record.summary) || clean(record.summary).length < 35) throw new Error(`Substantive summary required: ${record.recordKey}`);
+
+  const urlKey = canonicalSourceUrl(record.sourceUrl);
+  const previous = seenUrls.get(urlKey);
+  if (previous) throw new Error(`Duplicate canonical sourceUrl: ${previous} <-> ${record.recordKey}`);
+  seenUrls.set(urlKey, record.recordKey);
 }
 
-console.log(`Legal people audit passed: ${data.records.length} unique record(s).`);
+console.log(`Legal people audit passed: ${data.records.length} unique record(s), canonical URLs unique.`);
