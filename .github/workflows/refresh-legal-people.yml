@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
     paths:
+      - 'nexus/legal-intelligence/legal-people-curated.json'
       - 'nexus/legal-intelligence/legal-people-sources.json'
       - 'nexus/legal-intelligence/scripts/collect-legal-people.mjs'
       - 'nexus/legal-intelligence/scripts/audit-legal-people.mjs'
