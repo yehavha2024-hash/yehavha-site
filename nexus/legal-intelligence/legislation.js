@@ -185,6 +185,14 @@
     return '법제·AI·데이터·에듀테크·연구윤리 분야의 공식 연구보고서를 연구 쟁점과 함께 연결했습니다.';
   }
 
+  function appendMaterialAnalysis(card, label, value) {
+    const text = String(value || '').trim();
+    if (!text) return;
+    const point = el('div', 'material-point');
+    point.append(el('b', '', label), el('span', '', text));
+    card.append(point);
+  }
+
   function renderMaterialCard(record) {
     const card = el('article', 'material-card');
     const top = el('div', 'material-top');
@@ -193,11 +201,16 @@
     const reference = el('p', 'material-reference');
     reference.textContent = [record.reference, formatDate(record.date), record.result].filter(Boolean).join(' · ');
     card.append(reference, el('p', 'material-summary', record.summary || ''));
-    if (record.legalPoint) {
-      const point = el('div', 'material-point');
-      point.append(el('b', '', '연구 포인트'), el('span', '', record.legalPoint));
-      card.append(point);
+
+    const hasThreeLayerAnalysis = record.issue || record.legalRule || record.researchPoint;
+    if (hasThreeLayerAnalysis) {
+      appendMaterialAnalysis(card, '쟁점', record.issue);
+      appendMaterialAnalysis(card, '법리', record.legalRule);
+      appendMaterialAnalysis(card, 'NEXUS 연구 포인트', record.researchPoint);
+    } else if (record.legalPoint) {
+      appendMaterialAnalysis(card, '연구 포인트', record.legalPoint);
     }
+
     const tags = el('div', 'people-live-tags');
     for (const topic of record.topics || []) tags.append(el('span', '', topic));
     if (tags.childElementCount) card.append(tags);
@@ -226,7 +239,7 @@
     section.id = 'legal-materials';
     const container = el('div', 'container');
     const head = el('div', 'legal-section-head');
-    head.append(el('p', 'legal-eyebrow', 'CURATED LAW & RESEARCH'), el('h2', '', '판례·법령·연구자료 실제 데이터'), el('p', '', '제목만 나열하지 않고 사건번호·시행일·핵심쟁점·연구 포인트와 공식 원문을 함께 제공합니다.'));
+    head.append(el('p', 'legal-eyebrow', 'CURATED LAW & RESEARCH'), el('h2', '', '판례·법령·연구자료 실제 데이터'), el('p', '', '제목만 나열하지 않고 사건번호·시행일과 함께 쟁점·법리·NEXUS 연구 포인트를 분리해 제공합니다.'));
     container.append(head);
 
     const counts = new Map();
