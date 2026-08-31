@@ -118,6 +118,7 @@ function recordMap() {
 async function collectAssembly() {
   const cfg = config.assembly;
   const candidates = new Map();
+  const tracked = new Set((current.records || []).filter(record => record.sourceType === 'assembly').map(record => clean(record.sourceId)));
 
   for (const keyword of config.discoveryKeywords || []) {
     for (let page = 1; page <= cfg.maxPagesPerKeyword; page += 1) {
@@ -135,31 +136,31 @@ async function collectAssembly() {
     }
   }
 
-  for (const record of current.records || []) {
-    if (record.sourceType !== 'assembly') continue;
-    const billNo = clean(record.sourceId);
+  for (const billNo of tracked) {
     if (!billNo) continue;
-    const detail = await assemblyCall(cfg.detailEndpoint, {BILL_NO: billNo, pIndex: 1, pSize: 5});
-    if (detail.rows[0]) candidates.set(billNo, {...candidates.get(billNo), ...detail.rows[0]});
+    try {
+      const detail = await assemblyCall(cfg.detailEndpoint, {BILL_NO: billNo, pIndex: 1, pSize: 5});
+      if (detail.rows[0]) candidates.set(billNo, {...candidates.get(billNo), ...detail.rows[0]});
+    } catch (error) {
+      console.warn(`Assembly tracked detail skipped ${billNo}: ${error.message}`);
+    }
   }
 
-  const enriched = [];
+  const output = [];
   for (const [billNo, base] of candidates) {
-    let detail = {};
-    let review = {};
-    try {
-      detail = (await assemblyCall(cfg.detailEndpoint, {BILL_NO: billNo, pIndex: 1, pSize: 5})).rows[0] || {};
-    } catch (error) {
-      console.warn(`Assembly detail skipped ${billNo}: ${error.message}`);
+    if (!tracked.has(billNo)) {
+      output.push({sourceType: 'assembly', sourceId: billNo, raw: base});
+      continue;
     }
+    let review = {};
     try {
       review = (await assemblyCall(cfg.reviewEndpoint, {AGE: cfg.age, BILL_NO: billNo, pIndex: 1, pSize: 10})).rows[0] || {};
     } catch (error) {
-      console.warn(`Assembly review skipped ${billNo}: ${error.message}`);
+      console.warn(`Assembly tracked review skipped ${billNo}: ${error.message}`);
     }
-    enriched.push({sourceType: 'assembly', sourceId: billNo, raw: {...base, ...detail, ...review}});
+    output.push({sourceType: 'assembly', sourceId: billNo, raw: {...base, ...review}});
   }
-  return enriched;
+  return output;
 }
 
 async function collectGovernment() {
