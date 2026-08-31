@@ -37,12 +37,14 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Syntax and canonical data audit
+      - name: Normalize and validate canonical data
         run: |
           node --check nexus/legal-intelligence/scripts/collect-legislation.mjs
           node --check nexus/legal-intelligence/scripts/select-legislation.mjs
           node --check nexus/legal-intelligence/scripts/upsert-legislation.mjs
+          node --check nexus/legal-intelligence/scripts/normalize-legislation.mjs
           node --check nexus/legal-intelligence/scripts/audit-legislation.mjs
+          node nexus/legal-intelligence/scripts/normalize-legislation.mjs
           node nexus/legal-intelligence/scripts/audit-legislation.mjs
 
       - name: Report source modes
@@ -50,35 +52,54 @@ jobs:
         run: |
           if [ -z "$OPEN_ASSEMBLY_API_KEY" ]; then
             echo "### 국회 입법 API 비활성" >> "$GITHUB_STEP_SUMMARY"
-            echo "OPEN_ASSEMBLY_API_KEY 또는 OPEN_ASSEMBLY_SUBCOMMITTEE_API_KEY 미등록: 기존 국회 레코드는 보존하고 국회 신규 수집·상태조회만 건너뜁니다." >> "$GITHUB_STEP_SUMMARY"
+            echo "인증키 미등록: 기존 국회 레코드를 보존합니다." >> "$GITHUB_STEP_SUMMARY"
           else
             echo "### 국회 입법 API 활성" >> "$GITHUB_STEP_SUMMARY"
-            echo "등록된 열린국회정보 인증키를 국회 의안·심사 조회에 사용합니다." >> "$GITHUB_STEP_SUMMARY"
+            echo "등록된 열린국회정보 인증키로 의안·심사 정보를 조회합니다." >> "$GITHUB_STEP_SUMMARY"
           fi
           if [ -z "$LAWMAKING_OC" ]; then
             echo "### 정부입법 공개목록 모드" >> "$GITHUB_STEP_SUMMARY"
-            echo "LAWMAKING_OC 미등록: 국민참여입법센터 공개 정부입법현황에서 lbicId·법령명·부처·추진단계를 수집합니다." >> "$GITHUB_STEP_SUMMARY"
+            echo "국민참여입법센터 공개 정부입법현황을 우선 조회합니다." >> "$GITHUB_STEP_SUMMARY"
           else
             echo "### 정부입법 OC API 우선 모드" >> "$GITHUB_STEP_SUMMARY"
-            echo "OC API로 목록·상세 데이터를 조회하고 실패 시 공개목록 모드로 자동 전환합니다." >> "$GITHUB_STEP_SUMMARY"
+            echo "OC API의 목록·상세 데이터를 조회하고 실패 시 공개목록을 시도합니다." >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: Collect official legislation candidates
+        id: collect
+        continue-on-error: true
         run: node nexus/legal-intelligence/scripts/collect-legislation.mjs /tmp/legal-collected.json
 
+      - name: Report temporary source failure
+        if: steps.collect.outcome == 'failure'
+        shell: bash
+        run: |
+          echo "### 공식 원천 일시 응답 실패" >> "$GITHUB_STEP_SUMMARY"
+          echo "이번 실행에서는 신규 수집을 건너뛰고 기존 정규화 데이터는 유지합니다. 다음 정기 실행에서 다시 조회합니다." >> "$GITHUB_STEP_SUMMARY"
+
       - name: Select Nexus-relevant legislation
+        if: steps.collect.outcome == 'success'
         run: node nexus/legal-intelligence/scripts/select-legislation.mjs /tmp/legal-collected.json /tmp/legal-selected.json
 
       - name: Validate selected records
+        if: steps.collect.outcome == 'success'
         run: node nexus/legal-intelligence/scripts/audit-legislation.mjs /tmp/legal-selected.json
 
       - name: Upsert canonical legislation records
+        if: steps.collect.outcome == 'success'
         run: node nexus/legal-intelligence/scripts/upsert-legislation.mjs /tmp/legal-selected.json
 
+      - name: Normalize after upsert
+        if: steps.collect.outcome == 'success'
+        run: node nexus/legal-intelligence/scripts/normalize-legislation.mjs
+
       - name: Validate canonical result
+        id: canonical_audit
+        if: always()
         run: node nexus/legal-intelligence/scripts/audit-legislation.mjs
 
       - name: Commit legislation data when changed
+        if: always() && steps.canonical_audit.outcome == 'success'
         shell: bash
         run: |
           if git diff --quiet -- nexus/legal-intelligence/legislation.json; then
