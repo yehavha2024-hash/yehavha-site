@@ -1,7 +1,55 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "updatedAt": "2026-08-31",
   "records": [
+    {
+      "recordKey": "legalpeople:ccourt:20260828-international-symposium",
+      "category": "연구·학술",
+      "source": "헌법재판연구원",
+      "title": "제15회 국제학술심포지엄: 민주주의와 국제질서의 위기",
+      "publishedAt": "2026-08-28",
+      "effectiveAt": "2026-09-04",
+      "summary": "헌법재판연구원이 9월 4일 '민주주의와 국제질서의 위기: 법치주의와 헌법적 가치의 재조명'을 주제로 국제학술심포지엄을 개최합니다. 마틴 러클린 런던정치경제대 명예교수, 외른 악셀 켐머러 부세리우스 로스쿨 교수, 윤성현 한양대 교수가 발표합니다.",
+      "sourceUrl": "https://www.ccourt.go.kr/site/cri/ex/bbs/View.do?bcIdx=4267462&cbIdx=1531",
+      "tags": ["헌법재판연구원", "국제학술", "법치주의", "민주주의", "헌법"],
+      "active": true
+    },
+    {
+      "recordKey": "legalpeople:koreanbar:20260821-lawyers-conference",
+      "category": "연구·학술",
+      "source": "대한변호사협회",
+      "title": "제34회 법의 지배를 위한 변호사대회: 사법제도 변화와 기본권 보장",
+      "publishedAt": "2026-08-21",
+      "effectiveAt": "2026-08-24",
+      "summary": "대한변협은 '사법제도의 변화에 따른 국민의 기본권 보장'을 대주제로 변호사대회를 개최했습니다. ACP 제도 확립, 법조인 수급 결정구조, 수사기관 재편과 인권보장을 주요 세션으로 다루고 재판소원 논리구조와 변호사 징계사례에 관한 전문·윤리연수도 진행했습니다.",
+      "sourceUrl": "https://www.koreanbar.or.kr/pages/news/view.asp?category=&page=1&searchstr=%EB%B3%80%ED%98%B8%EC%82%AC&searchtype=contents&seq=15510&teamcode=&types=3",
+      "tags": ["변호사대회", "ACP", "법조인수급", "형사사법", "기본권"],
+      "active": true
+    },
+    {
+      "recordKey": "legalpeople:koreanbar:20260811-academic-awards",
+      "category": "연구·학술",
+      "source": "대한변호사협회",
+      "title": "2026년 대한변협 학술상 수상 연구 확정",
+      "publishedAt": "2026-08-11",
+      "effectiveAt": "2026-08-24",
+      "summary": "대한변협의 2026년 학술상 심사에서 윤희성 변호사가 최우수 논문, 김민규 변호사가 변호사 부문 우수 논문, 홍준영 서울대 법학전문대학원생이 법학연구생 부문 우수 논문 수상자로 선정됐습니다. 법조 실무자와 법학연구생의 연구성과를 함께 추적할 수 있는 자료입니다.",
+      "sourceUrl": "https://koreanbar.or.kr/pages/news/view.asp?category=&page=1&searchstr=&searchtype=contents&seq=15496&teamcode=&types=1",
+      "tags": ["학술상", "법학연구", "논문", "변호사", "법학전문대학원"],
+      "active": true
+    },
+    {
+      "recordKey": "legalpeople:koreanbar:20260821-legal-culture-award",
+      "category": "연구·학술",
+      "source": "대한변호사협회",
+      "title": "제57회 한국법률문화상 이순동 변호사 선정",
+      "publishedAt": "2026-08-21",
+      "effectiveAt": "2026-08-24",
+      "summary": "대한변협은 이순동 변호사를 제57회 한국법률문화상 수상자로 선정했습니다. 민사소송의 사실인정론과 증인신문기법, 채권자취소권 연구·저술, 법정기법 관련 번역, 법학교육과 자치경찰제도 활동 등 법학·실무·법률문화 기여를 선정 사유로 제시했습니다.",
+      "sourceUrl": "https://koreanbar.or.kr/pages/news/view.asp?category=&page=1&searchstr=&searchtype=contents&seq=15509&teamcode=&types=3",
+      "tags": ["한국법률문화상", "민사소송", "사실인정", "법률학", "법률문화"],
+      "active": true
+    },
     {
       "recordKey": "legalpeople:bkl:20260813-song-myoungdal",
       "category": "이동·개업",
