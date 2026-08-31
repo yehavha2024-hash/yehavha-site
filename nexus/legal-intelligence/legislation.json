@@ -17,6 +17,35 @@
   },
   "records": [
     {
+      "recordKey": "assembly:2220593",
+      "sourceType": "assembly",
+      "sourceId": "2220593",
+      "title": "지방자치법 일부개정법률안",
+      "proposer": "신정훈의원 등 11인",
+      "proposedAt": "2026-08-14",
+      "committee": "행정안전위원회",
+      "statusCode": "committee_referral",
+      "statusLabel": "위원회 회부",
+      "statusDate": "2026-08-18",
+      "active": true,
+      "topics": [
+        "행정·지방자치",
+        "주요 법제 변화"
+      ],
+      "summary": "지방의회의 조직·운영에 관한 구체적 사항을 별도 법률로 정비하고 지방자치법에는 지방의회의 기본 사항과 핵심 원칙을 두려는 개정안.",
+      "sourceUrl": "https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2220593/detailRP",
+      "history": [
+        {
+          "date": "2026-08-14",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-08-18",
+          "stage": "위원회 회부"
+        }
+      ]
+    },
+    {
       "recordKey": "assembly:2220395",
       "sourceType": "assembly",
       "sourceId": "2220395",
@@ -28,12 +57,21 @@
       "statusLabel": "위원회 회부",
       "statusDate": "2026-08-04",
       "active": true,
-      "topics": ["AI·로봇·디지털", "주요 법제 변화"],
+      "topics": [
+        "AI·로봇·디지털",
+        "주요 법제 변화"
+      ],
       "summary": "국가안보·공공안전에 중대한 위험을 초래할 우려가 있는 고위험 인공지능 모델의 지정·관리와 범국가적 사이버위협 대응체계 구축 근거를 신설하려는 개정안.",
       "sourceUrl": "https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2220395/detailRP?yType=I",
       "history": [
-        {"date": "2026-08-03", "stage": "발의"},
-        {"date": "2026-08-04", "stage": "위원회 회부"}
+        {
+          "date": "2026-08-03",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-08-04",
+          "stage": "위원회 회부"
+        }
       ]
     },
     {
@@ -48,32 +86,21 @@
       "statusLabel": "위원회 회부",
       "statusDate": "2026-07-22",
       "active": true,
-      "topics": ["AI·로봇·디지털", "주요 법제 변화"],
+      "topics": [
+        "AI·로봇·디지털",
+        "주요 법제 변화"
+      ],
       "summary": "채용 이후 직무배치·업무할당·성과평가·인사관리 등에 중대한 영향을 미치는 인공지능을 고영향 인공지능 범위에 포함하려는 개정안.",
       "sourceUrl": "https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2220058/detailRP",
       "history": [
-        {"date": "2026-07-21", "stage": "발의"},
-        {"date": "2026-07-22", "stage": "위원회 회부"}
-      ]
-    },
-    {
-      "recordKey": "assembly:2219835",
-      "sourceType": "assembly",
-      "sourceId": "2219835",
-      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
-      "proposer": "김우영의원 등 17인",
-      "proposedAt": "2026-07-08",
-      "committee": "과학기술정보방송통신위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-07-09",
-      "active": true,
-      "topics": ["AI·로봇·디지털", "플랫폼·전자상거래"],
-      "summary": "AI 생성물 표시의무에서 예술·창의적 표현물과 단순 보조도구 사용에 대한 예외·완화 기준을 명확하게 하려는 개정안.",
-      "sourceUrl": "https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2219835/detailRP",
-      "history": [
-        {"date": "2026-07-08", "stage": "발의"},
-        {"date": "2026-07-09", "stage": "위원회 회부"}
+        {
+          "date": "2026-07-21",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-22",
+          "stage": "위원회 회부"
+        }
       ]
     },
     {
@@ -88,32 +115,50 @@
       "statusLabel": "위원회 회부",
       "statusDate": "2026-07-09",
       "active": true,
-      "topics": ["데이터·개인정보", "민사책임·손해배상"],
+      "topics": [
+        "데이터·개인정보",
+        "민사책임·손해배상"
+      ],
       "summary": "개인정보 관련 중대한 고의 위반행위의 징벌적 손해배상 기준을 강화하고 감액 사유의 입증구조를 조정하려는 개정안.",
       "sourceUrl": "https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2219834/detailRP",
       "history": [
-        {"date": "2026-07-08", "stage": "발의"},
-        {"date": "2026-07-09", "stage": "위원회 회부"}
+        {
+          "date": "2026-07-08",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-09",
+          "stage": "위원회 회부"
+        }
       ]
     },
     {
-      "recordKey": "assembly:2220593",
+      "recordKey": "assembly:2219835",
       "sourceType": "assembly",
-      "sourceId": "2220593",
-      "title": "지방자치법 일부개정법률안",
-      "proposer": "신정훈의원 등 11인",
-      "proposedAt": "2026-08-14",
-      "committee": "행정안전위원회",
+      "sourceId": "2219835",
+      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
+      "proposer": "김우영의원 등 17인",
+      "proposedAt": "2026-07-08",
+      "committee": "과학기술정보방송통신위원회",
       "statusCode": "committee_referral",
       "statusLabel": "위원회 회부",
-      "statusDate": "2026-08-18",
+      "statusDate": "2026-07-09",
       "active": true,
-      "topics": ["행정·지방자치", "주요 법제 변화"],
-      "summary": "지방의회의 조직·운영에 관한 구체적 사항을 별도 법률로 정비하고 지방자치법에는 지방의회의 기본 사항과 핵심 원칙을 두려는 개정안.",
-      "sourceUrl": "https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2220593/detailRP",
+      "topics": [
+        "AI·로봇·디지털",
+        "플랫폼·전자상거래"
+      ],
+      "summary": "AI 생성물 표시의무에서 예술·창의적 표현물과 단순 보조도구 사용에 대한 예외·완화 기준을 명확하게 하려는 개정안.",
+      "sourceUrl": "https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2219835/detailRP",
       "history": [
-        {"date": "2026-08-14", "stage": "발의"},
-        {"date": "2026-08-18", "stage": "위원회 회부"}
+        {
+          "date": "2026-07-08",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-09",
+          "stage": "위원회 회부"
+        }
       ]
     },
     {
@@ -128,12 +173,20 @@
       "statusLabel": "위원회 회부",
       "statusDate": "2026-05-14",
       "active": true,
-      "topics": ["교육·에듀테크"],
+      "topics": [
+        "교육·에듀테크"
+      ],
       "summary": "국가와 지방자치단체가 독서교육 시책을 수립·실시하도록 근거를 신설하여 문해력·창의성·비판적 사고 함양을 지원하려는 개정안.",
       "sourceUrl": "https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2218943/detailRP",
       "history": [
-        {"date": "2026-05-13", "stage": "발의"},
-        {"date": "2026-05-14", "stage": "위원회 회부"}
+        {
+          "date": "2026-05-13",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-05-14",
+          "stage": "위원회 회부"
+        }
       ]
     },
     {
@@ -150,11 +203,17 @@
       "statusLabel": "입법예고",
       "statusDate": "2026-08-28",
       "active": true,
-      "topics": ["플랫폼·전자상거래", "AI·로봇·디지털"],
+      "topics": [
+        "플랫폼·전자상거래",
+        "AI·로봇·디지털"
+      ],
       "summary": "정보통신망 침해사고 관련 이용자 보호 업무 평가 주체 변경에 따라 평가 대상·기준 등 법률 위임사항을 정비하는 시행령 개정안.",
       "sourceUrl": "https://www.moleg.go.kr/lawinfo/makingInfo.mo?lawSeq=88298&lawType=TYPE5&mid=a10104010000",
       "history": [
-        {"date": "2026-08-28", "stage": "입법예고"}
+        {
+          "date": "2026-08-28",
+          "stage": "입법예고"
+        }
       ]
     },
     {
@@ -171,11 +230,16 @@
       "statusLabel": "입법예고",
       "statusDate": "2026-08-21",
       "active": true,
-      "topics": ["교육·에듀테크"],
+      "topics": [
+        "교육·에듀테크"
+      ],
       "summary": "학생 주거실태조사의 실시 근거가 법률에 마련됨에 따라 조사와 관련한 위임사항 및 시행 근거를 정비하는 시행령 개정안.",
       "sourceUrl": "https://www.moleg.go.kr/lawinfo/makingInfo.mo?lawSeq=88208&lawType=TYPE5&mid=a10104010000",
       "history": [
-        {"date": "2026-08-21", "stage": "입법예고"}
+        {
+          "date": "2026-08-21",
+          "stage": "입법예고"
+        }
       ]
     },
     {
@@ -192,12 +256,171 @@
       "statusLabel": "입법예고",
       "statusDate": "2026-08-14",
       "active": true,
-      "topics": ["행정·지방자치", "주요 법제 변화"],
+      "topics": [
+        "행정·지방자치",
+        "주요 법제 변화"
+      ],
       "summary": "자치분권·균형성장 관련 법률 개정에 따른 위임사항, 포상·포상금, 부처 역할, 지방자치단체 보조사업 기준과 제명·용어를 정비하는 시행령 개정안.",
       "sourceUrl": "https://www.moleg.go.kr/lawinfo/makingInfo.mo?lawSeq=88128&lawType=TYPE5&mid=a10104010000",
       "history": [
-        {"date": "2026-08-14", "stage": "입법예고"}
+        {
+          "date": "2026-08-14",
+          "stage": "입법예고"
+        }
       ]
+    },
+    {
+      "sourceType": "government",
+      "sourceId": "2000000325806",
+      "officialLbicId": "2000000325806",
+      "title": "고등교육법 시행령",
+      "ministry": "교육부",
+      "lawType": "대통령령",
+      "statusCode": "government_process",
+      "statusLabel": "국무회의",
+      "statusDate": "",
+      "active": true,
+      "topics": [
+        "교육·에듀테크"
+      ],
+      "summary": "법제처 정부입법 공식자료에서 자동 선별된 법령안입니다. 현재 추진단계는 국무회의이며 세부 내용은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://opinion.lawmaking.go.kr/lmSts/govLm/2000000325806/detailRP",
+      "history": [],
+      "recordKey": "government:2000000325806"
+    },
+    {
+      "sourceType": "government",
+      "sourceId": "2000000326600",
+      "officialLbicId": "2000000326600",
+      "title": "데이터기반행정 활성화에 관한 법률 시행령",
+      "ministry": "행정안전부",
+      "lawType": "대통령령",
+      "statusCode": "promulgated",
+      "statusLabel": "공포",
+      "statusDate": "",
+      "active": false,
+      "topics": [
+        "데이터·개인정보"
+      ],
+      "summary": "법제처 정부입법 공식자료에서 자동 선별된 법령안입니다. 현재 추진단계는 공포이며 세부 내용은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://opinion.lawmaking.go.kr/lmSts/govLm/2000000326600/detailRP",
+      "history": [],
+      "recordKey": "government:2000000326600"
+    },
+    {
+      "sourceType": "government",
+      "sourceId": "2000000326626",
+      "officialLbicId": "2000000326626",
+      "title": "데이터기반행정 활성화에 관한 법률 시행규칙",
+      "ministry": "행정안전부",
+      "lawType": "부령",
+      "statusCode": "promulgated",
+      "statusLabel": "공포",
+      "statusDate": "",
+      "active": false,
+      "topics": [
+        "데이터·개인정보"
+      ],
+      "summary": "법제처 정부입법 공식자료에서 자동 선별된 법령안입니다. 현재 추진단계는 공포이며 세부 내용은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://opinion.lawmaking.go.kr/lmSts/govLm/2000000326626/detailRP",
+      "history": [],
+      "recordKey": "government:2000000326626"
+    },
+    {
+      "sourceType": "government",
+      "sourceId": "2000000327582",
+      "officialLbicId": "2000000327582",
+      "title": "개인정보 보호법 시행령",
+      "ministry": "개인정보보호위원...",
+      "lawType": "대통령령",
+      "statusCode": "review",
+      "statusLabel": "법제처심사",
+      "statusDate": "",
+      "active": true,
+      "topics": [
+        "데이터·개인정보",
+        "주요 법제 변화"
+      ],
+      "summary": "법제처 정부입법 공식자료에서 자동 선별된 법령안입니다. 현재 추진단계는 법제처심사이며 세부 내용은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://opinion.lawmaking.go.kr/lmSts/govLm/2000000327582/detailRP",
+      "history": [],
+      "recordKey": "government:2000000327582"
+    },
+    {
+      "sourceType": "government",
+      "sourceId": "2000000329380",
+      "officialLbicId": "2000000329380",
+      "title": "글로벌 인공지능 허브 유치위원회의 설치 및 운영에 관한 규정",
+      "ministry": "국무조정실",
+      "lawType": "국무총리훈령",
+      "statusCode": "review",
+      "statusLabel": "법제처심사",
+      "statusDate": "",
+      "active": true,
+      "topics": [
+        "AI·로봇·디지털"
+      ],
+      "summary": "법제처 정부입법 공식자료에서 자동 선별된 법령안입니다. 현재 추진단계는 법제처심사이며 세부 내용은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://opinion.lawmaking.go.kr/lmSts/govLm/2000000329380/detailRP",
+      "history": [],
+      "recordKey": "government:2000000329380"
+    },
+    {
+      "sourceType": "government",
+      "sourceId": "2000000329556",
+      "officialLbicId": "2000000329556",
+      "title": "국가데이터처와 그 소속기관 직제 시행규칙",
+      "ministry": "국가데이터처",
+      "lawType": "총리령",
+      "statusCode": "promulgated",
+      "statusLabel": "공포",
+      "statusDate": "",
+      "active": false,
+      "topics": [
+        "데이터·개인정보"
+      ],
+      "summary": "법제처 정부입법 공식자료에서 자동 선별된 법령안입니다. 현재 추진단계는 공포이며 세부 내용은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://opinion.lawmaking.go.kr/lmSts/govLm/2000000329556/detailRP",
+      "history": [],
+      "recordKey": "government:2000000329556"
+    },
+    {
+      "sourceType": "government",
+      "sourceId": "2000000329622",
+      "officialLbicId": "2000000329622",
+      "title": "개인정보 보호위원회 직제 시행규칙",
+      "ministry": "개인정보보호위원...",
+      "lawType": "총리령",
+      "statusCode": "promulgated",
+      "statusLabel": "공포",
+      "statusDate": "",
+      "active": false,
+      "topics": [
+        "데이터·개인정보"
+      ],
+      "summary": "법제처 정부입법 공식자료에서 자동 선별된 법령안입니다. 현재 추진단계는 공포이며 세부 내용은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://opinion.lawmaking.go.kr/lmSts/govLm/2000000329622/detailRP",
+      "history": [],
+      "recordKey": "government:2000000329622"
+    },
+    {
+      "sourceType": "government",
+      "sourceId": "2000000329638",
+      "officialLbicId": "2000000329638",
+      "title": "개인정보보호 및 정보보호 인력 보강을 위한 36개 법령의 일부개정에 관한 대통령령안",
+      "ministry": "행정안전부",
+      "lawType": "대통령령",
+      "statusCode": "promulgated",
+      "statusLabel": "공포",
+      "statusDate": "",
+      "active": false,
+      "topics": [
+        "데이터·개인정보"
+      ],
+      "summary": "법제처 정부입법 공식자료에서 자동 선별된 법령안입니다. 현재 추진단계는 공포이며 세부 내용은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://opinion.lawmaking.go.kr/lmSts/govLm/2000000329638/detailRP",
+      "history": [],
+      "recordKey": "government:2000000329638"
     }
   ]
 }
