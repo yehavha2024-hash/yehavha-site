@@ -26,7 +26,7 @@ async function request(url, options = {}, retries = 2) {
     try {
       const response = await fetch(url, {
         ...fetchOptions,
-        headers: {'User-Agent': 'YEHAVHA-Nexus-Legal-Intelligence/1.1', Accept: accept, ...headers},
+        headers: {'User-Agent': 'YEHAVHA-Nexus-Legal-Intelligence/1.2', Accept: accept, ...headers},
         signal: AbortSignal.timeout(30000)
       });
       if (!response.ok) throw new Error(`HTTP ${response.status} ${url}`);
@@ -71,6 +71,21 @@ function xmlValue(segment, tag) {
   return match ? decodeXml(match[1].replace(/<[^>]+>/g, '')) : '';
 }
 
+function xmlSegments(xml, tag) {
+  const escaped = tag.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return [...xml.matchAll(new RegExp(`<${escaped}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${escaped}>`, 'gi'))].map(match => match[1]);
+}
+
+function absoluteGovernmentUrl(value) {
+  const text = clean(value);
+  if (!text) return '';
+  try {
+    return new URL(text, 'https://www.lawmaking.go.kr').href;
+  } catch {
+    return text;
+  }
+}
+
 function parseGovernmentRows(xml) {
   const starts = [...xml.matchAll(/<lbicId(?:\s[^>]*)?>/gi)].map(match => match.index ?? 0);
   const rows = [];
@@ -87,12 +102,70 @@ function parseGovernmentRows(xml) {
       cptOfiOrgNm: xmlValue(segment, 'cptOfiOrgNm') || xmlValue(segment, 'asndOfiCdNm'),
       lbPrcStsNm: xmlValue(segment, 'lbPrcStsNm') || xmlValue(segment, 'lbPrcStsCdGrpNm'),
       lbPrcStsDt: xmlValue(segment, 'lbPrcStsDt'),
-      rrRsn: xmlValue(segment, 'rrRsn'),
-      essCts: xmlValue(segment, 'essCts'),
       publicSourceUrl: `https://opinion.lawmaking.go.kr/lmSts/govLm/${lbicId}/detailRP`
     });
   }
   return rows;
+}
+
+function parseGovernmentStageList(xml, tag, phase, stageField, statusField) {
+  return xmlSegments(xml, tag).map(segment => ({
+    phase,
+    stage: xmlValue(segment, stageField),
+    status: xmlValue(segment, statusField)
+  })).filter(item => item.stage || item.status);
+}
+
+function parseGovernmentDocuments(xml) {
+  const documents = [];
+  const listTags = ['dsImportList', 'jsdImportList', 'GnrImportList'];
+  for (const tag of listTags) {
+    for (const segment of xmlSegments(xml, tag)) {
+      const pairs = [
+        ['FileName', 'fileDownLinkUrl'],
+        ['fileName', 'fileDownLinkUrl'],
+        ['FileName2', 'fileDown2LinkUrl'],
+        ['fileName2', 'fileDown2LinkUrl']
+      ];
+      for (const [nameField, urlField] of pairs) {
+        const name = xmlValue(segment, nameField);
+        const url = absoluteGovernmentUrl(xmlValue(segment, urlField));
+        if (name || url) documents.push({name, url});
+      }
+    }
+  }
+  const unique = new Map();
+  for (const document of documents) {
+    const key = `${document.url}|${document.name}`;
+    if (key !== '|') unique.set(key, document);
+  }
+  return [...unique.values()];
+}
+
+function parseGovernmentDetail(xml) {
+  const processStages = [
+    ...parseGovernmentStageList(xml, 'dsImportList', '입안', 'lbPrcStsCdGrpNm', 'lbPrcStst'),
+    ...parseGovernmentStageList(xml, 'jsdImportList', '심사', 'rcvbFlClsCdNm', 'lbSts'),
+    ...parseGovernmentStageList(xml, 'GnrImportList', '심사·의결', 'flClsCdNm', 'lbSts')
+  ];
+
+  return {
+    lbicId: xmlValue(xml, 'lbicId'),
+    lsNmKo: xmlValue(xml, 'lsNmKo'),
+    lsKndCdNm: xmlValue(xml, 'lsKndCdNm'),
+    rrFrCdNm: xmlValue(xml, 'rrFrCdNm'),
+    bgtAttdYn: xmlValue(xml, 'bgtAttdYn'),
+    abYn: xmlValue(xml, 'abYn'),
+    asndOfiCdNm: xmlValue(xml, 'asndOfiCdNm'),
+    asndDptCdNm: xmlValue(xml, 'asndDptCdNm'),
+    lmPlnIncludeYn: xmlValue(xml, 'lmPlnIncludeYn'),
+    strCts: xmlValue(xml, 'StrCts'),
+    rrRsn: xmlValue(xml, 'rrRsn'),
+    essCts: xmlValue(xml, 'essCts'),
+    processStages,
+    documents: parseGovernmentDocuments(xml),
+    detailCollectionMode: 'oc-api'
+  };
 }
 
 function dotDate(date) {
@@ -102,6 +175,10 @@ function dotDate(date) {
   return `${y}. ${m}. ${d}.`;
 }
 
+function governmentErrorResponse(text) {
+  return /retMsg[^>]*>\s*(400|401|403|500)|<error/i.test(text);
+}
+
 async function governmentApiCall(params) {
   if (!lawmakingOc) throw new Error('LAWMAKING_OC is not configured.');
   const url = new URL(config.government.endpoint);
@@ -109,8 +186,21 @@ async function governmentApiCall(params) {
   for (const [key, value] of Object.entries(params)) if (value !== '' && value != null) url.searchParams.set(key, String(value));
   const response = await request(url, {accept: 'application/xml,text/xml,*/*'});
   const text = await response.text();
-  if (/retMsg[^>]*>\s*(400|401|403|500)|<error/i.test(text)) throw new Error('Government legislation API returned an error response.');
+  if (governmentErrorResponse(text)) throw new Error('Government legislation API returned an error response.');
   return parseGovernmentRows(text);
+}
+
+async function governmentDetailCall(lbicId) {
+  if (!lawmakingOc) throw new Error('LAWMAKING_OC is not configured.');
+  const id = clean(lbicId);
+  if (!/^\d+$/.test(id)) throw new Error(`Invalid government lbicId: ${id}`);
+  const base = String(config.government.detailBase || 'https://www.lawmaking.go.kr/rest/govLmSts').replace(/\/$/, '');
+  const url = new URL(`${base}/${id}.xml`);
+  url.searchParams.set('OC', lawmakingOc);
+  const response = await request(url, {accept: 'application/xml,text/xml,*/*'});
+  const text = await response.text();
+  if (governmentErrorResponse(text)) throw new Error(`Government detail API returned an error response for ${id}.`);
+  return parseGovernmentDetail(text);
 }
 
 function parseGovernmentPublicHtml(html) {
@@ -201,8 +291,35 @@ async function collectAssembly() {
 }
 
 function governmentRelevant(row) {
-  const haystack = `${clean(row.lsNmKo)} ${clean(row.cptOfiOrgNm)} ${clean(row.rrRsn)} ${clean(row.essCts)}`.toLocaleLowerCase('ko-KR');
+  const haystack = `${clean(row.lsNmKo)} ${clean(row.cptOfiOrgNm)} ${clean(row.asndOfiCdNm)} ${clean(row.rrRsn)} ${clean(row.essCts)}`.toLocaleLowerCase('ko-KR');
   return (config.discoveryKeywords || []).some(keyword => haystack.includes(String(keyword).toLocaleLowerCase('ko-KR')));
+}
+
+async function enrichGovernmentDetails(candidates, existingByTitle) {
+  if (!lawmakingOc || !candidates.size) return;
+  const limit = Number(config.government.detailLimit || 80);
+  const entries = [...candidates.entries()].sort((a, b) => {
+    const aExisting = existingByTitle.has(clean(a[1].lsNmKo)) ? 1 : 0;
+    const bExisting = existingByTitle.has(clean(b[1].lsNmKo)) ? 1 : 0;
+    return bExisting - aExisting || String(b[1].lbPrcStsDt || '').localeCompare(String(a[1].lbPrcStsDt || ''));
+  }).slice(0, limit);
+
+  for (const [canonicalId, row] of entries) {
+    const lbicId = clean(row.officialLbicId || row.lbicId);
+    if (!lbicId) continue;
+    try {
+      const detail = await governmentDetailCall(lbicId);
+      candidates.set(canonicalId, {
+        ...row,
+        ...detail,
+        canonicalSourceId: canonicalId,
+        officialLbicId: clean(detail.lbicId || lbicId),
+        publicSourceUrl: row.publicSourceUrl || `https://opinion.lawmaking.go.kr/lmSts/govLm/${lbicId}/detailRP`
+      });
+    } catch (error) {
+      console.warn(`Government detail skipped ${lbicId}: ${error.message}`);
+    }
+  }
 }
 
 async function collectGovernment() {
@@ -231,6 +348,7 @@ async function collectGovernment() {
         if (exact?.lbicId) candidates.set(clean(record.sourceId), {...exact, canonicalSourceId: clean(record.sourceId), officialLbicId: clean(exact.lbicId)});
       }
       apiSucceeded = true;
+      await enrichGovernmentDetails(candidates, existingByTitle);
     } catch (error) {
       console.warn(`Government OC API unavailable; switching to public HTML: ${error.message}`);
     }
