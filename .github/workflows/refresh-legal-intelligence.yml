@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'nexus/legal-intelligence/collector-config.json'
+      - 'nexus/legal-intelligence/legal-materials.json'
       - 'nexus/legal-intelligence/scripts/**'
       - '.github/workflows/refresh-legal-intelligence.yml'
   schedule:
@@ -44,8 +45,10 @@ jobs:
           node --check nexus/legal-intelligence/scripts/upsert-legislation.mjs
           node --check nexus/legal-intelligence/scripts/normalize-legislation.mjs
           node --check nexus/legal-intelligence/scripts/audit-legislation.mjs
+          node --check nexus/legal-intelligence/scripts/audit-legal-materials.mjs
           node nexus/legal-intelligence/scripts/normalize-legislation.mjs
           node nexus/legal-intelligence/scripts/audit-legislation.mjs
+          node nexus/legal-intelligence/scripts/audit-legal-materials.mjs
 
       - name: Report source modes
         shell: bash
@@ -96,7 +99,9 @@ jobs:
       - name: Validate canonical result
         id: canonical_audit
         if: always()
-        run: node nexus/legal-intelligence/scripts/audit-legislation.mjs
+        run: |
+          node nexus/legal-intelligence/scripts/audit-legislation.mjs
+          node nexus/legal-intelligence/scripts/audit-legal-materials.mjs
 
       - name: Commit legislation data when changed
         if: always() && steps.canonical_audit.outcome == 'success'
