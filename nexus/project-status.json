@@ -205,5 +205,17 @@
     "lastUpdated": "2026-08-30",
     "contentCount": 10,
     "contentLabel": "연구 영역"
+  },
+  "legal-intelligence-portal": {
+    "id": "legal-intelligence-portal",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-08-31",
+    "contentCount": 9,
+    "contentLabel": "입법 추적",
+    "contentReviewedAt": "2026-08-31",
+    "baselineAt": "2026-08-31",
+    "baselineLabel": "입법자료 기준"
   }
 }
