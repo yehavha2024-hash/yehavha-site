@@ -1,6 +1,7 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "maxAgeDays": 240,
+  "detailLimitPerSource": 5,
   "sources": [
     {
       "id": "scourt",
@@ -27,8 +28,15 @@
       "id": "koreanbar",
       "label": "대한변호사협회",
       "url": "https://www.koreanbar.or.kr/pages/news/list.asp?types=1",
-      "includeKeywords": ["변호사대회", "세미나", "학술", "전문변호사", "변호사시험", "법무법인"],
+      "includeKeywords": ["변호사대회", "세미나", "포럼", "학술", "학술상", "전문변호사", "변호사시험", "법무법인"],
       "excludeKeywords": ["부음", "부고", "결혼", "화촉", "모친상", "부친상", "장모상", "장인상", "공시송달", "등록취소", "징계", "연수 안내", "특별연수 실시계획"]
+    },
+    {
+      "id": "kimchang",
+      "label": "김·장 법률사무소",
+      "url": "https://www.kimchang.com/ko/insights/index.kc",
+      "includeKeywords": ["영입", "합류", "세미나", "포럼", "발간", "출간", "센터", "전문팀", "리걸", "AI", "인공지능"],
+      "excludeKeywords": ["수상", "승소", "자문", "기부", "봉사"]
     },
     {
       "id": "bkl",
@@ -41,15 +49,22 @@
       "id": "shinkim",
       "label": "법무법인 세종",
       "url": "https://www.shinkim.com/kor/media/newsroom",
-      "includeKeywords": ["영입", "합류", "출범", "전문팀", "센터", "팀", "자문서비스"],
+      "includeKeywords": ["영입", "합류", "출범", "전문팀", "센터", "팀", "자문서비스", "세미나", "포럼"],
       "excludeKeywords": ["수상", "승소", "기부", "봉사"]
     },
     {
       "id": "yulchon",
       "label": "법무법인 율촌",
       "url": "https://www.yulchon.com/ko/resources/yulchon-news.do",
-      "includeKeywords": ["영입", "합류", "출범", "전문팀", "센터", "TF", "위촉", "저서", "논문"],
+      "includeKeywords": ["영입", "합류", "출범", "전문팀", "센터", "TF", "위촉", "저서", "논문", "세미나", "포럼"],
       "excludeKeywords": ["수상", "채용공고", "채용 공고", "강의", "행사참석", "봉사", "기부"]
+    },
+    {
+      "id": "yoonyang",
+      "label": "법무법인 화우",
+      "url": "https://www.yoonyang.com/kor/main?lang=ko",
+      "includeKeywords": ["영입", "합류", "출범", "전문팀", "센터", "세미나", "포럼", "AI", "컴플라이언스", "LegalTech"],
+      "excludeKeywords": ["수상", "승소", "채용", "기부", "봉사"]
     }
   ]
 }
