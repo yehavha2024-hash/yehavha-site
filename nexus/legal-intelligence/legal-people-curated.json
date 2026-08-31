@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-31",
+  "records": [
+    {
+      "recordKey": "legalpeople:bkl:20260813-song-myoungdal",
+      "category": "이동·개업",
+      "source": "법무법인 태평양",
+      "title": "송명달 전 해양수산부 차관 고문 영입",
+      "publishedAt": "2026-08-13",
+      "summary": "태평양이 송명달 전 해양수산부 차관을 고문으로 영입해 해상·운송, 에너지·인프라, 환경 규제 자문과 AI 인프라전략센터의 정책·인허가 대응 역량을 강화했습니다.",
+      "sourceUrl": "https://www.bkl.co.kr/law/insight/information/6574",
+      "tags": ["영입", "규제", "AI인프라", "해상·운송"],
+      "active": true
+    },
+    {
+      "recordKey": "legalpeople:bkl:20260812-ai-infra-center",
+      "category": "법률시장",
+      "source": "법무법인 태평양",
+      "title": "AI 인프라전략센터 출범",
+      "publishedAt": "2026-08-12",
+      "summary": "AI 데이터센터와 디지털 인프라 프로젝트를 대상으로 부동산·건설, M&A, 금융·PF, 에너지, 환경, AI·정보보호, 국제통상 등 전문가 약 100명의 통합 자문체계를 구축했습니다.",
+      "sourceUrl": "https://www.bkl.co.kr/law/insight/information/6572",
+      "tags": ["전문센터", "AI", "데이터센터", "법률시장"],
+      "active": true
+    },
+    {
+      "recordKey": "legalpeople:bkl:20260805-jang-lawyers",
+      "category": "이동·개업",
+      "source": "법무법인 태평양",
+      "title": "장우성·장성원 변호사 영입으로 수사 대응 역량 강화",
+      "publishedAt": "2026-08-05",
+      "summary": "특검보 출신 장우성 변호사와 경찰서장 출신 장성원 변호사가 합류해 기업형사·수사 대응, 디지털 포렌식·사이버대응 등 형사 분야 전문성이 보강됐습니다.",
+      "sourceUrl": "https://www.bkl.co.kr/law/insight/information",
+      "tags": ["영입", "기업형사", "수사", "디지털포렌식"],
+      "active": true
+    },
+    {
+      "recordKey": "legalpeople:bkl:20260803-labor-hires",
+      "category": "이동·개업",
+      "source": "법무법인 태평양",
+      "title": "서현영 변호사 등 영입으로 인사노무 전문성 강화",
+      "publishedAt": "2026-08-03",
+      "summary": "서현영·강승현·김광우·박서현 등 인사노무 전문가를 영입해 노동관계 법제 변화와 중대재해 대응 역량을 강화했습니다.",
+      "sourceUrl": "https://www.bkl.co.kr/law/insight/information",
+      "tags": ["영입", "인사노무", "노동법", "중대재해"],
+      "active": true
+    },
+    {
+      "recordKey": "legalpeople:bkl:20260731-legal-ai",
+      "category": "법률시장",
+      "source": "법무법인 태평양",
+      "title": "리걸 AI·범용 AI 통합 운영체계 구축",
+      "publishedAt": "2026-07-31",
+      "summary": "리걸 AI와 범용 생성형 AI를 함께 사용하는 전사 업무체계를 구축해 대형 로펌의 AI 기반 법률업무 전환이 본격화되고 있음을 보여주는 사례입니다.",
+      "sourceUrl": "https://www.bkl.co.kr/law/insight/information",
+      "tags": ["LegalTech", "리걸AI", "생성형AI", "법률시장"],
+      "active": true
+    },
+    {
+      "recordKey": "legalpeople:bkl:20260723-content-regulation-tf",
+      "category": "법률시장",
+      "source": "법무법인 태평양",
+      "title": "온라인 콘텐츠 규제 대응 TF 출범",
+      "publishedAt": "2026-07-23",
+      "summary": "정보통신망법 등 온라인 콘텐츠 규제 변화에 대응하기 위해 TMT 중심의 전문 TF를 출범시켜 플랫폼·디지털 규제 대응 조직을 강화했습니다.",
+      "sourceUrl": "https://www.bkl.co.kr/law/insight/information",
+      "tags": ["전문TF", "플랫폼", "콘텐츠규제", "TMT"],
+      "active": true
+    },
+    {
+      "recordKey": "legalpeople:shinkim:20260616-ccourt-hires",
+      "category": "이동·개업",
+      "source": "법무법인 세종",
+      "title": "헌법재판소 출신 신동승·김현영 변호사 영입",
+      "publishedAt": "2026-06-16",
+      "summary": "헌법재판소 경력의 신동승·김현영 변호사를 영입해 재판소원과 헌법소송 관련 대응 역량을 강화했습니다.",
+      "sourceUrl": "https://www.shinkim.com/kor/media/newsroom",
+      "tags": ["영입", "헌법재판소", "재판소원", "헌법소송"],
+      "active": true
+    },
+    {
+      "recordKey": "legalpeople:shinkim:20260513-prosecutor-hires",
+      "category": "이동·개업",
+      "source": "법무법인 세종",
+      "title": "검찰 출신 김태형·신승호 변호사 영입",
+      "publishedAt": "2026-05-13",
+      "summary": "검찰과 금융당국 경력을 보유한 김태형·신승호 변호사를 영입해 기업형사·국제형사·금융증권형사 및 조사·제재 대응 역량을 보강했습니다.",
+      "sourceUrl": "https://www.shinkim.com/kor/media/newsroom",
+      "tags": ["영입", "검찰", "기업형사", "금융규제"],
+      "active": true
+    },
+    {
+      "recordKey": "legalpeople:shinkim:20260407-ai-digital-competition",
+      "category": "법률시장",
+      "source": "법무법인 세종",
+      "title": "AI·디지털 경쟁법팀 출범",
+      "publishedAt": "2026-04-07",
+      "summary": "AI 개발 인프라부터 알고리즘 기반 경쟁제한 이슈까지 대응하기 위한 AI·디지털 경쟁법 전문조직을 출범시켜 AI 규제·공정거래 분야의 전문화를 강화했습니다.",
+      "sourceUrl": "https://www.shinkim.com/kor/media/sejong/7284",
+      "tags": ["전문팀", "AI", "경쟁법", "공정거래"],
+      "active": true
+    }
+  ]
+}
