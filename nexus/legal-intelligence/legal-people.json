@@ -3,9 +3,30 @@
   "updatedAt": "2026-08-31",
   "policy": {
     "description": "법원·검찰·헌법재판소·변호사단체·법률연구 현장의 공개 전문동향만 선별하며 경조사·가십은 제외한다.",
-    "categories": ["인사", "이동·개업", "연구·학술", "법률시장"]
+    "categories": [
+      "인사",
+      "이동·개업",
+      "연구·학술",
+      "법률시장"
+    ]
   },
   "records": [
+    {
+      "recordKey": "legalpeople:koreanbar:20260826-member-market",
+      "category": "법률시장",
+      "source": "대한변호사협회",
+      "title": "대한변호사협회 회원·개업 현황 기준 업데이트",
+      "publishedAt": "2026-08-26",
+      "summary": "대한변협 회원현황 기준 서울 지역은 개업회원 24,612명, 준회원 5,388명으로 소계 30,000명이 집계돼 법률시장 규모 변화의 기준 지표로 활용할 수 있습니다.",
+      "sourceUrl": "https://koreanbar.or.kr/pages/introduce/stat.asp",
+      "tags": [
+        "변호사",
+        "개업",
+        "회원현황",
+        "법률시장"
+      ],
+      "active": true
+    },
     {
       "recordKey": "legalpeople:moj:20260824-prosecutor-transfer",
       "category": "인사",
@@ -15,7 +36,11 @@
       "effectiveAt": "2026-08-31",
       "summary": "법무부가 일반검사 16명에 대한 전보 인사를 발표했으며 2026년 8월 31일자로 시행됩니다.",
       "sourceUrl": "https://www.moj.go.kr/bbs/moj/182/609605/artclView.do",
-      "tags": ["검사", "전보", "검찰"],
+      "tags": [
+        "검사",
+        "전보",
+        "검찰"
+      ],
       "active": true
     },
     {
@@ -27,8 +52,27 @@
       "effectiveAt": "2026-08-18",
       "summary": "헌법재판소가 김은정·김성현·유병민·이예림·박건우·장혁훈·이예지 등 7명의 헌법연구관보 임용을 발표했습니다.",
       "sourceUrl": "https://www.ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=4267331&cbIdx=1128",
-      "tags": ["헌법연구관보", "임용", "헌법재판소"],
+      "tags": [
+        "헌법연구관보",
+        "임용",
+        "헌법재판소"
+      ],
       "active": true
+    },
+    {
+      "recordKey": "legalpeople:koreanbar:fd0e1d2c647cd0fd",
+      "category": "인사",
+      "source": "대한변호사협회",
+      "title": "[연수팀] 「제34회 법의 지배를 위한 변호사대회」 개최 안내",
+      "publishedAt": "2026-08-11",
+      "summary": "대한변호사협회 공개자료에서 자동 선별된 인사 관련 동향입니다. 세부 내용은 공식 원문에서 확인할 수 있습니다.",
+      "sourceUrl": "https://www.koreanbar.or.kr/pages/news/view.asp?teamcode=&category=&page=1&seq=15495&types=1&searchtype=&searchstr=",
+      "tags": [
+        "대한변호사협회",
+        "인사"
+      ],
+      "active": true,
+      "autoCollected": true
     },
     {
       "recordKey": "legalpeople:ccourt:20260730-researchers",
@@ -39,8 +83,72 @@
       "effectiveAt": "2026-08-01",
       "summary": "선임헌법연구관 보직과 헌법연구관·헌법연구관보 신규 임용을 포함한 8월 1일자 인사가 발표됐습니다.",
       "sourceUrl": "https://www.ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=4267192&cbIdx=1128",
-      "tags": ["헌법연구관", "헌법연구관보", "인사"],
+      "tags": [
+        "헌법연구관",
+        "헌법연구관보",
+        "인사"
+      ],
       "active": true
+    },
+    {
+      "recordKey": "legalpeople:koreanbar:5cc945ea30336ee6",
+      "category": "이동·개업",
+      "source": "대한변호사협회",
+      "title": "공시송달(등록취소통지)",
+      "publishedAt": "2026-07-29",
+      "summary": "대한변호사협회 공개자료에서 자동 선별된 이동·개업 관련 동향입니다. 세부 내용은 공식 원문에서 확인할 수 있습니다.",
+      "sourceUrl": "https://www.koreanbar.or.kr/pages/news/view.asp?teamcode=&category=&page=1&seq=15470&types=1&searchtype=&searchstr=",
+      "tags": [
+        "대한변호사협회",
+        "이동·개업"
+      ],
+      "active": true,
+      "autoCollected": true
+    },
+    {
+      "recordKey": "legalpeople:koreanbar:477e78a42e0484c8",
+      "category": "이동·개업",
+      "source": "대한변호사협회",
+      "title": "공시송달(등록취소통지)",
+      "publishedAt": "2026-07-27",
+      "summary": "대한변호사협회 공개자료에서 자동 선별된 이동·개업 관련 동향입니다. 세부 내용은 공식 원문에서 확인할 수 있습니다.",
+      "sourceUrl": "https://www.koreanbar.or.kr/pages/news/view.asp?teamcode=&category=&page=1&seq=15469&types=1&searchtype=&searchstr=",
+      "tags": [
+        "대한변호사협회",
+        "이동·개업"
+      ],
+      "active": true,
+      "autoCollected": true
+    },
+    {
+      "recordKey": "legalpeople:scourt:20260710-registration-conference",
+      "category": "연구·학술",
+      "source": "대한민국 법원",
+      "title": "부진정등기로 인한 피해보상제도 설계 학술대회",
+      "publishedAt": "2026-07-10",
+      "summary": "법원행정처와 서강대 법학연구소가 피해보상 모델과 법령 정비 방안을 논의했으며 법관·변호사·법학교수·법무사 등 실무와 학계 전문가가 참여했습니다.",
+      "sourceUrl": "https://www.scourt.go.kr/portal/news/NewsViewAction.work?gubun=6&searchOption=&searchWord=&seqnum=3017",
+      "tags": [
+        "학술대회",
+        "등기",
+        "법제연구"
+      ],
+      "active": true
+    },
+    {
+      "recordKey": "legalpeople:koreanbar:a1e2a454bcb39f74",
+      "category": "이동·개업",
+      "source": "대한변호사협회",
+      "title": "영문등록증명서 명칭 변경 안내 (2026. 6. 22. 시행)",
+      "publishedAt": "2026-06-22",
+      "summary": "대한변호사협회 공개자료에서 자동 선별된 이동·개업 관련 동향입니다. 세부 내용은 공식 원문에서 확인할 수 있습니다.",
+      "sourceUrl": "https://www.koreanbar.or.kr/pages/news/view.asp?teamcode=&category=&page=1&seq=15415&types=1&searchtype=&searchstr=",
+      "tags": [
+        "대한변호사협회",
+        "이동·개업"
+      ],
+      "active": true,
+      "autoCollected": true
     },
     {
       "recordKey": "legalpeople:scourt:20260130-court-heads",
@@ -51,7 +159,11 @@
       "effectiveAt": "2026-02-09",
       "summary": "대법원이 법원장과 수석부장판사, 고등법원 판사 등의 정기 인사를 발표했으며 일부 회생법원장 인사는 3월 1일자로 시행됐습니다.",
       "sourceUrl": "https://sc.scourt.go.kr/portal/news/NewsViewAction.work?gubun=6&searchOption=&searchWord=&seqnum=2927",
-      "tags": ["법관", "법원장", "고등법원"],
+      "tags": [
+        "법관",
+        "법원장",
+        "고등법원"
+      ],
       "active": true
     },
     {
@@ -63,30 +175,243 @@
       "effectiveAt": "2026-10-02",
       "summary": "일반 법조경력자 법관임용 절차가 진행 중이며 최종면접 이후 2026년 10월 2일 임용 일정이 제시돼 있습니다.",
       "sourceUrl": "https://www.scourt.go.kr/portal/news/NewsViewAction.work?gubun=3&searchOption=&searchWord=&seqnum=2717",
-      "tags": ["법관임용", "법조경력자", "채용"],
+      "tags": [
+        "법관임용",
+        "법조경력자",
+        "채용"
+      ],
       "active": true
     },
     {
-      "recordKey": "legalpeople:scourt:20260710-registration-conference",
-      "category": "연구·학술",
-      "source": "대한민국 법원",
-      "title": "부진정등기로 인한 피해보상제도 설계 학술대회",
-      "publishedAt": "2026-07-10",
-      "summary": "법원행정처와 서강대 법학연구소가 피해보상 모델과 법령 정비 방안을 논의했으며 법관·변호사·법학교수·법무사 등 실무와 학계 전문가가 참여했습니다.",
-      "sourceUrl": "https://www.scourt.go.kr/portal/news/NewsViewAction.work?gubun=6&searchOption=&searchWord=&seqnum=3017",
-      "tags": ["학술대회", "등기", "법제연구"],
-      "active": true
+      "recordKey": "legalpeople:koreanbar:0c3dfe15845d018a",
+      "category": "인사",
+      "source": "대한변호사협회",
+      "title": "연수 안내 및 신청",
+      "publishedAt": "",
+      "summary": "대한변호사협회 공개자료에서 자동 선별된 인사 관련 동향입니다. 세부 내용은 공식 원문에서 확인할 수 있습니다.",
+      "sourceUrl": "https://biz.koreanbar.or.kr/pages/introduce/schedule.asp",
+      "tags": [
+        "대한변호사협회",
+        "인사"
+      ],
+      "active": true,
+      "autoCollected": true
     },
     {
-      "recordKey": "legalpeople:koreanbar:20260826-member-market",
+      "recordKey": "legalpeople:koreanbar:367a6cfd0ae42a3b",
       "category": "법률시장",
       "source": "대한변호사협회",
-      "title": "대한변호사협회 회원·개업 현황 기준 업데이트",
-      "publishedAt": "2026-08-26",
-      "summary": "대한변협 회원현황 기준 서울 지역은 개업회원 24,612명, 준회원 5,388명으로 소계 30,000명이 집계돼 법률시장 규모 변화의 기준 지표로 활용할 수 있습니다.",
-      "sourceUrl": "https://koreanbar.or.kr/pages/introduce/stat.asp",
-      "tags": ["변호사", "개업", "회원현황", "법률시장"],
-      "active": true
+      "title": "회원현황",
+      "publishedAt": "",
+      "summary": "대한변호사협회 공개자료에서 자동 선별된 법률시장 관련 동향입니다. 세부 내용은 공식 원문에서 확인할 수 있습니다.",
+      "sourceUrl": "https://www.koreanbar.or.kr/pages/introduce/stat.asp",
+      "tags": [
+        "대한변호사협회",
+        "법률시장"
+      ],
+      "active": true,
+      "autoCollected": true
+    },
+    {
+      "recordKey": "legalpeople:koreanbar:3927de2e28345820",
+      "category": "인사",
+      "source": "대한변호사협회",
+      "title": "- 변호사 연수교육",
+      "publishedAt": "",
+      "summary": "대한변호사협회 공개자료에서 자동 선별된 인사 관련 동향입니다. 세부 내용은 공식 원문에서 확인할 수 있습니다.",
+      "sourceUrl": "https://www.koreanbar.or.kr/pages/introduce/role_4.asp",
+      "tags": [
+        "대한변호사협회",
+        "인사"
+      ],
+      "active": true,
+      "autoCollected": true
+    },
+    {
+      "recordKey": "legalpeople:koreanbar:75888db05e69c01e",
+      "category": "인사",
+      "source": "대한변호사협회",
+      "title": "2025년 대한변협 특별연수 실시계획",
+      "publishedAt": "",
+      "summary": "대한변호사협회 공개자료에서 자동 선별된 인사 관련 동향입니다. 세부 내용은 공식 원문에서 확인할 수 있습니다.",
+      "sourceUrl": "https://www.koreanbar.or.kr/pages/news/view.asp?teamcode=&category=&page=1&seq=14178&types=1&searchtype=&searchstr=",
+      "tags": [
+        "대한변호사협회",
+        "인사"
+      ],
+      "active": true,
+      "autoCollected": true
+    },
+    {
+      "recordKey": "legalpeople:koreanbar:798c36d811049d09",
+      "category": "인사",
+      "source": "대한변호사협회",
+      "title": "사법연수원",
+      "publishedAt": "",
+      "summary": "대한변호사협회 공개자료에서 자동 선별된 인사 관련 동향입니다. 세부 내용은 공식 원문에서 확인할 수 있습니다.",
+      "sourceUrl": "https://jrti.scourt.go.kr/",
+      "tags": [
+        "대한변호사협회",
+        "인사"
+      ],
+      "active": true,
+      "autoCollected": true
+    },
+    {
+      "recordKey": "legalpeople:koreanbar:7ac0deeb51a38270",
+      "category": "인사",
+      "source": "대한변호사협회",
+      "title": "2026년 대한변협 특별연수 실시계획",
+      "publishedAt": "",
+      "summary": "대한변호사협회 공개자료에서 자동 선별된 인사 관련 동향입니다. 세부 내용은 공식 원문에서 확인할 수 있습니다.",
+      "sourceUrl": "https://www.koreanbar.or.kr/pages/news/view.asp?teamcode=&category=&page=1&seq=15055&types=1&searchtype=&searchstr=",
+      "tags": [
+        "대한변호사협회",
+        "인사"
+      ],
+      "active": true,
+      "autoCollected": true
+    },
+    {
+      "recordKey": "legalpeople:koreanbar:951a4ec5c4f4e27e",
+      "category": "이동·개업",
+      "source": "대한변호사협회",
+      "title": "★제15회 변호사시험 합격자 등록 및 개업 안내★",
+      "publishedAt": "",
+      "summary": "대한변호사협회 공개자료에서 자동 선별된 이동·개업 관련 동향입니다. 세부 내용은 공식 원문에서 확인할 수 있습니다.",
+      "sourceUrl": "https://www.koreanbar.or.kr/pages/news/view.asp?teamcode=&category=&page=1&seq=15296&types=1&searchtype=&searchstr=",
+      "tags": [
+        "대한변호사협회",
+        "이동·개업"
+      ],
+      "active": true,
+      "autoCollected": true
+    },
+    {
+      "recordKey": "legalpeople:koreanbar:f155fea93c0cadad",
+      "category": "이동·개업",
+      "source": "대한변호사협회",
+      "title": "변호사 등록 안내 및 신고/신청",
+      "publishedAt": "",
+      "summary": "대한변호사협회 공개자료에서 자동 선별된 이동·개업 관련 동향입니다. 세부 내용은 공식 원문에서 확인할 수 있습니다.",
+      "sourceUrl": "https://biz.koreanbar.or.kr/pages/apply/list.asp",
+      "tags": [
+        "대한변호사협회",
+        "이동·개업"
+      ],
+      "active": true,
+      "autoCollected": true
+    },
+    {
+      "recordKey": "legalpeople:koreanbar:f4d594f5371779d0",
+      "category": "인사",
+      "source": "대한변호사협회",
+      "title": "2026년 제15회 변호사시험 합격자 연수 신청 안내",
+      "publishedAt": "",
+      "summary": "대한변호사협회 공개자료에서 자동 선별된 인사 관련 동향입니다. 세부 내용은 공식 원문에서 확인할 수 있습니다.",
+      "sourceUrl": "https://www.koreanbar.or.kr/pages/news/view.asp?teamcode=&category=&page=1&seq=15305&types=1&searchtype=&searchstr=",
+      "tags": [
+        "대한변호사협회",
+        "인사"
+      ],
+      "active": true,
+      "autoCollected": true
+    },
+    {
+      "recordKey": "legalpeople:moj:0ff79c88c8a43b84",
+      "category": "인사",
+      "source": "법무부",
+      "title": "공직퇴임변호사 수임제한 위반 신고",
+      "publishedAt": "",
+      "summary": "법무부 공개자료에서 자동 선별된 인사 관련 동향입니다. 세부 내용은 공식 원문에서 확인할 수 있습니다.",
+      "sourceUrl": "https://www.moj.go.kr/moj/236/subview.do",
+      "tags": [
+        "법무부",
+        "인사"
+      ],
+      "active": true,
+      "autoCollected": true
+    },
+    {
+      "recordKey": "legalpeople:moj:34822700badef3ee",
+      "category": "인사",
+      "source": "법무부",
+      "title": "변호사시험 합격증명 발급",
+      "publishedAt": "",
+      "summary": "법무부 공개자료에서 자동 선별된 인사 관련 동향입니다. 세부 내용은 공식 원문에서 확인할 수 있습니다.",
+      "sourceUrl": "https://www.gov.kr/main?a=AA020InfoCappViewApp&amp;HighCtgCD=A01009&amp;CappBizCD=12700000105&amp;tp_seq=01",
+      "tags": [
+        "법무부",
+        "인사"
+      ],
+      "active": true,
+      "autoCollected": true
+    },
+    {
+      "recordKey": "legalpeople:moj:6982ef12fa4cd406",
+      "category": "인사",
+      "source": "법무부",
+      "title": "마을변호사",
+      "publishedAt": "",
+      "summary": "법무부 공개자료에서 자동 선별된 인사 관련 동향입니다. 세부 내용은 공식 원문에서 확인할 수 있습니다.",
+      "sourceUrl": "https://www.moj.go.kr/moj/312/subview.do",
+      "tags": [
+        "법무부",
+        "인사"
+      ],
+      "active": true,
+      "autoCollected": true
+    },
+    {
+      "recordKey": "legalpeople:moj:d96fe9fb0f8b7630",
+      "category": "인사",
+      "source": "법무부",
+      "title": "변호사시험",
+      "publishedAt": "",
+      "summary": "법무부 공개자료에서 자동 선별된 인사 관련 동향입니다. 세부 내용은 공식 원문에서 확인할 수 있습니다.",
+      "sourceUrl": "https://www.moj.go.kr/moj/440/subview.do",
+      "tags": [
+        "법무부",
+        "인사"
+      ],
+      "active": true,
+      "autoCollected": true
+    },
+    {
+      "recordKey": "legalpeople:moj:ea0b6b7095607eb9",
+      "category": "인사",
+      "source": "법무부",
+      "title": "변호사·공증 신문고",
+      "publishedAt": "",
+      "summary": "법무부 공개자료에서 자동 선별된 인사 관련 동향입니다. 세부 내용은 공식 원문에서 확인할 수 있습니다.",
+      "sourceUrl": "https://www.moj.go.kr/moj/244/subview.do",
+      "tags": [
+        "법무부",
+        "인사"
+      ],
+      "active": true,
+      "autoCollected": true
+    },
+    {
+      "recordKey": "legalpeople:moj:fa64c00d53d81f1e",
+      "category": "인사",
+      "source": "법무부",
+      "title": "변호사시험·사법시험",
+      "publishedAt": "",
+      "summary": "법무부 공개자료에서 자동 선별된 인사 관련 동향입니다. 세부 내용은 공식 원문에서 확인할 수 있습니다.",
+      "sourceUrl": "https://www.moj.go.kr/moj/3477/subview.do",
+      "tags": [
+        "법무부",
+        "인사"
+      ],
+      "active": true,
+      "autoCollected": true
+    }
+  ],
+  "sourceFailures": [
+    {
+      "source": "scourt",
+      "message": "fetch failed"
     }
   ]
 }
