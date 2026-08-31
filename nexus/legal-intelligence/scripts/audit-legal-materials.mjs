@@ -46,15 +46,18 @@ for (const record of data.records) {
   seenRefs.add(referenceKey);
 
   if (String(record.summary).trim().length < 40) throw new Error(`summary too short: ${key}`);
-  if (String(record.legalPoint).trim().length < 30) throw new Error(`legalPoint too short: ${key}`);
 
-  const requiresThreeLayerAnalysis = record.type === '판례' || record.type === '연구자료';
-  if (requiresThreeLayerAnalysis && !legacyCompactKeys.has(key)) {
+  const requiresThreeLayerAnalysis = (record.type === '판례' || record.type === '연구자료') && !legacyCompactKeys.has(key);
+  if (requiresThreeLayerAnalysis) {
     for (const field of ['issue', 'legalRule', 'researchPoint']) {
       const value = String(record[field] || '').trim();
       if (!value) throw new Error(`${field} is required for curated ${record.type}: ${key}`);
       if (value.length < 35) throw new Error(`${field} too short for curated ${record.type}: ${key}`);
     }
+    // 3단 분석 자료에서는 legalPoint를 카드용 짧은 결론으로 사용한다.
+    if (String(record.legalPoint).trim().length < 15) throw new Error(`legalPoint too short: ${key}`);
+  } else if (String(record.legalPoint).trim().length < 30) {
+    throw new Error(`legalPoint too short: ${key}`);
   }
 }
 
