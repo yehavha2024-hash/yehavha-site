@@ -12,14 +12,14 @@ const assemblyKey = process.env.OPEN_ASSEMBLY_API_KEY?.trim();
 const lawmakingOc = process.env.LAWMAKING_OC?.trim();
 
 if (!assemblyKey) throw new Error('OPEN_ASSEMBLY_API_KEY is required.');
-if (!lawmakingOc) throw new Error('LAWMAKING_OC is required.');
 
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
-const clean = value => value == null ? '' : String(value).trim();
+const clean = value => value == null ? '' : String(value).replace(/\s+/g, ' ').trim();
 const decodeXml = value => clean(value)
   .replaceAll('&lt;', '<').replaceAll('&gt;', '>').replaceAll('&amp;', '&')
   .replaceAll('&quot;', '"').replaceAll('&#39;', "'")
   .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1');
+const stripHtml = value => decodeXml(String(value || '').replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<style[\s\S]*?<\/style>/gi, ' ').replace(/<[^>]+>/g, ' '));
 
 async function request(url, options = {}, retries = 2) {
   let lastError;
@@ -28,7 +28,7 @@ async function request(url, options = {}, retries = 2) {
     try {
       const response = await fetch(url, {
         ...fetchOptions,
-        headers: {'User-Agent': 'YEHAVHA-Nexus-Legal-Intelligence/1.0', Accept: accept, ...headers},
+        headers: {'User-Agent': 'YEHAVHA-Nexus-Legal-Intelligence/1.1', Accept: accept, ...headers},
         signal: AbortSignal.timeout(30000)
       });
       if (!response.ok) throw new Error(`HTTP ${response.status} ${url}`);
@@ -89,7 +89,8 @@ function parseGovernmentRows(xml) {
       lbPrcStsNm: xmlValue(segment, 'lbPrcStsNm') || xmlValue(segment, 'lbPrcStsCdGrpNm'),
       lbPrcStsDt: xmlValue(segment, 'lbPrcStsDt'),
       rrRsn: xmlValue(segment, 'rrRsn'),
-      essCts: xmlValue(segment, 'essCts')
+      essCts: xmlValue(segment, 'essCts'),
+      publicSourceUrl: `https://opinion.lawmaking.go.kr/lmSts/govLm/${lbicId}/detailRP`
     });
   }
   return rows;
@@ -102,14 +103,54 @@ function dotDate(date) {
   return `${y}. ${m}. ${d}.`;
 }
 
-async function governmentCall(params) {
+async function governmentApiCall(params) {
+  if (!lawmakingOc) throw new Error('LAWMAKING_OC is not configured.');
   const url = new URL(config.government.endpoint);
   url.searchParams.set('OC', lawmakingOc);
   for (const [key, value] of Object.entries(params)) if (value !== '' && value != null) url.searchParams.set(key, String(value));
   const response = await request(url, {accept: 'application/xml,text/xml,*/*'});
   const text = await response.text();
-  if (/retMsg[^>]*>\s*500|<error/i.test(text)) throw new Error('Government legislation API returned an error response.');
+  if (/retMsg[^>]*>\s*(400|401|403|500)|<error/i.test(text)) throw new Error('Government legislation API returned an error response.');
   return parseGovernmentRows(text);
+}
+
+function parseGovernmentPublicHtml(html) {
+  const rows = [];
+  for (const match of html.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/gi)) {
+    const rowHtml = match[1];
+    const link = rowHtml.match(/<a\b[^>]*href=["']([^"']*\/lmSts\/govLm\/(\d+)\/detailRP[^"']*)["'][^>]*>([\s\S]*?)<\/a>/i);
+    if (!link) continue;
+    const cells = [...rowHtml.matchAll(/<td\b[^>]*>([\s\S]*?)<\/td>/gi)].map(cell => stripHtml(cell[1]));
+    const lbicId = clean(link[2]);
+    const lsNmKo = stripHtml(link[3]);
+    if (!lbicId || !lsNmKo) continue;
+    rows.push({
+      lbicId,
+      lsNmKo,
+      lsKndNm: cells[2] || '',
+      rrFrNm: cells[3] || '',
+      cptOfiOrgNm: cells[4] || '',
+      lbPrcStsNm: cells[5] || '',
+      lbPrcStsDt: '',
+      publicSourceUrl: new URL(link[1], 'https://opinion.lawmaking.go.kr').href,
+      collectionMode: 'public-html'
+    });
+  }
+  return rows;
+}
+
+async function collectGovernmentPublic() {
+  const pages = Number(config.government.publicPages || 12);
+  const rows = [];
+  for (let page = 1; page <= pages; page += 1) {
+    const url = new URL('https://opinion.lawmaking.go.kr/lmSts/govLm');
+    url.searchParams.set('pageIndex', String(page));
+    const response = await request(url, {accept: 'text/html,application/xhtml+xml'});
+    const pageRows = parseGovernmentPublicHtml(await response.text());
+    rows.push(...pageRows);
+    if (!pageRows.length) break;
+  }
+  return rows;
 }
 
 function recordMap() {
@@ -123,12 +164,7 @@ async function collectAssembly() {
 
   for (const keyword of config.discoveryKeywords || []) {
     for (let page = 1; page <= cfg.maxPagesPerKeyword; page += 1) {
-      const {rows, total} = await assemblyCall(cfg.endpoint, {
-        AGE: cfg.age,
-        BILL_NAME: keyword,
-        pIndex: page,
-        pSize: cfg.pageSize
-      });
+      const {rows, total} = await assemblyCall(cfg.endpoint, {AGE: cfg.age, BILL_NAME: keyword, pIndex: page, pSize: cfg.pageSize});
       for (const row of rows) {
         const billNo = clean(row.BILL_NO);
         if (billNo) candidates.set(billNo, {...candidates.get(billNo), ...row});
@@ -164,28 +200,50 @@ async function collectAssembly() {
   return output;
 }
 
+function governmentRelevant(row) {
+  const haystack = `${clean(row.lsNmKo)} ${clean(row.cptOfiOrgNm)} ${clean(row.rrRsn)} ${clean(row.essCts)}`.toLocaleLowerCase('ko-KR');
+  return (config.discoveryKeywords || []).some(keyword => haystack.includes(String(keyword).toLocaleLowerCase('ko-KR')));
+}
+
 async function collectGovernment() {
-  const lookback = Number(config.government.lookbackDays || 45);
-  const end = new Date();
-  const start = new Date(Date.now() - lookback * 86400000);
   const candidates = new Map();
   const existingGovernment = (current.records || []).filter(record => record.sourceType === 'government');
   const existingByTitle = new Map(existingGovernment.filter(record => record.title).map(record => [clean(record.title), record]));
+  let apiSucceeded = false;
 
-  for (const keyword of config.discoveryKeywords || []) {
-    const rows = await governmentCall({stDtFmt: dotDate(start), edDtFmt: dotDate(end), lsNmKo: keyword});
-    for (const row of rows) {
-      const previous = existingByTitle.get(clean(row.lsNmKo));
-      const canonicalId = previous?.sourceId || clean(row.lbicId);
-      if (canonicalId) candidates.set(canonicalId, {...row, canonicalSourceId: canonicalId, officialLbicId: clean(row.lbicId)});
+  if (lawmakingOc) {
+    const lookback = Number(config.government.lookbackDays || 45);
+    const end = new Date();
+    const start = new Date(Date.now() - lookback * 86400000);
+    try {
+      for (const keyword of config.discoveryKeywords || []) {
+        const rows = await governmentApiCall({stDtFmt: dotDate(start), edDtFmt: dotDate(end), lsNmKo: keyword});
+        for (const row of rows) {
+          const previous = existingByTitle.get(clean(row.lsNmKo));
+          const canonicalId = previous?.sourceId || clean(row.lbicId);
+          if (canonicalId) candidates.set(canonicalId, {...row, canonicalSourceId: canonicalId, officialLbicId: clean(row.lbicId)});
+        }
+      }
+      for (const record of existingGovernment) {
+        if (!record.title) continue;
+        const rows = await governmentApiCall({lsNmKo: record.title});
+        const exact = rows.find(row => clean(row.lbicId) === clean(record.officialLbicId || record.sourceId)) || rows.find(row => clean(row.lsNmKo) === clean(record.title));
+        if (exact?.lbicId) candidates.set(clean(record.sourceId), {...exact, canonicalSourceId: clean(record.sourceId), officialLbicId: clean(exact.lbicId)});
+      }
+      apiSucceeded = true;
+    } catch (error) {
+      console.warn(`Government OC API unavailable; switching to public HTML: ${error.message}`);
     }
   }
 
-  for (const record of existingGovernment) {
-    if (!record.title) continue;
-    const rows = await governmentCall({lsNmKo: record.title});
-    const exact = rows.find(row => clean(row.lbicId) === clean(record.officialLbicId || record.sourceId)) || rows.find(row => clean(row.lsNmKo) === clean(record.title));
-    if (exact?.lbicId) candidates.set(clean(record.sourceId), {...exact, canonicalSourceId: clean(record.sourceId), officialLbicId: clean(exact.lbicId)});
+  if (!apiSucceeded) {
+    const rows = await collectGovernmentPublic();
+    for (const row of rows) {
+      const previous = existingByTitle.get(clean(row.lsNmKo));
+      if (!previous && !governmentRelevant(row)) continue;
+      const canonicalId = previous?.sourceId || clean(row.lbicId);
+      if (canonicalId) candidates.set(canonicalId, {...row, canonicalSourceId: canonicalId, officialLbicId: clean(row.lbicId)});
+    }
   }
 
   return [...candidates.entries()].map(([sourceId, raw]) => ({sourceType: 'government', sourceId, raw}));
@@ -214,10 +272,6 @@ for (const item of collected) {
   deduped.set(key, {...item, recordKey: key, existing: existing.has(key)});
 }
 
-const output = {
-  collectedAt: new Date().toISOString(),
-  sourceErrors,
-  records: [...deduped.values()]
-};
+const output = {collectedAt: new Date().toISOString(), sourceErrors, records: [...deduped.values()]};
 await fs.writeFile(outputPath, `${JSON.stringify(output, null, 2)}\n`, 'utf8');
 console.log(`Collected ${output.records.length} unique candidate(s) -> ${outputPath}`);
