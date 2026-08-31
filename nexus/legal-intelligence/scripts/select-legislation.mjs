@@ -126,7 +126,8 @@ function mapGovernment(item) {
   if (!previous && !topics.length) return null;
   const statusCode = /(폐기|철회)/.test(statusLabel) ? 'withdrawn' : /(공포)/.test(statusLabel) ? 'promulgated' : /(국회)/.test(statusLabel) ? 'submitted_to_assembly' : /(심사)/.test(statusLabel) ? 'review' : /(심의|의결)/.test(statusLabel) ? 'deliberation' : 'government_process';
   const details = first(raw, ['rrRsn', 'essCts']);
-  const officialLbicId = first(raw, ['officialLbicId', 'lbicId']);
+  const officialLbicId = first(raw, ['officialLbicId', 'lbicId']) || previous?.officialLbicId || '';
+  const officialSourceUrl = first(raw, ['publicSourceUrl']) || previous?.sourceUrl || 'https://opinion.lawmaking.go.kr/lmSts/govLm';
 
   return {
     sourceType: 'government',
@@ -140,8 +141,8 @@ function mapGovernment(item) {
     statusDate,
     active: !/(폐기|철회|공포)/.test(statusLabel),
     topics: topics.length ? topics : previous?.topics || [],
-    ...(previous ? {} : {summary: details || `법제처 정부입법 API에서 자동 선별된 법령안입니다. 현재 추진단계는 ${statusLabel}이며 세부 내용은 공식 원문을 기준으로 보강합니다.`}),
-    sourceUrl: previous?.sourceUrl || 'https://opinion.lawmaking.go.kr/gcom/govLm/2000000/lmSts/govLm',
+    ...(previous ? {} : {summary: details || `법제처 정부입법 공식자료에서 자동 선별된 법령안입니다. 현재 추진단계는 ${statusLabel}이며 세부 내용은 공식 원문을 기준으로 보강합니다.`}),
+    sourceUrl: officialSourceUrl,
     history: statusDate ? [{date: statusDate, stage: statusLabel}] : []
   };
 }
