@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-31",
+  "selectionPolicy": {
+    "mode": "selected",
+    "description": "NEXUS 연구·실무 관심영역과 직접 연결되는 국회·정부 입법만 선별 추적하며 동일 식별자의 기존 레코드를 갱신한다.",
+    "topics": [
+      "AI·로봇·디지털",
+      "데이터·개인정보",
+      "민사책임·손해배상",
+      "플랫폼·전자상거래",
+      "교육·에듀테크",
+      "행정·지방자치",
+      "법조·사법제도",
+      "주요 법제 변화"
+    ]
+  },
+  "records": [
+    {
+      "recordKey": "assembly:2220395",
+      "sourceType": "assembly",
+      "sourceId": "2220395",
+      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
+      "proposer": "김성원의원 등 10인",
+      "proposedAt": "2026-08-03",
+      "committee": "과학기술정보방송통신위원회",
+      "statusCode": "committee_referral",
+      "statusLabel": "위원회 회부",
+      "statusDate": "2026-08-04",
+      "active": true,
+      "topics": ["AI·로봇·디지털", "주요 법제 변화"],
+      "summary": "국가안보·공공안전에 중대한 위험을 초래할 우려가 있는 고위험 인공지능 모델의 지정·관리와 범국가적 사이버위협 대응체계 구축 근거를 신설하려는 개정안.",
+      "sourceUrl": "https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2220395/detailRP?yType=I",
+      "history": [
+        {"date": "2026-08-03", "stage": "발의"},
+        {"date": "2026-08-04", "stage": "위원회 회부"}
+      ]
+    },
+    {
+      "recordKey": "assembly:2220058",
+      "sourceType": "assembly",
+      "sourceId": "2220058",
+      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
+      "proposer": "전종덕의원 등 11인",
+      "proposedAt": "2026-07-21",
+      "committee": "과학기술정보방송통신위원회",
+      "statusCode": "committee_referral",
+      "statusLabel": "위원회 회부",
+      "statusDate": "2026-07-22",
+      "active": true,
+      "topics": ["AI·로봇·디지털", "주요 법제 변화"],
+      "summary": "채용 이후 직무배치·업무할당·성과평가·인사관리 등에 중대한 영향을 미치는 인공지능을 고영향 인공지능 범위에 포함하려는 개정안.",
+      "sourceUrl": "https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2220058/detailRP",
+      "history": [
+        {"date": "2026-07-21", "stage": "발의"},
+        {"date": "2026-07-22", "stage": "위원회 회부"}
+      ]
+    },
+    {
+      "recordKey": "assembly:2219835",
+      "sourceType": "assembly",
+      "sourceId": "2219835",
+      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
+      "proposer": "김우영의원 등 17인",
+      "proposedAt": "2026-07-08",
+      "committee": "과학기술정보방송통신위원회",
+      "statusCode": "committee_referral",
+      "statusLabel": "위원회 회부",
+      "statusDate": "2026-07-09",
+      "active": true,
+      "topics": ["AI·로봇·디지털", "플랫폼·전자상거래"],
+      "summary": "AI 생성물 표시의무에서 예술·창의적 표현물과 단순 보조도구 사용에 대한 예외·완화 기준을 명확하게 하려는 개정안.",
+      "sourceUrl": "https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2219835/detailRP",
+      "history": [
+        {"date": "2026-07-08", "stage": "발의"},
+        {"date": "2026-07-09", "stage": "위원회 회부"}
+      ]
+    },
+    {
+      "recordKey": "assembly:2219834",
+      "sourceType": "assembly",
+      "sourceId": "2219834",
+      "title": "개인정보 보호법 일부개정법률안",
+      "proposer": "김남근의원 등 16인",
+      "proposedAt": "2026-07-08",
+      "committee": "정무위원회",
+      "statusCode": "committee_referral",
+      "statusLabel": "위원회 회부",
+      "statusDate": "2026-07-09",
+      "active": true,
+      "topics": ["데이터·개인정보", "민사책임·손해배상"],
+      "summary": "개인정보 관련 중대한 고의 위반행위의 징벌적 손해배상 기준을 강화하고 감액 사유의 입증구조를 조정하려는 개정안.",
+      "sourceUrl": "https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2219834/detailRP",
+      "history": [
+        {"date": "2026-07-08", "stage": "발의"},
+        {"date": "2026-07-09", "stage": "위원회 회부"}
+      ]
+    },
+    {
+      "recordKey": "assembly:2220593",
+      "sourceType": "assembly",
+      "sourceId": "2220593",
+      "title": "지방자치법 일부개정법률안",
+      "proposer": "신정훈의원 등 11인",
+      "proposedAt": "2026-08-14",
+      "committee": "행정안전위원회",
+      "statusCode": "committee_referral",
+      "statusLabel": "위원회 회부",
+      "statusDate": "2026-08-18",
+      "active": true,
+      "topics": ["행정·지방자치", "주요 법제 변화"],
+      "summary": "지방의회의 조직·운영에 관한 구체적 사항을 별도 법률로 정비하고 지방자치법에는 지방의회의 기본 사항과 핵심 원칙을 두려는 개정안.",
+      "sourceUrl": "https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2220593/detailRP",
+      "history": [
+        {"date": "2026-08-14", "stage": "발의"},
+        {"date": "2026-08-18", "stage": "위원회 회부"}
+      ]
+    },
+    {
+      "recordKey": "assembly:2218943",
+      "sourceType": "assembly",
+      "sourceId": "2218943",
+      "title": "교육기본법 일부개정법률안",
+      "proposer": "김영호의원 등 10인",
+      "proposedAt": "2026-05-13",
+      "committee": "교육위원회",
+      "statusCode": "committee_referral",
+      "statusLabel": "위원회 회부",
+      "statusDate": "2026-05-14",
+      "active": true,
+      "topics": ["교육·에듀테크"],
+      "summary": "국가와 지방자치단체가 독서교육 시책을 수립·실시하도록 근거를 신설하여 문해력·창의성·비판적 사고 함양을 지원하려는 개정안.",
+      "sourceUrl": "https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2218943/detailRP",
+      "history": [
+        {"date": "2026-05-13", "stage": "발의"},
+        {"date": "2026-05-14", "stage": "위원회 회부"}
+      ]
+    },
+    {
+      "recordKey": "government:88298",
+      "sourceType": "government",
+      "sourceId": "88298",
+      "title": "전기통신사업법 시행령 일부개정령안",
+      "ministry": "과학기술정보통신부",
+      "lawType": "대통령령",
+      "announcementNo": "제2026-903호",
+      "noticeStart": "2026-08-28",
+      "noticeEnd": "2026-09-14",
+      "statusCode": "public_notice",
+      "statusLabel": "입법예고",
+      "statusDate": "2026-08-28",
+      "active": true,
+      "topics": ["플랫폼·전자상거래", "AI·로봇·디지털"],
+      "summary": "정보통신망 침해사고 관련 이용자 보호 업무 평가 주체 변경에 따라 평가 대상·기준 등 법률 위임사항을 정비하는 시행령 개정안.",
+      "sourceUrl": "https://www.moleg.go.kr/lawinfo/makingInfo.mo?lawSeq=88298&lawType=TYPE5&mid=a10104010000",
+      "history": [
+        {"date": "2026-08-28", "stage": "입법예고"}
+      ]
+    },
+    {
+      "recordKey": "government:88208",
+      "sourceType": "government",
+      "sourceId": "88208",
+      "title": "고등교육법 시행령 일부개정령안",
+      "ministry": "교육부",
+      "lawType": "대통령령",
+      "announcementNo": "제2026-329호",
+      "noticeStart": "2026-08-21",
+      "noticeEnd": "2026-09-30",
+      "statusCode": "public_notice",
+      "statusLabel": "입법예고",
+      "statusDate": "2026-08-21",
+      "active": true,
+      "topics": ["교육·에듀테크"],
+      "summary": "학생 주거실태조사의 실시 근거가 법률에 마련됨에 따라 조사와 관련한 위임사항 및 시행 근거를 정비하는 시행령 개정안.",
+      "sourceUrl": "https://www.moleg.go.kr/lawinfo/makingInfo.mo?lawSeq=88208&lawType=TYPE5&mid=a10104010000",
+      "history": [
+        {"date": "2026-08-21", "stage": "입법예고"}
+      ]
+    },
+    {
+      "recordKey": "government:88128",
+      "sourceType": "government",
+      "sourceId": "88128",
+      "title": "지방자치분권 및 지역균형발전에 관한 특별법 시행령 일부개정령안",
+      "ministry": "행정안전부",
+      "lawType": "대통령령",
+      "announcementNo": "제2026-1016호",
+      "noticeStart": "2026-08-14",
+      "noticeEnd": "2026-09-23",
+      "statusCode": "public_notice",
+      "statusLabel": "입법예고",
+      "statusDate": "2026-08-14",
+      "active": true,
+      "topics": ["행정·지방자치", "주요 법제 변화"],
+      "summary": "자치분권·균형성장 관련 법률 개정에 따른 위임사항, 포상·포상금, 부처 역할, 지방자치단체 보조사업 기준과 제명·용어를 정비하는 시행령 개정안.",
+      "sourceUrl": "https://www.moleg.go.kr/lawinfo/makingInfo.mo?lawSeq=88128&lawType=TYPE5&mid=a10104010000",
+      "history": [
+        {"date": "2026-08-14", "stage": "입법예고"}
+      ]
+    }
+  ]
+}
