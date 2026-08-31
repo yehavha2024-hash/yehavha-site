@@ -21,6 +21,7 @@
     "nexus/ai-trends/nexus.project.json",
     "nexus/education-hub/nexus.project.json",
     "nexus/university/nexus.project.json",
-    "nexus/edtech-research/nexus.project.json"
+    "nexus/edtech-research/nexus.project.json",
+    "nexus/legal-intelligence/nexus.project.json"
   ]
 }
