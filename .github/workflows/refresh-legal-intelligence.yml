@@ -45,40 +45,39 @@ jobs:
           node --check nexus/legal-intelligence/scripts/audit-legislation.mjs
           node nexus/legal-intelligence/scripts/audit-legislation.mjs
 
-      - name: Validate collector credentials
-        id: credentials
+      - name: Report source modes
         shell: bash
         run: |
-          if [ -z "$OPEN_ASSEMBLY_API_KEY" ] || [ -z "$LAWMAKING_OC" ]; then
-            echo "ready=false" >> "$GITHUB_OUTPUT"
-            echo "### LEGAL INTELLIGENCE 수집 비활성" >> "$GITHUB_STEP_SUMMARY"
-            echo "OPEN_ASSEMBLY_API_KEY와 LAWMAKING_OC 저장소 Secret이 모두 필요합니다." >> "$GITHUB_STEP_SUMMARY"
-            exit 0
+          if [ -z "$OPEN_ASSEMBLY_API_KEY" ]; then
+            echo "### 국회 입법 API 비활성" >> "$GITHUB_STEP_SUMMARY"
+            echo "OPEN_ASSEMBLY_API_KEY 미등록: 기존 국회 레코드는 보존하고 국회 신규 수집·상태조회만 건너뜁니다." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "### 국회 입법 API 활성" >> "$GITHUB_STEP_SUMMARY"
           fi
-          echo "ready=true" >> "$GITHUB_OUTPUT"
+          if [ -z "$LAWMAKING_OC" ]; then
+            echo "### 정부입법 공개목록 모드" >> "$GITHUB_STEP_SUMMARY"
+            echo "LAWMAKING_OC 미등록: 국민참여입법센터 공개 정부입법현황에서 lbicId·법령명·부처·추진단계를 수집합니다." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "### 정부입법 OC API 우선 모드" >> "$GITHUB_STEP_SUMMARY"
+            echo "OC API 실패 시 공개목록 모드로 자동 전환합니다." >> "$GITHUB_STEP_SUMMARY"
+          fi
 
       - name: Collect official legislation candidates
-        if: steps.credentials.outputs.ready == 'true'
         run: node nexus/legal-intelligence/scripts/collect-legislation.mjs /tmp/legal-collected.json
 
       - name: Select Nexus-relevant legislation
-        if: steps.credentials.outputs.ready == 'true'
         run: node nexus/legal-intelligence/scripts/select-legislation.mjs /tmp/legal-collected.json /tmp/legal-selected.json
 
       - name: Validate selected records
-        if: steps.credentials.outputs.ready == 'true'
         run: node nexus/legal-intelligence/scripts/audit-legislation.mjs /tmp/legal-selected.json
 
       - name: Upsert canonical legislation records
-        if: steps.credentials.outputs.ready == 'true'
         run: node nexus/legal-intelligence/scripts/upsert-legislation.mjs /tmp/legal-selected.json
 
       - name: Validate canonical result
-        if: steps.credentials.outputs.ready == 'true'
         run: node nexus/legal-intelligence/scripts/audit-legislation.mjs
 
       - name: Commit legislation data when changed
-        if: steps.credentials.outputs.ready == 'true'
         shell: bash
         run: |
           if git diff --quiet -- nexus/legal-intelligence/legislation.json; then
