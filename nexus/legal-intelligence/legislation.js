@@ -33,11 +33,46 @@
     return [
       ['현재 단계', record.statusLabel],
       ['소관부처', record.ministry || '-'],
+      ['소관부서', record.department || '-'],
       ['법령종류', record.lawType || '-'],
-      ['예고 시작', formatDate(record.noticeStart)],
-      ['예고 종료', formatDate(record.noticeEnd)],
-      ['공고번호', record.announcementNo || '-']
+      ['제·개정형태', record.revisionType || '-'],
+      ['상태 기준일', formatDate(record.statusDate)]
     ];
+  }
+
+  function appendGovernmentDetails(card, record) {
+    const stages = Array.isArray(record.processStages) ? record.processStages : [];
+    const documents = Array.isArray(record.documents) ? record.documents : [];
+    if (!record.mainContent && !record.amendmentReason && !record.legislativePlan && !stages.length && !documents.length) return;
+
+    const detail = el('details', 'tracker-detail');
+    detail.append(el('summary', '', '상세 내용·추진경과'));
+    if (record.mainContent) detail.append(el('p', 'tracker-detail-row', `주요내용 · ${record.mainContent}`));
+    if (record.amendmentReason) detail.append(el('p', 'tracker-detail-row', `제개정이유 · ${record.amendmentReason}`));
+    if (record.legislativePlan) detail.append(el('p', 'tracker-detail-row', `입법계획·정비의견 · ${record.legislativePlan}`));
+
+    if (stages.length) {
+      const list = el('div', 'tracker-stage-list');
+      for (const item of stages.slice(-8)) {
+        const label = [item.phase, item.stage, item.status].filter(Boolean).join(' · ');
+        if (label) list.append(el('p', 'tracker-detail-row', label));
+      }
+      detail.append(list);
+    }
+
+    if (documents.length) {
+      const actions = el('div', 'source-actions');
+      for (const document of documents.slice(0, 3)) {
+        if (!document.url) continue;
+        const link = el('a', '', `${document.name || '법령안 파일'} ↗`);
+        link.href = document.url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        actions.append(link);
+      }
+      if (actions.childElementCount) detail.append(actions);
+    }
+    card.append(detail);
   }
 
   function renderRecord(record) {
@@ -53,6 +88,8 @@
       fields.append(item);
     }
     card.append(fields);
+
+    if (record.sourceType === 'government') appendGovernmentDetails(card, record);
 
     const tags = el('div', 'tag-row');
     for (const topic of record.topics || []) tags.append(el('span', '', topic));
@@ -103,7 +140,7 @@
     host.append(info);
 
     if (assembly.length) host.append(renderGroup('국회 입법 · 선별 추적', 'NEXUS 관심영역과 직접 연결되는 국회 법률안을 의안번호 기준으로 추적합니다.', assembly));
-    if (government.length) host.append(renderGroup('정부 입법 · 선별 추적', '현재 입법예고 또는 후속 절차를 진행 중인 정부 법령안을 정부입법 식별자 기준으로 추적합니다.', government));
+    if (government.length) host.append(renderGroup('정부 입법 · 선별 추적', '정부입법 lbicId를 기준으로 목록·상세 API의 추진단계와 주요내용을 함께 추적합니다.', government));
 
     anchor.insertAdjacentElement('afterend', host);
   }
