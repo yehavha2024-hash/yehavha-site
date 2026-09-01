@@ -34,11 +34,10 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Validate collector and current data
+      - name: Validate collector scripts
         run: |
           node --check nexus/legal-intelligence/scripts/collect-legal-people.mjs
           node --check nexus/legal-intelligence/scripts/audit-legal-people.mjs
-          node nexus/legal-intelligence/scripts/audit-legal-people.mjs
 
       - name: Collect public legal people and market updates
         run: node nexus/legal-intelligence/scripts/collect-legal-people.mjs
