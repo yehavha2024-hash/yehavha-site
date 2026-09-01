@@ -57,6 +57,18 @@ function auditWorkflowPermissions() {
     ['intelligence-briefing-archive.yml', {
       required: ['git add -- nexus/intelligence-briefing/archive nexus/intelligence-briefing/archive-index.json'],
       allowedPathTokens: ['nexus/intelligence-briefing/archive', 'nexus/intelligence-briefing/archive-index.json']
+    }],
+    ['refresh-legal-intelligence.yml', {
+      required: ['git add nexus/legal-intelligence/legislation.json'],
+      allowedPathTokens: ['nexus/legal-intelligence/legislation.json']
+    }],
+    ['refresh-legal-materials.yml', {
+      required: ['git add nexus/legal-intelligence/legal-materials.json'],
+      allowedPathTokens: ['nexus/legal-intelligence/legal-materials.json']
+    }],
+    ['refresh-legal-people.yml', {
+      required: ['git add nexus/legal-intelligence/legal-people.json'],
+      allowedPathTokens: ['nexus/legal-intelligence/legal-people.json']
     }]
   ]);
 
