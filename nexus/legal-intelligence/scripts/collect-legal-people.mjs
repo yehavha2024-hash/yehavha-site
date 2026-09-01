@@ -218,6 +218,16 @@ async function enrich(records, source) {
   return enriched;
 }
 
+function stillAllowedBySource(record) {
+  const sourceId = String(record.recordKey || '').split(':')[1];
+  const source = (config.sources || []).find(item => item.id === sourceId);
+  if (!source) return true;
+  const title = cleanTitle(record.title);
+  const includeKeywords = source.includeKeywords || [];
+  if (includeKeywords.length && !includeKeywords.some(keyword => title.includes(keyword))) return false;
+  return !(source.excludeKeywords || []).some(keyword => title.includes(keyword));
+}
+
 const existing = Array.isArray(data.records) ? data.records : [];
 const curatedRecords = Array.isArray(curated.records) ? curated.records : [];
 const maxAgeDays = Number(config.maxAgeDays || 240);
@@ -230,6 +240,7 @@ const curatedUrls = new Set(normalizedCurated.map(record => canonicalSourceUrl(r
 const curatedTitles = new Set(normalizedCurated.map(record => `${record.source}|${cleanTitle(record.title)}`));
 const retainedAutos = existing.filter(record => record.autoCollected && record.publishedAt && ageDays(record.publishedAt) <= maxAgeDays)
   .map(record => ({...record, title: cleanTitle(record.title), sourceUrl: canonicalSourceUrl(record.sourceUrl), category: categoryFor(cleanTitle(record.title))}))
+  .filter(stillAllowedBySource)
   .filter(record => !baseline.has(record.recordKey))
   .filter(record => !curatedUrls.has(canonicalSourceUrl(record.sourceUrl)))
   .filter(record => !curatedTitles.has(`${record.source}|${cleanTitle(record.title)}`));
