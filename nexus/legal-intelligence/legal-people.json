@@ -48,22 +48,6 @@
       "active": true
     },
     {
-      "recordKey": "legalpeople:koreanbar-press:9adb948b4a49b3f1",
-      "category": "연구·학술",
-      "source": "대한변호사협회",
-      "title": "결 의 문 「제34회 법의 지배를 위한 변호사대회」에 즈음하여",
-      "publishedAt": "2026-08-24",
-      "summary": "대한민국 사법제도는 중대한 변화의 시기를 맞고 있다. 검찰청 폐지와 공소청 및 중대범죄수사청의 출범을 앞두고 형사사법체계의 근간이 대폭 개편되고 있으며, 재판에 대한 헌법소원 도입 등 국민의 권리구제 절차에도 변화가 이루어지고 있다. 또한 대한변호사협회가 오랫동안 추진해 온 변호사-의뢰인 비밀유지권도 마침내 법률에 명문화되어 시행을 앞두고 있다.",
-      "sourceUrl": "https://www.koreanbar.or.kr/pages/news/view.asp?seq=15514&types=3",
-      "tags": [
-        "대한변호사협회",
-        "연구·학술",
-        "변호사"
-      ],
-      "active": true,
-      "autoCollected": true
-    },
-    {
       "recordKey": "legalpeople:moj:20260824-prosecutor-transfer",
       "category": "인사",
       "source": "법무부",
@@ -78,6 +62,22 @@
         "검찰"
       ],
       "active": true
+    },
+    {
+      "recordKey": "legalpeople:koreanbar-press:5c2f3b51f4335054",
+      "category": "연구·학술",
+      "source": "대한변호사협회",
+      "title": "대한변협, ‘의료분쟁 현황, 「의료분쟁조정법」의 과제 및 제도 개선을 위한 국회토론회’ 개최",
+      "publishedAt": "2026-08-21",
+      "summary": "대한변협, ‘의료분쟁 현황, 「의료분쟁조정법」의 과제 및 제도 개선을 위한 국회토론회’ 개최 관련 연구·학술 활동입니다. 발표 주제, 연구성과와 법률실무에 연결되는 쟁점을 확인합니다.",
+      "sourceUrl": "https://www.koreanbar.or.kr/pages/news/view.asp?seq=15492&types=3",
+      "tags": [
+        "대한변호사협회",
+        "연구·학술",
+        "토론회"
+      ],
+      "active": true,
+      "autoCollected": true
     },
     {
       "recordKey": "legalpeople:koreanbar:20260821-lawyers-conference",
