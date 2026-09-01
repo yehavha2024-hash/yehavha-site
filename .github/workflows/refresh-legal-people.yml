@@ -10,8 +10,7 @@ on:
       - 'nexus/legal-intelligence/scripts/audit-legal-people.mjs'
       - '.github/workflows/refresh-legal-people.yml'
   schedule:
-    - cron: '40 0 * * 1-5'
-    - cron: '40 9 * * 1-5'
+    - cron: '40 0 * * 1'
   workflow_dispatch:
 
 permissions:
