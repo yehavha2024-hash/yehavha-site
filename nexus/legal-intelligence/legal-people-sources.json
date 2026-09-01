@@ -1,6 +1,8 @@
 {
-  "schemaVersion": 5,
-  "maxAgeDays": 240,
+  "schemaVersion": 6,
+  "maxAgeDays": 90,
+  "displayMaxAgeDays": 60,
+  "latestPerSourceCategory": 1,
   "detailLimitPerSource": 6,
   "sources": [
     {
