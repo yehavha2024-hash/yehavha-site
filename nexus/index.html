@@ -12,6 +12,7 @@
 <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23326da8' d='M32 6 38 25l20 7-20 7-6 19-7-19-19-7 19-7z'/%3E%3C/svg%3E" rel="icon"/>
 <link as="image" href="./assets/nexus-strategy-map.svg" rel="preload"/>
 <link href="./portal-v2.css?v=20260824-contrast-icons-2" rel="stylesheet"/>
+<link href="./frontline.css?v=20260901-frontline-1" rel="stylesheet"/>
 <link href="./nexus-standard.css?v=20260824-remove-overview-1" rel="stylesheet"/>
 <style>
 .investment-category{margin-top:0}.investment-category .category-card{padding:16px!important}.investment-category .category-head{grid-template-columns:48px minmax(0,1fr)!important;gap:11px!important;margin-bottom:10px!important}.investment-category .category-icon{width:48px!important;height:48px!important;border-radius:13px!important}.investment-category .category-icon svg{width:26px;height:26px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.investment-category .category-head .eyebrow{margin-bottom:2px!important}.investment-category .category-title-row h2{margin:0 0 2px!important;font-size:1.35rem!important}.investment-category .category-description{margin:2px 0 0!important;font-size:14.5px!important;line-height:1.55!important}.investment-category .items-grid{grid-template-columns:1fr!important;gap:0!important}.investment-category .item-card{padding:12px 14px!important}.investment-category .item-top{gap:6px}.investment-category .item-card h3{margin:7px 0 4px!important;font-size:18px!important;line-height:1.35!important}.investment-category .item-card p{font-size:14.5px!important;line-height:1.58!important}.investment-category .item-actions{margin-top:9px!important}.investment-category .visit-link{min-height:38px!important;padding:0 13px!important;font-size:13.5px!important}@media(max-width:700px){.investment-category .category-card{padding:14px!important}.investment-category .category-head{grid-template-columns:44px minmax(0,1fr)!important}.investment-category .category-icon{width:44px!important;height:44px!important}.investment-category .item-card{padding:11px 12px!important}}
@@ -41,6 +42,103 @@
 </div>
 </header>
 <main class="main" id="projects">
+<section class="nexus-frontline" id="nexusFrontline" aria-label="NEXUS 상단 브리핑과 활용 안내">
+<div class="container">
+<div class="frontline-shell">
+<section class="frontline-panel" aria-labelledby="todayNexusTitle">
+<div class="frontline-head">
+<div>
+<p class="frontline-kicker">TODAY IN NEXUS</p>
+<h2 id="todayNexusTitle">오늘의 NEXUS</h2>
+</div>
+<p class="frontline-date" id="todayNexusDate">오늘</p>
+</div>
+<div class="today-grid">
+<a class="today-card" href="./intelligence-briefing/">
+<span class="today-meta">STRATEGIC INTELLIGENCE</span>
+<strong>오늘의 전략정보 브리핑</strong>
+<p>국내외 공개정보를 바탕으로 정치·외교·안보·경제·산업·정책의 핵심 변화를 먼저 확인합니다.</p>
+<span class="today-action">오늘 브리핑 보기 →</span>
+</a>
+<a class="today-card" href="./legal-intelligence/">
+<span class="today-meta">LEGAL INTELLIGENCE</span>
+<strong>오늘의 법률정보</strong>
+<p>법령·입법·판례·헌법재판소 결정·행정해석과 법조계 변화를 연결해 확인합니다.</p>
+<span class="today-action">법률정보 보기 →</span>
+</a>
+<a class="today-card" href="./ai-trends/">
+<span class="today-meta">AI INTELLIGENCE</span>
+<strong>오늘의 AI 동향</strong>
+<p>AI 기술·정책·법제·연구·안전 분야에서 빠르게 변하는 주요 흐름을 확인합니다.</p>
+<span class="today-action">AI 동향 보기 →</span>
+</a>
+</div>
+</section>
+
+<section class="frontline-panel" aria-labelledby="nexusVisualTitle">
+<div class="frontline-head">
+<div>
+<p class="frontline-kicker">NEXUS VISUAL DATA</p>
+<h2 id="nexusVisualTitle">NEXUS 구성 현황</h2>
+</div>
+<p class="frontline-date">실시간 구조 요약</p>
+</div>
+<div class="frontline-visual-grid">
+<div>
+<div class="metric-strip" aria-label="NEXUS 주요 지표">
+<div class="metric-card"><strong class="metric-value" id="frontlineProjectCount">—</strong><span class="metric-label">등록 프로젝트</span></div>
+<div class="metric-card"><strong class="metric-value" id="frontlineCategoryCount">—</strong><span class="metric-label">운영 카테고리</span></div>
+<div class="metric-card"><strong class="metric-value" id="frontlineUpdatedAt">—</strong><span class="metric-label">구조 데이터 갱신</span></div>
+</div>
+<p class="visual-note">메인 프로젝트 데이터와 현재 상단 독립 카테고리를 기준으로 자동 집계합니다.</p>
+</div>
+<div class="distribution" aria-label="카테고리별 프로젝트 분포">
+<div class="distribution-head"><strong>프로젝트 분포</strong><span>상위 7개 카테고리</span></div>
+<div class="distribution-bars" id="frontlineDistribution" aria-live="polite">구성 데이터 확인 중</div>
+</div>
+</div>
+</section>
+
+<section class="frontline-panel" aria-labelledby="nexusUseTitle">
+<div class="frontline-head">
+<div>
+<p class="frontline-kicker">USE · LEARN · PUBLISH · COLLABORATE</p>
+<h2 id="nexusUseTitle">NEXUS 활용·사업 연결</h2>
+</div>
+<p class="frontline-date">필요한 방식으로 바로 연결</p>
+</div>
+<div class="use-grid">
+<a class="use-card" href="https://yehavha-3min-rest.pages.dev/">
+<span class="use-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M4.2 6.2l2.9 2.9M16.9 14.9l2.9 2.9M3 12h4M17 12h4M4.2 17.8l2.9-2.9M16.9 9.1l2.9-2.9"/></svg></span>
+<strong>바로 활용</strong>
+<p>짧은 학습·정보·웹앱을 별도 준비 없이 바로 이용합니다.</p>
+<span>3분 쉼표 실행 →</span>
+</a>
+<a class="use-card" href="#university">
+<span class="use-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3 8.5 9-4.2 9 4.2-9 4.2-9-4.2Z"/><path d="M6 11.2v5c4 2.3 8 2.3 12 0v-5"/></svg></span>
+<strong>학습·교육</strong>
+<p>NEXUS UNIVERSITY, 웹앱, 실습 강좌를 목적에 따라 선택합니다.</p>
+<span>학습 영역 보기 →</span>
+</a>
+<a class="use-card" href="#publishing">
+<span class="use-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5c3.3-.6 5.9.1 8 2.1v11c-2.1-2-4.7-2.7-8-2.1v-11Z"/><path d="M20 5.5c-3.3-.6-5.9.1-8 2.1v11c2.1-2 4.7-2.7 8-2.1v-11Z"/></svg></span>
+<strong>출판·콘텐츠</strong>
+<p>전자책, 공개 글, 연구 아카이브와 미디어 결과물로 연결합니다.</p>
+<span>출판·콘텐츠 보기 →</span>
+</a>
+<a class="use-card is-collab" href="mailto:kimbrighth@gmail.com?subject=NEXUS%20협업%20및%20제안%20문의">
+<span class="use-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6.5h16v11H4z"/><path d="m4 7 8 6 8-6"/></svg></span>
+<strong>협업·제안</strong>
+<p>연구·교육·출판·AI·AX 관련 협업 가능성을 일정과 성격에 따라 검토합니다.</p>
+<span>제안 문의 →</span>
+</a>
+</div>
+<p class="business-note">협업·제안은 상시 외주 수주를 의미하지 않으며, 재직 및 기존 운영 일정과 프로젝트 성격을 고려해 선택적으로 검토합니다.</p>
+</section>
+</div>
+</div>
+</section>
+
 <div class="container portal-grid" id="portalGrid" aria-live="polite"></div>
 <div class="container investment-category" id="investment">
 <section class="category-card category-compact" aria-labelledby="investment-category-title">
@@ -100,6 +198,7 @@
 </footer>
 <div aria-live="polite" class="toast" id="toast" role="status"></div>
 <script defer src="./portal-v2.js?v=20260830-edtech-native-1"></script>
+<script defer src="./frontline.js?v=20260901-frontline-1"></script>
 <script>
 (()=>{
   const host=document.getElementById('quickLinks');
