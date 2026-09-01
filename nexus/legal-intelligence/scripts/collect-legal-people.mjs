@@ -316,12 +316,12 @@ const currentCandidates = [...merged.values()]
     const effectiveAge = ageDays(record.effectiveAt);
     return publishedAge <= displayMaxAgeDays || effectiveAge <= 0;
   })
-  .sort((a, b) => String(b.publishedAt || '').localeCompare(String(a.publishedAt || '')) || String(a.recordKey).localeCompare(String(b.recordKey)));
+  .sort((a, b) => String(b.publishedAt || '').localeCompare(String(a.publishedAt || '')) || Number(Boolean(b.curated)) - Number(Boolean(a.curated)) || String(a.recordKey).localeCompare(String(b.recordKey)));
 
 const groupCounts = new Map();
 const records = currentCandidates
   .filter(record => {
-    const sourceKey = String(record.recordKey || '').split(':')[1] || record.source || 'unknown';
+    const sourceKey = clean(record.source) || String(record.recordKey || '').split(':')[1] || 'unknown';
     const groupKey = `${sourceKey}|${record.category || '기타'}`;
     const count = groupCounts.get(groupKey) || 0;
     if (count >= latestPerSourceCategory) return false;
