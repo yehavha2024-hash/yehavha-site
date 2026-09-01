@@ -296,9 +296,27 @@ for (const [key, record] of [...merged]) {
 }
 
 const today = new Intl.DateTimeFormat('en-CA', {timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit'}).format(new Date());
-const records = [...merged.values()]
+const displayMaxAgeDays = Math.max(1, Number(config.displayMaxAgeDays || 60));
+const latestPerSourceCategory = Math.max(1, Number(config.latestPerSourceCategory || 1));
+const currentCandidates = [...merged.values()]
   .filter(record => record.active !== false)
-  .sort((a, b) => String(b.publishedAt || '').localeCompare(String(a.publishedAt || '')) || String(a.recordKey).localeCompare(String(b.recordKey)))
+  .filter(record => {
+    const publishedAge = ageDays(record.publishedAt);
+    const effectiveAge = ageDays(record.effectiveAt);
+    return publishedAge <= displayMaxAgeDays || effectiveAge <= 0;
+  })
+  .sort((a, b) => String(b.publishedAt || '').localeCompare(String(a.publishedAt || '')) || String(a.recordKey).localeCompare(String(b.recordKey)));
+
+const groupCounts = new Map();
+const records = currentCandidates
+  .filter(record => {
+    const sourceKey = String(record.recordKey || '').split(':')[1] || record.source || 'unknown';
+    const groupKey = `${sourceKey}|${record.category || '기타'}`;
+    const count = groupCounts.get(groupKey) || 0;
+    if (count >= latestPerSourceCategory) return false;
+    groupCounts.set(groupKey, count + 1);
+    return true;
+  })
   .slice(0, 100);
 
 if (!records.length) throw new Error('Legal people collector produced zero records.');
