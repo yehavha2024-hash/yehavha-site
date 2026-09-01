@@ -12,10 +12,10 @@
 <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23326da8' d='M32 6 38 25l20 7-20 7-6 19-7-19-19-7 19-7z'/%3E%3C/svg%3E" rel="icon"/>
 <link as="image" href="./assets/nexus-strategy-map.svg" rel="preload"/>
 <link href="./portal-v2.css?v=20260824-contrast-icons-2" rel="stylesheet"/>
-<link href="./frontline.css?v=20260901-today-only-1" rel="stylesheet"/>
 <link href="./nexus-standard.css?v=20260824-remove-overview-1" rel="stylesheet"/>
 <style>
 .investment-category{margin-top:0}.investment-category .category-card{padding:16px!important}.investment-category .category-head{grid-template-columns:48px minmax(0,1fr)!important;gap:11px!important;margin-bottom:10px!important}.investment-category .category-icon{width:48px!important;height:48px!important;border-radius:13px!important}.investment-category .category-icon svg{width:26px;height:26px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.investment-category .category-head .eyebrow{margin-bottom:2px!important}.investment-category .category-title-row h2{margin:0 0 2px!important;font-size:1.35rem!important}.investment-category .category-description{margin:2px 0 0!important;font-size:14.5px!important;line-height:1.55!important}.investment-category .items-grid{grid-template-columns:1fr!important;gap:0!important}.investment-category .item-card{padding:12px 14px!important}.investment-category .item-top{gap:6px}.investment-category .item-card h3{margin:7px 0 4px!important;font-size:18px!important;line-height:1.35!important}.investment-category .item-card p{font-size:14.5px!important;line-height:1.58!important}.investment-category .item-actions{margin-top:9px!important}.investment-category .visit-link{min-height:38px!important;padding:0 13px!important;font-size:13.5px!important}@media(max-width:700px){.investment-category .category-card{padding:14px!important}.investment-category .category-head{grid-template-columns:44px minmax(0,1fr)!important}.investment-category .category-icon{width:44px!important;height:44px!important}.investment-category .item-card{padding:11px 12px!important}}
+.nexus-frontline{padding:0 0 12px}.frontline-panel{border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px 14px}.frontline-headingline{display:flex;align-items:baseline;gap:9px;min-width:0;margin-bottom:8px}.frontline-headingline h2{margin:0;font-size:1.28rem;line-height:1.2;letter-spacing:-.03em}.frontline-kicker{margin:0;color:var(--accent);font-size:10.8px;font-weight:850;letter-spacing:.11em;line-height:1.3;white-space:nowrap}.frontline-date{margin:0 0 0 auto;color:#6b7280;font-size:11.5px;font-weight:750;white-space:nowrap}.today-grid{display:grid;gap:5px}.today-card{position:relative;display:grid;gap:3px;min-width:0;border:1px solid var(--line-soft);border-left:4px solid #2f6795;border-radius:9px;background:linear-gradient(90deg,#f5f9fd 0,#fff 42%);padding:7px 10px;text-decoration:none}.today-card:nth-child(2){border-left-color:#7a5b36;background:linear-gradient(90deg,#fbf8f3 0,#fff 42%)}.today-card:nth-child(3){border-left-color:#557a70;background:linear-gradient(90deg,#f4faf8 0,#fff 42%)}.today-titleline{display:flex;align-items:baseline;gap:8px;min-width:0}.today-titleline strong{min-width:0;font-size:14.5px;line-height:1.35;letter-spacing:-.02em}.today-meta{color:#68717b;font-size:10.2px;font-weight:850;letter-spacing:.08em;white-space:nowrap}.today-bodyline{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;min-width:0}.today-bodyline p{min-width:0;margin:0;color:#4b5563;font-size:12px;line-height:1.4}.today-action{color:#174f82;font-size:11.2px;font-weight:850;white-space:nowrap;text-align:right}@media(hover:hover) and (pointer:fine){.today-card:hover{border-color:#aab7c4}.today-action:hover{text-decoration:underline}}@media(max-width:760px){.frontline-panel{padding:11px 12px}.frontline-headingline{flex-wrap:wrap;gap:4px 7px;margin-bottom:7px}.frontline-date{margin-left:auto}.today-titleline{flex-wrap:wrap;gap:3px 7px}.today-bodyline{grid-template-columns:minmax(0,1fr) auto;gap:8px}}@media(max-width:430px){.frontline-headingline h2{font-size:1.2rem}.frontline-kicker{font-size:10px}.frontline-date{width:100%;margin-left:0}.today-bodyline{grid-template-columns:minmax(0,1fr) auto}.today-bodyline p{font-size:11.3px}.today-action{font-size:10.5px}}
 </style>
 <title>YEHAVHA Nexus | 예하바 프로젝트 포털</title>
 </head>
@@ -126,9 +126,15 @@
 </footer>
 <div aria-live="polite" class="toast" id="toast" role="status"></div>
 <script defer src="./portal-v2.js?v=20260830-edtech-native-1"></script>
-<script defer src="./frontline.js?v=20260901-compact-1"></script>
 <script>
 (()=>{
+  const dateEl=document.getElementById('todayNexusDate');
+  if(dateEl){
+    const parts=new Intl.DateTimeFormat('ko-KR',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit',weekday:'short'}).formatToParts(new Date());
+    const map=Object.fromEntries(parts.map(part=>[part.type,part.value]));
+    dateEl.textContent=`${map.year}.${map.month}.${map.day} ${map.weekday}`;
+  }
+
   const host=document.getElementById('quickLinks');
   if(!host)return;
   const ensureLink=({id,href,label,icon,className=''})=>{
