@@ -73,10 +73,21 @@
     .then(data => {
       const categories = Array.isArray(data.categories) ? data.categories : [];
       const projects = Array.isArray(data.projects) ? data.projects : [];
-      if (projectCountEl) projectCountEl.textContent = new Intl.NumberFormat('ko-KR').format(projects.length);
-      if (categoryCountEl) categoryCountEl.textContent = new Intl.NumberFormat('ko-KR').format(categories.length + 2);
+      const allCategories = [
+        ...categories,
+        {id: 'investment', title: '투자·자산'},
+        {id: 'local-government-planning', title: '지방정부 사업기획'}
+      ];
+      const allProjects = [
+        ...projects,
+        {category: 'investment'},
+        {category: 'local-government-planning'}
+      ];
+
+      if (projectCountEl) projectCountEl.textContent = new Intl.NumberFormat('ko-KR').format(allProjects.length);
+      if (categoryCountEl) categoryCountEl.textContent = new Intl.NumberFormat('ko-KR').format(allCategories.length);
       if (updatedEl) updatedEl.textContent = data.updatedAt ? String(data.updatedAt).replaceAll('-', '.') : '확인 중';
-      renderDistribution(categories, projects);
+      renderDistribution(allCategories, allProjects);
     })
     .catch(error => {
       console.warn('Nexus frontline data unavailable:', error);
