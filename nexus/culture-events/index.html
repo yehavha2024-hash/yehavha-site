@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="description" content="YEHAVHA NEXUS 문화·행사 허브. 영화·공연·전시·박람회·도서·지역행사의 주요 흐름과 공식 기준원을 압축해 확인합니다."/>
+<meta name="theme-color" content="#ffffff"/>
+<title>문화·행사 | YEHAVHA NEXUS</title>
+<link href="../portal-v2.css?v=20260824-contrast-icons-2" rel="stylesheet"/>
+<link href="./culture-events.css?v=20260902-1" rel="stylesheet"/>
+</head>
+<body>
+<a class="skip-link" href="#cultureDashboard">문화·행사 정보로 이동</a>
+<header class="culture-hero" id="top">
+  <div class="container">
+    <a class="back-link" href="../">← YEHAVHA NEXUS</a>
+    <section class="hero-card culture-hero-card">
+      <p class="eyebrow">CULTURE · EVENTS · REGIONAL CALENDAR</p>
+      <h1>문화·행사 <span>주요 흐름만 빠르게 확인</span></h1>
+      <p class="description">영화·공연·전시·박람회·도서·지역행사 전체를 무작정 수집하지 않고, 언론·취재·일정 판단에 필요한 주요 정보와 공식 기준원을 선별해 압축합니다.</p>
+    </section>
+  </div>
+</header>
+<main class="main" id="cultureDashboard">
+  <div class="container culture-shell">
+    <section class="culture-control" aria-labelledby="controlTitle">
+      <div class="section-line"><span class="section-number">01</span><h2 id="controlTitle">빠른 분류</h2><p>분야와 지역을 바로 좁혀 봅니다.</p></div>
+      <div class="filter-row" id="categoryFilters" aria-label="분야 필터"></div>
+      <div class="filter-row region-row" id="regionFilters" aria-label="지역 필터"></div>
+    </section>
+
+    <section class="culture-snapshot" aria-labelledby="snapshotTitle">
+      <div class="section-line"><span class="section-number">02</span><h2 id="snapshotTitle">현재 흐름</h2><p id="updatedAtText">업데이트 확인 중</p></div>
+      <div class="snapshot-grid" id="snapshotGrid"></div>
+    </section>
+
+    <section class="culture-events" aria-labelledby="eventsTitle">
+      <div class="section-line event-section-line"><span class="section-number">03</span><h2 id="eventsTitle">주요 일정</h2><p id="eventCountText">선별 일정</p><button class="past-toggle" id="pastToggle" type="button">지난 행사 보기</button></div>
+      <div class="event-grid" id="eventGrid"></div>
+      <p class="empty-state" id="emptyState" hidden>현재 선택 조건에 표시할 주요 일정이 없습니다.</p>
+    </section>
+
+    <section class="culture-sources" aria-labelledby="sourcesTitle">
+      <div class="section-line"><span class="section-number">04</span><h2 id="sourcesTitle">공식 기준원</h2><p>영화·공연·도서·전시·지역행사를 직접 확인합니다.</p></div>
+      <div class="source-grid" id="sourceGrid"></div>
+    </section>
+
+    <section class="culture-policy" aria-labelledby="policyTitle">
+      <div class="section-line"><span class="section-number">05</span><h2 id="policyTitle">운영 기준</h2><p>중복·과잉 수집을 막는 최소 원칙입니다.</p></div>
+      <div class="policy-grid">
+        <p><strong>선별</strong> 화제성·규모·공공성·취재가치가 있는 일정 중심</p>
+        <p><strong>확인</strong> 공식 주최처·공공기관·전문 기준원을 우선</p>
+        <p><strong>갱신</strong> 종료 일정은 기본 화면에서 자동 제외</p>
+        <p><strong>구조</strong> 모든 분야를 같은 JSON 구조로 관리해 중복 로직 방지</p>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="footer" data-footer-standard="v2">
+  <div class="container"><div class="footer-card">
+    <strong>YEHAVHA NEXUS · 문화·행사</strong>
+    <p>주요 문화·행사 흐름과 공식 확인 경로를 압축해 제공하는 선별형 정보 허브입니다.</p>
+    <div class="footer-meta">
+      <p class="business-meta">스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈</p>
+      <p>Copyright © 이명훈 2026. All rights reserved.</p>
+      <p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p>
+      <p class="ai-disclosure">AI 활용 안내: 공개된 공식 일정의 탐색·정리·구조화에 생성형 AI를 활용할 수 있으며, 행사 일정과 링크는 공식 출처를 우선 확인합니다.</p>
+      <p><a href="#top">맨 위로 이동 ↑</a></p>
+    </div>
+  </div></div>
+</footer>
+<script src="./culture-events.js?v=20260902-1"></script>
+</body>
+</html>
