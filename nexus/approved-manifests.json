@@ -22,6 +22,7 @@
     "nexus/education-hub/nexus.project.json",
     "nexus/university/nexus.project.json",
     "nexus/edtech-research/nexus.project.json",
-    "nexus/legal-intelligence/nexus.project.json"
+    "nexus/legal-intelligence/nexus.project.json",
+    "nexus/culture-events/nexus.project.json"
   ]
 }
