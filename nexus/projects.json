@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-31",
+  "updatedAt": "2026-09-02",
   "categories": [
     {"id":"commentary","eyebrow":"NEXUS COMMENTARY","title":"넥서스 논평","icon":"","iconClass":"commentary-icon","description":"국내외 주요 현안을 대상으로 사실관계를 바탕으로 판단·비판·제언을 제시하는 논평 영역"},
     {"id":"intelligence","eyebrow":"STRATEGIC INTELLIGENCE","title":"정보·전략","icon":"◆","iconClass":"intelligence-icon","description":"국내외 공개정보를 검증·분석해 중요한 변화와 위험·기회·향후 관찰지점을 압축하는 전략정보 영역"},
@@ -12,6 +12,7 @@
     {"id":"legalresearch","eyebrow":"LAW & AI RESEARCH","title":"법학·AI 연구","icon":"⚖️","iconClass":"research-icon","description":"AI 책임법과 법학 연구를 연구기관·학술트랙·법리·문헌·법철학·선제연구로 연결하는 전문 연구 영역"},
     {"id":"legalintelligence","eyebrow":"LEGAL INTELLIGENCE","title":"법률정보 포털","icon":"","iconClass":"research-icon","description":"현행 법령·입법·판례·헌법재판소 결정·행정해석과 법조계 동향을 선별하고 쟁점별로 연결하는 법률정보 영역"},
     {"id":"aiknowledge","eyebrow":"AI KNOWLEDGE & TRENDS","title":"AI 지식·동향","icon":"◇","iconClass":"intelligence-icon","description":"AI·법학 핵심 용어와 빠르게 변하는 국내외 AI 기술·법정책·연구 동향을 확인하는 지식정보 영역"},
+    {"id":"culture","eyebrow":"CULTURE · EVENTS","title":"문화·행사","icon":"","iconClass":"media-icon","description":"영화·공연·전시·박람회·도서·지역행사의 주요 흐름과 공식 확인 경로를 압축하는 문화정보 영역"},
     {"id":"publishing","eyebrow":"PUBLISHING & ARCHIVE","title":"출판·아카이브","icon":"📚","iconClass":"publishing-icon","description":"전자책과 주제별 공개 글을 읽는 출판·지식 아카이브"},
     {"id":"media","eyebrow":"MEDIA & CONTENT","title":"미디어·콘텐츠","icon":"🎬","iconClass":"media-icon","description":"찬양음악·영상 콘텐츠"}
   ],
@@ -39,6 +40,7 @@
     {"id":"legal-intelligence-portal","category":"legalintelligence","meta":"Law · Legislation · Legal People · Issues","title":"LEGAL INTELLIGENCE · 법률정보 포털","description":"현행 법령과 개정 이력, 국회·정부 입법, 대법원·하급심 판례와 헌법재판소 결정, 행정해석, 법조계 인사·이동·연구동향을 선별하고 주요 쟁점별로 연결합니다.","url":"https://yehavha-nexus-hub.pages.dev/legal-intelligence/","actionLabel":"법률정보 포털 보기","external":false},
     {"id":"ai-legal-glossary","category":"aiknowledge","meta":"AI · Law Terminology","title":"AI·법학 통합 용어·개념","description":"AI 기술과 법학의 핵심 용어를 영문 원어·한글 통용명·기능·법적 쟁점과 함께 확인할 수 있습니다.","url":"https://yehavha-nexus-hub.pages.dev/ai-legal-glossary/","actionLabel":"용어·개념 보기","external":false},
     {"id":"ai-trends","category":"aiknowledge","meta":"AI Intelligence · Trend Brief","title":"AI 동향 브리프","description":"국내외 AI 최신동향을 기술·법정책·연구·안전·국가사업별로 살펴보고 주요 변화와 연구 연결점을 확인할 수 있습니다.","url":"https://yehavha-nexus-hub.pages.dev/ai-trends/","actionLabel":"AI 동향 보기","external":false},
+    {"id":"culture-events-hub","category":"culture","meta":"Culture · Events · Regional Calendar","title":"문화·행사 브리핑","description":"영화·공연·전시·박람회·도서·지역행사를 분야·지역·기간별로 압축해 보고, 공식 일정과 기준원으로 바로 이동합니다.","url":"https://yehavha-nexus-hub.pages.dev/culture-events/","actionLabel":"문화·행사 보기","external":false},
     {"id":"publishing-hub","category":"publishing","meta":"Selected Publications","title":"대표 출간 도서","description":"Amazon Kindle과 유페이퍼에서 출간한 대표 전자책의 주제와 주요 내용을 살펴보고 판매처로 이동할 수 있습니다.","url":"https://yehavha-nexus-hub.pages.dev/publishing/","actionLabel":"출간 도서 보기"},
     {"id":"article-library","category":"publishing","meta":"Direct Reading Archive","title":"글·연구 아카이브","description":"성경·신학, AI·Suno, AI 법 연구 등 주제별 공개 글을 웹에서 직접 읽을 수 있는 아카이브입니다.","url":"https://yehavha-nexus-hub.pages.dev/articles/","actionLabel":"글 읽기"},
     {"id":"youtube-hashem-yeshua","category":"media","meta":"YouTube Channel","title":"HASHEM YESHUA","description":"히브리어·영어·한국어 AI 찬양음악을 지속적으로 공개하는 다국어 음악채널입니다.","url":"https://www.youtube.com/@yehavha","actionLabel":"바로가기"}
