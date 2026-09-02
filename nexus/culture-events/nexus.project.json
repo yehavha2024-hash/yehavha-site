@@ -1,0 +1,15 @@
+{
+  "id": "culture-events-hub",
+  "publish": true,
+  "tracking": {
+    "paths": ["nexus/culture-events"],
+    "freshDays": 3,
+    "staleDays": 14,
+    "count": {
+      "type": "json-array",
+      "file": "nexus/culture-events/events.json",
+      "path": "events",
+      "label": "주요일정"
+    }
+  }
+}
