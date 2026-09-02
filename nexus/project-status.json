@@ -217,5 +217,14 @@
     "contentReviewedAt": "2026-08-31",
     "baselineAt": "2026-08-31",
     "baselineLabel": "판례·법령·연구·입법·법조동향 자료 기준"
+  },
+  "culture-events-hub": {
+    "id": "culture-events-hub",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-09-02",
+    "contentCount": 16,
+    "contentLabel": "주요일정"
   }
 }
