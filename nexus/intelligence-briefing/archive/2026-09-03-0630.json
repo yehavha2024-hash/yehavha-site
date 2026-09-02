@@ -1,0 +1,153 @@
+{
+  "generatedAt": "2026-09-03T06:30:00+09:00",
+  "window": "2026-09-02 06:30–2026-09-03 06:30 KST · 최근 24시간 중심 · 동일 이슈는 material change가 있을 때만 본문 재진입",
+  "schedule": "06:30 KST daily",
+  "executiveSummary": "오늘의 전략적 핵심은 미·이란 교전과 호르무즈 해협 위험이 원유 물류와 글로벌 인플레이션 기대를 다시 자극하는 가운데, 한국의 8월 소비자물가 상승률이 3.1%로 높아져 국내 금리·재정정책의 제약도 커졌다는 점이다. 유럽에서는 독일 전력망이 24시간 내 두 차례 사보타주 공격을 받아 핵심인프라 방호와 하이브리드 위협이 다시 부각됐고, 러시아는 키이우 7일 연속 공습과 오데사 전력시설 공격을 이어가 우크라이나의 에너지·물류 회복력을 압박했다. 북미에서는 미국 연방부채가 40조달러를 넘어 장기금리와 재정위험 프리미엄이 확대되고 있으며, 캐나다 중앙은행은 중동 에너지가격과 미·캐나다 관세충돌 속 기준금리를 2.25%로 동결했지만 인플레이션 상방위험을 경고했다. 보건에서는 WHO·Gavi 등이 모든 국가가 이용할 수 있는 글로벌 mpox 백신 비축체계 출범을 발표했다.",
+  "items": [
+    {
+      "topicKey": "us-iran-hormuz-escalation-20260903",
+      "priority": "CRITICAL",
+      "category": "국제정세·안보·에너지·해운",
+      "headline": "미·이란 상호공격 지속, 호르무즈 통항량 급감…유가·해운 위험 프리미엄 재상승",
+      "fact": "9월 2일 Reuters와 AP에 따르면 미국과 이란은 전날 재개된 직접교전 이후 추가 공격을 이어갔다. 이란은 걸프지역의 미국 동맹국과 기지를 미사일·드론으로 공격했고, 미국도 이란 남부 해안의 군사목표를 타격했다. Reuters는 호르무즈 해협 통과 선박이 10일 평균 13척에서 4척 수준으로 줄었다고 보도했으며 Brent유는 배럴당 95.63달러로 마감했다.",
+      "assessment": "군사충돌 자체보다 해협의 실제 통항능력과 민간선박 위험이 시장 충격을 결정하는 국면이다. 전일의 사우디 유조선 피격에 이어 이란이 비준수 선박 블랙리스트를 확대하면서 물리적 봉쇄와 행정·강제집행 위험이 동시에 커지고 있다.",
+      "impact": "원유·LNG 가격, 탱커 운임·보험료, 아시아 에너지 수입비용, 정유·석화 원가, 글로벌 인플레이션과 장기금리에 상방압력을 줄 수 있다.",
+      "watch": "호르무즈 일일 통항량, 추가 상선 피격·나포, 미·이란 후속공격, 걸프 산유국의 호위조치, Brent 100달러 돌파 여부를 추적한다.",
+      "confidence": "높음",
+      "sources": [
+        {
+          "label": "Reuters · Oil settles 1% higher, as US-Iran strikes threaten supplies (2026-09-02)",
+          "url": "https://www.reuters.com/business/energy/oil-up-nearly-1-us-iran-trade-fresh-strikes-2026-09-02/"
+        },
+        {
+          "label": "Reuters · Iran blacklists more ships trying to sail through Hormuz (2026-09-02)",
+          "url": "https://www.reuters.com/business/energy/iran-blacklists-more-ships-trying-sail-through-hormuz-govt-website-shows-2026-09-02/"
+        },
+        {
+          "label": "AP · Iran fires on its Gulf neighbors, retaliating for US strikes (2026-09-02)",
+          "url": "https://apnews.com/article/iran-us-strikes-hormuz-trump-september-2-2026-cc891e22860d7a53bf7ade9a3d74c0ae"
+        }
+      ]
+    },
+    {
+      "topicKey": "korea-cpi-3-1-20260903",
+      "priority": "HIGH",
+      "category": "한국·경제·물가·통화정책",
+      "headline": "한국 8월 소비자물가 3.1%…기준금리 3.00% 인상 직후 인플레이션 제약 강화",
+      "fact": "한국은행은 9월 2일 물가상황점검회의에서 8월 소비자물가 상승률이 3.1%로 전월 2.8%보다 높아졌다고 밝혔다. 지난해 8월 통신요금 할인에 따른 기저효과가 크게 작용했다. 한국은행은 8월 27일 기준금리를 2.75%에서 3.00%로 인상했다.",
+      "assessment": "일부 기저효과를 감안하더라도 중동 에너지가격 상승과 원화·수입물가 경로가 겹치면 물가 둔화가 지연될 수 있다. 대규모 2027년 예산안과 통화긴축의 정책조합도 더 중요해졌다.",
+      "impact": "추가 금리인상 기대, 국고채 금리와 원화 변동성, 가계·기업 금융비용, 소비와 주택시장, 재정지출의 물가효과에 영향을 줄 수 있다.",
+      "watch": "9월 에너지·생활물가, 기대인플레이션, 원·달러 환율, 국고채 금리, 한국은행의 다음 통화정책 메시지를 확인한다.",
+      "confidence": "높음",
+      "sources": [
+        {
+          "label": "한국은행 · 2026년 8월 물가상황점검회의 (2026-09-02)",
+          "url": "https://www.bok.or.kr/portal/main/main.do"
+        }
+      ]
+    },
+    {
+      "topicKey": "germany-grid-sabotage-20260903",
+      "priority": "HIGH",
+      "category": "유럽·안보·에너지·핵심인프라",
+      "headline": "독일 전력망 24시간 내 두 차례 사보타주 수사…4.2GW 발전설비 일시 정지",
+      "fact": "9월 2일 Reuters와 AP에 따르면 독일 당국은 브란덴부르크와 베르크하임 인근 전력설비에 대한 두 건의 공격을 사보타주 가능성으로 수사하고 있다. 베르크하임 변전소 사건으로 RWE 갈탄발전소 여러 곳, 합계 약 4,200MW가 일시 정지했지만 계통 안정성은 유지됐다.",
+      "assessment": "단일 사건보다 짧은 시간 안에 전력계통의 서로 다른 지점이 반복 공격받았다는 점이 중요하다. 공격주체는 확정되지 않았으므로 국가배후를 단정할 수 없지만 유럽의 핵심인프라 방호비용과 하이브리드 위협 대응수준을 끌어올릴 가능성이 높다.",
+      "impact": "독일·EU의 전력·통신·철도 보안투자 확대, 발전사 운영비용 증가, 경찰·정보기관의 인프라 경계강화, 에너지시장 위험 프리미엄 상승 가능성이 있다.",
+      "watch": "수사기관의 공격주체·동기 규명, 추가 전력·통신시설 사건, 연방정부의 핵심인프라 보호조치, EU 차원의 대응을 본다.",
+      "confidence": "높음(사건), 중간(배후)",
+      "sources": [
+        {
+          "label": "Reuters · Germany probes second power grid sabotage case (2026-09-02)",
+          "url": "https://www.reuters.com/world/europe/german-power-grid-under-fresh-sabotage-attack-police-say-2026-09-02/"
+        },
+        {
+          "label": "AP · Germany probes suspected sabotage after disruption at 2 power substations (2026-09-02)",
+          "url": "https://apnews.com/article/germany-cologne-brandenburg-power-plants-sabotage-explosive-ef9c21908f232651d056d7462330e2b7"
+        }
+      ]
+    },
+    {
+      "topicKey": "ukraine-kyiv-odesa-energy-20260903",
+      "priority": "HIGH",
+      "category": "유럽·전쟁·에너지·물류",
+      "headline": "러시아, 키이우 7일 연속 공습·오데사 전력시설 타격…겨울 전 에너지전 압박 강화",
+      "fact": "9월 2일 Reuters에 따르면 러시아는 키이우에 7일 연속 드론 공격을 가해 11명이 부상했고, 오데사 전력시설 공격으로 약 35만 가구의 전력공급이 중단됐다. 우크라이나는 러시아가 겨울철을 앞두고 에너지 인프라 공격을 확대할 가능성을 경고했다.",
+      "assessment": "전일의 항만·수출시설 공격에서 전력망까지 압박범위가 확대되고 있다. 반복 공습은 방공미사일 소모와 도시기능 교란을 동시에 노리며, 겨울 전 에너지 회복능력 자체를 약화시키는 전략으로 평가된다.",
+      "impact": "우크라이나 전력복구·방공수요 증가, 흑해 수출물류 차질, 유럽의 지원비용 확대, 곡물·에너지시장 변동성 상승 가능성이 있다.",
+      "watch": "대규모 발전·송전시설 추가공격, 오데사 항만 복구, 서방 방공체계 추가지원, 우크라이나의 대러 장거리 드론 보복 확대를 본다.",
+      "confidence": "높음",
+      "sources": [
+        {
+          "label": "Reuters · Russia torments Ukraine's capital with seventh day of strikes (2026-09-02)",
+          "url": "https://www.reuters.com/world/europe/russian-attacks-damage-infrastructure-ukraines-odesa-official-says-2026-09-02/"
+        }
+      ]
+    },
+    {
+      "topicKey": "us-debt-40-trillion-20260903",
+      "priority": "HIGH",
+      "category": "미국·재정·금융시장",
+      "headline": "미 연방부채 40조달러 돌파…고금리와 재정위험 프리미엄 장기화 가능성",
+      "fact": "Reuters는 9월 2일 미국 연방정부 총부채가 40조달러를 넘어섰다고 보도했다. 높은 금리와 재정적자가 결합되면서 이자비용이 계속 증가하고 있고, 장기국채 금리는 최근 재정우려와 에너지가격 상승에 민감하게 반응하고 있다.",
+      "assessment": "미국의 재정위험이 단기 채무한도 논쟁을 넘어 구조적인 장기금리 프리미엄 문제로 이동하고 있다. 중동발 인플레이션 충격과 동시에 나타날 경우 연준의 정책여지를 줄일 수 있다.",
+      "impact": "미 국채 장기금리, 달러, 글로벌 위험자산 밸류에이션, 신흥국 자금흐름, 한국 국고채와 원화에도 영향을 줄 수 있다.",
+      "watch": "미 재정수지·국채발행계획, 10년·30년물 입찰수요, 중간선거 전 재정공약, 연준의 장기금리 평가를 추적한다.",
+      "confidence": "높음",
+      "sources": [
+        {
+          "label": "Reuters · Trump pledged fiscal restraint. Instead, debt tops $40 trillion (2026-09-02)",
+          "url": "https://www.reuters.com/world/us/trump-pledged-fiscal-restraint-instead-debt-tops-40-trillion-borrowing-costs-2026-09-02/"
+        }
+      ]
+    },
+    {
+      "topicKey": "canada-rate-hold-20260903",
+      "priority": "WATCH",
+      "category": "국제경제·통화정책·통상",
+      "headline": "캐나다 중앙은행 2.25% 동결…중동 에너지·미국 관세로 인플레이션 상방위험 경고",
+      "fact": "캐나다은행은 9월 2일 정책금리를 2.25%로 동결했다. 공식 성명은 중동분쟁으로 높은 에너지가격이 지속되고 있으며 미국의 신규관세와 캐나다의 대응조치가 성장과 물가전망의 불확실성을 높였다고 밝혔다. 총재는 인플레이션 상방위험이 증가했다고 평가했다.",
+      "assessment": "주요국 통화정책이 경기둔화보다 에너지·관세발 물가충격을 다시 우선시할 가능성을 보여준다. 북미 통상갈등이 지속될 경우 캐나다의 다음 결정은 동결보다 인상 가능성을 더 열어두는 방향으로 이동할 수 있다.",
+      "impact": "캐나다달러·국채금리, 북미 공급망, 자동차·원자재 교역, 글로벌 금리인상 기대에 영향을 줄 수 있다.",
+      "watch": "캐나다 CPI·고용, 미국 추가관세, 캐나다 보복조치, 다음 정책회의의 금리경로를 본다.",
+      "confidence": "높음",
+      "sources": [
+        {
+          "label": "Bank of Canada · Bank maintains the policy rate at 2¼% (2026-09-02)",
+          "url": "https://www.bankofcanada.ca/2026/09/fad-press-release-2026-09-02/"
+        },
+        {
+          "label": "Reuters · Bank of Canada holds key rate, says multiple hikes might be needed (2026-09-02)",
+          "url": "https://www.reuters.com/world/americas/bank-canada-set-hold-rates-strong-growth-collides-with-trade-risks-2026-09-02/"
+        }
+      ]
+    },
+    {
+      "topicKey": "global-mpox-stockpile-20260903",
+      "priority": "WATCH",
+      "category": "보건·국제기구·백신공급",
+      "headline": "WHO·Gavi, 전 세계 접근 가능한 mpox 백신 비축체계 출범…감염병 대응의 상시 인프라화",
+      "fact": "WHO·Gavi·UNICEF·IFRC·MSF는 9월 2일 글로벌 mpox 백신 비축체계를 발표했다. 8월 27일 출범한 이 체계는 9월 중 운영을 시작하며 모든 국가가 발병 대응을 위해 접근할 수 있다. WHO에 따르면 2022년 1월부터 2026년 7월까지 145개 국가·지역에서 확진 190,683건과 사망 529건이 보고됐다.",
+      "assessment": "2024년 임시 배분체계를 상설 비축체계로 전환했다는 점이 중요하다. 감염병 백신 접근성 격차를 줄이고 아프리카 중심의 반복 유행에 대한 대응시간을 단축할 수 있다.",
+      "impact": "백신 조달·비축시장, 국가별 비상접종계획, 저소득국의 접근성, 국제보건 공급망 운영방식에 영향을 줄 수 있다.",
+      "watch": "초기 비축물량, 실제 배분국가, 제조사 공급계약, 새로운 clade 확산과 국가별 요청규모를 본다.",
+      "confidence": "높음",
+      "sources": [
+        {
+          "label": "WHO · Global initiative launched to improve access to mpox vaccines (2026-09-02)",
+          "url": "https://www.who.int/news/item/02-09-2026-global-initiative-launched-to-improve-access-to-mpox-vaccines"
+        }
+      ]
+    }
+  ],
+  "strategicWatchlist": [
+    "호르무즈 통항량·추가 상선 피격·나포 및 Brent 100달러 돌파 여부",
+    "한국 9월 물가·원화·국고채와 한국은행 추가 긴축 신호",
+    "독일 전력망 사보타주 배후 규명과 EU 핵심인프라 방호조치",
+    "러시아의 우크라이나 대규모 에너지·송전시설 겨울 전 공격",
+    "미국 40조달러 부채 이후 장기국채 금리·입찰수요 변화",
+    "미·캐나다 관세충돌과 캐나다은행 추가 금리조정 가능성",
+    "글로벌 mpox 백신 비축체계의 실제 배분·공급규모"
+  ],
+  "outlook": "향후 1~4주의 최우선 변수는 호르무즈 해협의 실제 통항 안정성이다. 미·이란 교전이 제한적 공습을 넘어 상선·항만·기뢰전으로 확대되면 에너지와 운임을 통해 글로벌 물가와 장기금리에 동시 충격을 줄 수 있다. 한국은 3%대 물가와 기준금리 3.00%, 대규모 재정지출이 겹쳐 정책조합의 난도가 높아질 전망이다. 유럽에서는 우크라이나 에너지시설 공격과 독일 핵심인프라 사보타주가 결합되며 에너지안보·하이브리드 위협 대응투자가 확대될 가능성이 높다. 미국의 재정위험은 단기 이벤트보다 장기국채의 구조적 위험 프리미엄으로 관찰할 필요가 있다."
+}
