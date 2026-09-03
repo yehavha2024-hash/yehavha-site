@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="description" content="웹 문장에서 판례번호를 자동 인식해 국가법령정보센터 원자료, CaseNote 검색, NEXUS 법률정보 포털로 연결하는 NEXUS 법률검색 서비스입니다."/>
+<meta name="robots" content="index,follow"/>
+<link rel="canonical" href="https://yehavha-nexus-hub.pages.dev/legal-search/"/>
+<link rel="stylesheet" href="../portal-v2.css?v=20260904-legal-search-1"/>
+<link rel="stylesheet" href="./style.css?v=20260904-1"/>
+<title>NEXUS LEGAL SEARCH | YEHAVHA NEXUS</title>
+</head>
+<body>
+<header class="ls-hero" id="top">
+  <div class="container">
+    <div class="ls-back"><a href="../">← YEHAVHA NEXUS</a></div>
+    <div class="ls-hero-row">
+      <div>
+        <p class="ls-eyebrow">NEXUS LEGAL SEARCH · 1.0</p>
+        <h1>NEXUS 법률검색</h1>
+      </div>
+      <div class="ls-flow" aria-label="검색 흐름">
+        <span>판례번호 자동인식</span><b>→</b><span>원자료 검색</span><b>→</b><span>NEXUS 연결</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="ls-main">
+  <div class="container">
+    <section class="search-panel" aria-labelledby="search-title">
+      <div class="panel-head">
+        <div>
+          <p class="ls-eyebrow">CASE NUMBER DETECTOR</p>
+          <h2 id="search-title">판례번호 자동인식</h2>
+        </div>
+        <button class="ghost-btn" id="clearBtn" type="button">초기화</button>
+      </div>
+      <textarea id="sourceText" rows="5" placeholder="예: 대법원 2003다29043 판결, 2022두12345, 2018헌마456"></textarea>
+      <div class="input-row">
+        <input id="directInput" type="search" autocomplete="off" placeholder="사건번호 직접 입력" aria-label="사건번호 직접 입력"/>
+        <button id="searchBtn" class="primary-btn" type="button">검색</button>
+      </div>
+      <div class="detected-bar">
+        <span id="detectedCount">인식 0건</span>
+        <span id="statusText">텍스트를 입력하면 자동으로 판례번호를 찾습니다.</span>
+      </div>
+    </section>
+
+    <section class="result-section" aria-labelledby="result-title">
+      <div class="section-title-row">
+        <div>
+          <p class="ls-eyebrow">SEARCH RESULTS</p>
+          <h2 id="result-title">검색 결과</h2>
+        </div>
+      </div>
+      <div class="result-grid" id="resultGrid">
+        <div class="empty-state" id="emptyState">인식된 사건번호가 없습니다.</div>
+      </div>
+    </section>
+
+    <section class="source-strip" aria-label="검색 대상">
+      <a href="https://www.law.go.kr/precSc.do" target="_blank" rel="noopener noreferrer"><strong>국가법령정보센터</strong><span>판례 원자료</span></a>
+      <a href="https://casenote.kr/" target="_blank" rel="noopener noreferrer"><strong>CaseNote</strong><span>판례 보조검색</span></a>
+      <a href="../legal-intelligence/"><strong>NEXUS 법률정보 포털</strong><span>원자료·연구 연결</span></a>
+    </section>
+  </div>
+</main>
+
+<footer class="ls-footer">
+  <div class="container"><span>NEXUS LEGAL SEARCH</span><a href="#top">맨 위로 ↑</a></div>
+</footer>
+<script src="./app.js?v=20260904-1"></script>
+</body>
+</html>
