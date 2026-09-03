@@ -39,15 +39,6 @@
     media: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="m10 9 5 3-5 3V9Z"/></svg>'
   };
 
-  const portalTiers = [
-    { id: 'strategy', number: '01', eyebrow: 'JUDGMENT · STRATEGY', title: '판단·전략', description: '현안을 판단하고 핵심 정보를 분석하며 공공 AX 전략과 대응으로 연결합니다.', variant: 'primary' },
-    { id: 'learning', number: '02', eyebrow: 'LEARNING · PRACTICE', title: '학습·실무', description: '대학형 학습, 웹앱 반복학습, 법률 실무훈련과 AI 실습강좌를 연결합니다.', variant: 'primary' },
-    { id: 'knowledge', number: '03', eyebrow: 'RESEARCH · KNOWLEDGE', title: '연구·지식', description: '에듀테크와 법학·AI 연구, 빠르게 변하는 AI 지식·동향을 분리해 전문적으로 축적합니다.', variant: 'primary' },
-    { id: 'legal', number: '04', eyebrow: 'LEGAL INTELLIGENCE', title: '법률정보', description: '법률정보 포털과 독립 법률검색 서비스를 통해 원자료·입법·판례·연구를 연결합니다.', variant: 'primary' },
-    { id: 'culture', number: '05', eyebrow: 'CULTURE · EVENTS', title: '문화·행사', description: '영화·공연·전시·박람회·도서·지역행사의 주요 흐름과 공식 일정을 빠르게 확인합니다.', variant: 'compact' },
-    { id: 'publishing', number: '06', eyebrow: 'PUBLISH · MEDIA', title: '출판·미디어', description: '연구와 창작의 결과물을 출판·아카이브와 미디어 콘텐츠로 공개합니다.', variant: 'compact' }
-  ];
-
   function updateKoreaClock() {
     if (!portalMarkText) return;
     const now = new Date();
@@ -326,7 +317,7 @@
     const tierCategories = categories.filter(category => category.tier === tier.id);
     for (const category of tierCategories) {
       const categoryProjects = projects.filter(project => project.category === category.id);
-      if (categoryProjects.length) grid.append(renderCategory(category, categoryProjects, tier.variant));
+      if (categoryProjects.length) grid.append(renderCategory(category, categoryProjects, tier.variant || 'primary'));
     }
     if (!grid.childElementCount) return null;
     section.append(head, grid);
@@ -367,6 +358,7 @@
   }
 
   function renderPortal(data) {
+    const tiers = Array.isArray(data.tiers) ? data.tiers : [];
     const categories = Array.isArray(data.categories) ? data.categories : [];
     const projects = Array.isArray(data.projects) ? data.projects : [];
     const visibleCategories = orderedCategories(categories, projects);
@@ -375,7 +367,7 @@
     installSeo({projects});
     if (!portalGrid) return;
     portalGrid.replaceChildren();
-    for (const tier of portalTiers) {
+    for (const tier of tiers) {
       const section = renderTier(tier, visibleCategories, projects);
       if (section) portalGrid.append(section);
     }
