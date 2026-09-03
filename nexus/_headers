@@ -40,6 +40,10 @@
   Cache-Control: no-cache, no-store, must-revalidate
   Pragma: no-cache
   Expires: 0
+/legal-search/*
+  Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
+  Expires: 0
 /ai-legal-glossary/*
   Cache-Control: no-cache, no-store, must-revalidate
   Pragma: no-cache
