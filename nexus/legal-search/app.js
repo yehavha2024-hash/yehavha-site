@@ -65,6 +65,7 @@
       sourceCard('국가법령정보센터 · 법령검색', '법률명·조문·법령본문을 검색합니다.', `https://www.law.go.kr/lsSc.do?query=${q}`),
       sourceCard('국가법령정보센터 · 판례검색', cases.length ? `사건번호 ${primary}를 기준으로 판례 원자료를 찾습니다.` : '사건번호 또는 판례 키워드로 원자료를 찾습니다.', `https://www.law.go.kr/precSc.do?query=${p}`),
       sourceCard('CaseNote · 판례 보조검색', '입력한 사건번호 또는 판례 키워드를 검색합니다.', `https://casenote.kr/search/?q=${p}`),
+      sourceCard('Google · 법률검색', '입력한 검색어를 Google에서 폭넓게 검색합니다.', `https://www.google.com/search?q=${q}`),
       sourceCard('NEXUS 법률정보 포털', '법령·입법·판례·행정해석·연구자료를 확인합니다.', `../legal-intelligence/?q=${q}`, true)
     );
   }
