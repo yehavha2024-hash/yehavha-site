@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-02",
+  "updatedAt": "2026-09-03",
   "books": [
     {
       "id": "upaper-toeic-day001",
@@ -46,8 +46,8 @@
       "title": "사해사본이 밝혀낸 예슈아 시대의 성경과 메시아 기대",
       "description": "사해사본의 본문 다원성과 4Q521·11Q13의 종말론 자료를 중심으로 예슈아 시대의 성경 전승과 메시아 기대를 검토한 전자책입니다.",
       "bibliography": "ISBN 979-11-444-0579-0 · 유페이퍼",
-      "url": "https://yehavha-nexus-hub.pages.dev/articles/article.html?id=dead-sea-scrolls-bible-messianic-expectation",
-      "actionLabel": "웹에서 읽기"
+      "url": "https://yehavha.upaper.kr/content/1222579",
+      "actionLabel": "유페이퍼에서 보기"
     },
     {
       "id": "upaper-john-god-incarnate-recognition",
