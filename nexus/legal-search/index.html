@@ -3,73 +3,70 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<meta name="description" content="웹 문장에서 판례번호를 자동 인식해 국가법령정보센터 원자료, CaseNote 검색, NEXUS 법률정보 포털로 연결하는 NEXUS 법률검색 서비스입니다."/>
-<meta name="robots" content="index,follow"/>
+<meta name="description" content="법률명, 조문, 판례번호, 법률 쟁점을 입력해 국가법령정보센터, CaseNote 보조검색과 NEXUS 법률정보로 연결하는 NEXUS 법률검색 서비스입니다."/>
+<meta name="robots" content="index,follow,max-image-preview:large"/>
+<meta name="theme-color" content="#ffffff"/>
 <link rel="canonical" href="https://yehavha-nexus-hub.pages.dev/legal-search/"/>
-<link rel="stylesheet" href="../portal-v2.css?v=20260904-legal-search-1"/>
-<link rel="stylesheet" href="./style.css?v=20260904-1"/>
-<title>NEXUS LEGAL SEARCH | YEHAVHA NEXUS</title>
+<link rel="stylesheet" href="../portal-v2.css?v=20260904-legal-search-standard-1"/>
+<link rel="stylesheet" href="./style.css?v=20260904-2"/>
+<title>NEXUS 법률검색 | YEHAVHA NEXUS</title>
 </head>
 <body>
-<header class="ls-hero" id="top">
-  <div class="container">
-    <div class="ls-back"><a href="../">← YEHAVHA NEXUS</a></div>
-    <div class="ls-hero-row">
-      <div>
-        <p class="ls-eyebrow">NEXUS LEGAL SEARCH · 1.0</p>
-        <h1>NEXUS 법률검색</h1>
-      </div>
-      <div class="ls-flow" aria-label="검색 흐름">
-        <span>판례번호 자동인식</span><b>→</b><span>원자료 검색</span><b>→</b><span>NEXUS 연결</span>
-      </div>
-    </div>
-  </div>
+<header class="hero" id="top">
+<div class="container">
+<a class="back-link" href="../">← YEHAVHA NEXUS</a>
+<section class="hero-card legal-search-hero">
+<p class="eyebrow">NEXUS LEGAL SEARCH</p>
+<h1>NEXUS 법률검색<span>법률명·조문·판례번호·법률 쟁점을 한 번에 검색합니다.</span></h1>
+<p class="description">검색어를 입력하면 국가법령정보센터의 법령·판례 원자료, CaseNote 판례 보조검색, NEXUS 법률정보 포털로 연결합니다.</p>
+</section>
+</div>
 </header>
 
-<main class="ls-main">
-  <div class="container">
-    <section class="search-panel" aria-labelledby="search-title">
-      <div class="panel-head">
-        <div>
-          <p class="ls-eyebrow">CASE NUMBER DETECTOR</p>
-          <h2 id="search-title">판례번호 자동인식</h2>
-        </div>
-        <button class="ghost-btn" id="clearBtn" type="button">초기화</button>
-      </div>
-      <textarea id="sourceText" rows="5" placeholder="예: 대법원 2003다29043 판결, 2022두12345, 2018헌마456"></textarea>
-      <div class="input-row">
-        <input id="directInput" type="search" autocomplete="off" placeholder="사건번호 직접 입력" aria-label="사건번호 직접 입력"/>
-        <button id="searchBtn" class="primary-btn" type="button">검색</button>
-      </div>
-      <div class="detected-bar">
-        <span id="detectedCount">인식 0건</span>
-        <span id="statusText">텍스트를 입력하면 자동으로 판례번호를 찾습니다.</span>
-      </div>
-    </section>
+<main class="legal-search-main">
+<div class="container">
+<section class="search-shell" aria-labelledby="legal-search-title">
+<div class="search-head">
+<div>
+<p class="eyebrow">LEGAL QUERY</p>
+<h2 id="legal-search-title">법률 검색</h2>
+</div>
+<button id="clearBtn" class="secondary-btn" type="button">초기화</button>
+</div>
+<form id="legalSearchForm" class="search-row" role="search">
+<input id="legalQuery" name="q" type="search" autocomplete="off" placeholder="예: 민법 제750조, 2003다29043, 개인정보 보호법, 손해배상" aria-label="법률 검색어"/>
+<button class="primary-btn" type="submit">검색</button>
+</form>
+<div class="search-status" id="searchStatus" aria-live="polite">법률명·조문·판례번호·법률 쟁점을 입력하세요.</div>
+</section>
 
-    <section class="result-section" aria-labelledby="result-title">
-      <div class="section-title-row">
-        <div>
-          <p class="ls-eyebrow">SEARCH RESULTS</p>
-          <h2 id="result-title">검색 결과</h2>
-        </div>
-      </div>
-      <div class="result-grid" id="resultGrid">
-        <div class="empty-state" id="emptyState">인식된 사건번호가 없습니다.</div>
-      </div>
-    </section>
-
-    <section class="source-strip" aria-label="검색 대상">
-      <a href="https://www.law.go.kr/precSc.do" target="_blank" rel="noopener noreferrer"><strong>국가법령정보센터</strong><span>판례 원자료</span></a>
-      <a href="https://casenote.kr/" target="_blank" rel="noopener noreferrer"><strong>CaseNote</strong><span>판례 보조검색</span></a>
-      <a href="../legal-intelligence/"><strong>NEXUS 법률정보 포털</strong><span>원자료·연구 연결</span></a>
-    </section>
-  </div>
+<section class="result-shell" aria-labelledby="result-title">
+<div class="result-head">
+<p class="eyebrow">SEARCH SOURCES</p>
+<h2 id="result-title">검색 결과 연결</h2>
+</div>
+<div class="source-grid" id="sourceGrid">
+<div class="empty-state">검색어를 입력하면 검색 가능한 법률정보원이 표시됩니다.</div>
+</div>
+</section>
+</div>
 </main>
 
-<footer class="ls-footer">
-  <div class="container"><span>NEXUS LEGAL SEARCH</span><a href="#top">맨 위로 ↑</a></div>
+<footer class="footer" data-footer-standard="v2">
+<div class="container">
+<div class="footer-card">
+<strong>YEHAVHA NEXUS</strong>
+<p>AI·AX 기반 전략정보와 전문지식을 연구·출판·교육·콘텐츠·웹서비스로 전환하고,<br/>축적된 결과물을 재사용·사업화하는 통합 지식사업 플랫폼입니다.</p>
+<div aria-label="사업자정보·저작권 및 문의" class="footer-meta">
+<p class="business-meta">스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈</p>
+<p class="copyright">Copyright © 이명훈 2026. All rights reserved.</p>
+<p class="contact">문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p>
+<p class="ai-disclosure">AI 활용 안내: 일부 프로젝트의 콘텐츠·문안·연구자료 제작과 정리에 생성형 AI를 활용하며, 각 프로젝트의 기획·검토·편집·운영은 운영자가 관리합니다.</p>
+<a href="#top">맨 위로 이동 ↑</a>
+</div>
+</div>
+</div>
 </footer>
-<script src="./app.js?v=20260904-1"></script>
+<script src="./app.js?v=20260904-2"></script>
 </body>
 </html>
