@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-03",
+  "updatedAt": "2026-09-04",
   "books": [
     {
       "id": "upaper-toeic-day001",
@@ -54,9 +54,15 @@
       "platform": "유페이퍼",
       "title": "하나님이 사람으로 오셨을 때 왜 알아보지 못했는가",
       "description": "요한복음에 나타난 성육신과 하나님의 자기계시, 표적, 불신, 십자가의 구조와 의미를 살펴보는 전자책입니다.",
-      "bibliography": "ISBN 979-11-444-0593-6 · 유페이퍼",
+      "bibliography": "ISBN 979-11-444-0593-6 · 유페이퍼 · YES24 상용 유통",
       "url": "https://yehavha.upaper.kr/content/1222444",
-      "actionLabel": "유페이퍼에서 보기"
+      "actionLabel": "유페이퍼에서 보기",
+      "additionalLinks": [
+        {
+          "url": "https://m.yes24.com/goods/detail/195767587",
+          "label": "YES24에서 보기"
+        }
+      ]
     },
     {
       "id": "upaper-john-god-incarnate-recognition-en",
