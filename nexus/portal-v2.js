@@ -40,12 +40,12 @@
   };
 
   const portalTiers = [
-    { id: 'strategy', number: '01', eyebrow: 'JUDGMENT · STRATEGY', title: '판단·전략', description: '현안을 판단하고 핵심 정보를 분석하며 공공 AX 전략과 대응으로 연결합니다.', categoryIds: ['commentary', 'intelligence', 'publicsector'], variant: 'primary' },
-    { id: 'learning', number: '02', eyebrow: 'LEARNING · PRACTICE', title: '학습·실무', description: '대학형 학습, 웹앱 반복학습, 법률 실무훈련과 AI 실습강좌를 연결합니다.', categoryIds: ['university', 'learningapps', 'legalpractice', 'education'], variant: 'primary' },
-    { id: 'knowledge', number: '03', eyebrow: 'RESEARCH · KNOWLEDGE', title: '연구·지식', description: '에듀테크와 법학·AI 연구, 빠르게 변하는 AI 지식·동향을 분리해 전문적으로 축적합니다.', categoryIds: ['edtechresearch', 'legalresearch', 'aiknowledge'], variant: 'primary' },
-    { id: 'legal', number: '04', eyebrow: 'LEGAL INTELLIGENCE', title: '법률정보', description: '법률정보 포털과 독립 법률검색 서비스를 통해 원자료·입법·판례·연구를 연결합니다.', categoryIds: ['legalintelligence', 'legalsearch'], variant: 'primary' },
-    { id: 'culture', number: '05', eyebrow: 'CULTURE · EVENTS', title: '문화·행사', description: '영화·공연·전시·박람회·도서·지역행사의 주요 흐름과 공식 일정을 빠르게 확인합니다.', categoryIds: ['culture'], variant: 'compact' },
-    { id: 'publishing', number: '06', eyebrow: 'PUBLISH · MEDIA', title: '출판·미디어', description: '연구와 창작의 결과물을 출판·아카이브와 미디어 콘텐츠로 공개합니다.', categoryIds: ['publishing', 'media'], variant: 'compact' }
+    { id: 'strategy', number: '01', eyebrow: 'JUDGMENT · STRATEGY', title: '판단·전략', description: '현안을 판단하고 핵심 정보를 분석하며 공공 AX 전략과 대응으로 연결합니다.', variant: 'primary' },
+    { id: 'learning', number: '02', eyebrow: 'LEARNING · PRACTICE', title: '학습·실무', description: '대학형 학습, 웹앱 반복학습, 법률 실무훈련과 AI 실습강좌를 연결합니다.', variant: 'primary' },
+    { id: 'knowledge', number: '03', eyebrow: 'RESEARCH · KNOWLEDGE', title: '연구·지식', description: '에듀테크와 법학·AI 연구, 빠르게 변하는 AI 지식·동향을 분리해 전문적으로 축적합니다.', variant: 'primary' },
+    { id: 'legal', number: '04', eyebrow: 'LEGAL INTELLIGENCE', title: '법률정보', description: '법률정보 포털과 독립 법률검색 서비스를 통해 원자료·입법·판례·연구를 연결합니다.', variant: 'primary' },
+    { id: 'culture', number: '05', eyebrow: 'CULTURE · EVENTS', title: '문화·행사', description: '영화·공연·전시·박람회·도서·지역행사의 주요 흐름과 공식 일정을 빠르게 확인합니다.', variant: 'compact' },
+    { id: 'publishing', number: '06', eyebrow: 'PUBLISH · MEDIA', title: '출판·미디어', description: '연구와 창작의 결과물을 출판·아카이브와 미디어 콘텐츠로 공개합니다.', variant: 'compact' }
   ];
 
   function updateKoreaClock() {
@@ -155,15 +155,7 @@
   }
 
   function orderedCategories(categories, projects) {
-    const byId = new Map(categories.map(category => [category.id, category]));
-    const ordered = [];
-    for (const tier of portalTiers) {
-      for (const id of tier.categoryIds) {
-        const category = byId.get(id);
-        if (category && projects.some(project => project.category === id)) ordered.push(category);
-      }
-    }
-    return ordered;
+    return categories.filter(category => projects.some(project => project.category === category.id));
   }
 
   function renderQuickLinks(categories, projects) {
@@ -331,10 +323,9 @@
     copy.querySelector('h2').id = `tier-${tier.id}-title`;
     head.append(number, copy);
     const grid = make('div', 'portal-tier-grid');
-    for (const id of tier.categoryIds) {
-      const category = categories.find(item => item.id === id);
-      if (!category) continue;
-      const categoryProjects = projects.filter(project => project.category === id);
+    const tierCategories = categories.filter(category => category.tier === tier.id);
+    for (const category of tierCategories) {
+      const categoryProjects = projects.filter(project => project.category === category.id);
       if (categoryProjects.length) grid.append(renderCategory(category, categoryProjects, tier.variant));
     }
     if (!grid.childElementCount) return null;
@@ -368,7 +359,7 @@
       name:'YEHAVHA Nexus',
       alternateName:'예하바 프로젝트 포털',
       url:canonicalUrl,
-      description:'논평·전략정보·정부 AX·학습·법률실무·법학 AI 연구·법률정보·AI 지식동향·문화행사·출판·미디어를 연결하는 통합 포털',
+      description:'논평·전략정보·정부 AX·학습·법률실무·법학 AI 연구·법률정보·법률검색·AI 지식동향·문화행사·출판·미디어를 연결하는 통합 포털',
       potentialAction:{'@type':'SearchAction',target:`${canonicalUrl}?q={search_term_string}`,'query-input':'required name=search_term_string'},
       hasPart:data.projects.map(project => ({'@type':'WebPage',name:project.title,url:project.url,description:project.description}))
     });
