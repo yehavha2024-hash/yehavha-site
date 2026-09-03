@@ -48,7 +48,6 @@ const requiredReturnPages = [
   'nexus/ai-music-archive/index.html',
   'nexus/ai-trends/index.html',
   'nexus/articles/index.html',
-  'nexus/education-hub/index.html',
   'nexus/government-ax/index.html',
   'nexus/intelligence-briefing/index.html',
   'nexus/legal-search/index.html',
