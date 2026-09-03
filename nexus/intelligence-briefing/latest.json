@@ -1,120 +1,135 @@
 {
-  "generatedAt": "2026-09-03T06:30:00+09:00",
-  "window": "2026-09-02 06:30–2026-09-03 06:30 KST · 최근 24시간 중심 · 동일 이슈는 material change가 있을 때만 본문 재진입",
+  "generatedAt": "2026-09-04T06:30:00+09:00",
+  "window": "2026-09-03 06:30–2026-09-04 06:30 KST · 최근 24시간 중심 · 동일 이슈는 material change가 있을 때만 본문 재진입",
   "schedule": "06:30 KST daily",
-  "executiveSummary": "오늘의 전략적 핵심은 미·이란 교전과 호르무즈 해협 위험이 원유 물류와 글로벌 인플레이션 기대를 다시 자극하는 가운데, 한국의 8월 소비자물가 상승률이 3.1%로 높아져 국내 금리·재정정책의 제약도 커졌다는 점이다. 유럽에서는 독일 전력망이 24시간 내 두 차례 사보타주 공격을 받아 핵심인프라 방호와 하이브리드 위협이 다시 부각됐고, 러시아는 키이우 7일 연속 공습과 오데사 전력시설 공격을 이어가 우크라이나의 에너지·물류 회복력을 압박했다. 북미에서는 미국 연방부채가 40조달러를 넘어 장기금리와 재정위험 프리미엄이 확대되고 있으며, 캐나다 중앙은행은 중동 에너지가격과 미·캐나다 관세충돌 속 기준금리를 2.25%로 동결했지만 인플레이션 상방위험을 경고했다. 보건에서는 WHO·Gavi 등이 모든 국가가 이용할 수 있는 글로벌 mpox 백신 비축체계 출범을 발표했다.",
+  "executiveSummary": "오늘의 전략적 핵심은 러시아·우크라이나가 장기전 속에서도 협상 가능성과 미국 중재 재가동을 동시에 언급하면서 외교적 변곡 가능성이 생긴 반면, 키이우에 대한 연속 공습은 계속돼 군사·외교의 이중 궤도가 형성됐다는 점이다. 중동에서는 시리아가 아사드 정권 시절 잔존 화학무기의 검증 가능한 폐기를 재개해 비확산과 전후 책임규명에서 중요한 진전을 보였다. 경제·산업에서는 러시아 재정적자가 GDP의 2.8%까지 확대되고 중국은 중소기업·전략산업에 대한 정책금융과 국가 지원을 강화했다. 환경·재난에서는 WMO가 현재 엘니뇨가 관측 사상 최강 수준으로 발전할 가능성을 경고했고, 네팔 빙하붕괴 재난은 사망 1,200명 이상·실종 4,200명 이상, 약 2만 가구 재건 필요로 피해규모가 크게 확대됐다. 한국에서는 최근 집중호우 피해지역에 정부가 긴급 재난특교세를 지원하며 복구단계로 전환하고 있다.",
   "items": [
     {
-      "topicKey": "us-iran-hormuz-escalation-20260903",
+      "topicKey": "ukraine-peace-diplomacy-20260904",
+      "priority": "HIGH",
+      "category": "국제정세·외교·안보·유럽",
+      "headline": "푸틴·우크라이나 모두 평화협상 '새 동력' 언급…미 중재단 모스크바·키이우 방문 추진",
+      "fact": "9월 3일 Reuters에 따르면 블라디미르 푸틴 러시아 대통령은 우크라이나 전쟁 종식을 위한 합의 가능성이 있다고 언급했고, 우크라이나 외무장관도 평화 노력에 '새로운 동력'을 기대한다고 밝혔다. 볼로디미르 젤렌스키 대통령은 미국 정부 협상단이 조만간 모스크바와 키이우를 각각 방문할 예정이라고 밝혔다. 같은 날 러시아의 키이우 공격은 계속돼 최소 10명이 부상했다.",
+      "assessment": "협상 관련 수사가 양측에서 동시에 나온 것은 최근 수개월 대비 의미 있는 변화지만, 구체적 의제나 양보안은 제시되지 않았다. 연속 공습이 병행되고 있어 현재 단계는 휴전 임박보다는 외교채널 재가동 가능성을 시험하는 국면으로 보는 것이 타당하다.",
+      "impact": "실질 협상이 개시되면 유럽 방산·에너지·곡물·해운 시장의 위험 프리미엄이 낮아질 수 있으나, 협상 실패 시 반대로 장거리 타격과 인프라 공격이 더 강화될 수 있다.",
+      "watch": "미 협상단 실제 방문 일정, 러시아·우크라이나의 협상 의제 공개, 포로교환·부분휴전 등 선행조치, 키이우·흑해 인프라 공격 강도를 추적한다.",
+      "confidence": "높음(발언·방문계획), 중간(협상 진전 가능성)",
+      "sources": [
+        {"label": "Reuters · Putin cites chance of peace deal, Ukraine sees 'new dynamic' (2026-09-03)", "url": "https://www.reuters.com/world/europe/putin-cites-chance-peace-deal-says-ukrainian-aviation-warning-makes-it-harder-2026-09-03/"},
+        {"label": "Reuters · Zelenskiy says Ukraine expects meeting with US negotiators in coming days (2026-09-03)", "url": "https://www.reuters.com/world/zelenskiy-says-ukraine-expects-meeting-with-us-negotiators-coming-days-2026-09-03/"},
+        {"label": "Reuters · Russian attack on Kyiv injures 10 (2026-09-03)", "url": "https://www.reuters.com/world/russian-attack-kyiv-kills-one-triggers-fire-damages-high-rise-building-2026-09-03/"}
+      ]
+    },
+    {
+      "topicKey": "syria-chemical-weapons-destruction-20260904",
+      "priority": "HIGH",
+      "category": "국제안보·비확산·법·전후책임",
+      "headline": "시리아, 아사드 정권 잔존 화학무기 검증 폐기 재개…10여 년 만의 비확산 진전",
+      "fact": "9월 3일 Reuters에 따르면 시리아는 아사드 정권 시절 비밀 화학무기 프로그램의 잔존물 폐기에 착수했다. 유엔과 화학무기금지기구(OPCW)는 42발의 항공폭탄과 관련 생산·저장시설의 폐기를 검증했으며, 이는 2014년 이후 처음 확인된 대규모 검증 폐기다. 시리아 당국은 화학무기 프로그램 관련 고위급 인사를 포함한 18명에 대한 재판도 준비 중이다.",
+      "assessment": "단순 무기폐기를 넘어 국제검증과 형사책임 절차가 병행된다는 점이 중요하다. 신정부가 국제 비확산체제에 재편입하려는 신호로 볼 수 있으나, 미신고 저장시설과 추가 잔존물 존재 여부는 여전히 불확실하다.",
+      "impact": "시리아의 국제적 정상화, 제재완화 논의, 중동 비확산체제, 전쟁범죄·화학무기 책임규명에 영향을 줄 수 있다.",
+      "watch": "OPCW 추가 사찰결과, 미신고 시설 발견 여부, 18명 재판의 법적 절차와 증거 공개, 이스라엘의 역내 군사행동이 폐기작업에 미치는 영향을 본다.",
+      "confidence": "높음",
+      "sources": [
+        {"label": "Reuters · Syria begins destroying Assad-era chemical weapons (2026-09-03)", "url": "https://www.reuters.com/world/syria-begins-destroying-assad-era-chemical-weapons-2026-09-03/"}
+      ]
+    },
+    {
+      "topicKey": "russia-budget-deficit-20260904",
+      "priority": "HIGH",
+      "category": "러시아·경제·재정·전쟁지속능력",
+      "headline": "러시아 재정적자 GDP 2.8%로 확대…전쟁비용·인프라 타격·고금리의 삼중 압박",
+      "fact": "9월 3일 Reuters에 따르면 러시아의 1~7월 재정적자는 전년 동기 대비 40% 증가해 GDP의 2.8%에 달했다. 정부의 공식 연간 적자목표는 1.6%다. 러시아 중앙은행 기준금리는 14%이며, 우크라이나의 정유시설·물류시설 공격은 연료부족과 물가압력을 키우고 있다.",
+      "assessment": "러시아의 낮은 국가부채 수준이 단기 완충장치지만, 적자 확대와 고금리가 장기화될수록 전쟁비용 조달과 민간투자 사이의 구축효과가 커질 수 있다. 재정·통화·전쟁경제의 긴장이 동시에 증가하는 국면이다.",
+      "impact": "러시아의 국방비·사회지출 조정, 추가 증세·국채발행, 루블과 물가, 에너지 수출정책, 전쟁지속능력에 영향을 줄 수 있다.",
+      "watch": "9월 11일 러시아 중앙은행 금리결정, 추가 예산수정, 에너지세입, 정유시설 피해와 연료수급을 확인한다.",
+      "confidence": "높음",
+      "sources": [
+        {"label": "Reuters · Russia can manage its growing budget deficit, Putin says (2026-09-03)", "url": "https://www.reuters.com/markets/europe/russia-can-manage-its-growing-budget-deficit-putin-says-2026-09-03/"}
+      ]
+    },
+    {
+      "topicKey": "china-sme-policy-finance-20260904",
+      "priority": "HIGH",
+      "category": "중국·산업정책·경제·공급망",
+      "headline": "중국, '작은 거인' 2만2천개 육성·정책금융 집행…전략산업 자립과 내수투자 동시 강화",
+      "fact": "9월 3일 중국은 10개 중앙기관 공동 계획을 통해 2030년까지 혁신형 중소기업인 '작은 거인'을 2만2천개로 확대하고 산업클러스터를 600개까지 늘리겠다고 밝혔다. 같은 날 중국개발은행은 8,000억위안 규모 2026년 정책금융 프로그램의 첫 자금을 배터리·첨단소재·교통인프라 프로젝트에 집행했다.",
+      "assessment": "성장률 둔화와 민간투자 약화에 대응하는 경기부양이면서 동시에 미국과의 기술·공급망 경쟁을 염두에 둔 산업정책이다. 단기 경기부양보다 전략산업의 자금조달 구조를 국가가 장기간 재편하려는 성격이 강하다.",
+      "impact": "배터리·신소재·로봇·양자·첨단제조 공급망의 중국 내 투자 확대와 글로벌 과잉설비·통상갈등 심화 가능성이 있다.",
+      "watch": "정책금융 실제 집행속도, 민간투자 유발효과, 지방정부 부채와의 관계, 미국·EU의 추가 보조금·무역구제 대응을 본다.",
+      "confidence": "높음",
+      "sources": [
+        {"label": "Reuters · China to support 'little giants' and other emerging companies (2026-09-03)", "url": "https://www.reuters.com/world/asia-pacific/china-vows-support-small-midsize-firms-employment-innovation-2026-09-03/"},
+        {"label": "Reuters · China deploys first 2026 policy financing funds to spur investment (2026-09-03)", "url": "https://www.reuters.com/world/asia-pacific/china-deploys-first-2026-policy-financing-funds-spur-investment-2026-09-03/"}
+      ]
+    },
+    {
+      "topicKey": "super-el-nino-20260904",
       "priority": "CRITICAL",
-      "category": "국제정세·안보·에너지·해운",
-      "headline": "미·이란 상호공격 지속, 호르무즈 통항량 급감…유가·해운 위험 프리미엄 재상승",
-      "fact": "9월 2일 Reuters와 AP에 따르면 미국과 이란은 전날 재개된 직접교전 이후 추가 공격을 이어갔다. 이란은 걸프지역의 미국 동맹국과 기지를 미사일·드론으로 공격했고, 미국도 이란 남부 해안의 군사목표를 타격했다. Reuters는 호르무즈 해협 통과 선박이 10일 평균 13척에서 4척 수준으로 줄었다고 보도했으며 Brent유는 배럴당 95.63달러로 마감했다.",
-      "assessment": "군사충돌 자체보다 해협의 실제 통항능력과 민간선박 위험이 시장 충격을 결정하는 국면이다. 전일의 사우디 유조선 피격에 이어 이란이 비준수 선박 블랙리스트를 확대하면서 물리적 봉쇄와 행정·강제집행 위험이 동시에 커지고 있다.",
-      "impact": "원유·LNG 가격, 탱커 운임·보험료, 아시아 에너지 수입비용, 정유·석화 원가, 글로벌 인플레이션과 장기금리에 상방압력을 줄 수 있다.",
-      "watch": "호르무즈 일일 통항량, 추가 상선 피격·나포, 미·이란 후속공격, 걸프 산유국의 호위조치, Brent 100달러 돌파 여부를 추적한다.",
+      "category": "환경·기후·식량·재난",
+      "headline": "WMO, 현 엘니뇨 '관측 사상 최강 가능성' 경고…2027년까지 글로벌 재난·식량위험 확대",
+      "fact": "9월 3일 Reuters가 WMO 발표를 인용해 보도한 내용에 따르면 현재 엘니뇨는 1950년 이후 상위 4개 강도에 이미 진입했으며 2027년 2월까지 지속될 확률이 거의 100%로 평가됐다. WMO는 해수면 온도 상승이 계속될 경우 관측 사상 가장 강한 엘니뇨가 될 가능성이 있다고 밝혔다.",
+      "assessment": "단기 기상현상이 아니라 2026~2027년 농업·수자원·보건·보험·에너지수요를 동시에 흔드는 거시 위험요인이다. 기후변화로 높아진 해수온이 자연적 엘니뇨의 충격을 증폭시킬 가능성이 크다.",
+      "impact": "중남미·아시아의 홍수와 가뭄, 곡물가격, 수력발전, 산불, 감염병, 재보험 손실, 2027년 글로벌 물가에 연쇄 영향을 줄 수 있다.",
+      "watch": "WMO 계절전망, 태평양 해수면온도, 남미·동남아 강수편차, 주요 곡물 생산지 작황과 식량가격을 추적한다.",
       "confidence": "높음",
       "sources": [
-        {"label": "Reuters · Oil settles 1% higher, as US-Iran strikes threaten supplies (2026-09-02)", "url": "https://www.reuters.com/business/energy/oil-up-nearly-1-us-iran-trade-fresh-strikes-2026-09-02/"},
-        {"label": "Reuters · Iran blacklists more ships trying to sail through Hormuz (2026-09-02)", "url": "https://www.reuters.com/business/energy/iran-blacklists-more-ships-trying-sail-through-hormuz-govt-website-shows-2026-09-02/"},
-        {"label": "AP · Iran fires on its Gulf neighbors, retaliating for US strikes (2026-09-02)", "url": "https://apnews.com/article/iran-us-strikes-hormuz-trump-september-2-2026-cc891e22860d7a53bf7ade9a3d74c0ae"}
+        {"label": "Reuters · 'Supersized' El Niño may become strongest ever recorded, UN says (2026-09-03)", "url": "https://www.reuters.com/business/environment/el-nino-likely-strengthen-further-persist-into-2027-wmo-says-2026-09-03/"}
       ]
     },
     {
-      "topicKey": "korea-cpi-3-1-20260903",
-      "priority": "HIGH",
-      "category": "한국·경제·물가·통화정책",
-      "headline": "한국 8월 소비자물가 3.1%…기준금리 3.00% 인상 직후 인플레이션 제약 강화",
-      "fact": "한국은행은 9월 2일 물가상황점검회의에서 8월 소비자물가 상승률이 3.1%로 전월 2.8%보다 높아졌다고 밝혔다. 지난해 8월 통신요금 할인에 따른 기저효과가 크게 작용했다. 한국은행은 8월 27일 기준금리를 2.75%에서 3.00%로 인상했다.",
-      "assessment": "일부 기저효과를 감안하더라도 중동 에너지가격 상승과 원화·수입물가 경로가 겹치면 물가 둔화가 지연될 수 있다. 대규모 2027년 예산안과 통화긴축의 정책조합도 더 중요해졌다.",
-      "impact": "추가 금리인상 기대, 국고채 금리와 원화 변동성, 가계·기업 금융비용, 소비와 주택시장, 재정지출의 물가효과에 영향을 줄 수 있다.",
-      "watch": "9월 에너지·생활물가, 기대인플레이션, 원·달러 환율, 국고채 금리, 한국은행의 다음 통화정책 메시지를 확인한다.",
+      "topicKey": "nepal-glacier-disaster-update-20260904",
+      "priority": "CRITICAL",
+      "category": "재난·환경·에너지·인프라",
+      "headline": "네팔 빙하붕괴 재난 사망 1,250명 이상·실종 4,200명 이상…약 2만 가구 재건 필요",
+      "fact": "9월 3일 Reuters에 따르면 8월 26일 발생한 네팔 빙하붕괴·대홍수로 네팔에서 최소 1,252명이 사망하고 4,200명 이상이 실종됐다. 약 7,500가구가 완전히 파괴됐고 전체 약 2만 가구가 재건 또는 대규모 복구가 필요한 것으로 추산된다. 수력발전소 터널에 고립된 약 900명에 대한 구조작업도 계속되고 있다.",
+      "assessment": "피해가 인명·주택을 넘어 국가 전력망, 중국 국경무역, 교육·식수·위생 체계로 확산된 복합재난이다. 이전 브리핑 대비 피해규모가 크게 상향돼 동일 이슈의 재진입 요건을 충족한다.",
+      "impact": "네팔 재정과 재건수요, 수력발전·전력수입, 대중국 국경교역, 국제원조, 히말라야 지역의 빙하재난 조기경보 정책에 장기적 영향을 준다.",
+      "watch": "터널 구조결과, 최종 사망·실종 집계, 발전소 복구일정, 국제원조 규모, 추가 빙하호 붕괴위험을 본다.",
       "confidence": "높음",
       "sources": [
-        {"label": "한국은행 · 2026년 8월 물가상황점검회의 (2026-09-02)", "url": "https://www.bok.or.kr/portal/main/main.do"}
+        {"label": "Reuters · Nepal must rebuild thousands of homes, no letup in search for missing (2026-09-03)", "url": "https://www.reuters.com/business/environment/nepal-must-rebuild-thousands-homes-no-let-up-search-missing-2026-09-03/"},
+        {"label": "Reuters · In flood-ravaged Nepal valley nothing is left standing (2026-09-03)", "url": "https://www.reuters.com/business/environment/flood-ravaged-nepal-valley-nothing-is-left-standing-2026-09-03/"}
       ]
     },
     {
-      "topicKey": "germany-grid-sabotage-20260903",
+      "topicKey": "us-venezuela-spr-swap-20260904",
       "priority": "HIGH",
-      "category": "유럽·안보·에너지·핵심인프라",
-      "headline": "독일 전력망 24시간 내 두 차례 사보타주 수사…4.2GW 발전설비 일시 정지",
-      "fact": "9월 2일 Reuters와 AP에 따르면 독일 당국은 브란덴부르크와 베르크하임 인근 전력설비에 대한 두 건의 공격을 사보타주 가능성으로 수사하고 있다. 베르크하임 변전소 사건으로 RWE 갈탄발전소 여러 곳, 합계 약 4,200MW가 일시 정지했지만 계통 안정성은 유지됐다.",
-      "assessment": "단일 사건보다 짧은 시간 안에 전력계통의 서로 다른 지점이 반복 공격받았다는 점이 중요하다. 공격주체는 확정되지 않았으므로 국가배후를 단정할 수 없지만 유럽의 핵심인프라 방호비용과 하이브리드 위협 대응수준을 끌어올릴 가능성이 높다.",
-      "impact": "독일·EU의 전력·통신·철도 보안투자 확대, 발전사 운영비용 증가, 경찰·정보기관의 인프라 경계강화, 에너지시장 위험 프리미엄 상승 가능성이 있다.",
-      "watch": "수사기관의 공격주체·동기 규명, 추가 전력·통신시설 사건, 연방정부의 핵심인프라 보호조치, EU 차원의 대응을 본다.",
-      "confidence": "높음(사건), 중간(배후)",
-      "sources": [
-        {"label": "Reuters · Germany probes second power grid sabotage case (2026-09-02)", "url": "https://www.reuters.com/world/europe/german-power-grid-under-fresh-sabotage-attack-police-say-2026-09-02/"},
-        {"label": "AP · Germany probes suspected sabotage after disruption at 2 power substations (2026-09-02)", "url": "https://apnews.com/article/germany-cologne-brandenburg-power-plants-sabotage-explosive-ef9c21908f232651d056d7462330e2b7"}
-      ]
-    },
-    {
-      "topicKey": "ukraine-kyiv-odesa-energy-20260903",
-      "priority": "HIGH",
-      "category": "유럽·전쟁·에너지·물류",
-      "headline": "러시아, 키이우 7일 연속 공습·오데사 전력시설 타격…겨울 전 에너지전 압박 강화",
-      "fact": "9월 2일 Reuters에 따르면 러시아는 키이우에 7일 연속 드론 공격을 가해 11명이 부상했고, 오데사 전력시설 공격으로 약 35만 가구의 전력공급이 중단됐다. 우크라이나는 러시아가 겨울철을 앞두고 에너지 인프라 공격을 확대할 가능성을 경고했다.",
-      "assessment": "전일의 항만·수출시설 공격에서 전력망까지 압박범위가 확대되고 있다. 반복 공습은 방공미사일 소모와 도시기능 교란을 동시에 노리며, 겨울 전 에너지 회복능력 자체를 약화시키는 전략으로 평가된다.",
-      "impact": "우크라이나 전력복구·방공수요 증가, 흑해 수출물류 차질, 유럽의 지원비용 확대, 곡물·에너지시장 변동성 상승 가능성이 있다.",
-      "watch": "대규모 발전·송전시설 추가공격, 오데사 항만 복구, 서방 방공체계 추가지원, 우크라이나의 대러 장거리 드론 보복 확대를 본다.",
+      "category": "미국·에너지·전략비축·시장",
+      "headline": "미국, 베네수엘라 중질유를 미 원유와 교환해 SPR 충전 검토…비축전략 구체화",
+      "fact": "9월 3일 Reuters에 따르면 미국 에너지부는 베네수엘라산 중질유를 직접 전략비축유(SPR)에 넣기보다 미국산 경질·중질유와 교환하는 방안을 검토하고 있다. 베네수엘라산 원유는 황 함량과 점도가 높아 SPR의 기존 품질구조와 맞지 않는다는 기술적 제약 때문이다.",
+      "assessment": "전일의 SPR 재충전 방침이 실제 물류·품질 제약을 반영한 스왑 구조로 구체화됐다. 미·이란 분쟁으로 낮아진 비축수준을 보완하면서 베네수엘라 공급을 활용하려는 실용적 에너지안보 전략이다.",
+      "impact": "미국 원유 수급, 걸프코스트 정유사의 중질유 조달, 베네수엘라 수출, SPR 재충전 속도와 국제유가에 영향을 줄 수 있다.",
+      "watch": "스왑 계약구조, 물량과 시점, 참여 정유사, 대베네수엘라 제재·계약조건, SPR 재고 증가속도를 본다.",
       "confidence": "높음",
       "sources": [
-        {"label": "Reuters · Russia torments Ukraine's capital with seventh day of strikes (2026-09-02)", "url": "https://www.reuters.com/world/europe/russian-attacks-damage-infrastructure-ukraines-odesa-official-says-2026-09-02/"}
+        {"label": "Reuters · Venezuela's heavy crude could be swapped for American oil to fill emergency reserve (2026-09-03)", "url": "https://www.reuters.com/business/energy/venezuelas-heavy-crude-could-be-swapped-american-oil-fill-emergency-reserve-2026-09-03/"}
       ]
     },
     {
-      "topicKey": "us-debt-40-trillion-20260903",
-      "priority": "HIGH",
-      "category": "미국·재정·금융시장",
-      "headline": "미 연방부채 40조달러 돌파…고금리와 재정위험 프리미엄 장기화 가능성",
-      "fact": "Reuters는 9월 2일 미국 연방정부 총부채가 40조달러를 넘어섰다고 보도했다. 높은 금리와 재정적자가 결합되면서 이자비용이 계속 증가하고 있고, 장기국채 금리는 최근 재정우려와 에너지가격 상승에 민감하게 반응하고 있다.",
-      "assessment": "미국의 재정위험이 단기 채무한도 논쟁을 넘어 구조적인 장기금리 프리미엄 문제로 이동하고 있다. 중동발 인플레이션 충격과 동시에 나타날 경우 연준의 정책여지를 줄일 수 있다.",
-      "impact": "미 국채 장기금리, 달러, 글로벌 위험자산 밸류에이션, 신흥국 자금흐름, 한국 국고채와 원화에도 영향을 줄 수 있다.",
-      "watch": "미 재정수지·국채발행계획, 10년·30년물 입찰수요, 중간선거 전 재정공약, 연준의 장기금리 평가를 추적한다.",
-      "confidence": "높음",
-      "sources": [
-        {"label": "Reuters · Trump pledged fiscal restraint. Instead, debt tops $40 trillion (2026-09-02)", "url": "https://www.reuters.com/world/us/trump-pledged-fiscal-restraint-instead-debt-tops-40-trillion-borrowing-costs-2026-09-02/"}
-      ]
-    },
-    {
-      "topicKey": "canada-rate-hold-20260903",
+      "topicKey": "korea-heavy-rain-recovery-20260904",
       "priority": "WATCH",
-      "category": "국제경제·통화정책·통상",
-      "headline": "캐나다 중앙은행 2.25% 동결…중동 에너지·미국 관세로 인플레이션 상방위험 경고",
-      "fact": "캐나다은행은 9월 2일 정책금리를 2.25%로 동결했다. 공식 성명은 중동분쟁으로 높은 에너지가격이 지속되고 있으며 미국의 신규관세와 캐나다의 대응조치가 성장과 물가전망의 불확실성을 높였다고 밝혔다. 총재는 인플레이션 상방위험이 증가했다고 평가했다.",
-      "assessment": "주요국 통화정책이 경기둔화보다 에너지·관세발 물가충격을 다시 우선시할 가능성을 보여준다. 북미 통상갈등이 지속될 경우 캐나다의 다음 결정은 동결보다 인상 가능성을 더 열어두는 방향으로 이동할 수 있다.",
-      "impact": "캐나다달러·국채금리, 북미 공급망, 자동차·원자재 교역, 글로벌 금리인상 기대에 영향을 줄 수 있다.",
-      "watch": "캐나다 CPI·고용, 미국 추가관세, 캐나다 보복조치, 다음 정책회의의 금리경로를 본다.",
+      "category": "한국·재난·정부·사회",
+      "headline": "정부, 집중호우 피해 전남광주·충남·전북에 재난특교세 20억원 긴급지원",
+      "fact": "행정안전부는 9월 3일 지난 8월 28일부터 9월 1일까지 집중호우 피해를 입은 전남광주·충남·전북 3개 시도에 재난안전관리 특별교부세 20억원을 긴급 지원한다고 밝혔다. 자금은 응급복구와 이재민 구호에 사용된다.",
+      "assessment": "대규모 국가재난 수준은 아니지만 최근 집중호우가 복구·재정지원 단계로 넘어갔다는 국내 정책 변화다. 추가 피해조사 결과에 따라 특별재난지역 지정이나 지원규모 확대 가능성이 있다.",
+      "impact": "지방재정, 농업·주택·공공시설 복구, 이재민 지원과 향후 기후재난 대응예산에 영향을 줄 수 있다.",
+      "watch": "중앙재난피해합동조사, 특별재난지역 추가 지정, 농축산·시설피해 확정액, 추가 호우 가능성을 확인한다.",
       "confidence": "높음",
       "sources": [
-        {"label": "Bank of Canada · Bank maintains the policy rate at 2¼% (2026-09-02)", "url": "https://www.bankofcanada.ca/2026/09/fad-press-release-2026-09-02/"},
-        {"label": "Reuters · Bank of Canada holds key rate, says multiple hikes might be needed (2026-09-02)", "url": "https://www.reuters.com/world/americas/bank-canada-set-hold-rates-strong-growth-collides-with-trade-risks-2026-09-02/"}
-      ]
-    },
-    {
-      "topicKey": "global-mpox-stockpile-20260903",
-      "priority": "WATCH",
-      "category": "보건·국제기구·백신공급",
-      "headline": "WHO·Gavi, 전 세계 접근 가능한 mpox 백신 비축체계 출범…감염병 대응의 상시 인프라화",
-      "fact": "WHO·Gavi·UNICEF·IFRC·MSF는 9월 2일 글로벌 mpox 백신 비축체계를 발표했다. 8월 27일 출범한 이 체계는 9월 중 운영을 시작하며 모든 국가가 발병 대응을 위해 접근할 수 있다. WHO에 따르면 2022년 1월부터 2026년 7월까지 145개 국가·지역에서 확진 190,683건과 사망 529건이 보고됐다.",
-      "assessment": "2024년 임시 배분체계를 상설 비축체계로 전환했다는 점이 중요하다. 감염병 백신 접근성 격차를 줄이고 아프리카 중심의 반복 유행에 대한 대응시간을 단축할 수 있다.",
-      "impact": "백신 조달·비축시장, 국가별 비상접종계획, 저소득국의 접근성, 국제보건 공급망 운영방식에 영향을 줄 수 있다.",
-      "watch": "초기 비축물량, 실제 배분국가, 제조사 공급계약, 새로운 clade 확산과 국가별 요청규모를 본다.",
-      "confidence": "높음",
-      "sources": [
-        {"label": "WHO · Global initiative launched to improve access to mpox vaccines (2026-09-02)", "url": "https://www.who.int/news/item/02-09-2026-global-initiative-launched-to-improve-access-to-mpox-vaccines"}
+        {"label": "연합뉴스 · 정부, 집중호우 피해 전남광주·충남·전북에 20억원 긴급지원 (2026-09-03)", "url": "https://www.yna.co.kr/amp/view/AKR20260903057300530"}
       ]
     }
   ],
   "strategicWatchlist": [
-    "호르무즈 통항량·추가 상선 피격·나포 및 Brent 100달러 돌파 여부",
-    "한국 9월 물가·원화·국고채와 한국은행 추가 긴축 신호",
-    "독일 전력망 사보타주 배후 규명과 EU 핵심인프라 방호조치",
-    "러시아의 우크라이나 대규모 에너지·송전시설 겨울 전 공격",
-    "미국 40조달러 부채 이후 장기국채 금리·입찰수요 변화",
-    "미·캐나다 관세충돌과 캐나다은행 추가 금리조정 가능성",
-    "글로벌 mpox 백신 비축체계의 실제 배분·공급규모"
+    "미국 중재단의 모스크바·키이우 방문 및 러·우 협상 의제 공개",
+    "키이우·흑해·에너지 인프라 공격의 지속 여부와 부분휴전 가능성",
+    "시리아 화학무기 추가 신고·OPCW 검증·관련자 재판",
+    "러시아 9월 11일 기준금리 결정과 재정적자 확대 대응",
+    "중국 8,000억위안 정책금융의 실제 집행속도와 전략산업 과잉설비",
+    "초강도 엘니뇨의 농업·식량·수력발전·재보험 영향",
+    "네팔 터널 구조·전력복구·국경교역 정상화",
+    "미 SPR 재충전 스왑계약과 베네수엘라 원유 물량"
   ],
-  "outlook": "향후 1~4주의 최우선 변수는 호르무즈 해협의 실제 통항 안정성이다. 미·이란 교전이 제한적 공습을 넘어 상선·항만·기뢰전으로 확대되면 에너지와 운임을 통해 글로벌 물가와 장기금리에 동시 충격을 줄 수 있다. 한국은 3%대 물가와 기준금리 3.00%, 대규모 재정지출이 겹쳐 정책조합의 난도가 높아질 전망이다. 유럽에서는 우크라이나 에너지시설 공격과 독일 핵심인프라 사보타주가 결합되며 에너지안보·하이브리드 위협 대응투자가 확대될 가능성이 높다. 미국의 재정위험은 단기 이벤트보다 장기국채의 구조적 위험 프리미엄으로 관찰할 필요가 있다."
+  "outlook": "향후 1~4주는 우크라이나 전쟁에서 외교채널 재가동 여부가 핵심이다. 미국 중재단 방문이 실제 협상틀로 이어질 경우 부분휴전·인도적 조치가 먼저 나타날 수 있지만, 현재의 연속 공습이 지속되면 협상 수사는 압박전술의 일부에 그칠 가능성도 있다. 경제적으로는 러시아의 재정·금리 부담과 중국의 정책금융 확대가 대조적인 국가주도 대응을 보여준다. 기후·재난 측면에서는 초강도 엘니뇨와 네팔 빙하재난이 단기 뉴스가 아니라 2027년까지 식량·수자원·보험·재정에 영향을 주는 구조적 위험으로 확대될 가능성이 높다."
 }
