@@ -218,6 +218,18 @@
     "baselineAt": "2026-08-31",
     "baselineLabel": "판례·법령·연구·입법·법조동향 자료 기준"
   },
+  "nexus-legal-search": {
+    "id": "nexus-legal-search",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-09-04",
+    "contentCount": null,
+    "contentLabel": "콘텐츠",
+    "contentReviewedAt": "2026-09-04",
+    "baselineAt": "2026-09-04",
+    "baselineLabel": "판례번호 자동인식·원자료 검색·NEXUS 연결 1.0"
+  },
   "culture-events-hub": {
     "id": "culture-events-hub",
     "managedBy": "github",
