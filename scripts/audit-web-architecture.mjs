@@ -23,8 +23,7 @@ const nexusRuntimePages = [
   'nexus/publishing',
   'nexus/articles',
   'nexus/ai-trends',
-  'nexus/ai-music-archive',
-  'nexus/education-hub'
+  'nexus/ai-music-archive'
 ];
 
 const nexusDetailPages = [
