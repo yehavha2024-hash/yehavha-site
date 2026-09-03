@@ -179,15 +179,6 @@
     "baselineAt": "2026-08-27",
     "baselineLabel": "자료기준"
   },
-  "education-hub": {
-    "id": "education-hub",
-    "managedBy": "github",
-    "status": "운영 중",
-    "statusTone": "active",
-    "lastUpdated": "2026-08-23",
-    "contentCount": 6,
-    "contentLabel": "운영 모듈"
-  },
   "nexus-university": {
     "id": "nexus-university",
     "managedBy": "github",
