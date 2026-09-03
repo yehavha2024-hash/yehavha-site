@@ -1,0 +1,18 @@
+{
+  "id": "nexus-legal-search",
+  "publish": true,
+  "tracking": {
+    "paths": [
+      "nexus/legal-search/index.html",
+      "nexus/legal-search/style.css",
+      "nexus/legal-search/app.js"
+    ],
+    "freshDays": 30,
+    "staleDays": 120
+  },
+  "review": {
+    "contentReviewedAt": "2026-09-04",
+    "baselineAt": "2026-09-04",
+    "baselineLabel": "판례번호 자동인식·원자료 검색·NEXUS 연결 1.0"
+  }
+}
