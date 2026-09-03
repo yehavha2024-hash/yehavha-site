@@ -191,9 +191,9 @@
   "nexus-university": {
     "id": "nexus-university",
     "managedBy": "github",
-    "status": "운영 중",
-    "statusTone": "active",
-    "lastUpdated": "2026-08-23",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-09-04",
     "contentCount": 496,
     "contentLabel": "개설 과목"
   },
