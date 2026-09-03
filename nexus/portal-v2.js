@@ -6,16 +6,13 @@
   const portalGrid = document.getElementById('portalGrid');
   const accessCount = document.getElementById('accessCount');
   const portalMarkText = document.querySelector('.portal-mark span:last-child');
-  const heroVisual = document.querySelector('.hero-main>img');
-  const heroSubtitle = document.querySelector('.hero-main>h1>span');
+  const todayNexusDate = document.getElementById('todayNexusDate');
   let toastTimer;
   let koreaClockTimer;
 
   const COUNTER_ENDPOINT = '/api/access';
   const KOREA_TIME_ZONE = 'Asia/Seoul';
 
-  if (heroSubtitle) heroSubtitle.textContent = 'AI·AX 전략정보·지식·대응 시스템';
-  if (heroVisual) heroVisual.alt = '지식에서 전략으로, 전략에서 대응으로 이어지는 YEHAVHA NEXUS AI·AX 전략 시스템';
   if (accessCount) {
     accessCount.textContent = '확인 중';
     accessCount.hidden = false;
@@ -24,16 +21,19 @@
   const categoryIcons = {
     commentary: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19h4L19 9a2.1 2.1 0 0 0-3-3L6 16l-1 3Z"/><path d="m14.5 7.5 2 2"/><path d="M12.5 19H19"/></svg>',
     intelligence: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 19 6.2v5.1c0 4.4-2.9 7.4-7 9.2-4.1-1.8-7-4.8-7-9.2V6.2L12 3.5Z"/><path d="M8.2 12h2.1l1.2-2.5 1.8 5 1.1-2.5h1.7"/></svg>',
+    investment: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18V10M10 18V6M16 18v-5M3 20h18"/><path d="m4 8 5-4 6 5 5-5"/></svg>',
     publicsector: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-5 9 5H3Z"/><path d="M5 10.5v7M9.5 10.5v7M14.5 10.5v7M19 10.5v7M3 19.5h18"/></svg>',
+    'local-government-planning': '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-5 9 5H3Z"/><path d="M5 10.5v7M9.5 10.5v7M14.5 10.5v7M19 10.5v7M3 19.5h18"/></svg>',
     university: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3.2 8.5 8.8-4.2 8.8 4.2-8.8 4.2-8.8-4.2Z"/><path d="M6.2 11.2v5.3c3.7 2.2 7.9 2.2 11.6 0v-5.3M20.8 8.5v5.3"/></svg>',
     edtechresearch: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h9a3 3 0 0 1 3 3v10H7a3 3 0 0 0-3 3v-16Z"/><path d="M16 8.5h4v9h-4M8 10h4M8 13h5"/></svg>',
     learningapps: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="17" height="16" rx="3"/><path d="M3.5 8.2h17M7.2 12h3.8v3.8H7.2zM14.2 12h2.8M14.2 15.8h2.8"/></svg>',
-    legalpractice: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15M6 7h12M7.5 7 4.5 13h6L7.5 7ZM16.5 7l-3 6h6l-3-6ZM8 20h8"/></svg>',
     education: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 8.7 9-4.2 9 4.2-9 4.2-9-4.2Z"/><path d="M6 11.1v5c3.8 2.4 8.2 2.4 12 0v-5"/><path d="M21 8.7v5.1"/></svg>',
+    aiknowledge: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3M5.8 5.8l2.1 2.1M16.1 16.1l2.1 2.1M18.2 5.8l-2.1 2.1M7.9 16.1l-2.1 2.1"/><circle cx="12" cy="12" r="4.2"/></svg>',
+    'ai-work-infrastructure': '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="9" y="14" width="6" height="6" rx="1.5"/><path d="M7 10v2h10v-2M12 12v2"/></svg>',
+    legalpractice: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15M6 7h12M7.5 7 4.5 13h6L7.5 7ZM16.5 7l-3 6h6l-3-6ZM8 20h8"/></svg>',
     legalresearch: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h9.2a2.8 2.8 0 0 1 2.8 2.8v10.2H7.8A2.8 2.8 0 0 0 5 20.3V4.5Z"/><path d="M7.8 20.3H19V7.8M8.5 9h5M8.5 12h4"/></svg>',
     legalintelligence: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h14v15H5z"/><path d="M8 8h8M8 11.5h8M8 15h5"/><path d="M3 7.5h2M3 12h2M3 16.5h2"/></svg>',
     legalsearch: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="5.5"/><path d="m15 15 5 5"/><path d="M8 10.5h5M10.5 8v5"/></svg>',
-    aiknowledge: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3M5.8 5.8l2.1 2.1M16.1 16.1l2.1 2.1M18.2 5.8l-2.1 2.1M7.9 16.1l-2.1 2.1"/><circle cx="12" cy="12" r="4.2"/></svg>',
     culture: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h16v13H4z"/><path d="M7 9h4M7 12h7M7 15h5"/><path d="M17 8.5v6M14 11.5h6"/></svg>',
     publishing: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5c3.3-.6 5.9.1 8 2.1v11c-2.1-2-4.7-2.7-8-2.1v-11Z"/><path d="M20 5.5c-3.3-.6-5.9.1-8 2.1v11c2.1-2 4.7-2.7 8-2.1v-11Z"/></svg>',
     media: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="m10 9 5 3-5 3V9Z"/></svg>'
@@ -52,6 +52,13 @@
     updateKoreaClock();
     window.clearInterval(koreaClockTimer);
     koreaClockTimer = window.setInterval(updateKoreaClock, 30000);
+  }
+
+  function updateTodayDate() {
+    if (!todayNexusDate) return;
+    const parts = new Intl.DateTimeFormat('ko-KR', {timeZone:KOREA_TIME_ZONE,year:'numeric',month:'2-digit',day:'2-digit',weekday:'short'}).formatToParts(new Date());
+    const map = Object.fromEntries(parts.map(part => [part.type, part.value]));
+    todayNexusDate.textContent = `${map.year}.${map.month}.${map.day} ${map.weekday}`;
   }
 
   function make(tag, className, text) {
@@ -108,12 +115,15 @@
   function maturityFor(project) {
     if (project.category === 'commentary') return {label:'논평',tone:'research'};
     if (project.category === 'intelligence') return {label:'전략정보',tone:'research'};
+    if (project.category === 'investment') return {label:'분석·참고',tone:'operational'};
     if (project.category === 'publicsector') return {label:'전략·대응',tone:'research'};
+    if (project.category === 'local-government-planning') return {label:'실무 매뉴얼',tone:'operational'};
     if (project.category === 'edtechresearch') return {label:'전문 연구',tone:'research'};
+    if (project.category === 'aiknowledge') return {label:'지식·동향',tone:'research'};
+    if (project.category === 'ai-work-infrastructure') return {label:'구축 매뉴얼',tone:'operational'};
     if (project.category === 'legalresearch') return {label:'전문 연구',tone:'research'};
     if (project.category === 'legalintelligence') return {label:'법률정보',tone:'research'};
     if (project.category === 'legalsearch') return {label:'법률검색',tone:'research'};
-    if (project.category === 'aiknowledge') return {label:'지식·동향',tone:'research'};
     if (project.category === 'culture') return {label:'문화정보',tone:'operational'};
     if (project.category === 'legalpractice') return {label:'실무·훈련',tone:'operational'};
     if (project.category === 'learningapps' || project.category === 'university') return {label:'학습',tone:'operational'};
@@ -350,7 +360,7 @@
       name:'YEHAVHA Nexus',
       alternateName:'예하바 프로젝트 포털',
       url:canonicalUrl,
-      description:'논평·전략정보·정부 AX·학습·법률실무·법학 AI 연구·법률정보·법률검색·AI 지식동향·문화행사·출판·미디어를 연결하는 통합 포털',
+      description:'논평·전략정보·투자·정부 AX·지방정부 사업기획·학습·AI 지식·업무 인프라·법률실무·법학 AI 연구·법률정보·법률검색·문화행사·출판·미디어를 연결하는 통합 포털',
       potentialAction:{'@type':'SearchAction',target:`${canonicalUrl}?q={search_term_string}`,'query-input':'required name=search_term_string'},
       hasPart:data.projects.map(project => ({'@type':'WebPage',name:project.title,url:project.url,description:project.description}))
     });
@@ -426,6 +436,7 @@
     }
   });
 
+  updateTodayDate();
   installKoreaClock();
   window.setTimeout(() => { void requestAccessCount(); }, 700);
   loadPortal();

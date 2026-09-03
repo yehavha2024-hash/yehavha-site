@@ -51,6 +51,7 @@ const requiredReturnPages = [
   'nexus/education-hub/index.html',
   'nexus/government-ax/index.html',
   'nexus/intelligence-briefing/index.html',
+  'nexus/legal-search/index.html',
   'nexus/living-law/index.html',
   'nexus/publishing/index.html',
   'nexus/research-track/index.html',
@@ -92,6 +93,52 @@ if (!exists(portal)) {
   }
   if (/background\s*:\s*#081a30/i.test(css)) fail(portal, '복귀 링크/공통 shell에 구형 다크 배경이 남아 있음');
   if (!/\.footer-card[^\{]*\{[^}]*text-align:center/is.test(css)) fail(portal, 'Footer 중앙정렬 canonical 규칙 누락');
+  if (/\.hero\s+\.container\s*>\s*\.portal-discovery/.test(css)) fail(portal, '메인 전용 통합검색 폭 규칙은 nexus-standard.css가 소유해야 함');
+}
+
+const mainPortalPage = 'nexus/index.html';
+const mainPortalCss = 'nexus/nexus-standard.css';
+const mainPortalJs = 'nexus/portal-v2.js';
+if (!exists(mainPortalPage)) {
+  fail(mainPortalPage, 'NEXUS 메인 페이지 없음');
+} else {
+  const html = read(mainPortalPage);
+  const cssRefs = [...html.matchAll(/<link\s+[^>]*href=["']([^"']+\.css(?:\?[^"']*)?)["']/gi)].map(match => match[1].split('?')[0]);
+  if (cssRefs.length !== 2 || !cssRefs.some(ref => ref.endsWith('portal-v2.css')) || !cssRefs.some(ref => ref.endsWith('nexus-standard.css'))) {
+    fail(mainPortalPage, `NEXUS 메인 CSS는 공통 shell + nexus-standard.css 2개만 허용: ${cssRefs.join(', ') || '없음'}`);
+  }
+  if (/<style[\s>]/i.test(html)) fail(mainPortalPage, '메인 페이지 inline style 금지: nexus-standard.css가 presentation canonical owner');
+  const inlineScripts = [...html.matchAll(/<script\b([^>]*)>/gi)].filter(match => !/\bsrc\s*=/.test(match[1]) && !/application\/ld\+json/i.test(match[1]));
+  if (inlineScripts.length) fail(mainPortalPage, '메인 페이지 inline runtime script 금지: portal-v2.js가 behavior canonical owner');
+  if (/MutationObserver|standalone-category/.test(html)) fail(mainPortalPage, '정적 레이아웃 보정/standalone 예외 구조가 메인 HTML에 잔존');
+}
+
+if (!exists(mainPortalCss)) {
+  fail(mainPortalCss, 'NEXUS 메인 presentation canonical owner 없음');
+} else {
+  const css = read(mainPortalCss);
+  if (!/\.hero\s+\.container\s*>\s*\.portal-discovery/.test(css)) fail(mainPortalCss, '통합검색 폭 규칙 누락');
+  if (/standalone-category/.test(css)) fail(mainPortalCss, '폐기된 standalone-category 스타일 잔존');
+}
+
+if (!exists(mainPortalJs)) {
+  fail(mainPortalJs, 'NEXUS 메인 behavior canonical owner 없음');
+} else {
+  const js = read(mainPortalJs);
+  if (/MutationObserver/.test(js)) fail(mainPortalJs, 'MutationObserver로 정적 카테고리 순서를 보정하면 안 됨');
+  if (/heroSubtitle|heroVisual/.test(js)) fail(mainPortalJs, '정적 Hero 문구/이미지 속성을 JS가 재작성하면 안 됨');
+}
+
+if (exists('nexus/projects.json')) {
+  try {
+    const data = JSON.parse(read('nexus/projects.json'));
+    const categories = new Set((data.categories || []).map(item => item.id));
+    for (const id of ['investment','local-government-planning','ai-work-infrastructure']) {
+      if (!categories.has(id)) fail('nexus/projects.json', `메인 카테고리 단일원본 누락: ${id}`);
+    }
+  } catch (error) {
+    fail('nexus/projects.json', `카테고리 단일원본 JSON 파싱 실패: ${error.message}`);
+  }
 }
 
 const articlePages = [
