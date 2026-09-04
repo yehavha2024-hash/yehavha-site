@@ -1,135 +1,119 @@
 {
-  "generatedAt": "2026-09-04T06:30:00+09:00",
-  "window": "2026-09-03 06:30–2026-09-04 06:30 KST · 최근 24시간 중심 · 동일 이슈는 material change가 있을 때만 본문 재진입",
+  "generatedAt": "2026-09-05T06:30:00+09:00",
+  "window": "2026-09-04 06:30–2026-09-05 06:30 KST · 최근 24시간 중심 · 동일 이슈는 material change가 있을 때만 본문 재진입",
   "schedule": "06:30 KST daily",
-  "executiveSummary": "오늘의 전략적 핵심은 러시아·우크라이나가 장기전 속에서도 협상 가능성과 미국 중재 재가동을 동시에 언급하면서 외교적 변곡 가능성이 생긴 반면, 키이우에 대한 연속 공습은 계속돼 군사·외교의 이중 궤도가 형성됐다는 점이다. 중동에서는 시리아가 아사드 정권 시절 잔존 화학무기의 검증 가능한 폐기를 재개해 비확산과 전후 책임규명에서 중요한 진전을 보였다. 경제·산업에서는 러시아 재정적자가 GDP의 2.8%까지 확대되고 중국은 중소기업·전략산업에 대한 정책금융과 국가 지원을 강화했다. 환경·재난에서는 WMO가 현재 엘니뇨가 관측 사상 최강 수준으로 발전할 가능성을 경고했고, 네팔 빙하붕괴 재난은 사망 1,200명 이상·실종 4,200명 이상, 약 2만 가구 재건 필요로 피해규모가 크게 확대됐다. 한국에서는 최근 집중호우 피해지역에 정부가 긴급 재난특교세를 지원하며 복구단계로 전환하고 있다.",
+  "executiveSummary": "오늘의 전략적 핵심은 미국과 이란의 군사충돌이 재개된 가운데 미국 재무부가 튀르키예 소재 금융기관까지 제재해 군사·해상·금융 압박을 동시에 강화했고, 호르무즈 통항 제약과 맞물려 Brent가 주간 7.6% 상승하고 미국 디젤 가격이 사상 최고치에 도달했다는 점이다. 우크라이나에서는 미국 중재 방문을 앞두고 러시아 드론이 키이우의 우크라이나 보안국 본부를 타격해 협상 신호와 군사압박이 병행되고 있다. 한국에는 미국 기업 4곳이 반도체·첨단소재·에너지 분야에 총 20억달러 투자를 약속해 공급망·첨단산업 측면의 실질적 투자 유입이 확인됐다. 세계 식량가격은 FAO 기준 2022년 말 이후 최고로 올라 기후·전쟁·물류 충격이 식량 인플레이션으로 전이되고 있다. 네팔에서는 대재난 9일 만에 수력발전 터널에서 생존자 2명이 구조됐지만 사망 1,294명 이상·실종 5,600명 이상으로 피해가 확대됐고 유엔은 4,960만달러 긴급지원계획을 출범시켰다. 미국의 사우디 JDAM-ER 약 50억달러 판매 승인과 가자 민간인 사망에 대한 유엔 인권기구의 경고도 중동 안보·국제법 위험을 높이는 변수다.",
   "items": [
     {
-      "topicKey": "ukraine-peace-diplomacy-20260904",
-      "priority": "HIGH",
-      "category": "국제정세·외교·안보·유럽",
-      "headline": "푸틴·우크라이나 모두 평화협상 '새 동력' 언급…미 중재단 모스크바·키이우 방문 추진",
-      "fact": "9월 3일 Reuters에 따르면 블라디미르 푸틴 러시아 대통령은 우크라이나 전쟁 종식을 위한 합의 가능성이 있다고 언급했고, 우크라이나 외무장관도 평화 노력에 '새로운 동력'을 기대한다고 밝혔다. 볼로디미르 젤렌스키 대통령은 미국 정부 협상단이 조만간 모스크바와 키이우를 각각 방문할 예정이라고 밝혔다. 같은 날 러시아의 키이우 공격은 계속돼 최소 10명이 부상했다.",
-      "assessment": "협상 관련 수사가 양측에서 동시에 나온 것은 최근 수개월 대비 의미 있는 변화지만, 구체적 의제나 양보안은 제시되지 않았다. 연속 공습이 병행되고 있어 현재 단계는 휴전 임박보다는 외교채널 재가동 가능성을 시험하는 국면으로 보는 것이 타당하다.",
-      "impact": "실질 협상이 개시되면 유럽 방산·에너지·곡물·해운 시장의 위험 프리미엄이 낮아질 수 있으나, 협상 실패 시 반대로 장거리 타격과 인프라 공격이 더 강화될 수 있다.",
-      "watch": "미 협상단 실제 방문 일정, 러시아·우크라이나의 협상 의제 공개, 포로교환·부분휴전 등 선행조치, 키이우·흑해 인프라 공격 강도를 추적한다.",
-      "confidence": "높음(발언·방문계획), 중간(협상 진전 가능성)",
-      "sources": [
-        {"label": "Reuters · Putin cites chance of peace deal, Ukraine sees 'new dynamic' (2026-09-03)", "url": "https://www.reuters.com/world/europe/putin-cites-chance-peace-deal-says-ukrainian-aviation-warning-makes-it-harder-2026-09-03/"},
-        {"label": "Reuters · Zelenskiy says Ukraine expects meeting with US negotiators in coming days (2026-09-03)", "url": "https://www.reuters.com/world/zelenskiy-says-ukraine-expects-meeting-with-us-negotiators-coming-days-2026-09-03/"},
-        {"label": "Reuters · Russian attack on Kyiv injures 10 (2026-09-03)", "url": "https://www.reuters.com/world/russian-attack-kyiv-kills-one-triggers-fire-damages-high-rise-building-2026-09-03/"}
-      ]
-    },
-    {
-      "topicKey": "syria-chemical-weapons-destruction-20260904",
-      "priority": "HIGH",
-      "category": "국제안보·비확산·법·전후책임",
-      "headline": "시리아, 아사드 정권 잔존 화학무기 검증 폐기 재개…10여 년 만의 비확산 진전",
-      "fact": "9월 3일 Reuters에 따르면 시리아는 아사드 정권 시절 비밀 화학무기 프로그램의 잔존물 폐기에 착수했다. 유엔과 화학무기금지기구(OPCW)는 42발의 항공폭탄과 관련 생산·저장시설의 폐기를 검증했으며, 이는 2014년 이후 처음 확인된 대규모 검증 폐기다. 시리아 당국은 화학무기 프로그램 관련 고위급 인사를 포함한 18명에 대한 재판도 준비 중이다.",
-      "assessment": "단순 무기폐기를 넘어 국제검증과 형사책임 절차가 병행된다는 점이 중요하다. 신정부가 국제 비확산체제에 재편입하려는 신호로 볼 수 있으나, 미신고 저장시설과 추가 잔존물 존재 여부는 여전히 불확실하다.",
-      "impact": "시리아의 국제적 정상화, 제재완화 논의, 중동 비확산체제, 전쟁범죄·화학무기 책임규명에 영향을 줄 수 있다.",
-      "watch": "OPCW 추가 사찰결과, 미신고 시설 발견 여부, 18명 재판의 법적 절차와 증거 공개, 이스라엘의 역내 군사행동이 폐기작업에 미치는 영향을 본다.",
-      "confidence": "높음",
-      "sources": [
-        {"label": "Reuters · Syria begins destroying Assad-era chemical weapons (2026-09-03)", "url": "https://www.reuters.com/world/syria-begins-destroying-assad-era-chemical-weapons-2026-09-03/"}
-      ]
-    },
-    {
-      "topicKey": "russia-budget-deficit-20260904",
-      "priority": "HIGH",
-      "category": "러시아·경제·재정·전쟁지속능력",
-      "headline": "러시아 재정적자 GDP 2.8%로 확대…전쟁비용·인프라 타격·고금리의 삼중 압박",
-      "fact": "9월 3일 Reuters에 따르면 러시아의 1~7월 재정적자는 전년 동기 대비 40% 증가해 GDP의 2.8%에 달했다. 정부의 공식 연간 적자목표는 1.6%다. 러시아 중앙은행 기준금리는 14%이며, 우크라이나의 정유시설·물류시설 공격은 연료부족과 물가압력을 키우고 있다.",
-      "assessment": "러시아의 낮은 국가부채 수준이 단기 완충장치지만, 적자 확대와 고금리가 장기화될수록 전쟁비용 조달과 민간투자 사이의 구축효과가 커질 수 있다. 재정·통화·전쟁경제의 긴장이 동시에 증가하는 국면이다.",
-      "impact": "러시아의 국방비·사회지출 조정, 추가 증세·국채발행, 루블과 물가, 에너지 수출정책, 전쟁지속능력에 영향을 줄 수 있다.",
-      "watch": "9월 11일 러시아 중앙은행 금리결정, 추가 예산수정, 에너지세입, 정유시설 피해와 연료수급을 확인한다.",
-      "confidence": "높음",
-      "sources": [
-        {"label": "Reuters · Russia can manage its growing budget deficit, Putin says (2026-09-03)", "url": "https://www.reuters.com/markets/europe/russia-can-manage-its-growing-budget-deficit-putin-says-2026-09-03/"}
-      ]
-    },
-    {
-      "topicKey": "china-sme-policy-finance-20260904",
-      "priority": "HIGH",
-      "category": "중국·산업정책·경제·공급망",
-      "headline": "중국, '작은 거인' 2만2천개 육성·정책금융 집행…전략산업 자립과 내수투자 동시 강화",
-      "fact": "9월 3일 중국은 10개 중앙기관 공동 계획을 통해 2030년까지 혁신형 중소기업인 '작은 거인'을 2만2천개로 확대하고 산업클러스터를 600개까지 늘리겠다고 밝혔다. 같은 날 중국개발은행은 8,000억위안 규모 2026년 정책금융 프로그램의 첫 자금을 배터리·첨단소재·교통인프라 프로젝트에 집행했다.",
-      "assessment": "성장률 둔화와 민간투자 약화에 대응하는 경기부양이면서 동시에 미국과의 기술·공급망 경쟁을 염두에 둔 산업정책이다. 단기 경기부양보다 전략산업의 자금조달 구조를 국가가 장기간 재편하려는 성격이 강하다.",
-      "impact": "배터리·신소재·로봇·양자·첨단제조 공급망의 중국 내 투자 확대와 글로벌 과잉설비·통상갈등 심화 가능성이 있다.",
-      "watch": "정책금융 실제 집행속도, 민간투자 유발효과, 지방정부 부채와의 관계, 미국·EU의 추가 보조금·무역구제 대응을 본다.",
-      "confidence": "높음",
-      "sources": [
-        {"label": "Reuters · China to support 'little giants' and other emerging companies (2026-09-03)", "url": "https://www.reuters.com/world/asia-pacific/china-vows-support-small-midsize-firms-employment-innovation-2026-09-03/"},
-        {"label": "Reuters · China deploys first 2026 policy financing funds to spur investment (2026-09-03)", "url": "https://www.reuters.com/world/asia-pacific/china-deploys-first-2026-policy-financing-funds-spur-investment-2026-09-03/"}
-      ]
-    },
-    {
-      "topicKey": "super-el-nino-20260904",
+      "topicKey": "iran-financial-energy-pressure-20260905",
       "priority": "CRITICAL",
-      "category": "환경·기후·식량·재난",
-      "headline": "WMO, 현 엘니뇨 '관측 사상 최강 가능성' 경고…2027년까지 글로벌 재난·식량위험 확대",
-      "fact": "9월 3일 Reuters가 WMO 발표를 인용해 보도한 내용에 따르면 현재 엘니뇨는 1950년 이후 상위 4개 강도에 이미 진입했으며 2027년 2월까지 지속될 확률이 거의 100%로 평가됐다. WMO는 해수면 온도 상승이 계속될 경우 관측 사상 가장 강한 엘니뇨가 될 가능성이 있다고 밝혔다.",
-      "assessment": "단기 기상현상이 아니라 2026~2027년 농업·수자원·보건·보험·에너지수요를 동시에 흔드는 거시 위험요인이다. 기후변화로 높아진 해수온이 자연적 엘니뇨의 충격을 증폭시킬 가능성이 크다.",
-      "impact": "중남미·아시아의 홍수와 가뭄, 곡물가격, 수력발전, 산불, 감염병, 재보험 손실, 2027년 글로벌 물가에 연쇄 영향을 줄 수 있다.",
-      "watch": "WMO 계절전망, 태평양 해수면온도, 남미·동남아 강수편차, 주요 곡물 생산지 작황과 식량가격을 추적한다.",
+      "category": "국제정세·안보·에너지·금융제재",
+      "headline": "미국, 이란 금융망 튀르키예까지 차단…호르무즈 충격 속 유가·디젤 가격 동반 급등",
+      "fact": "9월 4일 미국 재무부는 Operation Economic Outcast의 일환으로 튀르키예 소재 Golden Global Bank와 자회사들을 제재했다. 재무부는 해당 은행이 IRGC-QF 관련 거래와 국제 결제 접근을 지원했다고 밝혔다. 같은 날 Reuters에 따르면 Brent유는 배럴당 92.68달러로 마감해 주간 7.6% 상승했고 WTI는 주간 약 10% 올랐다. 미국 소매 디젤 평균가격은 갤런당 5.85달러로 사상 최고를 기록했으며 호르무즈 통항량은 평시보다 크게 줄어든 상태다.",
+      "assessment": "미국의 대이란 전략이 군사타격·해상압박·2차 금융제재를 결합하는 단계로 이동했다. 특히 제3국 금융기관에 대한 실제 제재는 이란의 무역결제와 우회망을 위축시키는 동시에 중동·유럽·아시아 금융기관의 컴플라이언스 비용을 높일 수 있다.",
+      "impact": "원유·정유제품·해운·보험료 상승이 글로벌 물가와 장기금리에 재전이될 수 있다. 한국에는 원유수입단가, 정유·석화 원가, 원화 변동성, 물가경로를 통한 영향이 크다.",
+      "watch": "호르무즈 실제 통항량, 추가 상선 피격·억류, Brent 100달러 접근 여부, 미국의 제3국 금융기관 추가 제재, 이란의 협상 복귀 신호를 추적한다.",
       "confidence": "높음",
       "sources": [
-        {"label": "Reuters · 'Supersized' El Niño may become strongest ever recorded, UN says (2026-09-03)", "url": "https://www.reuters.com/business/environment/el-nino-likely-strengthen-further-persist-into-2027-wmo-says-2026-09-03/"}
+        {"label": "U.S. Treasury · Treasury Severs Iranian Regime’s Financial Lifelines in Türkiye (2026-09-04)", "url": "https://home.treasury.gov/news/press-releases/treasury-severs-iranian-regime-s-financial-lifelines-turkiye/"},
+        {"label": "Reuters · Oil ends week higher on renewed US-Iran strikes, diesel hits record (2026-09-04)", "url": "https://www.reuters.com/business/energy/oil-set-steepest-weekly-gain-since-mid-july-over-intensifying-us-iran-tensions-2026-09-04/"}
       ]
     },
     {
-      "topicKey": "nepal-glacier-disaster-update-20260904",
-      "priority": "CRITICAL",
-      "category": "재난·환경·에너지·인프라",
-      "headline": "네팔 빙하붕괴 재난 사망 1,250명 이상·실종 4,200명 이상…약 2만 가구 재건 필요",
-      "fact": "9월 3일 Reuters에 따르면 8월 26일 발생한 네팔 빙하붕괴·대홍수로 네팔에서 최소 1,252명이 사망하고 4,200명 이상이 실종됐다. 약 7,500가구가 완전히 파괴됐고 전체 약 2만 가구가 재건 또는 대규모 복구가 필요한 것으로 추산된다. 수력발전소 터널에 고립된 약 900명에 대한 구조작업도 계속되고 있다.",
-      "assessment": "피해가 인명·주택을 넘어 국가 전력망, 중국 국경무역, 교육·식수·위생 체계로 확산된 복합재난이다. 이전 브리핑 대비 피해규모가 크게 상향돼 동일 이슈의 재진입 요건을 충족한다.",
-      "impact": "네팔 재정과 재건수요, 수력발전·전력수입, 대중국 국경교역, 국제원조, 히말라야 지역의 빙하재난 조기경보 정책에 장기적 영향을 준다.",
-      "watch": "터널 구조결과, 최종 사망·실종 집계, 발전소 복구일정, 국제원조 규모, 추가 빙하호 붕괴위험을 본다.",
-      "confidence": "높음",
-      "sources": [
-        {"label": "Reuters · Nepal must rebuild thousands of homes, no letup in search for missing (2026-09-03)", "url": "https://www.reuters.com/business/environment/nepal-must-rebuild-thousands-homes-no-let-up-search-missing-2026-09-03/"},
-        {"label": "Reuters · In flood-ravaged Nepal valley nothing is left standing (2026-09-03)", "url": "https://www.reuters.com/business/environment/flood-ravaged-nepal-valley-nothing-is-left-standing-2026-09-03/"}
-      ]
-    },
-    {
-      "topicKey": "us-venezuela-spr-swap-20260904",
+      "topicKey": "ukraine-sbu-strike-talks-20260905",
       "priority": "HIGH",
-      "category": "미국·에너지·전략비축·시장",
-      "headline": "미국, 베네수엘라 중질유를 미 원유와 교환해 SPR 충전 검토…비축전략 구체화",
-      "fact": "9월 3일 Reuters에 따르면 미국 에너지부는 베네수엘라산 중질유를 직접 전략비축유(SPR)에 넣기보다 미국산 경질·중질유와 교환하는 방안을 검토하고 있다. 베네수엘라산 원유는 황 함량과 점도가 높아 SPR의 기존 품질구조와 맞지 않는다는 기술적 제약 때문이다.",
-      "assessment": "전일의 SPR 재충전 방침이 실제 물류·품질 제약을 반영한 스왑 구조로 구체화됐다. 미·이란 분쟁으로 낮아진 비축수준을 보완하면서 베네수엘라 공급을 활용하려는 실용적 에너지안보 전략이다.",
-      "impact": "미국 원유 수급, 걸프코스트 정유사의 중질유 조달, 베네수엘라 수출, SPR 재충전 속도와 국제유가에 영향을 줄 수 있다.",
-      "watch": "스왑 계약구조, 물량과 시점, 참여 정유사, 대베네수엘라 제재·계약조건, SPR 재고 증가속도를 본다.",
-      "confidence": "높음",
+      "category": "유럽·전쟁·외교·안보",
+      "headline": "러시아 드론, 키이우 SBU 본부 타격…미 중재 방문 앞두고 협상·군사압박 동시 진행",
+      "fact": "9월 4일 AP에 따르면 러시아 드론이 키이우 도심의 우크라이나 보안국(SBU) 본부를 타격해 12명이 다쳤다. 미국 특사단의 모스크바와 키이우 방문이 예정된 가운데 젤렌스키 대통령은 협상 기간 상호 공습중단 의사를 제시했다. 같은 시기 우크라이나는 러시아 소치·시리우스 일대 석유저장시설을 드론으로 공격했다.",
+      "assessment": "양측 모두 협상 가능성을 열어둔 채 상대의 군사·경제 인프라에 대한 압박을 강화하고 있다. 이는 휴전 직전의 긴장완화라기보다 협상력을 높이기 위한 강압외교 국면에 가깝다.",
+      "impact": "중재 성과 여부에 따라 러시아 에너지수출, 흑해 물류, 유럽 방산·에너지 가격의 위험 프리미엄이 크게 움직일 수 있다.",
+      "watch": "미국 특사단 실제 방문, 상호 공습중단 제안에 대한 러시아 반응, 포로교환·부분휴전 등 검증 가능한 선행조치, 러시아 정유·우크라이나 전력망 공격을 본다.",
+      "confidence": "높음(공격·방문계획), 중간(협상 진전)",
       "sources": [
-        {"label": "Reuters · Venezuela's heavy crude could be swapped for American oil to fill emergency reserve (2026-09-03)", "url": "https://www.reuters.com/business/energy/venezuelas-heavy-crude-could-be-swapped-american-oil-fill-emergency-reserve-2026-09-03/"}
+        {"label": "AP · Russian drone strikes Ukraine security service headquarters as US talks are expected (2026-09-04)", "url": "https://apnews.com/article/553d4ed8204070be97b1671db0c5cd53"}
       ]
     },
     {
-      "topicKey": "korea-heavy-rain-recovery-20260904",
+      "topicKey": "korea-us-investment-20260905",
+      "priority": "HIGH",
+      "category": "한국·산업·투자·공급망·에너지",
+      "headline": "미국 기업 4곳, 한국 반도체·첨단소재·해상풍력에 총 20억달러 투자 약속",
+      "fact": "9월 4일 Reuters는 한국 산업부 발표를 인용해 Air Products, Axcelis, Corning, Pacifico Energy 등 미국 기업 4곳이 한국에 총 20억달러를 투자하기로 했다고 보도했다. 투자대상은 평택 반도체용 가스·희귀가스 설비, 이온주입 장비 생산, 첨단 유리·소재, 서남권 3.2GW 해상풍력 프로젝트다.",
+      "assessment": "단순 외자유치보다 반도체 소재·장비와 대규모 전력공급을 하나의 산업생태계로 묶는 투자라는 점이 중요하다. 미·한 공급망 연계와 국내 반도체 클러스터의 전력·소재 자급 역량을 동시에 강화하는 성격이다.",
+      "impact": "반도체 공급망 안정성, 평택·서남권 산업투자, 해상풍력 인허가와 전력망 투자, 미국계 첨단소재 기업의 국내 생산기반 확대에 영향을 준다.",
+      "watch": "각 투자 프로젝트의 실제 집행시점·규모, 해상풍력 인허가와 송전망 확보, 반도체 클러스터 전력수요 대응, 후속 미국 기업 투자유치를 본다.",
+      "confidence": "높음",
+      "sources": [
+        {"label": "Reuters · South Korea says US companies to invest $2 billion in chip, energy sectors (2026-09-04 KST)", "url": "https://www.reuters.com/business/energy/south-korea-says-us-companies-invest-2-billion-chip-energy-sectors-2026-09-03/"}
+      ]
+    },
+    {
+      "topicKey": "fao-food-price-20260905",
+      "priority": "HIGH",
+      "category": "경제·식량·기후·물가",
+      "headline": "FAO 세계식량가격 2022년 말 이후 최고…기후·전쟁·흑해 물류위험 동시 반영",
+      "fact": "9월 4일 Reuters가 FAO 발표를 인용한 보도에 따르면 8월 FAO 세계식량가격지수는 133.3으로 7월 수정치 130.8에서 상승해 2022년 11월 이후 최고를 기록했다. 곡물가격은 3년 만의 최고 수준으로 올랐고 설탕은 전월 대비 11.9% 상승했다. FAO는 2026년 세계 곡물생산 전망을 29억8천만톤으로 하향했다.",
+      "assessment": "엘니뇨·폭염·가뭄과 우크라이나·이란 전쟁이 물류 및 생산위험을 동시에 높이면서 식량시장의 위험 프리미엄이 다시 확대되고 있다. 2022년 수준의 절대가격은 아니지만 방향성이 재상승으로 전환된 점이 중요하다.",
+      "impact": "신흥국 식량물가, 사료·가공식품 원가, 수입물가와 사회안정 비용이 상승할 수 있다. 한국도 곡물·유지류·설탕 수입가격을 통해 시차를 두고 영향을 받을 수 있다.",
+      "watch": "9~10월 곡물·설탕 가격, 엘니뇨 강도, 흑해 항만 운송, 브라질·유럽·아시아 작황, 주요국 수출제한 여부를 본다.",
+      "confidence": "높음",
+      "sources": [
+        {"label": "Reuters · World food prices at highest since 2022 as supply risks mount, FAO says (2026-09-04)", "url": "https://www.reuters.com/world/europe/world-food-prices-highest-since-2022-supply-risks-mount-fao-says-2026-09-04/"}
+      ]
+    },
+    {
+      "topicKey": "nepal-flood-rescue-appeal-20260905",
+      "priority": "CRITICAL",
+      "category": "재난·환경·에너지·인도지원",
+      "headline": "네팔 재난 9일 만에 수력터널 생존자 2명 구조…유엔 4,960만달러 긴급지원계획 가동",
+      "fact": "9월 4일 Reuters에 따르면 8월 26일 빙하·암석 붕괴 재난 이후 9일 만에 Upper Trishuli 3A 수력발전소 터널에서 근로자 2명이 구조됐다. 네팔 사망자는 1,294명 이상, 실종자는 5,600명 이상으로 집계됐으며 수력발전 터널에는 여전히 다수의 인원이 고립된 것으로 추정된다. 같은 날 유엔과 인도주의 파트너들은 84,000명 이상을 지원하기 위한 4,960만달러 규모의 4개월 긴급지원계획을 발표했다.",
+      "assessment": "재난은 구조단계와 동시에 대규모 인도지원·전력망·수자원·주거 재건 단계로 이동하고 있다. 고지대 겨울 이전에 도로·전력·식수 복구가 지연될 경우 2차 보건·생계 위기가 확대될 수 있다.",
+      "impact": "네팔 재정, 수력발전·전력수입, 관광·보험, 중국·인도와 연결된 국경 인프라에 중장기 부담이 예상된다.",
+      "watch": "터널 추가 생존자 구조, 실종자 집계, 산사태로 형성된 추가 자연댐 위험, 전력복구, 국제 긴급지원 자금 조달률과 겨울 이전 이재민 주거대책을 본다.",
+      "confidence": "높음",
+      "sources": [
+        {"label": "Reuters · Nine days after disaster, two pulled alive from Nepal hydropower tunnel (2026-09-04)", "url": "https://www.reuters.com/world/china/two-people-pulled-alive-nepal-hydropower-tunnel-2026-09-04/"},
+        {"label": "United Nations in Nepal · Nepal floods: UN and partners launch $49.6 million emergency appeal (2026-09-04)", "url": "https://nepal.un.org/en/322156-nepal-floods-un-and-partners-launch-496-million-emergency-appeal"}
+      ]
+    },
+    {
+      "topicKey": "saudi-jdam-sale-20260905",
+      "priority": "HIGH",
+      "category": "중동·안보·방산·군사협력",
+      "headline": "미 국무부, 사우디에 JDAM-ER 등 약 50억달러 무기판매 승인",
+      "fact": "9월 4일 Reuters에 따르면 미국 국무부는 사우디아라비아에 약 50억달러 규모의 JDAM-ER 정밀유도무기 판매 가능성을 승인했다. 주계약자는 Boeing으로 제시됐다. 별도로 약 7억5천만달러 규모의 AGT-1500 엔진 판매도 승인됐으며 Honeywell이 주계약자로 지목됐다.",
+      "assessment": "미·이란 충돌이 장기화되는 상황에서 걸프 동맹국의 정밀타격·기갑전력 유지능력을 강화하는 조치다. 단순 상업거래보다 미국의 걸프 억지체계 보강이라는 전략적 함의가 크다.",
+      "impact": "사우디 방공·타격능력, 미국 방산업체 수주, 이란의 위협인식, 걸프지역 군비경쟁에 영향을 줄 수 있다.",
+      "watch": "미 의회 심사, 최종 계약규모·납기, 사우디의 운용목적과 추가 방공·미사일 거래, 이란의 외교·군사 반응을 본다.",
+      "confidence": "높음",
+      "sources": [
+        {"label": "Reuters · U.S. approves potential sale of JDAM-ER to Saudi Arabia for $5 billion (2026-09-04)", "url": "https://www.reuters.com/world/middle-east/us-approves-potential-sale-joint-direct-attack-munitions-extend-range-saudi-2026-09-04/"}
+      ]
+    },
+    {
+      "topicKey": "gaza-civilian-law-risk-20260905",
       "priority": "WATCH",
-      "category": "한국·재난·정부·사회",
-      "headline": "정부, 집중호우 피해 전남광주·충남·전북에 재난특교세 20억원 긴급지원",
-      "fact": "행정안전부는 9월 3일 지난 8월 28일부터 9월 1일까지 집중호우 피해를 입은 전남광주·충남·전북 3개 시도에 재난안전관리 특별교부세 20억원을 긴급 지원한다고 밝혔다. 자금은 응급복구와 이재민 구호에 사용된다.",
-      "assessment": "대규모 국가재난 수준은 아니지만 최근 집중호우가 복구·재정지원 단계로 넘어갔다는 국내 정책 변화다. 추가 피해조사 결과에 따라 특별재난지역 지정이나 지원규모 확대 가능성이 있다.",
-      "impact": "지방재정, 농업·주택·공공시설 복구, 이재민 지원과 향후 기후재난 대응예산에 영향을 줄 수 있다.",
-      "watch": "중앙재난피해합동조사, 특별재난지역 추가 지정, 농축산·시설피해 확정액, 추가 호우 가능성을 확인한다.",
-      "confidence": "높음",
+      "category": "중동·국제법·인권·인도주의",
+      "headline": "유엔 인권기구, 가자 휴전 이후 민간인 사망 지속 경고…책임규명 요구",
+      "fact": "유엔 인권최고대표사무소는 9월 4일 성명에서 8월 28일부터 9월 1일까지 가자에서 이스라엘 공격으로 팔레스타인인 24명이 사망했으며 이 중 아동 4명과 여성 1명이 포함됐다고 밝혔다. OHCHR는 민간인 보호와 국제인도법·국제인권법 의무 준수를 재차 촉구했다.",
+      "assessment": "대규모 전면전보다는 낮은 강도의 공격이 지속되는 상황에서도 민간인 사상과 법적 책임 문제가 누적되고 있다. 휴전의 제도적 안정성이 충분히 확보되지 않았음을 보여준다.",
+      "impact": "이스라엘의 국제적 법적·외교적 부담, 휴전 감시체계, 인도지원 접근, 향후 책임규명 절차에 영향을 줄 수 있다.",
+      "watch": "휴전 위반 건수, 민간인 사상 추이, 인도지원 접근성, 이스라엘 조사·책임절차, 국제기구의 추가 법적 평가를 본다.",
+      "confidence": "높음(유엔 보고), 중간(개별 사건의 최종 법적 평가)",
       "sources": [
-        {"label": "연합뉴스 · 정부, 집중호우 피해 전남광주·충남·전북에 20억원 긴급지원 (2026-09-03)", "url": "https://www.yna.co.kr/amp/view/AKR20260903057300530"}
+        {"label": "OHCHR/United Nations in Palestine · The bloodshed in Gaza must stop (2026-09-04)", "url": "https://palestine.un.org/en/322139-office-united-nations-high-commissioner-human-rights-bloodshed-gaza-must-stop"}
       ]
     }
   ],
   "strategicWatchlist": [
-    "미국 중재단의 모스크바·키이우 방문 및 러·우 협상 의제 공개",
-    "키이우·흑해·에너지 인프라 공격의 지속 여부와 부분휴전 가능성",
-    "시리아 화학무기 추가 신고·OPCW 검증·관련자 재판",
-    "러시아 9월 11일 기준금리 결정과 재정적자 확대 대응",
-    "중국 8,000억위안 정책금융의 실제 집행속도와 전략산업 과잉설비",
-    "초강도 엘니뇨의 농업·식량·수력발전·재보험 영향",
-    "네팔 터널 구조·전력복구·국경교역 정상화",
-    "미 SPR 재충전 스왑계약과 베네수엘라 원유 물량"
+    "호르무즈 실제 통항량과 추가 상선 피격·억류, Brent 100달러 접근 여부",
+    "Operation Economic Outcast의 제3국 금융기관 추가 제재와 이란 협상 복귀 가능성",
+    "미국 특사단의 모스크바·키이우 방문과 상호 공습중단·부분휴전 선행조치",
+    "한국 내 미국 기업 20억달러 투자의 실제 집행과 반도체 클러스터 전력·송전망 확보",
+    "FAO 식량가격과 엘니뇨·흑해 물류가 9~10월 곡물·설탕 가격에 미치는 영향",
+    "네팔 수력발전 터널 추가 구조, 겨울 이전 주거·전력·식수 복구와 국제지원 조달률",
+    "사우디 JDAM-ER 거래의 미 의회 심사와 걸프 군비경쟁",
+    "가자 휴전 위반·민간인 사상과 국제법상 책임규명 절차"
   ],
-  "outlook": "향후 1~4주는 우크라이나 전쟁에서 외교채널 재가동 여부가 핵심이다. 미국 중재단 방문이 실제 협상틀로 이어질 경우 부분휴전·인도적 조치가 먼저 나타날 수 있지만, 현재의 연속 공습이 지속되면 협상 수사는 압박전술의 일부에 그칠 가능성도 있다. 경제적으로는 러시아의 재정·금리 부담과 중국의 정책금융 확대가 대조적인 국가주도 대응을 보여준다. 기후·재난 측면에서는 초강도 엘니뇨와 네팔 빙하재난이 단기 뉴스가 아니라 2027년까지 식량·수자원·보험·재정에 영향을 주는 구조적 위험으로 확대될 가능성이 높다."
+  "outlook": "향후 1~4주의 최우선 변수는 미·이란 충돌이 호르무즈 해상봉쇄와 금융고립을 통해 글로벌 인플레이션으로 얼마나 전이되는가이다. 상선 통항이 추가로 위축되거나 제3국 은행 제재가 확산되면 유가·정유제품·해운·보험·장기금리가 동시에 압박받을 수 있다. 우크라이나에서는 미국 중재단 방문이 실제 상호 공습중단이나 부분휴전으로 연결되는지 여부가 외교적 변곡점이다. 한국에서는 20억달러 규모 미국계 투자의 후속 집행이 반도체 공급망과 해상풍력·전력망 투자로 이어지는지를 볼 필요가 있다. 기후·식량 측면에서는 FAO 가격상승과 강한 엘니뇨가 결합하면서 2026년 하반기 식량물가가 다시 글로벌 정책변수로 부상할 가능성이 높다. 네팔은 구조단계를 넘어 재정·전력·주거 재건 국면으로 이동할 전망이다."
 }
