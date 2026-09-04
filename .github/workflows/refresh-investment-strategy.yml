@@ -6,6 +6,7 @@ on:
     paths:
       - 'scripts/refresh-investment-strategy.mjs'
       - 'scripts/run-investment-refresh.mjs'
+      - 'scripts/report-airtable-status.mjs'
       - '.github/workflows/refresh-investment-strategy.yml'
   schedule:
     # GitHub Actions cron uses UTC. 11:30 UTC = 20:30 KST.
@@ -37,6 +38,7 @@ jobs:
         run: |
           node --check scripts/refresh-investment-strategy.mjs
           node --check scripts/run-investment-refresh.mjs
+          node --check scripts/report-airtable-status.mjs
 
       - name: Refresh existing investment strategy content
         run: node scripts/run-investment-refresh.mjs
@@ -54,3 +56,12 @@ jobs:
           git add nexus/investment-strategy/index.html
           git commit -m "Refresh Nexus investment strategy"
           git push
+
+      - name: Report refresh status to Airtable
+        if: always()
+        continue-on-error: true
+        env:
+          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_NEXUS_TOKEN }}
+          NEXUS_REFRESH_STATUS: ${{ job.status }}
+          GITHUB_RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: node scripts/report-airtable-status.mjs
