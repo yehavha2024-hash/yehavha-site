@@ -11,8 +11,8 @@
   "government-local-ax-manual": {
     "id": "government-local-ax-manual",
     "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-08-27",
     "contentCount": 12,
     "contentLabel": "실행 단계"
@@ -50,8 +50,8 @@
   "living-law-100": {
     "id": "living-law-100",
     "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-08-27",
     "contentCount": 100,
     "contentLabel": "생활법률 항목",
@@ -98,8 +98,8 @@
   "legal-knowledge": {
     "id": "legal-knowledge",
     "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-08-27",
     "contentCount": 108,
     "contentLabel": "연구노트"
