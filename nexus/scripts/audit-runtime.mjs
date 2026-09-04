@@ -36,6 +36,65 @@ function auditInternalProjectUrls() {
   }
 }
 
+function auditUniversity() {
+  const source = 'nexus/university';
+  const coursePage = `${source}/course.html`;
+  for (const file of ['index.html', 'course.html', 'university.css', 'university-utils.js', 'readability.css', 'guided-practice.css', 'guided-practice.js']) {
+    if (!exists(`${source}/${file}`)) fail(source, `필수 실행파일 없음: ${file}`);
+  }
+  if (!exists(coursePage)) return;
+
+  const scripts = [...read(coursePage).matchAll(/<script\s+[^>]*src=["']\.\/([^"']+\.js)(?:\?[^"']*)?["']/gi)]
+    .map(match => match[1]);
+  const engineIndex = scripts.indexOf('course-engine.js');
+  if (engineIndex < 0) return fail(coursePage, 'course-engine.js 로드 순서 없음');
+  if (!scripts.includes('guided-practice.js')) fail(coursePage, 'canonical guided-practice.js 누락');
+  if (scripts.some(file => /-20\d{6}\.(?:css|js)$/.test(file))) fail(coursePage, '날짜형 실행 레이어가 로드됨');
+
+  const context = {
+    window: {},
+    console: { info() {}, warn() {}, error() {}, log() {} }
+  };
+  vm.createContext(context);
+  for (const file of scripts.slice(0, engineIndex)) {
+    const relative = `${source}/${file}`;
+    if (!exists(relative)) {
+      fail(coursePage, `교재 데이터 실행파일 없음: ${file}`);
+      continue;
+    }
+    try {
+      vm.runInContext(read(relative), context, { filename: file });
+    } catch (error) {
+      fail(relative, `교재 데이터 실행 실패: ${error.message}`);
+      return;
+    }
+  }
+
+  const curriculum = context.window.NEXUS_CURRICULUM;
+  const courses = Array.isArray(curriculum?.all) ? curriculum.all : [];
+  const textbooks = context.window.NEXUS_CORE_TEXTBOOK || {};
+  if (courses.length !== 496) fail(source, `전체 과목 ${courses.length}개, 기대값 496개`);
+  if (!unique(courses.map(course => course.id))) fail(source, '전체 과목 id 중복');
+  if (Object.keys(textbooks).length !== courses.length) fail(source, `교재 적용 ${Object.keys(textbooks).length}/${courses.length}`);
+
+  for (const course of courses) {
+    const lessons = textbooks[course.id]?.lessons;
+    if (!Array.isArray(lessons) || lessons.length !== 12) fail(`${source}/${course.id}`, `Lesson ${lessons?.length || 0}/12`);
+  }
+
+  const bridge = context.window.NEXUS_TEXTBOOK_COVERAGE_BRIDGE;
+  if (!bridge || bridge.count !== 0 || bridge.generated?.length) fail(source, `범용 보완 교재가 남아 있음: ${bridge?.count ?? '확인 불가'}개`);
+  for (const [globalName, sampleId] of [
+    ['NEXUS_PHILOSOPHY_TEXTBOOKS', 'PHI-101'],
+    ['NEXUS_THEOLOGY_TEXTBOOKS', 'BIB-101'],
+    ['NEXUS_HUMANITIES_TEXTBOOKS', 'HIS-101'],
+    ['NEXUS_ARTS_TEXTBOOKS', 'MUS-101']
+  ]) {
+    const lessons = context.window[globalName]?.[sampleId]?.lessons;
+    if (!Array.isArray(lessons) || lessons.length !== 12) fail(source, `${sampleId} 전공 교재 데이터 누락`);
+  }
+}
+
 function auditAdvancedToeic() {
   const source = 'nexus/toeic-human-v2';
   for (const file of ['data.js', 'learning-data.js', 'app.js', 'transfer-answers.js', 'style.css', 'transfer-answers.css', 'index.html']) {
@@ -208,6 +267,7 @@ function auditStatusModel() {
 }
 
 auditInternalProjectUrls();
+auditUniversity();
 auditAdvancedToeic();
 auditLivingLaw();
 auditPublishing();

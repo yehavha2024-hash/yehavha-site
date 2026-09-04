@@ -1,7 +1,7 @@
 (()=>{
 'use strict';
 const out=window.NEXUS_SOCIAL_TEXTBOOKS=window.NEXUS_SOCIAL_TEXTBOOKS||{};
-const S=s=>String(s||'').split('|').map(x=>x.trim()).filter(Boolean);
+const S=window.NEXUS_UNIVERSITY_UTILS.splitList;
 function mk(id,focus,chapters,theories,variables,designs,studies,rivals,readings,cases){
  const ch=S(chapters),th=S(theories),va=S(variables),de=S(designs),st=S(studies),rv=S(rivals),rd=S(readings),ca=S(cases);
  out[id]={kind:'social',focus,readings:rd,lessons:Array.from({length:12},(_,i)=>{const title=ch[i]||`${focus} 쟁점 ${i+1}`;const t=th[i%th.length],v=va[i%va.length],d=de[i%de.length],s=st[i%st.length],r=rv[i%rv.length],c=ca[i%ca.length];return {n:i+1,title,theory:[t],variables:[v],design:[d],study:[s],rival:[r],lecture:[`${title}은 ${focus}에서 의미·관계·공간·제도를 현장자료로 분석하는 핵심 주제다. ${t}이 어떤 문화적 분류, 실천, 권력관계 또는 공간과정을 설명하는지 먼저 확인하고 연구자의 분석범주와 참여자의 토착범주를 구분한다.`,`핵심 개념화는 ${v}이다. 설문척도만으로 포착하기 어려운 의미와 실천은 관찰·인터뷰·문서·지도·이동자료를 결합해 삼각검증한다. ${d} 설계에서는 현장접근, 표집, 연구자 위치성, 번역과 해석, 비교가능성, 윤리적 동의가 자료의 질에 어떤 영향을 주는지 명시한다.`,`대표 경험연구는 ${s}이다. 연구결과를 특정 문화나 장소의 본질로 일반화하지 않고 역사·정치경제적 조건을 함께 본다. 경쟁설명 ${r}을 병치하고, ${c} 사례에서 무엇을 추가로 관찰해야 두 설명을 구별할 수 있는지 제시한다.`],application:`현장·자료 적용: ${c}. ① ${t}에서 분석질문을 만든다. ② ${v}를 관찰 가능한 행동·담론·공간지표로 구체화한다. ③ ${d}로 자료를 수집한다. ④ ${s}와 비교하되 맥락차이를 기록한다. ⑤ ${r} 경쟁설명을 검토하고 연구자의 위치성과 윤리문제를 함께 평가한다.`,exercise:[`${v}를 emic 범주와 etic 범주로 각각 기술하라.`,`${d}에서 자료 삼각검증과 연구윤리를 확보할 방법을 제시하라.`,`${s}의 해석을 ${r} 경쟁설명이 어떻게 수정할 수 있는지 설명하고 추가 현장자료를 설계하라.`],tutor:`${id} ${focus} L${String(i+1).padStart(2,'0')} ${title}을 현장·비교사회과학 방식으로 공부하자. 정답을 먼저 말하지 말고 이론→토착범주와 분석범주→자료원→현장·비교설계→맥락→해석→경쟁설명→연구윤리 순서로 질문해 줘. 특정 문화나 집단을 고정된 본질로 일반화하지 않도록 계속 점검해 줘.`};})};

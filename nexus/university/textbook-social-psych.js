@@ -1,7 +1,7 @@
 (()=>{
 'use strict';
 const out=window.NEXUS_SOCIAL_TEXTBOOKS=window.NEXUS_SOCIAL_TEXTBOOKS||{};
-const S=s=>String(s||'').split('|').map(x=>x.trim()).filter(Boolean);
+const S=window.NEXUS_UNIVERSITY_UTILS.splitList;
 function mk(id,focus,chapters,theories,variables,designs,studies,rivals,readings,cases){
  const ch=S(chapters),th=S(theories),va=S(variables),de=S(designs),st=S(studies),rv=S(rivals),rd=S(readings),ca=S(cases);
  out[id]={kind:'social',focus,readings:rd,lessons:Array.from({length:12},(_,i)=>{const title=ch[i]||`${focus} 쟁점 ${i+1}`;const t=th[i%th.length],v=va[i%va.length],d=de[i%de.length],s=st[i%st.length],r=rv[i%rv.length],c=ca[i%ca.length];return {n:i+1,title,theory:[t],variables:[v],design:[d],study:[s],rival:[r],lecture:[`${title}은 ${focus}의 핵심 이론을 실제 측정과 실험으로 검토하는 단계다. ${t}가 어떤 인지·정서·행동기제를 가정하는지 명확히 하고, 관찰되지 않는 심리구성개념을 직접 관찰 가능한 지표와 과제로 조작화한다.`,`핵심 변수는 ${v}이다. 반응시간·정확도·자기보고·생리신호·행동지표가 같은 심리현상을 동일하게 측정한다고 가정하지 않고 측정타당도와 과제효과를 구분한다. 연구설계 ${d}에서 무작위화·통제조건·반복측정·표본크기·효과크기와 재현가능성을 확인한다.`,`대표 연구축은 ${s}이다. 고전연구의 결론을 그대로 반복하기보다 현대 재현연구·메타분석과 비교하고, 경쟁설명 ${r}이 같은 결과를 어떻게 다르게 해석하는지 검토한다. ${c} 사례에서는 실험결과가 실제 상황으로 일반화될 수 있는 범위를 따로 판단한다.`],application:`자료·사례 적용: ${c}. ① ${t}에서 예측을 도출한다. ② ${v}의 조작적 정의를 만든다. ③ ${d}를 사용해 비교조건을 설계한다. ④ ${s}와 예상 결과를 비교한다. ⑤ ${r} 경쟁설명과 구별되는 추가실험을 제안한다.`,exercise:[`${v}를 최소 두 가지 방식으로 조작화하고 각각의 장단점을 설명하라.`,`${d}에서 혼입변수와 demand characteristic을 줄일 방법을 제시하라.`,`${s}의 결과를 ${r}이 어떻게 다르게 설명할지 쓰고 두 설명을 구별할 후속실험을 설계하라.`],tutor:`${id} ${focus} L${String(i+1).padStart(2,'0')} ${title}을 심리과학 방식으로 공부하자. 정답부터 주지 말고 이론→구성개념→조작적 정의→독립·종속변수→실험설계→효과크기·재현성→대표 연구→경쟁설명 순서로 질문해 줘. 유명 고전실험도 현대 재현연구와 방법론적 비판을 함께 확인해 줘.`};})};

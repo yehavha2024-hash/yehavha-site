@@ -1,9 +1,9 @@
 (()=>{
 'use strict';
 const out=window.NEXUS_PHILOSOPHY_TEXTBOOKS=window.NEXUS_PHILOSOPHY_TEXTBOOKS||{};
-const S=s=>String(s||'').split('|').map(x=>x.trim()).filter(Boolean);
-function mk(id,focus,chapters,primary,theses,arguments,rivals,objections,readings,applications){
- const ch=S(chapters),pr=S(primary),th=S(theses),ar=S(arguments),rv=S(rivals),ob=S(objections),rd=S(readings),ap=S(applications);
+const S=window.NEXUS_UNIVERSITY_UTILS.splitList;
+function mk(id,focus,chapters,primary,theses,argumentList,rivals,objections,readings,applications){
+ const ch=S(chapters),pr=S(primary),th=S(theses),ar=S(argumentList),rv=S(rivals),ob=S(objections),rd=S(readings),ap=S(applications);
  out[id]={kind:'philosophy',focus,readings:rd,lessons:Array.from({length:12},(_,i)=>{
   const title=ch[i]||`${focus}의 쟁점 ${i+1}`;
   const p=pr[i%pr.length]||'대표 원전'; const t=th[i%th.length]||'핵심 명제'; const a=ar[i%ar.length]||'대표 논증';

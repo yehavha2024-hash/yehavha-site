@@ -7,7 +7,7 @@ const textbook=window.NEXUS_CORE_TEXTBOOK||{};
 const params=new URLSearchParams(location.search);
 const id=params.get('id');
 const course=curriculum?.all?.find(c=>c.id===id);
-const esc=(v='')=>String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const esc=window.NEXUS_UNIVERSITY_UTILS.escapeHtml;
 const domainLabels={core:'University Core',humanities:'인문학',social:'사회과학',law:'법학·공공정책',natural:'자연과학',engineering:'공학',computing:'컴퓨팅·AI',medicine:'의학·보건',architecture:'건축·도시',arts:'예술·디자인',theology:'신학·성서학',education:'교육·학습과학',interdisciplinary:'융합학'};
 const moduleTitles=['기초개념과 구조','핵심원리와 방법','사례·적용·비판','현대쟁점과 종합'];
 const genericBlueprints={

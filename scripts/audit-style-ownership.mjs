@@ -3,17 +3,11 @@ import path from 'node:path';
 
 const ROOT = process.cwd();
 let errors = 0;
-let warnings = 0;
 
 const fail = (file, message) => {
   errors += 1;
   console.error(`ERROR ${file}: ${message}`);
   console.log(`::error file=${file}::${message}`);
-};
-const warn = (file, message) => {
-  warnings += 1;
-  console.warn(`WARNING ${file}: ${message}`);
-  console.log(`::warning file=${file}::${message}`);
 };
 const exists = relative => fs.existsSync(path.join(ROOT, relative));
 const read = relative => fs.readFileSync(path.join(ROOT, relative), 'utf8');
@@ -29,6 +23,10 @@ const forbiddenLegacy = [
   'toeic-human-100/v2-ui-theme.css',
   'nexus/research-groups.css',
   'nexus/articles/public-layout-20260820.css',
+  'nexus/readability-20260820.css',
+  'nexus/university/readability-20260820.css',
+  'nexus/university/guided-practice-20260820.css',
+  'nexus/university/guided-practice-20260820.js',
   'nexus/intelligence-briefing/compact-top.css',
   'nexus/portal-enhancements.css',
   'nexus/status.css'
@@ -168,9 +166,5 @@ for (const file of structuralFiles) {
   if (/footer-(?:fix|override|hotfix)|patch\.css/i.test(css)) fail(file, '임시 footer/theme override 참조 금지');
 }
 
-for (const file of ['nexus/readability-20260820.css', 'nexus/university/guided-practice-20260820.css']) {
-  if (exists(file)) warn(file, '날짜형 CSS 기술부채: 기능 검증 후 canonical owner로 단계 통합 권장');
-}
-
-console.log(`Style ownership audit: ${errors} error(s), ${warnings} warning(s)`);
+console.log(`Style ownership audit: ${errors} error(s)`);
 if (errors) process.exit(1);

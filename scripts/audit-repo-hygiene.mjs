@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 
 const ROOT = process.cwd();
 let errors = 0;
@@ -10,6 +11,39 @@ const read = relative => fs.readFileSync(path.join(ROOT, relative), 'utf8');
 const json = relative => JSON.parse(read(relative));
 const error = (source, message) => { errors += 1; console.error(`ERROR ${source}: ${message}`); };
 const warn = (source, message) => { warnings += 1; console.warn(`WARNING ${source}: ${message}`); };
+
+function trackedFiles(...pathspecs) {
+  return execFileSync('git', ['ls-files', '-z', '--cached', '--others', '--exclude-standard', '--', ...pathspecs], {
+    cwd: ROOT,
+    encoding: 'utf8'
+  }).split('\0').filter(Boolean).filter(exists);
+}
+
+function auditSourceSyntax() {
+  for (const file of trackedFiles(':(glob)**/*.json')) {
+    try {
+      JSON.parse(read(file));
+    } catch (cause) {
+      error(file, `JSON 구문 오류: ${cause.message}`);
+    }
+  }
+
+  for (const file of trackedFiles(':(glob)**/*.js', ':(glob)**/*.mjs')) {
+    try {
+      execFileSync(process.execPath, ['--check', file], {
+        cwd: ROOT,
+        encoding: 'utf8',
+        maxBuffer: 4 * 1024 * 1024,
+        stdio: ['ignore', 'pipe', 'pipe']
+      });
+    } catch (cause) {
+      const detail = String(cause.stderr || cause.message)
+        .split(/\r?\n/)
+        .find(line => /SyntaxError|Error:/.test(line)) || '구문 검사 실패';
+      error(file, `JavaScript 구문 오류: ${detail.trim()}`);
+    }
+  }
+}
 
 function auditForbiddenArtifacts() {
   const forbidden = [
@@ -283,6 +317,7 @@ function auditStandardsDrift() {
   }
 }
 
+auditSourceSyntax();
 auditForbiddenArtifacts();
 auditWorkflowPermissions();
 auditServiceWorkerAssets('three-minute-break');

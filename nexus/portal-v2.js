@@ -18,12 +18,14 @@
     accessCount.hidden = false;
   }
 
+  const governmentIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-5 9 5H3Z"/><path d="M5 10.5v7M9.5 10.5v7M14.5 10.5v7M19 10.5v7M3 19.5h18"/></svg>';
+
   const categoryIcons = {
     commentary: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19h4L19 9a2.1 2.1 0 0 0-3-3L6 16l-1 3Z"/><path d="m14.5 7.5 2 2"/><path d="M12.5 19H19"/></svg>',
     intelligence: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 19 6.2v5.1c0 4.4-2.9 7.4-7 9.2-4.1-1.8-7-4.8-7-9.2V6.2L12 3.5Z"/><path d="M8.2 12h2.1l1.2-2.5 1.8 5 1.1-2.5h1.7"/></svg>',
     investment: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18V10M10 18V6M16 18v-5M3 20h18"/><path d="m4 8 5-4 6 5 5-5"/></svg>',
-    publicsector: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-5 9 5H3Z"/><path d="M5 10.5v7M9.5 10.5v7M14.5 10.5v7M19 10.5v7M3 19.5h18"/></svg>',
-    'local-government-planning': '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-5 9 5H3Z"/><path d="M5 10.5v7M9.5 10.5v7M14.5 10.5v7M19 10.5v7M3 19.5h18"/></svg>',
+    publicsector: governmentIcon,
+    'local-government-planning': governmentIcon,
     university: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3.2 8.5 8.8-4.2 8.8 4.2-8.8 4.2-8.8-4.2Z"/><path d="M6.2 11.2v5.3c3.7 2.2 7.9 2.2 11.6 0v-5.3M20.8 8.5v5.3"/></svg>',
     edtechresearch: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h9a3 3 0 0 1 3 3v10H7a3 3 0 0 0-3 3v-16Z"/><path d="M16 8.5h4v9h-4M8 10h4M8 13h5"/></svg>',
     learningapps: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="17" height="16" rx="3"/><path d="M3.5 8.2h17M7.2 12h3.8v3.8H7.2zM14.2 12h2.8M14.2 15.8h2.8"/></svg>',
@@ -37,6 +39,24 @@
     culture: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h16v13H4z"/><path d="M7 9h4M7 12h7M7 15h5"/><path d="M17 8.5v6M14 11.5h6"/></svg>',
     publishing: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5c3.3-.6 5.9.1 8 2.1v11c-2.1-2-4.7-2.7-8-2.1v-11Z"/><path d="M20 5.5c-3.3-.6-5.9.1-8 2.1v11c2.1-2 4.7-2.7 8-2.1v-11Z"/></svg>',
     media: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="m10 9 5 3-5 3V9Z"/></svg>'
+  };
+
+  const categoryMaturity = {
+    commentary: {label:'논평',tone:'research'},
+    intelligence: {label:'전략정보',tone:'research'},
+    investment: {label:'분석·참고',tone:'operational'},
+    publicsector: {label:'전략·대응',tone:'research'},
+    'local-government-planning': {label:'실무 매뉴얼',tone:'operational'},
+    edtechresearch: {label:'전문 연구',tone:'research'},
+    aiknowledge: {label:'지식·동향',tone:'research'},
+    'ai-work-infrastructure': {label:'구축 매뉴얼',tone:'operational'},
+    legalresearch: {label:'전문 연구',tone:'research'},
+    legalintelligence: {label:'법률정보',tone:'research'},
+    legalsearch: {label:'법률검색',tone:'research'},
+    culture: {label:'문화정보',tone:'operational'},
+    legalpractice: {label:'실무·훈련',tone:'operational'},
+    learningapps: {label:'학습',tone:'operational'},
+    university: {label:'학습',tone:'operational'}
   };
 
   function updateKoreaClock() {
@@ -113,21 +133,16 @@
   }
 
   function maturityFor(project) {
-    if (project.category === 'commentary') return {label:'논평',tone:'research'};
-    if (project.category === 'intelligence') return {label:'전략정보',tone:'research'};
-    if (project.category === 'investment') return {label:'분석·참고',tone:'operational'};
-    if (project.category === 'publicsector') return {label:'전략·대응',tone:'research'};
-    if (project.category === 'local-government-planning') return {label:'실무 매뉴얼',tone:'operational'};
-    if (project.category === 'edtechresearch') return {label:'전문 연구',tone:'research'};
-    if (project.category === 'aiknowledge') return {label:'지식·동향',tone:'research'};
-    if (project.category === 'ai-work-infrastructure') return {label:'구축 매뉴얼',tone:'operational'};
-    if (project.category === 'legalresearch') return {label:'전문 연구',tone:'research'};
-    if (project.category === 'legalintelligence') return {label:'법률정보',tone:'research'};
-    if (project.category === 'legalsearch') return {label:'법률검색',tone:'research'};
-    if (project.category === 'culture') return {label:'문화정보',tone:'operational'};
-    if (project.category === 'legalpractice') return {label:'실무·훈련',tone:'operational'};
-    if (project.category === 'learningapps' || project.category === 'university') return {label:'학습',tone:'operational'};
-    return {label:'운영',tone:'operational'};
+    return categoryMaturity[project.category] || {label:'운영',tone:'operational'};
+  }
+
+  function configureProjectLink(link, project) {
+    const external = isExternalProject(project);
+    link.href = trackedProjectUrl(project);
+    link.dataset.trackAccess = 'project';
+    link.target = external ? '_blank' : '_self';
+    if (external) link.rel = 'noopener noreferrer';
+    return external;
   }
 
   function trackEvent(eventName, projectId = '') {
@@ -155,15 +170,20 @@
     }
   }
 
-  function orderedCategories(categories, projects) {
-    return categories.filter(category => projects.some(project => project.category === category.id));
+  function groupProjectsByCategory(projects) {
+    const groups = new Map();
+    for (const project of projects) {
+      if (!groups.has(project.category)) groups.set(project.category, []);
+      groups.get(project.category).push(project);
+    }
+    return groups;
   }
 
-  function renderQuickLinks(categories, projects) {
+  function renderQuickLinks(categories, projectsByCategory) {
     if (!quickLinks) return;
     quickLinks.replaceChildren();
     for (const category of categories) {
-      const count = projects.filter(project => project.category === category.id).length;
+      const count = projectsByCategory.get(category.id)?.length || 0;
       const link = make('a', `quick-link quick-link-${category.id}`);
       link.href = `#${category.id}`;
       link.dataset.category = category.id;
@@ -172,8 +192,8 @@
     }
   }
 
-  function projectSearchText(project, categories) {
-    const category = categories.find(item => item.id === project.category);
+  function projectSearchText(project, categoriesById) {
+    const category = categoriesById.get(project.category);
     return [project.id,project.title,project.meta,project.description,category?.title,category?.description,project.contentLabel].filter(Boolean).join(' ').toLocaleLowerCase('ko-KR');
   }
 
@@ -207,20 +227,16 @@
       const query = input.value.trim().toLocaleLowerCase('ko-KR');
       results.replaceChildren();
       if (!query) return;
-      const matches = data.projects.filter(project => projectSearchText(project, data.categories).includes(query)).slice(0, 10);
+      const matches = data.projects.filter(project => projectSearchText(project, data.categoriesById).includes(query)).slice(0, 10);
       if (!matches.length) {
         results.append(make('p', 'search-empty', '일치하는 등록 프로젝트가 없습니다. 다른 핵심어로 검색해 주세요.'));
         return;
       }
       for (const project of matches) {
-        const category = data.categories.find(item => item.id === project.category);
+        const category = data.categoriesById.get(project.category);
         const link = make('a', 'search-result');
-        link.href = trackedProjectUrl(project);
-        link.dataset.trackAccess = 'project';
         link.dataset.searchResult = project.id;
-        const external = isExternalProject(project);
-        link.target = external ? '_blank' : '_self';
-        if (external) link.rel = 'noopener noreferrer';
+        const external = configureProjectLink(link, project);
         const copy = make('span');
         copy.append(make('strong', '', project.title), make('span', '', `${category?.title || '프로젝트'} · ${project.meta || ''}`));
         link.append(copy, make('span', 'search-result-arrow', external ? '↗' : '→'));
@@ -265,11 +281,7 @@
     const description = make('p', '', project.description);
     const actions = make('div', 'item-actions');
     const visit = make('a', 'visit-link');
-    visit.href = trackedProjectUrl(project);
-    visit.dataset.trackAccess = 'project';
-    const external = isExternalProject(project);
-    visit.target = external ? '_blank' : '_self';
-    if (external) visit.rel = 'noopener noreferrer';
+    const external = configureProjectLink(visit, project);
     visit.append(`${project.actionLabel || '바로가기'} `, make('span', '', external ? '↗' : '→'));
     const copy = make('button', 'copy-btn', '링크 복사');
     copy.type = 'button';
@@ -314,7 +326,7 @@
     return section;
   }
 
-  function renderTier(tier, categories, projects) {
+  function renderTier(tier, categories, projectsByCategory) {
     const section = make('section', `portal-tier portal-tier-${tier.id}`);
     section.setAttribute('aria-labelledby', `tier-${tier.id}-title`);
     const head = make('div', 'portal-tier-head');
@@ -326,7 +338,7 @@
     const grid = make('div', 'portal-tier-grid');
     const tierCategories = categories.filter(category => category.tier === tier.id);
     for (const category of tierCategories) {
-      const categoryProjects = projects.filter(project => project.category === category.id);
+      const categoryProjects = projectsByCategory.get(category.id) || [];
       if (categoryProjects.length) grid.append(renderCategory(category, categoryProjects, tier.variant || 'primary'));
     }
     if (!grid.childElementCount) return null;
@@ -371,14 +383,16 @@
     const tiers = Array.isArray(data.tiers) ? data.tiers : [];
     const categories = Array.isArray(data.categories) ? data.categories : [];
     const projects = Array.isArray(data.projects) ? data.projects : [];
-    const visibleCategories = orderedCategories(categories, projects);
-    renderQuickLinks(visibleCategories, projects);
-    renderSearch({categories:visibleCategories,projects});
+    const projectsByCategory = groupProjectsByCategory(projects);
+    const categoriesById = new Map(categories.map(category => [category.id, category]));
+    const visibleCategories = categories.filter(category => projectsByCategory.has(category.id));
+    renderQuickLinks(visibleCategories, projectsByCategory);
+    renderSearch({categoriesById,projects});
     installSeo({projects});
     if (!portalGrid) return;
     portalGrid.replaceChildren();
     for (const tier of tiers) {
-      const section = renderTier(tier, visibleCategories, projects);
+      const section = renderTier(tier, visibleCategories, projectsByCategory);
       if (section) portalGrid.append(section);
     }
   }

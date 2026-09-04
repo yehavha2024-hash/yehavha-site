@@ -96,11 +96,13 @@ Nexus 상태갱신은 저장소 전체를 무차별 재귀 탐색하지 않습�
 - 승인 목록의 중복 소유·하드코딩 재등장 여부
 - Service Worker의 현재 런타임 자산 소유 여부
 - 불필요한 GitHub Actions 쓰기 권한 여부
+- 저장소 전체 JavaScript·MJS 구문과 JSON 파싱 가능 여부
 - 삭제된 Nexus 프로젝트 경로·링크·포털 로직의 재등장 여부
 - 표준 Copyright 문구·문의 mailto·AI 활용 안내의 명시적 HTML Footer 존재 여부
 - CSS 가상요소가 Copyright 문구를 재생성하는지 여부
 - 3분 쉼표 실제 콘텐츠 로드순서와 퀴즈 데이터
 - Nexus 하위 데이터·본문 참조 무결성
+- NEXUS UNIVERSITY 496개 과목·12개 Lesson·전공 교재 런타임 완전성
 - 실제 운영 URL, `projects.json`, `project-status.json`, `/api/access`, `/go` 응답
 
 하위 프로젝트의 별도 검증은 해당 프로젝트 데이터 규칙에 따라 수행하며, 검증 결과를 운영 원본 파일과 섞지 않습니다.

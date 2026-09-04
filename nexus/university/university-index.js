@@ -8,7 +8,7 @@ const interHost=document.getElementById('interCatalog');
 const search=document.getElementById('courseSearch');
 const searchStatus=document.getElementById('searchStatus');
 
-const esc=(v='')=>String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const esc=window.NEXUS_UNIVERSITY_UTILS.escapeHtml;
 const stageMeta={
   1:['Stage 1 · Intellectual Foundation','사고·수학·문명·과학·컴퓨터의 기초 렌즈'],
   2:['Stage 2 · Fundamental Tools','전문지식을 읽고 분석하기 위한 기본 도구'],

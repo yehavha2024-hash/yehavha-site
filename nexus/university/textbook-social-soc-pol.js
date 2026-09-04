@@ -1,7 +1,7 @@
 (()=>{
 'use strict';
 const out=window.NEXUS_SOCIAL_TEXTBOOKS=window.NEXUS_SOCIAL_TEXTBOOKS||{};
-const S=s=>String(s||'').split('|').map(x=>x.trim()).filter(Boolean);
+const S=window.NEXUS_UNIVERSITY_UTILS.splitList;
 function mk(id,focus,chapters,theories,variables,designs,studies,rivals,readings,cases){
  const ch=S(chapters),th=S(theories),va=S(variables),de=S(designs),st=S(studies),rv=S(rivals),rd=S(readings),ca=S(cases);
  out[id]={kind:'social',focus,readings:rd,lessons:Array.from({length:12},(_,i)=>{const title=ch[i]||`${focus} 쟁점 ${i+1}`;const t=th[i%th.length],v=va[i%va.length],d=de[i%de.length],s=st[i%st.length],r=rv[i%rv.length],c=ca[i%ca.length];return {n:i+1,title,theory:[t],variables:[v],design:[d],study:[s],rival:[r],lecture:[`${title}은 ${focus}에서 이론을 경험자료와 연결하는 핵심 주제다. 먼저 ${t}이 어떤 행위자·구조·제도를 설명하려는지 확인하고, 설명대상을 관찰 가능한 개념으로 바꾼다. 사회과학의 이론은 이름을 암기하는 것이 아니라 어떤 현상을 설명하고 어떤 조건에서 실패하는지를 검증하는 도구로 사용한다.`,`핵심 개념화는 ${v}이다. 개념을 변수로 조작화할 때 측정수준, 지표의 타당도, 표본선택, 누락변수와 역인과 가능성을 명시한다. 연구설계는 ${d}를 중심으로 하며, 단순 상관을 인과효과로 해석하지 않도록 비교집단·시간순서·선택과정과 대안설명을 점검한다.`,`대표 경험연구 또는 자료축은 ${s}이다. 결과를 그대로 권위로 받아들이지 않고 표본·측정·모형·외적타당도를 검토한다. 경쟁설명 ${r}과 비교하고, ${c} 사례에 적용해 어떤 자료가 두 설명을 구별할 수 있는지 제안한다.`],application:`자료·사례 적용: ${c}. ① 이론 ${t}에서 검증 가능한 가설을 도출한다. ② ${v}를 독립·종속·통제변수로 구분한다. ③ ${d}으로 자료를 수집·비교한다. ④ ${s}와 결과를 비교한다. ⑤ ${r}을 경쟁설명으로 검토하고 결론의 인과 강도를 조정한다.`,exercise:[`${t}에서 검증 가능한 가설 두 개를 도출하라.`,`${v}를 실제 자료에서 측정할 지표를 정하고 측정오차 가능성을 설명하라.`,`${d}의 내적타당도를 위협하는 요소와 ${r} 경쟁설명을 구별할 추가자료를 제시하라.`],tutor:`${id} ${focus} L${String(i+1).padStart(2,'0')} ${title}을 경험사회과학 방식으로 공부하자. 정답을 먼저 말하지 말고 이론→개념화→변수→가설→연구설계→자료→인과추론→대표 경험연구→경쟁설명 순으로 한 단계씩 질문해 줘. 상관과 인과를 구별하고 측정·표본·누락변수의 한계를 반드시 점검해 줘.`};})};

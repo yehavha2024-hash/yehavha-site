@@ -1,6 +1,6 @@
 (()=>{'use strict';
 const cur=window.NEXUS_CURRICULUM||{};const id=new URLSearchParams(location.search).get('id');const c=(cur.all||[]).find(x=>x.id===id);if(!c)return;
-const esc=(v='')=>String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const esc=window.NEXUS_UNIVERSITY_UTILS.escapeHtml;
 function kind(id,domain){if(id.startsWith('CORE-'))return'core';if(/^(LAW|PPA)-/.test(id))return'law';if(/^(CS|DS|AI|ROB|SEC)-/.test(id))return'ai';if(/^PHI-/.test(id))return'philosophy';if(/^(SOC|POL|PSY|ANT|URBS)-/.test(id))return'social';if(/^(MATH|PHY|CHEM|BIO|ENV)-/.test(id))return'natural';if(/^(ME|EE|CE|MSE|ISE)-/.test(id))return'engineering';if(/^(BMS|CLN|NEU|PH|MEH)-/.test(id))return'medicine';if(/^(BIB|BLG|SYS|CHH|JRS)-/.test(id))return'theology';if(/^(HIS|LIT|LIN|CIV)-/.test(id))return'humanities';if(/^(MUS|FAR|DES|AES)-/.test(id))return'arts';if(/^(ECO|BUS|FIN)-/.test(id))return'economics';if(/^(ARC|ARE|URB)-/.test(id))return'architecture';if(/^(EDU|LRS)-/.test(id))return'education';if(/^(INT|SEM)-/.test(id))return'interdisciplinary';return domain||'core'}
 function tier(v){const n=Number(v)||0;if(n>=500||(n>=5&&n<10))return{code:'T4',name:'Synthesis · Defense',weight:'독립적 종합·대안설계·구두방어'};if(n>=400||n===4)return{code:'T3',name:'Evaluation · Design',weight:'근거평가·설계·비판·검증'};if(n>=300||n===3)return{code:'T2',name:'Analysis · Application',weight:'분석·적용·비교·오류검출'};return{code:'T1',name:'Foundation · Explanation',weight:'정의·구분·기초적용·정확성'}}
 const profiles={

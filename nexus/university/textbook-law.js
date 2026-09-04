@@ -1,6 +1,6 @@
 (()=>{'use strict';
 const out=window.NEXUS_LAW_TEXTBOOKS=window.NEXUS_LAW_TEXTBOOKS||{};
-const S=s=>String(s||'').split('|').map(x=>x.trim()).filter(Boolean);
+const S=window.NEXUS_UNIVERSITY_UTILS.splitList;
 function mk(id,focus,chapters,norms,doctrines,cases,compare,readings,scenario){
  const ch=S(chapters),ns=S(norms),ds=S(doctrines),cs=S(cases),cmp=S(compare),rd=S(readings),sc=S(scenario);
  out[id]={kind:'law',focus,readings:rd,lessons:Array.from({length:12},(_,i)=>{

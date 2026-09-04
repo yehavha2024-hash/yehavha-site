@@ -1,6 +1,6 @@
 (()=>{'use strict';
 const cur=window.NEXUS_CURRICULUM||{};const textbook=window.NEXUS_CORE_TEXTBOOK||{};const reg=window.NEXUS_QA_REGISTER||{batches:[],verified:{}};
-const $=s=>document.querySelector(s);const esc=(v='')=>String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const $=s=>document.querySelector(s);const esc=window.NEXUS_UNIVERSITY_UTILS.escapeHtml;
 const courses=cur.all||[];const courseMap=new Map(courses.map(c=>[c.id,c]));const issues=[];const lessonRows=[];const bodyMap=new Map();const crossTitleMap=new Map();
 const verified=reg.verified||{};const reviewedKey='nexus-university:qa-reviewed';let reviewed=new Set();try{reviewed=new Set(JSON.parse(localStorage.getItem(reviewedKey)||'[]'))}catch{}
 const issueMeta={STRUCTURE:['구조','critical'],SOURCE_MISSING:['문헌 누락','high'],SOURCE_DETAIL:['출처 상세화','medium'],DUP_TITLE:['중복 Lesson','high'],DUP_BODY:['본문 중복','high'],PREREQ_INVALID:['선수과목 오류','critical'],PREREQ_CYCLE:['선수과목 순환','critical'],PREREQ_REVIEW:['선수과목 검토','medium'],ASSESSMENT:['평가 난이도','medium'],LINK:['Course 연결','low']};

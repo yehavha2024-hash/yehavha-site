@@ -16,6 +16,43 @@ function requireFiles(files) {
   for (const file of files) if (!exists(file)) fail(file, '필수 파일 없음');
 }
 
+async function auditAccessCounter() {
+  const file = 'nexus/functions/lib/access-counter.js';
+  if (!exists(file)) return;
+
+  let count = 3;
+  const statements = [];
+  const database = {
+    prepare(sql) {
+      const statement = sql.replace(/\s+/g, ' ').trim();
+      statements.push(statement);
+      return {
+        async run() {
+          if (statement.startsWith('UPDATE nexus_access_counter')) count += 1;
+          return { success: true };
+        },
+        async first() {
+          return statement.startsWith('SELECT count') ? { count } : null;
+        }
+      };
+    }
+  };
+
+  try {
+    const counter = await import('../functions/lib/access-counter.js');
+    const [initial, concurrent] = await Promise.all([
+      counter.readAccessCount(database),
+      counter.readAccessCount(database)
+    ]);
+    await counter.incrementAccessCount(database);
+    const updated = await counter.readAccessCount(database);
+    if (initial !== 3 || concurrent !== 3 || updated !== 4) fail(file, `읽기·증가 결과 불일치: ${initial}/${concurrent} → ${updated}`);
+    if (statements.filter(statement => statement.startsWith('CREATE TABLE')).length !== 1) fail(file, '스키마 준비가 중복 실행됨');
+  } catch (error) {
+    fail(file, `공유 access counter 실행 실패: ${error.message}`);
+  }
+}
+
 requireFiles([
   'nexus/projects.json',
   'nexus/project-status.json',
@@ -118,13 +155,18 @@ if (exists('nexus/intelligence-briefing/latest.json')) {
 }
 
 requireFiles([
+  'nexus/functions/lib/access-counter.js',
   'nexus/functions/lib/metrics.js',
   'nexus/functions/api/access.js',
   'nexus/functions/go.js',
   'nexus/functions/_middleware.js'
 ]);
+if (exists('nexus/functions/_middleware.js') && !read('nexus/functions/_middleware.js').includes('./lib/access-counter.js')) fail('nexus/functions/_middleware.js', '공유 access counter helper 미사용');
+if (exists('nexus/functions/api/access.js') && !read('nexus/functions/api/access.js').includes('../lib/access-counter.js')) fail('nexus/functions/api/access.js', '공유 access counter helper 미사용');
 if (exists('nexus/functions/api/access.js') && !read('nexus/functions/api/access.js').includes('../lib/metrics.js')) fail('nexus/functions/api/access.js', '공유 metrics helper 미사용');
 if (exists('nexus/functions/go.js') && !read('nexus/functions/go.js').includes('./lib/metrics.js')) fail('nexus/functions/go.js', '공유 metrics helper 미사용');
+
+await auditAccessCounter();
 
 console.log(`Nexus structural ownership audit: ${errors} error(s)`);
 if (errors) process.exit(1);

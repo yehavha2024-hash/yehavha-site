@@ -26,21 +26,10 @@ jobs:
       - run: node scripts/audit-repo-hygiene.mjs
       - run: node scripts/audit-style-ownership.mjs
       - run: node scripts/audit-nexus-light-theme.mjs
-      - name: Validate Nexus portal enhancement runtime
-        run: |
-          node --check nexus/portal-v2.js
-          node --check nexus/functions/_middleware.js
-          node --check nexus/functions/go.js
-          node --check nexus/functions/api/access.js
-          node --check nexus/functions/lib/metrics.js
-          node nexus/scripts/audit-portal-enhancements.mjs
-      - name: Validate article archive runtime scripts
-        run: |
-          node --check nexus/articles/articles.js
-          node --check nexus/articles/article-seo.js
+      - name: Validate Nexus portal ownership
+        run: node nexus/scripts/audit-portal-enhancements.mjs
       - name: Validate legal philosophy citation coverage
         run: |
-          node --check legal-philosophy/research-citations-6d.js
           node --input-type=module <<'NODE'
           globalThis.window = globalThis;
           await import('./legal-philosophy/data.js');
@@ -58,10 +47,6 @@ jobs:
           if (audit.quoteVerified !== 19 || !audit.complete) throw new Error(`quote verification incomplete: ${audit.quoteVerified}/19`);
           console.log(`Legal philosophy citations: ${audit.totalCovered}/${audit.totalExpected}; remaining verification ${audit.uniformVerified}/${audit.uniformExpected}`);
           NODE
-      - name: Validate legal mind runtime scripts
-        run: |
-          node --check legal-knowledge/legal-mind/data.js
-          node --check legal-knowledge/legal-mind/app.js
       - name: Validate 3 minute break runtime content
         run: node three-minute-break/scripts/export-content.mjs
       - run: node nexus/scripts/audit-runtime.mjs

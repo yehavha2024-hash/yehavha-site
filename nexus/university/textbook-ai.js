@@ -1,6 +1,6 @@
 (()=>{'use strict';
 const out=window.NEXUS_AI_TEXTBOOKS=window.NEXUS_AI_TEXTBOOKS||{};
-const S=s=>String(s||'').split('|').map(x=>x.trim()).filter(Boolean);
+const S=window.NEXUS_UNIVERSITY_UTILS.splitList;
 function mk(id,focus,chapters,algorithms,maths,systems,papers,failures,readings,lab){
  const ch=S(chapters),al=S(algorithms),ma=S(maths),sy=S(systems),pa=S(papers),fa=S(failures),rd=S(readings),lb=S(lab);
  out[id]={kind:'ai',focus,readings:rd,lessons:Array.from({length:12},(_,i)=>{

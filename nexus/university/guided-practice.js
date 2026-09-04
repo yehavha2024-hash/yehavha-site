@@ -1,4 +1,4 @@
-(()=>{
+(() => {
 'use strict';
 
 const cur=window.NEXUS_CURRICULUM||{};
