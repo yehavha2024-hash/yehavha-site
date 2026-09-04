@@ -1,5 +1,5 @@
 import { readMetrics, recordMetric } from '../lib/metrics.js';
-import { readAccessCount } from '../lib/access-counter.js';
+import { readAccessStats } from '../lib/access-counter.js';
 
 const ALLOWED_OPS = new Set(['get', 'event', 'metrics']);
 
@@ -43,8 +43,8 @@ export async function onRequestGet({ request, env }) {
       return json({ ok: true, ...metrics });
     }
 
-    const count = await readAccessCount(env.NEXUS_DB);
-    return json({ ok: true, count });
+    const { count, today } = await readAccessStats(env.NEXUS_DB);
+    return json({ ok: true, count, today });
   } catch (error) {
     console.error('Nexus metrics API failed:', error);
     return json({ ok: false, error: 'nexus_db_query_failed' }, 500);
