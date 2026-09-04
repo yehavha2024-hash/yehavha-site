@@ -39,7 +39,7 @@ function auditInternalProjectUrls() {
 function auditUniversity() {
   const source = 'nexus/university';
   const coursePage = `${source}/course.html`;
-  for (const file of ['index.html', 'course.html', 'university.css', 'university-utils.js', 'readability.css', 'guided-practice.css', 'guided-practice.js']) {
+  for (const file of ['index.html', 'course.html', 'core-101.html', 'university.css', 'university-utils.js', 'readability.css', 'guided-practice.css', 'guided-practice.js']) {
     if (!exists(`${source}/${file}`)) fail(source, `필수 실행파일 없음: ${file}`);
   }
   if (!exists(coursePage)) return;
@@ -50,6 +50,16 @@ function auditUniversity() {
   if (engineIndex < 0) return fail(coursePage, 'course-engine.js 로드 순서 없음');
   if (!scripts.includes('guided-practice.js')) fail(coursePage, 'canonical guided-practice.js 누락');
   if (scripts.some(file => /-20\d{6}\.(?:css|js)$/.test(file))) fail(coursePage, '날짜형 실행 레이어가 로드됨');
+
+  const canonicalCoreRoute = './course.html?id=CORE-101';
+  const indexPage = read(`${source}/index.html`);
+  const indexRuntime = read(`${source}/university-index.js`);
+  const courseRuntime = read(`${source}/course-engine.js`);
+  const legacyCorePage = read(`${source}/core-101.html`);
+  if (!indexPage.includes(`href="${canonicalCoreRoute}"`)) fail(`${source}/index.html`, 'CORE-101 표준강좌가 canonical course 경로를 사용하지 않음');
+  if (indexRuntime.includes("'./core-101.html'")) fail(`${source}/university-index.js`, 'CORE-101 카드가 legacy redirect 경로를 사용함');
+  if (courseRuntime.includes("location.replace('./core-101.html')")) fail(`${source}/course-engine.js`, 'CORE-101 강좌가 legacy 경로로 되돌아가 순환 이동함');
+  if (!legacyCorePage.includes(`location.replace('${canonicalCoreRoute}')`)) fail(`${source}/core-101.html`, 'legacy CORE-101 주소의 단방향 canonical 이동 누락');
 
   const context = {
     window: {},

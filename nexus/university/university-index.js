@@ -16,7 +16,7 @@ const stageMeta={
   4:['Stage 4 · Analysis & Integration','자료·모델·제도·기술을 통합 분석'],
   5:['Stage 5 · Synthesis','복합문제를 여러 학문으로 종합하는 Capstone']
 };
-const href=c=>c.id==='CORE-101'?'./core-101.html':`./course.html?id=${encodeURIComponent(c.id)}`;
+const href=c=>`./course.html?id=${encodeURIComponent(c.id)}`;
 
 function card(c){
   return `<a class="course-card open catalog-course" href="${href(c)}" data-search="${esc(`${c.id} ${c.title} ${c.summary} ${c.college} ${c.department}`.toLowerCase())}"><span class="course-code">${esc(c.id)}</span><span class="course-copy"><strong>${esc(c.title)}</strong><small>${esc(c.summary)}</small></span><span class="course-state">Level ${esc(c.level)}</span></a>`;
