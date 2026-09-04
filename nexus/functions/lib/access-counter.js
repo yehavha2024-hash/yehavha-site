@@ -14,6 +14,14 @@ async function prepareAccessCounterSchema(db) {
     VALUES (1, 0)
     ON CONFLICT(id) DO NOTHING
   `).run();
+
+  await db.prepare(`
+    CREATE TABLE IF NOT EXISTS nexus_daily_access (
+      access_date TEXT PRIMARY KEY,
+      count INTEGER NOT NULL DEFAULT 0,
+      updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )
+  `).run();
 }
 
 export function ensureAccessCounterSchema(db) {
@@ -39,12 +47,41 @@ export async function readAccessCount(db) {
   return Number(row?.count ?? 0);
 }
 
+export async function readTodayAccessCount(db) {
+  await ensureAccessCounterSchema(db);
+  const row = await db.prepare(`
+    SELECT count
+    FROM nexus_daily_access
+    WHERE access_date = date('now', '+9 hours')
+  `).first();
+
+  return Number(row?.count ?? 0);
+}
+
+export async function readAccessStats(db) {
+  const [count, today] = await Promise.all([
+    readAccessCount(db),
+    readTodayAccessCount(db)
+  ]);
+
+  return { count, today };
+}
+
 export async function incrementAccessCount(db) {
   await ensureAccessCounterSchema(db);
+
   await db.prepare(`
     UPDATE nexus_access_counter
     SET count = count + 1,
         updated_at = CURRENT_TIMESTAMP
     WHERE id = 1
+  `).run();
+
+  await db.prepare(`
+    INSERT INTO nexus_daily_access (access_date, count, updated_at)
+    VALUES (date('now', '+9 hours'), 1, CURRENT_TIMESTAMP)
+    ON CONFLICT(access_date) DO UPDATE SET
+      count = count + 1,
+      updated_at = CURRENT_TIMESTAMP
   `).run();
 }
