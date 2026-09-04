@@ -5,10 +5,11 @@ on:
     branches: [main]
     paths:
       - 'scripts/refresh-investment-strategy.mjs'
+      - 'scripts/run-investment-refresh.mjs'
       - '.github/workflows/refresh-investment-strategy.yml'
   schedule:
-    # GitHub Actions cron uses UTC. 08:30 UTC = 17:30 KST, after the Korean regular-session close.
-    - cron: '30 8 * * 1-5'
+    # GitHub Actions cron uses UTC. 11:30 UTC = 20:30 KST.
+    - cron: '30 11 * * 1-5'
   workflow_dispatch:
 
 permissions:
@@ -32,11 +33,13 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Validate investment refresh script
-        run: node --check scripts/refresh-investment-strategy.mjs
+      - name: Validate investment refresh scripts
+        run: |
+          node --check scripts/refresh-investment-strategy.mjs
+          node --check scripts/run-investment-refresh.mjs
 
       - name: Refresh existing investment strategy content
-        run: node scripts/refresh-investment-strategy.mjs
+        run: node scripts/run-investment-refresh.mjs
 
       - name: Commit refreshed investment strategy when changed
         shell: bash
