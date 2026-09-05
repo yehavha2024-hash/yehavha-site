@@ -15,14 +15,13 @@ on:
 
 permissions:
   contents: write
-  models: read
 
 concurrency:
   group: korea-social-intelligence-refresh
   cancel-in-progress: true
 
 env:
-  NEXUS_SOCIAL_MODEL: openai/gpt-4.1-mini
+  OPENAI_MODEL: gpt-4.1-mini
 
 jobs:
   refresh:
@@ -47,7 +46,7 @@ jobs:
 
       - name: Collect and analyze latest public information
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: node scripts/refresh-korea-social-intelligence.mjs
 
       - name: Archive refreshed daily brief
