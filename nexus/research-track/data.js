@@ -38,7 +38,7 @@ window.RESEARCH_TRACK = {
       focus: ['인공지능 행위', '행위귀속', '책임귀속', '기능적 단위 법인격', '공정한 귀속', '번들 이론'],
       deliverable: '석사학위논문 · 대학원 우수논문상',
       items: [
-        { type: '석사학위논문', title: 'AI 행위에 대한 책임귀속 및 범위에 관한 원칙과 그 실현 방안에 대한 연구', note: '기능적 단위의 법인격 부여라는 수단을 중심으로 · 한국방송통신대학교 대학원 법학과 2026년도 학위논문 · dCollection 원문 공개', url: 'https://knou.dcollection.net/common/orgView/200001040576' },
+        { type: '석사학위논문', title: 'AI 행위에 대한 책임귀속 및 범위에 관한 원칙과 그 실현 방안에 대한 연구', note: '기능적 단위의 법인격 부여라는 수단을 중심으로 · 2026년도 학위논문 · dCollection 원문 공개', url: 'https://knou.dcollection.net/common/orgView/200001040576' },
         { type: 'dCollection', title: 'dCollection 학위논문 상세정보', note: '논문의 서지정보·초록·원문 제공 정보를 확인할 수 있습니다.', url: 'https://knou.dcollection.net/srch/srchDetail/200001040576?insCode=211057&query=%28ins_code%3A211057%29+AND+%28coll_id%3A200000005489%29&navigationSize=10&start=0&pageSize=10&searthTotalPage=0&rows=10&locale=ko&ajax=false&pageNum=1&sortField=pub_year&collId=200000005489&searchTotalCount=0&sortDir=desc' },
         { type: '학술성과', title: '석사학위논문 논문우수상 수상', note: '학과 추천을 거쳐 대학원 우수논문으로 선정' }
       ],
