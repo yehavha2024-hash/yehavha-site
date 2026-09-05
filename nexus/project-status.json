@@ -101,8 +101,8 @@
   "legal-research-track": {
     "id": "legal-research-track",
     "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-08-28",
     "contentCount": 6,
     "contentLabel": "연구 단계"
