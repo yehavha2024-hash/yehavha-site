@@ -45,7 +45,7 @@ jobs:
       - name: Collect public legal people and market updates
         run: node nexus/legal-intelligence/scripts/collect-legal-people.mjs
 
-      - name: Evaluate required and optional source health
+      - name: Evaluate legal people source quorum
         shell: bash
         run: |
           node <<'NODE'
@@ -59,17 +59,30 @@ jobs:
           const requiredFailures = failures.filter(failure => byId.get(failure.source)?.allowFailure !== true);
           const optionalFailures = failures.filter(failure => byId.get(failure.source)?.allowFailure === true);
           const requiredSucceeded = Math.max(0, requiredSources.length - requiredFailures.length);
+          const minimumRequiredSucceeded = Math.max(1, Math.ceil(requiredSources.length * 0.6));
+          const quorumHealthy = requiredSucceeded >= minimumRequiredSucceeded;
 
-          const health = {sourceFailures: requiredFailures, optionalFailures};
+          // Airtable tracks the health of the refresh pipeline, not each transient upstream response.
+          // All raw source failures remain preserved in legal-people.json and the Actions summary.
+          const health = {
+            sourceFailures: quorumHealthy ? [] : requiredFailures,
+            partialFailures: failures,
+            optionalFailures,
+            requiredSucceeded,
+            requiredTotal: requiredSources.length,
+            minimumRequiredSucceeded
+          };
           fs.writeFileSync('/tmp/legal-people-health.json', JSON.stringify(health, null, 2));
 
-          console.log(`Required legal-people source health: ${requiredSucceeded}/${requiredSources.length} source(s) succeeded.`);
-          if (optionalFailures.length) {
-            console.log('Optional source failures:', optionalFailures);
-            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `### 선택 원천 상태\n${optionalFailures.map(item => `- ${item.source}: ${item.message}`).join('\n')}\n`);
+          console.log(`Required legal-people source health: ${requiredSucceeded}/${requiredSources.length}; quorum=${minimumRequiredSucceeded}.`);
+          if (failures.length) {
+            fs.appendFileSync(
+              process.env.GITHUB_STEP_SUMMARY,
+              `### 원천 응답 상태\n필수 원천 ${requiredSucceeded}/${requiredSources.length} 응답 성공 · 정상 판정 최소 ${minimumRequiredSucceeded}\n${failures.map(item => `- ${item.source}: ${item.message}${byId.get(item.source)?.allowFailure === true ? ' (선택 원천)' : ''}`).join('\n')}\n`
+            );
           }
-          if (requiredSources.length && requiredSucceeded === 0) {
-            console.error('Every required legal-people source failed:', requiredFailures);
+          if (!quorumHealthy) {
+            console.error('Legal-people required source quorum failed:', requiredFailures);
             process.exit(1);
           }
           NODE
