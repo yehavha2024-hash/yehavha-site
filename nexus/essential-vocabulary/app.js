@@ -138,7 +138,7 @@
     return sections.map(([label,list])=>`<div class="relation-row"><span>${label}</span><div>${list.map(v=>`<b>${escapeHtml(v)}</b>`).join('')}</div></div>`).join('');
   }
 
-  function escapeHtml(value) { return String(value ?? '').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c])); }
+  function escapeHtml(value) { return String(value ?? '').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
   function currentList() {
     const query = norm(els.search.value);
     let list = mode === 'word' ? words : phrases;
