@@ -2,7 +2,7 @@
   'use strict';
 
   const KST = 'Asia/Seoul';
-  const START_KEY = 'toeic100_start_date';
+  const PROJECT_START_DATE = '2026-08-30';
   const COMPLETION_KEY = 'toeic-human-v2-stage-completed-v3';
   const WRONG_KEY = 'toeic-human-v2-wrong-v3';
 
@@ -18,12 +18,7 @@
 
   function getDateDay() {
     const today = kstDateString();
-    let start = localStorage.getItem(START_KEY);
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(start || '')) {
-      start = today;
-      localStorage.setItem(START_KEY, start);
-    }
-    return Math.min(100, Math.max(1, dayDiff(start, today) + 1));
+    return Math.min(100, Math.max(1, dayDiff(PROJECT_START_DATE, today) + 1));
   }
 
   const todayDay = getDateDay();
