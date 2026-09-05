@@ -92,6 +92,10 @@ function auditWorkflowPermissions() {
       required: ['git add -- nexus/intelligence-briefing/archive nexus/intelligence-briefing/archive-index.json'],
       allowedPathTokens: ['nexus/intelligence-briefing/archive', 'nexus/intelligence-briefing/archive-index.json']
     }],
+    ['korea-social-intelligence-archive.yml', {
+      required: ['git add -- nexus/korea-social-intelligence/archive nexus/korea-social-intelligence/archive-index.json'],
+      allowedPathTokens: ['nexus/korea-social-intelligence/archive', 'nexus/korea-social-intelligence/archive-index.json']
+    }],
     ['refresh-legal-intelligence.yml', {
       required: ['git add nexus/legal-intelligence/legislation.json'],
       allowedPathTokens: ['nexus/legal-intelligence/legislation.json']
