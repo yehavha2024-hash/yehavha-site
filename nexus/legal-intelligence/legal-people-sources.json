@@ -9,6 +9,8 @@
       "id": "scourt",
       "label": "대한민국 법원",
       "url": "https://www.scourt.go.kr/portal/main.jsp",
+      "allowFailure": true,
+      "failureNote": "공식 사이트의 웹 방화벽이 GitHub Actions 클라우드 요청을 차단할 수 있어 선택 원천으로 취급한다. 기존 공식 레코드와 링크는 보존한다.",
       "includeKeywords": ["인사", "임용", "임명", "대법관", "법관", "재판연구원", "학술대회", "국제회의"],
       "excludeKeywords": ["부음", "부고", "결혼", "화촉", "모친상", "부친상", "장모상", "장인상"]
     },
