@@ -8,8 +8,10 @@ on:
       - 'nexus/legal-intelligence/legal-people-sources.json'
       - 'nexus/legal-intelligence/scripts/collect-legal-people.mjs'
       - 'nexus/legal-intelligence/scripts/audit-legal-people.mjs'
+      - 'scripts/report-airtable-status.mjs'
       - '.github/workflows/refresh-legal-people.yml'
   schedule:
+    # 00:40 UTC = 09:40 KST every Monday.
     - cron: '40 0 * * 1'
   workflow_dispatch:
 
@@ -38,9 +40,14 @@ jobs:
         run: |
           node --check nexus/legal-intelligence/scripts/collect-legal-people.mjs
           node --check nexus/legal-intelligence/scripts/audit-legal-people.mjs
+          node --check scripts/report-airtable-status.mjs
 
       - name: Collect public legal people and market updates
         run: node nexus/legal-intelligence/scripts/collect-legal-people.mjs
+
+      - name: Fail when every configured legal-people source failed
+        run: |
+          node -e "const fs=require('fs'); const data=JSON.parse(fs.readFileSync('nexus/legal-intelligence/legal-people.json','utf8')); const cfg=JSON.parse(fs.readFileSync('nexus/legal-intelligence/legal-people-sources.json','utf8')); const failures=Array.isArray(data.sourceFailures)?data.sourceFailures:[]; const sources=Array.isArray(cfg.sources)?cfg.sources:[]; if(sources.length && failures.length >= sources.length){console.error('All configured legal-people sources failed:', failures); process.exit(1)} console.log('Legal-people source health:', (sources.length-failures.length)+'/'+sources.length, 'source(s) succeeded.');"
 
       - name: Validate refreshed data
         run: node nexus/legal-intelligence/scripts/audit-legal-people.mjs
@@ -59,3 +66,16 @@ jobs:
           git commit -m "Refresh Legal Intelligence people data"
           git pull --rebase origin main
           git push origin main
+
+      - name: Report legal people refresh status to Airtable
+        if: always()
+        continue-on-error: true
+        env:
+          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_NEXUS_TOKEN }}
+          AIRTABLE_NEXUS_RECORD_ID: recVAJTq4vq0nlch2
+          NEXUS_REFRESH_STATUS: ${{ job.status }}
+          NEXUS_STATUS_SOURCE_PATH: nexus/legal-intelligence/legal-people.json
+          NEXUS_STATUS_DATE_FIELD: updatedAt
+          NEXUS_STATUS_WARNING_FIELD: sourceFailures
+          GITHUB_RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: node scripts/report-airtable-status.mjs
