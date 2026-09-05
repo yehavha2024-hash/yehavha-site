@@ -97,9 +97,16 @@
   scanToeic(window.TOEIC_HUMAN_V2);
   FALLBACK_PHRASES.forEach(([term,meaning]) => mergePhrase(term, meaning, 'TOEIC'));
 
-  let words = [...wordMap.values()].map(item => ({...item,sources:[...item.sources]}));
-  words.sort((a,b) => (a.rank || 999999) - (b.rank || 999999) || a.term.localeCompare(b.term));
-  let phrases = [...phraseMap.values()].map(item => ({...item,sources:[...item.sources]})).sort((a,b)=>a.term.localeCompare(b.term));
+  function shuffle(list) {
+    for (let i = list.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [list[i], list[j]] = [list[j], list[i]];
+    }
+    return list;
+  }
+
+  let words = shuffle([...wordMap.values()].map(item => ({...item,sources:[...item.sources]})));
+  let phrases = shuffle([...phraseMap.values()].map(item => ({...item,sources:[...item.sources]})));
 
   const els = {
     totalWords:document.getElementById('totalWords'), highSchoolCount:document.getElementById('highSchoolCount'), toeicCount:document.getElementById('toeicCount'), phraseCount:document.getElementById('phraseCount'),
@@ -131,7 +138,7 @@
     return sections.map(([label,list])=>`<div class="relation-row"><span>${label}</span><div>${list.map(v=>`<b>${escapeHtml(v)}</b>`).join('')}</div></div>`).join('');
   }
 
-  function escapeHtml(value) { return String(value ?? '').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function escapeHtml(value) { return String(value ?? '').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c])); }
   function currentList() {
     const query = norm(els.search.value);
     let list = mode === 'word' ? words : phrases;
