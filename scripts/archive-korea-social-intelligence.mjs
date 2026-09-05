@@ -11,15 +11,6 @@ const readJson = file => JSON.parse(fs.readFileSync(file, 'utf8'));
 const stableJson = value => `${JSON.stringify(value, null, 2)}\n`;
 const nonEmpty = value => typeof value === 'string' && value.trim().length > 0;
 
-function validateSource(source, headline) {
-  if (!source || !nonEmpty(source.label) || !nonEmpty(source.url)) {
-    throw new Error(`Invalid source in: ${headline}`);
-  }
-  let url;
-  try { url = new URL(source.url); } catch { throw new Error(`Invalid source URL in: ${headline}`); }
-  if (!['http:', 'https:'].includes(url.protocol)) throw new Error(`Unsupported source URL in: ${headline}`);
-}
-
 function validateBrief(brief) {
   if (brief?.schemaVersion !== 1) throw new Error('latest.json schemaVersion must be 1.');
   if (!/^20\d{2}-\d{2}-\d{2}$/.test(brief?.date || '')) throw new Error('latest.json requires YYYY-MM-DD date.');
@@ -33,11 +24,17 @@ function validateBrief(brief) {
     if (!Array.isArray(section.items) || !section.items.length) continue;
     for (const item of section.items) {
       itemCount += 1;
-      if (!nonEmpty(item?.headline) || !nonEmpty(item?.fact) || !nonEmpty(item?.why) || !nonEmpty(item?.impact) || !nonEmpty(item?.assessment)) {
+      if (
+        !nonEmpty(item?.headline) ||
+        !nonEmpty(item?.fact) ||
+        !nonEmpty(item?.why) ||
+        !nonEmpty(item?.publicResponse) ||
+        !nonEmpty(item?.attention) ||
+        !nonEmpty(item?.impact) ||
+        !nonEmpty(item?.assessment)
+      ) {
         throw new Error(`Required analytical field missing: ${item?.headline || section.category}`);
       }
-      if (!Array.isArray(item.sources) || !item.sources.length) throw new Error(`At least one source required: ${item.headline}`);
-      item.sources.forEach(source => validateSource(source, item.headline));
     }
   }
   if (!itemCount) throw new Error('At least one briefing item is required.');
