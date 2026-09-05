@@ -2,6 +2,7 @@ import { recordMetric } from './lib/metrics.js';
 
 const ALLOWED_HOSTS = new Set([
   'yehavha-nexus-hub.pages.dev',
+  'yehavha.com',
   'yehavha-3min-rest.pages.dev',
   'yehavha-toeicman.pages.dev',
   'ai-song-studio.pages.dev',
