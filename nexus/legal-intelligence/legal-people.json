@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-01",
+  "updatedAt": "2026-09-05",
   "policy": {
     "description": "법원·검찰·헌법재판소·변호사단체·법률연구 현장의 공개 전문동향만 선별하며 경조사·가십은 제외한다.",
     "categories": [
@@ -30,6 +30,22 @@
       "active": true,
       "curated": true,
       "autoCollected": false
+    },
+    {
+      "recordKey": "legalpeople:yulchon:b32c5fbed8da28e9",
+      "category": "연구·학술",
+      "source": "법무법인 율촌",
+      "title": "조상욱 변호사 저서 「괴로움이 괴롭힘은 아니다」 2026년 세종도서 지원 사업 교양부문 선정",
+      "publishedAt": "2026-08-28",
+      "summary": "조상욱 변호사가 출간한 저서 『괴로움이 괴롭힘은 아니다 – 감수성의 시대, 기업문화의 길』이 한국출판문화산업진흥원의 2026년 세종도서 지원 사업 교양부문에 선정되었습니다.",
+      "sourceUrl": "https://www.yulchon.com/ko/resources/yulchon-news-view/45011/page.do",
+      "tags": [
+        "법무법인 율촌",
+        "연구·학술",
+        "변호사"
+      ],
+      "active": true,
+      "autoCollected": true
     },
     {
       "recordKey": "legalpeople:koreanbar:20260826-member-market",
@@ -152,22 +168,6 @@
       "autoCollected": false
     },
     {
-      "recordKey": "legalpeople:yulchon:b32c5fbed8da28e9",
-      "category": "연구·학술",
-      "source": "법무법인 율촌",
-      "title": "조상욱 변호사 저서 「괴로움이 괴롭힘은 아니다」 2026년 세종도서 지원 사업 교양부문 선정",
-      "publishedAt": "2026-08-04",
-      "summary": "조상욱 변호사가 출간한 저서 『괴로움이 괴롭힘은 아니다 – 감수성의 시대, 기업문화의 길』이 한국출판문화산업진흥원의 2026년 세종도서 지원 사업 교양부문에 선정되었습니다.",
-      "sourceUrl": "https://www.yulchon.com/ko/resources/yulchon-news-view/45011/page.do",
-      "tags": [
-        "법무법인 율촌",
-        "연구·학술",
-        "변호사"
-      ],
-      "active": true,
-      "autoCollected": true
-    },
-    {
       "recordKey": "legalpeople:scourt:20260710-registration-conference",
       "category": "연구·학술",
       "source": "대한민국 법원",
@@ -199,5 +199,10 @@
       "active": true
     }
   ],
-  "sourceFailures": []
+  "sourceFailures": [
+    {
+      "source": "scourt",
+      "message": "fetch failed"
+    }
+  ]
 }
