@@ -33,7 +33,7 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
 .portal-mark>span:not(.dot){color:#111111!important;font-size:13.5px!important;font-weight:700!important;letter-spacing:.005em!important;white-space:nowrap!important;font-variant-numeric:tabular-nums}
 .portal-runtime{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-width:0;margin-left:auto}
 .access-count{display:inline-flex;align-items:center;justify-content:flex-end;gap:7px;min-height:36px;padding:7px 11px;border:1px solid var(--portal-line);border-radius:9px;background:#fff;color:var(--portal-text);font-size:14px;font-weight:820;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
-.access-count::before{content:"방문자";color:#111111;font-size:12px;font-weight:760;letter-spacing:.02em}
+.access-count::before{display:none;content:none}
 .access-count[hidden]{display:none!important}
 .hero-card{position:relative;overflow:hidden;margin-top:0;padding:30px;border:1px solid var(--portal-line);border-radius:16px;background:#fff;box-shadow:0 4px 16px rgba(0,0,0,.06)}
 .hero-main{position:relative;z-index:1;max-width:none}
