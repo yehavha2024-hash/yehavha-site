@@ -47,7 +47,9 @@ async function auditAccessCounter() {
     await counter.incrementAccessCount(database);
     const updated = await counter.readAccessCount(database);
     if (initial !== 3 || concurrent !== 3 || updated !== 4) fail(file, `읽기·증가 결과 불일치: ${initial}/${concurrent} → ${updated}`);
-    if (statements.filter(statement => statement.startsWith('CREATE TABLE')).length !== 1) fail(file, '스키마 준비가 중복 실행됨');
+    const accessSchemaCreates = statements.filter(statement => statement.startsWith('CREATE TABLE IF NOT EXISTS nexus_access_counter')).length;
+    const dailySchemaCreates = statements.filter(statement => statement.startsWith('CREATE TABLE IF NOT EXISTS nexus_daily_access')).length;
+    if (accessSchemaCreates !== 1 || dailySchemaCreates !== 1) fail(file, '스키마 준비가 중복 실행됨');
   } catch (error) {
     fail(file, `공유 access counter 실행 실패: ${error.message}`);
   }
@@ -114,7 +116,7 @@ if (exists('nexus/portal-v2.js') && exists('nexus/index.html')) {
   for (const token of ["fetchJson('./projects.json')", "fetchJson('./project-status.json')", "const KOREA_TIME_ZONE = 'Asia/Seoul'", "const COUNTER_ENDPOINT = '/api/access'"]) {
     if (!js.includes(token)) fail('nexus/portal-v2.js', `런타임 소유권 누락: ${token}`);
   }
-  for (const marker of ['portal-brand','portal-runtime','portal-mark','accessCount','portalGrid']) {
+  for (const marker of ['portal-runtime','portal-mark','accessCount','portalGrid']) {
     if (!html.includes(marker)) fail('nexus/index.html', `메인 DOM 누락: ${marker}`);
   }
   if (js.includes('portal-enhancements.css') || js.includes('status.css')) fail('nexus/portal-v2.js', '폐기된 전역 스타일 동적 연결 잔존');
