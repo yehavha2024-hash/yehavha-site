@@ -1,0 +1,79 @@
+name: Archive Korea Social Intelligence
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'nexus/korea-social-intelligence/latest.json'
+      - 'scripts/archive-korea-social-intelligence.mjs'
+      - 'scripts/report-airtable-status.mjs'
+      - '.github/workflows/korea-social-intelligence-archive.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: korea-social-intelligence-archive
+  cancel-in-progress: true
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Validate archive scripts
+        run: |
+          node --check scripts/archive-korea-social-intelligence.mjs
+          node --check scripts/report-airtable-status.mjs
+          node -e "JSON.parse(require('fs').readFileSync('nexus/korea-social-intelligence/latest.json','utf8')); JSON.parse(require('fs').readFileSync('nexus/korea-social-intelligence/archive-index.json','utf8'));"
+
+      - name: Archive latest daily brief
+        run: node scripts/archive-korea-social-intelligence.mjs
+
+      - name: Commit daily archive when changed
+        shell: bash
+        run: |
+          if git diff --quiet -- nexus/korea-social-intelligence/archive nexus/korea-social-intelligence/archive-index.json; then
+            echo "No domestic social intelligence archive changes detected."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- nexus/korea-social-intelligence/archive nexus/korea-social-intelligence/archive-index.json
+          git commit -m "Archive Korea social intelligence daily brief"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin main; then
+              exit 0
+            fi
+            echo "Push raced with another main update; retrying (${attempt}/3)."
+            sleep $((attempt * 2))
+          done
+
+          echo "Unable to push domestic social intelligence archive after 3 attempts."
+          exit 1
+
+      - name: Report domestic social intelligence status to Airtable
+        if: always()
+        continue-on-error: true
+        env:
+          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_NEXUS_TOKEN }}
+          AIRTABLE_NEXUS_RECORD_ID: recUB5amq8J9PNVwJ
+          NEXUS_REFRESH_STATUS: ${{ job.status }}
+          NEXUS_STATUS_SOURCE_PATH: nexus/korea-social-intelligence/latest.json
+          NEXUS_STATUS_DATE_FIELD: date
+          GITHUB_RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: node scripts/report-airtable-status.mjs
