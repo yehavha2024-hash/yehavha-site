@@ -7,6 +7,7 @@ on:
       - 'nexus/legal-intelligence/collector-config.json'
       - 'nexus/legal-intelligence/legal-materials.json'
       - 'nexus/legal-intelligence/scripts/**'
+      - 'scripts/report-airtable-status.mjs'
       - '.github/workflows/refresh-legal-intelligence.yml'
   schedule:
     - cron: '20 0 * * 1-5'
@@ -46,6 +47,7 @@ jobs:
           node --check nexus/legal-intelligence/scripts/normalize-legislation.mjs
           node --check nexus/legal-intelligence/scripts/audit-legislation.mjs
           node --check nexus/legal-intelligence/scripts/audit-legal-materials.mjs
+          node --check scripts/report-airtable-status.mjs
           node nexus/legal-intelligence/scripts/normalize-legislation.mjs
           node nexus/legal-intelligence/scripts/audit-legislation.mjs
           node nexus/legal-intelligence/scripts/audit-legal-materials.mjs
@@ -55,7 +57,7 @@ jobs:
         run: |
           if [ -z "$OPEN_ASSEMBLY_API_KEY" ]; then
             echo "### 국회 입법 API 비활성" >> "$GITHUB_STEP_SUMMARY"
-            echo "인증키 미등록: 기존 국회 레코드를 보존합니다." >> "$GITHUB_STEP_SUMMARY"
+            echo "인증키 미등록: 국회 원천 수집 실패는 실행 결과에 반영됩니다." >> "$GITHUB_STEP_SUMMARY"
           else
             echo "### 국회 입법 API 활성" >> "$GITHUB_STEP_SUMMARY"
             echo "등록된 열린국회정보 인증키로 의안·심사 정보를 조회합니다." >> "$GITHUB_STEP_SUMMARY"
@@ -69,42 +71,26 @@ jobs:
           fi
 
       - name: Collect official legislation candidates
-        id: collect
-        continue-on-error: true
         run: node nexus/legal-intelligence/scripts/collect-legislation.mjs /tmp/legal-collected.json
 
-      - name: Report temporary source failure
-        if: steps.collect.outcome == 'failure'
-        shell: bash
-        run: |
-          echo "### 공식 원천 일시 응답 실패" >> "$GITHUB_STEP_SUMMARY"
-          echo "이번 실행에서는 신규 수집을 건너뛰고 기존 정규화 데이터는 유지합니다. 다음 정기 실행에서 다시 조회합니다." >> "$GITHUB_STEP_SUMMARY"
-
       - name: Select Nexus-relevant legislation
-        if: steps.collect.outcome == 'success'
         run: node nexus/legal-intelligence/scripts/select-legislation.mjs /tmp/legal-collected.json /tmp/legal-selected.json
 
       - name: Validate selected records
-        if: steps.collect.outcome == 'success'
         run: node nexus/legal-intelligence/scripts/audit-legislation.mjs /tmp/legal-selected.json
 
       - name: Upsert canonical legislation records
-        if: steps.collect.outcome == 'success'
         run: node nexus/legal-intelligence/scripts/upsert-legislation.mjs /tmp/legal-selected.json
 
       - name: Normalize after upsert
-        if: steps.collect.outcome == 'success'
         run: node nexus/legal-intelligence/scripts/normalize-legislation.mjs
 
       - name: Validate canonical result
-        id: canonical_audit
-        if: always()
         run: |
           node nexus/legal-intelligence/scripts/audit-legislation.mjs
           node nexus/legal-intelligence/scripts/audit-legal-materials.mjs
 
       - name: Commit legislation data when changed
-        if: always() && steps.canonical_audit.outcome == 'success'
         shell: bash
         run: |
           if git diff --quiet -- nexus/legal-intelligence/legislation.json; then
@@ -118,3 +104,17 @@ jobs:
           git commit -m "Refresh Legal Intelligence legislation data"
           git pull --rebase origin main
           git push origin main
+
+      - name: Report legislation refresh status to Airtable
+        if: always()
+        continue-on-error: true
+        env:
+          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_NEXUS_TOKEN }}
+          AIRTABLE_NEXUS_RECORD_ID: recVVMjcTuUx2qRUs
+          NEXUS_REFRESH_STATUS: ${{ job.status }}
+          NEXUS_STATUS_SOURCE_PATH: nexus/legal-intelligence/legislation.json
+          NEXUS_STATUS_DATE_FIELD: updatedAt
+          NEXUS_STATUS_WARNING_SOURCE_PATH: /tmp/legal-collected.json
+          NEXUS_STATUS_WARNING_FIELD: sourceErrors
+          GITHUB_RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: node scripts/report-airtable-status.mjs
