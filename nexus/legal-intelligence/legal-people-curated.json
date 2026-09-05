@@ -1,16 +1,16 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-08-31",
+  "updatedAt": "2026-09-05",
   "records": [
     {
       "recordKey": "legalpeople:ccourt:20260828-international-symposium",
       "category": "연구·학술",
       "source": "헌법재판연구원",
       "title": "제15회 국제학술심포지엄: 민주주의와 국제질서의 위기",
-      "publishedAt": "2026-08-28",
+      "publishedAt": "2026-09-03",
       "effectiveAt": "2026-09-04",
-      "summary": "헌법재판연구원이 9월 4일 '민주주의와 국제질서의 위기: 법치주의와 헌법적 가치의 재조명'을 주제로 국제학술심포지엄을 개최합니다. 마틴 러클린 런던정치경제대 명예교수, 외른 악셀 켐머러 부세리우스 로스쿨 교수, 윤성현 한양대 교수가 발표합니다.",
-      "sourceUrl": "https://www.ccourt.go.kr/site/cri/ex/bbs/View.do?bcIdx=4267462&cbIdx=1531",
+      "summary": "9월 3일 보도자료로 9월 4일 국제학술심포지엄의 상세 프로그램이 공개됐습니다. 김하열 교수의 사회 아래 마틴 러클린·외른 악셀 켐머러·윤성현 교수를 발표자로 안내하며, 민주주의 쇠퇴와 입헌주의, 독일·유럽의 법적 대응, 한국 민주주의의 참여·경쟁·숙의를 주요 논제로 제시합니다.",
+      "sourceUrl": "https://www.ccourt.go.kr/site/kor/ex/bbs/View.do?bcIdx=4267529&cbIdx=1128",
       "tags": ["헌법재판연구원", "국제학술", "법치주의", "민주주의", "헌법"],
       "active": true
     },
@@ -147,6 +147,51 @@
       "summary": "AI 개발 인프라부터 알고리즘 기반 경쟁제한 이슈까지 대응하기 위한 AI·디지털 경쟁법 전문조직을 출범시켜 AI 규제·공정거래 분야의 전문화를 강화했습니다.",
       "sourceUrl": "https://www.shinkim.com/kor/media/sejong/7284",
       "tags": ["전문팀", "AI", "경쟁법", "공정거래"],
+      "active": true
+    },
+    {
+      "recordKey": "legalpeople:koreanbar:20260826-member-market",
+      "category": "법률시장",
+      "source": "대한변호사협회",
+      "title": "대한변호사협회 회원·개업 현황: 2026년 9월 2일 기준",
+      "publishedAt": "2026-09-02",
+      "summary": "대한변협이 공개한 2026년 9월 2일 기준 회원현황에서 서울 지역 개업회원은 24,563명, 준회원(휴업·미개업)은 5,443명으로 소계 30,006명입니다. 개업회원과 준회원을 구분한 수치로 법률시장 규모를 확인할 수 있습니다.",
+      "sourceUrl": "https://www.koreanbar.or.kr/pages/introduce/stat.asp",
+      "tags": ["변호사", "개업", "회원현황", "법률시장"],
+      "active": true
+    },
+    {
+      "recordKey": "legalpeople:moj:20260824-prosecutor-transfer",
+      "category": "인사",
+      "source": "법무부",
+      "title": "2026년 하반기 일반검사 인사",
+      "publishedAt": "2026-08-24",
+      "effectiveAt": "2026-08-31",
+      "summary": "법무부가 8월 24일 발표한 일반검사 16명의 전보 인사는 2026년 8월 31일자로 시행됐습니다. 공식 보도자료에 전입청·전출청 기준 인사이동 내역이 함께 공개돼 있습니다.",
+      "sourceUrl": "https://www.moj.go.kr/bbs/moj/182/609605/artclView.do",
+      "tags": ["검사", "전보", "검찰"],
+      "active": true
+    },
+    {
+      "recordKey": "legalpeople:scourt:20260105-career-judges",
+      "category": "인사",
+      "source": "대한민국 법원",
+      "title": "2026년 일반 법조경력자 법관임용: 임명동의 대상자 명단 공개",
+      "publishedAt": "2026-08-21",
+      "summary": "대법원이 8월 21일 2026년 일반 법조경력자 법관임용 절차의 대법관회의 임명동의 대상자 명단을 공개했습니다. 법관인사위원회 최종심사를 통과한 대상자를 공개한 단계로, 대법관회의의 최종 임명동의 및 임용 결과와 구분됩니다.",
+      "sourceUrl": "https://www.scourt.go.kr/portal/news/NewsViewAction.work?gubun=3&searchOption=&searchWord=&seqnum=2849",
+      "tags": ["법관임용", "법조경력자", "임명동의", "명단공개"],
+      "active": true
+    },
+    {
+      "recordKey": "legalpeople:yulchon:6813bd5e4c24d467",
+      "category": "인사",
+      "source": "법무법인 율촌",
+      "title": "오택원 변호사, 대한체육회 ‘2040 K-스포츠 비전 전문가그룹’ 법률분야 전문가로 위촉",
+      "publishedAt": "2026-08-20",
+      "summary": "율촌은 8월 20일 오택원 변호사의 대한체육회 ‘2040 K-스포츠 비전 전문가그룹’ 법률분야 전문가 위촉을 알렸습니다. 스포츠 현안과 중장기 발전 전략·추진 과제를 논의하는 전문가그룹에 법률 전문가로 참여합니다.",
+      "sourceUrl": "https://www.yulchon.com/ko/resources/yulchon-news-view/45015/page.do",
+      "tags": ["법무법인 율촌", "인사", "변호사"],
       "active": true
     }
   ]
