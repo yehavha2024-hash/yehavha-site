@@ -12,6 +12,13 @@
     "freshDays": 1,
     "staleDays": 3
   },
+  "dailyOperation": {
+    "cadence": "daily",
+    "timezone": "Asia/Seoul",
+    "sourceWindow": "최근 24시간 공개정보 중심",
+    "archiveUnit": "one snapshot per KST date",
+    "sameDayRevision": "replace the same date archive with the latest validated revision"
+  },
   "analysisStandard": {
     "primaryLens": "국내 공개정보 기반 일일 사회정세 분석",
     "sourceRule": "공식자료, 신뢰도 높은 언론보도, 공개 검색흐름, 공개 커뮤니티·SNS·영상 플랫폼의 검증 가능한 신호만 사용한다. 비공개 첩보, 출처 불명 정보, 소문과 찌라시는 사용하지 않는다.",
