@@ -38,6 +38,18 @@
     "baselineAt": "2026-08-22",
     "baselineLabel": "운영기준"
   },
+  "korea-social-intelligence": {
+    "id": "korea-social-intelligence",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-09-05",
+    "contentCount": null,
+    "contentLabel": "콘텐츠",
+    "contentReviewedAt": "2026-09-05",
+    "baselineAt": "2026-09-05",
+    "baselineLabel": "공개정보 기준"
+  },
   "three-min-rest": {
     "id": "three-min-rest",
     "managedBy": "github",
