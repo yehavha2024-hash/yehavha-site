@@ -2,6 +2,7 @@ import { recordMetric } from './lib/metrics.js';
 
 const ALLOWED_HOSTS = new Set([
   'yehavha-nexus-hub.pages.dev',
+  'yehavha-nexus.pages.dev',
   'yehavha.com',
   'yehavha-3min-rest.pages.dev',
   'yehavha-toeicman.pages.dev',
@@ -21,6 +22,7 @@ function safeDestination(value) {
     const target = new URL(value);
     if (target.protocol !== 'https:') return null;
     if (!ALLOWED_HOSTS.has(target.hostname)) return null;
+    if (['yehavha-nexus-hub.pages.dev', 'yehavha-nexus.pages.dev'].includes(target.hostname)) target.host = 'yehavha.com';
     return target;
   } catch {
     return null;

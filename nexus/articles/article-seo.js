@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const ARCHIVE_URL = 'https://yehavha-nexus-hub.pages.dev/articles/';
+  const ARCHIVE_URL = 'https://yehavha.com/articles/';
   const DETAIL_URL = `${ARCHIVE_URL}article.html`;
 
   function ensureMeta(selector, attributes) {

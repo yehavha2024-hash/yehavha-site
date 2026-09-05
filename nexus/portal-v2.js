@@ -151,9 +151,11 @@
     fetch(`${COUNTER_ENDPOINT}?${params.toString()}`, {method:'GET',cache:'no-store',credentials:'same-origin',keepalive:true}).catch(() => undefined);
   }
 
-  function showAccessCount(value) {
-    if (!accessCount || !Number.isFinite(Number(value))) return;
-    accessCount.textContent = new Intl.NumberFormat('ko-KR').format(Number(value));
+  function showAccessCount({ count, today }) {
+    if (!accessCount) return;
+    const format = value => new Intl.NumberFormat('ko-KR').format(value);
+    accessCount.textContent = `오늘 ${format(today)} | 누적 ${format(count)}`;
+    accessCount.setAttribute('aria-label', `오늘 방문자 ${format(today)}명, 누적 방문자 ${format(count)}명`);
     accessCount.hidden = false;
   }
 
@@ -162,8 +164,8 @@
       const response = await fetch(`${COUNTER_ENDPOINT}?op=get`, {method:'GET',cache:'no-store',credentials:'same-origin',headers:{Accept:'application/json'}});
       if (!response.ok) throw new Error(`counter HTTP ${response.status}`);
       const payload = await response.json();
-      if (!payload?.ok || !Number.isFinite(Number(payload.count))) throw new Error('counter value missing');
-      showAccessCount(payload.count);
+      if (!payload?.ok || ![payload.count, payload.today].every(value => Number.isSafeInteger(value) && value >= 0)) throw new Error('counter value missing');
+      showAccessCount(payload);
     } catch (error) {
       console.warn('Nexus D1 access counter unavailable:', error);
       if (accessCount) accessCount.textContent = '확인 불가';
@@ -347,7 +349,7 @@
   }
 
   function installSeo(data) {
-    const canonicalUrl = 'https://yehavha-nexus-hub.pages.dev/';
+    const canonicalUrl = 'https://yehavha.com/';
     let canonical = document.querySelector('link[rel="canonical"]');
     if (!canonical) {
       canonical = document.createElement('link');

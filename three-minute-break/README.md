@@ -55,7 +55,7 @@ GitHub에서 관리하는 모바일 중심 일일 순환 웹앱입니다.
 
 ## 통합 정보
 
-- YEHAVHA Nexus: https://yehavha-nexus-hub.pages.dev/
+- YEHAVHA Nexus: https://yehavha.com/
 - 문의: kimbrighth@gmail.com
 
 Copyright © 이명훈 2026. All rights reserved.

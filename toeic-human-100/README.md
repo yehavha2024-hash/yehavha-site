@@ -122,7 +122,7 @@ TOEIC·TEPS 공식 기출문장을 대량 복제하지 않습니다. 시험의 �
 
 ## 통합 정보
 
-- YEHAVHA Nexus: https://yehavha-nexus-hub.pages.dev/
+- YEHAVHA Nexus: https://yehavha.com/
 - 문의: kimbrighth@gmail.com
 
 Copyright © 이명훈 2026. All rights reserved.

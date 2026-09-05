@@ -6,7 +6,7 @@ YEHAVHA Nexus와 연결 프로젝트를 GitHub에서 관리하는 운영 저장�
 
 이 저장소의 루트에는 별도의 웹사이트를 배포하지 않습니다. 각 프로젝트는 지정된 하위 디렉터리를 운영 원본으로 사용하며, Nexus는 `nexus/` 디렉터리만 공식 포털 원본으로 사용합니다.
 
-운영 포털: https://yehavha-nexus-hub.pages.dev/
+운영 포털: https://yehavha.com/
 
 ## 활성 프로젝트 디렉터리
 

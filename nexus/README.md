@@ -1,6 +1,6 @@
 # YEHAVHA Nexus — GitHub 자동배포형
 
-운영 주소: https://yehavha-nexus-hub.pages.dev/
+운영 주소: https://yehavha.com/
 
 운영 구조 기준일: 2026-08-21
 
@@ -152,4 +152,4 @@ Nexus 자체 측정은 개인 단위 분석보다 포털 개선에 필요한 최
 - Root directory: `nexus`
 - Build output directory: `.`
 
-운영 기준 주소는 `https://yehavha-nexus-hub.pages.dev/`입니다.
+운영 기준 주소는 `https://yehavha.com/`입니다.

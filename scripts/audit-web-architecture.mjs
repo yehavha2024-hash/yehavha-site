@@ -260,7 +260,7 @@ const auditNexusModel = () => {
         if (!allowedHosts.has(projectUrl.hostname.toLowerCase())) {
           report('ERROR', redirectPath, `projects.json의 호스트가 /go 허용목록에 없음: ${project.id} → ${projectUrl.hostname}`);
         }
-        if (projectUrl.hostname === 'yehavha-nexus-hub.pages.dev') {
+        if (projectUrl.hostname === 'yehavha.com') {
           const cleanPath = decodeURIComponent(projectUrl.pathname).replace(/^\/+|\/+$/g, '');
           const localRoot = cleanPath ? path.join('nexus', cleanPath) : 'nexus';
           const localTarget = path.extname(localRoot) ? localRoot : path.join(localRoot, 'index.html');

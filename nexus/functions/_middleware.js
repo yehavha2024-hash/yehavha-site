@@ -16,6 +16,13 @@ function shouldCount(request) {
 }
 
 export async function onRequest(context) {
+  const url = new URL(context.request.url);
+  if (['yehavha-nexus-hub.pages.dev', 'yehavha-nexus.pages.dev', 'www.yehavha.com'].includes(url.hostname)) {
+    url.host = 'yehavha.com';
+    url.protocol = 'https:';
+    return Response.redirect(url.href, 301);
+  }
+
   if (shouldCount(context.request) && context.env?.NEXUS_DB) {
     context.waitUntil(
       incrementAccessCount(context.env.NEXUS_DB).catch(() => undefined)

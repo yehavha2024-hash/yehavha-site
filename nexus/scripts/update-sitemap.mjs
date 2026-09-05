@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const SITE_URL = 'https://yehavha-nexus-hub.pages.dev';
+const SITE_URL = 'https://yehavha.com';
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const nexusDir = path.resolve(scriptDir, '..');
 const articlesDir = path.join(nexusDir, 'articles');

@@ -1,10 +1,11 @@
 import fs from 'node:fs';
 
 const projects = JSON.parse(fs.readFileSync('nexus/projects.json', 'utf8')).projects || [];
-const NEXUS_ORIGIN = 'https://yehavha-nexus-hub.pages.dev';
+const NEXUS_ORIGIN = 'https://yehavha.com';
 const COPYRIGHT_STANDARD = 'Copyright © 이명훈 2026. All rights reserved.';
 const RETIRED_PATHS = ['/ai-practice/', '/ai-governance/', '/ai-service-operations/', '/initiatives/'];
 const OWNED_HOSTS = [
+  /^yehavha\.com$/i,
   /\.pages\.dev$/i,
   /\.danielie\.workers\.dev$/i
 ];

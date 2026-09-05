@@ -47,6 +47,8 @@ function auditSourceSyntax() {
 
 function auditForbiddenArtifacts() {
   const forbidden = [
+    'nexus/visitor-count.js',
+    'scripts/run-investment-refresh.mjs',
     'legal-knowledge/RUNTIME_AUDIT_OUTPUT_20260809.json',
     'legal-knowledge/RUNTIME_AUDIT_PRIORITY_20260809.md',
     'toeic-human-100/contrast-fix-20260809.css',

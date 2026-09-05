@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yehavha-nexus-hub.pages.dev/sitemap.xml
+Sitemap: https://yehavha.com/sitemap.xml

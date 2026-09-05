@@ -28,7 +28,7 @@ function auditInternalProjectUrls() {
     let url;
     try { url = new URL(project.url); }
     catch { continue; }
-    if (url.hostname !== 'yehavha-nexus-hub.pages.dev') continue;
+    if (url.hostname !== 'yehavha.com') continue;
     const pathname = decodeURIComponent(url.pathname).replace(/^\/+|\/+$/g, '');
     const target = pathname ? `nexus/${pathname}` : 'nexus';
     const html = path.extname(target) ? target : `${target}/index.html`;
