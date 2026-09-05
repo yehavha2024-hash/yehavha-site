@@ -203,18 +203,6 @@
     {
       "source": "scourt",
       "message": "fetch failed"
-    },
-    {
-      "source": "ccourt",
-      "message": "fetch failed"
-    },
-    {
-      "source": "ccourt-news",
-      "message": "fetch failed"
-    },
-    {
-      "source": "moj",
-      "message": "fetch failed"
     }
   ]
 }
