@@ -205,7 +205,7 @@
     const block = make('section', 'portal-search');
     block.setAttribute('aria-labelledby', 'nexus-search-title');
     const head = make('div', 'portal-search-head');
-    const title = make('h2', '', 'Nexus 통합검색');
+    const title = make('h2', '', 'NEXUS 통합검색');
     title.id = 'nexus-search-title';
     head.append(title, make('p', '', '현재 등록된 전체 프로젝트 검색'));
     const box = make('div', 'portal-search-box');
@@ -213,7 +213,7 @@
     input.type = 'search';
     input.autocomplete = 'off';
     input.placeholder = '예: Agentic AI, 책임귀속, 임대차, Suno, 성경';
-    input.setAttribute('aria-label', 'Nexus 통합검색');
+    input.setAttribute('aria-label', 'NEXUS 통합검색');
     const clear = make('button', 'portal-search-clear', '지우기');
     clear.type = 'button';
     const results = make('div', 'portal-search-results');
