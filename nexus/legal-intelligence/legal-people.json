@@ -135,8 +135,8 @@
         "변호사"
       ],
       "active": true,
-      "autoCollected": false,
-      "curated": true
+      "curated": true,
+      "autoCollected": false
     },
     {
       "recordKey": "legalpeople:ccourt:20260814-research-assistant",
@@ -206,10 +206,5 @@
       "active": true
     }
   ],
-  "sourceFailures": [
-    {
-      "source": "scourt",
-      "message": "fetch failed"
-    }
-  ]
+  "sourceFailures": []
 }
