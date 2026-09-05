@@ -36,6 +36,20 @@ function first(raw, keys) {
   return '';
 }
 
+function officialHttpsUrl(value) {
+  const text = clean(value);
+  if (!text) return '';
+  try {
+    const url = new URL(text);
+    if (url.protocol === 'https:') return url.href;
+    if (url.protocol === 'http:') {
+      url.protocol = 'https:';
+      return url.href;
+    }
+  } catch {}
+  return '';
+}
+
 function topicsFor(text) {
   const source = clean(text).toLocaleLowerCase('ko-KR');
   const topics = [];
@@ -92,7 +106,12 @@ function mapAssembly(item) {
   const proposer = first(raw, ['PROPOSER', 'RST_PROPOSER', 'PPSR_NM']);
   const proposedAt = normalizeDate(first(raw, ['PROPOSE_DT', 'PPSL_DT']));
   const committee = first(raw, ['COMMITTEE', 'COMMITTEE_NM', 'JRCMIT_NM']);
-  const sourceUrl = first(raw, ['DETAIL_LINK', 'LINK_URL']) || `https://likms.assembly.go.kr/bill/billDetail.do?billId=${encodeURIComponent(first(raw, ['BILL_ID']))}`;
+  const rawSourceUrl = officialHttpsUrl(first(raw, ['DETAIL_LINK', 'LINK_URL']));
+  const billId = first(raw, ['BILL_ID']);
+  const sourceUrl = rawSourceUrl
+    || (billId ? `https://likms.assembly.go.kr/bill/billDetail.do?billId=${encodeURIComponent(billId)}` : '')
+    || previous?.sourceUrl
+    || 'https://likms.assembly.go.kr/bill/main.do';
   const status = assemblyStatus(raw, previous);
   const topics = topicsFor([title, committee, proposer].join(' '));
   if (!previous && !topics.length) return null;
