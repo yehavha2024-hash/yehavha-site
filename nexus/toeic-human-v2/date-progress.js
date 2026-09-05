@@ -8,7 +8,7 @@
   const CATEGORIES = ['read', 'analyze', 'apply', 'speed'];
   const initialUrl = new URL(location.href);
   const requestedDay = Number(initialUrl.searchParams.get('day'));
-  const explicitDay = Number.isInteger(requestedDay) && requestedDay >= 1 && requestedDay <= 100;
+  const explicitReview = initialUrl.searchParams.get('review') === '1' && Number.isInteger(requestedDay) && requestedDay >= 1 && requestedDay <= 100;
 
   function kstDateString(date = new Date()) {
     return new Intl.DateTimeFormat('en-CA', { timeZone: KST, year: 'numeric', month: '2-digit', day: '2-digit' }).format(date);
@@ -48,9 +48,10 @@
   }
 
   const todayDay = getDateDay();
-  if (!explicitDay) {
+  if (!explicitReview) {
     const nextUrl = new URL(location.href);
     nextUrl.searchParams.set('day', String(todayDay));
+    nextUrl.searchParams.set('review', '1');
     history.replaceState({}, '', nextUrl);
   }
 
