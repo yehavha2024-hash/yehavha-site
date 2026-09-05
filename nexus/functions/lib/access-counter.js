@@ -36,52 +36,45 @@ export function ensureAccessCounterSchema(db) {
   return pending;
 }
 
-export async function readAccessCount(db) {
-  await ensureAccessCounterSchema(db);
-  const row = await db.prepare(`
-    SELECT count
-    FROM nexus_access_counter
-    WHERE id = 1
-  `).first();
-
-  return Number(row?.count ?? 0);
-}
-
-export async function readTodayAccessCount(db) {
-  await ensureAccessCounterSchema(db);
-  const row = await db.prepare(`
-    SELECT count
-    FROM nexus_daily_access
-    WHERE access_date = date('now', '+9 hours')
-  `).first();
-
-  return Number(row?.count ?? 0);
-}
-
 export async function readAccessStats(db) {
-  const [count, today] = await Promise.all([
-    readAccessCount(db),
-    readTodayAccessCount(db)
-  ]);
+  await ensureAccessCounterSchema(db);
 
-  return { count, today };
+  const row = await db.prepare(`
+    SELECT
+      COALESCE((
+        SELECT count
+        FROM nexus_access_counter
+        WHERE id = 1
+      ), 0) AS count,
+      COALESCE((
+        SELECT count
+        FROM nexus_daily_access
+        WHERE access_date = date('now', '+9 hours')
+      ), 0) AS today
+  `).first();
+
+  return {
+    count: Number(row?.count ?? 0),
+    today: Number(row?.today ?? 0)
+  };
 }
 
 export async function incrementAccessCount(db) {
   await ensureAccessCounterSchema(db);
 
-  await db.prepare(`
-    UPDATE nexus_access_counter
-    SET count = count + 1,
+  await db.batch([
+    db.prepare(`
+      UPDATE nexus_access_counter
+      SET count = count + 1,
+          updated_at = CURRENT_TIMESTAMP
+      WHERE id = 1
+    `),
+    db.prepare(`
+      INSERT INTO nexus_daily_access (access_date, count, updated_at)
+      VALUES (date('now', '+9 hours'), 1, CURRENT_TIMESTAMP)
+      ON CONFLICT(access_date) DO UPDATE SET
+        count = count + 1,
         updated_at = CURRENT_TIMESTAMP
-    WHERE id = 1
-  `).run();
-
-  await db.prepare(`
-    INSERT INTO nexus_daily_access (access_date, count, updated_at)
-    VALUES (date('now', '+9 hours'), 1, CURRENT_TIMESTAMP)
-    ON CONFLICT(access_date) DO UPDATE SET
-      count = count + 1,
-      updated_at = CURRENT_TIMESTAMP
-  `).run();
+    `)
+  ]);
 }
