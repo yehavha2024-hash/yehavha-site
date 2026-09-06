@@ -9,16 +9,29 @@ on:
       - main
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   audit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
       - uses: actions/setup-node@v7
         with:
           node-version: '22'
+      - name: Normalize Footer source on work branch
+        if: github.event_name == 'pull_request' && github.head_ref == 'fix/nexus-footer-main-standard-20260906'
+        run: |
+          node scripts/_normalize-nexus-footer-worktree.mjs
+          if ! git diff --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add nexus ai-law-tech-foresight legal-philosophy legal-knowledge three-minute-break toeic-human-100
+            git commit -m "normalize existing footer html sources"
+            git push origin HEAD:${{ github.head_ref }}
+          fi
       - run: node scripts/audit-web-architecture.mjs
       - run: node scripts/audit-business-footer.mjs
       - run: node scripts/audit-research-track-footer.mjs
