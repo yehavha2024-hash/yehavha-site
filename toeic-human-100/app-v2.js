@@ -20,16 +20,26 @@ const els = {
 const COMPLETION_KEY = "toeic100_completed_v2";
 const WRONG_KEY = "toeic100_wrong_v2";
 const SPEED_MIGRATION_KEY = "toeic100_speed_quiz_migrated_v1";
+const PROJECT_START_DATE = "2026-08-30";
+const KST = "Asia/Seoul";
 let activeCategory = "read";
 let activeDay = 1;
-let autoDay = 1;
+let todayDay = 1;
 let deferredInstallPrompt = null;
 let currentSpeechText = "";
 let activeQuestions = new Map();
 let speechToken = 0;
 
 function kstDateString(date = new Date()) {
-  return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul", year: "numeric", month: "2-digit", day: "2-digit" }).format(date);
+  return new Intl.DateTimeFormat("en-CA", { timeZone: KST, year: "numeric", month: "2-digit", day: "2-digit" }).format(date);
+}
+function dayDiff(start, end) {
+  const startTime = Date.parse(`${start}T00:00:00+09:00`);
+  const endTime = Date.parse(`${end}T00:00:00+09:00`);
+  return Math.floor((endTime - startTime) / 86400000);
+}
+function getCalendarDay() {
+  return Math.min(100, Math.max(1, dayDiff(PROJECT_START_DATE, kstDateString()) + 1));
 }
 function formatKoreanDate(dateString) {
   const [y,m,d] = dateString.split("-").map(Number);
@@ -102,11 +112,6 @@ function dayIsComplete(day, data = getCompleted()) {
 function firstIncompleteCategory(day, data = getCompleted()) {
   const entries = new Set(Array.isArray(data[day]) ? data[day] : []);
   return categoryOrder.find(category => !entries.has(category)) || "read";
-}
-function getAutoDay() {
-  const data = getCompleted();
-  for (let day = 1; day <= 100; day += 1) if (!dayIsComplete(day, data)) return day;
-  return 100;
 }
 function toggleCompleted(day, category) {
   const data = getCompleted();
@@ -408,15 +413,15 @@ function render() {
   els.speakBtn.hidden = !currentSpeechText;
   els.dayLabel.textContent = `DAY ${activeDay}`;
   const currentDayComplete = dayIsComplete(activeDay);
-  if (activeDay === autoDay) {
+  if (activeDay === todayDay) {
     els.dayHeadline.textContent = v2 ? "장문독해 · 4단계 학습" : "4단계 통합 학습";
     els.dateLabel.textContent = formatKoreanDate(kstDateString());
-  } else if (currentDayComplete && activeDay < autoDay) {
+  } else if (activeDay < todayDay && currentDayComplete) {
     els.dayHeadline.textContent = "학습 완료";
-    els.dateLabel.textContent = `다음 학습은 DAY ${autoDay}`;
+    els.dateLabel.textContent = `오늘 학습은 DAY ${todayDay}`;
   } else {
     els.dayHeadline.textContent = "복습 모드";
-    els.dateLabel.textContent = `현재 진행일은 DAY ${autoDay}`;
+    els.dateLabel.textContent = `오늘 학습은 DAY ${todayDay}`;
   }
 
   els.progressNumber.textContent = activeDay;
@@ -446,7 +451,7 @@ function updateStats() {
 function initFromUrl() {
   migrateLegacyProgress();
   migrateSpeedProgress();
-  autoDay = getAutoDay();
+  todayDay = getCalendarDay();
   const params = new URLSearchParams(location.search);
   const category = params.get("category");
   const day = Number(params.get("day"));
@@ -456,7 +461,7 @@ function initFromUrl() {
     activeCategory = categoryOrder.includes(category) ? category : firstIncompleteCategory(activeDay);
     return;
   }
-  activeDay = autoDay;
+  activeDay = todayDay;
   activeCategory = firstIncompleteCategory(activeDay);
 }
 
@@ -484,11 +489,10 @@ els.speakBtn.addEventListener("click", () => speak(currentSpeechText));
 els.completeBtn.addEventListener("click", () => {
   const wasCompleted = isCompleted(activeDay, activeCategory);
   toggleCompleted(activeDay, activeCategory);
-  autoDay = getAutoDay();
   const nowCompleted = isCompleted(activeDay, activeCategory);
   const finishedDay = nowCompleted && dayIsComplete(activeDay);
   render();
-  if (finishedDay && !wasCompleted && activeDay < 100) showToast(`DAY ${activeDay} 완료 · 다음 학습은 DAY ${autoDay}입니다.`);
+  if (finishedDay && !wasCompleted && activeDay === todayDay && todayDay < 100) showToast("오늘 학습 완료를 기록했습니다. 다음 DAY는 날짜가 바뀌면 자동으로 진행됩니다.");
   else if (finishedDay && activeDay === 100) showToast("DAY 100까지 모든 학습을 완료했습니다.");
   else showToast(nowCompleted ? "단계 완료를 기록했습니다." : "완료 기록을 취소했습니다.");
 });
@@ -504,16 +508,17 @@ els.shareBtn.addEventListener("click", async () => {
   } catch (e) { if (e.name !== "AbortError") showToast("공유하지 못했습니다."); }
 });
 els.resetBtn.addEventListener("click", () => {
-  if (!confirm("학습 진행 기록을 초기화하고 DAY 1부터 다시 시작할까요? 완료 기록과 오답 기록이 삭제됩니다.")) return;
+  if (!confirm("완료 기록과 오답 기록만 초기화할까요? 날짜 기준 DAY는 그대로 유지됩니다.")) return;
   localStorage.removeItem(COMPLETION_KEY);
   localStorage.removeItem(WRONG_KEY);
   localStorage.removeItem(SPEED_MIGRATION_KEY);
   localStorage.removeItem("toeic100_completed");
   localStorage.removeItem("toeic100_wrong");
-  activeDay = autoDay = 1;
+  todayDay = getCalendarDay();
+  activeDay = todayDay;
   activeCategory = "read";
   render();
-  showToast("DAY 1부터 다시 시작합니다.");
+  showToast("완료·오답 기록을 초기화했습니다. 날짜 기준 DAY는 유지됩니다.");
 });
 window.addEventListener("beforeinstallprompt", e => {
   e.preventDefault();
@@ -528,7 +533,7 @@ els.installBtn.addEventListener("click", async () => {
   els.installBtn.hidden = true;
 });
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js?v=20260809-v2").catch(()=>{}));
+  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js?v=20260907-calendar-owner-1").catch(()=>{}));
 }
 initFromUrl();
 render();
