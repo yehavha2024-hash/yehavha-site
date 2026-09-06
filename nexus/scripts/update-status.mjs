@@ -33,6 +33,7 @@ function loadManifestRegistry() {
 // 카드의 제목·설명·URL은 nexus/projects.json만을 단일 원본으로 사용합니다.
 // 내용 검토일·법령/자료 기준일은 각 승인 manifest의 review 객체가 소유합니다.
 const MANIFEST_FILES = loadManifestRegistry();
+const PREVIOUS_STATUS = fs.existsSync(STATUS_FILE) ? readJson(STATUS_FILE) : {};
 
 function valueAtPath(root, pathSpec) {
   if (!pathSpec) return root;
@@ -235,13 +236,21 @@ for (const { file, relative, data } of manifests) {
 
   const tracking = data.tracking || {};
   const fallbackPaths = [path.relative(ROOT, path.dirname(file)) || '.'];
-  const latest = latestDate(tracking, fallbackPaths);
-  let count = null;
+  const previous = PREVIOUS_STATUS[data.id] || {};
+  let latest = latestDate(tracking, fallbackPaths);
+  if (!latest && tracking.externalRepository && previous.lastUpdated) {
+    latest = previous.lastUpdated;
+    console.warn(`External status lookup unavailable for ${data.id}; preserving last known update ${previous.lastUpdated}`);
+  }
 
+  let count = null;
   try {
     count = contentCount(tracking.count);
   } catch (error) {
     console.warn(`Content count failed for ${data.id}: ${error.message}`);
+    if (tracking.externalRepository && Number.isFinite(previous.contentCount)) {
+      count = previous.contentCount;
+    }
   }
 
   statusMap[data.id] = {
@@ -258,9 +267,3 @@ for (const { file, relative, data } of manifests) {
 writeJson(STATUS_FILE, statusMap);
 
 console.log(`YEHAVHA Nexus status refreshed: ${Object.keys(statusMap).length} approved GitHub-managed project(s).`);
-for (const item of Object.values(statusMap)) {
-  const title = (base.projects || []).find(project => project.id === item.id)?.title || item.id;
-  const review = item.contentReviewedAt ? `, 내용검토 ${item.contentReviewedAt}` : '';
-  const baseline = item.baselineAt ? `, ${item.baselineLabel || '기준일'} ${item.baselineAt}` : '';
-  console.log(`- ${title}: ${item.status}, ${item.contentLabel} ${item.contentCount ?? '-'}, ${item.lastUpdated ?? '-'}${review}${baseline}`);
-}
