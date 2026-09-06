@@ -87,5 +87,44 @@ for (const root of ROOTS) {
   }
 }
 
+const FOOTER_CSS_EXPECTATIONS = {
+  'legal-knowledge/project-standard.css': [
+    '>div:first-child strong{display:block;font-size:15px!important;font-weight:700!important',
+    '.footer-note p{margin:0!important;font-size:14px!important',
+    '.business-meta{color:var(--nxs-text)!important;font-weight:700!important}',
+    '.ai-disclosure{margin-top:7px!important;font-size:13.5px!important;line-height:1.75!important}',
+    '.site-footer[data-footer-standard="v2"] a{color:var(--nxs-accent)!important;font-weight:700!important',
+    '.footer-note>a{display:inline-block;margin-top:7px!important;font-size:13.5px!important;font-weight:700!important}'
+  ],
+  'legal-knowledge/ai-literature/styles.css': [
+    '.site-footer[data-footer-standard="v2"] strong{display:block;color:var(--text);font-size:15px;font-weight:700;line-height:1.5}',
+    '.footer-note p{margin:0;color:#111111;font-size:14px;line-height:1.75;text-align:center}',
+    '.business-meta{color:var(--text);font-weight:700}',
+    '.ai-disclosure{margin-top:7px;font-size:13.5px;line-height:1.75}',
+    '.footer-note p a{color:var(--accent);font-size:14px;font-weight:700;text-decoration:none}',
+    '.footer-note>a{display:inline-block;margin-top:7px;color:var(--accent);text-decoration:none;font-size:13.5px;font-weight:700}'
+  ],
+  'legal-knowledge/legal-mind/style.css': [
+    '.footer-brand strong{display:block;color:var(--text);font-size:15px;font-weight:700;line-height:1.5}',
+    '.footer-brand p{margin:5px 0 0;color:#111111;font-size:13.5px;line-height:1.72}',
+    '.footer-meta p{margin:0;color:#111111;font-size:14px;line-height:1.75;text-align:center}',
+    '.footer-meta .business-meta{color:var(--text);font-weight:700}',
+    '.footer-meta .ai-disclosure{max-width:920px;margin:7px auto 0;font-size:13.5px;line-height:1.75}',
+    '.footer-meta p a{color:var(--accent);font-size:14px;font-weight:700;text-decoration:none}',
+    '.footer-meta>a{display:inline-block;margin-top:7px;color:var(--accent);font-size:13.5px;font-weight:700;text-decoration:none}'
+  ]
+};
+
+for (const [file, tokens] of Object.entries(FOOTER_CSS_EXPECTATIONS)) {
+  if (!fs.existsSync(file)) {
+    fail(file, 'Footer CSS 소유 파일 없음');
+    continue;
+  }
+  const compact = fs.readFileSync(file, 'utf8').replace(/\s+/g, '');
+  for (const token of tokens) {
+    if (!compact.includes(token.replace(/\s+/g, ''))) fail(file, `NEXUS 메인 Footer CSS 규격 불일치: ${token}`);
+  }
+}
+
 console.log(`Standalone business/footer source audit: ${errors} error(s); HTML checked=${checked}`);
 if (errors) process.exit(1);
