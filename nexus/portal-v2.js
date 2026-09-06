@@ -269,8 +269,24 @@
     }
   }
 
-  function renderProject(project) {
+  function renderProject(project, category) {
     const article = make('article', 'item-card');
+    if (category?.thumbnail) {
+      const thumbnail = make('a', 'project-thumbnail');
+      configureProjectLink(thumbnail, project);
+      thumbnail.setAttribute('aria-label', `${project.title} 열기`);
+      const image = make('img');
+      image.src = category.thumbnail;
+      image.alt = '';
+      image.width = 960;
+      image.height = 540;
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      const caption = make('span', 'project-thumbnail-caption');
+      caption.append(make('span', 'project-thumbnail-label', 'YEHAVHA NEXUS'), make('strong', '', category.title));
+      thumbnail.append(image, caption);
+      article.append(thumbnail);
+    }
     const top = make('div', 'item-top');
     top.append(make('span', 'item-meta', project.meta || 'Project'));
     const maturity = maturityFor(project);
@@ -323,7 +339,7 @@
     copy.append(make('p', 'eyebrow', category.eyebrow), titleRow, make('p', 'category-description', category.description));
     head.append(icon, copy);
     const grid = make('div', `items-grid${projects.length === 1 ? ' one-item' : ''}`);
-    projects.forEach(project => grid.append(renderProject(project)));
+    projects.forEach(project => grid.append(renderProject(project, category)));
     section.append(head, grid);
     return section;
   }
