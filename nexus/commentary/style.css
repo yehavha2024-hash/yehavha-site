@@ -19,6 +19,7 @@ h1{margin:0 0 28px;font-size:clamp(30px,4.2vw,44px);line-height:1.22;letter-spac
 .latest-commentary{margin-top:34px;padding-top:24px;border-top:1px solid var(--line)}
 .latest-commentary h2{margin:0 0 12px;font-size:20px;line-height:1.4;letter-spacing:-.025em}
 .commentary-card{display:block;padding:17px 18px;border:1px solid var(--line);border-radius:12px;background:#fff;color:#111;text-decoration:none}
+.commentary-card+.commentary-card{margin-top:12px}
 .commentary-card:hover,.commentary-card:focus-visible{background:#f7f9fc;border-color:#aeb8c5}
 .commentary-card .card-meta{display:block;margin-bottom:5px;color:#111;font-size:12.5px;font-weight:800}
 .commentary-card strong{display:block;font-size:20px;line-height:1.42;letter-spacing:-.025em}
@@ -32,6 +33,7 @@ h1{margin:0 0 28px;font-size:clamp(30px,4.2vw,44px);line-height:1.22;letter-spac
 .article-subtitle{margin:9px 0 0;color:#111;font-size:19px;font-weight:750;line-height:1.55;letter-spacing:-.025em}
 .article-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:13px}
 .article-meta span{display:inline-flex;align-items:center;min-height:27px;padding:0 8px;border:1px solid var(--line);border-radius:999px;background:#f7f9fc;color:#111;font-size:var(--meta-size);font-weight:760}
+.article-video-link{margin-top:16px}
 .commentary-toc{margin:18px 0 8px;padding:13px 14px;border:1px solid var(--line);border-radius:12px;background:#fff}
 .commentary-toc>strong{display:block;margin:0 0 8px;padding:0 0 8px;border-bottom:1px solid var(--line);font-size:14px;font-weight:850;text-align:center}
 .commentary-toc ol{display:block;margin:0;padding:0;list-style:none;column-count:2;column-gap:0;column-rule:1px solid var(--line)}
