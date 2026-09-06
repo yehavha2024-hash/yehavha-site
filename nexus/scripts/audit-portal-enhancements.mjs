@@ -22,6 +22,7 @@ async function auditAccessCounter() {
   if (!exists(file)) return;
 
   let count = 3;
+  let today = 2;
   const statements = [];
   const database = {
     prepare(sql) {
@@ -30,24 +31,39 @@ async function auditAccessCounter() {
       return {
         async run() {
           if (statement.startsWith('UPDATE nexus_access_counter')) count += 1;
+          if (statement.startsWith('INSERT INTO nexus_daily_access')) today += 1;
           return { success: true };
         },
         async first() {
-          return statement.startsWith('SELECT count') ? { count } : null;
+          return statement.includes('AS count') && statement.includes('AS today')
+            ? { count, today }
+            : null;
         }
       };
+    },
+    async batch(batchStatements) {
+      return Promise.all(batchStatements.map(statement => statement.run()));
     }
   };
 
   try {
     const counter = await import('../functions/lib/access-counter.js');
     const [initial, concurrent] = await Promise.all([
-      counter.readAccessCount(database),
-      counter.readAccessCount(database)
+      counter.readAccessStats(database),
+      counter.readAccessStats(database)
     ]);
     await counter.incrementAccessCount(database);
-    const updated = await counter.readAccessCount(database);
-    if (initial !== 3 || concurrent !== 3 || updated !== 4) fail(file, `읽기·증가 결과 불일치: ${initial}/${concurrent} → ${updated}`);
+    const updated = await counter.readAccessStats(database);
+    if (
+      initial?.count !== 3 || initial?.today !== 2 ||
+      concurrent?.count !== 3 || concurrent?.today !== 2 ||
+      updated?.count !== 4 || updated?.today !== 3
+    ) {
+      fail(
+        file,
+        `읽기·증가 결과 불일치: ${JSON.stringify(initial)}/${JSON.stringify(concurrent)} → ${JSON.stringify(updated)}`
+      );
+    }
     const accessSchemaCreates = statements.filter(statement => statement.startsWith('CREATE TABLE IF NOT EXISTS nexus_access_counter')).length;
     const dailySchemaCreates = statements.filter(statement => statement.startsWith('CREATE TABLE IF NOT EXISTS nexus_daily_access')).length;
     if (accessSchemaCreates !== 1 || dailySchemaCreates !== 1) fail(file, '스키마 준비가 중복 실행됨');
