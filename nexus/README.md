@@ -2,7 +2,7 @@
 
 운영 주소: https://yehavha.com/
 
-운영 구조 기준일: 2026-08-21
+운영 구조 기준일: 2026-09-06
 
 YEHAVHA Nexus는 전략정보·대학·웹앱·연구·출판·미디어·교육·기획 프로젝트의 공식 진입점을 한곳에 모아 관리하는 통합 포털입니다.
 
@@ -10,10 +10,10 @@ YEHAVHA Nexus는 전략정보·대학·웹앱·연구·출판·미디어·교육
 
 Cloudflare Pages는 이 저장소의 `nexus/` 디렉터리를 Nexus 운영 원본으로 사용합니다.
 
-- `nexus/index.html` — 포털 화면 구조
-- `nexus/portal-v2.css`, `nexus/nexus-standard.css`, `nexus/status.css` — 기본 포털 스타일 계층
-- `nexus/portal-enhancements.css` — 통합검색·대표 진입점·최근 업데이트·신뢰 레이어·성숙도 표시·중간 화면 반응형 보강 전용 스타일
-- `nexus/portal-v2.js` — 카테고리·프로젝트 렌더링, 상태 병합, 통합검색·대표 진입점·최근 업데이트·SEO·집계형 이용행동 연결
+- `nexus/index.html` — 포털 화면 구조와 명시적 Footer의 유일한 HTML 소유 원본
+- `nexus/portal-v2.css` — 공통 shell 스타일
+- `nexus/nexus-standard.css` — 메인 포털 presentation의 유일한 전용 스타일 소유 원본. 카테고리 바로가기 크기·간격도 이 파일이 직접 소유합니다.
+- `nexus/portal-v2.js` — 카테고리·프로젝트 렌더링, 상태 병합, 통합검색·SEO·집계형 이용행동 연결의 유일한 메인 동작 소유 원본
 - `nexus/projects.json` — 카테고리·연구그룹·프로젝트 카드의 유일한 표시정보 원본
 - `nexus/approved-manifests.json` — 자동 상태 추적이 허용된 매니페스트 경로의 유일한 승인 레지스트리
 - 각 승인된 `nexus.project.json` — 프로젝트별 상태 추적·콘텐츠 집계 규칙과 필요한 경우 내용검토일·자료/법령 기준일의 소유 원본
@@ -24,11 +24,14 @@ Cloudflare Pages는 이 저장소의 `nexus/` 디렉터리를 Nexus 운영 원�
 - `nexus/scripts/audit-live-urls.mjs` — 실제 배포 URL·JSON·API·리다이렉트 스모크 테스트
 - `scripts/audit-repo-hygiene.mjs` — 구버전·고아 파일·과도한 권한·소유권 중복 검증
 - `scripts/audit-web-architecture.mjs` — 내부링크·로컬자산·Footer·Copyright·삭제경로·프로젝트 모델 검증
+- `scripts/audit-style-ownership.mjs` — 메인 CSS를 `portal-v2.css` + `nexus-standard.css` 두 파일로 제한하고 임시 override 재등장을 차단
 - `nexus/functions/lib/metrics.js` — 개인정보·검색어 원문 없이 일자별 집계형 이용행동만 기록하는 유일한 측정 스키마·이벤트 소유 코드
 - `nexus/functions/api/access.js` — 접속횟수와 집계형 측정 조회·기록 API
 - `nexus/functions/go.js` — 승인된 프로젝트 URL 이동과 프로젝트 클릭 집계
 - `nexus/assets/portal-bg.webp` — 포털 배경
 - `nexus/_headers` — 캐시 제어
+
+`nexus/status.css`, `nexus/portal-enhancements.css` 같은 폐기된 전역 override와 메인 화면 전용 임시 보정 CSS는 운영 원본으로 다시 연결하지 않습니다. 메인 화면의 스타일 변경은 `nexus-standard.css`에서 직접 수정합니다.
 
 ## 데이터 역할과 소유권
 
