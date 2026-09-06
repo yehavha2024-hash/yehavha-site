@@ -13,7 +13,7 @@ a{color:inherit}
 .main{padding:46px 0 54px}
 .commentary{max-width:820px;margin:0 auto}
 .section-name{margin:0 0 12px;color:var(--blue);font-size:13px;font-weight:850;letter-spacing:.14em}
-h1{margin:0 0 28px;font-size:clamp(2.15rem,5vw,3.45rem);line-height:1.22;letter-spacing:-.045em;font-weight:900}
+h1{margin:0 0 28px;font-size:clamp(30px,4.2vw,44px);line-height:1.22;letter-spacing:-.045em;font-weight:900}
 .article-body{font-size:18px;line-height:1.9}
 .article-body p{margin:0 0 20px;color:#111}
 .latest-commentary{margin-top:34px;padding-top:24px;border-top:1px solid var(--line)}
@@ -61,7 +61,7 @@ h1{margin:0 0 28px;font-size:clamp(2.15rem,5vw,3.45rem);line-height:1.22;letter-
   .brand-icon{width:44px;height:44px;border-radius:12px}.brand-icon svg{width:25px;height:25px}
   .main{padding:34px 0 42px}
   .section-name{margin-bottom:10px;font-size:12.5px}
-  h1{margin-bottom:24px;font-size:2.05rem;line-height:1.28}
+  h1{margin-bottom:24px;font-size:30px;line-height:1.28}
   .article-body{font-size:17px;line-height:1.88}
   .article-body p{margin-bottom:18px}
   .latest-commentary{margin-top:28px;padding-top:20px}
