@@ -1,5 +1,5 @@
 name: Web Architecture Audit
-# Read-only regression audit for Nexus and related web projects.
+# Read-only regression audit for Nexus and related web projects; Footer content and presentation remain owned by each existing source file.
 
 on:
   workflow_dispatch:
