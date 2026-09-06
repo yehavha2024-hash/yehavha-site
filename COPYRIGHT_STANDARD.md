@@ -1,7 +1,7 @@
 # YEHAVHA Project Copyright Footer Standard
 
-Version: 3.0  
-Updated: 2026-08-23
+Version: 3.1  
+Updated: 2026-09-06
 
 모든 YEHAVHA 프로젝트와 Nexus 하위 결과물의 웹 하단 권리표기는 Nexus 메인의 중앙정렬 단일열 Footer를 기준으로 통일합니다. 프로젝트마다 좌측정렬·우측정렬·2열 Footer를 별도로 만들지 않습니다.
 
@@ -10,20 +10,25 @@ Updated: 2026-08-23
 1. 프로젝트명
 2. 프로젝트 영문명 또는 짧은 성격 설명
 3. `스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈`
-4. `Copyright © 이명훈 2026. All rights reserved.`
-5. `문의 kimbrighth@gmail.com`
-6. 콘텐츠 성격에 맞는 `AI 활용 안내`
-7. `맨 위로 이동 ↑`
+4. `국가연구자번호 13169680 · ISNI 0000000513760591 · ORCID 0009-0000-6095-8067`
+5. `Copyright © 이명훈 2026. All rights reserved.`
+6. `문의 kimbrighth@gmail.com`
+7. 콘텐츠 성격에 맞는 `AI 활용 안내`
+8. `맨 위로 이동 ↑`
 
 데스크톱과 모바일 모두 위 순서와 중앙정렬을 유지합니다. `맨 위로 이동`은 Footer의 마지막 항목으로 1개만 둡니다. 프로젝트 URL은 Footer에 중복 표시하지 않습니다.
 
-사업자정보·Copyright·문의는 하나의 법적 메타 3행으로 취급하며 행 사이 margin은 0으로 유지합니다. AI 활용 안내와 맨 위로 이동에는 작은 위쪽 간격을 둘 수 있습니다.
+사업자정보·연구자 식별정보·Copyright·문의는 연속된 메타 행으로 취급하며 행 사이 margin은 0으로 유지합니다. AI 활용 안내와 맨 위로 이동에는 작은 위쪽 간격을 둡니다.
 
-## 2. 법적 메타데이터의 단일 기준
+## 2. 법적·연구자 메타데이터의 단일 기준
 
 공개 Footer에 사용하는 사업자정보의 표준 문자열은 다음과 같습니다.
 
 `스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈`
+
+연구자 식별정보의 표준 문자열은 다음과 같습니다.
+
+`국가연구자번호 13169680 · ISNI 0000000513760591 · ORCID 0009-0000-6095-8067`
 
 Copyright 표준 문자열은 다음과 같습니다.
 
@@ -33,9 +38,9 @@ Copyright 표준 문자열은 다음과 같습니다.
 
 `kimbrighth@gmail.com`
 
-Nexus 내부 페이지와 독립 프로젝트를 구분하지 않고 위 사업자정보를 실제 Footer HTML에 직접 기록합니다. CSS `::before`, `::after`, `content` 또는 JavaScript로 사업자정보·Copyright·문의·AI 안내를 생성하거나 보충하지 않습니다. 화면에 보이는 법적 메타데이터와 HTML 원문이 일치해야 합니다.
+Nexus 내부 페이지와 독립 프로젝트를 구분하지 않고 위 메타데이터를 실제 Footer HTML에 직접 기록합니다. CSS `::before`, `::after`, `content` 또는 JavaScript로 사업자정보·연구자 식별정보·Copyright·문의·AI 안내를 생성하거나 보충하지 않습니다. 화면에 보이는 메타데이터와 HTML 원문이 일치해야 합니다.
 
-사업자정보를 변경해야 할 경우 이 문서의 표준 문자열과 실제 Footer HTML을 함께 수정하고 감사 규칙으로 전체 누락 여부를 확인합니다.
+표준정보를 변경해야 할 경우 이 문서의 표준 문자열과 실제 Footer HTML을 함께 수정하고 감사 규칙으로 전체 누락 여부를 확인합니다.
 
 ## 3. 표준 DOM
 
@@ -47,6 +52,7 @@ Nexus 내부 페이지와 독립 프로젝트를 구분하지 않고 위 사업�
   </div>
   <div class="footer-meta">
     <p class="business-meta">스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈</p>
+    <p class="research-identifiers">국가연구자번호 13169680 · ISNI 0000000513760591 · ORCID 0009-0000-6095-8067</p>
     <p>Copyright © 이명훈 2026. All rights reserved.</p>
     <p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p>
     <p class="ai-disclosure">AI 활용 안내: ...</p>
@@ -55,7 +61,7 @@ Nexus 내부 페이지와 독립 프로젝트를 구분하지 않고 위 사업�
 </footer>
 ```
 
-클래스명은 프로젝트 구조에 따라 달라질 수 있지만 실제 표시 내용과 순서는 동일해야 합니다. Nexus 내부 페이지도 사업자정보를 CSS 가상요소에서 가져오지 않고 실제 Footer HTML에 기록합니다.
+클래스명은 프로젝트 구조에 따라 달라질 수 있지만 실제 표시 내용과 순서는 동일해야 합니다. Nexus 내부 페이지도 메타데이터를 CSS 가상요소에서 가져오지 않고 실제 Footer HTML에 기록합니다.
 
 `#top`은 문서 시작점에 둡니다. `맨 위로 이동`은 기본 `<a href="#top">`를 사용하며 인라인 `onclick`, `window.scrollTo()`, 임의 scrollTop 보정으로 덮지 않습니다.
 
@@ -77,13 +83,14 @@ Nexus 내부 페이지와 독립 프로젝트를 구분하지 않고 위 사업�
 공통 서체:
 `Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", system-ui, -apple-system, sans-serif`
 
-- 프로젝트명: 13px / 600 / line-height 1.5
-- 영문 설명: 11px / 400 / line-height 1.7
-- 사업자정보: 12px / 400 / line-height 1.7
-- Copyright: 12px / 400 / line-height 1.7
-- 문의: 12px / 400 / line-height 1.7
-- AI 활용 안내: 11.5px / 400 / line-height 1.7
-- 맨 위로 이동: 11px / 600 / line-height 1.7
+- 프로젝트명: 15px / 700 / line-height 1.5
+- 영문 설명: 13.5px / 400 / line-height 1.72
+- 사업자정보: 14px / 700 / line-height 1.75
+- 연구자 식별정보: 14px / 400 / line-height 1.75
+- Copyright: 14px / 400 / line-height 1.75
+- 문의: 14px / 400 / line-height 1.75
+- AI 활용 안내: 13.5px / 400 / line-height 1.75
+- 맨 위로 이동: 13.5px / 700 / line-height 1.7
 - letter-spacing: 0
 
 Footer에는 Georgia, Noto Serif KR 등 장식용 serif를 사용하지 않습니다.
@@ -94,18 +101,21 @@ Nexus 라이트 인터페이스 기준을 그대로 적용합니다.
 
 - 전체 정렬: `text-align:center`
 - 배경: `#FFFFFF`
-- 상단 경계선·구분선: `#CFD4DC`
-- 프로젝트명: `#111111`
-- 사업자정보·Copyright·문의·설명: `#111111`
-- 링크: `#111111`
-- Footer 전체 하단 여백: 약 32~36px
-- 프로젝트 정보와 권리정보 사이에는 회색 구분선 1개
-- 사업자정보·Copyright·문의 3행: `margin:0`
-- AI 활용 안내: 법적 메타 3행과 구분되는 위쪽 간격 약 6px
-- 맨 위로 이동: AI 안내와 구분되는 위쪽 간격 약 4~7px
+- 상단 경계선: `#CFD4DC`
+- 메타 구분선: `#E5E7EB`
+- 프로젝트명·설명·메타정보: `#111111`
+- 링크: `#326DA8`
+- Footer 전체 하단 여백: `36px`
+- Footer 카드 상단 패딩: `20px` (모바일 `18px`)
+- 프로젝트 설명 위쪽 간격: `5px`
+- 프로젝트 정보와 권리정보 사이: 위쪽 간격 `14px`, 상단 패딩 `14px`, 회색 구분선 1개
+- 사업자정보·연구자 식별정보·Copyright·문의 행: `margin:0`
+- AI 활용 안내 위쪽 간격: `7px`
+- 맨 위로 이동 위쪽 간격: `7px`
+- AI 활용 안내 최대폭: `920px`
 - 본문 컨테이너와 동일한 최대폭 사용
 
-테두리·구분선에 흰색 또는 반투명 흰색을 사용하지 않습니다. 모바일에서도 중앙정렬 단일열을 유지합니다.
+테두리·구분선에 흰색 또는 반투명 흰색을 사용하지 않습니다. 모바일에서도 중앙정렬 단일열과 동일한 Footer 글자 규격을 유지합니다.
 
 ## 7. AI 활용 안내
 
@@ -132,22 +142,23 @@ Nexus Footer 감사는 다음을 검사합니다.
 
 - Footer 표준 `v2`
 - 사업자정보 정확한 문자열
+- 연구자 식별정보 정확한 문자열과 `ORCID` 표기
 - Copyright 정확한 문자열
 - 문의 mailto
 - AI 활용 안내
 - 맨 위로 이동 링크
-- `사업자정보 → Copyright → 문의 → AI 활용 안내 → 맨 위로 이동` 순서
-- CSS 가상요소를 이용한 사업자정보 생성 금지
+- `사업자정보 → 연구자 식별정보 → Copyright → 문의 → AI 활용 안내 → 맨 위로 이동` 순서
+- CSS 가상요소를 이용한 메타데이터 생성 금지
 - Footer CSS 순서 재배치 금지
 - 임시 footer patch/override/hotfix 파일 재도입 금지
 
-독립 프로젝트 감사도 동일한 법적 메타데이터를 기준으로 합니다.
+독립 프로젝트 감사도 동일한 메타데이터를 기준으로 합니다.
 
 ## 10. 재발 방지 원칙
 
-- 새 공개 페이지에는 사업자정보를 Footer HTML에 처음부터 기록합니다.
+- 새 공개 페이지에는 사업자정보와 연구자 식별정보를 Footer HTML에 처음부터 기록합니다.
 - Footer 정렬을 프로젝트별 보조 CSS에서 임의로 left, right, 2열 grid로 변경하지 않습니다.
-- 사업자정보·Copyright·문의 3행 사이에 개별 margin을 추가하지 않습니다.
+- 메타 행 사이에 개별 margin을 추가하지 않습니다.
 - 공통 Footer를 상세페이지마다 다시 정의하지 않습니다.
 - 수정 시 새 override 파일을 만들지 않고 기존 canonical owner를 수정합니다.
-- 사업자정보 누락을 CSS나 JavaScript로 보충하지 않습니다.
+- 누락정보를 CSS나 JavaScript로 보충하지 않습니다.
