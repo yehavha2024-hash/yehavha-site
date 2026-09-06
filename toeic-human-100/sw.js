@@ -1,4 +1,4 @@
-const CACHE = "toeic-human-100-v14-canonical-footer";
+const CACHE = "toeic-human-100-v15-calendar-owner";
 const ASSETS = [
   "./",
   "index.html",
@@ -7,7 +7,6 @@ const ASSETS = [
   "teps-extension-v2.css",
   "project-standard.css",
   "app-v2.js",
-  "date-progress.js",
   "teps-extension-ui-v2.js",
   "reading-ready-sync.js",
   "focused-reading-ui.js",
