@@ -4,7 +4,7 @@
     "managedBy": "github-external",
     "status": "최근 업데이트",
     "statusTone": "fresh",
-    "lastUpdated": "2026-09-01",
+    "lastUpdated": "2026-09-06",
     "contentCount": 8,
     "contentLabel": "연구축"
   },
@@ -103,7 +103,7 @@
     "managedBy": "github",
     "status": "최근 업데이트",
     "statusTone": "fresh",
-    "lastUpdated": "2026-09-05",
+    "lastUpdated": "2026-09-06",
     "contentCount": 6,
     "contentLabel": "연구 단계"
   },
@@ -236,8 +236,8 @@
   "culture-events-hub": {
     "id": "culture-events-hub",
     "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-09-02",
     "contentCount": 16,
     "contentLabel": "주요일정"
