@@ -236,9 +236,9 @@
   "culture-events-hub": {
     "id": "culture-events-hub",
     "managedBy": "github",
-    "status": "운영 중",
-    "statusTone": "active",
-    "lastUpdated": "2026-09-02",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-09-06",
     "contentCount": 16,
     "contentLabel": "주요일정"
   }
