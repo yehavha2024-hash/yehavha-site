@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-06",
+  "updatedAt": "2026-09-07",
   "tiers": [
     {"id":"strategy","number":"01","eyebrow":"JUDGMENT · STRATEGY","title":"판단·전략","description":"현안을 판단하고 핵심 정보를 분석하며 공공 AX 전략과 대응으로 연결합니다.","variant":"primary"},
     {"id":"learning","number":"02","eyebrow":"LEARNING · PRACTICE","title":"학습·교육","description":"대학형 학습, 웹앱 반복학습과 AI 실습강좌를 연결합니다.","variant":"primary"},
@@ -49,6 +49,7 @@
     {"id":"legaltech-self-litigation","category":"legalpractice","meta":"LegalTech · Practical Law","title":"리걸테크 · 나홀로소송 실무 가이드","description":"법률문서를 처음 보는 사람이 민사소장·청구취지·청구원인·증거, 소액사건·지급명령·전자소송과 형사 고소장의 구조를 실제 가상사례로 이해하는 실무 학습자료입니다.","url":"https://yehavha.com/legaltech/","actionLabel":"실무 가이드 보기","external":false},
     {"id":"legal-mind-training","category":"legalpractice","meta":"Legal Mind · Case Solving Training","title":"리걸 마인드 · 사례해결 훈련","description":"사실관계에서 쟁점·법규범·증거·반론·포섭·절차·결론으로 이어지는 법률적 사고를 사례로 반복 훈련합니다.","url":"https://yehavha-legal-knowledge.danielie.workers.dev/legal-mind/","actionLabel":"사례훈련 시작"},
     {"id":"ai-law-institute","category":"legalresearch","meta":"Research Institute","title":"AI 법률연구소","description":"AI 민사책임, Agentic AI·Multi-Agent Systems, 제조물책임, 증명위험과 책임배분 등 신기술의 법적 쟁점을 연구합니다.","url":"https://yehavha-ai-law-institute.pages.dev/","actionLabel":"연구소 방문"},
+    {"id":"ai-law-visual","category":"legalresearch","meta":"Visual AI Law · 10 Cards","title":"그림으로 이해하는 AI 법률","description":"AI 책임·저작권·대리·AI 에이전트·개인정보·내부통제·법인격 등 복잡한 AI 법률 쟁점을 한 장의 그림과 짧은 핵심 문장으로 설명하는 시각화 시리즈입니다.","url":"https://yehavha.com/ai-law-visual/","actionLabel":"그림으로 AI 법률 보기","external":false},
     {"id":"legal-research-track","category":"legalresearch","meta":"Academic Research Path","title":"법학 학술연구 트랙","description":"AI 책임법을 중심으로 기존 연구성과가 학술논문·학술발표와 후속 심화연구로 발전하는 과정을 살펴볼 수 있습니다.","url":"https://yehavha.com/research-track/","actionLabel":"연구 트랙 보기"},
     {"id":"legal-knowledge","category":"legalresearch","meta":"Advanced Legal Studies","title":"법리·판례 연구","description":"실정법·판례·법적 추론과 논증을 주제별로 살펴볼 수 있는 고급 법률지식 아카이브입니다.","url":"https://yehavha-legal-knowledge.danielie.workers.dev","actionLabel":"연구자료 보기"},
     {"id":"ai-law-literature","category":"legalresearch","meta":"AI Law Research Literature","title":"인공지능 법학 연구문헌 아카이브","description":"AI 법학의 도서·논문·학위논문·해외문헌·규범자료를 주제와 연구 쟁점에 따라 찾아볼 수 있습니다.","url":"https://yehavha-legal-knowledge.danielie.workers.dev/ai-literature/","actionLabel":"문헌 아카이브 보기"},
