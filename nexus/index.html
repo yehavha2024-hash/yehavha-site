@@ -3,10 +3,8 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="YEHAVHA Nexus는 웹앱, 연구·지식, 출판, 미디어와 교육 프로젝트를 연결하는 통합 포털입니다." name="description"/>
-<meta content="index,follow,max-image-preview:large" name="robots"/>
 <meta content="#ffffff" name="theme-color"/>
-<meta content="YEHAVHA Nexus | 예하바 프로젝트 포털" property="og:title"/>
+<meta content="YEHAVHA Nexus" property="og:title"/>
 <meta content="웹서비스·연구·출판·미디어·교육 프로젝트를 한곳에서 만나보세요." property="og:description"/>
 <meta content="website" property="og:type"/>
 <meta content="/assets/portal-bg.webp" property="og:image"/>
@@ -15,7 +13,7 @@
 <link as="image" href="./assets/nexus-strategy-map.svg" rel="preload"/>
 <link href="./portal-v2.css?v=20260906-image-cards-1" rel="stylesheet"/>
 <link href="./nexus-standard.css?v=20260906-image-cards-1" rel="stylesheet"/>
-<link href="./nexus-quicklinks-compact.css?v=20260906-1" rel="stylesheet"/>
+<link href="./nexus-quicklinks-compact.css?v=20260906-2" rel="stylesheet"/>
 <title>YEHAVHA Nexus | 예하바 프로젝트 포털</title>
 </head>
 <body>
@@ -23,98 +21,41 @@
 <header class="hero" id="top">
 <div class="container">
 <div class="topbar">
-<div class="portal-mark" aria-label="한국 표준시"><span aria-hidden="true" class="dot"></span><span>한국시간 확인 중</span></div>
-<div class="portal-runtime">
-<strong class="access-count" id="accessCount" aria-label="방문자수" hidden></strong>
+<a class="portal-brand" href="./" aria-label="YEHAVHA Nexus 메인">YEHAVHA NEXUS</a>
+<div class="portal-mark" aria-label="NEXUS 현재 시각"><span class="dot"></span><span>현재 시각</span></div>
+<div class="portal-runtime"><span class="access-count" id="accessCount">확인 중</span></div>
 </div>
-</div>
-<section class="hero-card">
+<div class="hero-card">
 <div class="hero-main">
-<p class="eyebrow">AI · AX STRATEGIC INTELLIGENCE &amp; RESPONSE SYSTEM</p>
-<h1>YEHAVHA NEXUS <span>AI·AX 전략정보·지식·대응 시스템</span></h1>
-<img alt="지식에서 전략으로, 전략에서 대응으로 이어지는 YEHAVHA NEXUS AI·AX 전략 시스템" src="./assets/nexus-strategy-map.svg"/>
-<p class="description">각 분야의 프로젝트를 확인하고 필요한 서비스·연구자료·출판물·미디어·교육 과정으로 바로 이동할 수 있습니다.</p>
-<nav aria-label="분야별 바로가기" class="quick-links" id="quickLinks"></nav>
+<p class="eyebrow">INTEGRATED KNOWLEDGE · RESEARCH · PRACTICE PLATFORM</p>
+<h1>YEHAVHA NEXUS<span>지식·연구·실무를 하나의 운영체계로 연결합니다.</span></h1>
+<img src="./assets/nexus-strategy-map.svg" alt="YEHAVHA NEXUS 운영 구조"/>
+<p class="description">AI와 법학, 에듀테크, 전략정보, 공공 AX, 출판과 콘텐츠를 실제 연구·학습·서비스·업무 흐름으로 연결하는 통합 운영 플랫폼입니다.</p>
+<nav class="quick-links" id="quickLinks" aria-label="NEXUS 카테고리 바로가기"></nav>
 </div>
-</section>
+</div>
 </div>
 </header>
-<section class="nexus-legal-searchbar" aria-labelledby="nexusLegalSearchTitle">
-<div class="container">
-<section class="portal-search">
-<div class="portal-search-head">
-<h2 id="nexusLegalSearchTitle">NEXUS 법률검색</h2>
-<p>법률명·조문·판례번호·법률 쟁점 검색</p>
-</div>
-<form class="portal-search-box" action="./legal-search/" method="get" role="search">
-<input class="portal-search-input" type="search" name="q" autocomplete="off" placeholder="예: 민법 제750조, 2003다29043, 개인정보 보호법" aria-label="NEXUS 법률검색"/>
-<button class="portal-legal-submit" type="submit">법률검색</button>
-</form>
-</section>
-</div>
-</section>
-<section class="nexus-google-searchbar" aria-labelledby="nexusGoogleSearchTitle">
-<div class="container">
-<section class="portal-search">
-<div class="portal-search-head">
-<h2 id="nexusGoogleSearchTitle">Google 검색</h2>
-<p>웹 전체 검색</p>
-</div>
-<form class="portal-search-box" action="https://www.google.com/search" method="get" role="search">
-<input class="portal-search-input" type="search" name="q" autocomplete="off" placeholder="Google에서 검색할 내용을 입력하세요" aria-label="Google 검색"/>
-<button class="portal-google-submit" type="submit">Google 검색</button>
-</form>
-</section>
-</div>
-</section>
 <main class="main" id="projects">
-<section class="nexus-frontline" id="nexusFrontline" aria-label="오늘의 NEXUS">
 <div class="container">
-<section class="frontline-panel" aria-labelledby="todayNexusTitle">
-<div class="frontline-headingline">
-<h2 id="todayNexusTitle">오늘의 NEXUS</h2>
-<p class="frontline-kicker">TODAY IN NEXUS</p>
-<p class="frontline-date" id="todayNexusDate">오늘</p>
+<div class="portal-grid" id="portalGrid"></div>
 </div>
-<div class="today-grid">
-<a class="today-card" href="./intelligence-briefing/">
-<div class="today-titleline"><strong>오늘의 전략정보 브리핑</strong><span class="today-meta">STRATEGIC INTELLIGENCE</span></div>
-<div class="today-bodyline"><p>국내외 공개정보를 바탕으로 정치·외교·안보·경제·산업·정책의 핵심 변화를 먼저 확인합니다.</p><span class="today-action">오늘 브리핑 보기 →</span></div>
-</a>
-<a class="today-card" href="./korea-social-intelligence/">
-<div class="today-titleline"><strong>국내 사회동향 브리핑</strong><span class="today-meta">DOMESTIC SOCIAL INTELLIGENCE</span></div>
-<div class="today-bodyline"><p>정치·경제·사회·문화·생활의 주요 이슈와 여론 반응, 영향과 의미를 일일 정세분석으로 확인합니다.</p><span class="today-action">사회동향 보기 →</span></div>
-</a>
-<a class="today-card" href="./legal-intelligence/">
-<div class="today-titleline"><strong>오늘의 법률정보</strong><span class="today-meta">LEGAL INTELLIGENCE</span></div>
-<div class="today-bodyline"><p>법령·입법·판례·헌법재판소 결정·행정해석과 법조계 변화를 연결해 확인합니다.</p><span class="today-action">법률정보 보기 →</span></div>
-</a>
-<a class="today-card" href="./ai-trends/">
-<div class="today-titleline"><strong>오늘의 AI 동향</strong><span class="today-meta">AI INTELLIGENCE</span></div>
-<div class="today-bodyline"><p>AI 기술·정책·법제·연구·안전 분야에서 빠르게 변하는 주요 흐름을 확인합니다.</p><span class="today-action">AI 동향 보기 →</span></div>
-</a>
-</div>
-</section>
-</div>
-</section>
-<div class="container portal-grid" id="portalGrid" aria-live="polite"></div>
 </main>
-<footer class="footer" data-footer-standard="v2">
+<footer class="footer">
 <div class="container">
 <div class="footer-card">
 <strong>YEHAVHA NEXUS</strong>
-<p>AI·AX 기반 전략정보와 전문지식을 연구·출판·교육·콘텐츠·웹서비스로 전환하고,<br/>축적된 결과물을 재사용·사업화하는 통합 지식사업 플랫폼입니다.</p>
-<div aria-label="사업자정보·저작권 및 문의" class="footer-meta">
-<p class="business-meta">스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈</p>
-<p class="copyright">Copyright © 이명훈 2026. All rights reserved.</p>
-<p class="contact">문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p>
-<p class="ai-disclosure">AI 활용 안내: 일부 프로젝트의 콘텐츠·문안·연구자료 제작과 정리에 생성형 AI를 활용하며, 각 프로젝트의 기획·검토·편집·운영은 운영자가 관리합니다.</p>
-<a href="#top">맨 위로 이동 ↑</a>
+<p>지식·연구·실무를 연결하는 통합 운영 플랫폼</p>
+<div class="footer-meta">
+<p class="business-meta">㈜예하바 · 스카이예슈아</p>
+<p class="copyright">© 2026 YEHAVHA. All rights reserved.</p>
+<p class="ai-disclosure">본 사이트는 AI를 연구·분석·정리·제작 과정에 활용하며, 공개되는 최종 내용은 운영자가 검토·관리합니다.</p>
+<a href="#top">맨 위로</a>
 </div>
 </div>
 </div>
 </footer>
-<div aria-live="polite" class="toast" id="toast" role="status"></div>
-<script defer src="./portal-v2.js?v=20260906-image-cards-1"></script>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="./portal-v2.js?v=20260906-image-cards-1"></script>
 </body>
 </html>
