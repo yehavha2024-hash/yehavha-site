@@ -343,6 +343,110 @@
     return response.json();
   }
 
+  async function loadPublicData(source, params) {
+    const url = new URL('/api/public-data', location.origin);
+    url.searchParams.set('source', source);
+    for (const [key, value] of Object.entries(params)) url.searchParams.set(key, value);
+    const response = await fetch(url, {cache: 'no-store'});
+    const payload = await response.json();
+    if (!response.ok || !payload.ok || payload.upstreamStatus !== 200) throw new Error(`${source}: HTTP ${response.status}`);
+    return payload.data;
+  }
+
+  function publicRecords(root, keys) {
+    const queue = [root];
+    const seen = new Set();
+    while (queue.length) {
+      const value = queue.shift();
+      if (!value || typeof value !== 'object' || seen.has(value)) continue;
+      seen.add(value);
+      for (const key of keys) {
+        if (Array.isArray(value[key])) return value[key];
+        if (value[key] && typeof value[key] === 'object') return [value[key]];
+      }
+      for (const child of Object.values(value)) if (child && typeof child === 'object') queue.push(child);
+    }
+    return [];
+  }
+
+  function pickPublic(record, keys) {
+    for (const key of keys) {
+      const value = record?.[key];
+      if (value !== undefined && value !== null && String(value).trim()) return String(value).trim();
+    }
+    return '';
+  }
+
+  function publicCard(type, record) {
+    const law = type === '법령';
+    const title = law ? pickPublic(record, ['법령명한글', '법령명', 'lawName']) : pickPublic(record, ['사건명', '판례명']);
+    const card = el('article', 'tracker-panel');
+    const head = el('div', 'tracker-head');
+    head.append(el('span', '', `공공 API · ${type}`), el('h3', '', title || type));
+    card.append(head, el('p', '', law ? '국가법령정보 공동활용 API에서 현재 법령 정보를 직접 조회한 결과입니다.' : '국가법령정보 공동활용 API에서 판례 목록을 직접 조회한 결과입니다.'));
+    const fields = el('div', 'field-grid');
+    const values = law ? [
+      ['소관부처', pickPublic(record, ['소관부처명', '소관부처'])],
+      ['시행일', pickPublic(record, ['시행일자', '시행일'])],
+      ['제·개정', pickPublic(record, ['제개정구분명', '제개정구분'])],
+      ['법령ID', pickPublic(record, ['법령ID', '법령일련번호'])]
+    ] : [
+      ['사건번호', pickPublic(record, ['사건번호'])],
+      ['법원', pickPublic(record, ['법원명', '법원'])],
+      ['선고일', pickPublic(record, ['선고일자', '선고일'])],
+      ['결과', pickPublic(record, ['종국결과', '판결유형'])]
+    ];
+    for (const [label, value] of values) {
+      if (!value) continue;
+      const item = el('span');
+      item.append(el('b', '', label), document.createTextNode(value));
+      fields.append(item);
+    }
+    if (fields.childElementCount) card.append(fields);
+    const actions = el('div', 'source-actions');
+    const link = el('a', '', '국가법령정보센터 원문 검색 ↗');
+    const search = law ? title : pickPublic(record, ['사건번호']) || title;
+    link.href = law ? `https://www.law.go.kr/lsSc.do?query=${encodeURIComponent(search)}` : `https://www.law.go.kr/precSc.do?query=${encodeURIComponent(search)}`;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    actions.append(link);
+    card.append(actions);
+    return card;
+  }
+
+  async function loadOfficialPublicData() {
+    const section = document.getElementById('legislation-tracker');
+    const anchor = section?.querySelector('.watch-wrap');
+    if (!section || !anchor) return;
+    section.querySelectorAll('[data-official-public-data]').forEach(node => node.remove());
+    const query = new URLSearchParams(location.search).get('q')?.trim() || '인공지능';
+    const settled = await Promise.allSettled([
+      loadPublicData('law-current', {query, display: '6'}),
+      loadPublicData('precedent-list', {query, display: '6'})
+    ]);
+    const laws = settled[0].status === 'fulfilled' ? publicRecords(settled[0].value, ['law', '법령']).slice(0, 6) : [];
+    const precedents = settled[1].status === 'fulfilled' ? publicRecords(settled[1].value, ['prec', '판례']).slice(0, 6) : [];
+    const host = el('div', 'watch-wrap');
+    host.dataset.officialPublicData = 'true';
+    const head = el('div', 'tracker-head');
+    head.append(el('span', '', 'LIVE PUBLIC DATA'), el('h3', '', `국가법령정보 실시간 조회 · ${query}`));
+    host.append(head, el('p', '', 'NEXUS 게이트웨이를 통해 국가법령정보 공동활용 API의 현행·시행예정 법령과 판례를 페이지 접속 시 직접 조회합니다.'));
+    const grid = el('div', 'legislation-grid');
+    for (const record of laws) grid.append(publicCard('법령', record));
+    for (const record of precedents) grid.append(publicCard('판례', record));
+    if (!grid.childElementCount) {
+      const note = el('div', 'exclusion-note');
+      note.append(el('strong', '', '실시간 조회'), el('span', '', '현재 검색어의 법령·판례 결과가 없거나 원천 API 응답을 확인하지 못했습니다. 기존 선별 법률자료는 그대로 유지됩니다.'));
+      host.append(note);
+    } else {
+      host.append(grid);
+      const note = el('div', 'exclusion-note');
+      note.append(el('strong', '', `실시간 ${laws.length + precedents.length}건`), el('span', '', '별도 캐시를 두지 않고 페이지를 열 때 공식 공공데이터를 다시 조회합니다.'));
+      host.append(note);
+    }
+    anchor.insertAdjacentElement('afterend', host);
+  }
+
   async function load() {
     const [legislationResult, peopleResult, materialsResult] = await Promise.allSettled([
       loadJson(LEGISLATION_URL),
@@ -366,5 +470,5 @@
     else console.error('LEGAL INTELLIGENCE curated material data load failed:', materialsResult.reason);
   }
 
-  load();
+  load().then(loadOfficialPublicData).catch(error => console.error('LEGAL INTELLIGENCE public data load failed:', error));
 })();
