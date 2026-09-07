@@ -36,7 +36,8 @@
       }
       const response = await fetch(url, { cache: options.refresh ? 'reload' : 'default' });
       const payload = await response.json();
-      if (!response.ok || !payload.ok || payload.upstreamStatus !== 200) {
+      const upstreamFailed = payload.upstreamStatus !== undefined && payload.upstreamStatus !== 200;
+      if (!response.ok || !payload.ok || upstreamFailed) {
         const error = new Error(`${source}: HTTP ${response.status}`);
         error.payload = payload;
         throw error;
@@ -56,6 +57,10 @@
   async function records(source, params = {}, options = {}) {
     const payload = await query(source, params, options);
     return Array.isArray(payload.records) ? payload.records : [];
+  }
+
+  async function catalog(options = {}) {
+    return query('catalog', {}, options);
   }
 
   function titleNode(record, tag = 'h3') {
@@ -140,6 +145,7 @@
   window.NexusData = Object.freeze({
     query,
     records,
+    catalog,
     renderGrid,
     renderIntelligence,
     recordCard,
