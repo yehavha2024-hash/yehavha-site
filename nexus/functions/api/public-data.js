@@ -2,6 +2,7 @@ import { getPublicDataSource, listPublicDataSources } from '../lib/public-data-r
 
 const MAX_BODY_BYTES = 16_384;
 const MAX_ROWS = 100;
+const UPSTREAM_DEPENDENCY_STATUS = 424;
 
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -259,7 +260,7 @@ async function proxyGet({ request, env }) {
       upstreamStatus: upstreamResponse.status,
       format: parsed.format,
       data: clientData
-    }, 502);
+    }, UPSTREAM_DEPENDENCY_STATUS);
   }
 
   return json({
@@ -272,7 +273,7 @@ async function proxyGet({ request, env }) {
     upstreamStatus: upstreamResponse.status,
     format: parsed.format,
     data: clientData
-  }, upstreamResponse.ok ? 200 : 502);
+  }, upstreamResponse.ok ? 200 : UPSTREAM_DEPENDENCY_STATUS);
 }
 
 function normalizeBusinessNumbers(value) {
@@ -331,7 +332,7 @@ async function proxyPost({ request, env }) {
     upstreamStatus: upstreamResponse.status,
     format: parsed.format,
     data: clientData
-  }, upstreamResponse.ok ? 200 : 502);
+  }, upstreamResponse.ok ? 200 : UPSTREAM_DEPENDENCY_STATUS);
 }
 
 export async function onRequestGet(context) {
@@ -339,7 +340,7 @@ export async function onRequestGet(context) {
     return await proxyGet(context);
   } catch (error) {
     console.error('Nexus public data GET failed:', error);
-    return json({ ok: false, error: 'public_data_upstream_failed' }, 502);
+    return json({ ok: false, error: 'public_data_upstream_failed' }, UPSTREAM_DEPENDENCY_STATUS);
   }
 }
 
@@ -348,6 +349,6 @@ export async function onRequestPost(context) {
     return await proxyPost(context);
   } catch (error) {
     console.error('Nexus public data POST failed:', error);
-    return json({ ok: false, error: 'public_data_upstream_failed' }, 502);
+    return json({ ok: false, error: 'public_data_upstream_failed' }, UPSTREAM_DEPENDENCY_STATUS);
   }
 }
