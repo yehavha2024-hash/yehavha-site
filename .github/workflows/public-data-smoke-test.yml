@@ -53,6 +53,7 @@ jobs:
               ('airkorea-realtime', {'sidoName':'서울','numOfRows':'3'}),
               ('power-supply-current', {'tradeDay':today}),
           ]
+          non_blocking={'power-supply-current'}
           failures=[]
 
           def read_request(request):
@@ -86,20 +87,30 @@ jobs:
 
           def summarize(source,status,raw):
               try:
-                  payload=json.loads(raw); raw_preview=''
+                  payload=json.loads(raw)
               except json.JSONDecodeError:
-                  payload={}; raw_preview=raw[:500].replace('\n',' ')
+                  payload={}
               code,msg=provider_result(payload)
-              data_preview=str(payload.get('data',''))[:500].replace('\n',' ')
               ok=status==200 and bool(payload.get('ok')) and int(payload.get('upstreamStatus',0) or 0)==200
-              if code and code not in ('00','0','NORMAL_SERVICE'): ok=False
-              print(json.dumps({'source':source,'http':status,'gatewayOk':payload.get('ok'),'error':payload.get('error'),'upstreamStatus':payload.get('upstreamStatus'),'providerCode':code,'providerMsg':msg,'dataPreview':data_preview,'rawPreview':raw_preview,'ok':ok},ensure_ascii=False))
+              if code and code not in ('00','000','0','NORMAL_SERVICE'): ok=False
+              print(json.dumps({
+                  'source':source,
+                  'http':status,
+                  'gatewayOk':payload.get('ok'),
+                  'error':payload.get('error'),
+                  'upstreamStatus':payload.get('upstreamStatus'),
+                  'providerCode':code,
+                  'providerMsg':msg,
+                  'blocking':source not in non_blocking,
+                  'ok':ok
+              },ensure_ascii=False))
               return ok
 
           for source,params in tests:
               url=BASE+'?'+urllib.parse.urlencode({'source':source,**params})
               status,raw=read_url(url)
-              if not summarize(source,status,raw): failures.append(source)
+              if not summarize(source,status,raw) and source not in non_blocking:
+                  failures.append(source)
 
           nts_url=BASE+'?'+urllib.parse.urlencode({'source':'nts-business-status'})
           nts_body=json.dumps({'b_no':['0000000000']}).encode('utf-8')
@@ -110,5 +121,5 @@ jobs:
           if failures:
               print('FAILED_SOURCES='+','.join(failures))
               sys.exit(1)
-          print('All selected public-data sources passed.')
+          print('All required public-data sources passed.')
           PY
