@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-05",
+  "updatedAt": "2026-09-07",
   "policy": {
     "description": "법원·검찰·헌법재판소·변호사단체·법률연구 현장의 공개 전문동향만 선별하며 경조사·가십은 제외한다.",
     "categories": [
@@ -206,5 +206,14 @@
       "active": true
     }
   ],
-  "sourceFailures": []
+  "sourceFailures": [
+    {
+      "source": "scourt",
+      "message": "fetch failed"
+    },
+    {
+      "source": "moj",
+      "message": "fetch failed"
+    }
+  ]
 }
