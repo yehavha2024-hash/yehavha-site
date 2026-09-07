@@ -53,6 +53,13 @@ h1 { margin: 0; font-size: clamp(34px, 4.8vw, 52px); line-height: 1.08; letter-s
 .card-takeaway { margin: 11px 0 0; color: var(--text); font-size: 14px; }
 .card-action { display: inline-block; margin-top: 16px; color: var(--accent-deep); font-size: 13px; font-weight: 900; }
 .empty-state { margin: 30px 0 0; padding: 36px; border: 1px dashed #c9d5e4; border-radius: 18px; background: var(--surface); text-align: center; color: var(--text); }
+.thesis-link { margin-bottom: 24px; padding: 22px 24px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+.thesis-link .eyebrow { margin-bottom: 6px; }
+.thesis-link h2 { margin: 0; font-size: clamp(20px, 2.6vw, 28px); line-height: 1.4; letter-spacing: -.02em; }
+.thesis-title { margin: 12px 0 0; font-size: 15px; font-weight: 700; line-height: 1.72; }
+.thesis-meta { margin: 5px 0 0; font-size: 13.5px; line-height: 1.72; }
+.thesis-open { display: inline-flex; align-items: center; margin-top: 14px; color: var(--accent); font-size: 14px; font-weight: 800; text-decoration: none; }
+.thesis-open:hover { text-decoration: underline; }
 .note { margin-bottom: 24px; padding: 22px 24px; border: 1px solid #d7e4f4; border-radius: 18px; background: var(--surface-soft); }
 .note strong { display: block; margin-bottom: 4px; font-size: 14px; color: var(--accent-deep); }
 .note p { margin: 0; color: var(--text); font-size: 14px; }
@@ -89,6 +96,7 @@ h1 { margin: 0; font-size: clamp(34px, 4.8vw, 52px); line-height: 1.08; letter-s
   .section-heading > p { text-align: left; }
   .card-grid { grid-template-columns: 1fr; gap: 18px; }
   .gallery { padding-bottom: 24px; }
+  .thesis-link { margin-bottom: 24px; padding: 18px 20px; }
   .note { margin-bottom: 24px; padding: 18px 20px; }
   .viewer-inner { grid-template-columns: 1fr; }
   .viewer-media { padding: 10px; }
