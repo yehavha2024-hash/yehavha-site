@@ -31,19 +31,20 @@ jobs:
           import urllib.request
           import xml.etree.ElementTree as ET
 
-          BASE = 'https://yehavha.com/api/public-data'
-          KST = dt.timezone(dt.timedelta(hours=9))
-          now = dt.datetime.now(KST)
-          today = now.strftime('%Y%m%d')
-          yesterday = (now - dt.timedelta(days=1)).strftime('%Y%m%d')
-          prev_month = (now.replace(day=1) - dt.timedelta(days=1)).strftime('%Y%m')
-          trade_month = (now.replace(day=1) - dt.timedelta(days=32)).strftime('%Y%m')
-          forecast_times = [2,5,8,11,14,17,20,23]
-          available = [h for h in forecast_times if now.hour > h or (now.hour == h and now.minute >= 15)]
-          forecast_date = today if available else yesterday
-          base_time = f'{max(available) if available else 23:02d}00'
+          BASE='https://yehavha.com/api/public-data'
+          KST=dt.timezone(dt.timedelta(hours=9))
+          now=dt.datetime.now(KST)
+          today=now.strftime('%Y%m%d')
+          yesterday=(now-dt.timedelta(days=1)).strftime('%Y%m%d')
+          prev_month=(now.replace(day=1)-dt.timedelta(days=1)).strftime('%Y%m')
+          trade_month=(now.replace(day=1)-dt.timedelta(days=32)).strftime('%Y%m')
+          forecast_times=[2,5,8,11,14,17,20,23]
+          available=[h for h in forecast_times if now.hour>h or (now.hour==h and now.minute>=15)]
+          forecast_date=today if available else yesterday
+          base_time=f'{max(available) if available else 23:02d}00'
 
-          tests = [
+          tests=[
+              ('law-current', {'query':'인공지능','display':'1'}),
               ('g2b-bid-service', {'inqryDiv':'1','inqryBgnDt':today+'0000','inqryEndDt':today+'2359','numOfRows':'3'}),
               ('g2b-contract-service', {'inqryDiv':'1','inqryBgnDt':yesterday+'0000','inqryEndDt':today+'2359','numOfRows':'3'}),
               ('apt-trade', {'LAWD_CD':'11680','DEAL_YMD':prev_month,'numOfRows':'3'}),
@@ -55,7 +56,7 @@ jobs:
           failures=[]
 
           def read_url(url):
-              req=urllib.request.Request(url,headers={'User-Agent':'NEXUS-Public-Data-Smoke/1.0'})
+              req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 NEXUS-Smoke/1.0'})
               try:
                   with urllib.request.urlopen(req,timeout=30) as response:
                       return response.status,response.read().decode('utf-8',errors='replace')
@@ -67,8 +68,11 @@ jobs:
               if isinstance(data,dict):
                   response=data.get('response')
                   if isinstance(response,dict) and isinstance(response.get('header'),dict):
-                      header=response['header']
-                      return str(header.get('resultCode','')),str(header.get('resultMsg',''))
+                      h=response['header']
+                      return str(h.get('resultCode','')),str(h.get('resultMsg',''))
+                  if isinstance(data.get('LawSearch'),dict):
+                      h=data['LawSearch']
+                      return str(h.get('resultCode','')),str(h.get('resultMsg',''))
                   return str(data.get('resultCode','')),str(data.get('resultMsg',''))
               if isinstance(data,str) and data.lstrip().startswith('<'):
                   try:
@@ -82,27 +86,13 @@ jobs:
               url=BASE+'?'+urllib.parse.urlencode({'source':source,**params})
               status,raw=read_url(url)
               try:
-                  payload=json.loads(raw)
-                  raw_preview=''
+                  payload=json.loads(raw); raw_preview=''
               except json.JSONDecodeError:
-                  payload={}
-                  raw_preview=raw[:500].replace('\n',' ')
+                  payload={}; raw_preview=raw[:300].replace('\n',' ')
               code,msg=provider_result(payload)
               ok=status==200 and bool(payload.get('ok')) and int(payload.get('upstreamStatus',0) or 0)==200
-              if code and code not in ('00','0','NORMAL_SERVICE'):
-                  ok=False
-              print(json.dumps({
-                  'source':source,
-                  'http':status,
-                  'gatewayOk':payload.get('ok'),
-                  'error':payload.get('error'),
-                  'upstreamStatus':payload.get('upstreamStatus'),
-                  'providerCode':code,
-                  'providerMsg':msg,
-                  'dataPreview':str(payload.get('data',''))[:300],
-                  'rawPreview':raw_preview,
-                  'ok':ok
-              },ensure_ascii=False))
+              if code and code not in ('00','0','NORMAL_SERVICE'): ok=False
+              print(json.dumps({'source':source,'http':status,'gatewayOk':payload.get('ok'),'error':payload.get('error'),'upstreamStatus':payload.get('upstreamStatus'),'providerCode':code,'providerMsg':msg,'rawPreview':raw_preview,'ok':ok},ensure_ascii=False))
               if not ok: failures.append(source)
 
           if failures:
