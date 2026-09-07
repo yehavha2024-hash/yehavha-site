@@ -116,28 +116,12 @@ function safeRequestParams(source, inputUrl) {
   return params;
 }
 
-function safeUpstreamParams(source, upstream) {
-  const params = {};
-  for (const [name, value] of upstream.searchParams.entries()) {
-    if (name === source.auth?.param) continue;
-    params[name] = value;
-  }
-  return params;
-}
-
 function upstreamHeaders(source) {
   if (isLawOpenDataSource(source)) {
     return {
       accept: 'application/json, application/xml, text/xml;q=0.9, */*;q=0.8',
       'user-agent': 'YEHAVHA-NEXUS/1.0 (+https://yehavha.com/)',
       referer: 'https://yehavha.com/'
-    };
-  }
-
-  if (isDataGoKrSource(source)) {
-    return {
-      accept: '*/*',
-      'user-agent': 'curl/8.4.0'
     };
   }
 
@@ -266,7 +250,6 @@ async function proxyGet({ request, env }) {
       sourceInfo: publicSource(source),
       fetchedAt: new Date().toISOString(),
       request: safeRequestParams(source, inputUrl),
-      upstreamRequest: safeUpstreamParams(source, upstream),
       upstreamStatus: upstreamResponse.status,
       format: parsed.format,
       data: clientData
@@ -279,7 +262,6 @@ async function proxyGet({ request, env }) {
     sourceInfo: publicSource(source),
     fetchedAt: new Date().toISOString(),
     request: safeRequestParams(source, inputUrl),
-    upstreamRequest: safeUpstreamParams(source, upstream),
     upstreamStatus: upstreamResponse.status,
     format: parsed.format,
     data: clientData
