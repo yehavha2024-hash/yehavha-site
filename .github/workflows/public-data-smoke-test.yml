@@ -88,11 +88,12 @@ jobs:
               try:
                   payload=json.loads(raw); raw_preview=''
               except json.JSONDecodeError:
-                  payload={}; raw_preview=raw[:300].replace('\n',' ')
+                  payload={}; raw_preview=raw[:500].replace('\n',' ')
               code,msg=provider_result(payload)
+              data_preview=str(payload.get('data',''))[:500].replace('\n',' ')
               ok=status==200 and bool(payload.get('ok')) and int(payload.get('upstreamStatus',0) or 0)==200
               if code and code not in ('00','0','NORMAL_SERVICE'): ok=False
-              print(json.dumps({'source':source,'http':status,'gatewayOk':payload.get('ok'),'error':payload.get('error'),'upstreamStatus':payload.get('upstreamStatus'),'providerCode':code,'providerMsg':msg,'rawPreview':raw_preview,'ok':ok},ensure_ascii=False))
+              print(json.dumps({'source':source,'http':status,'gatewayOk':payload.get('ok'),'error':payload.get('error'),'upstreamStatus':payload.get('upstreamStatus'),'providerCode':code,'providerMsg':msg,'dataPreview':data_preview,'rawPreview':raw_preview,'ok':ok},ensure_ascii=False))
               return ok
 
           for source,params in tests:
