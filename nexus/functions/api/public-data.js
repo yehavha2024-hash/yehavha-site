@@ -124,6 +124,35 @@ function upstreamHeaders(source) {
   return headers;
 }
 
+function redactCredentialString(value, credentials = []) {
+  let redacted = value.replace(/([?&](?:OC|serviceKey)=)[^&#\s"']+/gi, '$1[REDACTED]');
+
+  for (const credential of credentials) {
+    if (!credential) continue;
+    const variants = new Set([
+      credential,
+      encodeURIComponent(credential),
+      encodeURIComponent(encodeURIComponent(credential))
+    ]);
+    for (const variant of variants) {
+      if (variant) redacted = redacted.split(variant).join('[REDACTED]');
+    }
+  }
+
+  return redacted;
+}
+
+function redactCredentials(value, credentials = []) {
+  if (typeof value === 'string') return redactCredentialString(value, credentials);
+  if (Array.isArray(value)) return value.map((item) => redactCredentials(item, credentials));
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, item]) => [key, redactCredentials(item, credentials)])
+    );
+  }
+  return value;
+}
+
 async function parseUpstream(response, source) {
   const text = await response.text();
   const format = source.responseFormat || 'auto';
@@ -204,6 +233,8 @@ async function proxyGet({ request, env }) {
   });
   const parsed = await parseUpstream(upstreamResponse, source);
   const applicationError = detectApplicationError(source, parsed);
+  const credential = readCredential(source, env);
+  const clientData = redactCredentials(parsed.data, [credential]);
 
   if (applicationError) {
     return json({
@@ -217,7 +248,7 @@ async function proxyGet({ request, env }) {
       upstreamRequest: safeUpstreamParams(source, upstream),
       upstreamStatus: upstreamResponse.status,
       format: parsed.format,
-      data: parsed.data
+      data: clientData
     }, 502);
   }
 
@@ -230,7 +261,7 @@ async function proxyGet({ request, env }) {
     upstreamRequest: safeUpstreamParams(source, upstream),
     upstreamStatus: upstreamResponse.status,
     format: parsed.format,
-    data: parsed.data
+    data: clientData
   }, upstreamResponse.ok ? 200 : 502);
 }
 
@@ -279,6 +310,7 @@ async function proxyPost({ request, env }) {
     body: JSON.stringify({ b_no: businessNumbers })
   });
   const parsed = await parseUpstream(upstreamResponse, source);
+  const clientData = redactCredentials(parsed.data, [credential]);
 
   return json({
     ok: upstreamResponse.ok,
@@ -288,7 +320,7 @@ async function proxyPost({ request, env }) {
     requestCount: businessNumbers.length,
     upstreamStatus: upstreamResponse.status,
     format: parsed.format,
-    data: parsed.data
+    data: clientData
   }, upstreamResponse.ok ? 200 : 502);
 }
 
