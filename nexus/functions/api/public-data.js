@@ -57,6 +57,10 @@ function isLawOpenDataSource(source) {
   return source.provider === '법제처 국가법령정보 공동활용';
 }
 
+function isDataGoKrSource(source) {
+  return source.auth?.env === 'DATA_GO_KR_SERVICE_KEY';
+}
+
 function applyLawDefaults(source, upstream) {
   if (!isLawOpenDataSource(source)) return;
   if (!upstream.pathname.endsWith('/lawSearch.do')) return;
@@ -112,16 +116,22 @@ function safeUpstreamParams(source, upstream) {
 }
 
 function upstreamHeaders(source) {
-  const headers = {
-    accept: 'application/json, application/xml, text/xml;q=0.9, */*;q=0.8'
-  };
-
   if (isLawOpenDataSource(source)) {
-    headers['user-agent'] = 'YEHAVHA-NEXUS/1.0 (+https://yehavha.com/)';
-    headers.referer = 'https://yehavha.com/';
+    return {
+      accept: 'application/json, application/xml, text/xml;q=0.9, */*;q=0.8',
+      'user-agent': 'YEHAVHA-NEXUS/1.0 (+https://yehavha.com/)',
+      referer: 'https://yehavha.com/'
+    };
   }
 
-  return headers;
+  if (isDataGoKrSource(source)) {
+    return {
+      accept: '*/*',
+      'user-agent': 'curl/8.4.0'
+    };
+  }
+
+  return { accept: '*/*' };
 }
 
 function redactCredentialString(value, credentials = []) {
@@ -306,7 +316,7 @@ async function proxyPost({ request, env }) {
   upstream.searchParams.set(source.auth.param, credential);
   const upstreamResponse = await fetch(upstream.toString(), {
     method: 'POST',
-    headers: { accept: 'application/json', 'content-type': 'application/json' },
+    headers: { ...upstreamHeaders(source), 'content-type': 'application/json' },
     body: JSON.stringify({ b_no: businessNumbers })
   });
   const parsed = await parseUpstream(upstreamResponse, source);
