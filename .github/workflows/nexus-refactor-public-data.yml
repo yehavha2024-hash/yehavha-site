@@ -2,14 +2,13 @@ name: NEXUS Refactor Public Data Consumers
 
 on:
   push:
-    paths:
-      - 'nexus/.refactor-public-data-trigger'
 
 permissions:
   contents: write
 
 jobs:
   refactor:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
