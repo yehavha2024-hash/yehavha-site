@@ -114,28 +114,6 @@
   ],
   "entries": [
     {
-      "id": "auto-2026-09-07-openai-news-78a0eb6c86",
-      "date": "2026-09-07",
-      "category": "frontier",
-      "categoryLabel": "프런티어 AI·AGI (범용인공지능)·ASI (초지능)",
-      "signal": "PRODUCT UPDATE (제품 업데이트)",
-      "title": "Supporting independent journalism in Ukraine",
-      "summary": "OpenAI, AIRPPU and WAN-IFRA launch an AI program to help Ukrainian news organizations strengthen innovation, resilience, and independent journalism.",
-      "importance": "모델 성능·가격·접근범위의 변화는 기존 AI 서비스의 모델 선택과 운영기준을 직접 바꿀 수 있으므로 적용 가능성과 전환 필요성을 확인할 가치가 있다.",
-      "research": "기초모델의 능력과 실제 서비스·에이전트 실행환경을 분리해 성능, 권한, 통제 가능성과 책임범위를 비교할 자료로 축적한다.",
-      "topics": [
-        "OpenAI"
-      ],
-      "sources": [
-        {
-          "label": "OpenAI · 2026.09.07",
-          "url": "https://openai.com/index/supporting-independent-journalism-in-ukraine"
-        }
-      ],
-      "autoCollected": true,
-      "sourceId": "openai-news"
-    },
-    {
       "id": "auto-2026-09-07-arxiv-cs-ai-fe46207998",
       "date": "2026-09-07",
       "category": "research",
@@ -163,7 +141,7 @@
       "date": "2026-09-07",
       "category": "agents",
       "categoryLabel": "Agentic AI (에이전틱 AI)·Multi-Agent Systems (다중 에이전트 시스템)",
-      "signal": "RESEARCH UPDATE (연구 업데이트)",
+      "signal": "PRODUCT UPDATE (제품 업데이트)",
       "title": "Harbor Adapters and Harbor-Index: Infrastructure and a Curated Meta-Dataset for Large-Scale Agentic Evaluation",
       "summary": "arXiv:2609.04298v1 Announce Type: new Abstract: Evaluating agents on the growing number of agentic benchmarks is challenging because they often require complex environments and agent integrations. We introduce Harbor Adapters, a unified evaluation infrastructure for agentic benchmarks. Our work makes three contributions. First, we develop benchmark adapters…",
       "importance": "에이전트의 도구 사용·권한·장기 작업 기능 변화는 실제 업무 자동화 범위와 통제·책임 구조에 직접 영향을 줄 수 있다.",
@@ -183,23 +161,23 @@
       "sourceId": "arxiv-cs-ai"
     },
     {
-      "id": "auto-2026-09-07-arxiv-cs-ai-74590c253e",
+      "id": "auto-2026-09-07-arxiv-cs-ai-7cd10302c5",
       "date": "2026-09-07",
-      "category": "safety",
-      "categoryLabel": "사건·안전",
-      "signal": "SAFETY & SECURITY (안전·보안)",
-      "title": "Data-Optimized Contingency Screening: A Machine Learning Approach to Power System Security",
-      "summary": "arXiv:2609.04300v1 Announce Type: new Abstract: Ensuring the security of the power system is essential for stability and reliability, especially in the event of disruption. Effective classification of contingency in power systems enables proactive decision-making and mitigates large-scale breakdowns and failures. This study explores the use of machine learn…",
-      "importance": "안전·보안 변화는 권한통제, 모니터링, 중단장치, 로그 보존과 사고대응 체계를 재점검해야 할 신호가 된다.",
-      "research": "사고 전 예방의무와 사고 후 책임을 구분하고 권한관리·모니터링·중단·로그 보존의 합리적 주의의무를 분석할 자료로 연결한다.",
+      "category": "research",
+      "categoryLabel": "연구·논문",
+      "signal": "RESEARCH UPDATE (연구 업데이트)",
+      "title": "A Removal Based Approach to Improve LLM Faithfulness at Test-Time",
+      "summary": "arXiv:2609.04343v1 Announce Type: new Abstract: Large language models (LLMs) are increasingly used for consequential decisions, making their explanations an important tool for auditing model behavior. Unfortunately, these explanations can be unfaithful, failing to reflect the actual reasoning underlying the model's decisions. We consider a setting in which…",
+      "importance": "새 연구·벤치마크는 모델과 에이전트의 능력·한계를 평가하는 기준을 바꾸고 후속 연구의 검증 대상을 제공한다.",
+      "research": "방법론·평가환경·재현성·한계를 확인해 Agentic AI 및 AI 책임 연구에서 기술적 전제로 사용할 수 있는지 검토한다.",
       "topics": [
         "arXiv cs.AI",
-        "Cybersecurity (사이버보안)"
+        "Frontier Model (프런티어 모델)"
       ],
       "sources": [
         {
           "label": "arXiv cs.AI · 2026.09.07",
-          "url": "https://arxiv.org/abs/2609.04300"
+          "url": "https://arxiv.org/abs/2609.04343"
         }
       ],
       "autoCollected": true,
@@ -254,13 +232,13 @@
     {
       "id": "auto-2026-09-06-openai-news-eb96acc10a",
       "date": "2026-09-06",
-      "category": "frontier",
-      "categoryLabel": "프런티어 AI·AGI (범용인공지능)·ASI (초지능)",
-      "signal": "AI UPDATE (AI 업데이트)",
+      "category": "safety",
+      "categoryLabel": "사건·안전",
+      "signal": "SAFETY & SECURITY (안전·보안)",
       "title": "An Alien Mind",
       "summary": "Jakub Pachocki reflects on increasingly capable AI and the challenge of keeping it aligned. He calls for stronger safeguards and international coordination.",
-      "importance": "모델 성능·가격·접근범위의 변화는 기존 AI 서비스의 모델 선택과 운영기준을 직접 바꿀 수 있으므로 적용 가능성과 전환 필요성을 확인할 가치가 있다.",
-      "research": "기초모델의 능력과 실제 서비스·에이전트 실행환경을 분리해 성능, 권한, 통제 가능성과 책임범위를 비교할 자료로 축적한다.",
+      "importance": "AI 안전·보안 변화는 권한통제, 모니터링, 중단장치, 로그 보존과 사고대응 체계를 재점검해야 할 신호가 된다.",
+      "research": "사고 전 예방의무와 사고 후 책임을 구분하고 권한관리·모니터링·중단·로그 보존의 합리적 주의의무를 분석할 자료로 연결한다.",
       "topics": [
         "OpenAI"
       ],
@@ -278,7 +256,7 @@
       "date": "2026-09-06",
       "category": "agents",
       "categoryLabel": "Agentic AI (에이전틱 AI)·Multi-Agent Systems (다중 에이전트 시스템)",
-      "signal": "RESEARCH UPDATE (연구 업데이트)",
+      "signal": "AI UPDATE (AI 업데이트)",
       "title": "Research acceleration: The view inside OpenAI",
       "summary": "Inside OpenAI, coding agents are reshaping AI research. Explore early data on agent usage, experiment velocity, task complexity, and research acceleration.",
       "importance": "에이전트의 도구 사용·권한·장기 작업 기능 변화는 실제 업무 자동화 범위와 통제·책임 구조에 직접 영향을 줄 수 있다.",
@@ -1080,10 +1058,12 @@
   ],
   "collector": {
     "mode": "official-source-first",
-    "sourceCount": 8,
+    "sourceCount": 7,
     "deduplication": "normalized URL + normalized title",
     "lookbackDays": 3,
-    "lastSuccessfulUpdateAt": "2026-09-07T13:46:01.951Z",
-    "lastAddedCount": 10
+    "lastSuccessfulUpdateAt": "2026-09-07T13:52:58.018Z",
+    "lastAddedCount": 3,
+    "relevanceFilter": "source-specific strict filter",
+    "lastCleanupCount": 4
   }
 }
