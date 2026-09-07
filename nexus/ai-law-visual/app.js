@@ -1,9 +1,6 @@
 (() => {
   const episodes = Array.isArray(window.NEXUS_AI_LAW_EPISODES) ? window.NEXUS_AI_LAW_EPISODES : [];
   const grid = document.getElementById('cardGrid');
-  const searchInput = document.getElementById('searchInput');
-  const resultCount = document.getElementById('resultCount');
-  const emptyState = document.getElementById('emptyState');
   const seriesCount = document.getElementById('seriesCount');
   const viewer = document.getElementById('viewer');
   const viewerClose = document.getElementById('viewerClose');
@@ -14,8 +11,6 @@
   const viewerKeywords = document.getElementById('viewerKeywords');
 
   seriesCount.textContent = `${episodes.length} CARDS`;
-
-  const normalize = (value) => String(value || '').toLocaleLowerCase('ko-KR').replace(/\s+/g, ' ').trim();
 
   function openViewer(item) {
     viewerImage.src = item.image;
@@ -72,18 +67,8 @@
     return article;
   }
 
-  function render(query = '') {
-    const needle = normalize(query);
-    const visible = needle
-      ? episodes.filter((item) => normalize([item.title, item.takeaway, ...item.keywords].join(' ')).includes(needle))
-      : episodes;
+  grid.replaceChildren(...episodes.map(cardFor));
 
-    grid.replaceChildren(...visible.map(cardFor));
-    resultCount.textContent = `${visible.length} / ${episodes.length}편`;
-    emptyState.hidden = visible.length !== 0;
-  }
-
-  searchInput.addEventListener('input', (event) => render(event.target.value));
   viewerClose.addEventListener('click', () => viewer.close());
   viewer.addEventListener('click', (event) => {
     if (event.target === viewer) viewer.close();
@@ -91,6 +76,4 @@
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && viewer.open) viewer.close();
   });
-
-  render();
 })();
