@@ -1,0 +1,70 @@
+name: NEXUS Knowledge Refresh
+
+on:
+  schedule:
+    - cron: '35 21 * * *' # 06:35 KST
+    - cron: '35 11 * * *' # 20:35 KST
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nexus-knowledge-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Trigger normalized public-data snapshots
+        shell: bash
+        run: |
+          set -u
+          BASE='https://yehavha.com/api/public-data'
+          TODAY="$(TZ=Asia/Seoul date +%Y%m%d)"
+          PREV_MONTH="$(TZ=Asia/Seoul date -d '1 month ago' +%Y%m)"
+          FROM="$(TZ=Asia/Seoul date -d '7 days ago' +%Y%m%d)0000"
+          TO="$(TZ=Asia/Seoul date +%Y%m%d)2359"
+          HOUR="$(TZ=Asia/Seoul date +%H)"
+          if [ "$HOUR" -lt 20 ]; then WEATHER_BASE='0500'; else WEATHER_BASE='2000'; fi
+          STAMP="$(TZ=Asia/Seoul date +%Y%m%d%H)"
+
+          urls=(
+            "$BASE?source=law-current&display=30&_snapshot=$STAMP"
+            "$BASE?source=precedent-list&display=20&_snapshot=$STAMP"
+            "$BASE?source=admin-rule-list&display=20&_snapshot=$STAMP"
+            "$BASE?source=interpretation-list&display=20&_snapshot=$STAMP"
+            "$BASE?source=ordinance-list&display=20&_snapshot=$STAMP"
+            "$BASE?source=assembly-bill-search&AGE=22&pSize=20&_snapshot=$STAMP"
+            "$BASE?source=g2b-bid-service&inqryDiv=1&inqryBgnDt=$FROM&inqryEndDt=$TO&numOfRows=30&_snapshot=$STAMP"
+            "$BASE?source=g2b-contract-service&inqryDiv=1&inqryBgnDt=$FROM&inqryEndDt=$TO&numOfRows=30&_snapshot=$STAMP"
+            "$BASE?source=apt-trade&LAWD_CD=11680&DEAL_YMD=$PREV_MONTH&numOfRows=50&_snapshot=$STAMP"
+            "$BASE?source=customs-trade-total&strtYymm=$PREV_MONTH&endYymm=$PREV_MONTH&_snapshot=$STAMP"
+            "$BASE?source=weather-short-forecast&base_date=$TODAY&base_time=$WEATHER_BASE&nx=60&ny=127&numOfRows=100&_snapshot=$STAMP"
+            "$BASE?source=airkorea-realtime&sidoName=%EC%84%9C%EC%9A%B8&numOfRows=50&_snapshot=$STAMP"
+            "$BASE?source=airkorea-forecast&numOfRows=50&_snapshot=$STAMP"
+          )
+
+          success=0
+          failed=0
+          for url in "${urls[@]}"; do
+            status="$(curl --silent --show-error --location --output /tmp/nexus-response.json --write-out '%{http_code}' "$url" || printf '000')"
+            source="$(printf '%s' "$url" | sed -n 's/.*source=\([^&]*\).*/\1/p')"
+            if [ "$status" = '200' ]; then
+              echo "OK   $source HTTP $status"
+              success=$((success + 1))
+            else
+              echo "WARN $source HTTP $status"
+              head -c 300 /tmp/nexus-response.json 2>/dev/null || true
+              echo
+              failed=$((failed + 1))
+            fi
+          done
+
+          echo "Snapshot refresh complete: success=$success failed=$failed"
+          if [ "$success" -eq 0 ]; then
+            echo 'No public-data source refreshed successfully.' >&2
+            exit 1
+          fi
