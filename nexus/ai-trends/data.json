@@ -165,16 +165,15 @@
     {
       "id": "auto-2026-09-07-arxiv-cs-ai-7cd10302c5",
       "date": "2026-09-07",
-      "category": "research",
-      "categoryLabel": "연구·논문",
-      "signal": "RESEARCH UPDATE (연구 업데이트)",
+      "category": "frontier",
+      "categoryLabel": "프런티어 AI·AGI (범용인공지능)·ASI (초지능)",
+      "signal": "AI UPDATE (AI 업데이트)",
       "title": "LLM 설명의 충실성을 높이는 테스트 시점 제거 기반 접근법",
       "summary": "대규모 언어모델이 중요한 의사결정에 활용되면서 모델 설명은 행동을 감사하는 핵심 수단이 되고 있다. 그러나 생성된 설명이 실제 모델 판단 과정과 일치하지 않는 문제가 있다. 이 연구는 테스트 시점에서 입력 요소를 제거하며 반응 변화를 확인하는 방식으로 설명의 충실성을 높이는 접근을 제안한다.",
-      "importance": "새 연구·벤치마크는 모델과 에이전트의 능력·한계를 평가하는 기준을 바꾸고 후속 연구의 검증 대상을 제공한다.",
-      "research": "방법론·평가환경·재현성·한계를 확인해 Agentic AI 및 AI 책임 연구에서 기술적 전제로 사용할 수 있는지 검토한다.",
+      "importance": "모델 성능·가격·접근범위의 변화는 기존 AI 서비스의 모델 선택과 운영기준을 직접 바꿀 수 있으므로 적용 가능성과 전환 필요성을 확인할 가치가 있다.",
+      "research": "기초모델의 능력과 실제 서비스·에이전트 실행환경을 분리해 성능, 권한, 통제 가능성과 책임범위를 비교할 자료로 축적한다.",
       "topics": [
-        "arXiv cs.AI",
-        "Frontier Model (프런티어 모델)"
+        "arXiv cs.AI"
       ],
       "sources": [
         {
@@ -286,15 +285,13 @@
       "date": "2026-09-04",
       "category": "agents",
       "categoryLabel": "Agentic AI (에이전틱 AI)·Multi-Agent Systems (다중 에이전트 시스템)",
-      "signal": "PRODUCT UPDATE (제품 업데이트)",
+      "signal": "AI UPDATE (AI 업데이트)",
       "title": "GitHub Copilot 주간 업데이트…모델 선택·콘텐츠 보호·에이전트 세션 관리 확대",
       "summary": "GitHub Copilot은 사용할 수 있는 모델 선택 폭과 콘텐츠 보호 기능을 확대했다. VS Code에는 여러 에이전트 세션을 관리하고 풀 리퀘스트를 병합 가능한 상태로 준비하는 기능이 추가돼, 코딩 에이전트를 실제 개발 워크플로에 통합하는 범위가 넓어졌다.",
       "importance": "에이전트의 도구 사용·권한·장기 작업 기능 변화는 실제 업무 자동화 범위와 통제·책임 구조에 직접 영향을 줄 수 있다.",
       "research": "Agentic AI와 다중 에이전트 시스템의 행위효과·권한위임·로그·감독·계층적 책임귀속 연구에 연결할 수 있다.",
       "topics": [
-        "GitHub Changelog",
-        "Agentic AI (에이전틱 AI)",
-        "Frontier Model (프런티어 모델)"
+        "GitHub Changelog"
       ],
       "sources": [
         {
@@ -311,14 +308,13 @@
       "date": "2026-09-04",
       "category": "agents",
       "categoryLabel": "Agentic AI (에이전틱 AI)·Multi-Agent Systems (다중 에이전트 시스템)",
-      "signal": "PRODUCT UPDATE (제품 업데이트)",
+      "signal": "AI UPDATE (AI 업데이트)",
       "title": "GPT-6 Astra, GitHub Copilot에서 정식 제공…장기 자율 코딩 과업 지원 확대",
       "summary": "OpenAI의 GPT-6 Astra가 GitHub Copilot에서 정식 제공된다. GitHub는 이 모델이 장시간 이어지는 자율 코딩과 에이전틱 과업을 수행하도록 설계됐다고 설명했으며, Copilot 안에서 복잡한 개발 작업을 장기적으로 수행하는 모델 선택지가 확대됐다.",
       "importance": "에이전트의 도구 사용·권한·장기 작업 기능 변화는 실제 업무 자동화 범위와 통제·책임 구조에 직접 영향을 줄 수 있다.",
       "research": "Agentic AI와 다중 에이전트 시스템의 행위효과·권한위임·로그·감독·계층적 책임귀속 연구에 연결할 수 있다.",
       "topics": [
         "GitHub Changelog",
-        "Agentic AI (에이전틱 AI)",
         "Frontier Model (프런티어 모델)"
       ],
       "sources": [
@@ -1070,10 +1066,10 @@
     "sourceCount": 7,
     "deduplication": "normalized URL + normalized title",
     "lookbackDays": 3,
-    "lastSuccessfulUpdateAt": "2026-09-07T13:52:58.018Z",
-    "lastAddedCount": 3,
+    "lastSuccessfulUpdateAt": "2026-09-07T21:31:03.288Z",
+    "lastAddedCount": 6,
     "relevanceFilter": "source-specific strict filter",
-    "lastCleanupCount": 4,
+    "lastCleanupCount": 6,
     "publicLanguage": "ko",
     "localizationPolicy": "한국어 제목·요약이 완료된 자동수집 항목만 공개",
     "lastLocalizedCount": 9,
