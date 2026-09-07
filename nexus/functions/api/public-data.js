@@ -62,6 +62,15 @@ function isDataGoKrSource(source) {
   return source.auth?.env === 'DATA_GO_KR_SERVICE_KEY';
 }
 
+function normalizeCredentialForUpstream(source, credential) {
+  if (!isDataGoKrSource(source) || !/%[0-9a-f]{2}/i.test(credential)) return credential;
+  try {
+    return decodeURIComponent(credential);
+  } catch {
+    return credential;
+  }
+}
+
 function applyLawDefaults(source, upstream) {
   if (!isLawOpenDataSource(source)) return;
   if (!upstream.pathname.endsWith('/lawSearch.do')) return;
@@ -81,7 +90,7 @@ function buildUpstreamUrl(source, inputUrl, env) {
   }
 
   const upstream = new URL(source.url);
-  upstream.searchParams.set(source.auth.param, credential);
+  upstream.searchParams.set(source.auth.param, normalizeCredentialForUpstream(source, credential));
 
   for (const [name, value] of Object.entries(source.fixedParams || {})) {
     upstream.searchParams.set(name, value);
@@ -245,7 +254,8 @@ async function proxyGet({ request, env }) {
   const parsed = await parseUpstream(upstreamResponse, source);
   const applicationError = detectApplicationError(source, parsed);
   const credential = readCredential(source, env);
-  const clientData = redactCredentials(parsed.data, [credential]);
+  const normalizedCredential = credential ? normalizeCredentialForUpstream(source, credential) : null;
+  const clientData = redactCredentials(parsed.data, [credential, normalizedCredential]);
 
   if (applicationError) {
     return json({
@@ -296,6 +306,7 @@ async function proxyPost({ request, env }) {
   if (!credential) {
     return json({ ok: false, error: 'credential_missing', env: source.auth?.env || null, source: sourceId }, 503);
   }
+  const normalizedCredential = normalizeCredentialForUpstream(source, credential);
 
   let body;
   try {
@@ -314,14 +325,14 @@ async function proxyPost({ request, env }) {
   }
 
   const upstream = new URL(source.url);
-  upstream.searchParams.set(source.auth.param, credential);
+  upstream.searchParams.set(source.auth.param, normalizedCredential);
   const upstreamResponse = await fetch(upstream.toString(), {
     method: 'POST',
     headers: { ...upstreamHeaders(source), 'content-type': 'application/json' },
     body: JSON.stringify({ b_no: businessNumbers })
   });
   const parsed = await parseUpstream(upstreamResponse, source);
-  const clientData = redactCredentials(parsed.data, [credential]);
+  const clientData = redactCredentials(parsed.data, [credential, normalizedCredential]);
 
   return json({
     ok: upstreamResponse.ok,
