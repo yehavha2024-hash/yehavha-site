@@ -35,84 +35,79 @@
   document.getElementById('rules')?.remove();
 })();
 
-(()=>{
+(async()=>{
   const anchor=document.getElementById('project-db');
   if(!anchor||document.getElementById('g2b-live'))return;
 
   const section=document.createElement('section');
   section.className='section';
   section.id='g2b-live';
-  section.innerHTML='<div class="section-head"><p class="eyebrow">LIVE DATA · G2B</p><h2>나라장터 용역 입찰·계약</h2><p id="g2b-live-meta">조달청 공공 API에서 최근 용역 입찰공고와 계약현황을 불러오는 중입니다.</p></div><div class="grid-2" id="g2b-live-grid"><div class="live-card"><h3>실시간 데이터 확인 중</h3><p>공공데이터 응답을 기다리고 있습니다.</p></div></div>';
   anchor.insertAdjacentElement('afterend',section);
 
-  const host=section.querySelector('#g2b-live-grid');
-  const meta=section.querySelector('#g2b-live-meta');
-  const el=(tag,className,text)=>{const node=document.createElement(tag);if(className)node.className=className;if(text!==undefined)node.textContent=text;return node};
-  const pick=(record,keys)=>{for(const key of keys){const value=record?.[key];if(value!==undefined&&value!==null&&String(value).trim())return String(value).trim()}return''};
+  try{
+    await import('/shared/nexus-data-system.js?v=20260907');
+    const ND=window.NexusData;
+    if(!ND)throw new Error('NexusData unavailable');
 
-  function kstYmd(offsetDays=0){
-    const date=new Date(Date.now()+offsetDays*86400000);
-    const parts=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(date);
-    const get=type=>parts.find(part=>part.type===type)?.value||'';
-    return `${get('year')}${get('month')}${get('day')}`;
-  }
+    const head=document.createElement('div');head.className='section-head';
+    const eyebrow=document.createElement('p');eyebrow.className='eyebrow';eyebrow.textContent='LIVE DATA · LOCAL FINANCE → G2B';
+    const title=ND.bilingualTitle('지방재정365 → 나라장터 사업 흐름','Local Finance → G2B Procurement Flow','h2');
+    const meta=document.createElement('p');meta.textContent='예산·세출 → 입찰 → 계약을 하나의 공통 데이터 규격으로 연결합니다.';
+    head.append(eyebrow,title,meta);
 
-  async function loadPublicData(source,params){
-    const url=new URL('/api/public-data',location.origin);
-    url.searchParams.set('source',source);
-    Object.entries(params).forEach(([key,value])=>url.searchParams.set(key,value));
-    const response=await fetch(url,{cache:'no-store'});
-    const payload=await response.json();
-    if(!response.ok||!payload.ok||payload.upstreamStatus!==200)throw new Error(`${source}: ${response.status}`);
-    return payload.data;
-  }
+    const stages=document.createElement('div');stages.className='grid-3';
+    const dataHost=document.createElement('div');
+    const insightHost=document.createElement('div');
+    section.append(head,stages,dataHost,insightHost);
 
-  function items(data){
-    const value=data?.response?.body?.items;
-    if(Array.isArray(value))return value;
-    if(Array.isArray(value?.item))return value.item;
-    if(value?.item)return [value.item];
-    return [];
-  }
+    const stage=(ko,en,text)=>{
+      const card=document.createElement('div');card.className='live-card';
+      card.append(ND.bilingualTitle(ko,en,'h3'));
+      const p=document.createElement('p');p.textContent=text;card.append(p);return card;
+    };
 
-  function liveCard(kind,record){
-    const card=el('div','live-card');
-    const path=el('div','path',kind==='입찰'?'조달청 나라장터 → 용역 입찰공고':'조달청 나라장터 → 용역 계약현황');
-    const title=kind==='입찰'
-      ?pick(record,['bidNtceNm','bidNtceName','ntceNm'])
-      :pick(record,['cntrctNm','contractNm','cntrctName']);
-    const h3=el('h3','',title||`${kind} 정보`);
-    const org=kind==='입찰'
-      ?pick(record,['ntceInsttNm','dminsttNm','orderInsttNm'])
-      :pick(record,['cntrctInsttNm','dminsttNm','orderInsttNm']);
-    const date=kind==='입찰'
-      ?pick(record,['bidNtceDt','bidClseDt','opengDt'])
-      :pick(record,['cntrctCnclsDate','cntrctDt','contractDate']);
-    const number=kind==='입찰'?pick(record,['bidNtceNo']):pick(record,['cntrctNo','bidNtceNo']);
-    const amount=kind==='계약'?pick(record,['totCntrctAmt','cntrctAmt','contractAmt']):'';
-    const p=el('p','',[org,date].filter(Boolean).join(' · ')||'기관·일정 정보 확인 중');
-    const facts=el('div','facts');
-    if(number)facts.append(el('span','',`${kind}번호 ${number}`));
-    if(amount)facts.append(el('span','',`계약금액 ${amount}`));
-    if(!facts.childElementCount)facts.append(el('span','','나라장터 공공 API 실시간 자료'));
-    card.append(path,h3,p,facts);
-    return card;
-  }
+    stages.append(
+      stage('1 · 예산·세출','Budget & Expenditure','지방재정365 어댑터 등록 상태를 확인하고 있습니다.'),
+      stage('2 · 입찰','Public Bids','나라장터 최근 용역 입찰을 조회하고 있습니다.'),
+      stage('3 · 계약','Contracts','나라장터 최근 용역 계약을 조회하고 있습니다.')
+    );
 
-  async function load(){
+    const kstYmd=(offsetDays=0)=>{
+      const date=new Date(Date.now()+offsetDays*86400000);
+      const parts=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(date);
+      const get=type=>parts.find(part=>part.type===type)?.value||'';
+      return `${get('year')}${get('month')}${get('day')}`;
+    };
     const from=kstYmd(-7)+'0000';
     const to=kstYmd()+'2359';
-    const settled=await Promise.allSettled([
-      loadPublicData('g2b-bid-service',{inqryDiv:'1',inqryBgnDt:from,inqryEndDt:to,numOfRows:'6'}),
-      loadPublicData('g2b-contract-service',{inqryDiv:'1',inqryBgnDt:from,inqryEndDt:to,numOfRows:'6'})
+    const [catalogResult,bidResult,contractResult]=await Promise.allSettled([
+      ND.catalog(),
+      ND.query('g2b-bid-service',{inqryDiv:'1',inqryBgnDt:from,inqryEndDt:to,numOfRows:'8'}),
+      ND.query('g2b-contract-service',{inqryDiv:'1',inqryBgnDt:from,inqryEndDt:to,numOfRows:'8'})
     ]);
-    host.replaceChildren();
-    let count=0;
-    if(settled[0].status==='fulfilled')for(const record of items(settled[0].value).slice(0,4)){host.append(liveCard('입찰',record));count++}
-    if(settled[1].status==='fulfilled')for(const record of items(settled[1].value).slice(0,4)){host.append(liveCard('계약',record));count++}
-    if(!count){const card=el('div','live-card');card.append(el('h3','','나라장터 데이터를 불러오지 못했습니다.'),el('p','','기존 사업기획 DB는 그대로 사용할 수 있으며 공공 API는 다음 접속 때 다시 조회합니다.'));host.append(card)}
-    meta.textContent=count?`최근 7일 용역 입찰·계약 ${count}건 표시 · 페이지를 열 때 최신 공공데이터를 다시 조회합니다.`:'나라장터 실시간 응답을 확인하지 못했습니다.';
-  }
 
-  load().catch(error=>{console.error('G2B live data load failed:',error);meta.textContent='나라장터 실시간 응답을 확인하지 못했습니다.'});
+    const finance=catalogResult.status==='fulfilled'?catalogResult.value.providerCatalog?.find(x=>x.id==='local-finance-365'):null;
+    const bid=bidResult.status==='fulfilled'?bidResult.value:null;
+    const contract=contractResult.status==='fulfilled'?contractResult.value:null;
+    const stageCards=stages.children;
+    stageCards[0].querySelector('p').textContent=finance?.activation?.state==='requires-provider-setup'
+      ?'공통 소유 레지스트리에 등록 완료 · 제공기관 인증 활성화 후 세출자료가 이 흐름에 자동 합류합니다.'
+      :'지방재정365 연결 상태를 확인하지 못했습니다.';
+    stageCards[1].querySelector('p').textContent=bid?`최근 7일 입찰 ${bid.records?.length||0}건 · ${bid.cache?.status||'LIVE'}`:'나라장터 입찰 응답을 확인하지 못했습니다.';
+    stageCards[2].querySelector('p').textContent=contract?`최근 7일 계약 ${contract.records?.length||0}건 · ${contract.cache?.status||'LIVE'}`:'나라장터 계약 응답을 확인하지 못했습니다.';
+
+    const rows=[...(bid?.records||[]).slice(0,4),...(contract?.records||[]).slice(0,4)];
+    ND.renderGrid(dataHost,rows,{columns:2,emptyText:'현재 표시할 나라장터 실시간 자료가 없습니다.'});
+
+    for(const payload of [bid,contract]){
+      if(!payload?.intelligence)continue;
+      const block=document.createElement('div');
+      block.append(ND.bilingualTitle(payload.sourceInfo?.title||'공공데이터 분석',payload.sourceInfo?.titleEn||'Public Data Intelligence','h3'));
+      const body=document.createElement('div');ND.renderIntelligence(body,payload.intelligence);block.append(body);insightHost.append(block);
+    }
+    meta.textContent=`최근 7일 입찰 ${(bid?.records||[]).length}건 · 계약 ${(contract?.records||[]).length}건 · 동일 스키마로 정규화해 표시합니다.`;
+  }catch(error){
+    console.error('Local government public data flow failed:',error);
+    section.innerHTML='<div class="section-head"><p class="eyebrow">LIVE DATA · LOCAL FINANCE → G2B</p><h2>지방재정·나라장터 데이터 흐름</h2><p>공통 데이터 계층의 실시간 응답을 확인하지 못했습니다. 기존 지역사업 DB는 그대로 유지됩니다.</p></div>';
+  }
 })();
