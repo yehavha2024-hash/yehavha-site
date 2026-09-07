@@ -53,6 +53,19 @@ function validateRequiredParams(source, inputUrl) {
   return { ok: true };
 }
 
+function isLawOpenDataSource(source) {
+  return source.provider === '법제처 국가법령정보 공동활용';
+}
+
+function applyLawDefaults(source, upstream) {
+  if (!isLawOpenDataSource(source)) return;
+  if (!upstream.pathname.endsWith('/lawSearch.do')) return;
+
+  if (!upstream.searchParams.has('search')) upstream.searchParams.set('search', '1');
+  if (!upstream.searchParams.has('page')) upstream.searchParams.set('page', '1');
+  if (!upstream.searchParams.has('display')) upstream.searchParams.set('display', '20');
+}
+
 function buildUpstreamUrl(source, inputUrl, env) {
   const credential = readCredential(source, env);
   if (!credential) {
@@ -76,6 +89,7 @@ function buildUpstreamUrl(source, inputUrl, env) {
     }
   }
 
+  applyLawDefaults(source, upstream);
   return upstream;
 }
 
@@ -86,6 +100,28 @@ function safeRequestParams(source, inputUrl) {
     if (value !== null && value !== '') params[name] = clampRows(name, value);
   }
   return params;
+}
+
+function safeUpstreamParams(source, upstream) {
+  const params = {};
+  for (const [name, value] of upstream.searchParams.entries()) {
+    if (name === source.auth?.param) continue;
+    params[name] = value;
+  }
+  return params;
+}
+
+function upstreamHeaders(source) {
+  const headers = {
+    accept: 'application/json, application/xml, text/xml;q=0.9, */*;q=0.8'
+  };
+
+  if (isLawOpenDataSource(source)) {
+    headers['user-agent'] = 'YEHAVHA-NEXUS/1.0 (+https://yehavha.com/)';
+    headers.referer = 'https://yehavha.com/';
+  }
+
+  return headers;
 }
 
 async function parseUpstream(response, source) {
@@ -110,6 +146,23 @@ async function parseUpstream(response, source) {
     }
   }
   return { format: contentType.includes('xml') ? 'xml' : 'text', data: text };
+}
+
+function detectApplicationError(source, parsed) {
+  if (!isLawOpenDataSource(source) || parsed.format !== 'json' || !parsed.data || typeof parsed.data !== 'object') {
+    return null;
+  }
+
+  const directResult = parsed.data.result;
+  const directMessage = parsed.data.msg;
+  if (typeof directResult === 'string' && /실패|fail|error/i.test(directResult)) {
+    return {
+      code: 'law_open_data_validation_failed',
+      message: directMessage || directResult
+    };
+  }
+
+  return null;
 }
 
 async function proxyGet({ request, env }) {
@@ -147,9 +200,26 @@ async function proxyGet({ request, env }) {
 
   const upstreamResponse = await fetch(upstream.toString(), {
     method: 'GET',
-    headers: { accept: 'application/json, application/xml, text/xml;q=0.9, */*;q=0.8' }
+    headers: upstreamHeaders(source)
   });
   const parsed = await parseUpstream(upstreamResponse, source);
+  const applicationError = detectApplicationError(source, parsed);
+
+  if (applicationError) {
+    return json({
+      ok: false,
+      error: applicationError.code,
+      message: applicationError.message,
+      source: sourceId,
+      sourceInfo: publicSource(source),
+      fetchedAt: new Date().toISOString(),
+      request: safeRequestParams(source, inputUrl),
+      upstreamRequest: safeUpstreamParams(source, upstream),
+      upstreamStatus: upstreamResponse.status,
+      format: parsed.format,
+      data: parsed.data
+    }, 502);
+  }
 
   return json({
     ok: upstreamResponse.ok,
@@ -157,6 +227,7 @@ async function proxyGet({ request, env }) {
     sourceInfo: publicSource(source),
     fetchedAt: new Date().toISOString(),
     request: safeRequestParams(source, inputUrl),
+    upstreamRequest: safeUpstreamParams(source, upstream),
     upstreamStatus: upstreamResponse.status,
     format: parsed.format,
     data: parsed.data
