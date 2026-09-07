@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>그림으로 이해하는 AI 법률 | NEXUS</title>
+  <meta name="description" content="AI 책임·저작권·대리·에이전트·개인정보 등 복잡한 AI 법률 쟁점을 한 장의 그림과 짧은 해설로 이해하는 NEXUS 시각화 시리즈입니다.">
+  <link rel="canonical" href="https://yehavha.com/ai-law-visual/">
+  <link rel="stylesheet" href="./style.css?v=20260907-1">
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell header-row">
+      <a class="nexus-return-link" data-project-standard-return href="/nexus/" aria-label="NEXUS Portal로 돌아가기">← NEXUS Portal</a>
+      <span class="series-count" id="seriesCount">10 CARDS</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero shell" aria-labelledby="pageTitle">
+      <p class="eyebrow">NEXUS · AI LAW VISUAL</p>
+      <h1 id="pageTitle">그림으로 이해하는 AI 법률</h1>
+      <p class="hero-copy">AI 책임, 저작권, 대리, AI 에이전트, 개인정보와 내부통제 같은 법률 쟁점을 한 장의 그림과 짧은 핵심 문장으로 정리합니다.</p>
+      <div class="hero-meta" aria-label="시리즈 정보">
+        <span>현재 10편</span>
+        <span>WebP 최적화</span>
+        <span>계속 확장</span>
+      </div>
+    </section>
+
+    <section class="controls shell" aria-label="콘텐츠 찾기">
+      <label class="search-wrap" for="searchInput">
+        <span class="search-label">시리즈 검색</span>
+        <input id="searchInput" type="search" placeholder="예: 책임, 저작권, 개인정보, 법인격" autocomplete="off">
+      </label>
+      <p class="result-count" id="resultCount" aria-live="polite"></p>
+    </section>
+
+    <section class="gallery shell" aria-labelledby="galleryTitle">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">VISUAL SERIES</p>
+          <h2 id="galleryTitle">AI 법률 10편</h2>
+        </div>
+        <p>카드를 누르면 큰 이미지와 핵심 설명을 볼 수 있습니다.</p>
+      </div>
+      <div class="card-grid" id="cardGrid"></div>
+      <p class="empty-state" id="emptyState" hidden>검색 결과가 없습니다.</p>
+    </section>
+
+    <section class="note shell" aria-label="이용 안내">
+      <strong>이용 안내</strong>
+      <p>이 시리즈는 AI 법률 쟁점을 쉽게 이해하기 위한 교육·연구용 요약입니다. 구체적인 사건의 법률관계는 사실관계와 적용 법령에 따라 달라질 수 있습니다.</p>
+    </section>
+  </main>
+
+  <dialog class="viewer" id="viewer" aria-labelledby="viewerTitle">
+    <div class="viewer-inner">
+      <button class="viewer-close" id="viewerClose" type="button" aria-label="닫기">×</button>
+      <div class="viewer-media">
+        <img id="viewerImage" alt="">
+      </div>
+      <div class="viewer-copy">
+        <p class="viewer-index" id="viewerIndex"></p>
+        <h2 id="viewerTitle"></h2>
+        <p class="viewer-takeaway" id="viewerTakeaway"></p>
+        <div class="viewer-keywords" id="viewerKeywords"></div>
+      </div>
+    </div>
+  </dialog>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <div>
+        <strong>그림으로 이해하는 AI 법률</strong>
+        <p>NEXUS 법학·AI 연구 하위 시각화 프로젝트</p>
+      </div>
+      <p class="copyright">© 2026 YEHAVHA.COM. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="./episodes.js?v=20260907-1"></script>
+  <script src="./app.js?v=20260907-1"></script>
+</body>
+</html>

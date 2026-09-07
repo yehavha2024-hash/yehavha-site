@@ -1,0 +1,10 @@
+{
+  "id": "ai-law-visual",
+  "projectId": "ai-law-visual",
+  "title": "그림으로 이해하는 AI 법률",
+  "category": "legalresearch",
+  "href": "./ai-law-visual/",
+  "stage": "live",
+  "source": "nexus/ai-law-visual/index.html",
+  "enabled": true
+}
