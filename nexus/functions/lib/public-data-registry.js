@@ -16,11 +16,12 @@ function lawList(target, title, allowedParams, fixedParams = {}) {
     auth: LAW_AUTH,
     fixedParams: { target, type: 'JSON', ...fixedParams },
     allowedParams,
+    requiredParams: [],
     responseFormat: 'json'
   });
 }
 
-function lawDetail(target, title, allowedParams) {
+function lawDetail(target, title, allowedParams, requiredParams = [], requiredAny = []) {
   return Object.freeze({
     axis: 'legal',
     provider: '법제처 국가법령정보 공동활용',
@@ -30,11 +31,13 @@ function lawDetail(target, title, allowedParams) {
     auth: LAW_AUTH,
     fixedParams: { target, type: 'JSON' },
     allowedParams,
+    requiredParams,
+    requiredAny,
     responseFormat: 'json'
   });
 }
 
-function dataGoKrGet(axis, provider, title, url, allowedParams, fixedParams = {}, responseFormat = 'auto') {
+function dataGoKrGet(axis, provider, title, url, allowedParams, fixedParams = {}, responseFormat = 'auto', requiredParams = []) {
   return Object.freeze({
     axis,
     provider,
@@ -44,6 +47,7 @@ function dataGoKrGet(axis, provider, title, url, allowedParams, fixedParams = {}
     auth: DATA_GO_KR_AUTH,
     fixedParams,
     allowedParams,
+    requiredParams,
     responseFormat
   });
 }
@@ -52,22 +56,46 @@ export const PUBLIC_DATA_SOURCES = Object.freeze({
   'law-current': lawList(
     'eflaw',
     '현행·시행예정 법령 목록',
-    ['search', 'query', 'display', 'page', 'sort', 'date', 'efYd', 'ancYd', 'ancNo', 'rrClsCd', 'nb', 'org', 'knd', 'lsChapNo', 'gana'],
+    ['search', 'query', 'display', 'page', 'sort', 'date', 'efYd', 'ancYd', 'ancNo', 'rrClsCd', 'nb', 'org', 'knd', 'lsChapNo', 'gana', 'popYn'],
     { nw: '2,3' }
   ),
-  'law-detail': lawDetail('law', '법령 본문', ['ID', 'MST', 'LM', 'LD', 'LN', 'JO']),
+  'law-detail': lawDetail(
+    'law',
+    '법령 본문',
+    ['ID', 'MST', 'LM', 'LD', 'LN', 'JO'],
+    [],
+    [['ID', 'MST', 'LM']]
+  ),
   'precedent-list': lawList(
     'prec',
     '판례 목록',
-    ['search', 'query', 'display', 'page', 'sort', 'date', 'prncYd', 'nb', 'org', 'curt', 'JO', 'gana', 'datSrcNm']
+    ['search', 'query', 'display', 'page', 'sort', 'date', 'prncYd', 'nb', 'org', 'curt', 'JO', 'gana', 'datSrcNm', 'popYn']
   ),
-  'precedent-detail': lawDetail('prec', '판례 본문', ['ID', 'LM']),
-  'admin-rule-list': lawList('admrul', '행정규칙 목록', ['search', 'query', 'display', 'page', 'sort', 'org', 'nw', 'gana']),
-  'admin-rule-detail': lawDetail('admrul', '행정규칙 본문', ['ID', 'LID', 'LM']),
-  'interpretation-list': lawList('expc', '법령해석례 목록', ['search', 'query', 'display', 'page', 'sort', 'inq', 'rpl', 'gana', 'itmno']),
-  'interpretation-detail': lawDetail('expc', '법령해석례 본문', ['ID', 'LM']),
-  'ordinance-list': lawList('ordin', '자치법규 목록', ['search', 'query', 'display', 'page', 'sort', 'nw', 'org', 'gana']),
-  'ordinance-detail': lawDetail('ordin', '자치법규 본문', ['ID', 'MST', 'LM']),
+  'precedent-detail': lawDetail('prec', '판례 본문', ['ID', 'LM'], ['ID']),
+  'admin-rule-list': lawList(
+    'admrul',
+    '행정규칙 목록',
+    ['nw', 'search', 'query', 'display', 'page', 'org', 'knd', 'gana', 'sort', 'date', 'prmlYd', 'modYd', 'nb', 'popYn']
+  ),
+  'admin-rule-detail': lawDetail(
+    'admrul',
+    '행정규칙 본문',
+    ['ID', 'LID', 'LM'],
+    [],
+    [['ID', 'LID', 'LM']]
+  ),
+  'interpretation-list': lawList(
+    'expc',
+    '법령해석례 목록',
+    ['search', 'query', 'display', 'page', 'inq', 'rpl', 'gana', 'itmno', 'regYd', 'explYd', 'sort', 'popYn']
+  ),
+  'interpretation-detail': lawDetail('expc', '법령해석례 본문', ['ID', 'LM'], [], [['ID', 'LM']]),
+  'ordinance-list': lawList(
+    'ordin',
+    '자치법규 목록',
+    ['nw', 'search', 'query', 'display', 'page', 'sort', 'date', 'efYd', 'ancYd', 'ancNo', 'nb', 'org', 'sborg', 'knd', 'rrClsCd', 'ordinFd', 'lsChapNo', 'gana', 'popYn']
+  ),
+  'ordinance-detail': lawDetail('ordin', '자치법규 본문', ['ID', 'MST', 'LM'], [], [['ID', 'MST', 'LM']]),
 
   'g2b-bid-construction': dataGoKrGet(
     'local-government',
@@ -114,6 +142,7 @@ export const PUBLIC_DATA_SOURCES = Object.freeze({
     auth: DATA_GO_KR_AUTH,
     fixedParams: {},
     allowedParams: [],
+    requiredParams: [],
     bodyType: 'businessNumbers',
     responseFormat: 'json'
   }),
@@ -124,8 +153,9 @@ export const PUBLIC_DATA_SOURCES = Object.freeze({
     '아파트 매매 실거래가',
     'https://apis.data.go.kr/1613000/RTMSDataSvcAptTradeDev/getRTMSDataSvcAptTradeDev',
     ['LAWD_CD', 'DEAL_YMD', 'pageNo', 'numOfRows'],
-    {},
-    'xml'
+    { pageNo: '1', numOfRows: '100' },
+    'xml',
+    ['LAWD_CD', 'DEAL_YMD']
   ),
   'weather-ultra-now': dataGoKrGet(
     'strategy',
@@ -133,8 +163,19 @@ export const PUBLIC_DATA_SOURCES = Object.freeze({
     '초단기실황',
     'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst',
     ['pageNo', 'numOfRows', 'base_date', 'base_time', 'nx', 'ny'],
-    { dataType: 'JSON' },
-    'json'
+    { dataType: 'JSON', pageNo: '1', numOfRows: '100' },
+    'json',
+    ['base_date', 'base_time', 'nx', 'ny']
+  ),
+  'weather-short-forecast': dataGoKrGet(
+    'strategy',
+    '기상청',
+    '단기예보',
+    'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst',
+    ['pageNo', 'numOfRows', 'base_date', 'base_time', 'nx', 'ny'],
+    { dataType: 'JSON', pageNo: '1', numOfRows: '100' },
+    'json',
+    ['base_date', 'base_time', 'nx', 'ny']
   ),
   'airkorea-forecast': dataGoKrGet(
     'strategy',
@@ -142,8 +183,18 @@ export const PUBLIC_DATA_SOURCES = Object.freeze({
     '대기질 예보통보',
     'https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMinuDustFrcstDspth',
     ['numOfRows', 'pageNo', 'searchDate', 'InformCode'],
-    { returnType: 'json' },
+    { returnType: 'json', pageNo: '1', numOfRows: '100' },
     'json'
+  ),
+  'airkorea-realtime': dataGoKrGet(
+    'strategy',
+    '한국환경공단 에어코리아',
+    '시도별 실시간 대기오염 측정정보',
+    'https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty',
+    ['sidoName', 'pageNo', 'numOfRows', 'ver'],
+    { returnType: 'json', pageNo: '1', numOfRows: '100', ver: '1.4' },
+    'json',
+    ['sidoName']
   ),
   'power-supply-current': dataGoKrGet(
     'strategy',
@@ -152,7 +203,8 @@ export const PUBLIC_DATA_SOURCES = Object.freeze({
     'https://apis.data.go.kr/B552115/sukub5mMaxDatetime2',
     ['tradeDay'],
     {},
-    'xml'
+    'xml',
+    ['tradeDay']
   ),
   'kwater-rainfall-minute': dataGoKrGet(
     'strategy',
@@ -160,8 +212,9 @@ export const PUBLIC_DATA_SOURCES = Object.freeze({
     '우량관측소 분단위 관측정보',
     'https://apis.data.go.kr/B500001/dam/excllncobsrvt/mntrf/mntrflist',
     ['pageNo', 'numOfRows', 'sdate', 'stime', 'edate', 'etime', 'excll', 'tms'],
-    { _type: 'json' },
-    'json'
+    { _type: 'json', pageNo: '1', numOfRows: '100' },
+    'json',
+    ['sdate', 'stime', 'edate', 'etime', 'excll', 'tms']
   )
 });
 
@@ -177,6 +230,8 @@ export function listPublicDataSources() {
     title: source.title,
     method: source.method,
     allowedParams: source.allowedParams,
+    requiredParams: source.requiredParams || [],
+    requiredAny: source.requiredAny || [],
     bodyType: source.bodyType || null
   }));
 }
