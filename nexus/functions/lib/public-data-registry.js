@@ -206,7 +206,7 @@ export const PUBLIC_DATA_SOURCES = Object.freeze({
     'strategy',
     '기상청',
     '단기예보',
-    'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst',
+    'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst',
     ['pageNo', 'numOfRows', 'base_date', 'base_time', 'nx', 'ny'],
     { dataType: 'JSON', pageNo: '1', numOfRows: '100' },
     'json',
