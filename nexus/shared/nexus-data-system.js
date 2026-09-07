@@ -9,7 +9,7 @@
     const link = document.createElement('link');
     link.id = STYLE_ID;
     link.rel = 'stylesheet';
-    link.href = '/shared/nexus-data-system.css?v=20260907';
+    link.href = '/shared/nexus-data-system.css?v=20260907-knowledge-1';
     document.head.append(link);
   }
 
@@ -61,6 +61,26 @@
 
   async function catalog(options = {}) {
     return query('catalog', {}, options);
+  }
+
+  async function knowledge(axis, options = {}) {
+    const limit = Math.min(Math.max(Number(options.limit) || 12, 2), 48);
+    const key = `knowledge:${axis}:${limit}`;
+    if (!options.refresh && requestCache.has(key)) return requestCache.get(key);
+    const task = (async()=>{
+      const url = new URL('/api/nexus-knowledge', location.origin);
+      url.searchParams.set('axis', axis);
+      url.searchParams.set('limit', String(limit));
+      const response = await fetch(url, { cache: options.refresh ? 'reload' : 'default' });
+      let payload = null;
+      try { payload = await response.json(); } catch { return null; }
+      if (response.status === 503 && payload?.error === 'knowledge_store_not_bound') return null;
+      if (!response.ok || !payload?.ok) return null;
+      return payload;
+    })();
+    requestCache.set(key, task);
+    try { return await task; }
+    catch { requestCache.delete(key); return null; }
   }
 
   function titleNode(record, tag = 'h3') {
@@ -141,16 +161,81 @@
     return titleNode({ title: { ko, en } }, tag);
   }
 
+  function routeAxis(pathname = location.pathname) {
+    const path = String(pathname || '').toLowerCase();
+    if (path.includes('/legal-intelligence')) return 'legal';
+    if (path.includes('/local-government-planning')) return 'local-government';
+    if (path.includes('/university') || path.includes('/edtech-research')) return 'education';
+    if (path.includes('/intelligence-briefing') || path.includes('/investment-strategy')) return 'strategy';
+    return '';
+  }
+
+  function knowledgeSourceCard(item) {
+    const card = el('article', 'nexus-knowledge-source');
+    const title = el('h3', 'nexus-data-title');
+    title.append(el('span', 'nexus-title-ko', item?.headline || item?.source || '변화 감지'));
+    if (item?.headline_en) title.append(el('span', 'nexus-title-en', item.headline_en));
+    const counts = item?.delta?.counts || {};
+    const meta = el('p', 'nexus-data-meta', `${item?.priority || 'NORMAL'} · ${item?.direction || 'baseline'} · 신규 ${counts.added || 0} · 변경 ${counts.changed || 0} · 소멸 ${counts.removed || 0}`);
+    const body = el('p', 'nexus-data-summary', item?.assessment || item?.fact || '');
+    card.append(title, meta, body);
+    return card;
+  }
+
+  async function renderKnowledge(host, axis, options = {}) {
+    ensureStyle();
+    const payload = await knowledge(axis, options);
+    const axisData = payload?.axes?.find((entry) => entry.axis === axis) || payload?.axes?.[0];
+    if (!axisData || !payload?.stored_sources) return false;
+
+    const panel = el('section', 'nexus-knowledge-panel');
+    const head = el('div', 'nexus-knowledge-head');
+    head.append(bilingualTitle('축적 지식 · 변화 동향', 'Accumulated Knowledge & Change Intelligence', 'h2'));
+    head.append(el('p', 'nexus-data-meta', `${axisData.sources || 0}개 소스 · 변화 감지 ${axisData.changed_sources || 0}개 · 우선도 ${axisData.priority || 'NORMAL'}`));
+    panel.append(head);
+
+    const executive = el('div', 'nexus-knowledge-executive');
+    renderIntelligence(executive, { briefing: axisData.executive || {} });
+    panel.append(executive);
+
+    const changed = (axisData.briefings || []).filter((item) => Number(item?.score || 0) > 0).slice(0, 4);
+    if (changed.length) {
+      const grid = el('div', 'nexus-knowledge-grid');
+      for (const item of changed) grid.append(knowledgeSourceCard(item));
+      panel.append(grid);
+    }
+
+    host.replaceChildren(panel);
+    return true;
+  }
+
+  async function autoKnowledge() {
+    if (document.querySelector('[data-nexus-knowledge-auto]')) return;
+    const axis = routeAxis();
+    const main = document.querySelector('main');
+    if (!axis || !main) return;
+    const host = el('div', 'nexus-knowledge-auto');
+    host.dataset.nexusKnowledgeAuto = axis;
+    const visible = await renderKnowledge(host, axis, { limit: 12 });
+    if (visible) main.append(host);
+  }
+
   ensureStyle();
   window.NexusData = Object.freeze({
     query,
     records,
     catalog,
+    knowledge,
     renderGrid,
     renderIntelligence,
+    renderKnowledge,
     recordCard,
     bilingualTitle,
     ensureStyle,
+    routeAxis,
     clearCache(){ requestCache.clear(); }
   });
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', autoKnowledge, { once: true });
+  else queueMicrotask(autoKnowledge);
 })();
