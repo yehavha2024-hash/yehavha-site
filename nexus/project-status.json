@@ -8,6 +8,15 @@
     "contentCount": 8,
     "contentLabel": "연구축"
   },
+  "ai-law-visual": {
+    "id": "ai-law-visual",
+    "managedBy": "github",
+    "status": "최근 업데이트",
+    "statusTone": "fresh",
+    "lastUpdated": "2026-09-07",
+    "contentCount": 10,
+    "contentLabel": "AI 법률 카드"
+  },
   "government-local-ax-manual": {
     "id": "government-local-ax-manual",
     "managedBy": "github",
