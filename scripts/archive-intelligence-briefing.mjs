@@ -7,9 +7,31 @@ const latestPath = path.join(briefingDir, 'latest.json');
 const archiveDir = path.join(briefingDir, 'archive');
 const indexPath = path.join(briefingDir, 'archive-index.json');
 const ROLLING_WINDOW_DAYS = 7;
+const ALLOWED_PRIORITIES = new Set(['CRITICAL', 'HIGH', 'WATCH']);
+const PORTAL_HOST_PATTERNS = [
+  /(^|\.)news\.nate\.com$/i,
+  /(^|\.)nate\.com$/i,
+  /(^|\.)news\.naver\.com$/i,
+  /(^|\.)naver\.com$/i,
+  /(^|\.)news\.daum\.net$/i,
+  /(^|\.)daum\.net$/i
+];
 
 const readJson = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
 const stableJson = (value) => `${JSON.stringify(value, null, 2)}\n`;
+const nonEmpty = (value) => typeof value === 'string' && value.trim().length > 0;
+
+function sourceHost(url) {
+  try {
+    return new URL(url).hostname.toLowerCase();
+  } catch {
+    return '';
+  }
+}
+
+function isPortalHost(host) {
+  return PORTAL_HOST_PATTERNS.some((pattern) => pattern.test(host));
+}
 
 function kstParts(value) {
   const date = new Date(value);
@@ -52,6 +74,76 @@ function makeDetail(brief) {
     .map((item) => item.headline || item.category)
     .filter(Boolean)
     .join(' · ');
+}
+
+function validateAnalyticSchema(latest) {
+  const items = Array.isArray(latest.items) ? latest.items : [];
+  if (!items.length) throw new Error('latest.json must contain at least one briefing item.');
+  if (!nonEmpty(latest.executiveSummary)) {
+    throw new Error('latest.json requires executiveSummary with cross-item strategic judgment.');
+  }
+
+  for (const item of items) {
+    const name = item.headline || item.topicKey || item.category || 'untitled item';
+    const requiredTextFields = [
+      ['headline', item.headline],
+      ['category', item.category],
+      ['signal', item.signal],
+      ['fact', item.fact],
+      ['assessment', item.assessment],
+      ['impact', item.impact],
+      ['secondOrder', item.secondOrder],
+      ['uncertainty', item.uncertainty],
+      ['nexusAction', item.nexusAction],
+      ['confidence', item.confidence]
+    ];
+
+    for (const [field, value] of requiredTextFields) {
+      if (!nonEmpty(value)) {
+        throw new Error(`Strategic briefing item requires ${field}: ${name}`);
+      }
+    }
+
+    const priority = String(item.priority || '').toUpperCase();
+    if (!ALLOWED_PRIORITIES.has(priority)) {
+      throw new Error(`Invalid priority for ${name}: use CRITICAL, HIGH, or WATCH.`);
+    }
+
+    if (!Number.isInteger(item.rank) || item.rank < 1) {
+      throw new Error(`Strategic briefing item requires positive integer rank: ${name}`);
+    }
+
+    if (!Array.isArray(item.indicators) || item.indicators.length < 3 || item.indicators.some((value) => !nonEmpty(value))) {
+      throw new Error(`Strategic briefing item requires at least three concrete indicators: ${name}`);
+    }
+
+    if (!Array.isArray(item.sources) || item.sources.length < 2) {
+      throw new Error(`Strategic briefing item requires at least two cross-check sources: ${name}`);
+    }
+
+    const hosts = new Set();
+    let hasNonPortalSource = false;
+    for (const source of item.sources) {
+      if (!nonEmpty(source?.label) || !nonEmpty(source?.url)) {
+        throw new Error(`Every source requires label and url: ${name}`);
+      }
+      const host = sourceHost(source.url);
+      if (!host) {
+        throw new Error(`Invalid source URL in ${name}: ${source.url}`);
+      }
+      hosts.add(host);
+      if (!isPortalHost(host)) hasNonPortalSource = true;
+    }
+
+    if (hosts.size < 2) {
+      throw new Error(`Cross-check sources must use at least two distinct hosts: ${name}`);
+    }
+    if (!hasNonPortalSource) {
+      throw new Error(
+        `News portals are signal detectors, not final evidence. Add an original or non-portal corroborating source: ${name}`
+      );
+    }
+  }
 }
 
 function loadPreviousBriefs(latest, currentArchivePath) {
@@ -143,6 +235,7 @@ const relativeFile = `archive/${date}-${time}.json`;
 const archivePath = path.join(briefingDir, relativeFile);
 
 fs.mkdirSync(archiveDir, { recursive: true });
+validateAnalyticSchema(latest);
 validateNovelty(latest, loadPreviousBriefs(latest, archivePath));
 
 if (fs.existsSync(archivePath)) {
