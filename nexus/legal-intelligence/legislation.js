@@ -4,6 +4,8 @@
   const LEGISLATION_URL = './legislation.json';
   const PEOPLE_URL = './legal-people.json';
   const MATERIALS_URL = './legal-materials.json';
+  const LEGISLATION_DISPLAY_LIMIT = 24;
+  const GOVERNMENT_DISPLAY_LIMIT = 8;
 
   function el(tag, className, text) {
     const node = document.createElement(tag);
@@ -14,6 +16,23 @@
 
   function formatDate(value) {
     return value ? String(value).replaceAll('-', '.') : '-';
+  }
+
+  function currentSeoulYear() {
+    return new Intl.DateTimeFormat('en-US', {timeZone: 'Asia/Seoul', year: 'numeric'}).format(new Date());
+  }
+
+  function legislationOriginYear(record) {
+    if (record.sourceType === 'assembly') return String(record.proposedAt || '').slice(0, 4);
+    const announcementYear = String(record.announcementNo || '').match(/20\d{2}/)?.[0];
+    if (announcementYear) return announcementYear;
+    const firstHistoryDate = Array.isArray(record.history) ? record.history.find(item => item?.date)?.date : '';
+    return String(firstHistoryDate || record.statusDate || '').slice(0, 4);
+  }
+
+  function legislationSortDate(record) {
+    const history = Array.isArray(record.history) ? record.history.filter(item => item?.date).map(item => item.date).sort() : [];
+    return String(record.statusDate || history.at(-1) || record.proposedAt || '');
   }
 
   function sourceLabel(record) {
@@ -49,7 +68,22 @@
     if (record.mainContent) return record.mainContent;
     if (record.amendmentReason) return record.amendmentReason;
     const topics = Array.isArray(record.topics) ? record.topics.join(' · ') : '';
-    return topics ? `${topics} 영역과 직접 연결되는 입법으로 현재 ${record.statusLabel || '진행상태'} 단계입니다.` : summary;
+    if (record.sourceType === 'assembly') {
+      const parts = [
+        record.proposedAt ? `${formatDate(record.proposedAt)} 제안` : '',
+        record.proposer || '',
+        record.committee ? `${record.committee} 소관` : '',
+        record.statusLabel ? `현재 ${record.statusLabel}` : ''
+      ].filter(Boolean).join(' · ');
+      return `${parts || '국회 입법 진행상황을 추적 중입니다.'}${topics ? ` · 관심영역 ${topics}` : ''}`;
+    }
+    const parts = [
+      record.ministry || '',
+      record.lawType || '',
+      record.announcementNo || '',
+      record.statusLabel ? `현재 ${record.statusLabel}` : ''
+    ].filter(Boolean).join(' · ');
+    return `${parts || '정부 입법 진행상황을 추적 중입니다.'}${topics ? ` · 관심영역 ${topics}` : ''}`;
   }
 
   function appendHistory(card, record) {
@@ -138,19 +172,18 @@
     host.append(cell);
   }
 
-  function renderLegislationSummary(records, data) {
+  function renderLegislationSummary(records, displayedRecords, year) {
     const host = document.getElementById('legislation-live-summary');
     if (!host) return;
     host.replaceChildren();
     const assembly = records.filter(record => record.sourceType === 'assembly');
     const government = records.filter(record => record.sourceType === 'government');
-    const latest = records.map(record => record.statusDate).filter(Boolean).sort().at(-1) || data.updatedAt || '';
     const topicCounts = new Map();
     for (const record of records) for (const topic of record.topics || []) topicCounts.set(topic, (topicCounts.get(topic) || 0) + 1);
     const leadingTopic = [...topicCounts.entries()].sort((a, b) => b[1] - a[1])[0];
-    appendSummaryCell(host, '선별 추적', `${records.length}건`);
+    appendSummaryCell(host, `${year} 추적`, `${records.length}건`);
+    appendSummaryCell(host, '화면 표시', `최신 ${displayedRecords.length}건`);
     appendSummaryCell(host, '국회 / 정부', `${assembly.length} / ${government.length}건`);
-    appendSummaryCell(host, '최근 상태변경', formatDate(latest));
     appendSummaryCell(host, '최다 관심영역', leadingTopic ? `${leadingTopic[0]} ${leadingTopic[1]}건` : '-');
   }
 
@@ -159,22 +192,32 @@
     const anchor = section?.querySelector('.watch-wrap');
     if (!section || !anchor) return;
     section.querySelectorAll('[data-live-legislation]').forEach(node => node.remove());
+    const year = currentSeoulYear();
     const records = (Array.isArray(data.records) ? data.records : [])
-      .filter(record => record && record.active !== false)
-      .sort((a, b) => String(b.statusDate || '').localeCompare(String(a.statusDate || '')));
-    renderLegislationSummary(records, data);
-    const assembly = records.filter(record => record.sourceType === 'assembly');
-    const government = records.filter(record => record.sourceType === 'government');
+      .filter(record => record && record.active !== false && legislationOriginYear(record) === year)
+      .sort((a, b) => legislationSortDate(b).localeCompare(legislationSortDate(a)));
+    const allGovernment = records.filter(record => record.sourceType === 'government');
+    const government = allGovernment.slice(0, GOVERNMENT_DISPLAY_LIMIT);
+    const assemblyLimit = Math.max(0, LEGISLATION_DISPLAY_LIMIT - government.length);
+    const assembly = records.filter(record => record.sourceType === 'assembly').slice(0, assemblyLimit);
+    const displayedRecords = [...assembly, ...government];
+    renderLegislationSummary(records, displayedRecords, year);
     const host = el('div');
     host.dataset.liveLegislation = 'true';
     const info = el('div', 'exclusion-note');
+    const latest = records.map(legislationSortDate).filter(Boolean).sort().at(-1) || data.updatedAt || '';
     info.append(
-      el('strong', '', `데이터 기준 ${formatDate(data.updatedAt)}`),
-      el('span', '', '의안번호와 정부입법 식별자를 기준으로 중복을 통제하고, 동일 법안의 새 심사단계는 기존 기록의 추진경과에 누적합니다.')
+      el('strong', '', `${year}년 최신 입법 우선`),
+      el('span', '', `${year}년에 새로 발의·입안된 항목만 우선 표시하고, 화면에는 최신 ${displayedRecords.length}건만 노출합니다. 과거 연도와 나머지 기록은 삭제하지 않고 원본 데이터에 보존합니다.${latest ? ` 최근 상태변경 ${formatDate(latest)}.` : ''}`)
     );
     host.append(info);
-    if (assembly.length) host.append(renderGroup('국회 입법 · 선별 추적', '법안의 제안 취지와 소관위원회, 현재 심사단계, 날짜별 추진경과를 같은 카드에서 확인합니다.', assembly));
-    if (government.length) host.append(renderGroup('정부 입법 · 선별 추적', '정부입법 목록·상세자료에서 소관부처, 제·개정이유, 세부 심사단계와 법령안 파일을 연결합니다.', government));
+    if (assembly.length) host.append(renderGroup(`국회 입법 · ${year} 최신 ${assembly.length}건`, '올해 새로 발의된 법률안 가운데 최근 상태변경 순으로 표시합니다. 카드에서 제안자·소관위원회·현재 단계와 관심영역을 먼저 확인하고 필요할 때 공식 원문을 엽니다.', assembly));
+    if (government.length) host.append(renderGroup(`정부 입법 · ${year} 최신 ${government.length}건`, '올해 입안·입법예고된 정부 법령안 가운데 최근 자료를 표시합니다. 소관부처·법령종류·현재 추진단계를 먼저 확인하고 필요할 때 상세 원문을 엽니다.', government));
+    if (!displayedRecords.length) {
+      const note = el('div', 'exclusion-note');
+      note.append(el('strong', '', `${year}년 입법`), el('span', '', '현재 표시할 올해 입법 기록이 없습니다. 과거 기록은 원본 데이터에 보존되어 있습니다.'));
+      host.append(note);
+    }
     anchor.insertAdjacentElement('afterend', host);
   }
 
