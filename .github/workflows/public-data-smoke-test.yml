@@ -24,6 +24,7 @@ jobs:
           import datetime as dt
           import json
           import sys
+          import urllib.error
           import urllib.parse
           import urllib.request
           import xml.etree.ElementTree as ET
@@ -47,41 +48,13 @@ jobs:
           base_time = f'{forecast_hour:02d}00'
 
           tests = [
-              ('g2b-bid-service', {
-                  'inqryDiv': '1',
-                  'inqryBgnDt': today + '0000',
-                  'inqryEndDt': today + '2359',
-                  'numOfRows': '3'
-              }),
-              ('g2b-contract-service', {
-                  'inqryDiv': '1',
-                  'inqryBgnDt': yesterday + '0000',
-                  'inqryEndDt': today + '2359',
-                  'numOfRows': '3'
-              }),
-              ('apt-trade', {
-                  'LAWD_CD': '11680',
-                  'DEAL_YMD': prev_month,
-                  'numOfRows': '3'
-              }),
-              ('customs-trade-total', {
-                  'strtYymm': trade_month,
-                  'endYymm': trade_month
-              }),
-              ('weather-short-forecast', {
-                  'base_date': forecast_date,
-                  'base_time': base_time,
-                  'nx': '60',
-                  'ny': '127',
-                  'numOfRows': '10'
-              }),
-              ('airkorea-realtime', {
-                  'sidoName': '서울',
-                  'numOfRows': '3'
-              }),
-              ('power-supply-current', {
-                  'tradeDay': today
-              }),
+              ('g2b-bid-service', {'inqryDiv':'1','inqryBgnDt':today+'0000','inqryEndDt':today+'2359','numOfRows':'3'}),
+              ('g2b-contract-service', {'inqryDiv':'1','inqryBgnDt':yesterday+'0000','inqryEndDt':today+'2359','numOfRows':'3'}),
+              ('apt-trade', {'LAWD_CD':'11680','DEAL_YMD':prev_month,'numOfRows':'3'}),
+              ('customs-trade-total', {'strtYymm':trade_month,'endYymm':trade_month}),
+              ('weather-short-forecast', {'base_date':forecast_date,'base_time':base_time,'nx':'60','ny':'127','numOfRows':'10'}),
+              ('airkorea-realtime', {'sidoName':'서울','numOfRows':'3'}),
+              ('power-supply-current', {'tradeDay':today}),
           ]
 
           failures = []
@@ -89,49 +62,58 @@ jobs:
           def provider_result(payload):
               data = payload.get('data')
               if isinstance(data, dict):
-                  header = data.get('response', {}).get('header') if isinstance(data.get('response'), dict) else None
-                  if isinstance(header, dict):
+                  response = data.get('response')
+                  if isinstance(response, dict) and isinstance(response.get('header'), dict):
+                      header = response['header']
                       return str(header.get('resultCode', '')), str(header.get('resultMsg', ''))
-                  for key in ('resultCode', 'resultMsg'):
-                      if key in data:
-                          return str(data.get('resultCode', '')), str(data.get('resultMsg', ''))
+                  if 'resultCode' in data or 'resultMsg' in data:
+                      return str(data.get('resultCode', '')), str(data.get('resultMsg', ''))
                   return '', ''
               if isinstance(data, str) and data.lstrip().startswith('<'):
                   try:
                       root = ET.fromstring(data)
-                      code = root.findtext('.//resultCode') or ''
-                      msg = root.findtext('.//resultMsg') or root.findtext('.//resultMsg') or ''
-                      return code, msg
+                      return root.findtext('.//resultCode') or '', root.findtext('.//resultMsg') or ''
                   except ET.ParseError:
                       return '', 'xml-parse-failed'
               return '', ''
 
-          for source, params in tests:
-              query = {'source': source, **params}
-              url = BASE + '?' + urllib.parse.urlencode(query)
+          def read_url(url):
+              req = urllib.request.Request(url, headers={'User-Agent':'NEXUS-Public-Data-Smoke/1.0'})
               try:
-                  req = urllib.request.Request(url, headers={'User-Agent': 'NEXUS-Public-Data-Smoke/1.0'})
                   with urllib.request.urlopen(req, timeout=30) as response:
-                      raw = response.read().decode('utf-8', errors='replace')
-                      status = response.status
-                  payload = json.loads(raw)
+                      return response.status, response.read().decode('utf-8', errors='replace')
+              except urllib.error.HTTPError as exc:
+                  return exc.code, exc.read().decode('utf-8', errors='replace')
+
+          for source, params in tests:
+              url = BASE + '?' + urllib.parse.urlencode({'source':source, **params})
+              try:
+                  status, raw = read_url(url)
+                  try:
+                      payload = json.loads(raw)
+                  except json.JSONDecodeError:
+                      payload = {'ok':False, 'raw':raw[:500]}
                   code, msg = provider_result(payload)
-                  ok = bool(payload.get('ok')) and int(payload.get('upstreamStatus', 0) or 0) == 200
-                  if code and code not in ('00', '0', 'NORMAL_SERVICE'):
+                  ok = status == 200 and bool(payload.get('ok')) and int(payload.get('upstreamStatus', 0) or 0) == 200
+                  if code and code not in ('00','0','NORMAL_SERVICE'):
                       ok = False
-                  print(json.dumps({
-                      'source': source,
-                      'http': status,
-                      'gatewayOk': payload.get('ok'),
-                      'upstreamStatus': payload.get('upstreamStatus'),
-                      'providerCode': code,
-                      'providerMsg': msg,
-                      'ok': ok
-                  }, ensure_ascii=False))
+                  summary = {
+                      'source':source,
+                      'http':status,
+                      'gatewayOk':payload.get('ok'),
+                      'error':payload.get('error'),
+                      'message':payload.get('message'),
+                      'upstreamStatus':payload.get('upstreamStatus'),
+                      'providerCode':code,
+                      'providerMsg':msg,
+                      'dataPreview':str(payload.get('data',''))[:300],
+                      'ok':ok,
+                  }
+                  print(json.dumps(summary, ensure_ascii=False))
                   if not ok:
                       failures.append(source)
               except Exception as exc:
-                  print(json.dumps({'source': source, 'ok': False, 'error': str(exc)}, ensure_ascii=False))
+                  print(json.dumps({'source':source,'ok':False,'error':str(exc)}, ensure_ascii=False))
                   failures.append(source)
 
           if failures:
