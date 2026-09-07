@@ -35,6 +35,24 @@ function clampRows(name, value) {
   return String(Math.min(parsed, MAX_ROWS));
 }
 
+function validateRequiredParams(source, inputUrl) {
+  const missing = (source.requiredParams || []).filter((name) => {
+    const value = inputUrl.searchParams.get(name);
+    return value === null || value.trim() === '';
+  });
+  if (missing.length) return { ok: false, missing };
+
+  for (const group of source.requiredAny || []) {
+    const present = group.some((name) => {
+      const value = inputUrl.searchParams.get(name);
+      return value !== null && value.trim() !== '';
+    });
+    if (!present) return { ok: false, missingAny: group };
+  }
+
+  return { ok: true };
+}
+
 function buildUpstreamUrl(source, inputUrl, env) {
   const credential = readCredential(source, env);
   if (!credential) {
@@ -105,6 +123,17 @@ async function proxyGet({ request, env }) {
   const source = getPublicDataSource(sourceId);
   if (!source) return json({ ok: false, error: 'unknown_source' }, 404);
   if (source.method !== 'GET') return json({ ok: false, error: 'method_not_allowed' }, 405);
+
+  const validation = validateRequiredParams(source, inputUrl);
+  if (!validation.ok) {
+    return json({
+      ok: false,
+      error: 'missing_required_parameter',
+      source: sourceId,
+      missing: validation.missing || [],
+      missingAny: validation.missingAny || []
+    }, 400);
+  }
 
   let upstream;
   try {
