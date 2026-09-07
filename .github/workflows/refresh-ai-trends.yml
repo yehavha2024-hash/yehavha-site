@@ -1,0 +1,56 @@
+name: Refresh Nexus AI updates
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/refresh-ai-trends.mjs'
+      - '.github/workflows/refresh-ai-trends.yml'
+  schedule:
+    # GitHub Actions cron uses UTC. Runs every 6 hours; minute 17 avoids top-of-hour congestion.
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nexus-ai-trends-refresh
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Validate AI update collector
+        run: node --check scripts/refresh-ai-trends.mjs
+
+      - name: Collect and merge AI updates
+        env:
+          AI_TRENDS_LOOKBACK_DAYS: '3'
+          AI_TRENDS_MAX_NEW: '30'
+        run: node scripts/refresh-ai-trends.mjs
+
+      - name: Commit AI trend data when changed
+        shell: bash
+        run: |
+          if git diff --quiet -- nexus/ai-trends/data.json; then
+            echo "AI trend data is already current."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nexus/ai-trends/data.json
+          git commit -m "Refresh Nexus AI updates"
+          git push
