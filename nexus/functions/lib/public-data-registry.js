@@ -66,6 +66,13 @@ export const PUBLIC_DATA_SOURCES = Object.freeze({
     [],
     [['ID', 'MST', 'LM']]
   ),
+  'law-effective-detail': lawDetail(
+    'eflaw',
+    '시행일 기준 법령 본문',
+    ['ID', 'MST', 'efYd', 'JO'],
+    [],
+    [['ID', 'MST']]
+  ),
   'precedent-list': lawList(
     'prec',
     '판례 목록',
@@ -115,6 +122,15 @@ export const PUBLIC_DATA_SOURCES = Object.freeze({
     { type: 'json' },
     'json'
   ),
+  'g2b-bid-goods': dataGoKrGet(
+    'local-government',
+    '조달청 나라장터',
+    '물품 입찰공고',
+    `${G2B_BID_URL}/getBidPblancListInfoThng`,
+    ['pageNo', 'numOfRows', 'inqryDiv', 'inqryBgnDt', 'inqryEndDt', 'bidNtceNo'],
+    { type: 'json' },
+    'json'
+  ),
   'g2b-contract-construction': dataGoKrGet(
     'local-government',
     '조달청 나라장터',
@@ -129,6 +145,15 @@ export const PUBLIC_DATA_SOURCES = Object.freeze({
     '조달청 나라장터',
     '용역 계약현황',
     `${G2B_CONTRACT_URL}/getCntrctInfoListServc`,
+    ['pageNo', 'numOfRows', 'inqryDiv', 'inqryBgnDt', 'inqryEndDt', 'cntrctNo', 'bidNtceNo', 'dminsttNm', 'cntrctInsttNm'],
+    { type: 'json' },
+    'json'
+  ),
+  'g2b-contract-goods': dataGoKrGet(
+    'local-government',
+    '조달청 나라장터',
+    '물품 계약현황',
+    `${G2B_CONTRACT_URL}/getCntrctInfoListThng`,
     ['pageNo', 'numOfRows', 'inqryDiv', 'inqryBgnDt', 'inqryEndDt', 'cntrctNo', 'bidNtceNo', 'dminsttNm', 'cntrctInsttNm'],
     { type: 'json' },
     'json'
@@ -156,6 +181,16 @@ export const PUBLIC_DATA_SOURCES = Object.freeze({
     { pageNo: '1', numOfRows: '100' },
     'xml',
     ['LAWD_CD', 'DEAL_YMD']
+  ),
+  'customs-trade-total': dataGoKrGet(
+    'strategy',
+    '관세청',
+    '월별 수출입총괄',
+    'https://apis.data.go.kr/1220000/Newtrade/getNewtradeList',
+    ['strtYymm', 'endYymm'],
+    {},
+    'xml',
+    ['strtYymm', 'endYymm']
   ),
   'weather-ultra-now': dataGoKrGet(
     'strategy',
