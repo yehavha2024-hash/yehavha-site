@@ -16,4 +16,5 @@
   }
 
   window.NEXUS_UNIVERSITY_UTILS = Object.freeze({ splitList, escapeHtml });
+  import('/shared/education-data-render.js?v=20260907').catch(error => console.error('N-University education data layer failed:', error));
 })();
