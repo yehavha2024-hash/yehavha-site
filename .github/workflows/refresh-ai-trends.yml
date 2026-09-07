@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'scripts/refresh-ai-trends.mjs'
+      - 'scripts/localize-ai-trends-ko.mjs'
       - '.github/workflows/refresh-ai-trends.yml'
   schedule:
     # GitHub Actions cron uses UTC. Runs every 6 hours; minute 17 avoids top-of-hour congestion.
@@ -33,13 +34,18 @@ jobs:
           node-version: '22'
 
       - name: Validate AI update collector
-        run: node --check scripts/refresh-ai-trends.mjs
+        run: |
+          node --check scripts/refresh-ai-trends.mjs
+          node --check scripts/localize-ai-trends-ko.mjs
 
       - name: Collect and merge AI updates
         env:
           AI_TRENDS_LOOKBACK_DAYS: '3'
           AI_TRENDS_MAX_NEW: '30'
         run: node scripts/refresh-ai-trends.mjs
+
+      - name: Localize public AI trends to Korean
+        run: node scripts/localize-ai-trends-ko.mjs
 
       - name: Commit AI trend data when changed
         shell: bash
