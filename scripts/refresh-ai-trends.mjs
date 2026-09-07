@@ -27,66 +27,63 @@ const SOURCES = [
     name: 'OpenAI',
     url: 'https://openai.com/news/rss.xml',
     type: 'rss',
-    maxItems: 8,
-    include: /\b(ai|gpt|chatgpt|codex|model|agent|api|safety|research|robot|benchmark)\b/i
+    maxItems: 8
   },
   {
     id: 'github-changelog',
     name: 'GitHub Changelog',
     url: 'https://github.blog/changelog/feed/',
     type: 'rss',
-    maxItems: 8,
-    include: /\b(copilot|ai|model|agent|mcp|gpt|claude|gemini|llm|reasoning)\b/i
+    maxItems: 8
   },
   {
     id: 'google-blog',
     name: 'Google',
     url: 'https://blog.google/feed/',
     type: 'rss',
-    maxItems: 8,
-    include: /\b(ai|gemini|deepmind|model|agent|robot|tpu|machine learning|generative)\b/i
+    maxItems: 8
   },
   {
     id: 'huggingface-blog',
     name: 'Hugging Face',
     url: 'https://huggingface.co/blog/feed.xml',
     type: 'rss',
-    maxItems: 6,
-    include: /\b(model|agent|llm|transformer|robot|inference|benchmark|multimodal|reasoning|ai|diffusion)\b/i
+    maxItems: 6
   },
   {
     id: 'arxiv-cs-ai',
     name: 'arXiv cs.AI',
     url: 'https://rss.arxiv.org/rss/cs.AI',
     type: 'rss',
-    maxItems: 5,
-    include: /\b(agent|multi-agent|language model|foundation model|reasoning|robot|alignment|safety|benchmark|autonomous|artificial intelligence)\b/i
+    maxItems: 5
   },
   {
     id: 'nvidia-generative-ai',
     name: 'NVIDIA',
     url: 'https://blogs.nvidia.com/blog/category/generative-ai/feed/',
     type: 'rss',
-    maxItems: 6,
-    include: /./
+    maxItems: 6
   },
   {
     id: 'anthropic-news',
     name: 'Anthropic',
     url: 'https://www.anthropic.com/news',
     type: 'anthropic-html',
-    maxItems: 6,
-    include: /\b(claude|model|agent|safety|research|standard|security|ai)\b/i
-  },
-  {
-    id: 'openai-release-notes',
-    name: 'OpenAI Release Notes',
-    url: 'https://openai.com/products/release-notes/',
-    type: 'openai-release-html',
-    maxItems: 8,
-    include: /\b(gpt|chatgpt|codex|api|agent|model|reasoning|computer use|release|retir|sunset|deprecat)\b/i
+    maxItems: 6
   }
 ];
+
+const SOURCE_BY_ID = new Map(SOURCES.map(source => [source.id, source]));
+
+const RELEVANCE = {
+  'openai-news': /\b(gpt(?:-[a-z0-9.]+)?|chatgpt|codex|model|agent(?:ic)?|multi-agent|api|computer use|reasoning|benchmark|alignment|aligned|safety|guardrail|robotics?|research acceleration|inference|multimodal)\b/i,
+  'github-changelog': /\b(copilot|gpt(?:-[a-z0-9.]+)?|claude|gemini|agent(?:ic)?|multi-agent|mcp|model context protocol|model|reasoning|ai coding|coding agent)\b/i,
+  'google-blog': /\b(gemini|deepmind|foundation model|language model|generative ai|ai model|agent(?:ic)?|multi-agent|reasoning|robotics?|humanoid|tpu|inference|multimodal)\b/i,
+  'huggingface-blog': /\b(llm|large language model|foundation model|language model|agent(?:ic)?|multi-agent|transformer|inference|benchmark|reasoning|multimodal|diffusion|robotics?|open-weight|open weight)\b/i,
+  'arxiv-cs-ai': /\b(llm|large language model|foundation model|language model|agent(?:ic)?|multi-agent|tool use|reasoning|generative ai|multimodal|robotics?|humanoid|alignment|ai safety|ai governance|artificial intelligence governance|benchmark|model evaluation|vision-language-action|vla)\b/i,
+  'nvidia-generative-ai': /\b(generative ai|agent(?:ic)?|multi-agent|inference|foundation model|language model|llm|robotics?|physical ai|digital twin|gpu|cuda|nemotron|nvidia nim|reasoning|multimodal)\b/i,
+  'anthropic-news': /\b(claude|model|agent(?:ic)?|multi-agent|mcp|model context protocol|alignment|safety|guardrail|benchmark|research|reasoning|computer use|api)\b/i
+};
 
 function decodeEntities(value = '') {
   return value
@@ -169,6 +166,12 @@ function atomLink(block) {
   return preferred ? decodeEntities(preferred[1]) : '';
 }
 
+function isRelevant(sourceId, title, description = '') {
+  const rule = RELEVANCE[sourceId];
+  if (!rule) return true;
+  return rule.test(`${title} ${description}`);
+}
+
 function parseFeed(xml, source) {
   const results = [];
   const itemBlocks = [...xml.matchAll(/<item\b[\s\S]*?<\/item>/gi)].map(match => match[0]);
@@ -180,8 +183,7 @@ function parseFeed(xml, source) {
     const description = tagValue(block, 'description') || tagValue(block, 'summary') || tagValue(block, 'content:encoded') || tagValue(block, 'content');
     const link = itemBlocks.length ? textify(tagValue(block, 'link') || tagValue(block, 'guid')) : atomLink(block);
     const date = isoDate(tagValue(block, 'pubDate') || tagValue(block, 'published') || tagValue(block, 'updated') || tagValue(block, 'dc:date'));
-    const haystack = `${title} ${textify(description)}`;
-    if (!title || !link || !source.include.test(haystack)) continue;
+    if (!title || !link || !isRelevant(source.id, title, textify(description))) continue;
     results.push({ title, description: clip(description || title), link, date });
   }
 
@@ -204,30 +206,8 @@ function parseAnthropic(html, source) {
       .replace(/\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2},\s+20\d{2}\b/gi, ' ')
       .replace(/\s+/g, ' ')
       .trim();
-    if (!title || !source.include.test(title)) continue;
+    if (!title || !isRelevant(source.id, title, body)) continue;
     results.push({ title: clip(title, 180), description: clip(body, 360), link, date });
-    if (results.length >= source.maxItems) break;
-  }
-  return results;
-}
-
-function parseOpenAIReleaseNotes(html, source) {
-  const results = [];
-  const h2Regex = /<h2\b[^>]*>([\s\S]*?)<\/h2>/gi;
-  for (const match of html.matchAll(h2Regex)) {
-    const title = textify(match[1]);
-    if (!title || !source.include.test(title)) continue;
-    const start = Math.max(0, match.index - 1800);
-    const end = Math.min(html.length, (match.index || 0) + match[0].length + 2400);
-    const neighborhood = textify(html.slice(start, end));
-    const dateMatch = neighborhood.match(/\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2},\s+20\d{2}\b/i);
-    if (!dateMatch) continue;
-    results.push({
-      title,
-      description: clip(neighborhood.replace(title, '').trim(), 360),
-      link: source.url,
-      date: isoDate(dateMatch[0])
-    });
     if (results.length >= source.maxItems) break;
   }
   return results;
@@ -236,28 +216,29 @@ function parseOpenAIReleaseNotes(html, source) {
 function categoryFor(title, description, sourceId) {
   const hay = `${title} ${description}`.toLowerCase();
   const rules = [
-    ['safety', /\b(safety|security|cyber|attack|vulnerab|incident|shutdown|jailbreak|prompt injection|red team|guardrail|containment|privacy)\b/i],
-    ['law-policy', /\b(policy|regulat|law|act\b|governance|standard|copyright|compliance|nist|iso|eu ai|legislat)\b/i],
-    ['physical', /\b(robot|robotics|humanoid|physical ai|embodied|vla|vision-language-action|hardware standard)\b/i],
-    ['autonomy', /\b(autonomous driv|robotaxi|self-driving|drone|uas\b|bvlos|vehicle autonomy)\b/i],
-    ['compute', /\b(gpu|tpu|npu|cuda|chip|semiconductor|memory|hbm|inference hardware|data ?center|compute)\b/i],
-    ['agents', /\b(agent|agentic|multi-agent|mcp|computer use|tool use|copilot|workflow|automation)\b/i],
+    ['agents', /\b(agentic|agent|multi-agent|mcp|model context protocol|computer use|tool use|copilot|workflow automation)\b/i],
+    ['law-policy', /\b(ai act|artificial intelligence act|policy|regulat|legislat|governance|standard|copyright|compliance|nist|iso\/iec|eu ai)\b/i],
+    ['physical', /\b(physical ai|robotics?|humanoid|embodied|vision-language-action|\bvla\b|robot arm)\b/i],
+    ['autonomy', /\b(autonomous driv|robotaxi|self-driving|drone|\buas\b|bvlos|vehicle autonomy)\b/i],
+    ['compute', /\b(gpu|tpu|npu|cuda|chip|semiconductor|memory|hbm|data ?center|ai compute|inference hardware)\b/i],
+    ['safety', /\b(ai safety|model safety|agent safety|alignment|aligned|guardrail|jailbreak|prompt injection|red team|containment|misalignment|cybersecurity)\b/i],
     ['research', /\b(arxiv|paper|research|benchmark|evaluation|dataset|leaderboard|study)\b/i],
-    ['national', /\b(government|national|public sector|ministry|federal|state program|initiative|budget)\b/i],
-    ['frontier', /\b(gpt|gemini|claude|llm|language model|foundation model|model release|multimodal|reasoning|open-weight|open weight)\b/i]
+    ['national', /\b(national ai|public sector ai|government ai|national strategy|national program)\b/i],
+    ['frontier', /\b(gpt|gemini|claude|llm|large language model|foundation model|language model|model release|multimodal|reasoning|open-weight|open weight)\b/i]
   ];
   for (const [category, regex] of rules) if (regex.test(hay)) return category;
   if (sourceId === 'arxiv-cs-ai') return 'research';
   return 'frontier';
 }
 
-function signalFor(title, description) {
+function signalFor(title, description, category) {
   const hay = `${title} ${description}`;
   if (/retir|sunset|deprecat|end of support/i.test(hay)) return 'DEPRECATION (지원 종료·변경)';
-  if (/security|safety|vulnerab|incident|attack|jailbreak/i.test(hay)) return 'SAFETY & SECURITY (안전·보안)';
-  if (/policy|regulat|law|governance|standard|copyright/i.test(hay)) return 'POLICY & STANDARD (정책·표준)';
-  if (/research|paper|benchmark|evaluation|dataset|arxiv/i.test(hay)) return 'RESEARCH UPDATE (연구 업데이트)';
+  if (category === 'safety') return 'SAFETY & SECURITY (안전·보안)';
+  if (category === 'law-policy') return 'POLICY & STANDARD (정책·표준)';
+  if (category === 'research') return 'RESEARCH UPDATE (연구 업데이트)';
   if (/introduc|launch|release|available|general availability|\bga\b|preview/i.test(hay)) return 'PRODUCT UPDATE (제품 업데이트)';
+  if (/\bapi\b|endpoint|sdk|developer|tool call|responses api/i.test(hay)) return 'API UPDATE (API 업데이트)';
   return 'AI UPDATE (AI 업데이트)';
 }
 
@@ -270,7 +251,7 @@ function importanceFor(category) {
     compute: '컴퓨팅·반도체·추론 인프라 변화는 AI 서비스의 비용·속도·배치방식과 공급망 의존성에 직접 영향을 준다.',
     'law-policy': '법·정책·표준 변경은 AI 개발자·제공자·배포자·이용자의 준수의무와 위험관리 기준을 직접 바꿀 수 있다.',
     research: '새 연구·벤치마크는 모델과 에이전트의 능력·한계를 평가하는 기준을 바꾸고 후속 연구의 검증 대상을 제공한다.',
-    safety: '안전·보안 변화는 권한통제, 모니터링, 중단장치, 로그 보존과 사고대응 체계를 재점검해야 할 신호가 된다.',
+    safety: 'AI 안전·보안 변화는 권한통제, 모니터링, 중단장치, 로그 보존과 사고대응 체계를 재점검해야 할 신호가 된다.',
     national: '국가사업·공공투자 변화는 조달·인프라·표준·산업생태계의 방향을 결정하며 국내 적용 가능성에 영향을 줄 수 있다.'
   };
   return map[category] || map.frontier;
@@ -298,12 +279,13 @@ function topicsFor(title, description, sourceName) {
     ['Agentic AI (에이전틱 AI)', /agentic|\bagent\b/i],
     ['Multi-Agent Systems (다중 에이전트 시스템)', /multi-agent/i],
     ['MCP (Model Context Protocol)', /\bmcp\b|model context protocol/i],
-    ['Frontier Model (프런티어 모델)', /gpt|gemini|claude|frontier model|foundation model/i],
-    ['AI Safety (AI 안전)', /safety|guardrail|containment|jailbreak/i],
-    ['Cybersecurity (사이버보안)', /cyber|security|vulnerab|attack/i],
+    ['Frontier Model (프런티어 모델)', /gpt|gemini|claude|frontier model|foundation model|large language model/i],
+    ['API & Developer (API·개발자)', /\bapi\b|endpoint|sdk|developer|tool call/i],
+    ['AI Safety (AI 안전)', /ai safety|model safety|agent safety|alignment|guardrail|containment|jailbreak/i],
+    ['Cybersecurity (사이버보안)', /cybersecurity|cyber attack|vulnerability/i],
     ['Physical AI (피지컬 AI)', /physical ai|robot|humanoid|embodied/i],
-    ['AI Compute (AI 컴퓨팅)', /gpu|tpu|npu|cuda|semiconductor|compute/i],
-    ['AI Governance (AI 거버넌스)', /governance|regulat|policy|law|standard/i],
+    ['AI Compute (AI 컴퓨팅)', /gpu|tpu|npu|cuda|semiconductor|ai compute/i],
+    ['AI Governance (AI 거버넌스)', /governance|regulat|policy|ai act|standard/i],
     ['Benchmark (벤치마크)', /benchmark|evaluation|leaderboard/i],
     ['Open Source (오픈소스)', /open source|open-source|open-weight|open weight/i]
   ];
@@ -322,7 +304,7 @@ async function fetchText(url) {
       redirect: 'follow',
       signal: controller.signal,
       headers: {
-        'user-agent': 'YEHAVHA-NEXUS-AI-Update-Collector/1.0 (+https://yehavha.com/)'
+        'user-agent': 'YEHAVHA-NEXUS-AI-Update-Collector/1.1 (+https://yehavha.com/)'
       }
     });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -334,13 +316,8 @@ async function fetchText(url) {
 
 async function collectSource(source) {
   const body = await fetchText(source.url);
-  let items = [];
-  if (source.type === 'rss') items = parseFeed(body, source);
-  else if (source.type === 'anthropic-html') items = parseAnthropic(body, source);
-  else if (source.type === 'openai-release-html') items = parseOpenAIReleaseNotes(body, source);
-  return items
-    .filter(item => withinLookback(item.date))
-    .map(item => ({ ...item, source }));
+  const items = source.type === 'rss' ? parseFeed(body, source) : parseAnthropic(body, source);
+  return items.filter(item => withinLookback(item.date)).map(item => ({ ...item, source }));
 }
 
 function candidateToEntry(item) {
@@ -352,7 +329,7 @@ function candidateToEntry(item) {
     date: item.date,
     category,
     categoryLabel: CATEGORY_LABELS[category],
-    signal: signalFor(item.title, item.description),
+    signal: signalFor(item.title, item.description, category),
     title: item.title,
     summary: item.description || `${item.source.name}의 최신 AI 업데이트입니다.`,
     importance: importanceFor(category),
@@ -362,6 +339,35 @@ function candidateToEntry(item) {
     autoCollected: true,
     sourceId: item.source.id
   };
+}
+
+function normalizeExistingAuto(entry) {
+  const source = SOURCE_BY_ID.get(entry.sourceId);
+  if (!source) return entry;
+  if (!isRelevant(entry.sourceId, entry.title || '', entry.summary || '')) return null;
+  const category = categoryFor(entry.title || '', entry.summary || '', entry.sourceId);
+  return {
+    ...entry,
+    category,
+    categoryLabel: CATEGORY_LABELS[category],
+    signal: signalFor(entry.title || '', entry.summary || '', category),
+    importance: importanceFor(category),
+    research: researchFor(category),
+    topics: topicsFor(entry.title || '', entry.summary || '', source.name)
+  };
+}
+
+function cleanEntries(entries) {
+  const cleaned = [];
+  for (const entry of entries) {
+    if (!entry.autoCollected) {
+      cleaned.push(entry);
+      continue;
+    }
+    const normalized = normalizeExistingAuto(entry);
+    if (normalized) cleaned.push(normalized);
+  }
+  return cleaned;
 }
 
 function existingIndexes(entries) {
@@ -381,6 +387,7 @@ function ensureMetadata(data) {
     mode: 'official-source-first',
     sourceCount: SOURCES.length,
     deduplication: 'normalized URL + normalized title',
+    relevanceFilter: 'source-specific strict filter',
     lookbackDays: LOOKBACK_DAYS
   };
 }
@@ -388,7 +395,8 @@ function ensureMetadata(data) {
 async function main() {
   const raw = await fs.readFile(DATA_PATH, 'utf8');
   const data = JSON.parse(raw);
-  const entries = Array.isArray(data.entries) ? data.entries : [];
+  const originalEntries = Array.isArray(data.entries) ? data.entries : [];
+  const entries = cleanEntries(originalEntries);
   const { urls, titles } = existingIndexes(entries);
   const failures = [];
   const collected = [];
@@ -397,7 +405,7 @@ async function main() {
     try {
       const items = await collectSource(source);
       collected.push(...items);
-      console.log(`[ai-trends] ${source.name}: ${items.length} recent candidate(s)`);
+      console.log(`[ai-trends] ${source.name}: ${items.length} relevant recent candidate(s)`);
     } catch (error) {
       failures.push(`${source.id}: ${error.message}`);
       console.warn(`[ai-trends] ${source.name} failed: ${error.message}`);
@@ -422,26 +430,29 @@ async function main() {
       titles.add(titleKey);
     });
 
+  const nextEntries = [...newEntries, ...entries]
+    .sort((a, b) => `${b.date}|${b.id}`.localeCompare(`${a.date}|${a.id}`));
+
   const metadataBefore = JSON.stringify({ updateCadence: data.updateCadence, collector: data.collector });
   ensureMetadata(data);
   const metadataAfter = JSON.stringify({ updateCadence: data.updateCadence, collector: data.collector });
+  const entriesChanged = JSON.stringify(originalEntries) !== JSON.stringify(nextEntries);
+  const metadataChanged = metadataBefore !== metadataAfter;
 
-  if (newEntries.length) {
-    data.entries = [...newEntries, ...entries].sort((a, b) => `${b.date}|${b.id}`.localeCompare(`${a.date}|${a.id}`));
-    data.updatedAt = new Date().toISOString().slice(0, 10);
-    data.edition = data.updatedAt;
-    data.collector.lastSuccessfulUpdateAt = new Date().toISOString();
-    data.collector.lastAddedCount = newEntries.length;
-  }
-
-  const shouldWrite = newEntries.length > 0 || metadataBefore !== metadataAfter;
-  if (!shouldWrite) {
-    console.log(`[ai-trends] No new entries. ${failures.length} source(s) failed.`);
+  if (!entriesChanged && !metadataChanged) {
+    console.log(`[ai-trends] No data change. ${failures.length} source(s) failed.`);
     return;
   }
 
+  data.entries = nextEntries;
+  data.updatedAt = new Date().toISOString().slice(0, 10);
+  data.edition = data.updatedAt;
+  data.collector.lastSuccessfulUpdateAt = new Date().toISOString();
+  data.collector.lastAddedCount = newEntries.length;
+  data.collector.lastCleanupCount = originalEntries.length + newEntries.length - nextEntries.length;
+
   await fs.writeFile(DATA_PATH, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
-  console.log(`[ai-trends] Added ${newEntries.length} new entr${newEntries.length === 1 ? 'y' : 'ies'}.`);
+  console.log(`[ai-trends] Added ${newEntries.length}; cleaned/reclassified automated entries as needed.`);
   if (failures.length) console.warn(`[ai-trends] Partial source failures: ${failures.join('; ')}`);
 }
 
