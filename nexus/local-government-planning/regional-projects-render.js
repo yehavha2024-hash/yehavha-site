@@ -34,3 +34,85 @@
   });
   document.getElementById('rules')?.remove();
 })();
+
+(()=>{
+  const anchor=document.getElementById('project-db');
+  if(!anchor||document.getElementById('g2b-live'))return;
+
+  const section=document.createElement('section');
+  section.className='section';
+  section.id='g2b-live';
+  section.innerHTML='<div class="section-head"><p class="eyebrow">LIVE DATA · G2B</p><h2>나라장터 용역 입찰·계약</h2><p id="g2b-live-meta">조달청 공공 API에서 최근 용역 입찰공고와 계약현황을 불러오는 중입니다.</p></div><div class="grid-2" id="g2b-live-grid"><div class="live-card"><h3>실시간 데이터 확인 중</h3><p>공공데이터 응답을 기다리고 있습니다.</p></div></div>';
+  anchor.insertAdjacentElement('afterend',section);
+
+  const host=section.querySelector('#g2b-live-grid');
+  const meta=section.querySelector('#g2b-live-meta');
+  const el=(tag,className,text)=>{const node=document.createElement(tag);if(className)node.className=className;if(text!==undefined)node.textContent=text;return node};
+  const pick=(record,keys)=>{for(const key of keys){const value=record?.[key];if(value!==undefined&&value!==null&&String(value).trim())return String(value).trim()}return''};
+
+  function kstYmd(offsetDays=0){
+    const date=new Date(Date.now()+offsetDays*86400000);
+    const parts=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(date);
+    const get=type=>parts.find(part=>part.type===type)?.value||'';
+    return `${get('year')}${get('month')}${get('day')}`;
+  }
+
+  async function loadPublicData(source,params){
+    const url=new URL('/api/public-data',location.origin);
+    url.searchParams.set('source',source);
+    Object.entries(params).forEach(([key,value])=>url.searchParams.set(key,value));
+    const response=await fetch(url,{cache:'no-store'});
+    const payload=await response.json();
+    if(!response.ok||!payload.ok||payload.upstreamStatus!==200)throw new Error(`${source}: ${response.status}`);
+    return payload.data;
+  }
+
+  function items(data){
+    const value=data?.response?.body?.items;
+    if(Array.isArray(value))return value;
+    if(Array.isArray(value?.item))return value.item;
+    if(value?.item)return [value.item];
+    return [];
+  }
+
+  function liveCard(kind,record){
+    const card=el('div','live-card');
+    const path=el('div','path',kind==='입찰'?'조달청 나라장터 → 용역 입찰공고':'조달청 나라장터 → 용역 계약현황');
+    const title=kind==='입찰'
+      ?pick(record,['bidNtceNm','bidNtceName','ntceNm'])
+      :pick(record,['cntrctNm','contractNm','cntrctName']);
+    const h3=el('h3','',title||`${kind} 정보`);
+    const org=kind==='입찰'
+      ?pick(record,['ntceInsttNm','dminsttNm','orderInsttNm'])
+      :pick(record,['cntrctInsttNm','dminsttNm','orderInsttNm']);
+    const date=kind==='입찰'
+      ?pick(record,['bidNtceDt','bidClseDt','opengDt'])
+      :pick(record,['cntrctCnclsDate','cntrctDt','contractDate']);
+    const number=kind==='입찰'?pick(record,['bidNtceNo']):pick(record,['cntrctNo','bidNtceNo']);
+    const amount=kind==='계약'?pick(record,['totCntrctAmt','cntrctAmt','contractAmt']):'';
+    const p=el('p','',[org,date].filter(Boolean).join(' · ')||'기관·일정 정보 확인 중');
+    const facts=el('div','facts');
+    if(number)facts.append(el('span','',`${kind}번호 ${number}`));
+    if(amount)facts.append(el('span','',`계약금액 ${amount}`));
+    if(!facts.childElementCount)facts.append(el('span','','나라장터 공공 API 실시간 자료'));
+    card.append(path,h3,p,facts);
+    return card;
+  }
+
+  async function load(){
+    const from=kstYmd(-7)+'0000';
+    const to=kstYmd()+'2359';
+    const settled=await Promise.allSettled([
+      loadPublicData('g2b-bid-service',{inqryDiv:'1',inqryBgnDt:from,inqryEndDt:to,numOfRows:'6'}),
+      loadPublicData('g2b-contract-service',{inqryDiv:'1',inqryBgnDt:from,inqryEndDt:to,numOfRows:'6'})
+    ]);
+    host.replaceChildren();
+    let count=0;
+    if(settled[0].status==='fulfilled')for(const record of items(settled[0].value).slice(0,4)){host.append(liveCard('입찰',record));count++}
+    if(settled[1].status==='fulfilled')for(const record of items(settled[1].value).slice(0,4)){host.append(liveCard('계약',record));count++}
+    if(!count){const card=el('div','live-card');card.append(el('h3','','나라장터 데이터를 불러오지 못했습니다.'),el('p','','기존 사업기획 DB는 그대로 사용할 수 있으며 공공 API는 다음 접속 때 다시 조회합니다.'));host.append(card)}
+    meta.textContent=count?`최근 7일 용역 입찰·계약 ${count}건 표시 · 페이지를 열 때 최신 공공데이터를 다시 조회합니다.`:'나라장터 실시간 응답을 확인하지 못했습니다.';
+  }
+
+  load().catch(error=>{console.error('G2B live data load failed:',error);meta.textContent='나라장터 실시간 응답을 확인하지 못했습니다.'});
+})();
