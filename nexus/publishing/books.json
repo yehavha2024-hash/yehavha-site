@@ -21,7 +21,7 @@
       "platform": "유페이퍼",
       "title": "사람으로 오신 YHWH, 다시 오실 예슈아",
       "description": "이스라엘 언약의 성취와 부활·성도 집결·천년 왕국을 하나의 흐름으로 연결하여 예슈아의 재림과 언약 성취를 살펴보는 신앙 연구 전자책입니다.",
-      "bibliography": "ISBN 979-11-444-1317-7 · 유페이퍼 · 교보문고 상용 유통",
+      "bibliography": "ISBN 979-11-444-1317-7 · 유페이퍼 · 교보문고·알라딘 상용 유통",
       "url": "https://yehavha.upaper.kr/content/1221622",
       "actionLabel": "유페이퍼에서 보기",
       "detailEnabled": true,
@@ -49,6 +49,10 @@
         {
           "url": "https://ebook-product.kyobobook.co.kr/dig/epd/ebook/480D260997940?LINK=NVE",
           "label": "교보문고에서 보기"
+        },
+        {
+          "url": "https://www.aladin.co.kr/m/mproduct.aspx?ISBN=E012639508&start=pmnavereboo",
+          "label": "알라딘에서 보기"
         }
       ]
     },
