@@ -93,8 +93,8 @@
     stageCards[0].querySelector('p').textContent=finance?.activation?.state==='requires-provider-setup'
       ?'공통 소유 레지스트리에 등록 완료 · 제공기관 인증 활성화 후 세출자료가 이 흐름에 자동 합류합니다.'
       :'지방재정365 연결 상태를 확인하지 못했습니다.';
-    stageCards[1].querySelector('p').textContent=bid?`최근 7일 입찰 ${bid.records?.length||0}건 · ${bid.cache?.status||'LIVE'}`:'나라장터 입찰 응답을 확인하지 못했습니다.';
-    stageCards[2].querySelector('p').textContent=contract?`최근 7일 계약 ${contract.records?.length||0}건 · ${contract.cache?.status||'LIVE'}`:'나라장터 계약 응답을 확인하지 못했습니다.';
+    stageCards[1].querySelector('p').textContent=bid?`최근 7일 입찰 ${bid.records?.length||0}건 · 정상 조회`:'나라장터 입찰 응답을 확인하지 못했습니다.';
+    stageCards[2].querySelector('p').textContent=contract?`최근 7일 계약 ${contract.records?.length||0}건 · 정상 조회`:'나라장터 계약 응답을 확인하지 못했습니다.';
 
     const rows=[...(bid?.records||[]).slice(0,4),...(contract?.records||[]).slice(0,4)];
     ND.renderGrid(dataHost,rows,{columns:2,emptyText:'현재 표시할 나라장터 실시간 자료가 없습니다.'});
