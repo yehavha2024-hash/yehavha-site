@@ -1,0 +1,228 @@
+{
+  "generatedAt": "2026-09-10T06:29:27+09:00",
+  "window": "2026-09-09 06:30–2026-09-10 06:30 KST · 공개정보 신호 탐지 + 원출처·독립출처 교차검증 · AI 전문동향 중복 최소화",
+  "schedule": "06:30 KST daily · material-change strategic pulse",
+  "briefLabel": "EXECUTIVE BRIEF · 2026.09.10",
+  "executiveSummary": "오늘의 구조적 판단은 ‘안보 리스크가 에너지·비확산·노동시장·산업정책으로 동시에 전이되는 국면’이다. 중동에서는 미·이란이 전쟁 개시 이후 최대 규모의 상선·유조선 공격을 주고받으며 Brent가 100달러를 넘어 실제 공급·물가 충격 단계로 진입했고, 동시에 IAEA 이사회는 이란을 20년 만에 유엔 안전보장이사회에 회부해 군사충돌과 핵 비확산 절차가 결합됐다. 한반도에서는 북한이 영변 제2 우라늄농축시설과 강선 확장시설의 가동을 확대하는 정황이 확인돼 해상 핵전력 강화와 별개로 핵물질 생산기반 자체가 확장되고 있다. 국내 사회동향에서는 전체 취업자가 늘었음에도 청년 취업자가 46개월 연속 감소해 ‘총량 회복–청년 약화’라는 노동시장 이중구조가 고착되는 신호가 나타났다. 산업·에너지에서는 한국전력과 Petrovietnam이 베트남 원전 협의를 가속했고, 유럽은 러시아 가스 퇴출을 추진하는 가운데 저장률이 약 67%에 그쳐 중동발 LNG 충격이 겨울 에너지안보와 산업비용에 직접 연결될 위험이 커졌다.",
+  "items": [
+    {
+      "rank": 1,
+      "topicKey": "iran-us-maritime-war-brent100-20260910",
+      "priority": "CRITICAL",
+      "category": "국제정세·안보·에너지·해운·시장",
+      "trajectory": "확전 및 공급충격",
+      "timeHorizon": "즉시–4주",
+      "headline": "미·이란, 전쟁 이후 최대 규모 해상공격…Brent 100달러 돌파로 ‘군사위험→물가충격’ 전환",
+      "signal": "전일 사우디 에너지시설 피격에 이어 9월 9일에는 미국이 이란 유조선 5척을 격침하고 이란이 호르무즈 인근 선박 10척을 공격하면서 해상전이 질적으로 확대됐다. Brent가 100달러를 넘어 지정학 리스크가 실제 가격·재고 충격으로 전환됐다.",
+      "fact": "Reuters에 따르면 이란은 미국의 이란 유조선 5척 격침에 대응해 호르무즈 인근 선박 10척을 공격했고, 최소 선원 1명이 사망하고 1명이 실종됐다. 이란은 요르단의 미군기지에도 탄도미사일을 발사했다. Brent는 9월 9일 배럴당 101.21달러에 마감했다. 미국 EIA는 중동 생산차질과 재고감소를 이유로 유가 전망을 상향했고, 올해 글로벌 원유재고 감소가 약 4억 배럴에 이를 것으로 보고 있다.",
+      "assessment": "이제 핵심 변수는 ‘호르무즈가 봉쇄되는가’가 아니라 실제 상선 손실, 보험료, 재고 감소와 정유제품 가격이 얼마나 장기간 누적되는가다. 전쟁 위험이 금융시장과 생활물가에 내재화되는 단계다.",
+      "impact": "한국·일본·인도 등 에너지 수입국의 원유도입단가, 항공·물류비, 석유화학·정유 원가, 기대인플레이션과 장기금리에 동시 압력이 커질 수 있다.",
+      "secondOrder": "유가가 100달러 이상에서 장기화되면 중앙은행의 완화 여력이 줄고 정부의 유류세·보조금 부담이 커진다. 기업은 재고 확대와 장기운송계약에 자금을 묶게 되어 운전자본과 신용수요가 증가할 수 있다.",
+      "indicators": [
+        "호르무즈 일일 선박 통항량",
+        "Brent 100달러 이상 지속기간",
+        "전쟁위험 보험료·VLCC 운임",
+        "EIA/OPEC 글로벌 재고 추정치"
+      ],
+      "uncertainty": "이란의 공격 대상과 피해규모 일부는 교전 당사자 발표에 의존하며, 호르무즈 통항이 얼마나 장기간 위축될지는 불확실하다.",
+      "nexusAction": "중동 리스크를 군사뉴스가 아니라 원유재고–운임–보험–정유제품–기대인플레이션으로 이어지는 전이경로로 일일 추적한다.",
+      "confidence": "높음",
+      "materialChange": true,
+      "changeReason": "9월 9일판의 사우디 에너지시설 피격에서 하루 만에 미·이란 직접 해상공격이 전쟁 이후 최대 규모로 확대되고 Brent가 100달러를 넘는 가격 변곡점이 발생했다.",
+      "sources": [
+        {
+          "label": "Reuters · Iran and US hit tankers in biggest shipping attack wave (2026-09-09)",
+          "url": "https://www.reuters.com/world/middle-east/iran-attacks-us-base-jordan-ships-near-hormuz-after-tankers-sunk-2026-09-09/"
+        },
+        {
+          "label": "U.S. EIA · Short-Term Energy Outlook (2026-09-09 update context)",
+          "url": "https://www.eia.gov/outlooks/steo/"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "topicKey": "iran-iaea-unsc-referral-20260910",
+      "priority": "CRITICAL",
+      "category": "국제법·비확산·외교·안보",
+      "trajectory": "제도적 압박 강화",
+      "timeHorizon": "즉시–6개월",
+      "headline": "IAEA, 이란을 20년 만에 유엔 안보리 회부…군사충돌과 핵 비확산 절차 결합",
+      "signal": "중동 군사충돌과 별개로 이란 핵문제가 다시 유엔 안전보장이사회 단계로 이동했다. 이는 외교적 복구 경로를 좁히고 군사·제재·검증 이슈를 하나의 위기로 묶는 변화다.",
+      "fact": "AP와 Reuters에 따르면 IAEA 35개국 이사회는 9월 9일 이란의 안전조치 의무 불이행과 미신고 장소의 우라늄 흔적 조사 비협조를 이유로 이란을 유엔 안전보장이사회에 회부하는 결의안을 통과시켰다. 23개국이 찬성했고 중국·러시아·니제르가 반대했으며 8개국은 기권했다. IAEA 추정상 이란은 60% 농축우라늄 440.9kg을 보유한 것으로 평가돼 왔다.",
+      "assessment": "안보리에서 러시아·중국의 거부권 때문에 즉각적 추가제재가 자동 발생하는 것은 아니지만, 핵 검증 실패가 국제법적·외교적 분쟁의 공식 축으로 복귀했다는 점이 중요하다.",
+      "impact": "향후 대이란 제재, 보험·금융거래, 핵시설 검증, 휴전협상 조건이 서로 연계될 가능성이 높아진다. 걸프 국가와 유럽의 외교 부담도 증가한다.",
+      "secondOrder": "군사협상과 핵 검증협상이 분리되지 못하면 휴전이 성립해도 경제제재가 장기간 유지될 수 있고, 반대로 핵 사찰 복원이 부분적 긴장완화의 선행조건으로 부상할 수 있다.",
+      "indicators": [
+        "유엔 안보리 공식 논의 일정",
+        "IAEA 사찰단의 이란 핵시설 접근 여부",
+        "60% 농축우라늄 재고 검증",
+        "미·E3 추가 제재 또는 협상 제안"
+      ],
+      "uncertainty": "안보리의 실질 조치는 상임이사국 대립으로 제한될 가능성이 높고, 전쟁 상황에서 사찰 접근 재개 시점도 불확실하다.",
+      "nexusAction": "이란 사안을 ‘전쟁’과 ‘핵협상’으로 분리 저장하지 않고 안보리–IAEA–제재–해상전의 연계 구조로 추적한다.",
+      "confidence": "높음",
+      "materialChange": false,
+      "sources": [
+        {
+          "label": "AP · IAEA board reports Iran to UN Security Council (2026-09-09)",
+          "url": "https://apnews.com/article/607ecdffcd8ef88ddf8f33041e86b720"
+        },
+        {
+          "label": "Reuters · IAEA board resolution / Iran non-compliance (2026-09-09)",
+          "url": "https://www.reuters.com/world/europe/us-allies-want-iaea-board-report-iran-un-security-council-diplomats-say-2026-09-04/"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "topicKey": "dprk-yongbyon-kangson-enrichment-expansion-20260910",
+      "priority": "CRITICAL",
+      "category": "한반도·안보·핵비확산",
+      "trajectory": "핵물질 생산능력 확대",
+      "timeHorizon": "1–24개월",
+      "headline": "북한, 영변 제2 우라늄농축시설 구축·강선 확장시설 가동…핵물질 생산기반 자체 확대",
+      "signal": "9월 8일의 구축함·해상핵전력 신호와 달리 이번에는 핵탄두의 원료가 되는 농축우라늄 생산능력 자체의 구조적 확장이 확인됐다.",
+      "fact": "IAEA 보고를 인용한 Reuters에 따르면 북한은 영변에 최대 28개 원심분리기 캐스케이드를 수용할 수 있는 2층 규모의 두 번째 우라늄농축시설을 건설했고, 평양 인근 강선의 확장시설도 올해 1월부터 가동한 징후가 있다. IAEA는 2009년 이후 현장사찰 없이 위성영상과 북한 공개사진을 교차분석해 판단했다.",
+      "assessment": "북한의 핵위협이 운반수단 다변화뿐 아니라 핵물질 생산능력 확대라는 공급 측면에서도 강화되고 있다. 이는 핵탄두 수량 확대와 예비비축 증가의 기반이 될 수 있다.",
+      "impact": "한국·미국·일본의 확장억제·미사일방어·정보감시 부담이 커지고, 향후 비핵화 협상이 재개돼도 동결·신고·검증 대상 시설 수가 늘어나 협상 복잡성이 증가한다.",
+      "secondOrder": "농축시설의 분산과 확대는 향후 군비통제 협상에서 ‘완전 폐기’보다 생산동결·상한·검증 같은 단계적 접근의 필요성을 키울 수 있다.",
+      "indicators": [
+        "영변·강선 위성영상상의 가동징후",
+        "원심분리기 설치 규모 추정",
+        "핵실험장·탄두 생산시설 활동",
+        "한미 확장억제협의체의 대응 변화"
+      ],
+      "uncertainty": "시설의 실제 원심분리기 수, 성능, 농축도와 가동률은 현장사찰 부재로 확인되지 않았다.",
+      "nexusAction": "북한 핵능력을 운반수단·핵물질·탄두화·지휘통제의 4개 축으로 분리해 추적하고 상호 결합 정도를 평가한다.",
+      "confidence": "높음",
+      "materialChange": false,
+      "sources": [
+        {
+          "label": "Reuters · North Korea builds new Yongbyon uranium enrichment facility (2026-09-09)",
+          "url": "https://www.reuters.com/world/asia-pacific/north-korea-builds-new-yongbyon-uranium-enrichment-facility-iaea-says-2026-09-09/"
+        },
+        {
+          "label": "Seoul Economic Daily · IAEA: Yongbyon and Kangson enrichment expansion (2026-09-09)",
+          "url": "https://en.sedaily.com/politics/2026/09/09/north-korea-expands-uranium-enrichment-at-yongbyon-and"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "topicKey": "korea-youth-employment-dual-labor-market-20260910",
+      "priority": "HIGH",
+      "category": "국내 사회동향·청년·고용·소득·지역",
+      "trajectory": "구조적 약화 지속",
+      "timeHorizon": "6개월–5년",
+      "headline": "전체 고용은 회복됐지만 청년 취업자는 46개월 연속 감소…‘총량 회복–청년 약화’ 이중구조 고착",
+      "signal": "8월 전체 취업자는 18만4천명 증가했지만 청년 취업자는 14만3천명 감소했다. 청년 고용률은 28개월 연속 하락해 전체 노동시장 지표와 청년 체감고용이 반대 방향으로 움직이는 구조가 장기화되고 있다.",
+      "fact": "국가데이터처 8월 고용동향을 인용한 연합뉴스와 복수 국내 보도에 따르면 전체 취업자는 전년동월 대비 18만4천명 증가했지만 15~29세 청년 취업자는 14만3천명 감소해 46개월 연속 줄었다. 청년 고용률은 44.1%로 1.0%포인트 하락해 28개월 연속 하락했고, 청년 실업률은 5.4%로 0.5%포인트 상승했다. 보건·사회복지서비스 취업자는 18만6천명 증가한 반면 제조업은 3만8천명 감소했다.",
+      "assessment": "한국 고용의 총량 회복이 고령층·돌봄·사회서비스 중심으로 나타나는 반면 청년이 많이 진입하는 제조·정보통신·숙박음식 등에서는 기회가 줄고 있다. 문제는 경기순환보다 산업·연령별 고용구조의 미스매치다.",
+      "impact": "청년의 초임·경력형성 지연, 결혼·출산·주거독립 지연, 공공부문·자격시험 쏠림, 수도권 취업집중이 강화될 수 있다. 기업에는 중장기 숙련인력 파이프라인 약화가 나타날 수 있다.",
+      "secondOrder": "청년층이 ‘쉬었음’에서 교육·구직으로 일부 이동해도 실제 양질의 일자리 전환이 뒤따르지 않으면 실업률이 먼저 상승하고 체감경기·소비가 약화될 수 있다. 지역에서는 청년 유출과 지역기업 구인난이 동시에 심화되는 역설이 지속될 수 있다.",
+      "indicators": [
+        "15~29세 취업자 증감",
+        "청년 고용률·경제활동참가율",
+        "제조·정보통신업 20대 신규채용",
+        "청년 ‘쉬었음’·직업훈련·구직 전환율"
+      ],
+      "uncertainty": "학업·시험준비 등 인구구성 변화가 일부 지표에 영향을 주며, 정부의 청년 일자리 회복사업 효과는 아직 평가하기 이르다.",
+      "nexusAction": "국내 사회동향에서 전체 취업자 수보다 연령×산업×지역별 신규진입 일자리와 청년의 교육–구직–취업 전환율을 핵심 선행지표로 추적한다.",
+      "confidence": "높음",
+      "materialChange": false,
+      "sources": [
+        {
+          "label": "Yonhap · S. Korea adds 184,000 jobs in Aug., youth conditions weak (2026-09-09)",
+          "url": "https://en.yna.co.kr/view/AEN20260909001553320"
+        },
+        {
+          "label": "MoneyToday · Youth employed population declines for 46th consecutive month (2026-09-09)",
+          "url": "https://www.mt.co.kr/en/economy/2026/09/09/2026090908434262067"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "topicKey": "korea-vietnam-nuclear-export-petrovietnam-kepco-20260910",
+      "priority": "HIGH",
+      "category": "산업·에너지·통상·원전·수출",
+      "trajectory": "사업화 협의 가속",
+      "timeHorizon": "1–10년",
+      "headline": "Petrovietnam–KEPCO 원전 협의 가속…한국형 원전의 동남아 사업화 경쟁 본격화",
+      "signal": "베트남의 원전 재도입이 정책검토를 넘어 사업자·금융·기술협력 단계로 이동하면서 한국전력의 실제 수주 가능성이 커지고 있다.",
+      "fact": "Petrovietnam은 9월 8일 서울에서 KEPCO와 원전 협력 이행방안을 논의하고 협의를 가속하기로 했다고 공식 발표했다. Reuters도 양측이 베트남 최초 원전 프로젝트 가운데 하나의 건설 가능성에 대한 협의를 강화했다고 보도했다. 앞서 한국 수출입은행·무역보험공사·KEPCO·Petrovietnam은 4월 금융모델과 지원방안을 검토하는 협력체계를 구축했다.",
+      "assessment": "원전 수출경쟁은 원자로 기술만이 아니라 정부 간 외교, 장기금융, 연료·정비, 현지 인력양성을 묶는 패키지 경쟁으로 이동하고 있다.",
+      "impact": "한국에는 원전 EPC·기자재·금융·운영정비 수출기회가 확대될 수 있고, 베트남에는 급증하는 전력수요와 석탄의존을 완화하는 기저전원 옵션이 된다.",
+      "secondOrder": "베트남 원전사업이 한국·러시아 등 복수 공급국 경쟁 구조로 진행될 경우 수출금융 조건과 현지화 비율이 수주를 좌우할 가능성이 크며, 동남아 다른 국가의 원전 재검토에도 기준사례가 될 수 있다.",
+      "indicators": [
+        "베트남 Ninh Thuan 프로젝트 사업자 선정",
+        "한국 수출금융 패키지 규모",
+        "부지·규제·인허가 일정",
+        "현지 기자재·인력 현지화 조건"
+      ],
+      "uncertainty": "기술·금융·사업자 선정의 세부조건과 최종 발주 일정은 공개되지 않았고 러시아 등 경쟁 공급국 변수도 남아 있다.",
+      "nexusAction": "원전 수출을 단일 수주뉴스가 아니라 정부외교–금융–연료–EPC–O&M의 패키지 가치사슬로 추적한다.",
+      "confidence": "높음",
+      "materialChange": false,
+      "sources": [
+        {
+          "label": "Petrovietnam · Petrovietnam and KEPCO accelerate nuclear cooperation (2026-09-08)",
+          "url": "https://www.pvn.vn/petrovietnam-va-kepco-tang-toc-thuc-day-hop-tac-nghien-cuu-phat-trien-dien-hat-nhan-35254"
+        },
+        {
+          "label": "Reuters · Petrovietnam, KEPCO step up talks on nuclear power project (2026-09-09)",
+          "url": "https://www.reuters.com/business/energy/petrovietnam-kepco-step-up-talks-nuclear-power-project-2026-09-09/"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "topicKey": "eu-gas-storage-russian-exit-winter-risk-20260910",
+      "priority": "HIGH",
+      "category": "유럽·에너지·경제·산업·정책",
+      "trajectory": "겨울 공급비용 리스크 확대",
+      "timeHorizon": "1–6개월",
+      "headline": "EU 가스저장률 약 67%…러시아 에너지 퇴출과 중동 LNG 충격이 겨울 비용위험으로 결합",
+      "signal": "유럽은 법적으로 러시아 가스 퇴출을 진행 중이지만 9월 초 저장률이 과거보다 낮고 중동발 LNG 공급위험까지 겹쳐 ‘공급독립’과 ‘가격안정’ 사이의 긴장이 커지고 있다.",
+      "fact": "Gas Infrastructure Europe에 따르면 9월 8일 EU 가스저장률은 67.12%였고 독일은 54.75%, 네덜란드는 50.39%였다. Reuters는 유럽 가스가격이 최근 메가와트시당 75유로 수준까지 상승했고 EU의 러시아 가스 의존 축소가 충분한 투자와 대체공급 확보로 뒷받침되지 못하고 있다는 감사 지적을 전했다. EU는 러시아 가스의 단계적 수입금지를 법제화해 2026~2027년 전면 퇴출을 추진 중이다.",
+      "assessment": "즉각적인 물리적 가스 부족보다 높은 조달가격이 산업경쟁력·재정지원·전력가격을 압박할 위험이 더 크다. 중동 위기가 지속되면 유럽의 탈러시아 전략 비용이 예상보다 크게 상승할 수 있다.",
+      "impact": "화학·비료·철강·유리 등 가스집약 산업의 원가와 유럽 전력가격, 가계 난방비와 정부 보조금 부담이 증가할 수 있다.",
+      "secondOrder": "높은 에너지가격이 장기화되면 유럽 제조업의 투자 해외이전과 탈탄소 투자 지연이 동시에 발생할 수 있고, 러시아산 에너지 재도입을 둘러싼 정치적 논쟁이 다시 커질 수 있다.",
+      "indicators": [
+        "EU·독일·네덜란드 저장률",
+        "TTF 가스가격",
+        "중동 LNG 수출량·유럽 도착물량",
+        "에너지집약 산업 생산지수"
+      ],
+      "uncertainty": "겨울 기온, 미국 LNG 증산, 아시아 수요, 중동 운송 정상화 여부에 따라 실제 부족과 가격경로는 크게 달라질 수 있다.",
+      "nexusAction": "유럽 에너지안보를 저장률뿐 아니라 LNG 조달가격–산업생산–재정보조–러시아 퇴출 일정의 결합지표로 추적한다.",
+      "confidence": "높음",
+      "materialChange": false,
+      "sources": [
+        {
+          "label": "Gas Infrastructure Europe · AGSI storage status (2026-09-08)",
+          "url": "https://www.gie.eu/"
+        },
+        {
+          "label": "Reuters · EU Russian energy exit faltering, auditors say (2026-09-09)",
+          "url": "https://www.reuters.com/business/energy/eus-russian-energy-exit-faltering-auditors-say-2026-09-09/"
+        }
+      ]
+    }
+  ],
+  "strategicWatchlist": [
+    "호르무즈 상선공격·Brent 100달러 이상 지속기간과 글로벌 원유재고",
+    "IAEA–유엔 안보리의 이란 핵문제 후속절차와 사찰 재개",
+    "영변·강선 농축시설의 실제 가동징후와 북한 핵물질 생산 확대",
+    "한국 청년고용률·청년 취업자 감소폭과 제조·정보통신 신규채용",
+    "베트남 원전 사업자 선정·한국 수출금융 패키지",
+    "EU 가스저장률·TTF 가격과 겨울 전 에너지집약 산업 생산"
+  ],
+  "outlook": "향후 1~4주는 중동발 에너지 충격이 가장 광범위한 공통 변수다. 해상공격이 반복되고 Brent가 100달러 이상에서 고착되면 미국·유럽·아시아의 금리경로와 물가정책이 동시에 제약될 수 있다. 핵안보에서는 이란의 안보리 회부와 북한의 농축시설 확대가 서로 다른 지역에서 비확산체제의 검증력을 시험한다. 한국에서는 전체 고용 회복에도 청년층 신규진입이 계속 약하면 청년 일자리 문제는 경기대응이 아니라 산업·지역·교육을 결합한 구조정책으로 전환될 가능성이 크다. 에너지산업에서는 베트남 원전이 한국의 수출 패키지 경쟁력을 시험하는 사례가 되고, 유럽은 겨울 전 가스비축과 러시아 에너지 퇴출을 동시에 달성해야 하는 비용 압력에 직면할 전망이다.",
+  "domesticSocialScan": {
+    "status": "checked",
+    "selectedSignal": "korea-youth-employment-dual-labor-market-20260910",
+    "note": "포털·언론 신호는 후보 탐지에만 사용하고 국가데이터처 8월 고용동향을 인용한 연합뉴스와 복수 독립보도로 재확인했다. 전체 취업자 증가보다 청년 취업자의 46개월 연속 감소, 연령·산업별 신규진입 일자리의 구조적 약화를 핵심 사회변화 신호로 선정했다."
+  }
+}
