@@ -21,7 +21,7 @@
       "platform": "유페이퍼",
       "title": "사람으로 오신 YHWH, 다시 오실 예슈아",
       "description": "이스라엘 언약의 성취와 부활·성도 집결·천년 왕국을 하나의 흐름으로 연결하여 예슈아의 재림과 언약 성취를 살펴보는 신앙 연구 전자책입니다.",
-      "bibliography": "ISBN 979-11-444-1317-7 · 유페이퍼 · 교보문고·알라딘 상용 유통",
+      "bibliography": "ISBN 979-11-444-1317-7 · 유페이퍼 · 교보문고·알라딘·YES24 상용 유통",
       "url": "https://yehavha.upaper.kr/content/1221622",
       "actionLabel": "유페이퍼에서 보기",
       "detailEnabled": true,
@@ -51,6 +51,10 @@
           "label": "교보문고에서 보기"
         },
         {
+          "url": "https://m.yes24.com/Goods/Detail/196182974?pid=181055&NaPm=ct%3Dmttvf9c8%7Cci%3Df09d9a944eb3480d27374776fb6357b9ce7f6965%7Ctr%3Dboknx%7Csn%3D187110%7Chk%3D51596eac35474e1bb80d432d88df6954f99f6d0c",
+          "label": "YES24에서 보기"
+        },
+        {
           "url": "https://www.aladin.co.kr/m/mproduct.aspx?ISBN=E012639508&start=pmnavereboo",
           "label": "알라딘에서 보기"
         }
@@ -61,22 +65,32 @@
       "platform": "유페이퍼",
       "title": "사해사본이 밝혀낸 예슈아 시대의 성경과 메시아 기대",
       "description": "사해사본의 본문 다원성과 4Q521·11Q13의 종말론 자료를 중심으로 예슈아 시대의 성경 전승과 메시아 기대를 검토한 전자책입니다.",
-      "bibliography": "ISBN 979-11-444-0579-0 · 유페이퍼",
+      "bibliography": "ISBN 979-11-444-0579-0 · 유페이퍼 · 교보문고·YES24 상용 유통",
       "url": "https://yehavha.upaper.kr/content/1222579",
-      "actionLabel": "유페이퍼에서 보기"
+      "actionLabel": "유페이퍼에서 보기",
+      "additionalLinks": [
+        {
+          "url": "https://ebook-product.kyobobook.co.kr/dig/epd/sam/E000013560000",
+          "label": "교보문고에서 보기"
+        }
+      ]
     },
     {
       "id": "upaper-john-god-incarnate-recognition",
       "platform": "유페이퍼",
       "title": "하나님이 사람으로 오셨을 때 왜 알아보지 못했는가",
       "description": "요한복음에 나타난 성육신과 하나님의 자기계시, 표적, 불신, 십자가의 구조와 의미를 살펴보는 전자책입니다.",
-      "bibliography": "ISBN 979-11-444-0593-6 · 유페이퍼 · YES24 상용 유통",
+      "bibliography": "ISBN 979-11-444-0593-6 · 유페이퍼 · YES24·교보문고 상용 유통",
       "url": "https://yehavha.upaper.kr/content/1222444",
       "actionLabel": "유페이퍼에서 보기",
       "additionalLinks": [
         {
           "url": "https://m.yes24.com/goods/detail/195767587",
           "label": "YES24에서 보기"
+        },
+        {
+          "url": "https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000013559925",
+          "label": "교보문고에서 보기"
         }
       ]
     },
