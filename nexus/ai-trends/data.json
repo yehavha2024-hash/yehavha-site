@@ -922,13 +922,13 @@
     "sourceCount": 7,
     "deduplication": "normalized URL + normalized title",
     "lookbackDays": 3,
-    "lastSuccessfulUpdateAt": "2026-09-10T16:24:05.913Z",
-    "lastAddedCount": 18,
+    "lastSuccessfulUpdateAt": "2026-09-10T20:52:21.149Z",
+    "lastAddedCount": 16,
     "relevanceFilter": "source-specific strict filter",
     "lastCleanupCount": 0,
     "publicLanguage": "ko",
     "localizationPolicy": "한국어 제목·요약이 완료된 자동수집 항목만 공개",
     "lastLocalizedCount": 3,
-    "lastWithheldUnlocalizedCount": 18
+    "lastWithheldUnlocalizedCount": 16
   }
 }
