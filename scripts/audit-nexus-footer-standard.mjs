@@ -1,25 +1,37 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const ROOT = 'nexus';
-const BUSINESS = '스카이예슈아 · 사업자등록번호 536-38-01234 · 통신판매번호 : 2025-서울서초-2352 · 대표 이명훈';
-const RESEARCH = '국가연구자번호 13169680 · ISNI 0000000513760591 · ORCID 0009-0000-6095-8067';
-const BUSINESS_SPLIT = '스카이예슈아 · 사업자등록번호 536-38-01234<br/>통신판매번호 : 2025-서울서초-2352 · 대표 이명훈';
-const RESEARCH_SPLIT = '국가연구자번호 13169680 · ISNI 0000000513760591<br/>ORCID 0009-0000-6095-8067';
-const SPLIT_FOOTER_PAGES = new Set([
-  'nexus/index.html',
-  'nexus/articles/index.html',
-  'nexus/articles/article.html',
-  'nexus/intelligence-briefing/index.html'
-]);
-const COPYRIGHT = 'Copyright © 이명훈 2026. All rights reserved.';
-const PORTAL = 'nexus/portal-v2.css';
-const COMPACT = 'nexus/layer-compact.css';
-const UNIVERSITY = 'nexus/university/university.css';
-let errors = 0;
-let checked = 0;
+const ROOTS = [
+  'nexus',
+  'ai-law-tech-foresight',
+  'legal-philosophy',
+  'legal-knowledge',
+  'three-minute-break',
+  'toeic-human-100'
+];
 
-const norm = p => p.split(path.sep).join('/');
+const STANDARD = Object.freeze({
+  business: [
+    '스카이예슈아 · 사업자등록번호 536-38-01234',
+    '통신판매번호 : 2025-서울서초-2352 · 대표 이명훈'
+  ],
+  research: [
+    '국가연구자번호 13169680 · ISNI 0000000513760591',
+    'ORCID 0009-0000-6095-8067'
+  ],
+  copyright: 'Copyright © 이명훈 2026. All rights reserved.'
+});
+
+const SOURCE_EXTENSIONS = new Set(['.html', '.htm', '.js', '.mjs', '.cjs', '.ts', '.tsx', '.jsx']);
+const META_ANCHORS = ['사업자등록번호', '통신판매번호', '국가연구자번호', 'ISNI', 'ORCID'];
+const TEMP_FOOTER_FILE = /(?:footer[-_.]?(?:fix|override|patch|hotfix)|(?:fix|override|patch|hotfix)[-_.]?footer)/i;
+
+let errors = 0;
+let checkedFooters = 0;
+let checkedProducers = 0;
+let checkedFooterCss = 0;
+
+const norm = file => file.split(path.sep).join('/');
 const fail = (file, message) => {
   errors += 1;
   console.error(`ERROR ${file}: ${message}`);
@@ -36,141 +48,125 @@ function walk(dir, predicate, out = []) {
   return out;
 }
 
-function footerBlocks(html) {
-  return [...html.matchAll(/<footer\b[^>]*>[\s\S]*?<\/footer>/gi)].map(m => m[0]);
+function decodeEntities(text) {
+  return text
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&middot;/gi, '·')
+    .replace(/&copy;/gi, '©')
+    .replace(/&amp;/gi, '&');
 }
 
-function stripComments(css) {
-  return css.replace(/\/\*[\s\S]*?\*\//g, '');
+function visibleLines(fragment) {
+  return decodeEntities(fragment)
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/p\s*>|<\/div\s*>|<\/li\s*>/gi, '\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\\n/g, '\n')
+    .split(/\r?\n/)
+    .map(line => line.replace(/[\t ]+/g, ' ').trim())
+    .filter(Boolean);
 }
 
-function plainText(html) {
-  return html
-    .replace(/<br\s*\/?>/gi, ' · ')
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
+function footerBlocks(source) {
+  return [...source.matchAll(/<footer\b[^>]*>[\s\S]*?<\/footer>/gi)].map(match => match[0]);
 }
 
-function hasClassedParagraph(footer, className, text) {
-  const escapedClass = className.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const match = footer.match(new RegExp(`<p\\b[^>]*class=["'][^"']*\\b${escapedClass}\\b[^"']*["'][^>]*>([\\s\\S]*?)<\\/p>`, 'i'));
-  return Boolean(match && plainText(match[1]) === text);
+function classBody(footer, className) {
+  const escaped = className.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const match = footer.match(new RegExp(`<p\\b[^>]*class=["'][^"']*\\b${escaped}\\b[^"']*["'][^>]*>([\\s\\S]*?)<\\/p>`, 'i'));
+  return match ? match[1] : null;
 }
 
-for (const file of walk(ROOT, f => f.endsWith('.html'))) {
-  const html = fs.readFileSync(file, 'utf8');
-  if (/data-footer-standard=["']v1["']/i.test(html)) fail(file, '구형 Footer 표준 v1이 남아 있음');
+function sameLines(actual, expected) {
+  return actual.length === expected.length && actual.every((line, index) => line === expected[index]);
+}
 
-  const blocks = footerBlocks(html);
-  if (!blocks.length && !html.includes('Copyright ©')) continue;
+function assertStaticFooter(file, footer) {
+  checkedFooters += 1;
+  if (!/data-footer-standard=["']v2["']/i.test(footer)) fail(file, 'Footer 표준 버전 v2 누락');
+  if (/ORCID\s+ID\b/i.test(footer)) fail(file, '구형 ORCID ID 표기가 남아 있음');
 
-  for (const footer of blocks) {
-    if (!footer.includes('Copyright ©') && !/data-footer-standard=/i.test(footer)) continue;
-    checked += 1;
-    const footerText = plainText(footer);
-    if (!/data-footer-standard=["']v2["']/i.test(footer)) fail(file, 'Footer 표준 버전 v2 누락');
-    if (!footerText.includes(BUSINESS)) fail(file, '사업자등록 정보 누락');
-    if (!footerText.includes(RESEARCH)) fail(file, 'NEXUS 메인 연구자 식별자 표준 불일치');
-    if (/ORCID\s+ID\b/i.test(footer)) fail(file, '구형 ORCID ID 표기가 남아 있음');
-    if (!hasClassedParagraph(footer, 'business-meta', BUSINESS)) fail(file, '사업자정보 business-meta 클래스 누락 또는 내용 불일치');
-    if (!hasClassedParagraph(footer, 'research-identifiers', RESEARCH)) fail(file, '연구자 식별자 research-identifiers 클래스 누락 또는 내용 불일치');
-    if (!hasClassedParagraph(footer, 'copyright', COPYRIGHT)) fail(file, 'Copyright copyright 클래스 누락');
-    if (!/<p\b[^>]*class=["'][^"']*\bcontact\b[^"']*["'][^>]*>[\s\S]*?문의\s*<a[^>]+href=["']mailto:kimbrighth@gmail\.com["']/is.test(footer)) fail(file, '문의 contact 클래스 또는 표준 mailto 누락');
-    if (!footer.includes(COPYRIGHT)) fail(file, '표준 Copyright 문구 불일치');
-    if (!footer.includes('AI 활용 안내')) fail(file, 'AI 활용 안내 누락');
-    if (!/href=["']#top["']/i.test(footer) || !footer.includes('맨 위로 이동')) fail(file, '표준 맨 위로 이동 링크 누락');
+  const business = classBody(footer, 'business-meta');
+  const research = classBody(footer, 'research-identifiers');
+  if (business === null) fail(file, 'business-meta 클래스가 없음');
+  else if (!sameLines(visibleLines(business), STANDARD.business)) fail(file, '사업자정보는 사업자등록번호 다음 줄에 통신판매번호·대표가 오는 고정 2행이어야 함');
+  if (research === null) fail(file, 'research-identifiers 클래스가 없음');
+  else if (!sameLines(visibleLines(research), STANDARD.research)) fail(file, '연구자정보는 국가연구자번호·ISNI 다음 줄에 ORCID가 오는 고정 2행이어야 함');
 
-    if (SPLIT_FOOTER_PAGES.has(file)) {
-      if (!footer.includes(BUSINESS_SPLIT)) fail(file, '사업자정보 고정 2행 배열이 적용되지 않음');
-      if (!footer.includes(RESEARCH_SPLIT)) fail(file, '연구자 식별자 고정 2행 배열이 적용되지 않음');
+  const copyright = classBody(footer, 'copyright');
+  if (copyright === null || visibleLines(copyright).join(' ') !== STANDARD.copyright) fail(file, 'Copyright copyright 클래스 또는 표준 문구 불일치');
+  if (!/<p\b[^>]*class=["'][^"']*\bcontact\b[^"']*["'][^>]*>[\s\S]*?문의\s*<a[^>]+href=["']mailto:kimbrighth@gmail\.com["']/is.test(footer)) fail(file, '문의 contact 클래스 또는 표준 mailto 누락');
+  if (!footer.includes('AI 활용 안내')) fail(file, 'AI 활용 안내 누락');
+  if (!/href=["']#top["']/i.test(footer) || !footer.includes('맨 위로 이동')) fail(file, '표준 맨 위로 이동 링크 누락');
+  if (/<a\b[^>]*href=["']#top["'][^>]*onclick=/i.test(footer)) fail(file, '맨 위로 이동이 인라인 JavaScript 보정에 의존함');
+
+  const text = visibleLines(footer).join('\n');
+  const positions = [
+    text.indexOf(STANDARD.business[0]),
+    text.indexOf(STANDARD.business[1]),
+    text.indexOf(STANDARD.research[0]),
+    text.indexOf(STANDARD.research[1]),
+    text.indexOf(STANDARD.copyright),
+    text.indexOf('kimbrighth@gmail.com'),
+    text.indexOf('AI 활용 안내'),
+    text.indexOf('맨 위로 이동')
+  ];
+  if (positions.some(position => position < 0) || positions.some((position, index) => index > 0 && position <= positions[index - 1])) {
+    fail(file, 'Footer DOM 순서가 사업자 2행 → 연구자 2행 → Copyright → 문의 → AI 안내 → 맨 위로 이동 순서가 아님');
+  }
+}
+
+function assertDynamicProducer(file, source) {
+  if (!META_ANCHORS.some(anchor => source.includes(anchor))) return;
+  if (file.endsWith('.html') && footerBlocks(source).length) return;
+  checkedProducers += 1;
+
+  for (const line of [...STANDARD.business, ...STANDARD.research]) {
+    if (!source.includes(line)) fail(file, `동적 Footer/템플릿의 표준 메타데이터 누락: ${line}`);
+  }
+
+  const oldBusiness = `${STANDARD.business[0]} · ${STANDARD.business[1]}`;
+  const oldResearch = `${STANDARD.research[0]} · ${STANDARD.research[1]}`;
+  if (source.includes(oldBusiness)) fail(file, '동적 Footer/템플릿에 사업자정보 단일행 생성이 남아 있음');
+  if (source.includes(oldResearch)) fail(file, '동적 Footer/템플릿에 연구자정보 단일행 생성이 남아 있음');
+}
+
+function assertFooterCss(file, css) {
+  const clean = css.replace(/\/\*[\s\S]*?\*\//g, '');
+  const rules = [...clean.matchAll(/([^{}]*footer[^{}]*)\{([^{}]*)\}/gi)];
+  if (!rules.length) return;
+  checkedFooterCss += 1;
+
+  if (TEMP_FOOTER_FILE.test(path.basename(file))) fail(file, 'Footer 임시 fix/override/patch/hotfix 파일이 남아 있음');
+  for (const [, selectorRaw, body] of rules) {
+    const selector = selectorRaw.trim();
+    if (/\border\s*:/i.test(body)) fail(file, `Footer CSS order 재배치 금지: ${selector}`);
+    if (/::(?:before|after)/i.test(selector) && /\bcontent\s*:/i.test(body)) fail(file, `Footer 메타데이터를 CSS content로 생성하면 안 됨: ${selector}`);
+    if (/white-space\s*:\s*nowrap/i.test(body) && !/(?:orcid|identifier)/i.test(selector)) {
+      fail(file, `Footer 전체/광범위 nowrap 금지; 식별자 단위로만 허용: ${selector}`);
     }
+  }
+}
 
-    const businessAt = footerText.indexOf(BUSINESS);
-    const researchAt = footerText.indexOf(RESEARCH);
-    const copyrightAt = footerText.indexOf(COPYRIGHT);
-    const contactAt = footerText.indexOf('kimbrighth@gmail.com');
-    const aiAt = footerText.indexOf('AI 활용 안내');
-    const topAt = footerText.indexOf('맨 위로 이동');
-    if (!(businessAt >= 0 && businessAt < researchAt && researchAt < copyrightAt && copyrightAt < contactAt && contactAt < aiAt && aiAt < topAt)) {
-      fail(file, 'HTML 원문 순서가 사업자정보 → 연구자 식별자 → Copyright → 문의 → AI 활용 안내 → 맨 위로 이동 순서가 아님');
+const sourceFiles = ROOTS.flatMap(root => walk(root, file => SOURCE_EXTENSIONS.has(path.extname(file).toLowerCase())));
+for (const file of sourceFiles) {
+  const source = fs.readFileSync(file, 'utf8');
+  if (/data-footer-standard=["']v1["']/i.test(source)) fail(file, '구형 Footer 표준 v1이 남아 있음');
+
+  const footers = footerBlocks(source);
+  if (file.endsWith('.html')) {
+    for (const footer of footers) {
+      if (footer.includes('Copyright ©') || /data-footer-standard=/i.test(footer)) assertStaticFooter(file, footer);
+    }
+    if (!footers.length && source.includes('Copyright ©') && META_ANCHORS.some(anchor => source.includes(anchor))) {
+      fail(file, 'Footer 메타데이터가 있으나 정적 footer 원문을 찾을 수 없음');
     }
   }
+  assertDynamicProducer(file, source);
 }
 
-if (!fs.existsSync(PORTAL)) fail(PORTAL, 'canonical portal CSS 없음');
-else {
-  const css = stripComments(fs.readFileSync(PORTAL, 'utf8'));
-  const footerStart = css.indexOf('.footer,.reader-site-footer,.research-footer');
-  const footerEnd = css.indexOf('.toast', footerStart);
-  const footerCss = footerStart >= 0 ? css.slice(footerStart, footerEnd >= 0 ? footerEnd : undefined) : '';
-  if (!footerCss) fail(PORTAL, 'canonical Footer 스타일 블록을 찾을 수 없음');
-  for (const token of [
-    '--nxs-footer-project:15px',
-    '--nxs-footer-description:13.5px',
-    '--nxs-footer-text:14px',
-    '--nxs-footer-ai:13.5px',
-    '--nxs-footer-link:13.5px'
-  ]) {
-    if (!css.includes(token)) fail(PORTAL, `NEXUS 메인 Footer 글자 규격 누락: ${token}`);
-  }
-  if (!/\.footer-card>strong[^}]*font-size:var\(--nxs-footer-project\)[^}]*font-weight:700/is.test(footerCss)) fail(PORTAL, 'Footer 프로젝트명 15px/700 규격 불일치');
-  if (!/\.footer-card>p[^}]*font-size:var\(--nxs-footer-description\)[^}]*line-height:1\.72/is.test(footerCss)) fail(PORTAL, 'Footer 설명 13.5px/1.72 규격 불일치');
-  if (!/\.footer-meta p[^}]*font-size:var\(--nxs-footer-text\)[^}]*line-height:1\.75/is.test(footerCss)) fail(PORTAL, 'Footer 메타 14px/1.75 규격 불일치');
-  if (!/\.footer-meta \.business-meta[^}]*font-weight:700/is.test(footerCss)) fail(PORTAL, 'Footer 사업자정보 700 굵기 규격 불일치');
-  if (!/\.footer-meta \.ai-disclosure[^}]*font-size:var\(--nxs-footer-ai\)[^}]*line-height:1\.75/is.test(footerCss)) fail(PORTAL, 'Footer AI 안내 13.5px/1.75 규격 불일치');
-  if (!/\.footer-meta>a[^}]*font-size:var\(--nxs-footer-link\)/is.test(footerCss)) fail(PORTAL, 'Footer 상단 이동 링크 13.5px 규격 불일치');
-  if (/\border\s*:/i.test(footerCss)) fail(PORTAL, 'Footer CSS에서 order 재배치 금지: HTML DOM 순서가 유일한 순서 원본이어야 함');
-  if (/nth-child\([^)]*\)[^{]*\{[^}]*\border\s*:/is.test(footerCss)) fail(PORTAL, 'nth-child 기반 Footer 순서 보정 금지');
-  if (/footer-meta::before[\s\S]{0,500}content\s*:/is.test(footerCss)) fail(PORTAL, '사업자정보를 CSS content로 생성하면 안 됨');
-}
-
-if (!fs.existsSync(COMPACT)) fail(COMPACT, 'compact canonical CSS 없음');
-else {
-  const css = stripComments(fs.readFileSync(COMPACT, 'utf8'));
-  if (/^\s*@import[^;]*portal-v2\.css/im.test(css)) fail(COMPACT, 'compact CSS가 portal-v2.css를 import하면 Footer 소유권이 중복됨');
-  const footerStart = css.indexOf('.footer{');
-  const footerCss = footerStart >= 0 ? css.slice(footerStart) : '';
-  for (const rule of [
-    /\.footer>strong[^}]*font-size:15px[^}]*font-weight:700[^}]*line-height:1\.5/is,
-    /\.footer-description[^}]*font-size:13\.5px[^}]*line-height:1\.72/is,
-    /\.footer-meta>p[^}]*font-size:14px[^}]*line-height:1\.75/is,
-    /\.footer-meta>\.business-meta[^}]*font-weight:700/is,
-    /\.footer \.ai-disclosure[^}]*font-size:13\.5px[^}]*line-height:1\.75/is,
-    /\.footer-meta>a[^}]*font-size:13\.5px[^}]*font-weight:700/is
-  ]) {
-    if (!rule.test(footerCss)) fail(COMPACT, 'compact Footer 글자·굵기·행간이 NEXUS 메인 규격과 다름');
-  }
-  if (/\border\s*:/i.test(footerCss)) fail(COMPACT, 'compact Footer CSS에 order 재배치가 남아 있음');
-  if (/footer-meta::before/i.test(footerCss)) fail(COMPACT, 'compact Footer가 사업자정보를 가상요소로 생성함');
-}
-
-if (!fs.existsSync(UNIVERSITY)) fail(UNIVERSITY, 'NEXUS UNIVERSITY Footer CSS 없음');
-else {
-  const css = stripComments(fs.readFileSync(UNIVERSITY, 'utf8'));
-  for (const rule of [
-    /\.university-footer>strong[^}]*font-size:15px[^}]*font-weight:700[^}]*line-height:1\.5/is,
-    /\.university-footer>\.footer-description[^}]*font-size:13\.5px[^}]*line-height:1\.72/is,
-    /\.university-footer-meta p[^}]*font-size:14px[^}]*line-height:1\.75/is,
-    /\.university-footer-meta \.business-meta[^}]*font-weight:700/is,
-    /\.university-footer-meta \.ai-disclosure[^}]*font-size:13\.5px[^}]*line-height:1\.75/is,
-    /\.university-footer-meta a[^}]*font-size:13\.5px[^}]*font-weight:700/is
-  ]) {
-    if (!rule.test(css)) fail(UNIVERSITY, 'NEXUS UNIVERSITY Footer 글자·굵기·행간이 NEXUS 메인 규격과 다름');
-  }
-}
-
-const universityIndex = 'nexus/university/index.html';
-if (fs.existsSync(universityIndex)) {
-  const html = fs.readFileSync(universityIndex, 'utf8');
-  if (/portal-v2\.css/i.test(html)) fail(universityIndex, 'NEXUS UNIVERSITY는 자체 university.css Footer를 사용하므로 portal-v2.css 중복 로드를 금지함');
-}
-
-for (const cssFile of walk(ROOT, f => f.endsWith('.css'))) {
-  const base = path.basename(cssFile);
-  if (/(?:footer[-_.]?(?:fix|override|patch|hotfix)|(?:fix|patch|hotfix)[-_.]?footer)/i.test(base)) {
-    fail(cssFile, 'Footer 임시 fix/override/patch/hotfix 파일이 저장소에 남아 있음');
-  }
+for (const file of ROOTS.flatMap(root => walk(root, candidate => candidate.endsWith('.css')))) {
+  assertFooterCss(file, fs.readFileSync(file, 'utf8'));
 }
 
 for (const stale of [
@@ -187,5 +183,5 @@ for (const stale of [
   if (fs.existsSync(stale)) fail(stale, '일회성 Footer 마이그레이션/감사 산출물이 다시 존재함');
 }
 
-console.log(`Nexus footer source audit: ${errors} error(s); standardized footers checked=${checked}`);
+console.log(`Global footer source audit: ${errors} error(s); static footers=${checkedFooters}; dynamic producers=${checkedProducers}; footer CSS files=${checkedFooterCss}`);
 if (errors) process.exit(1);
