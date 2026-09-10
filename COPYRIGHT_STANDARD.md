@@ -1,7 +1,7 @@
 # YEHAVHA Project Copyright Footer Standard
 
-Version: 3.1  
-Updated: 2026-09-06
+Version: 3.2  
+Updated: 2026-09-10
 
 모든 YEHAVHA 프로젝트와 Nexus 하위 결과물의 웹 하단 권리표기는 Nexus 메인의 중앙정렬 단일열 Footer를 기준으로 통일합니다. 프로젝트마다 좌측정렬·우측정렬·2열 Footer를 별도로 만들지 않습니다.
 
@@ -9,7 +9,7 @@ Updated: 2026-09-06
 
 1. 프로젝트명
 2. 프로젝트 영문명 또는 짧은 성격 설명
-3. `스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈`
+3. `스카이예슈아 · 사업자등록번호 536-38-01234 · 통신판매번호 2025-서울서초-2352 · 대표 이명훈`
 4. `국가연구자번호 13169680 · ISNI 0000000513760591 · ORCID 0009-0000-6095-8067`
 5. `Copyright © 이명훈 2026. All rights reserved.`
 6. `문의 kimbrighth@gmail.com`
@@ -24,7 +24,7 @@ Updated: 2026-09-06
 
 공개 Footer에 사용하는 사업자정보의 표준 문자열은 다음과 같습니다.
 
-`스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈`
+`스카이예슈아 · 사업자등록번호 536-38-01234 · 통신판매번호 2025-서울서초-2352 · 대표 이명훈`
 
 연구자 식별정보의 표준 문자열은 다음과 같습니다.
 
@@ -51,7 +51,7 @@ Nexus 내부 페이지와 독립 프로젝트를 구분하지 않고 위 메타�
     <p>프로젝트 영문명 또는 성격 설명</p>
   </div>
   <div class="footer-meta">
-    <p class="business-meta">스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈</p>
+    <p class="business-meta">스카이예슈아 · 사업자등록번호 536-38-01234 · 통신판매번호 2025-서울서초-2352 · 대표 이명훈</p>
     <p class="research-identifiers">국가연구자번호 13169680 · ISNI 0000000513760591 · ORCID 0009-0000-6095-8067</p>
     <p>Copyright © 이명훈 2026. All rights reserved.</p>
     <p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p>
