@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   sync:
-    if: github.event.head_commit.message == 'chore: start footer business number sync'
+    if: github.event.head_commit.message == 'footer sync trigger'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
