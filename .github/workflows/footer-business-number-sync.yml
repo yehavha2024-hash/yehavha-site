@@ -1,0 +1,88 @@
+name: Footer Business Number One-Time Sync
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/footer-business-number-sync.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: github.event.head_commit.message == 'chore: start footer business number sync'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - name: Replace footer business metadata in all HTML sources
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import path from 'node:path';
+
+          const OLD = '스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈';
+          const WRONG = '스카이예슈아 · 사업자등록번호 536-38-01234 · 통신판매업신고번호 제2024-대구중구-1234호 · 대표 이명훈';
+          const CORRECT = '스카이예슈아 · 사업자등록번호 536-38-01234 · 통신판매번호 2025-서울서초-2352 · 대표 이명훈';
+          const changed = [];
+
+          function walk(dir) {
+            for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+              if (entry.name === '.git' || entry.name === 'node_modules') continue;
+              const full = path.join(dir, entry.name);
+              if (entry.isDirectory()) walk(full);
+              else if (entry.isFile() && entry.name.endsWith('.html')) {
+                const before = fs.readFileSync(full, 'utf8');
+                const after = before.split(WRONG).join(CORRECT).split(OLD).join(CORRECT);
+                if (after !== before) {
+                  fs.writeFileSync(full, after, 'utf8');
+                  changed.push(full.split(path.sep).join('/'));
+                }
+              }
+            }
+          }
+
+          walk('.');
+
+          const remainingWrong = [];
+          const remainingOld = [];
+          function verify(dir) {
+            for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+              if (entry.name === '.git' || entry.name === 'node_modules') continue;
+              const full = path.join(dir, entry.name);
+              if (entry.isDirectory()) verify(full);
+              else if (entry.isFile() && entry.name.endsWith('.html')) {
+                const html = fs.readFileSync(full, 'utf8');
+                if (html.includes(WRONG)) remainingWrong.push(full);
+                if (html.includes(OLD)) remainingOld.push(full);
+              }
+            }
+          }
+          verify('.');
+
+          console.log(`Updated footer HTML files: ${changed.length}`);
+          for (const file of changed) console.log(`UPDATED ${file}`);
+          if (remainingWrong.length || remainingOld.length) {
+            console.error('Footer business metadata replacement incomplete');
+            console.error([...remainingWrong, ...remainingOld].join('\n'));
+            process.exit(1);
+          }
+          NODE
+      - name: Remove one-time sync workflow and commit direct source changes
+        run: |
+          rm -f .github/workflows/footer-business-number-sync.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No footer files required changes."
+            exit 0
+          fi
+          git commit -m "fix: apply correct mail-order sales number to all footers [skip ci]"
+          git push origin main
