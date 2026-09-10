@@ -2,7 +2,7 @@ import fs from 'node:fs';
 
 const HTML_FILE = 'nexus/research-track/index.html';
 const CSS_FILE = 'nexus/research-track/project-standard.css';
-const BUSINESS = '스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈';
+const BUSINESS = '스카이예슈아 · 사업자등록번호 536-38-01234 · 통신판매번호 : 2025-서울서초-2352 · 대표 이명훈';
 const COPYRIGHT = 'Copyright © 이명훈 2026. All rights reserved.';
 
 let errors = 0;
