@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-09-09",
-  "edition": "2026-09-09",
+  "updatedAt": "2026-09-10",
+  "edition": "2026-09-10",
   "updateCadence": "6시간마다 자동 수집 · 중요 변화 발생 시 수시 반영",
   "filters": [
     {
@@ -134,53 +134,6 @@
       ],
       "autoCollected": true,
       "sourceId": "arxiv-cs-ai",
-      "localizedKo": true
-    },
-    {
-      "id": "auto-2026-09-06-openai-news-eb96acc10a",
-      "date": "2026-09-06",
-      "category": "safety",
-      "categoryLabel": "사건·안전",
-      "signal": "SAFETY & SECURITY (안전·보안)",
-      "title": "고도화되는 AI와 정렬 문제…더 강한 안전장치와 국제 공조 필요성 제기",
-      "summary": "OpenAI의 Jakub Pachocki는 AI의 능력이 빠르게 높아질수록 인간의 의도와 목표에 맞게 시스템을 유지하는 정렬 문제가 더 중요해진다고 설명한다. 그는 보다 강한 안전장치와 국제적 협력 체계가 필요하다는 점을 강조한다.",
-      "importance": "AI 안전·보안 변화는 권한통제, 모니터링, 중단장치, 로그 보존과 사고대응 체계를 재점검해야 할 신호가 된다.",
-      "research": "사고 전 예방의무와 사고 후 책임을 구분하고 권한관리·모니터링·중단·로그 보존의 합리적 주의의무를 분석할 자료로 연결한다.",
-      "topics": [
-        "OpenAI"
-      ],
-      "sources": [
-        {
-          "label": "OpenAI · 2026.09.06",
-          "url": "https://openai.com/index/an-alien-mind"
-        }
-      ],
-      "autoCollected": true,
-      "sourceId": "openai-news",
-      "localizedKo": true
-    },
-    {
-      "id": "auto-2026-09-06-openai-news-57fbb99319",
-      "date": "2026-09-06",
-      "category": "agents",
-      "categoryLabel": "Agentic AI (에이전틱 AI)·Multi-Agent Systems (다중 에이전트 시스템)",
-      "signal": "AI UPDATE (AI 업데이트)",
-      "title": "OpenAI 내부 연구에서 코딩 에이전트 활용 확대…연구 속도와 과업 복잡도 변화",
-      "summary": "OpenAI 내부에서 코딩 에이전트가 AI 연구 방식 자체를 바꾸고 있다. 에이전트 사용량, 실험 수행 속도, 처리 가능한 과업의 복잡도와 연구 가속 효과에 관한 초기 데이터를 통해 장기 연구 워크플로에서 에이전트의 역할이 확대되는 흐름을 보여준다.",
-      "importance": "에이전트의 도구 사용·권한·장기 작업 기능 변화는 실제 업무 자동화 범위와 통제·책임 구조에 직접 영향을 줄 수 있다.",
-      "research": "Agentic AI와 다중 에이전트 시스템의 행위효과·권한위임·로그·감독·계층적 책임귀속 연구에 연결할 수 있다.",
-      "topics": [
-        "OpenAI",
-        "Agentic AI (에이전틱 AI)"
-      ],
-      "sources": [
-        {
-          "label": "OpenAI · 2026.09.06",
-          "url": "https://openai.com/index/research-acceleration-view-inside-openai"
-        }
-      ],
-      "autoCollected": true,
-      "sourceId": "openai-news",
       "localizedKo": true
     },
     {
@@ -969,13 +922,13 @@
     "sourceCount": 7,
     "deduplication": "normalized URL + normalized title",
     "lookbackDays": 3,
-    "lastSuccessfulUpdateAt": "2026-09-09T20:55:40.342Z",
-    "lastAddedCount": 16,
+    "lastSuccessfulUpdateAt": "2026-09-10T04:42:16.343Z",
+    "lastAddedCount": 17,
     "relevanceFilter": "source-specific strict filter",
     "lastCleanupCount": 2,
     "publicLanguage": "ko",
     "localizationPolicy": "한국어 제목·요약이 완료된 자동수집 항목만 공개",
-    "lastLocalizedCount": 5,
-    "lastWithheldUnlocalizedCount": 14
+    "lastLocalizedCount": 3,
+    "lastWithheldUnlocalizedCount": 17
   }
 }
