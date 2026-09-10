@@ -9,7 +9,8 @@ const RESEARCH_SPLIT = '국가연구자번호 13169680 · ISNI 0000000513760591<
 const SPLIT_FOOTER_PAGES = new Set([
   'nexus/index.html',
   'nexus/articles/index.html',
-  'nexus/articles/article.html'
+  'nexus/articles/article.html',
+  'nexus/intelligence-briefing/index.html'
 ]);
 const COPYRIGHT = 'Copyright © 이명훈 2026. All rights reserved.';
 const PORTAL = 'nexus/portal-v2.css';
