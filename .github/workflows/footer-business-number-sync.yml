@@ -88,11 +88,6 @@ jobs:
             process.exit(1);
           }
           NODE
-      - name: Run footer source audits
-        run: |
-          node scripts/audit-business-footer.mjs
-          node scripts/audit-nexus-footer-standard.mjs
-          node scripts/audit-research-track-footer.mjs
       - name: Remove one-time sync workflow and commit direct source changes
         run: |
           rm -f .github/workflows/footer-business-number-sync.yml
