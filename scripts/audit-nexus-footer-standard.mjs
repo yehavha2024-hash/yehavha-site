@@ -4,6 +4,13 @@ import path from 'node:path';
 const ROOT = 'nexus';
 const BUSINESS = '스카이예슈아 · 사업자등록번호 536-38-01234 · 통신판매번호 : 2025-서울서초-2352 · 대표 이명훈';
 const RESEARCH = '국가연구자번호 13169680 · ISNI 0000000513760591 · ORCID 0009-0000-6095-8067';
+const BUSINESS_SPLIT = '스카이예슈아 · 사업자등록번호 536-38-01234<br/>통신판매번호 : 2025-서울서초-2352 · 대표 이명훈';
+const RESEARCH_SPLIT = '국가연구자번호 13169680 · ISNI 0000000513760591<br/>ORCID 0009-0000-6095-8067';
+const SPLIT_FOOTER_PAGES = new Set([
+  'nexus/index.html',
+  'nexus/articles/index.html',
+  'nexus/articles/article.html'
+]);
 const COPYRIGHT = 'Copyright © 이명훈 2026. All rights reserved.';
 const PORTAL = 'nexus/portal-v2.css';
 const COMPACT = 'nexus/layer-compact.css';
@@ -36,9 +43,18 @@ function stripComments(css) {
   return css.replace(/\/\*[\s\S]*?\*\//g, '');
 }
 
+function plainText(html) {
+  return html
+    .replace(/<br\s*\/?>/gi, ' · ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 function hasClassedParagraph(footer, className, text) {
-  const re = new RegExp(`<p\\b[^>]*class=["'][^"']*\\b${className}\\b[^"']*["'][^>]*>[\\s\\S]*?${text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[\\s\\S]*?<\\/p>`, 'i');
-  return re.test(footer);
+  const escapedClass = className.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const match = footer.match(new RegExp(`<p\\b[^>]*class=["'][^"']*\\b${escapedClass}\\b[^"']*["'][^>]*>([\\s\\S]*?)<\\/p>`, 'i'));
+  return Boolean(match && plainText(match[1]) === text);
 }
 
 for (const file of walk(ROOT, f => f.endsWith('.html'))) {
@@ -51,25 +67,30 @@ for (const file of walk(ROOT, f => f.endsWith('.html'))) {
   for (const footer of blocks) {
     if (!footer.includes('Copyright ©') && !/data-footer-standard=/i.test(footer)) continue;
     checked += 1;
+    const footerText = plainText(footer);
     if (!/data-footer-standard=["']v2["']/i.test(footer)) fail(file, 'Footer 표준 버전 v2 누락');
-    if (!footer.includes(BUSINESS)) fail(file, '사업자등록 정보 누락');
-    if (!footer.includes(RESEARCH)) fail(file, 'NEXUS 메인 연구자 식별자 표준 불일치');
+    if (!footerText.includes(BUSINESS)) fail(file, '사업자등록 정보 누락');
+    if (!footerText.includes(RESEARCH)) fail(file, 'NEXUS 메인 연구자 식별자 표준 불일치');
     if (/ORCID\s+ID\b/i.test(footer)) fail(file, '구형 ORCID ID 표기가 남아 있음');
-    if (!hasClassedParagraph(footer, 'business-meta', BUSINESS)) fail(file, '사업자정보 business-meta 클래스 누락');
-    if (!hasClassedParagraph(footer, 'research-identifiers', RESEARCH)) fail(file, '연구자 식별자 research-identifiers 클래스 누락');
+    if (!hasClassedParagraph(footer, 'business-meta', BUSINESS)) fail(file, '사업자정보 business-meta 클래스 누락 또는 내용 불일치');
+    if (!hasClassedParagraph(footer, 'research-identifiers', RESEARCH)) fail(file, '연구자 식별자 research-identifiers 클래스 누락 또는 내용 불일치');
     if (!hasClassedParagraph(footer, 'copyright', COPYRIGHT)) fail(file, 'Copyright copyright 클래스 누락');
     if (!/<p\b[^>]*class=["'][^"']*\bcontact\b[^"']*["'][^>]*>[\s\S]*?문의\s*<a[^>]+href=["']mailto:kimbrighth@gmail\.com["']/is.test(footer)) fail(file, '문의 contact 클래스 또는 표준 mailto 누락');
     if (!footer.includes(COPYRIGHT)) fail(file, '표준 Copyright 문구 불일치');
     if (!footer.includes('AI 활용 안내')) fail(file, 'AI 활용 안내 누락');
     if (!/href=["']#top["']/i.test(footer) || !footer.includes('맨 위로 이동')) fail(file, '표준 맨 위로 이동 링크 누락');
 
-    const businessAt = footer.indexOf(BUSINESS);
-    const researchAt = footer.indexOf(RESEARCH);
-    const copyrightAt = footer.indexOf(COPYRIGHT);
-    const contactAt = footer.indexOf('mailto:kimbrighth@gmail.com');
-    const aiAt = footer.indexOf('AI 활용 안내');
-    const topMatch = footer.match(/href=["']#top["']/i);
-    const topAt = topMatch ? topMatch.index : -1;
+    if (SPLIT_FOOTER_PAGES.has(file)) {
+      if (!footer.includes(BUSINESS_SPLIT)) fail(file, '사업자정보 고정 2행 배열이 적용되지 않음');
+      if (!footer.includes(RESEARCH_SPLIT)) fail(file, '연구자 식별자 고정 2행 배열이 적용되지 않음');
+    }
+
+    const businessAt = footerText.indexOf(BUSINESS);
+    const researchAt = footerText.indexOf(RESEARCH);
+    const copyrightAt = footerText.indexOf(COPYRIGHT);
+    const contactAt = footerText.indexOf('kimbrighth@gmail.com');
+    const aiAt = footerText.indexOf('AI 활용 안내');
+    const topAt = footerText.indexOf('맨 위로 이동');
     if (!(businessAt >= 0 && businessAt < researchAt && researchAt < copyrightAt && copyrightAt < contactAt && contactAt < aiAt && aiAt < topAt)) {
       fail(file, 'HTML 원문 순서가 사업자정보 → 연구자 식별자 → Copyright → 문의 → AI 활용 안내 → 맨 위로 이동 순서가 아님');
     }
