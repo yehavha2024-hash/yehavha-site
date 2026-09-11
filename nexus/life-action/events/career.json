@@ -1,36 +1,51 @@
 {
-  "version":"0.1.0","eventType":"career","title":"취업·이직","targetLabel":"목표일","subtitle":"지원·면접·입사 전후에 해야 할 일을 순서대로 정리합니다.","updatedAt":"2026-09-11",
+  "version":"0.3.0","eventType":"career","title":"취업·이직","targetLabel":"목표일","subtitle":"첫 취업·재직 중 이직·퇴사 후 구직·계약만료·경력복귀를 구분해 실행합니다.","updatedAt":"2026-09-11",
   "inputs":[
     {"id":"targetDate","label":"입사·이직 목표일","type":"date","required":true},
-    {"id":"path","label":"구분","type":"select","default":"change","options":[{"value":"change","label":"이직"},{"value":"first","label":"첫 취업"},{"value":"return","label":"재취업"}]},
-    {"id":"status","label":"현재 상태","type":"select","default":"employed","options":[{"value":"employed","label":"재직 중"},{"value":"unemployed","label":"구직 중"}]},
-    {"id":"focus","label":"직무 방향","type":"select","default":"office","options":[{"value":"office","label":"사무·기획"},{"value":"technical","label":"기술·전문"},{"value":"public","label":"공공·기관"},{"value":"other","label":"기타"}]}
+    {"id":"mode","label":"현재 상황","type":"select","default":"employedMove","options":[{"value":"firstJob","label":"첫 취업"},{"value":"employedMove","label":"재직 중 이직"},{"value":"unemployed","label":"퇴사 후 구직"},{"value":"contractEnd","label":"계약만료 예정"},{"value":"careerReturn","label":"경력단절 후 복귀"}]},
+    {"id":"jobType","label":"희망 고용형태","type":"select","default":"regular","options":[{"value":"regular","label":"정규직"},{"value":"fixed","label":"계약직"},{"value":"parttime","label":"단시간·파트타임"},{"value":"freelance","label":"프리랜서"},{"value":"public","label":"공공·공무직"}]},
+    {"id":"transition","label":"현재 직장 종료 방식","type":"select","default":"offerThenExit","options":[{"value":"offerThenExit","label":"합격 후 퇴사"},{"value":"exitBeforeOffer","label":"퇴사 후 구직"},{"value":"contractEnd","label":"계약만료"},{"value":"recommended","label":"권고사직·인원감축"},{"value":"notApplicable","label":"해당 없음"}]},
+    {"id":"training","label":"직무훈련 필요","type":"select","default":"none","options":[{"value":"none","label":"바로 지원 가능"},{"value":"short","label":"단기 보완"},{"value":"certificate","label":"자격증 필요"},{"value":"reskill","label":"직무전환 훈련 필요"}]},
+    {"id":"portfolio","label":"포트폴리오","type":"select","default":"notNeeded","options":[{"value":"required","label":"필수 직무"},{"value":"helpful","label":"있으면 유리"},{"value":"notNeeded","label":"불필요"}]},
+    {"id":"unemployment","label":"실업급여 상태","type":"select","default":"none","options":[{"value":"receiving","label":"수급 중"},{"value":"check","label":"대상 여부 확인"},{"value":"none","label":"해당 없음"}]},
+    {"id":"relocation","label":"근무지 이동","type":"select","default":"no","options":[{"value":"no","label":"현재 생활권"},{"value":"commute","label":"통근거리 증가"},{"value":"move","label":"이사 필요"},{"value":"remote","label":"원격·하이브리드"}]},
+    {"id":"salary","label":"연봉 협상","type":"select","default":"market","options":[{"value":"fixed","label":"공고 기준 수용"},{"value":"market","label":"시장수준 협상"},{"value":"increase","label":"현 연봉 대비 인상 목표"}]}
   ],
   "stages":[
     {"id":"career-60","label":"목표 60~31일 전","fromDays":60,"toDays":31,"actions":[
-      {"id":"career-target","title":"지원 직무와 조건 한 줄로 고정","summary":"직무·지역·급여·근무형태 중 양보하지 않을 기준을 먼저 정합니다.","kind":"must","priority":100},
-      {"id":"career-resume","title":"이력서·경력기술서 기준본 만들기","summary":"공고마다 처음부터 다시 쓰지 않도록 공통 기준본을 먼저 완성합니다.","kind":"execute","priority":94},
-      {"id":"career-exit-risk","title":"퇴사 시점과 공백기간 계산","summary":"재직 중 이직이라면 사직 통보·인수인계·입사 가능일이 충돌하지 않는지 확인합니다.","kind":"risk","priority":92,"conditions":{"status":["employed"]}}
+      {"id":"role-definition","title":"직무명보다 실제 수행업무를 3~5개로 정의","summary":"지원직무의 핵심업무, 필수경험, 도구, 성과지표를 적어 검색범위를 좁힙니다.","kind":"must","priority":100},
+      {"id":"resume-evidence","title":"이력서를 업무목록이 아니라 성과증빙으로 재작성","summary":"매출·비용·시간·정확도·프로젝트 규모처럼 검증 가능한 결과 중심으로 경력을 정리합니다.","kind":"must","priority":96},
+      {"id":"portfolio-build","title":"포트폴리오를 직무별 증거자료로 구성","summary":"프로젝트 목적, 본인 역할, 결과, 산출물, 회고가 한눈에 보이도록 정리합니다.","kind":"execute","priority":93,"conditions":{"portfolio":["required","helpful"]}},
+      {"id":"training-route","title":"직무전환이면 훈련과정과 취업연계 여부 비교","summary":"국민내일배움카드는 고용24에서 발급·훈련검색이 가능하므로 훈련비뿐 아니라 과정시간·취업률·자비부담을 비교합니다.","kind":"execute","priority":92,"conditions":{"training":["short","certificate","reskill"]},"url":"https://www.work24.go.kr/","sourceLabel":"고용24"},
+      {"id":"career-return-gap","title":"경력공백 설명을 사과가 아니라 현재 역량으로 연결","summary":"경력단절 사유는 짧게 정리하고 최근 학습·프로젝트·복귀 준비를 중심으로 설명합니다.","kind":"must","priority":88,"conditions":{"mode":["careerReturn"]}},
+      {"id":"first-job-proof","title":"신입은 경험 대신 과제·프로젝트·현장경험 증거 확보","summary":"인턴·프로젝트·교육과제·자격·봉사·개인제작물 중 직무와 연결되는 증거를 우선 배치합니다.","kind":"execute","priority":86,"conditions":{"mode":["firstJob"]}}
     ]},
     {"id":"career-30","label":"목표 30~15일 전","fromDays":30,"toDays":15,"actions":[
-      {"id":"career-list","title":"지원기업 우선순위 10곳 정리","summary":"지원 가능성보다 실제로 갈 의향이 있는 곳부터 순서를 정합니다.","kind":"must","priority":88},
-      {"id":"career-work24","title":"공식 채용·지원제도 확인","summary":"채용정보와 고용지원제도를 공식 경로에서 함께 확인합니다.","kind":"execute","priority":82,"url":"https://www.work24.go.kr/","sourceLabel":"고용24"},
-      {"id":"career-proof","title":"경력·자격 증빙파일 한 폴더로 정리","summary":"재직·경력·자격·포트폴리오 파일명을 통일해 즉시 제출 가능하게 만듭니다.","kind":"risk","priority":75}
+      {"id":"application-pipeline","title":"공고를 저장하지 말고 지원 파이프라인으로 관리","summary":"관심→지원→서류→면접→과제→오퍼 단계로 나누고 각 단계 전환률을 기록합니다.","kind":"execute","priority":96},
+      {"id":"company-screen","title":"연봉보다 먼저 고용형태·수습·근무시간·퇴직률 확인","summary":"정규직 표기만 보지 말고 계약서 형태, 수습조건, 야근·출장, 조직규모, 최근 채용 반복 여부를 확인합니다.","kind":"risk","priority":98},
+      {"id":"employment-end","title":"현재 직장 사직시점과 새 회사 입사일 겹침 방지","summary":"합격 전 퇴사인지, 오퍼 확정 후 퇴사인지 정하고 인수인계·연차·통보기간을 역산합니다.","kind":"risk","priority":95,"conditions":{"mode":["employedMove"],"transition":["offerThenExit","exitBeforeOffer"]}},
+      {"id":"unemployment-docs","title":"퇴사 후 구직이면 이직확인서·상실신고 상태 확인","summary":"실업급여 판단에 필요한 이직사유와 피보험단위기간 등이 제대로 신고됐는지 고용24에서 확인합니다.","kind":"execute","priority":99,"conditions":{"unemployment":["receiving","check"]},"url":"https://www.work24.go.kr/","sourceLabel":"고용24"},
+      {"id":"employment-support","title":"장기구직이면 국민취업지원제도 참여 가능성 검토","summary":"취업지원서비스와 수당의 유형·요건을 고용24 공식 기준으로 확인합니다.","kind":"execute","priority":82,"conditions":{"mode":["unemployed","careerReturn"]},"url":"https://www.work24.go.kr/","sourceLabel":"고용24"},
+      {"id":"relocation-cost","title":"이사 필요 시 연봉 인상분과 주거·통근비를 함께 계산","summary":"실수령 증가보다 주거비·교통비·시간비용이 더 커지는지 비교합니다.","kind":"risk","priority":85,"conditions":{"relocation":["move","commute"]}}
     ]},
     {"id":"career-14","label":"목표 14~3일 전","fromDays":14,"toDays":3,"actions":[
-      {"id":"career-interview","title":"면접 질문 10개와 답변 근거 준비","summary":"자기소개보다 지원동기·성과·갈등·퇴사사유를 실제 사례 중심으로 준비합니다.","kind":"must","priority":96},
-      {"id":"career-company","title":"회사·직무 리스크 역질문 준비","summary":"업무범위, 평가방식, 계약조건, 조직문화에서 반드시 확인할 항목을 적습니다.","kind":"risk","priority":91},
-      {"id":"career-route","title":"면접 일정·이동·복장 확정","summary":"면접 직전 변수로 집중력이 떨어지지 않도록 실무 준비를 끝냅니다.","kind":"execute","priority":70}
+      {"id":"interview-stories","title":"면접 답변을 경험 5개로 표준화","summary":"갈등·실패·성과·리더십·문제해결 사례를 상황-행동-결과 순으로 준비합니다.","kind":"must","priority":94},
+      {"id":"salary-band","title":"희망연봉·최저수용선·대안가치를 숫자로 정하기","summary":"현재 연봉, 시장범위, 복리후생, 출퇴근, 성장성을 포함해 협상 기준을 정합니다.","kind":"risk","priority":93,"conditions":{"salary":["market","increase"]}},
+      {"id":"offer-check","title":"오퍼는 총액·수습·성과급·퇴직금·근로시간까지 확인","summary":"연봉 숫자 하나가 아니라 고정급, 변동급, 수습감액, 포괄임금 여부, 근무장소, 계약기간을 확인합니다.","kind":"risk","priority":100},
+      {"id":"references","title":"경력조회·추천인 연락 가능성 정리","summary":"추천인에게 사전 동의를 받고 회사기밀이나 개인정보를 넘기지 않도록 범위를 정합니다.","kind":"must","priority":78},
+      {"id":"contract-role","title":"계약직이면 계약기간·갱신조건·종료조건을 명확히 확인","summary":"재계약 기대만으로 판단하지 말고 계약기간과 갱신기준을 문서로 확인합니다.","kind":"risk","priority":95,"conditions":{"jobType":["fixed"]}}
     ]},
-    {"id":"career-day","label":"입사·전환 시점","fromDays":2,"toDays":-7,"actions":[
-      {"id":"career-contract","title":"근로조건 서면 확인","summary":"임금·근무시간·계약기간·업무범위를 실제 문서 기준으로 확인합니다.","kind":"risk","priority":100},
-      {"id":"career-firstweek","title":"첫 주 업무목표 3개 설정","summary":"사람·업무·보고체계를 파악할 최소 목표를 정합니다.","kind":"must","priority":84},
-      {"id":"career-record","title":"초기 업무·질문 기록 시작","summary":"배운 내용과 확인할 사항을 매일 짧게 기록해 적응속도를 높입니다.","kind":"execute","priority":72}
+    {"id":"career-day","label":"입사 전후 2일","fromDays":2,"toDays":-2,"actions":[
+      {"id":"contract-copy","title":"근로계약서 사본 즉시 보관","summary":"임금, 소정근로시간, 휴일·휴가, 근무장소, 계약기간이 실제 합의와 일치하는지 확인합니다.","kind":"must","priority":100},
+      {"id":"four-insurance","title":"4대보험·고용형태 등록 확인","summary":"입사 후 실제 가입·신고 상태가 계약형태와 일치하는지 확인합니다.","kind":"risk","priority":94},
+      {"id":"onboarding-goals","title":"첫 30일 업무목표와 보고라인 파악","summary":"누구에게 무엇을 보고하고 첫 달에 어떤 결과를 기대하는지 명확히 합니다.","kind":"execute","priority":84},
+      {"id":"freelance-contract","title":"프리랜서는 근로계약 대신 업무범위·대금·저작권·해지조항 확인","summary":"프로젝트 범위와 검수, 지급일, 비용부담, 결과물 권리, 계약종료 조항을 확인합니다.","kind":"risk","priority":100,"conditions":{"jobType":["freelance"]}}
     ]},
-    {"id":"career-after","label":"입사 후 8~30일","fromDays":-8,"toDays":-30,"actions":[
-      {"id":"career-fit","title":"실제 업무와 채용조건 비교","summary":"면접 때 들은 역할과 실제 업무가 얼마나 일치하는지 점검합니다.","kind":"risk","priority":89},
-      {"id":"career-network","title":"핵심 협업자와 업무흐름 정리","summary":"누구에게 무엇을 물어보고 보고해야 하는지 구조를 정리합니다.","kind":"must","priority":77},
-      {"id":"career-review","title":"30일 적응 점검","summary":"계속 다닐 이유와 위험요인을 함께 기록해 감정이 아니라 근거로 판단합니다.","kind":"execute","priority":68}
+    {"id":"career-after","label":"입사 후 3~30일","fromDays":-3,"toDays":-30,"actions":[
+      {"id":"expectation-check","title":"채용공고와 실제업무 차이 기록","summary":"업무범위·근무시간·보고체계가 채용 당시 설명과 다른지 첫 달에 확인합니다.","kind":"risk","priority":90},
+      {"id":"probation-review","title":"수습평가기준과 종료시점 확인","summary":"수습기간이 있다면 평가항목, 감액 여부, 정식전환 조건을 확인합니다.","kind":"must","priority":88},
+      {"id":"career-log","title":"성과로그를 첫 달부터 시작","summary":"향후 연봉협상과 다음 이직에 쓸 수 있도록 결과·수치·피드백을 월 단위로 기록합니다.","kind":"execute","priority":85},
+      {"id":"training-use","title":"입사 후 부족역량만 선택해 추가훈련","summary":"막연한 자격증 취득보다 실제 업무에서 드러난 부족역량을 기준으로 훈련을 선택합니다.","kind":"execute","priority":72,"conditions":{"training":["short","certificate","reskill"]}}
     ]}
   ]
 }
