@@ -1,36 +1,55 @@
 {
-  "version":"0.1.0","eventType":"startup","title":"창업","targetLabel":"사업 시작일","subtitle":"아이디어를 사업자등록·매출 준비·운영체계까지 단계별로 연결합니다.","updatedAt":"2026-09-11",
+  "version":"0.3.0","eventType":"startup","title":"창업","targetLabel":"사업개시 목표일","subtitle":"개인·법인, 일반·간이과세, 온라인·오프라인, 직원·인허가·자금조달을 실제 분기별로 점검합니다.","updatedAt":"2026-09-11",
   "inputs":[
-    {"id":"targetDate","label":"사업 시작 목표일","type":"date","required":true},
-    {"id":"form","label":"사업 형태","type":"select","default":"individual","options":[{"value":"individual","label":"개인사업"},{"value":"corporation","label":"법인"},{"value":"undecided","label":"미정"}]},
-    {"id":"channel","label":"판매 방식","type":"select","default":"online","options":[{"value":"online","label":"온라인"},{"value":"offline","label":"오프라인"},{"value":"both","label":"온·오프라인"}]},
-    {"id":"staff","label":"인력","type":"select","default":"solo","options":[{"value":"solo","label":"1인"},{"value":"planned","label":"채용 예정"}]}
+    {"id":"targetDate","label":"사업개시 목표일","type":"date","required":true},
+    {"id":"entity","label":"사업 형태","type":"select","default":"sole","options":[{"value":"sole","label":"개인사업자"},{"value":"corporation","label":"법인"},{"value":"undecided","label":"미정"}]},
+    {"id":"taxType","label":"과세 유형","type":"select","default":"undecided","options":[{"value":"general","label":"일반과세"},{"value":"simplified","label":"간이과세 검토"},{"value":"exempt","label":"면세업 검토"},{"value":"undecided","label":"미정"}]},
+    {"id":"businessType","label":"업종","type":"select","default":"service","options":[{"value":"service","label":"서비스·교육·컨설팅"},{"value":"online","label":"온라인 판매·콘텐츠"},{"value":"retail","label":"소매·매장"},{"value":"food","label":"음식·식품"},{"value":"manufacturing","label":"제조"},{"value":"professional","label":"전문직"}]},
+    {"id":"ecommerce","label":"통신판매","type":"select","default":"no","options":[{"value":"yes","label":"온라인 판매함"},{"value":"no","label":"안 함"},{"value":"planned","label":"향후 예정"}]},
+    {"id":"employees","label":"직원","type":"select","default":"none","options":[{"value":"none","label":"1인 사업"},{"value":"hireSoon","label":"곧 채용"},{"value":"existing","label":"직원 있음"}]},
+    {"id":"location","label":"사업장","type":"select","default":"home","options":[{"value":"home","label":"자택·무점포"},{"value":"office","label":"사무실"},{"value":"store","label":"매장"},{"value":"shared","label":"공유오피스"}]},
+    {"id":"funding","label":"초기자금","type":"select","default":"self","options":[{"value":"self","label":"자기자금"},{"value":"loan","label":"대출"},{"value":"grant","label":"정부지원사업"},{"value":"invest","label":"투자유치"},{"value":"mixed","label":"복합"}]},
+    {"id":"permit","label":"인허가","type":"select","default":"unknown","options":[{"value":"none","label":"특별 인허가 없음"},{"value":"required","label":"인허가 필요"},{"value":"unknown","label":"모름·확인 필요"}]}
   ],
   "stages":[
-    {"id":"startup-60","label":"시작 60~31일 전","fromDays":60,"toDays":31,"actions":[
-      {"id":"startup-problem","title":"고객 문제와 유료 해결책 한 문장으로 정의","summary":"무엇을 누구에게 얼마에 팔 것인지 한 문장으로 정리합니다.","kind":"must","priority":100},
-      {"id":"startup-demand","title":"실제 구매의사 10건 확인","summary":"좋다는 반응보다 가격을 제시했을 때 구매할 사람이 있는지 먼저 확인합니다.","kind":"risk","priority":98},
-      {"id":"startup-cost","title":"고정비·변동비·손익분기 계산","summary":"첫 매출 전까지 버틸 수 있는 기간과 월 최소매출을 계산합니다.","kind":"must","priority":92}
+    {"id":"startup-60","label":"개시 60~31일 전","fromDays":60,"toDays":31,"actions":[
+      {"id":"problem-customer","title":"상품보다 먼저 고객·문제·지불의사 검증","summary":"누가 어떤 문제 때문에 얼마를 지불하는지 인터뷰·사전판매·견적으로 확인합니다.","kind":"must","priority":100},
+      {"id":"entity-choice","title":"개인사업자와 법인을 세금만 보고 고르지 않기","summary":"책임범위, 투자유치, 공동창업, 비용, 회계·등기 유지비를 함께 비교해 형태를 결정합니다.","kind":"risk","priority":97,"conditions":{"entity":["undecided"]}},
+      {"id":"tax-type-check","title":"간이·일반·면세 적용 가능성을 업종과 예상매출로 확인","summary":"개인사업자는 공급대가와 업종에 따라 간이과세 적용 가능 여부가 달라집니다. 국세청 기준에서 배제업종과 예상매출을 확인합니다.","kind":"risk","priority":98,"conditions":{"entity":["sole"],"taxType":["simplified","undecided"]},"url":"https://www.nts.go.kr/","sourceLabel":"국세청"},
+      {"id":"professional-tax","title":"전문직·일부 업종은 간이과세 배제 여부 확인","summary":"전문직, 일부 제조·도매·부동산 등은 매출이 작아도 간이과세 적용이 제한될 수 있으므로 업종코드를 확인합니다.","kind":"risk","priority":96,"conditions":{"businessType":["professional","manufacturing"]},"url":"https://www.nts.go.kr/","sourceLabel":"국세청"},
+      {"id":"permit-check","title":"사업자등록 전에 인허가·신고 선행 여부 확인","summary":"음식·제조·전문서비스 등은 업종에 따라 영업신고, 허가, 시설요건이 먼저 필요할 수 있으므로 관할기관에서 확인합니다.","kind":"risk","priority":100,"conditions":{"permit":["required","unknown"]}},
+      {"id":"funding-runway","title":"사업비와 생활비를 분리해 6개월 런웨이 계산","summary":"초기투자비, 고정비, 세금, 보험료, 생활비를 분리하고 매출이 늦어질 때 버틸 기간을 계산합니다.","kind":"must","priority":94},
+      {"id":"support-search","title":"정부지원사업은 사업모델과 자격이 맞는 것만 선별","summary":"K-Startup 공고에서 업력, 연령, 지역, 기술분야, 자부담, 사업기간을 기준으로 지원가능성을 확인합니다.","kind":"execute","priority":84,"conditions":{"funding":["grant","mixed"]},"url":"https://www.k-startup.go.kr/","sourceLabel":"K-Startup"}
     ]},
-    {"id":"startup-30","label":"시작 30~15일 전","fromDays":30,"toDays":15,"actions":[
-      {"id":"startup-registration","title":"사업자등록 절차 확인","summary":"사업 형태와 업종에 맞는 등록 절차를 공식 경로에서 확인합니다.","kind":"execute","priority":96,"url":"https://www.hometax.go.kr/","sourceLabel":"국세청 홈택스"},
-      {"id":"startup-commerce","title":"통신판매·인허가 필요 여부 확인","summary":"온라인 판매나 특정 업종이면 별도 신고·허가가 필요한지 확인합니다.","kind":"risk","priority":90,"conditions":{"channel":["online","both"]},"url":"https://www.gov.kr/","sourceLabel":"정부24"},
-      {"id":"startup-account","title":"사업용 자금 흐름 분리","summary":"개인 생활비와 사업 매출·비용이 섞이지 않도록 계좌·카드·기록방식을 정합니다.","kind":"must","priority":82}
+    {"id":"startup-30","label":"개시 30~15일 전","fromDays":30,"toDays":15,"actions":[
+      {"id":"business-registration","title":"사업자등록 신청자료 준비","summary":"상호, 사업장, 업종·업태, 임대차계약, 개업일 등 사업자등록에 필요한 정보를 정리하고 홈택스·세무서 절차를 확인합니다.","kind":"execute","priority":100,"url":"https://www.hometax.go.kr/","sourceLabel":"홈택스"},
+      {"id":"corporation-steps","title":"법인은 설립등기·사업자등록·법인계좌 순서 분리","summary":"법인설립등기, 정관·주주·임원, 자본금, 사업자등록, 법인인감과 계좌 개설을 하나의 절차로 섞지 않고 순서대로 처리합니다.","kind":"must","priority":100,"conditions":{"entity":["corporation"]}},
+      {"id":"location-rights","title":"사업장 사용가능 여부를 임대차·건축물용도로 확인","summary":"자택·공유오피스·매장마다 사업자등록과 인허가 가능 여부가 다를 수 있으므로 계약 전에 사용범위를 확인합니다.","kind":"risk","priority":95,"conditions":{"location":["home","shared","store"]}},
+      {"id":"bank-separation","title":"개인자금과 사업자금 계좌를 분리","summary":"초기부터 매출·비용·대표자 인출을 구분해 세무·손익 확인이 가능하도록 만듭니다.","kind":"must","priority":92},
+      {"id":"expense-policy","title":"비용처리 기준과 증빙수집 방식을 먼저 정하기","summary":"카드·계좌·세금계산서·현금영수증의 증빙흐름을 정해 나중에 비용누락이 생기지 않도록 합니다.","kind":"execute","priority":86},
+      {"id":"online-sales-plan","title":"온라인 판매면 통신판매·전자상거래 표시사항 준비","summary":"쇼핑몰·SNS·플랫폼 판매를 한다면 통신판매 관련 신고·고지와 환불·배송·사업자정보 표시를 확인합니다.","kind":"risk","priority":96,"conditions":{"ecommerce":["yes","planned"]}},
+      {"id":"privacy-plan","title":"고객정보를 받는 순간 개인정보 처리구조부터 만들기","summary":"수집항목·목적·보유기간·제3자 제공·위탁·파기와 접근권한을 실제 운영에 맞춰 정합니다.","kind":"risk","priority":93,"conditions":{"businessType":["online","service","retail","food"]}}
     ]},
-    {"id":"startup-14","label":"시작 14~3일 전","fromDays":14,"toDays":3,"actions":[
-      {"id":"startup-offer","title":"첫 상품·서비스 1개만 확정","summary":"처음부터 여러 상품을 만들지 말고 가장 검증 가능한 판매단위를 하나 정합니다.","kind":"must","priority":94},
-      {"id":"startup-payment","title":"결제·환불·문의 흐름 점검","summary":"고객이 결제하고 문의하고 환불받는 과정이 실제로 작동하는지 테스트합니다.","kind":"risk","priority":91},
-      {"id":"startup-staff","title":"채용·업무분장 최소안 작성","summary":"채용 예정이라면 첫 인력의 역할과 비용 한도를 먼저 정합니다.","kind":"execute","priority":70,"conditions":{"staff":["planned"]}}
+    {"id":"startup-14","label":"개시 14~3일 전","fromDays":14,"toDays":3,"actions":[
+      {"id":"price-unit-economics","title":"판매가에서 원가·수수료·광고·배송·세금까지 빼보기","summary":"매출이 아니라 건당 실제 공헌이익이 얼마인지 계산합니다.","kind":"must","priority":100},
+      {"id":"contracts","title":"고객·외주·공급계약의 범위·대금·해지·권리 정리","summary":"구두합의 대신 납품범위, 검수, 지급일, 지연, 저작권·지식재산, 해지조건을 문서화합니다.","kind":"risk","priority":96},
+      {"id":"employee-cost","title":"직원 채용이면 급여 외 총고용비용 계산","summary":"임금, 4대보험 사용자부담, 퇴직급여, 휴가, 장비·공간비까지 포함한 월 비용을 계산합니다.","kind":"must","priority":98,"conditions":{"employees":["hireSoon","existing"]}},
+      {"id":"labor-contract","title":"채용 전 근로계약·급여일·근로시간·수습기준 준비","summary":"직원에게 적용할 근로조건을 채용 후 정하지 말고 사전에 표준화합니다.","kind":"risk","priority":97,"conditions":{"employees":["hireSoon","existing"]}},
+      {"id":"insurance-check","title":"직원 채용 시 4대보험 신고 흐름 확인","summary":"근로자 고용이 시작되면 사업장 성립과 자격취득 신고 등 적용절차를 확인합니다.","kind":"execute","priority":92,"conditions":{"employees":["hireSoon","existing"]},"url":"https://www.4insure.or.kr/","sourceLabel":"4대사회보험 정보연계센터"},
+      {"id":"merchant-payments","title":"결제·환불·정산주기 실제 테스트","summary":"카드·PG·플랫폼 수수료와 정산일까지 포함해 현금흐름 공백을 확인합니다.","kind":"execute","priority":88,"conditions":{"businessType":["online","retail","food"]}}
     ]},
-    {"id":"startup-day","label":"사업 시작~7일","fromDays":2,"toDays":-7,"actions":[
-      {"id":"startup-firstsale","title":"첫 매출 확보에 집중","summary":"브랜드 완성도보다 실제 결제 고객을 만드는 행동을 우선합니다.","kind":"execute","priority":100},
-      {"id":"startup-log","title":"문의·거절·구매이유 기록","summary":"고객 반응을 매일 짧게 기록해 다음 수정의 근거로 남깁니다.","kind":"must","priority":86},
-      {"id":"startup-tax","title":"매출·비용 증빙 누락 방지","summary":"세금계산서·영수증·결제내역 등 사업 증빙을 처음부터 한 방식으로 관리합니다.","kind":"risk","priority":88}
+    {"id":"startup-day","label":"사업개시 전후 2일","fromDays":2,"toDays":-2,"actions":[
+      {"id":"registration-copy","title":"사업자등록·인허가·신고 완료상태 확인","summary":"등록번호, 업종, 사업장 주소, 과세유형, 신고증의 실제 기재내용이 계획과 일치하는지 확인합니다.","kind":"must","priority":100},
+      {"id":"invoice-flow","title":"첫 매출의 증빙 발행·정산 흐름 확인","summary":"세금계산서, 현금영수증, 카드매출 등 업종에 맞는 증빙 발행이 가능한지 테스트합니다.","kind":"execute","priority":96},
+      {"id":"launch-small","title":"처음부터 전면확장하지 말고 소규모로 판매검증","summary":"첫 고객군과 채널을 좁혀 문의→구매→불만→재구매 흐름을 실제로 확인합니다.","kind":"must","priority":94},
+      {"id":"online-disclosure","title":"온라인 판매페이지의 사업자정보·가격·배송·환불 표시 확인","summary":"결제 직전 고객이 알아야 할 조건이 누락되지 않았는지 실제 모바일 화면에서 확인합니다.","kind":"risk","priority":96,"conditions":{"ecommerce":["yes"]}}
     ]},
-    {"id":"startup-after","label":"시작 후 8~30일","fromDays":-8,"toDays":-30,"actions":[
-      {"id":"startup-margin","title":"실제 매출총이익 확인","summary":"매출액보다 한 건을 팔 때 실제로 얼마가 남는지 확인합니다.","kind":"risk","priority":96},
-      {"id":"startup-repeat","title":"재구매·소개 가능성 확인","summary":"첫 고객이 다시 사거나 다른 사람에게 추천할 이유가 있는지 확인합니다.","kind":"must","priority":85},
-      {"id":"startup-cut","title":"효과 없는 비용·기능 제거","summary":"한 달간 사용되지 않은 도구·광고·기능을 정리해 고정비를 낮춥니다.","kind":"execute","priority":78}
+    {"id":"startup-after","label":"개시 후 3~30일","fromDays":-3,"toDays":-30,"actions":[
+      {"id":"cash-dashboard","title":"매출보다 현금잔고·고정비·미수금 먼저 보기","summary":"월 매출, 실제 입금, 미수금, 고정비, 변동비, 세금충당액을 분리해 기록합니다.","kind":"must","priority":100},
+      {"id":"tax-calendar","title":"부가세·원천세·종합소득·법인세 일정을 캘린더화","summary":"사업형태와 직원유무에 맞는 신고·납부 일정을 세무일정으로 고정합니다.","kind":"risk","priority":95,"url":"https://www.hometax.go.kr/","sourceLabel":"홈택스"},
+      {"id":"simplified-review","title":"간이과세 적용 여부를 실제 업종·매출 기준으로 재확인","summary":"예상과 실제 매출·업종이 달라지면 과세유형과 세금계산서 발행·매입세액 처리 영향도 다시 확인합니다.","kind":"risk","priority":88,"conditions":{"taxType":["simplified","undecided"]}},
+      {"id":"channel-profit","title":"채널별 매출이 아니라 채널별 이익률 비교","summary":"플랫폼 수수료, 광고비, 배송비, 환불률을 빼고 실제 남는 채널을 확인합니다.","kind":"execute","priority":84},
+      {"id":"customer-complaints","title":"첫 불만·환불 사유를 제품개선 데이터로 기록","summary":"문의와 취소·환불 이유를 유형화해 상품, 설명, 가격, 배송 중 어디가 문제인지 수정합니다.","kind":"execute","priority":80}
     ]}
   ]
 }
