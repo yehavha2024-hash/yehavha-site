@@ -151,7 +151,6 @@
       const response = await fetch('./events/move.json', { cache: 'no-store' });
       if (!response.ok) throw new Error('Action Graph load failed');
       graph = await response.json();
-      $('graphVersion').textContent = `Action Data v${graph.version} · ${graph.updatedAt}`;
       applyProfile(readJSON(PROFILE_KEY, null));
     } catch (error) {
       $('loadError').hidden = false;
