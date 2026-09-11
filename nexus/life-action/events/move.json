@@ -1,162 +1,41 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "eventType": "move",
   "title": "이사",
-  "subtitle": "정보를 읽는 대신, 지금 해야 할 일을 순서대로 실행합니다.",
+  "targetLabel": "이사일",
+  "subtitle": "계약·정산·주소·생활서비스를 시점별로 정리합니다.",
   "updatedAt": "2026-09-11",
+  "inputs": [
+    {"id":"targetDate","label":"이사일","type":"date","required":true},
+    {"id":"region","label":"지역","type":"select","default":"seoul","options":[{"value":"seoul","label":"서울"},{"value":"capital","label":"수도권"},{"value":"metro","label":"광역시"},{"value":"other","label":"기타 지역"}]},
+    {"id":"residence","label":"주거형태","type":"select","default":"owner","options":[{"value":"owner","label":"자가"},{"value":"jeonse","label":"전세"},{"value":"monthly","label":"월세"}]},
+    {"id":"household","label":"가구","type":"select","default":"solo","options":[{"value":"solo","label":"1인"},{"value":"family","label":"가족"}]}
+  ],
   "stages": [
-    {
-      "id": "move-60",
-      "label": "이사 60~31일 전",
-      "fromDays": 60,
-      "toDays": 31,
-      "actions": [
-        {
-          "id": "contract-schedule",
-          "title": "현재 계약·잔금·입주일 일정 한 번에 맞추기",
-          "summary": "퇴거일, 잔금일, 입주 가능일이 어긋나지 않는지 먼저 확인합니다.",
-          "kind": "must",
-          "priority": 100
-        },
-        {
-          "id": "deposit-loan-check",
-          "title": "보증금·대출·보증 조건 확인",
-          "summary": "전세·월세라면 보증금 반환 시점과 대출·보증 조건을 미리 확인합니다.",
-          "kind": "risk",
-          "priority": 96,
-          "conditions": {"residence": ["jeonse", "monthly"]},
-          "url": "https://finlife.fss.or.kr/",
-          "sourceLabel": "금융감독원 금융상품 한눈에"
-        },
-        {
-          "id": "moving-quotes",
-          "title": "이사업체 일정·견적 비교",
-          "summary": "날짜가 정해지면 업체 가용 일정과 견적 조건을 비교하고 계약 범위를 기록합니다.",
-          "kind": "execute",
-          "priority": 88
-        }
-      ]
-    },
-    {
-      "id": "move-30",
-      "label": "이사 30~15일 전",
-      "fromDays": 30,
-      "toDays": 15,
-      "actions": [
-        {
-          "id": "internet-transfer",
-          "title": "인터넷·통신 이전 예약",
-          "summary": "설치 가능일을 확인해 이사 직후 공백이 생기지 않도록 예약합니다.",
-          "kind": "execute",
-          "priority": 78
-        },
-        {
-          "id": "school-care",
-          "title": "가족 생활동선 변경 확인",
-          "summary": "가족과 함께 이동한다면 통학·돌봄·출퇴근 동선을 새 주소 기준으로 다시 확인합니다.",
-          "kind": "must",
-          "priority": 76,
-          "conditions": {"household": ["family"]}
-        },
-        {
-          "id": "waste-plan",
-          "title": "폐기·중고판매·대형폐기물 정리 계획",
-          "summary": "버릴 물건과 가져갈 물건을 분리해 이사 직전 비용과 작업량을 줄입니다.",
-          "kind": "execute",
-          "priority": 67
-        }
-      ]
-    },
-    {
-      "id": "move-14",
-      "label": "이사 14~3일 전",
-      "fromDays": 14,
-      "toDays": 3,
-      "actions": [
-        {
-          "id": "utility-settlement",
-          "title": "전기·가스·수도 정산·개통 일정 확인",
-          "summary": "기존 주소의 정산과 새 주소의 사용 시작 일정을 각각 확인합니다.",
-          "kind": "must",
-          "priority": 92
-        },
-        {
-          "id": "address-list",
-          "title": "주소 변경 대상 목록 만들기",
-          "summary": "금융, 보험, 통신, 배송, 정기구독 등 주소가 등록된 서비스를 한 번에 목록화합니다.",
-          "kind": "risk",
-          "priority": 83
-        },
-        {
-          "id": "documents-pack",
-          "title": "계약서·신분증·중요서류 별도 보관",
-          "summary": "이삿짐과 섞이지 않도록 당일 직접 들고 갈 서류와 귀중품을 분리합니다.",
-          "kind": "must",
-          "priority": 86
-        }
-      ]
-    },
-    {
-      "id": "move-day",
-      "label": "이사 당일~3일",
-      "fromDays": 2,
-      "toDays": -3,
-      "actions": [
-        {
-          "id": "meter-photo",
-          "title": "기존·새 주거 상태와 계량기 기록",
-          "summary": "퇴거·입주 시점의 상태와 주요 계량기 수치를 사진으로 남겨 정산 분쟁 가능성을 줄입니다.",
-          "kind": "risk",
-          "priority": 98
-        },
-        {
-          "id": "move-in-report",
-          "title": "전입 관련 행정절차 확인",
-          "summary": "새 주소 기준으로 필요한 전입 관련 절차와 제출사항을 정부24에서 확인합니다.",
-          "kind": "execute",
-          "priority": 100,
-          "url": "https://www.gov.kr/",
-          "sourceLabel": "정부24"
-        },
-        {
-          "id": "door-security",
-          "title": "출입·보안·주차 정보 정리",
-          "summary": "공동현관, 주차등록, 관리사무소, 택배 위치 등 실제 생활에 필요한 정보를 확인합니다.",
-          "kind": "must",
-          "priority": 75
-        }
-      ]
-    },
-    {
-      "id": "move-after",
-      "label": "이사 후 4~30일",
-      "fromDays": -4,
-      "toDays": -30,
-      "actions": [
-        {
-          "id": "postal-address",
-          "title": "우편·배송 주소 변경 마무리",
-          "summary": "이전 주소로 계속 배송되는 항목이 없는지 확인하고 우편 관련 서비스를 점검합니다.",
-          "kind": "execute",
-          "priority": 74,
-          "url": "https://www.epost.go.kr/",
-          "sourceLabel": "인터넷우체국"
-        },
-        {
-          "id": "service-address-audit",
-          "title": "금융·보험·쇼핑·구독 주소 최종 점검",
-          "summary": "자주 쓰는 서비스부터 실제 등록주소가 바뀌었는지 확인합니다.",
-          "kind": "risk",
-          "priority": 69
-        },
-        {
-          "id": "move-cost-review",
-          "title": "이사 비용과 실제 소요 기록",
-          "summary": "견적과 실제 비용, 예상 밖 지출을 기록해 다음 의사결정 데이터로 남깁니다.",
-          "kind": "must",
-          "priority": 55
-        }
-      ]
-    }
+    {"id":"move-60","label":"이사 60~31일 전","fromDays":60,"toDays":31,"actions":[
+      {"id":"contract-schedule","title":"계약·잔금·입주일 일정 맞추기","summary":"퇴거일, 잔금일, 입주 가능일이 어긋나지 않는지 먼저 확인합니다.","kind":"must","priority":100},
+      {"id":"deposit-loan-check","title":"보증금·대출·보증 조건 확인","summary":"전세·월세라면 보증금 반환 시점과 대출·보증 조건을 미리 확인합니다.","kind":"risk","priority":96,"conditions":{"residence":["jeonse","monthly"]},"url":"https://finlife.fss.or.kr/","sourceLabel":"금융감독원 금융상품 한눈에"},
+      {"id":"moving-quotes","title":"이사업체 일정·견적 비교","summary":"날짜가 정해지면 업체 가용 일정과 견적 조건을 비교하고 계약 범위를 기록합니다.","kind":"execute","priority":88}
+    ]},
+    {"id":"move-30","label":"이사 30~15일 전","fromDays":30,"toDays":15,"actions":[
+      {"id":"internet-transfer","title":"인터넷·통신 이전 예약","summary":"설치 가능일을 확인해 이사 직후 공백이 생기지 않도록 예약합니다.","kind":"execute","priority":78},
+      {"id":"school-care","title":"가족 생활동선 변경 확인","summary":"가족과 함께 이동한다면 통학·돌봄·출퇴근 동선을 새 주소 기준으로 확인합니다.","kind":"must","priority":76,"conditions":{"household":["family"]}},
+      {"id":"waste-plan","title":"폐기·중고판매·대형폐기물 정리","summary":"버릴 물건과 가져갈 물건을 분리해 이사 직전 비용과 작업량을 줄입니다.","kind":"execute","priority":67}
+    ]},
+    {"id":"move-14","label":"이사 14~3일 전","fromDays":14,"toDays":3,"actions":[
+      {"id":"utility-settlement","title":"전기·가스·수도 정산·개통 확인","summary":"기존 주소의 정산과 새 주소의 사용 시작 일정을 각각 확인합니다.","kind":"must","priority":92},
+      {"id":"address-list","title":"주소 변경 대상 목록 만들기","summary":"금융, 보험, 통신, 배송, 정기구독 등 주소가 등록된 서비스를 목록화합니다.","kind":"risk","priority":83},
+      {"id":"documents-pack","title":"계약서·신분증·중요서류 별도 보관","summary":"이삿짐과 섞이지 않도록 당일 직접 들고 갈 서류와 귀중품을 분리합니다.","kind":"must","priority":86}
+    ]},
+    {"id":"move-day","label":"이사 당일~3일","fromDays":2,"toDays":-3,"actions":[
+      {"id":"meter-photo","title":"주거 상태와 계량기 기록","summary":"퇴거·입주 시점의 상태와 계량기 수치를 사진으로 남겨 분쟁 가능성을 줄입니다.","kind":"risk","priority":98},
+      {"id":"move-in-report","title":"전입 관련 행정절차 확인","summary":"새 주소 기준으로 필요한 전입 관련 절차와 제출사항을 정부24에서 확인합니다.","kind":"execute","priority":100,"url":"https://www.gov.kr/","sourceLabel":"정부24"},
+      {"id":"door-security","title":"출입·보안·주차 정보 정리","summary":"공동현관, 주차등록, 관리사무소, 택배 위치 등 실제 생활 정보를 확인합니다.","kind":"must","priority":75}
+    ]},
+    {"id":"move-after","label":"이사 후 4~30일","fromDays":-4,"toDays":-30,"actions":[
+      {"id":"postal-address","title":"우편·배송 주소 변경 마무리","summary":"이전 주소로 계속 배송되는 항목이 없는지 확인합니다.","kind":"execute","priority":74,"url":"https://www.epost.go.kr/","sourceLabel":"인터넷우체국"},
+      {"id":"service-address-audit","title":"금융·보험·쇼핑·구독 주소 최종 점검","summary":"자주 쓰는 서비스부터 실제 등록주소가 바뀌었는지 확인합니다.","kind":"risk","priority":69},
+      {"id":"move-cost-review","title":"이사 비용과 실제 소요 기록","summary":"견적과 실제 비용, 예상 밖 지출을 기록해 다음 의사결정 데이터로 남깁니다.","kind":"must","priority":55}
+    ]}
   ]
 }
