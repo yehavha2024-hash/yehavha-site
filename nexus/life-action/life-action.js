@@ -1,12 +1,23 @@
 (() => {
   'use strict';
 
-  const PROFILE_KEY = 'nexus2:moveProfile';
-  const PROGRESS_KEY = 'nexus2:moveProgress';
+  const EVENT_FILES = {
+    move: 'move.json',
+    career: 'career.json',
+    retire: 'retire.json',
+    startup: 'startup.json',
+    care: 'care.json',
+    travel: 'travel.json'
+  };
+  const SELECTED_EVENT_KEY = 'nexus2:selectedEvent';
   const kindLabel = { must: '해야 하는 것', risk: '놓치면 손해', execute: '지금 실행' };
+
   let graph = null;
+  let currentEvent = 'move';
 
   const $ = (id) => document.getElementById(id);
+  const profileKey = () => `nexus2:${currentEvent}:profile`;
+  const progressKey = () => `nexus2:${currentEvent}:progress`;
 
   function readJSON(key, fallback) {
     try {
@@ -30,10 +41,15 @@
     return Object.entries(action.conditions).every(([key, allowed]) => allowed.includes(profile[key]));
   }
 
+  function defaultProfile() {
+    if (!graph) return {};
+    return Object.fromEntries((graph.inputs || []).map((input) => [input.id, input.default || '']));
+  }
+
   function actionsForProfile(profile) {
     return graph.stages.flatMap((stage) => stage.actions
       .filter((action) => matchesConditions(action, profile))
-      .map((action) => ({ ...action, stageId: stage.id, stageLabel: stage.label, fromDays: stage.fromDays, toDays: stage.toDays }))
+      .map((action) => ({ ...action, stageId: stage.id, stageLabel: stage.label }))
     );
   }
 
@@ -46,11 +62,37 @@
   }
 
   function dueActions(profile) {
-    const days = daysUntil(profile.moveDate);
+    const days = daysUntil(profile.targetDate);
     const stage = currentStage(days);
     return stage.actions
       .filter((action) => matchesConditions(action, profile))
       .sort((a, b) => b.priority - a.priority);
+  }
+
+  function renderForm(profile = {}) {
+    const form = $('lifeForm');
+    const fields = (graph.inputs || []).map((input) => {
+      const value = profile[input.id] ?? input.default ?? '';
+      if (input.type === 'select') {
+        const options = (input.options || []).map((option) =>
+          `<option value="${option.value}" ${String(value) === String(option.value) ? 'selected' : ''}>${option.label}</option>`
+        ).join('');
+        return `<div class="life-field"><label for="field-${input.id}">${input.label}</label><select id="field-${input.id}" name="${input.id}">${options}</select></div>`;
+      }
+      return `<div class="life-field"><label for="field-${input.id}">${input.label}</label><input id="field-${input.id}" name="${input.id}" type="${input.type || 'text'}" value="${value}" ${input.required ? 'required' : ''}/></div>`;
+    }).join('');
+
+    form.innerHTML = `${fields}<div class="life-form-actions"><button class="life-primary" type="submit">내 실행 순서 만들기</button><button class="life-secondary" id="resetLife" type="button">초기화</button></div>`;
+    $('resetLife').addEventListener('click', resetCurrentEvent);
+  }
+
+  function collectProfile() {
+    const profile = {};
+    (graph.inputs || []).forEach((input) => {
+      const field = $(`field-${input.id}`);
+      profile[input.id] = field ? field.value : '';
+    });
+    return profile;
   }
 
   function renderNow(profile) {
@@ -60,22 +102,18 @@
     Object.entries(groups).forEach(([kind, actions]) => {
       const target = $(`now-${kind}`);
       if (!target) return;
-      if (!actions.length) {
-        target.innerHTML = '<p class="life-empty">현재 단계에서 별도 항목이 없습니다.</p>';
-        return;
-      }
-      target.innerHTML = actions.slice(0, 3).map((action) => `
+      target.innerHTML = actions.length ? actions.slice(0, 3).map((action) => `
         <article class="life-now-item">
           <strong>${action.title}</strong>
           <p>${action.summary}</p>
           ${action.url ? `<a class="life-action-link" href="${action.url}" target="_blank" rel="noopener noreferrer">${action.sourceLabel || '공식 경로'} 확인 →</a>` : ''}
         </article>
-      `).join('');
+      `).join('') : '<p class="life-empty">현재 단계에서 별도 항목이 없습니다.</p>';
     });
   }
 
   function renderTimeline(profile) {
-    const progress = readJSON(PROGRESS_KEY, {});
+    const progress = readJSON(progressKey(), {});
     const timeline = $('lifeTimeline');
     timeline.innerHTML = '';
 
@@ -90,7 +128,7 @@
         <div class="life-actions">
           ${actions.map((action) => `
             <label class="life-check ${progress[action.id] ? 'is-done' : ''}" data-action-id="${action.id}">
-              <input type="checkbox" ${progress[action.id] ? 'checked' : ''} />
+              <input type="checkbox" ${progress[action.id] ? 'checked' : ''}/>
               <span class="life-check-copy"><strong>${action.title}</strong><p>${action.summary}${action.url ? ` · <a href="${action.url}" target="_blank" rel="noopener noreferrer">${action.sourceLabel || '공식 경로'}</a>` : ''}</p></span>
               <span class="life-kind">${kindLabel[action.kind] || action.kind}</span>
             </label>
@@ -103,23 +141,25 @@
     timeline.querySelectorAll('.life-check input').forEach((input) => {
       input.addEventListener('change', (event) => {
         const label = event.target.closest('.life-check');
-        const id = label.dataset.actionId;
-        const next = readJSON(PROGRESS_KEY, {});
-        next[id] = event.target.checked;
-        localStorage.setItem(PROGRESS_KEY, JSON.stringify(next));
-        renderDashboard(profile);
+        const next = readJSON(progressKey(), {});
+        next[label.dataset.actionId] = event.target.checked;
+        localStorage.setItem(progressKey(), JSON.stringify(next));
+        const saved = readJSON(profileKey(), null);
+        if (saved && saved.targetDate) renderDashboard(saved);
+        else renderTimeline(profile);
       });
     });
   }
 
   function renderSummary(profile) {
     const actions = actionsForProfile(profile);
-    const progress = readJSON(PROGRESS_KEY, {});
+    const progress = readJSON(progressKey(), {});
     const complete = actions.filter((action) => progress[action.id]).length;
-    const days = daysUntil(profile.moveDate);
+    const days = daysUntil(profile.targetDate);
     $('totalActions').textContent = `${actions.length}개`;
     $('completedActions').textContent = `${complete}개`;
-    $('moveDday').textContent = days === null ? '미설정' : days > 0 ? `D-${days}` : days === 0 ? 'D-DAY' : `D+${Math.abs(days)}`;
+    $('targetSummaryLabel').textContent = graph.targetLabel || '기준일';
+    $('targetSummaryValue').textContent = days === null ? '미설정' : days > 0 ? `D-${days}` : days === 0 ? 'D-DAY' : `D+${Math.abs(days)}`;
   }
 
   function renderDashboard(profile) {
@@ -129,81 +169,72 @@
     renderTimeline(profile);
   }
 
-  function applyProfile(profile) {
-    if (!profile) return;
-    $('moveDate').value = profile.moveDate || '';
-    $('region').value = profile.region || 'seoul';
-    $('residence').value = profile.residence || 'owner';
-    $('household').value = profile.household || 'solo';
-    if (profile.moveDate) renderDashboard(profile);
-  }
-
-  function resetView() {
+  function resetCurrentEvent() {
+    localStorage.removeItem(profileKey());
+    localStorage.removeItem(progressKey());
+    const profile = defaultProfile();
+    renderForm(profile);
     $('resultPanel').hidden = true;
-    $('lifeTimeline').innerHTML = '<p class="life-empty">이사일과 조건을 선택하면 실행흐름이 표시됩니다.</p>';
-    $('totalActions').textContent = '0개';
-    $('completedActions').textContent = '0개';
-    $('moveDday').textContent = '미설정';
+    renderTimeline(profile);
   }
 
-  function selectEvent(button) {
-    document.querySelectorAll('.life-event').forEach((item) => item.classList.remove('is-active'));
-    button.classList.add('is-active');
+  function setActiveButton(eventKey) {
+    document.querySelectorAll('.life-event').forEach((button) => {
+      button.classList.toggle('is-active', button.dataset.event === eventKey);
+    });
+  }
 
-    const eventKey = button.dataset.event;
-    const label = button.dataset.label || button.textContent.trim();
-    const notice = $('lifeEventNotice');
-    const isMove = eventKey === 'move';
+  async function loadEvent(eventKey, shouldScroll = false) {
+    if (!EVENT_FILES[eventKey]) return;
+    currentEvent = eventKey;
+    localStorage.setItem(SELECTED_EVENT_KEY, eventKey);
+    setActiveButton(eventKey);
+    $('loadError').hidden = true;
 
-    $('configure').hidden = !isMove;
-    $('timelinePanel').hidden = !isMove;
-    if (!isMove) $('resultPanel').hidden = true;
+    try {
+      const response = await fetch(`./events/${EVENT_FILES[eventKey]}`, { cache: 'no-store' });
+      if (!response.ok) throw new Error(`${eventKey} Action Graph load failed`);
+      graph = await response.json();
 
-    if (isMove) {
-      notice.hidden = true;
-      $('configure').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      return;
+      $('configureTitle').textContent = `${graph.title} 실행순서 만들기`;
+      $('configureDescription').textContent = graph.subtitle || '조건을 선택하면 필요한 실행순서를 보여줍니다.';
+      $('timelineTitle').textContent = `${graph.title} Action Graph`;
+      $('timelineDescription').textContent = '전체 실행흐름을 시점별로 확인하고 완료상태를 남깁니다.';
+
+      const saved = readJSON(profileKey(), null);
+      const profile = saved || defaultProfile();
+      renderForm(profile);
+      renderTimeline(profile);
+
+      if (saved && saved.targetDate) renderDashboard(saved);
+      else $('resultPanel').hidden = true;
+
+      if (shouldScroll) $('configure').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } catch (error) {
+      $('loadError').hidden = false;
+      $('lifeForm').innerHTML = '';
+      $('lifeTimeline').innerHTML = '<p class="life-empty">실행 데이터를 불러오지 못했습니다.</p>';
+      $('resultPanel').hidden = true;
+      console.error(error);
     }
-
-    notice.textContent = `${label} 실행 NEXUS는 준비 중입니다.`;
-    notice.hidden = false;
   }
 
   async function init() {
-    try {
-      const response = await fetch('./events/move.json', { cache: 'no-store' });
-      if (!response.ok) throw new Error('Action Graph load failed');
-      graph = await response.json();
-      applyProfile(readJSON(PROFILE_KEY, null));
-    } catch (error) {
-      $('loadError').hidden = false;
-      console.error(error);
-    }
-
     document.querySelectorAll('.life-event').forEach((button) => {
-      button.addEventListener('click', () => selectEvent(button));
+      button.addEventListener('click', () => loadEvent(button.dataset.event, true));
     });
 
     $('lifeForm').addEventListener('submit', (event) => {
       event.preventDefault();
       if (!graph) return;
-      const profile = {
-        moveDate: $('moveDate').value,
-        region: $('region').value,
-        residence: $('residence').value,
-        household: $('household').value
-      };
-      localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
+      const profile = collectProfile();
+      localStorage.setItem(profileKey(), JSON.stringify(profile));
       renderDashboard(profile);
       $('resultPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
-    $('resetLife').addEventListener('click', () => {
-      localStorage.removeItem(PROFILE_KEY);
-      localStorage.removeItem(PROGRESS_KEY);
-      $('lifeForm').reset();
-      resetView();
-    });
+    const savedEvent = localStorage.getItem(SELECTED_EVENT_KEY);
+    await loadEvent(EVENT_FILES[savedEvent] ? savedEvent : 'move', false);
   }
 
   document.addEventListener('DOMContentLoaded', init);
