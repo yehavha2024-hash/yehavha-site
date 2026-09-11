@@ -1,0 +1,36 @@
+{
+  "version":"0.1.0","eventType":"travel","title":"여행","targetLabel":"출발일","subtitle":"예약·준비·이동·현지 행동을 출발일 기준으로 정리합니다.","updatedAt":"2026-09-11",
+  "inputs":[
+    {"id":"targetDate","label":"출발일","type":"date","required":true},
+    {"id":"scope","label":"여행 범위","type":"select","default":"domestic","options":[{"value":"domestic","label":"국내"},{"value":"overseas","label":"해외"}]},
+    {"id":"party","label":"동행","type":"select","default":"solo","options":[{"value":"solo","label":"혼자"},{"value":"couple","label":"2인"},{"value":"family","label":"가족"}]},
+    {"id":"style","label":"여행 방식","type":"select","default":"free","options":[{"value":"free","label":"자유여행"},{"value":"package","label":"패키지"},{"value":"business","label":"출장"}]}
+  ],
+  "stages":[
+    {"id":"travel-60","label":"출발 60~31일 전","fromDays":60,"toDays":31,"actions":[
+      {"id":"travel-budget","title":"총예산 상한 먼저 정하기","summary":"교통·숙박·식비·현지교통·입장료까지 포함한 총예산을 먼저 정합니다.","kind":"must","priority":100},
+      {"id":"travel-book","title":"교통·숙박 핵심 예약","summary":"취소조건과 위치를 함께 보고 핵심 예약부터 확정합니다.","kind":"execute","priority":94},
+      {"id":"travel-passport","title":"여권·입국조건 확인","summary":"해외여행이면 여권 유효기간과 입국조건을 공식 경로에서 확인합니다.","kind":"risk","priority":98,"conditions":{"scope":["overseas"]},"url":"https://www.0404.go.kr/","sourceLabel":"외교부 해외안전여행"}
+    ]},
+    {"id":"travel-30","label":"출발 30~15일 전","fromDays":30,"toDays":15,"actions":[
+      {"id":"travel-route","title":"하루 핵심 일정 1~2개만 확정","summary":"시간을 촘촘히 채우지 말고 이동시간을 포함해 핵심 일정만 고정합니다.","kind":"must","priority":88},
+      {"id":"travel-local","title":"현지 이동수단과 결제수단 확인","summary":"공항·역에서 숙소까지 이동과 카드·현금 사용방식을 미리 확인합니다.","kind":"risk","priority":86},
+      {"id":"travel-family","title":"가족별 필요물품 분리","summary":"아이·부모님과 함께라면 약, 식사, 이동보조 등 개인별 준비물을 따로 정리합니다.","kind":"execute","priority":78,"conditions":{"party":["family"]}}
+    ]},
+    {"id":"travel-14","label":"출발 14~3일 전","fromDays":14,"toDays":3,"actions":[
+      {"id":"travel-weather","title":"날씨·운영시간 재확인","summary":"옷차림과 실내 대체일정을 정할 수 있도록 출발 직전 다시 확인합니다.","kind":"must","priority":92},
+      {"id":"travel-docs","title":"예약·신분·보험 정보 한곳에 저장","summary":"휴대폰이 안 되더라도 확인할 수 있도록 핵심 정보의 오프라인 사본을 준비합니다.","kind":"risk","priority":94},
+      {"id":"travel-roaming","title":"통신·로밍·충전 준비","summary":"해외라면 데이터 사용방식과 충전규격을 미리 준비합니다.","kind":"execute","priority":76,"conditions":{"scope":["overseas"]}}
+    ]},
+    {"id":"travel-day","label":"출발 당일~여행 중","fromDays":2,"toDays":-7,"actions":[
+      {"id":"travel-check","title":"출발 전 핵심 5개 확인","summary":"신분증·결제수단·휴대폰·충전·예약정보만 마지막으로 확인합니다.","kind":"must","priority":100},
+      {"id":"travel-safety","title":"일정 변경 시 안전·공식정보 우선","summary":"교통·기상·현지상황이 바뀌면 계획보다 공식 안내를 우선합니다.","kind":"risk","priority":92},
+      {"id":"travel-expense","title":"큰 지출만 바로 기록","summary":"세부 가계부보다 교통·숙박·쇼핑 등 큰 지출만 기록해 예산이탈을 막습니다.","kind":"execute","priority":68}
+    ]},
+    {"id":"travel-after","label":"귀환 후 1~14일","fromDays":-8,"toDays":-14,"actions":[
+      {"id":"travel-settle","title":"카드·환전·공동비용 정산","summary":"미결제 금액과 공동비용을 바로 정리합니다.","kind":"must","priority":86},
+      {"id":"travel-review","title":"좋았던 것과 낭비한 것 기록","summary":"다음 여행에서 재사용할 숙소·동선·비용 정보를 짧게 남깁니다.","kind":"execute","priority":70},
+      {"id":"travel-security","title":"공용기기·임시계정 점검","summary":"해외나 공용기기를 사용했다면 로그인 상태와 보안설정을 확인합니다.","kind":"risk","priority":74,"conditions":{"scope":["overseas"]}}
+    ]}
+  ]
+}
