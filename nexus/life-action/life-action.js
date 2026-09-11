@@ -2,30 +2,22 @@
   'use strict';
 
   const EVENT_FILES = {
-    move: 'move.json',
-    career: 'career.json',
-    retire: 'retire.json',
-    startup: 'startup.json',
-    care: 'care.json',
-    travel: 'travel.json'
+    move: 'move.json', career: 'career.json', retire: 'retire.json',
+    startup: 'startup.json', care: 'care.json', travel: 'travel.json'
   };
   const SELECTED_EVENT_KEY = 'nexus2:selectedEvent';
   const kindLabel = { must: '해야 하는 것', risk: '놓치면 손해', execute: '지금 실행' };
-
   let graph = null;
   let currentEvent = 'move';
+  let draftProfile = {};
 
   const $ = (id) => document.getElementById(id);
   const profileKey = () => `nexus2:${currentEvent}:profile`;
   const progressKey = () => `nexus2:${currentEvent}:progress`;
 
   function readJSON(key, fallback) {
-    try {
-      const value = JSON.parse(localStorage.getItem(key));
-      return value ?? fallback;
-    } catch (_) {
-      return fallback;
-    }
+    try { const value = JSON.parse(localStorage.getItem(key)); return value ?? fallback; }
+    catch (_) { return fallback; }
   }
 
   function daysUntil(dateString) {
@@ -36,10 +28,13 @@
     return Math.ceil((target - today) / 86400000);
   }
 
-  function matchesConditions(action, profile) {
-    if (!action.conditions) return true;
-    return Object.entries(action.conditions).every(([key, allowed]) => allowed.includes(profile[key]));
+  function conditionMatches(conditions, profile) {
+    if (!conditions) return true;
+    return Object.entries(conditions).every(([key, allowed]) => allowed.includes(profile[key]));
   }
+
+  function matchesConditions(action, profile) { return conditionMatches(action.conditions, profile); }
+  function inputVisible(input, profile) { return conditionMatches(input.conditions, profile); }
 
   function defaultProfile() {
     if (!graph) return {};
@@ -49,8 +44,7 @@
   function actionsForProfile(profile) {
     return graph.stages.flatMap((stage) => stage.actions
       .filter((action) => matchesConditions(action, profile))
-      .map((action) => ({ ...action, stageId: stage.id, stageLabel: stage.label }))
-    );
+      .map((action) => ({ ...action, stageId: stage.id, stageLabel: stage.label })));
   }
 
   function currentStage(days) {
@@ -62,53 +56,50 @@
   }
 
   function dueActions(profile) {
-    const days = daysUntil(profile.targetDate);
-    const stage = currentStage(days);
-    return stage.actions
-      .filter((action) => matchesConditions(action, profile))
-      .sort((a, b) => b.priority - a.priority);
+    const stage = currentStage(daysUntil(profile.targetDate));
+    return stage.actions.filter((action) => matchesConditions(action, profile)).sort((a,b) => b.priority - a.priority);
+  }
+
+  function fieldMarkup(input, value) {
+    if (input.type === 'select') {
+      const options = (input.options || []).map((option) => `<option value="${option.value}" ${String(value) === String(option.value) ? 'selected' : ''}>${option.label}</option>`).join('');
+      return `<div class="life-field"><label for="field-${input.id}">${input.label}</label><select id="field-${input.id}" name="${input.id}">${options}</select></div>`;
+    }
+    return `<div class="life-field"><label for="field-${input.id}">${input.label}</label><input id="field-${input.id}" name="${input.id}" type="${input.type || 'text'}" value="${value || ''}" ${input.required ? 'required' : ''}/></div>`;
   }
 
   function renderForm(profile = {}) {
-    const form = $('lifeForm');
-    const fields = (graph.inputs || []).map((input) => {
-      const value = profile[input.id] ?? input.default ?? '';
-      if (input.type === 'select') {
-        const options = (input.options || []).map((option) =>
-          `<option value="${option.value}" ${String(value) === String(option.value) ? 'selected' : ''}>${option.label}</option>`
-        ).join('');
-        return `<div class="life-field"><label for="field-${input.id}">${input.label}</label><select id="field-${input.id}" name="${input.id}">${options}</select></div>`;
-      }
-      return `<div class="life-field"><label for="field-${input.id}">${input.label}</label><input id="field-${input.id}" name="${input.id}" type="${input.type || 'text'}" value="${value}" ${input.required ? 'required' : ''}/></div>`;
-    }).join('');
-
-    form.innerHTML = `${fields}<div class="life-form-actions"><button class="life-primary" type="submit">내 실행 순서 만들기</button><button class="life-secondary" id="resetLife" type="button">초기화</button></div>`;
+    draftProfile = { ...defaultProfile(), ...draftProfile, ...profile };
+    const visibleInputs = (graph.inputs || []).filter((input) => inputVisible(input, draftProfile));
+    $('lifeForm').innerHTML = `${visibleInputs.map((input) => fieldMarkup(input, draftProfile[input.id] ?? input.default ?? '')).join('')}<div class="life-form-actions"><button class="life-primary" type="submit">내 실행 순서 만들기</button><button class="life-secondary" id="resetLife" type="button">초기화</button></div>`;
+    visibleInputs.forEach((input) => {
+      const field = $(`field-${input.id}`);
+      if (!field) return;
+      field.addEventListener('change', () => {
+        draftProfile[input.id] = field.value;
+        if ((graph.inputs || []).some((item) => item.conditions && Object.prototype.hasOwnProperty.call(item.conditions, input.id))) renderForm(draftProfile);
+      });
+    });
     $('resetLife').addEventListener('click', resetCurrentEvent);
   }
 
   function collectProfile() {
-    const profile = {};
+    const profile = { ...draftProfile };
     (graph.inputs || []).forEach((input) => {
       const field = $(`field-${input.id}`);
-      profile[input.id] = field ? field.value : '';
+      if (field) profile[input.id] = field.value;
     });
+    draftProfile = profile;
     return profile;
   }
 
   function renderNow(profile) {
     const groups = { must: [], risk: [], execute: [] };
     dueActions(profile).forEach((action) => groups[action.kind].push(action));
-
     Object.entries(groups).forEach(([kind, actions]) => {
       const target = $(`now-${kind}`);
       if (!target) return;
-      target.innerHTML = actions.length ? actions.slice(0, 3).map((action) => `
-        <article class="life-now-item">
-          <strong>${action.title}</strong>
-          <p>${action.summary}</p>
-          ${action.url ? `<a class="life-action-link" href="${action.url}" target="_blank" rel="noopener noreferrer">${action.sourceLabel || '공식 경로'} 확인 →</a>` : ''}
-        </article>
-      `).join('') : '<p class="life-empty">현재 단계에서 별도 항목이 없습니다.</p>';
+      target.innerHTML = actions.length ? actions.slice(0,4).map((action) => `<article class="life-now-item"><strong>${action.title}</strong><p>${action.summary}</p>${action.url ? `<a class="life-action-link" href="${action.url}" target="_blank" rel="noopener noreferrer">${action.sourceLabel || '공식 경로'} 확인 →</a>` : ''}</article>`).join('') : '<p class="life-empty">현재 단계에서 별도 항목이 없습니다.</p>';
     });
   }
 
@@ -116,28 +107,15 @@
     const progress = readJSON(progressKey(), {});
     const timeline = $('lifeTimeline');
     timeline.innerHTML = '';
-
     graph.stages.forEach((stage) => {
       const actions = stage.actions.filter((action) => matchesConditions(action, profile));
       if (!actions.length) return;
       const completed = actions.filter((action) => progress[action.id]).length;
       const section = document.createElement('section');
       section.className = 'life-stage';
-      section.innerHTML = `
-        <div class="life-stage-head"><strong>${stage.label}</strong><span>${completed}/${actions.length} 완료</span></div>
-        <div class="life-actions">
-          ${actions.map((action) => `
-            <label class="life-check ${progress[action.id] ? 'is-done' : ''}" data-action-id="${action.id}">
-              <input type="checkbox" ${progress[action.id] ? 'checked' : ''}/>
-              <span class="life-check-copy"><strong>${action.title}</strong><p>${action.summary}${action.url ? ` · <a href="${action.url}" target="_blank" rel="noopener noreferrer">${action.sourceLabel || '공식 경로'}</a>` : ''}</p></span>
-              <span class="life-kind">${kindLabel[action.kind] || action.kind}</span>
-            </label>
-          `).join('')}
-        </div>
-      `;
+      section.innerHTML = `<div class="life-stage-head"><strong>${stage.label}</strong><span>${completed}/${actions.length} 완료</span></div><div class="life-actions">${actions.map((action) => `<label class="life-check ${progress[action.id] ? 'is-done' : ''}" data-action-id="${action.id}"><input type="checkbox" ${progress[action.id] ? 'checked' : ''}/><span class="life-check-copy"><strong>${action.title}</strong><p>${action.summary}${action.url ? ` · <a href="${action.url}" target="_blank" rel="noopener noreferrer">${action.sourceLabel || '공식 경로'}</a>` : ''}</p></span><span class="life-kind">${kindLabel[action.kind] || action.kind}</span></label>`).join('')}</div>`;
       timeline.appendChild(section);
     });
-
     timeline.querySelectorAll('.life-check input').forEach((input) => {
       input.addEventListener('change', (event) => {
         const label = event.target.closest('.life-check');
@@ -145,8 +123,7 @@
         next[label.dataset.actionId] = event.target.checked;
         localStorage.setItem(progressKey(), JSON.stringify(next));
         const saved = readJSON(profileKey(), null);
-        if (saved && saved.targetDate) renderDashboard(saved);
-        else renderTimeline(profile);
+        if (saved && saved.targetDate) renderDashboard(saved); else renderTimeline(profile);
       });
     });
   }
@@ -162,26 +139,19 @@
     $('targetSummaryValue').textContent = days === null ? '미설정' : days > 0 ? `D-${days}` : days === 0 ? 'D-DAY' : `D+${Math.abs(days)}`;
   }
 
-  function renderDashboard(profile) {
-    $('resultPanel').hidden = false;
-    renderSummary(profile);
-    renderNow(profile);
-    renderTimeline(profile);
-  }
+  function renderDashboard(profile) { $('resultPanel').hidden = false; renderSummary(profile); renderNow(profile); renderTimeline(profile); }
 
   function resetCurrentEvent() {
     localStorage.removeItem(profileKey());
     localStorage.removeItem(progressKey());
-    const profile = defaultProfile();
-    renderForm(profile);
+    draftProfile = defaultProfile();
+    renderForm(draftProfile);
     $('resultPanel').hidden = true;
-    renderTimeline(profile);
+    renderTimeline(draftProfile);
   }
 
   function setActiveButton(eventKey) {
-    document.querySelectorAll('.life-event').forEach((button) => {
-      button.classList.toggle('is-active', button.dataset.event === eventKey);
-    });
+    document.querySelectorAll('.life-event').forEach((button) => button.classList.toggle('is-active', button.dataset.event === eventKey));
   }
 
   async function loadEvent(eventKey, shouldScroll = false) {
@@ -190,25 +160,19 @@
     localStorage.setItem(SELECTED_EVENT_KEY, eventKey);
     setActiveButton(eventKey);
     $('loadError').hidden = true;
-
     try {
       const response = await fetch(`./events/${EVENT_FILES[eventKey]}`, { cache: 'no-store' });
       if (!response.ok) throw new Error(`${eventKey} Action Graph load failed`);
       graph = await response.json();
-
       $('configureTitle').textContent = `${graph.title} 실행순서 만들기`;
       $('configureDescription').textContent = graph.subtitle || '조건을 선택하면 필요한 실행순서를 보여줍니다.';
       $('timelineTitle').textContent = `${graph.title} Action Graph`;
       $('timelineDescription').textContent = '전체 실행흐름을 시점별로 확인하고 완료상태를 남깁니다.';
-
       const saved = readJSON(profileKey(), null);
-      const profile = saved || defaultProfile();
-      renderForm(profile);
-      renderTimeline(profile);
-
-      if (saved && saved.targetDate) renderDashboard(saved);
-      else $('resultPanel').hidden = true;
-
+      draftProfile = saved || defaultProfile();
+      renderForm(draftProfile);
+      renderTimeline(draftProfile);
+      if (saved && saved.targetDate) renderDashboard(saved); else $('resultPanel').hidden = true;
       if (shouldScroll) $('configure').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     } catch (error) {
       $('loadError').hidden = false;
@@ -220,10 +184,7 @@
   }
 
   async function init() {
-    document.querySelectorAll('.life-event').forEach((button) => {
-      button.addEventListener('click', () => loadEvent(button.dataset.event, true));
-    });
-
+    document.querySelectorAll('.life-event').forEach((button) => button.addEventListener('click', () => loadEvent(button.dataset.event, true)));
     $('lifeForm').addEventListener('submit', (event) => {
       event.preventDefault();
       if (!graph) return;
@@ -232,7 +193,6 @@
       renderDashboard(profile);
       $('resultPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
-
     const savedEvent = localStorage.getItem(SELECTED_EVENT_KEY);
     await loadEvent(EVENT_FILES[savedEvent] ? savedEvent : 'move', false);
   }
