@@ -1,0 +1,31 @@
+{
+  "version":"0.1.0","eventType":"retire","title":"퇴직","targetLabel":"퇴직일","subtitle":"퇴직 전후의 소득·보험·연금·생활전환을 순서대로 점검합니다.","updatedAt":"2026-09-11",
+  "inputs":[
+    {"id":"targetDate","label":"퇴직일","type":"date","required":true},
+    {"id":"type","label":"퇴직 형태","type":"select","default":"planned","options":[{"value":"planned","label":"예정 퇴직"},{"value":"voluntary","label":"자발적 퇴직"},{"value":"already","label":"이미 퇴직"}]},
+    {"id":"income","label":"퇴직 후 소득","type":"select","default":"unknown","options":[{"value":"pension","label":"연금 중심"},{"value":"work","label":"재취업 예정"},{"value":"mixed","label":"복합"},{"value":"unknown","label":"미정"}]},
+    {"id":"household","label":"가구","type":"select","default":"family","options":[{"value":"solo","label":"1인"},{"value":"family","label":"가족"}]}
+  ],
+  "stages":[
+    {"id":"retire-90","label":"퇴직 90~31일 전","fromDays":90,"toDays":31,"actions":[
+      {"id":"retire-cashflow","title":"퇴직 후 6개월 현금흐름 계산","summary":"고정비·부채·보험료·생활비를 기준으로 월별 필요자금을 먼저 계산합니다.","kind":"must","priority":100},
+      {"id":"retire-benefits","title":"퇴직금·연차·정산 항목 확인","summary":"회사 규정과 실제 지급예정 항목을 문서 기준으로 확인합니다.","kind":"risk","priority":96},
+      {"id":"retire-records","title":"경력·재직 증빙 미리 확보","summary":"퇴직 후 다시 요청하기 번거로운 서류를 재직 중 정리합니다.","kind":"execute","priority":82}
+    ]},
+    {"id":"retire-30","label":"퇴직 30~8일 전","fromDays":30,"toDays":8,"actions":[
+      {"id":"retire-pension","title":"연금 수급·예상액 확인","summary":"국민연금 등 본인에게 적용되는 연금정보를 공식기관에서 확인합니다.","kind":"execute","priority":92,"url":"https://www.nps.or.kr/","sourceLabel":"국민연금공단"},
+      {"id":"retire-health","title":"건강보험 자격 변화 확인","summary":"직장가입 종료 후 적용될 건강보험 자격과 보험료 변화를 확인합니다.","kind":"risk","priority":94,"url":"https://www.nhis.or.kr/","sourceLabel":"국민건강보험공단"},
+      {"id":"retire-work","title":"재취업 여부와 시점 결정","summary":"재취업 계획이 있다면 휴식기간과 구직 시작일을 명확히 정합니다.","kind":"must","priority":75,"conditions":{"income":["work","mixed"]}}
+    ]},
+    {"id":"retire-7","label":"퇴직 7일 전~당일","fromDays":7,"toDays":0,"actions":[
+      {"id":"retire-handover","title":"인수인계·반납·정산 마무리","summary":"업무자료, 장비, 계정, 비용처리의 종료 상태를 확인합니다.","kind":"must","priority":90},
+      {"id":"retire-contact","title":"필요한 업무 연락처만 정리","summary":"개인정보와 회사자료를 섞지 않고 향후 필요한 관계만 정리합니다.","kind":"risk","priority":78},
+      {"id":"retire-schedule","title":"퇴직 후 첫 2주 일정 만들기","summary":"생활리듬이 갑자기 무너지지 않도록 행정·건강·구직·휴식 일정을 배치합니다.","kind":"execute","priority":72}
+    ]},
+    {"id":"retire-after","label":"퇴직 후 1~30일","fromDays":-1,"toDays":-30,"actions":[
+      {"id":"retire-finalpay","title":"최종 급여·퇴직금 지급 확인","summary":"예상액과 실제 지급액을 비교하고 차이가 있으면 근거를 확인합니다.","kind":"risk","priority":100},
+      {"id":"retire-budget","title":"실제 생활비로 예산 다시 보정","summary":"퇴직 전 예상과 한 달 실제 지출을 비교해 현금흐름을 수정합니다.","kind":"must","priority":85},
+      {"id":"retire-next","title":"다음 90일 계획 확정","summary":"재취업·학업·휴식·건강 중 우선순위를 정하고 일정으로 옮깁니다.","kind":"execute","priority":80}
+    ]}
+  ]
+}
