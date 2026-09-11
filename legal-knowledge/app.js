@@ -49,7 +49,8 @@ function documentFooter() {
   return `<footer class="document-footer" aria-label="연구노트 문서 하단">
     <div class="document-footer-copy">
       <strong>법리·판례 연구</strong>
-      <p class="business-meta">스카이예슈아 · 사업자등록번호 536-38-01234 · 대표 이명훈</p>
+      <p class="business-meta">스카이예슈아 · 사업자등록번호 536-38-01234<br />통신판매번호 : 2025-서울서초-2352 · 대표 이명훈</p>
+      <p class="research-identifiers">국가연구자번호 13169680 · ISNI 0000000513760591<br />ORCID 0009-0000-6095-8067</p>
       <p>Copyright © 이명훈 2026. All rights reserved.</p>
       <p>문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p>
       <p class="ai-disclosure">AI 활용 안내: 일부 법률 연구노트·사례·요약의 초안 작성과 구조화에 생성형 AI를 활용했으며, 법령·판례·공식자료의 확인과 내용 검토·편집은 운영자가 관리합니다. 본 자료는 개별 법률자문을 대체하지 않습니다.</p>
