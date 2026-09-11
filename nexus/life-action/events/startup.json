@@ -1,0 +1,36 @@
+{
+  "version":"0.1.0","eventType":"startup","title":"창업","targetLabel":"사업 시작일","subtitle":"아이디어를 사업자등록·매출 준비·운영체계까지 단계별로 연결합니다.","updatedAt":"2026-09-11",
+  "inputs":[
+    {"id":"targetDate","label":"사업 시작 목표일","type":"date","required":true},
+    {"id":"form","label":"사업 형태","type":"select","default":"individual","options":[{"value":"individual","label":"개인사업"},{"value":"corporation","label":"법인"},{"value":"undecided","label":"미정"}]},
+    {"id":"channel","label":"판매 방식","type":"select","default":"online","options":[{"value":"online","label":"온라인"},{"value":"offline","label":"오프라인"},{"value":"both","label":"온·오프라인"}]},
+    {"id":"staff","label":"인력","type":"select","default":"solo","options":[{"value":"solo","label":"1인"},{"value":"planned","label":"채용 예정"}]}
+  ],
+  "stages":[
+    {"id":"startup-60","label":"시작 60~31일 전","fromDays":60,"toDays":31,"actions":[
+      {"id":"startup-problem","title":"고객 문제와 유료 해결책 한 문장으로 정의","summary":"무엇을 누구에게 얼마에 팔 것인지 한 문장으로 정리합니다.","kind":"must","priority":100},
+      {"id":"startup-demand","title":"실제 구매의사 10건 확인","summary":"좋다는 반응보다 가격을 제시했을 때 구매할 사람이 있는지 먼저 확인합니다.","kind":"risk","priority":98},
+      {"id":"startup-cost","title":"고정비·변동비·손익분기 계산","summary":"첫 매출 전까지 버틸 수 있는 기간과 월 최소매출을 계산합니다.","kind":"must","priority":92}
+    ]},
+    {"id":"startup-30","label":"시작 30~15일 전","fromDays":30,"toDays":15,"actions":[
+      {"id":"startup-registration","title":"사업자등록 절차 확인","summary":"사업 형태와 업종에 맞는 등록 절차를 공식 경로에서 확인합니다.","kind":"execute","priority":96,"url":"https://www.hometax.go.kr/","sourceLabel":"국세청 홈택스"},
+      {"id":"startup-commerce","title":"통신판매·인허가 필요 여부 확인","summary":"온라인 판매나 특정 업종이면 별도 신고·허가가 필요한지 확인합니다.","kind":"risk","priority":90,"conditions":{"channel":["online","both"]},"url":"https://www.gov.kr/","sourceLabel":"정부24"},
+      {"id":"startup-account","title":"사업용 자금 흐름 분리","summary":"개인 생활비와 사업 매출·비용이 섞이지 않도록 계좌·카드·기록방식을 정합니다.","kind":"must","priority":82}
+    ]},
+    {"id":"startup-14","label":"시작 14~3일 전","fromDays":14,"toDays":3,"actions":[
+      {"id":"startup-offer","title":"첫 상품·서비스 1개만 확정","summary":"처음부터 여러 상품을 만들지 말고 가장 검증 가능한 판매단위를 하나 정합니다.","kind":"must","priority":94},
+      {"id":"startup-payment","title":"결제·환불·문의 흐름 점검","summary":"고객이 결제하고 문의하고 환불받는 과정이 실제로 작동하는지 테스트합니다.","kind":"risk","priority":91},
+      {"id":"startup-staff","title":"채용·업무분장 최소안 작성","summary":"채용 예정이라면 첫 인력의 역할과 비용 한도를 먼저 정합니다.","kind":"execute","priority":70,"conditions":{"staff":["planned"]}}
+    ]},
+    {"id":"startup-day","label":"사업 시작~7일","fromDays":2,"toDays":-7,"actions":[
+      {"id":"startup-firstsale","title":"첫 매출 확보에 집중","summary":"브랜드 완성도보다 실제 결제 고객을 만드는 행동을 우선합니다.","kind":"execute","priority":100},
+      {"id":"startup-log","title":"문의·거절·구매이유 기록","summary":"고객 반응을 매일 짧게 기록해 다음 수정의 근거로 남깁니다.","kind":"must","priority":86},
+      {"id":"startup-tax","title":"매출·비용 증빙 누락 방지","summary":"세금계산서·영수증·결제내역 등 사업 증빙을 처음부터 한 방식으로 관리합니다.","kind":"risk","priority":88}
+    ]},
+    {"id":"startup-after","label":"시작 후 8~30일","fromDays":-8,"toDays":-30,"actions":[
+      {"id":"startup-margin","title":"실제 매출총이익 확인","summary":"매출액보다 한 건을 팔 때 실제로 얼마가 남는지 확인합니다.","kind":"risk","priority":96},
+      {"id":"startup-repeat","title":"재구매·소개 가능성 확인","summary":"첫 고객이 다시 사거나 다른 사람에게 추천할 이유가 있는지 확인합니다.","kind":"must","priority":85},
+      {"id":"startup-cut","title":"효과 없는 비용·기능 제거","summary":"한 달간 사용되지 않은 도구·광고·기능을 정리해 고정비를 낮춥니다.","kind":"execute","priority":78}
+    ]}
+  ]
+}
