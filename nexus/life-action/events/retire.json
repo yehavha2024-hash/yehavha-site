@@ -1,57 +1,70 @@
 {
-  "version":"0.3.0","eventType":"retire","title":"퇴직·휴직","targetLabel":"퇴직·전환일","subtitle":"퇴직사유·근로형태·연차·휴직·실업급여·퇴직금·건강보험·국민연금을 실제 분기별로 점검합니다.","updatedAt":"2026-09-11",
+  "version":"0.4.0",
+  "eventType":"retire",
+  "title":"퇴직·휴직",
+  "targetLabel":"퇴직·휴직 기준일",
+  "subtitle":"퇴직사유·연차·퇴직금·IRP·실업급여·건강보험·국민연금·휴직까지 실제 권리와 기한을 분기합니다.",
+  "updatedAt":"2026-09-11",
   "inputs":[
-    {"id":"targetDate","label":"퇴직·전환일","type":"date","required":true},
-    {"id":"exitReason","label":"퇴직 사유","type":"select","default":"voluntary","options":[{"value":"voluntary","label":"자진퇴사"},{"value":"recommended","label":"권고사직"},{"value":"layoff","label":"해고·인원감축"},{"value":"contractEnd","label":"계약만료"},{"value":"mandatory","label":"정년퇴직"},{"value":"honorary","label":"명예·희망퇴직"},{"value":"closure","label":"폐업·도산"},{"value":"leaveOnly","label":"퇴직 아님·휴직 전환"}]},
-    {"id":"preExitMode","label":"마지막 근무 처리","type":"select","default":"normal","options":[{"value":"normal","label":"정상근무 후 종료"},{"value":"annualLeave","label":"연차 소진 후 종료"},{"value":"annualPayout","label":"미사용연차 수당정산"},{"value":"paidLeave","label":"유급휴가 후 종료"},{"value":"unpaidLeave","label":"무급휴가 후 종료"},{"value":"leaveOfAbsence","label":"휴직 후 종료"}]},
-    {"id":"employmentType","label":"근로 형태","type":"select","default":"regular","options":[{"value":"regular","label":"정규직"},{"value":"fixed","label":"기간제·계약직"},{"value":"parttime","label":"단시간근로"},{"value":"daily","label":"일용·단기"},{"value":"executive","label":"임원·등기임원"}]},
-    {"id":"tenure","label":"계속근로기간","type":"select","default":"over1","options":[{"value":"under1","label":"1년 미만"},{"value":"over1","label":"1년 이상"},{"value":"unknown","label":"혼재·확인 필요"}]},
-    {"id":"weeklyHours","label":"주 소정근로시간","type":"select","default":"over15","options":[{"value":"over15","label":"평균 15시간 이상"},{"value":"under15","label":"평균 15시간 미만"},{"value":"mixed","label":"15시간 이상·미만 혼재"}]},
-    {"id":"nextPlan","label":"퇴직 후 계획","type":"select","default":"rejob","options":[{"value":"rejob","label":"재취업"},{"value":"startup","label":"창업"},{"value":"study","label":"학업·자격"},{"value":"rest","label":"휴식·재정비"},{"value":"retireLife","label":"완전 은퇴"}]},
-    {"id":"unemployment","label":"실업급여","type":"select","default":"check","options":[{"value":"apply","label":"신청 예정"},{"value":"check","label":"대상 여부 확인"},{"value":"no","label":"신청 안 함"}]},
-    {"id":"ageBand","label":"연령대","type":"select","default":"under60","options":[{"value":"under60","label":"60세 미만"},{"value":"60to64","label":"60~64세"},{"value":"65plus","label":"65세 이상"}]},
-    {"id":"healthPlan","label":"퇴직 후 건강보험","type":"select","default":"unknown","options":[{"value":"reemploy","label":"곧 재취업"},{"value":"dependent","label":"피부양자 검토"},{"value":"regional","label":"지역가입 예상"},{"value":"unknown","label":"아직 모름"}]}
+    {"id":"targetDate","label":"퇴직·휴직 기준일","type":"date","required":true},
+    {"id":"eventMode","label":"현재 상황","type":"select","default":"retire","options":[{"value":"retire","label":"퇴직 예정"},{"value":"already","label":"이미 퇴직"},{"value":"leave","label":"휴직 예정·중"},{"value":"return","label":"휴직 후 복귀"}]},
+    {"id":"reason","label":"퇴직·휴직 사유","type":"select","default":"voluntary","options":[{"value":"voluntary","label":"자진퇴사"},{"value":"recommend","label":"권고사직"},{"value":"dismissal","label":"해고"},{"value":"contractEnd","label":"계약기간 만료"},{"value":"retirementAge","label":"정년퇴직"},{"value":"early","label":"희망·명예퇴직"},{"value":"closure","label":"사업장 폐업·도산"},{"value":"medicalLeave","label":"질병·부상 휴직"},{"value":"familyLeave","label":"가족돌봄휴직"},{"value":"personalLeave","label":"개인사유 휴직"}]},
+    {"id":"employmentType","label":"근로 형태","type":"select","default":"regular","options":[{"value":"regular","label":"정규직"},{"value":"fixed","label":"기간제"},{"value":"part","label":"단시간"},{"value":"daily","label":"일용·간헐"},{"value":"executive","label":"임원·등기임원"}]},
+    {"id":"tenure","label":"계속근로기간","type":"select","default":"over1","options":[{"value":"under1","label":"1년 미만"},{"value":"over1","label":"1~3년"},{"value":"over3","label":"3년 이상"}]},
+    {"id":"weeklyHours","label":"주 소정근로시간","type":"select","default":"over15","options":[{"value":"over15","label":"4주 평균 주 15시간 이상"},{"value":"under15","label":"주 15시간 미만"},{"value":"unknown","label":"확인 필요"}]},
+    {"id":"leaveBalance","label":"남은 연차","type":"select","default":"unknown","options":[{"value":"none","label":"없음"},{"value":"use","label":"퇴직 전 사용 예정"},{"value":"cash","label":"미사용수당 정산 예정"},{"value":"unknown","label":"일수·처리 미확인"}]},
+    {"id":"severanceScheme","label":"퇴직급여 방식","type":"select","default":"unknown","options":[{"value":"severance","label":"퇴직금"},{"value":"db","label":"DB형 퇴직연금"},{"value":"dc","label":"DC형 퇴직연금"},{"value":"none","label":"대상 아님·없음"},{"value":"unknown","label":"확인 필요"}]},
+    {"id":"irp","label":"IRP 준비","type":"select","default":"unknown","options":[{"value":"ready","label":"IRP 계좌 있음"},{"value":"need","label":"개설 필요"},{"value":"exception","label":"예외 가능성 확인"},{"value":"unknown","label":"모름"}],"conditions":{"eventMode":["retire","already"]}},
+    {"id":"unemployment","label":"구직급여","type":"select","default":"check","options":[{"value":"apply","label":"신청 예정"},{"value":"check","label":"수급 가능성 확인 필요"},{"value":"no","label":"신청 안 함"}],"conditions":{"eventMode":["retire","already"]}},
+    {"id":"healthAfter","label":"퇴직 후 건강보험","type":"select","default":"unknown","options":[{"value":"dependent","label":"가족 피부양자 검토"},{"value":"regional","label":"지역가입 예상"},{"value":"continued","label":"임의계속가입 검토"},{"value":"newJob","label":"새 직장 가입 예정"},{"value":"unknown","label":"미정"}],"conditions":{"eventMode":["retire","already"]}},
+    {"id":"ageBand","label":"연령","type":"select","default":"under60","options":[{"value":"under55","label":"55세 미만"},{"value":"55to59","label":"55~59세"},{"value":"60plus","label":"60세 이상"}]},
+    {"id":"nextPlan","label":"다음 계획","type":"select","default":"job","options":[{"value":"job","label":"재취업"},{"value":"startup","label":"창업·프리랜서"},{"value":"study","label":"학업·자격"},{"value":"rest","label":"휴식"},{"value":"retired","label":"은퇴생활"}]},
+    {"id":"dispute","label":"회사와 정산·퇴직 분쟁","type":"select","default":"none","options":[{"value":"none","label":"없음"},{"value":"pay","label":"임금·연차·퇴직금"},{"value":"reason","label":"퇴직사유·해고"},{"value":"documents","label":"이직확인서·증명서"},{"value":"unknown","label":"우려 있음"}]}
   ],
   "stages":[
-    {"id":"retire-90","label":"퇴직 90~31일 전","fromDays":90,"toDays":31,"actions":[
-      {"id":"exit-reason-proof","title":"퇴직사유를 말이 아니라 증빙으로 확정","summary":"사직서, 권고사직 통보, 계약서, 인사발령 등 실제 이직사유를 확인합니다. 실업급여 판단에서 이직사유 기재가 중요합니다.","kind":"risk","priority":100,"url":"https://www.work24.go.kr/","sourceLabel":"고용24"},
-      {"id":"voluntary-valid-reason","title":"자진퇴사라면 정당한 이직사유 해당 여부 확인","summary":"임금체불, 근로조건 저하, 장거리 통근, 질병, 괴롭힘, 가족간호 등 예외사유는 개별 증빙에 따라 판단될 수 있으므로 미리 자료를 확보합니다.","kind":"risk","priority":99,"conditions":{"exitReason":["voluntary"],"unemployment":["apply","check"]},"url":"https://1350.moel.go.kr/","sourceLabel":"고용노동부 1350"},
-      {"id":"contract-end-intent","title":"계약만료는 재계약 의사·거절 주체까지 확인","summary":"단순 만료만으로 자동 인정되는 것이 아니라 재계약 제안과 계속근로 의사 등 실제 경위가 실업급여 판단에 영향을 줄 수 있습니다.","kind":"risk","priority":98,"conditions":{"exitReason":["contractEnd"],"unemployment":["apply","check"]}},
-      {"id":"retirement-pay-eligibility","title":"퇴직금 법정대상 여부 먼저 계산","summary":"4주 평균 주 15시간 이상이면서 1년 이상 계속근로한 근로자는 원칙적으로 계속근로 1년에 30일분 이상의 평균임금 기준 퇴직금 대상입니다.","kind":"must","priority":100,"conditions":{"tenure":["over1","unknown"],"weeklyHours":["over15","mixed"]},"url":"https://1350.moel.go.kr/","sourceLabel":"고용노동부 1350"},
-      {"id":"short-hours-review","title":"주 15시간 이상·미만이 섞였으면 기간별 재산정","summary":"단시간근로가 혼재하면 퇴직일에서 역산해 4주 평균 주 15시간 이상인 기간을 구분해 계속근로기간을 확인합니다.","kind":"risk","priority":96,"conditions":{"weeklyHours":["mixed"]}},
-      {"id":"executive-status","title":"임원이라면 근로자성부터 별도 확인","summary":"등기임원 등은 명칭만으로 퇴직금·고용보험 적용을 단정할 수 없으므로 실제 지휘감독·보수·근로형태를 기준으로 확인합니다.","kind":"risk","priority":98,"conditions":{"employmentType":["executive"]}},
-      {"id":"annual-leave-plan","title":"연차 소진·수당정산·실제 퇴직일을 서로 맞추기","summary":"연차를 쓰고 퇴직하는지, 미사용수당으로 정산하는지, 최종 근로제공일과 퇴직일이 어떻게 처리되는지 회사와 서면으로 확인합니다.","kind":"must","priority":95,"conditions":{"preExitMode":["annualLeave","annualPayout","paidLeave","unpaidLeave","leaveOfAbsence"]}},
-      {"id":"cashflow-6m","title":"퇴직 후 6개월 현금흐름 계산","summary":"퇴직금, 실업급여 가능성, 보험료, 대출, 생활비, 다음 소득 시작일을 월 단위로 계산합니다.","kind":"must","priority":91}
+    {"id":"retire-90","label":"기준일 90~31일 전","fromDays":90,"toDays":31,"actions":[
+      {"id":"separation-evidence","title":"퇴직사유를 구두가 아니라 문서·메일로 남기기","summary":"권고사직·계약만료·해고·폐업은 구직급여와 분쟁에서 사유가 중요하므로 통보서, 계약서, 메일을 보관합니다.","kind":"risk","priority":100,"conditions":{"reason":["recommend","dismissal","contractEnd","closure"]}},
+      {"id":"voluntary-reason","title":"자진퇴사라면 불가피한 사유 증빙 가능성 확인","summary":"통근, 임금체불, 질병, 가족돌봄 등 정당한 이직사유가 문제될 수 있으므로 퇴사 전에 객관자료를 모읍니다.","kind":"risk","priority":97,"conditions":{"reason":["voluntary"],"unemployment":["apply","check"]},"url":"https://www.work24.go.kr/","sourceLabel":"고용24"},
+      {"id":"severance-eligibility","title":"퇴직금 대상 여부를 1년·주15시간 기준으로 먼저 판정","summary":"4주 평균 주 15시간 이상이면서 1년 이상 계속근로했는지 확인해 퇴직급여 발생 여부를 판단합니다.","kind":"must","priority":100,"conditions":{"eventMode":["retire","already"]},"url":"https://www.moel.go.kr/","sourceLabel":"고용노동부"},
+      {"id":"under1-warning","title":"1년 미만이면 퇴직금 미발생 가능성 확인","summary":"계속근로기간이 1년 미만이면 일반적인 퇴직금 요건을 충족하지 못할 수 있으므로 입·퇴사일을 정확히 계산합니다.","kind":"risk","priority":99,"conditions":{"tenure":["under1"],"eventMode":["retire","already"]}},
+      {"id":"under15-warning","title":"주15시간 미만 기간이 퇴직급여 산정에 미치는 영향 확인","summary":"4주 평균 주 소정근로시간이 15시간 미만인 기간이 있다면 계속근로 및 퇴직급여 적용을 별도로 확인합니다.","kind":"risk","priority":98,"conditions":{"weeklyHours":["under15","unknown"]}},
+      {"id":"leave-days-audit","title":"연차 발생일수·사용일수·잔여일수를 급여명세와 대조","summary":"회사 시스템 숫자만 믿지 말고 입사일, 출근율, 사용기록, 연차촉진 여부를 함께 확인합니다.","kind":"must","priority":97,"conditions":{"leaveBalance":["use","cash","unknown"]}},
+      {"id":"leave-before-exit","title":"연차소진과 실제 퇴직일의 관계를 서면 확인","summary":"마지막 출근일과 퇴직일이 다를 수 있으므로 연차사용기간, 4대보험 자격상실일, 급여정산일을 구분합니다.","kind":"risk","priority":98,"conditions":{"leaveBalance":["use"]}},
+      {"id":"cashflow-6m","title":"퇴직 후 6개월 현금흐름을 세후 기준으로 계산","summary":"퇴직금 총액이 아니라 실제 입금, 실업급여, 보험료, 대출, 생활비로 월별 잔액을 계산합니다.","kind":"must","priority":94},
+      {"id":"medical-leave-docs","title":"질병휴직은 진단서·취업규칙·복귀조건 확보","summary":"휴직기간, 급여 유무, 4대보험 처리, 복귀판정과 연장요건을 회사 규정과 진단서 기준으로 확인합니다.","kind":"risk","priority":96,"conditions":{"reason":["medicalLeave"],"eventMode":["leave","return"]}},
+      {"id":"family-leave-rule","title":"가족돌봄휴직·휴가 사용일수와 분할기준 확인","summary":"가족돌봄휴직은 연간 최장 90일, 가족돌봄휴가는 일반적으로 연간 최장 10일이며 법정 예외와 분할기준을 확인합니다.","kind":"execute","priority":96,"conditions":{"reason":["familyLeave"],"eventMode":["leave","return"]},"url":"https://www.law.go.kr/","sourceLabel":"국가법령정보센터"}
     ]},
-    {"id":"retire-30","label":"퇴직 30~8일 전","fromDays":30,"toDays":8,"actions":[
-      {"id":"career-documents","title":"재직·경력·원천징수·급여자료 확보","summary":"경력증명, 재직증명, 급여명세, 원천징수 관련 서류 등 퇴직 후 다시 요청할 가능성이 높은 자료를 확보합니다.","kind":"execute","priority":90},
-      {"id":"leave-records","title":"휴직·휴가 기간과 급여 처리내역 보관","summary":"육아휴직·가족돌봄휴직·무급휴직 등은 평균임금 산정과 계속근로기간 판단에서 의미가 달라질 수 있으므로 발령·급여자료를 보관합니다.","kind":"risk","priority":93,"conditions":{"preExitMode":["paidLeave","unpaidLeave","leaveOfAbsence"]}},
-      {"id":"avg-wage-check","title":"퇴직금 평균임금 산정기간 확인","summary":"통상 퇴직 전 3개월 임금과 총일수를 기초로 평균임금을 계산하되, 법령상 산정 제외기간이 있는지 확인합니다.","kind":"risk","priority":97,"conditions":{"tenure":["over1","unknown"],"weeklyHours":["over15","mixed"]}},
-      {"id":"unemployment-docs","title":"고용보험 상실신고·이직확인서 준비 여부 확인","summary":"실업급여 신청 예정이면 회사가 신고할 상실사유와 이직확인서 내용이 실제 퇴직사유와 맞는지 확인합니다.","kind":"execute","priority":99,"conditions":{"unemployment":["apply","check"]},"url":"https://www.work24.go.kr/","sourceLabel":"고용24"},
-      {"id":"next-job-prep","title":"퇴직 전부터 구직자료 최신화","summary":"재취업 계획이면 이력서·경력기술서·포트폴리오·추천인·희망연봉 기준을 퇴직 전에 정리합니다.","kind":"execute","priority":82,"conditions":{"nextPlan":["rejob"]}},
-      {"id":"startup-bridge","title":"창업 전환이면 개인·사업자 자금 분리계획 세우기","summary":"퇴직금 전액을 초기 사업비로 쓰기 전에 생활비와 사업자금을 분리하고 사업개시 시점을 정합니다.","kind":"risk","priority":83,"conditions":{"nextPlan":["startup"]}}
+    {"id":"retire-30","label":"기준일 30~8일 전","fromDays":30,"toDays":8,"actions":[
+      {"id":"avg-wage","title":"퇴직금 평균임금 산정용 3개월 급여·상여·연차수당 자료 확보","summary":"기본급만 보지 말고 평균임금 산정에 들어가는 임금과 제외기간을 고용노동부 계산기 기준으로 대조합니다.","kind":"must","priority":100,"conditions":{"tenure":["over1","over3"],"weeklyHours":["over15"]},"url":"https://www.moel.go.kr/retirementpayCal.do","sourceLabel":"고용노동부"},
+      {"id":"leave-average-wage","title":"육아·질병휴직 등 평균임금 미산입기간 여부 확인","summary":"퇴직 직전 휴직이 있으면 평균임금 산정기간에서 제외되는 기간이 있는지 확인합니다.","kind":"risk","priority":98,"conditions":{"eventMode":["leave","return","retire"],"reason":["medicalLeave","familyLeave","personalLeave"]}},
+      {"id":"irp-open","title":"퇴직급여 수령용 IRP 계좌 필요 여부 확인","summary":"퇴직연금 가입 근로자 등은 원칙적으로 지정한 IRP 계정으로 퇴직급여가 이전될 수 있으므로 미리 준비합니다.","kind":"execute","priority":98,"conditions":{"irp":["need","unknown"],"severanceScheme":["severance","db","dc","unknown"]}},
+      {"id":"dc-balance","title":"DC형은 회사 부담금 납입누락·운용상품 확인","summary":"퇴직 직전 적립금 잔액과 미납 부담금, 운용상품, 수수료를 확인합니다.","kind":"risk","priority":96,"conditions":{"severanceScheme":["dc"]}},
+      {"id":"db-benefit","title":"DB형은 예상 퇴직급여와 회사 산정내역 비교","summary":"회사 제시액과 근속기간·평균임금 기준 예상액을 비교합니다.","kind":"risk","priority":96,"conditions":{"severanceScheme":["db"]}},
+      {"id":"employment-certificate","title":"경력증명·재직증명·원천징수·퇴직소득 자료 요청","summary":"퇴직 후 다시 요청하기 번거로운 경력증명서, 원천징수영수증, 퇴직소득 자료를 목록으로 요청합니다.","kind":"execute","priority":94},
+      {"id":"handover-scope","title":"인수인계 범위와 완료기준을 문서로 남기기","summary":"계정·장비·자료·진행업무를 목록화하고 회사자료와 개인자료를 분리합니다.","kind":"must","priority":89},
+      {"id":"noncompete-check","title":"경업금지·비밀유지·성과물 조항 다시 확인","summary":"퇴직 후 이직·창업 계획과 충돌할 수 있는 계약조항과 회사자료 반출금지를 확인합니다.","kind":"risk","priority":91,"conditions":{"nextPlan":["job","startup"]}},
+      {"id":"health-options","title":"건강보험 피부양자·지역가입·임의계속가입 보험료 비교","summary":"한 가지 제도를 자동 선택하지 말고 예상 지역보험료와 피부양자 가능성, 임의계속가입 조건을 비교합니다.","kind":"must","priority":97,"conditions":{"eventMode":["retire","already"],"healthAfter":["dependent","regional","continued","unknown"]},"url":"https://www.nhis.or.kr/","sourceLabel":"국민건강보험"},
+      {"id":"continued-health","title":"임의계속가입의 직장가입 이력·신청기한 확인","summary":"퇴직 전 18개월 중 통산 1년 이상 직장가입 여부와 지역보험료 최초 고지 후 신청기한을 확인합니다.","kind":"risk","priority":98,"conditions":{"healthAfter":["continued","unknown"]},"url":"https://www.nhis.or.kr/","sourceLabel":"국민건강보험"}
     ]},
-    {"id":"retire-7","label":"퇴직 7일 전~당일","fromDays":7,"toDays":0,"actions":[
-      {"id":"handover","title":"인수인계·장비·법인카드·계정 종료 확인","summary":"업무자료와 회사자산을 반납하고 개인자료와 회사자료를 혼합하지 않도록 정리합니다.","kind":"must","priority":94},
-      {"id":"final-leave-date","title":"마지막 출근일·연차 종료일·퇴직일을 각각 확인","summary":"연차소진이나 휴가 후 퇴직이면 실제 출근 종료일과 고용관계 종료일이 다를 수 있으므로 인사기록을 확인합니다.","kind":"risk","priority":98,"conditions":{"preExitMode":["annualLeave","paidLeave","unpaidLeave","leaveOfAbsence"]}},
-      {"id":"final-pay-sheet","title":"마지막 급여 정산항목 사전표 작성","summary":"기본급, 연장·휴일수당, 연차수당, 성과급·상여 반영 여부, 공제내역, 퇴직급여를 항목별로 적어 실제 지급액과 비교할 준비를 합니다.","kind":"must","priority":96},
-      {"id":"personal-data-separation","title":"개인 파일·계정과 회사자료 완전 분리","summary":"회사 문서·고객정보를 개인 클라우드나 기기에 남기지 않고 개인 인증수단·개인파일만 분리합니다.","kind":"risk","priority":91},
-      {"id":"post-exit-calendar","title":"퇴직 후 2주 행정일정 캘린더화","summary":"실업급여, 건강보험, 국민연금, 은행·보험, 재취업·훈련 일정을 날짜로 잡습니다.","kind":"execute","priority":88}
+    {"id":"retire-7","label":"기준일 7일 전~당일","fromDays":7,"toDays":0,"actions":[
+      {"id":"final-pay-list","title":"최종정산 항목을 급여·연차·퇴직급여·비용정산으로 분리","summary":"한 번에 입금된 금액만 보지 말고 각 항목별 산식과 지급일을 확인합니다.","kind":"must","priority":100},
+      {"id":"leave-pay","title":"미사용 연차수당 지급대상·일수 확인","summary":"퇴직 시 사용하지 못한 연차의 발생근거와 미사용수당 지급일을 확인합니다.","kind":"risk","priority":98,"conditions":{"leaveBalance":["cash","unknown"]}},
+      {"id":"exit-documents","title":"사직서·권고사직서·해고통지서의 문구를 실제 사유와 맞추기","summary":"문서 제목보다 실제 퇴직사유가 중요하므로 본인 의사와 다른 문구에 서명하지 않습니다.","kind":"risk","priority":100,"conditions":{"reason":["recommend","dismissal","contractEnd","closure","voluntary"]}},
+      {"id":"return-company-assets","title":"장비·카드·계정·문서 반납확인 남기기","summary":"반납목록과 날짜를 기록해 퇴직 후 분쟁을 줄입니다.","kind":"execute","priority":85},
+      {"id":"personal-backup","title":"개인 연락처·개인 파일만 적법하게 분리","summary":"회사 영업비밀·고객정보·업무자료는 반출하지 않고 개인자료만 분리합니다.","kind":"risk","priority":92},
+      {"id":"leave-return-plan","title":"휴직 복귀자는 복귀일·직무·근로시간·제한사항 확인","summary":"복귀 전 인사담당자와 근무장소, 업무, 단축근로나 의료상 제한을 문서로 확인합니다.","kind":"must","priority":95,"conditions":{"eventMode":["return"]}}
     ]},
-    {"id":"retire-after30","label":"퇴직 후 1~30일","fromDays":-1,"toDays":-30,"actions":[
-      {"id":"retirement-pay-payment","title":"퇴직금·최종급여 실제 지급 확인","summary":"법정 퇴직금은 특별한 사정에 대한 합의가 없으면 원칙적으로 지급사유 발생일부터 14일 이내 지급 여부를 확인합니다.","kind":"risk","priority":100,"conditions":{"tenure":["over1","unknown"],"weeklyHours":["over15","mixed"]},"url":"https://1350.moel.go.kr/","sourceLabel":"고용노동부 1350"},
-      {"id":"unemployment-application","title":"실업급여 수급자격 신청 절차 진행","summary":"상실신고와 이직확인서를 확인하고 고용24 온라인교육·구직신청 등 수급자격 절차를 진행합니다. 최종 판단은 관할 고용센터가 합니다.","kind":"execute","priority":100,"conditions":{"unemployment":["apply","check"]},"url":"https://www.work24.go.kr/","sourceLabel":"고용24"},
-      {"id":"health-insurance-compare","title":"건강보험 지역가입·피부양자·임의계속가입 비교","summary":"퇴직 후 지역보험료가 높아질 수 있으므로 피부양자 가능성, 지역보험료와 임의계속가입 보험료를 비교합니다.","kind":"risk","priority":99,"conditions":{"healthPlan":["dependent","regional","unknown"]},"url":"https://www.nhis.or.kr/","sourceLabel":"국민건강보험공단"},
-      {"id":"health-continuation","title":"건강보험 임의계속가입 신청기한 확인","summary":"퇴직 전 18개월 중 직장가입자 자격을 통산 1년 이상 유지한 사람은 요건 충족 시 임의계속가입을 검토할 수 있고 적용은 최대 36개월 범위입니다.","kind":"execute","priority":97,"conditions":{"healthPlan":["regional","unknown"]},"url":"https://www.nhis.or.kr/","sourceLabel":"국민건강보험공단"},
-      {"id":"pension-status","title":"국민연금 지역가입·납부예외 여부 확인","summary":"퇴직 후 사업장가입자 상실 뒤 소득이 없으면 지역가입 신고와 납부예외 가능성을 확인합니다.","kind":"must","priority":94,"conditions":{"ageBand":["under60"]},"url":"https://www.nps.or.kr/","sourceLabel":"국민연금공단"},
-      {"id":"unemployment-credit","title":"구직급여 수급자는 국민연금 실업크레딧 검토","summary":"요건을 충족하는 구직급여 수급자는 보험료 일부 지원과 가입기간 산입이 가능한 실업크레딧을 신청기한 안에 검토합니다.","kind":"execute","priority":90,"conditions":{"ageBand":["under60"],"unemployment":["apply"]},"url":"https://www.nps.or.kr/","sourceLabel":"국민연금공단"},
-      {"id":"training-card","title":"재취업·직무전환이면 국민내일배움카드 검토","summary":"직업훈련이 필요하면 고용24에서 발급대상과 훈련과정을 확인합니다.","kind":"execute","priority":80,"conditions":{"nextPlan":["rejob","study"]},"url":"https://www.work24.go.kr/","sourceLabel":"고용24"}
-    ]},
-    {"id":"retire-after90","label":"퇴직 후 31~90일","fromDays":-31,"toDays":-90,"actions":[
-      {"id":"rejob-pipeline","title":"재취업 활동을 지원서·면접·제안 단계로 관리","summary":"지원건수보다 실제 면접·제안·협상 전환률을 기록해 구직전략을 수정합니다.","kind":"must","priority":86,"conditions":{"nextPlan":["rejob"]}},
-      {"id":"startup-transition","title":"창업 전환 시 사업자등록·세무·자금 일정 분리","summary":"퇴직행정과 창업행정을 섞지 말고 사업개시일 기준으로 별도 실행표를 만듭니다.","kind":"execute","priority":83,"conditions":{"nextPlan":["startup"]}},
-      {"id":"retire-life-budget","title":"완전 은퇴는 연금·보험·생활비 기준으로 장기예산 재설계","summary":"월 지출과 예상연금, 의료비, 비정기지출을 반영해 1년 단위 현금흐름을 다시 계산합니다.","kind":"must","priority":88,"conditions":{"nextPlan":["retireLife"]}},
-      {"id":"early-pension-check","title":"60대라면 노령·조기노령연금 수급조건 별도 확인","summary":"연령·가입기간·소득있는 업무 여부에 따라 수급조건이 달라질 수 있으므로 국민연금공단 기준으로 확인합니다.","kind":"risk","priority":85,"conditions":{"ageBand":["60to64","65plus"]},"url":"https://www.nps.or.kr/","sourceLabel":"국민연금공단"}
+    {"id":"retire-after","label":"기준일 후 1~30일","fromDays":-1,"toDays":-30,"actions":[
+      {"id":"14day-payment","title":"퇴직 후 14일 이내 금품청산 여부 확인","summary":"임금·퇴직금·그 밖의 금품은 특별한 사정으로 합의한 경우를 제외하고 원칙적으로 지급사유 발생 후 14일 이내 지급 여부를 확인합니다.","kind":"risk","priority":100,"conditions":{"eventMode":["retire","already"]},"url":"https://www.moel.go.kr/","sourceLabel":"고용노동부"},
+      {"id":"irp-receipt","title":"퇴직급여가 IRP 또는 지정계좌에 실제 입금됐는지 확인","summary":"회사 처리완료 통보가 아니라 계좌의 입금액·입금일·세후금액을 확인합니다.","kind":"must","priority":99,"conditions":{"severanceScheme":["severance","db","dc","unknown"]}},
+      {"id":"separation-confirmation","title":"이직확인서·고용보험 상실사유 확인","summary":"구직급여 신청 전 회사가 제출한 이직사유가 실제 퇴직사유와 일치하는지 확인합니다.","kind":"risk","priority":100,"conditions":{"unemployment":["apply","check"]},"url":"https://www.work24.go.kr/","sourceLabel":"고용24"},
+      {"id":"unemployment-apply","title":"구직급여 수급자격·대기·실업인정 절차 시작","summary":"고용24와 관할 고용센터에서 수급자격과 재취업활동 요건을 확인합니다.","kind":"execute","priority":99,"conditions":{"unemployment":["apply","check"]},"url":"https://www.work24.go.kr/","sourceLabel":"고용24"},
+      {"id":"pension-credit","title":"구직급여 수급자는 국민연금 실업크레딧 검토","summary":"18~60세 미만 구직급여 수급자 등 요건을 충족하면 보험료의 일부 지원과 가입기간 추가산입을 검토합니다.","kind":"execute","priority":94,"conditions":{"unemployment":["apply"],"ageBand":["under55","55to59"]},"url":"https://www.nps.or.kr/","sourceLabel":"국민연금공단"},
+      {"id":"pension-credit-deadline","title":"실업크레딧 신청기한 놓치지 않기","summary":"구직급여 종료일이 속한 달의 다음 달 15일까지 신청기한을 확인합니다.","kind":"risk","priority":96,"conditions":{"unemployment":["apply"],"ageBand":["under55","55to59"]},"url":"https://www.nps.or.kr/","sourceLabel":"국민연금공단"},
+      {"id":"health-apply","title":"건강보험 자격변동 후 실제 보험료 고지액 확인","summary":"예상만 하지 말고 피부양자 등록 또는 지역보험료 고지액을 확인한 뒤 임의계속가입과 비교합니다.","kind":"execute","priority":96,"conditions":{"healthAfter":["dependent","regional","continued","unknown"]}},
+      {"id":"tax-documents","title":"근로소득·퇴직소득 원천징수 자료 보관","summary":"연말정산·종합소득세·대출·재취업 증빙에 필요하므로 전자파일로 별도 보관합니다.","kind":"must","priority":91},
+      {"id":"dispute-route","title":"미지급·부당해고·퇴직사유 분쟁은 증빙부터 묶기","summary":"계약서, 급여명세, 출퇴근, 통보문, 합법적으로 확보한 자료를 날짜순으로 정리한 뒤 노동청·노동위원회 등 적절한 절차를 확인합니다.","kind":"risk","priority":100,"conditions":{"dispute":["pay","reason","documents","unknown"]},"url":"https://www.moel.go.kr/","sourceLabel":"고용노동부"},
+      {"id":"next-90","title":"재취업·창업·학업·휴식의 다음 90일을 숫자로 계획","summary":"목표일, 월 필요소득, 주당 투입시간, 구직·교육 횟수를 일정으로 전환합니다.","kind":"execute","priority":82}
     ]}
   ]
 }
