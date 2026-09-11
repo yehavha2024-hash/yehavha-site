@@ -1,56 +1,73 @@
 {
-  "version":"0.3.0","eventType":"move","title":"이사","targetLabel":"이사일","subtitle":"계약형태·주택유형·대출·보증·가구상황까지 나눠 이사 전후 실행을 구체화합니다.","updatedAt":"2026-09-11",
+  "version":"0.4.0","eventType":"move","title":"이사","targetLabel":"이사일",
+  "subtitle":"계약형태·보증금·대출·보증·주택유형·중도퇴거·이사방식·가족조건까지 실제 분쟁·비용 지점을 세분화합니다.",
+  "updatedAt":"2026-09-11",
   "inputs":[
     {"id":"targetDate","label":"이사일","type":"date","required":true},
-    {"id":"contractType","label":"계약·거주 형태","type":"select","default":"jeonse","options":[{"value":"ownerBuy","label":"자가 매수·입주"},{"value":"ownerMove","label":"기존 자가에서 자가로 이동"},{"value":"jeonse","label":"전세"},{"value":"semiJeonse","label":"반전세"},{"value":"monthlyDeposit","label":"보증부 월세"},{"value":"monthly","label":"월세"},{"value":"publicRental","label":"공공·임대주택"}]},
+    {"id":"contractType","label":"계약·거주 형태","type":"select","default":"jeonse","options":[{"value":"ownerBuy","label":"자가 매수·입주"},{"value":"ownerSellBuy","label":"기존집 매도 후 매수"},{"value":"ownerMove","label":"자가→자가 이동"},{"value":"jeonse","label":"전세"},{"value":"semiJeonse","label":"반전세"},{"value":"monthlyDeposit","label":"보증부 월세"},{"value":"monthly","label":"월세"},{"value":"shortTerm","label":"단기임대"},{"value":"publicRental","label":"공공·임대주택"}]},
     {"id":"housingType","label":"주택 유형","type":"select","default":"apartment","options":[{"value":"apartment","label":"아파트"},{"value":"officetel","label":"주거용 오피스텔"},{"value":"villa","label":"연립·다세대"},{"value":"detached","label":"단독주택"},{"value":"multiFamily","label":"다가구·다중주택"},{"value":"publicRental","label":"공공임대"}]},
-    {"id":"contractStatus","label":"계약 상황","type":"select","default":"new","options":[{"value":"new","label":"신규 계약"},{"value":"renewal","label":"갱신 계약"},{"value":"expiration","label":"정상 만료 이동"},{"value":"midtermExit","label":"중도해지·중도퇴거"}]},
-    {"id":"loanType","label":"대출","type":"select","default":"none","options":[{"value":"none","label":"없음"},{"value":"jeonseLoan","label":"전세자금대출"},{"value":"mortgage","label":"주택담보대출"},{"value":"both","label":"대출 복합"}]},
-    {"id":"guarantee","label":"보증금 반환보증","type":"select","default":"unknown","options":[{"value":"hug","label":"HUG 가입"},{"value":"hf","label":"HF 등 타 보증"},{"value":"sgi","label":"SGI 등 민간보증"},{"value":"none","label":"미가입"},{"value":"unknown","label":"모름·확인 필요"}]},
-    {"id":"broker","label":"계약 방식","type":"select","default":"broker","options":[{"value":"broker","label":"공인중개사 중개"},{"value":"direct","label":"직거래"}]},
-    {"id":"household","label":"가구 상황","type":"select","default":"solo","options":[{"value":"solo","label":"1인"},{"value":"couple","label":"부부·2인"},{"value":"child","label":"자녀 동반"},{"value":"parent","label":"부모 동거"},{"value":"mixed","label":"다세대 가족"}]},
+    {"id":"contractStatus","label":"계약 상황","type":"select","default":"new","options":[{"value":"new","label":"신규 계약"},{"value":"renewal","label":"갱신"},{"value":"expiration","label":"정상 만료"},{"value":"midtermExit","label":"중도해지·중도퇴거"},{"value":"dispute","label":"보증금·하자 분쟁 중"}]},
+    {"id":"region","label":"지역","type":"select","default":"capital","options":[{"value":"capital","label":"수도권"},{"value":"nonCapital","label":"수도권 외"}]},
+    {"id":"depositBand","label":"보증금 규모","type":"select","default":"under300","options":[{"value":"under50","label":"5천만원 미만"},{"value":"under100","label":"5천만~1억원"},{"value":"under300","label":"1억~3억원"},{"value":"under500","label":"3억~5억원"},{"value":"under700","label":"5억~7억원"},{"value":"over700","label":"7억원 초과"}],"conditions":{"contractType":["jeonse","semiJeonse","monthlyDeposit","monthly"]}},
+    {"id":"loanType","label":"대출","type":"select","default":"none","options":[{"value":"none","label":"없음"},{"value":"jeonseLoan","label":"전세자금대출"},{"value":"mortgage","label":"주택담보대출"},{"value":"bridge","label":"잔금·브리지 필요"},{"value":"both","label":"복합"}]},
+    {"id":"guarantee","label":"보증금 반환보증","type":"select","default":"unknown","options":[{"value":"hug","label":"HUG 가입"},{"value":"hf","label":"HF 가입"},{"value":"sgi","label":"SGI 가입"},{"value":"none","label":"미가입"},{"value":"rejected","label":"가입 거절·불가"},{"value":"unknown","label":"확인 필요"}],"conditions":{"contractType":["jeonse","semiJeonse","monthlyDeposit"]}},
+    {"id":"broker","label":"계약 방식","type":"select","default":"broker","options":[{"value":"broker","label":"공인중개사"},{"value":"direct","label":"직거래"},{"value":"platform","label":"플랫폼 중개"}]},
+    {"id":"depositDependency","label":"기존 보증금 의존","type":"select","default":"no","options":[{"value":"yes","label":"기존 보증금을 받아야 잔금 가능"},{"value":"partial","label":"일부 의존"},{"value":"no","label":"무관"}]},
+    {"id":"household","label":"가구","type":"select","default":"solo","options":[{"value":"solo","label":"1인"},{"value":"couple","label":"부부·2인"},{"value":"child","label":"자녀 동반"},{"value":"parent","label":"부모 동거"},{"value":"mixed","label":"다세대 가족"}]},
+    {"id":"schoolChild","label":"전학 대상 자녀","type":"select","default":"no","options":[{"value":"yes","label":"있음"},{"value":"no","label":"없음"}],"conditions":{"household":["child","mixed"]}},
+    {"id":"pet","label":"반려동물","type":"select","default":"no","options":[{"value":"yes","label":"있음"},{"value":"no","label":"없음"}]},
+    {"id":"moveMethod","label":"이사 방식","type":"select","default":"packing","options":[{"value":"packing","label":"포장이사"},{"value":"semi","label":"반포장"},{"value":"self","label":"직접·용달"},{"value":"storage","label":"보관이사"}]},
+    {"id":"buildingAccess","label":"건물 진입","type":"select","default":"elevator","options":[{"value":"elevator","label":"엘리베이터 사용"},{"value":"ladder","label":"사다리차 필요"},{"value":"stairs","label":"계단·진입제약"},{"value":"unknown","label":"확인 필요"}]},
     {"id":"distance","label":"이동 범위","type":"select","default":"sameCity","options":[{"value":"sameArea","label":"같은 동네"},{"value":"sameCity","label":"같은 시·도"},{"value":"intercity","label":"타 시·도"}]}
   ],
   "stages":[
     {"id":"move-60","label":"이사 60~31일 전","fromDays":60,"toDays":31,"actions":[
-      {"id":"contract-rights","title":"등기·임대인·권리관계 먼저 확인","summary":"계약서만 보지 말고 등기상 소유자, 권리침해, 선순위채권, 위반건축물 여부를 확인합니다.","kind":"risk","priority":100,"conditions":{"contractType":["jeonse","semiJeonse","monthlyDeposit","monthly"]},"url":"https://www.iros.go.kr/","sourceLabel":"인터넷등기소"},
-      {"id":"hug-eligibility","title":"전세·반전세 보증금 반환보증 가능 여부 확인","summary":"전세와 보증부 월세계약은 보증한도·주택유형·계약기간·전입·확정일자 등 가입요건을 공식 기준으로 확인합니다.","kind":"risk","priority":99,"conditions":{"contractType":["jeonse","semiJeonse","monthlyDeposit"]},"url":"https://www.khug.or.kr/","sourceLabel":"HUG"},
-      {"id":"guarantee-deadline","title":"반환보증 신청기한 확인","summary":"HUG 전세보증금반환보증은 통상 전세계약기간의 1/2 경과 전 신청기한이 적용되므로 계약 시작일과 남은 기간을 확인합니다.","kind":"must","priority":98,"conditions":{"contractType":["jeonse","semiJeonse","monthlyDeposit"],"guarantee":["none","unknown"]},"url":"https://www.khug.or.kr/","sourceLabel":"HUG"},
-      {"id":"officetel-use","title":"오피스텔의 주거용 표기 확인","summary":"주거용 오피스텔은 계약서 또는 중개대상물 확인·설명서에 주거용 표기가 필요한 보증상품이 있으므로 확인합니다.","kind":"risk","priority":92,"conditions":{"housingType":["officetel"],"contractType":["jeonse","semiJeonse","monthlyDeposit"]}},
-      {"id":"loan-schedule","title":"대출 실행·상환·보증 일정을 잔금일과 맞추기","summary":"전세대출이나 주담대가 있으면 기존대출 상환, 신규대출 실행, 보증 심사 일정을 잔금일과 함께 맞춥니다.","kind":"must","priority":96,"conditions":{"loanType":["jeonseLoan","mortgage","both"]}},
-      {"id":"broker-document","title":"중개대상물 확인설명서·중개보수·특약 검토","summary":"중개계약이면 확인설명서와 중개보수, 보증금 반환·수리·관리비·하자 관련 특약을 계약 전에 정리합니다.","kind":"must","priority":86,"conditions":{"broker":["broker"]}},
-      {"id":"direct-contract-risk","title":"직거래 계약서와 소유자 확인 강화","summary":"직거래는 중개사의 확인절차가 없으므로 소유자 신원, 등기, 계약 권한, 계좌명의를 별도로 대조합니다.","kind":"risk","priority":97,"conditions":{"broker":["direct"]}},
-      {"id":"moving-quotes","title":"이사업체 2~3곳 견적·작업범위 비교","summary":"사다리차, 엘리베이터, 포장범위, 추가인력, 폐기물, 주차조건까지 같은 기준으로 비교합니다.","kind":"execute","priority":82}
+      {"id":"owner-check","title":"등기상 소유자·계약상 임대인·입금계좌 명의 대조","summary":"세 이름이 다르면 위임장·대리권·상속·신탁 등 권한근거를 확인합니다.","kind":"risk","priority":100,"conditions":{"contractType":["jeonse","semiJeonse","monthlyDeposit","monthly","shortTerm"]},"url":"https://www.iros.go.kr/","sourceLabel":"인터넷등기소"},
+      {"id":"rights-order","title":"근저당·압류·가압류·신탁·선순위 임차관계 확인","summary":"보증금만 보지 말고 내가 들어갈 순위보다 앞선 권리와 채권 규모를 확인합니다.","kind":"risk","priority":100,"conditions":{"contractType":["jeonse","semiJeonse","monthlyDeposit","monthly"]}},
+      {"id":"multifamily-senior","title":"다가구는 다른 세입자 선순위보증금까지 확인","summary":"다가구·다중주택은 내 호실 등기만으로 위험을 판단하기 어렵기 때문에 선순위 보증금과 채권 합계를 따로 확인합니다.","kind":"risk","priority":100,"conditions":{"housingType":["multiFamily"],"contractType":["jeonse","semiJeonse","monthlyDeposit"]}},
+      {"id":"illegal-building","title":"건축물대장·위반건축물·실제 용도 대조","summary":"등기와 실제 사용형태가 다른지, 위반건축물 표시나 주거용 인정 문제가 없는지 확인합니다.","kind":"risk","priority":96,"conditions":{"housingType":["officetel","villa","detached","multiFamily"]}},
+      {"id":"hug-limit","title":"보증금 규모가 반환보증 대상 한도 안인지 확인","summary":"HUG는 수도권과 비수도권 한도가 다르고 보증부월세는 환산보증금 기준이 적용될 수 있으므로 금액부터 확인합니다.","kind":"risk","priority":100,"conditions":{"contractType":["jeonse","semiJeonse","monthlyDeposit"],"guarantee":["none","unknown","rejected"]},"url":"https://www.khug.or.kr/hug/web/ig/dr/igdr000001.jsp","sourceLabel":"HUG"},
+      {"id":"hug-deadline","title":"반환보증 신청기한을 계약기간 절반 전에 체크","summary":"가입 가능하더라도 신청기한을 지나면 문제가 되므로 계약 시작일 기준으로 마감일을 계산합니다.","kind":"must","priority":99,"conditions":{"contractType":["jeonse","semiJeonse","monthlyDeposit"],"guarantee":["none","unknown"]},"url":"https://www.khug.or.kr/hug/web/ig/dr/igdr000002.jsp","sourceLabel":"HUG"},
+      {"id":"guarantee-reject","title":"보증 가입 거절 사유를 계약위험 신호로 재검토","summary":"주택가액, 선순위채권, 소유권, 계약서, 주택유형 문제로 거절됐다면 단순 미가입으로 넘기지 않습니다.","kind":"risk","priority":100,"conditions":{"guarantee":["rejected"]}},
+      {"id":"loan-precheck","title":"잔금 전에 대출한도·상환능력·보증 가능성을 사전심사","summary":"계약 후 대출이 안 나오는 상황을 피하도록 계약금 지급 전 은행·보증기관 기준을 확인합니다.","kind":"risk","priority":99,"conditions":{"loanType":["jeonseLoan","mortgage","bridge","both"]}},
+      {"id":"sale-chain","title":"매도대금→기존대출상환→신규잔금의 시간순서 작성","summary":"같은 날 여러 거래가 연결되면 한 단계 지연이 전체 잔금을 막을 수 있어 은행·법무사·중개사 시간표를 만듭니다.","kind":"must","priority":100,"conditions":{"contractType":["ownerSellBuy"],"loanType":["mortgage","bridge","both"]}},
+      {"id":"broker-scope","title":"중개보수·확인설명서·특약 초안을 계약 전에 받기","summary":"계약 직전 현장에서 처음 읽지 말고 수리, 관리비, 하자, 반환, 원상복구 특약을 미리 검토합니다.","kind":"must","priority":92,"conditions":{"broker":["broker","platform"]}},
+      {"id":"direct-identity","title":"직거래는 소유자 신분·권한·계좌까지 별도 검증","summary":"중개사의 확인절차가 없으므로 신분증, 등기, 위임관계와 지급계좌를 직접 대조합니다.","kind":"risk","priority":100,"conditions":{"broker":["direct"]}}
     ]},
     {"id":"move-30","label":"이사 30~15일 전","fromDays":30,"toDays":15,"actions":[
-      {"id":"deposit-return-plan","title":"기존 보증금 반환일·잔금일 연결 확인","summary":"기존 보증금을 받아 새 집 잔금에 쓰는 경우 시간차가 생기지 않는지 임대인·금융기관과 확인합니다.","kind":"risk","priority":100,"conditions":{"contractStatus":["expiration","midtermExit"]}},
-      {"id":"midterm-settlement","title":"중도퇴거 비용·새 임차인·중개보수 정리","summary":"중도해지라면 위약·중개보수 부담, 새 임차인 확보 조건, 보증금 반환시점을 서면으로 정리합니다.","kind":"risk","priority":99,"conditions":{"contractStatus":["midtermExit"]}},
-      {"id":"internet-transfer","title":"인터넷·통신 이전 예약","summary":"설치기사 일정과 새 주소 서비스 가능 여부를 확인해 이사 직후 공백을 줄입니다.","kind":"execute","priority":80},
-      {"id":"child-school","title":"전학·통학·돌봄 동선 확인","summary":"자녀가 있으면 전학, 통학거리, 돌봄·학원·등하원 동선을 새 주소 기준으로 확인합니다.","kind":"must","priority":84,"conditions":{"household":["child","mixed"]}},
-      {"id":"parent-access","title":"부모 동거 시 병원·약국·엘리베이터·보행동선 확인","summary":"고령 부모와 이동한다면 주거 접근성, 병원·약국, 주차와 대중교통을 함께 확인합니다.","kind":"must","priority":83,"conditions":{"household":["parent","mixed"]}},
-      {"id":"waste-plan","title":"대형폐기물·중고판매·기부 품목 분리","summary":"버릴 것·팔 것·기부할 것·가져갈 것을 나누고 대형폐기물 신고일정을 잡습니다.","kind":"execute","priority":67},
-      {"id":"parking-elevator","title":"이사차량·엘리베이터·주차 예약","summary":"관리사무소가 있는 경우 이사시간, 엘리베이터 사용, 차량진입과 주차를 사전 예약합니다.","kind":"execute","priority":71,"conditions":{"housingType":["apartment","officetel","villa"]}}
+      {"id":"deposit-chain","title":"기존 보증금 반환시간과 새집 잔금시간을 분 단위로 맞추기","summary":"기존 임대인의 입금이 늦으면 새집 잔금과 대출 실행이 멈출 수 있으므로 당일 순서를 합의합니다.","kind":"risk","priority":100,"conditions":{"depositDependency":["yes","partial"]}},
+      {"id":"midterm-exit","title":"중도퇴거의 중개보수·새임차인·반환일을 서면 합의","summary":"누가 중개보수를 부담하고 언제 보증금을 돌려주는지, 새 임차인 조건을 문자 수준이 아니라 기록으로 남깁니다.","kind":"risk","priority":100,"conditions":{"contractStatus":["midtermExit"]}},
+      {"id":"dispute-preserve","title":"보증금·하자 분쟁 중이면 사진·계약·지급증빙부터 보존","summary":"수리비·원상복구·보증금 공제 문제는 퇴거 후 입증이 어려워지므로 상태와 대화를 날짜순으로 보관합니다.","kind":"risk","priority":100,"conditions":{"contractStatus":["dispute"]}},
+      {"id":"move-quote-scope","title":"이사업체 견적을 인원·차량·사다리·포장·폐기까지 동일조건으로 비교","summary":"총액만 비교하지 말고 추가요금 발생조건을 항목별로 맞춰 비교합니다.","kind":"execute","priority":92},
+      {"id":"storage-risk","title":"보관이사는 보관장소·습기·화재·분실 책임범위 확인","summary":"보관기간, 출고비, 재배송비, 보험·배상한도와 사진기록을 확인합니다.","kind":"risk","priority":96,"conditions":{"moveMethod":["storage"]}},
+      {"id":"ladder-reserve","title":"사다리차·엘리베이터·주차 진입 가능 여부 사전확인","summary":"관리사무소 예약, 도로점유, 높이·전선·주차장 진입제약을 업체와 확인합니다.","kind":"execute","priority":93,"conditions":{"buildingAccess":["ladder","stairs","unknown"]}},
+      {"id":"school-transfer","title":"전학·배정·돌봄·학원 동선을 이사일과 연결","summary":"주소 이전일과 학사일정이 어긋나지 않도록 학교·교육청 절차를 확인합니다.","kind":"must","priority":90,"conditions":{"schoolChild":["yes"]}},
+      {"id":"pet-contract","title":"반려동물 허용·원상복구·엘리베이터 이동 조건 확인","summary":"임대차 특약, 관리규약, 이사업체 운송조건을 미리 확인합니다.","kind":"risk","priority":85,"conditions":{"pet":["yes"]}},
+      {"id":"utility-book","title":"가스·전기·수도·인터넷 이전예약을 서비스별로 분리","summary":"한 번에 처리된다고 가정하지 말고 해지·개통·명의변경 일정을 각각 잡습니다.","kind":"execute","priority":88}
     ]},
     {"id":"move-14","label":"이사 14~3일 전","fromDays":14,"toDays":3,"actions":[
-      {"id":"utility-settlement","title":"전기·가스·수도 해지·개통 일정 확정","summary":"기존 주소 최종정산과 새 주소 사용개시 날짜를 각각 확인합니다.","kind":"must","priority":95},
-      {"id":"address-list","title":"주소 변경 대상 전체 목록 작성","summary":"은행·카드·보험·통신·배송·구독·학교·회사·사업자 주소를 한 번에 목록화합니다.","kind":"risk","priority":87},
-      {"id":"rent-documents","title":"계약서·보증금 이체내역·확정일자 관련서류 별도 보관","summary":"보증 가입이나 분쟁 대응에 필요한 계약서, 지급증빙, 등본 등은 이삿짐과 분리해 보관합니다.","kind":"risk","priority":93,"conditions":{"contractType":["jeonse","semiJeonse","monthlyDeposit","monthly"]}},
-      {"id":"documents-pack","title":"신분증·인감·통장·귀중품 직접 휴대","summary":"계약·잔금·행정처리에 필요한 서류와 귀중품을 별도 가방에 모읍니다.","kind":"must","priority":90},
-      {"id":"loan-final-check","title":"잔금일 대출 실행시간·필요서류 재확인","summary":"대출 실행이 필요한 경우 은행 마감시간, 법무·등기 일정, 필요서류 누락을 다시 확인합니다.","kind":"risk","priority":92,"conditions":{"loanType":["jeonseLoan","mortgage","both"]}}
+      {"id":"rent-report","title":"주택 임대차 계약 신고 대상·기한 확인","summary":"보증금·월세와 지역 등 신고대상 여부를 확인하고 계약 후 신고의무가 있다면 기한을 놓치지 않습니다.","kind":"risk","priority":97,"conditions":{"contractType":["jeonse","semiJeonse","monthlyDeposit","monthly"]},"url":"https://www.gov.kr/","sourceLabel":"정부24"},
+      {"id":"movein-rights","title":"전입신고·확정일자·실제 점유의 순서를 이사 당일에 맞추기","summary":"임차권 보호 절차를 잔금·열쇠인도와 분리해서 생각하지 말고 같은 날 일정으로 묶습니다.","kind":"must","priority":100,"conditions":{"contractType":["jeonse","semiJeonse","monthlyDeposit","monthly"]}},
+      {"id":"final-register","title":"잔금 직전 등기부 다시 확인","summary":"계약 때 깨끗했더라도 잔금 전 새 근저당·압류가 생겼는지 다시 발급해 확인합니다.","kind":"risk","priority":100,"conditions":{"contractType":["ownerBuy","ownerSellBuy","jeonse","semiJeonse","monthlyDeposit"]},"url":"https://www.iros.go.kr/","sourceLabel":"인터넷등기소"},
+      {"id":"loan-cutoff","title":"대출 실행 은행 마감시간·필요서류·법무 일정 재확인","summary":"잔금 당일 서류 누락이나 은행 마감으로 실행이 미뤄지지 않게 최종 체크합니다.","kind":"risk","priority":98,"conditions":{"loanType":["jeonseLoan","mortgage","bridge","both"]}},
+      {"id":"management-fee","title":"관리비·장기수선충당금·주차비 정산 항목 확인","summary":"임대인·임차인 부담 항목과 관리사무소 정산기준을 퇴거 전에 확인합니다.","kind":"risk","priority":93,"conditions":{"housingType":["apartment","officetel","villa"]}},
+      {"id":"address-master","title":"주소변경 대상을 금융·보험·사업·배송·학교로 분류","summary":"한 목록으로 만들어 변경 완료 여부를 체크합니다.","kind":"must","priority":86},
+      {"id":"valuable-bag","title":"계약서·신분증·인감·통장·귀중품은 이삿짐과 분리","summary":"잔금·행정처리에 필요한 물건은 직접 휴대합니다.","kind":"must","priority":92}
     ]},
     {"id":"move-day","label":"이사 당일~3일","fromDays":2,"toDays":-3,"actions":[
-      {"id":"meter-photo","title":"퇴거·입주 상태와 계량기 사진 기록","summary":"벽·바닥·설비·가전 옵션과 전기·가스·수도 계량기를 촬영해 인수인계·정산 근거를 남깁니다.","kind":"risk","priority":100},
-      {"id":"deposit-receipt","title":"보증금·잔금 수령·지급 확인 후 증빙 저장","summary":"현금보다 계좌이체 등 추적 가능한 방식으로 지급하고 영수증·이체내역을 보관합니다.","kind":"must","priority":100},
-      {"id":"move-in-report","title":"전입신고·확정일자 등 적용절차 확인","summary":"임차인은 새 주소의 전입신고와 확정일자 등 권리보호 절차를 정부24와 주민센터 기준으로 확인합니다.","kind":"execute","priority":100,"conditions":{"contractType":["jeonse","semiJeonse","monthlyDeposit","monthly"]},"url":"https://www.gov.kr/","sourceLabel":"정부24"},
-      {"id":"owner-registration","title":"소유권이전·등기 완료 여부 확인","summary":"매수 입주라면 잔금 후 등기접수와 소유권이전 진행상태를 확인합니다.","kind":"risk","priority":98,"conditions":{"contractType":["ownerBuy"]},"url":"https://www.iros.go.kr/","sourceLabel":"인터넷등기소"},
-      {"id":"door-security","title":"출입·도어락·주차·관리사무소 정보 정리","summary":"공동현관, 도어락, 주차등록, 택배위치, 관리사무소 연락처를 바로 사용할 수 있게 정리합니다.","kind":"execute","priority":75}
+      {"id":"condition-photo","title":"퇴거·입주 상태를 방별·설비별 사진과 영상으로 기록","summary":"벽, 바닥, 창호, 누수, 옵션가전, 계량기까지 촬영해 원상복구·하자 분쟁 근거를 남깁니다.","kind":"risk","priority":100},
+      {"id":"money-proof","title":"보증금·잔금·중개보수 지급증빙 각각 저장","summary":"누구에게 무엇을 지급했는지 계좌이체 내역과 영수증을 분리 보관합니다.","kind":"must","priority":100},
+      {"id":"keys-handover","title":"열쇠·카드키·리모컨·주차스티커 인수목록 작성","summary":"퇴거 시 반환물과 입주 시 수령물을 숫자로 기록합니다.","kind":"execute","priority":85},
+      {"id":"movein-report","title":"전입신고 즉시 처리","summary":"온라인 또는 주민센터에서 전입신고를 처리하고 처리완료 여부를 확인합니다.","kind":"execute","priority":100,"conditions":{"contractType":["jeonse","semiJeonse","monthlyDeposit","monthly"]},"url":"https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=13100000016","sourceLabel":"정부24"},
+      {"id":"owner-registration","title":"매수자는 소유권이전 등기 접수·완료 확인","summary":"법무사에게 맡겼더라도 접수번호와 완료등기를 직접 확인합니다.","kind":"risk","priority":100,"conditions":{"contractType":["ownerBuy","ownerSellBuy"]},"url":"https://www.iros.go.kr/","sourceLabel":"인터넷등기소"},
+      {"id":"new-defects","title":"입주 즉시 발견한 하자는 사진과 함께 통지","summary":"누수·보일러·에어컨·도어락·배수 등 즉시 확인 가능한 하자를 입주 직후 기록해 책임시점을 명확히 합니다.","kind":"risk","priority":94}
     ]},
     {"id":"move-after","label":"이사 후 4~30일","fromDays":-4,"toDays":-30,"actions":[
-      {"id":"postal-address","title":"우편·배송 주소 변경 마무리","summary":"이전 주소로 계속 배송되는 항목을 확인하고 우편·배송 주소를 정리합니다.","kind":"execute","priority":76,"url":"https://www.epost.go.kr/","sourceLabel":"인터넷우체국"},
-      {"id":"service-address-audit","title":"금융·보험·통신·쇼핑·구독 주소 최종점검","summary":"자동이체·청구지·배송지까지 실제 등록주소가 모두 바뀌었는지 확인합니다.","kind":"risk","priority":72},
-      {"id":"deposit-delay-response","title":"기존 보증금 반환이 지연되면 보증·법적 대응경로 즉시 확인","summary":"보증금 미반환 상태를 방치하지 말고 가입한 반환보증, 임차권등기 등 가능한 대응을 공식기관 기준으로 확인합니다.","kind":"risk","priority":100,"conditions":{"contractType":["jeonse","semiJeonse","monthlyDeposit","monthly"],"contractStatus":["expiration","midtermExit"]},"url":"https://www.khug.or.kr/","sourceLabel":"HUG"},
-      {"id":"guarantee-record","title":"반환보증서·대출·계약서 보관체계 정리","summary":"계약기간 중 다시 필요한 보증·대출·계약 증빙을 한 폴더에 보관합니다.","kind":"must","priority":70,"conditions":{"guarantee":["hug","hf","sgi"]}},
-      {"id":"move-cost-review","title":"견적 대비 실제 이사비용 기록","summary":"이사비·중개비·수리비·폐기비·설치비를 기록해 다음 이동의 기준데이터로 남깁니다.","kind":"must","priority":55}
+      {"id":"guarantee-final","title":"반환보증 가입·변경 절차 최종 완료 확인","summary":"신청만 한 상태인지 보증서가 실제 발급됐는지 확인하고 갱신·주소변경 조건도 기록합니다.","kind":"risk","priority":100,"conditions":{"contractType":["jeonse","semiJeonse","monthlyDeposit"],"guarantee":["hug","hf","sgi","unknown"]}},
+      {"id":"postal","title":"우편물 이전·금융·보험 주소변경 누락 점검","summary":"첫 달 실제 우편·배송 내역을 보고 이전주소가 남은 곳을 수정합니다.","kind":"execute","priority":86,"url":"https://www.epost.go.kr/","sourceLabel":"인터넷우체국"},
+      {"id":"deposit-old-close","title":"기존집 보증금·관리비·공과금 최종정산서 보관","summary":"나중에 추가청구가 생기지 않도록 정산내역과 반환증빙을 보관합니다.","kind":"must","priority":92,"conditions":{"contractStatus":["expiration","midtermExit","dispute"]}},
+      {"id":"move-damage","title":"이삿짐 파손·분실은 발견 즉시 사진·목록·업체 통지","summary":"시간이 지난 뒤 주장하지 않도록 박스·물품·파손상태를 기록하고 계약상 배상절차를 확인합니다.","kind":"risk","priority":90},
+      {"id":"actual-cost","title":"견적 대비 실제 추가비용을 항목별 기록","summary":"사다리, 인력, 주차, 폐기, 청소, 보관, 중개, 등기까지 실제비용을 남겨 다음 이사 기준값으로 만듭니다.","kind":"must","priority":80}
     ]}
   ]
 }
