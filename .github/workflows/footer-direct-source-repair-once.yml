@@ -91,3 +91,5 @@ jobs:
           fi
           git commit -m "Fix all footer sources to canonical two-line format"
           git push
+
+# retrigger: 2026-09-11 direct footer source repair
