@@ -138,6 +138,14 @@
     if (profile.moveDate) renderDashboard(profile);
   }
 
+  function resetView() {
+    $('resultPanel').hidden = true;
+    $('lifeTimeline').innerHTML = '<p class="life-empty">이사일과 조건을 선택하면 실행흐름이 표시됩니다.</p>';
+    $('totalActions').textContent = '0개';
+    $('completedActions').textContent = '0개';
+    $('moveDday').textContent = '미설정';
+  }
+
   async function init() {
     try {
       const response = await fetch('./events/move.json', { cache: 'no-store' });
@@ -170,7 +178,7 @@
       localStorage.removeItem(PROFILE_KEY);
       localStorage.removeItem(PROGRESS_KEY);
       $('lifeForm').reset();
-      $('resultPanel').hidden = true;
+      resetView();
     });
   }
 
