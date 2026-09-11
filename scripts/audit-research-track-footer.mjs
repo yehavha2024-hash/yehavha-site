@@ -2,7 +2,8 @@ import fs from 'node:fs';
 
 const HTML_FILE = 'nexus/research-track/index.html';
 const CSS_FILE = 'nexus/research-track/project-standard.css';
-const BUSINESS = '스카이예슈아 · 사업자등록번호 536-38-01234 · 통신판매번호 : 2025-서울서초-2352 · 대표 이명훈';
+const BUSINESS = '스카이예슈아 · 사업자등록번호 536-38-01234<br />통신판매번호 : 2025-서울서초-2352 · 대표 이명훈';
+const RESEARCH = '국가연구자번호 13169680 · ISNI 0000000513760591<br />ORCID 0009-0000-6095-8067';
 const COPYRIGHT = 'Copyright © 이명훈 2026. All rights reserved.';
 
 let errors = 0;
@@ -32,6 +33,7 @@ if (!errors) {
     '법학 학술연구 트랙',
     'ACADEMIC LEGAL RESEARCH TRACK',
     BUSINESS,
+    RESEARCH,
     COPYRIGHT,
     'mailto:kimbrighth@gmail.com',
     'AI 활용 안내',
@@ -43,17 +45,18 @@ if (!errors) {
   const projectAt = footer.indexOf('법학 학술연구 트랙');
   const descriptionAt = footer.indexOf('ACADEMIC LEGAL RESEARCH TRACK');
   const businessAt = footer.indexOf(BUSINESS);
+  const researchAt = footer.indexOf(RESEARCH);
   const copyrightAt = footer.indexOf(COPYRIGHT);
   const contactAt = footer.indexOf('mailto:kimbrighth@gmail.com');
   const aiAt = footer.indexOf('AI 활용 안내');
   const topAt = footer.indexOf('href="#top"');
-  if (!(projectAt >= 0 && projectAt < descriptionAt && descriptionAt < businessAt && businessAt < copyrightAt && copyrightAt < contactAt && contactAt < aiAt && aiAt < topAt)) {
-    fail('Footer 표시 순서가 프로젝트명 → 설명 → 사업자정보 → Copyright → 문의 → AI 안내 → 맨 위 순서가 아님');
+  if (!(projectAt >= 0 && projectAt < descriptionAt && descriptionAt < businessAt && businessAt < researchAt && researchAt < copyrightAt && copyrightAt < contactAt && contactAt < aiAt && aiAt < topAt)) {
+    fail('Footer 표시 순서가 프로젝트명 → 설명 → 사업자정보 → 연구자 식별정보 → Copyright → 문의 → AI 안내 → 맨 위 순서가 아님');
   }
 
   if (!/\.site-footer\s*\{[^}]*text-align\s*:\s*center/i.test(css)) fail('canonical Footer 중앙정렬 규칙 누락');
   if (!/\.site-footer\s*\{[^}]*margin\s*:\s*0\s+auto/i.test(css)) fail('Footer 컨테이너 중앙 배치 규칙 누락');
-  if (!/\.footer-meta\s+p\s*\{[^}]*margin\s*:\s*0\s+auto/i.test(css)) fail('사업자정보·Copyright·문의 행의 무간격 규칙 누락');
+  if (!/\.footer-meta\s+p\s*\{[^}]*margin\s*:\s*0\s+auto/i.test(css)) fail('사업자정보·연구자정보·Copyright·문의 행의 무간격 규칙 누락');
   if (/\.site-footer\s*\{[^}]*text-align\s*:\s*(?:left|right)/i.test(css)) fail('Footer가 중앙정렬 이외의 정렬을 사용함');
   if (/@media[\s\S]*?\.site-footer\s*\{[^}]*text-align\s*:\s*(?:left|right)/i.test(css)) fail('모바일에서 Footer 정렬이 변경됨');
 }
