@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-09-10",
-  "edition": "2026-09-10",
+  "updatedAt": "2026-09-11",
+  "edition": "2026-09-11",
   "updateCadence": "6시간마다 자동 수집 · 중요 변화 발생 시 수시 반영",
   "filters": [
     {
@@ -922,13 +922,13 @@
     "sourceCount": 7,
     "deduplication": "normalized URL + normalized title",
     "lookbackDays": 3,
-    "lastSuccessfulUpdateAt": "2026-09-10T20:52:21.149Z",
-    "lastAddedCount": 16,
+    "lastSuccessfulUpdateAt": "2026-09-11T04:39:58.296Z",
+    "lastAddedCount": 15,
     "relevanceFilter": "source-specific strict filter",
     "lastCleanupCount": 0,
     "publicLanguage": "ko",
     "localizationPolicy": "한국어 제목·요약이 완료된 자동수집 항목만 공개",
     "lastLocalizedCount": 3,
-    "lastWithheldUnlocalizedCount": 16
+    "lastWithheldUnlocalizedCount": 15
   }
 }
