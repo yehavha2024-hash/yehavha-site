@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#ffffff"/>
 <title>NEXUS 2 · 생활사건 실행 NEXUS | YEHAVHA NEXUS</title>
 <link href="../portal-v2.css?v=20260911-nexus2-1" rel="stylesheet"/>
-<link href="./life-action.css?v=20260911-2" rel="stylesheet"/>
+<link href="./life-action.css?v=20260911-3" rel="stylesheet"/>
 </head>
 <body>
 <a class="skip-link" href="#lifeMain">NEXUS 2 실행화면으로 이동</a>
@@ -17,7 +17,7 @@
     <section class="hero-card life-hero-card">
       <p class="eyebrow">NEXUS 2 · LIFE ACTION</p>
       <h1>NEXUS 2 <span>지금 필요한 일만 바로 실행</span></h1>
-      <p class="description">이사·이직·퇴직·창업·돌봄·여행. 상황을 고르면 필요한 순서만 보여줍니다.</p>
+      <p class="description">상황을 고르면 필요한 순서만 보여줍니다.</p>
     </section>
   </div>
 </header>
@@ -26,14 +26,15 @@
   <div class="container life-shell">
     <section class="life-panel life-event-panel" aria-labelledby="eventTitle">
       <div class="life-heading life-heading-compact"><span class="life-number">01</span><div><h2 id="eventTitle">지금 무엇을 하고 계십니까?</h2></div></div>
-      <div class="life-event-grid">
-        <button class="life-event is-active" id="moveEvent" type="button"><span class="life-event-icon" aria-hidden="true">🏠</span><strong>이사</strong></button>
-        <button class="life-event" type="button" disabled><span class="life-event-icon" aria-hidden="true">💼</span><strong>취업·이직</strong></button>
-        <button class="life-event" type="button" disabled><span class="life-event-icon" aria-hidden="true">🌿</span><strong>퇴직</strong></button>
-        <button class="life-event" type="button" disabled><span class="life-event-icon" aria-hidden="true">🚀</span><strong>창업</strong></button>
-        <button class="life-event" type="button" disabled><span class="life-event-icon" aria-hidden="true">🤝</span><strong>부모님 돌봄</strong></button>
-        <button class="life-event" type="button" disabled><span class="life-event-icon" aria-hidden="true">✈️</span><strong>여행</strong></button>
+      <div class="life-event-grid" id="lifeEventGrid">
+        <button class="life-event is-active" id="moveEvent" type="button" data-event="move" data-label="이사"><span class="life-event-icon" aria-hidden="true">🏠</span><strong>이사</strong></button>
+        <button class="life-event" type="button" data-event="career" data-label="취업·이직"><span class="life-event-icon" aria-hidden="true">💼</span><strong>취업·이직</strong></button>
+        <button class="life-event" type="button" data-event="retire" data-label="퇴직"><span class="life-event-icon" aria-hidden="true">🌿</span><strong>퇴직</strong></button>
+        <button class="life-event" type="button" data-event="startup" data-label="창업"><span class="life-event-icon" aria-hidden="true">🚀</span><strong>창업</strong></button>
+        <button class="life-event" type="button" data-event="care" data-label="부모님 돌봄"><span class="life-event-icon" aria-hidden="true">🤝</span><strong>부모님 돌봄</strong></button>
+        <button class="life-event" type="button" data-event="travel" data-label="여행"><span class="life-event-icon" aria-hidden="true">✈️</span><strong>여행</strong></button>
       </div>
+      <p class="life-event-notice" id="lifeEventNotice" hidden></p>
     </section>
 
     <section class="life-panel" id="configure" aria-labelledby="configureTitle">
@@ -62,7 +63,7 @@
       </div>
     </section>
 
-    <section class="life-panel" aria-labelledby="timelineTitle">
+    <section class="life-panel" id="timelinePanel" aria-labelledby="timelineTitle">
       <div class="life-heading"><span class="life-number">04</span><div><h2 id="timelineTitle">이사 Action Graph</h2><p>전체 실행흐름을 시점별로 확인하고 완료상태를 남깁니다.</p></div></div>
       <div class="life-timeline" id="lifeTimeline"><p class="life-empty">이사일과 조건을 선택하면 실행흐름이 표시됩니다.</p></div>
     </section>
@@ -83,6 +84,6 @@
     </div>
   </div></div>
 </footer>
-<script src="./life-action.js?v=20260911-2"></script>
+<script src="./life-action.js?v=20260911-3"></script>
 </body>
 </html>
