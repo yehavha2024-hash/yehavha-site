@@ -10,7 +10,6 @@ permissions:
 
 jobs:
   repair:
-    if: github.event.head_commit.message == 'chore: run one-time direct footer source repair'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -19,77 +18,17 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: '22'
-      - name: Normalize footer source content directly
-        shell: bash
-        run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          import re
-
-          roots = [
-              Path('nexus'),
-              Path('ai-law-tech-foresight'),
-              Path('legal-philosophy'),
-              Path('legal-knowledge'),
-              Path('three-minute-break'),
-              Path('toeic-human-100'),
-          ]
-          text_exts = {'.html', '.js', '.mjs', '.jsx', '.ts', '.tsx'}
-
-          business = '스카이예슈아 · 사업자등록번호 536-38-01234<br />통신판매번호 : 2025-서울서초-2352 · 대표 이명훈'
-          research = '국가연구자번호 13169680 · ISNI 0000000513760591<br />ORCID 0009-0000-6095-8067'
-
-          business_re = re.compile(r'(<p\b[^>]*class=["\'][^"\']*\bbusiness-meta\b[^"\']*["\'][^>]*>)(.*?)(</p>)', re.I | re.S)
-          research_re = re.compile(r'(<p\b[^>]*class=["\'][^"\']*\bresearch-identifiers\b[^"\']*["\'][^>]*>)(.*?)(</p>)', re.I | re.S)
-
-          changed = []
-          for root in roots:
-              if not root.exists():
-                  continue
-              for path in root.rglob('*'):
-                  if not path.is_file() or path.suffix.lower() not in text_exts:
-                      continue
-                  text = path.read_text(encoding='utf-8')
-                  original = text
-                  if 'business-meta' in text:
-                      text = business_re.sub(lambda m: m.group(1) + business + m.group(3), text)
-                  if 'research-identifiers' in text:
-                      text = research_re.sub(lambda m: m.group(1) + research + m.group(3), text)
-
-                  rel = path.as_posix()
-                  if rel in {'legal-philosophy/app.js', 'legal-knowledge/app.js'} and 'research-identifiers' not in text:
-                      line_re = re.compile(r'(?m)^([ \t]*)(<p class="business-meta">.*?</p>)[ \t]*$')
-                      match = line_re.search(text)
-                      if not match:
-                          raise SystemExit(f'Could not locate dynamic business footer line in {rel}')
-                      replacement = match.group(1) + match.group(2) + '\n' + match.group(1) + f'<p class="research-identifiers">{research}</p>'
-                      text = text[:match.start()] + replacement + text[match.end():]
-
-                  if text != original:
-                      path.write_text(text, encoding='utf-8')
-                      changed.append(rel)
-
-          print(f'Directly normalized {len(changed)} source file(s):')
-          for rel in changed:
-              print(f'  {rel}')
-          if not changed:
-              raise SystemExit('No footer source files changed; refusing empty repair run')
-          PY
+      - name: Repair footer source content directly
+        run: node scripts/repair-footer-sources-once.mjs
       - name: Verify global footer source audit
         run: node scripts/audit-nexus-footer-standard.mjs
       - name: Verify architecture audit
         run: node scripts/audit-web-architecture.mjs
-      - name: Commit only direct source changes
-        shell: bash
+      - name: Commit direct footer source changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add nexus ai-law-tech-foresight legal-philosophy legal-knowledge three-minute-break toeic-human-100
-          if git diff --cached --quiet; then
-            echo "No source changes to commit"
-            exit 1
-          fi
+          git diff --cached --quiet && exit 1
           git commit -m "Fix all footer sources to canonical two-line format"
           git push
-
-# retrigger: 2026-09-11 direct footer source repair
