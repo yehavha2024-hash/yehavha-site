@@ -1,0 +1,31 @@
+{
+  "version":"0.1.0","eventType":"care","title":"부모님 돌봄","targetLabel":"돌봄 시작일","subtitle":"건강·행정·생활·가족 역할을 한 흐름으로 정리합니다.","updatedAt":"2026-09-11",
+  "inputs":[
+    {"id":"targetDate","label":"돌봄 시작 기준일","type":"date","required":true},
+    {"id":"living","label":"거주 형태","type":"select","default":"separate","options":[{"value":"together","label":"동거"},{"value":"separate","label":"별거"}]},
+    {"id":"need","label":"주요 필요","type":"select","default":"daily","options":[{"value":"daily","label":"일상생활"},{"value":"medical","label":"병원·건강"},{"value":"admin","label":"행정·복지"},{"value":"mixed","label":"복합"}]},
+    {"id":"family","label":"돌봄 분담","type":"select","default":"shared","options":[{"value":"solo","label":"주로 혼자"},{"value":"shared","label":"가족과 분담"}]}
+  ],
+  "stages":[
+    {"id":"care-30","label":"시작 30~15일 전","fromDays":30,"toDays":15,"actions":[
+      {"id":"care-needs","title":"현재 필요한 도움을 5개 항목으로 정리","summary":"식사·이동·약·병원·금전·행정 중 실제 도움이 필요한 항목을 구분합니다.","kind":"must","priority":100},
+      {"id":"care-medlist","title":"복용약·진료기관·연락처 정리","summary":"응급상황에서도 바로 확인할 수 있도록 한 장에 정리합니다.","kind":"risk","priority":96},
+      {"id":"care-family-role","title":"가족 역할과 연락 순서 정하기","summary":"누가 병원, 행정, 비용, 방문을 맡을지 미리 정합니다.","kind":"execute","priority":84,"conditions":{"family":["shared"]}}
+    ]},
+    {"id":"care-14","label":"시작 14~3일 전","fromDays":14,"toDays":3,"actions":[
+      {"id":"care-home","title":"집 안 안전위험 확인","summary":"낙상 위험, 조명, 욕실, 이동 동선, 비상연락 수단을 확인합니다.","kind":"risk","priority":94},
+      {"id":"care-benefits","title":"장기요양·복지 지원 가능성 확인","summary":"현재 상태에서 이용 가능한 공적 지원과 신청 절차를 공식기관에서 확인합니다.","kind":"execute","priority":92,"url":"https://www.longtermcare.or.kr/","sourceLabel":"노인장기요양보험"},
+      {"id":"care-schedule","title":"주간 돌봄 일정표 만들기","summary":"방문·식사·약·병원·전화 확인을 요일별로 배치합니다.","kind":"must","priority":82}
+    ]},
+    {"id":"care-day","label":"돌봄 시작~7일","fromDays":2,"toDays":-7,"actions":[
+      {"id":"care-baseline","title":"첫 주 실제 상태 기록","summary":"식사, 수면, 이동, 약 복용, 기분 변화를 짧게 기록해 기준선을 만듭니다.","kind":"must","priority":94},
+      {"id":"care-overload","title":"돌봄자 과부하 신호 확인","summary":"혼자 감당해야 하는 업무가 계속 늘어나면 분담·외부서비스 필요성을 점검합니다.","kind":"risk","priority":90,"conditions":{"family":["solo"]}},
+      {"id":"care-admin","title":"필요한 행정·복지 신청 진행","summary":"확인한 지원제도 중 실제로 필요한 항목부터 신청합니다.","kind":"execute","priority":86,"conditions":{"need":["admin","mixed"]}}
+    ]},
+    {"id":"care-after","label":"시작 후 8~30일","fromDays":-8,"toDays":-30,"actions":[
+      {"id":"care-review","title":"돌봄 계획이 실제로 작동하는지 점검","summary":"빠진 시간대, 반복되는 문제, 가족 간 부담 불균형을 확인합니다.","kind":"must","priority":92},
+      {"id":"care-medical","title":"건강 변화가 있으면 진료기록 갱신","summary":"새 증상이나 약 변경이 있으면 기존 기록을 바로 수정합니다.","kind":"risk","priority":88,"conditions":{"need":["medical","mixed"]}},
+      {"id":"care-backup","title":"대체 돌봄 경로 하나 확보","summary":"주 돌봄자가 움직일 수 없을 때 대신 연락하거나 방문할 사람·서비스를 정합니다.","kind":"execute","priority":80}
+    ]}
+  ]
+}
