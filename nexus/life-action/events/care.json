@@ -1,31 +1,51 @@
 {
-  "version":"0.1.0","eventType":"care","title":"부모님 돌봄","targetLabel":"돌봄 시작일","subtitle":"건강·행정·생활·가족 역할을 한 흐름으로 정리합니다.","updatedAt":"2026-09-11",
+  "version":"0.3.0","eventType":"care","title":"부모님 돌봄","targetLabel":"돌봄 시작·전환일","subtitle":"연령·질병·거주형태·장기요양등급·가족분담·재가·시설 선택을 실제 조건별로 나눠 점검합니다.","updatedAt":"2026-09-11",
   "inputs":[
-    {"id":"targetDate","label":"돌봄 시작 기준일","type":"date","required":true},
-    {"id":"living","label":"거주 형태","type":"select","default":"separate","options":[{"value":"together","label":"동거"},{"value":"separate","label":"별거"}]},
-    {"id":"need","label":"주요 필요","type":"select","default":"daily","options":[{"value":"daily","label":"일상생활"},{"value":"medical","label":"병원·건강"},{"value":"admin","label":"행정·복지"},{"value":"mixed","label":"복합"}]},
-    {"id":"family","label":"돌봄 분담","type":"select","default":"shared","options":[{"value":"solo","label":"주로 혼자"},{"value":"shared","label":"가족과 분담"}]}
+    {"id":"targetDate","label":"돌봄 시작·전환일","type":"date","required":true},
+    {"id":"ageStatus","label":"연령·질병","type":"select","default":"65plus","options":[{"value":"65plus","label":"65세 이상"},{"value":"under65ElderlyDisease","label":"65세 미만·노인성 질병 있음"},{"value":"under65Other","label":"65세 미만·기타 질환"}]},
+    {"id":"living","label":"현재 거주","type":"select","default":"alone","options":[{"value":"alone","label":"부모님 혼자 거주"},{"value":"spouse","label":"부부 거주"},{"value":"family","label":"자녀와 동거"},{"value":"facility","label":"병원·시설"}]},
+    {"id":"need","label":"주요 돌봄 필요","type":"select","default":"mobility","options":[{"value":"dementia","label":"치매·인지저하"},{"value":"mobility","label":"거동·일상생활 지원"},{"value":"medical","label":"의료·간호 필요"},{"value":"discharge","label":"퇴원 후 돌봄"},{"value":"mixed","label":"복합 필요"}]},
+    {"id":"grade","label":"장기요양 상태","type":"select","default":"none","options":[{"value":"none","label":"신청 전"},{"value":"applying","label":"신청·조사 중"},{"value":"grade12","label":"1~2등급"},{"value":"grade35","label":"3~5등급"},{"value":"cognitive","label":"인지지원등급"},{"value":"rejected","label":"등급 외·불인정"}]},
+    {"id":"caregiver","label":"주 돌봄자","type":"select","default":"familyShared","options":[{"value":"singleFamily","label":"가족 1인이 전담"},{"value":"familyShared","label":"가족 분담"},{"value":"paid","label":"유급 돌봄인력"},{"value":"none","label":"현재 없음"}]},
+    {"id":"daytime","label":"낮 시간","type":"select","default":"alone","options":[{"value":"alone","label":"혼자 있는 시간 많음"},{"value":"family","label":"가족 동행 가능"},{"value":"center","label":"주야간보호 이용 중"},{"value":"paid","label":"요양·간병 인력 있음"}]},
+    {"id":"home","label":"주거환경","type":"select","default":"unknown","options":[{"value":"accessible","label":"엘리베이터·무장애 양호"},{"value":"stairs","label":"계단·욕실 등 위험요소 있음"},{"value":"unknown","label":"아직 점검 안 함"}]}
   ],
   "stages":[
-    {"id":"care-30","label":"시작 30~15일 전","fromDays":30,"toDays":15,"actions":[
-      {"id":"care-needs","title":"현재 필요한 도움을 5개 항목으로 정리","summary":"식사·이동·약·병원·금전·행정 중 실제 도움이 필요한 항목을 구분합니다.","kind":"must","priority":100},
-      {"id":"care-medlist","title":"복용약·진료기관·연락처 정리","summary":"응급상황에서도 바로 확인할 수 있도록 한 장에 정리합니다.","kind":"risk","priority":96},
-      {"id":"care-family-role","title":"가족 역할과 연락 순서 정하기","summary":"누가 병원, 행정, 비용, 방문을 맡을지 미리 정합니다.","kind":"execute","priority":84,"conditions":{"family":["shared"]}}
+    {"id":"care-30","label":"돌봄 30~15일 전","fromDays":30,"toDays":15,"actions":[
+      {"id":"care-needs-map","title":"돌봄을 식사·이동·배변·투약·인지·야간으로 쪼개기","summary":"'돌봄이 필요하다'가 아니라 하루 중 어떤 행동에서 얼마나 도움이 필요한지 시간대별로 기록합니다.","kind":"must","priority":100},
+      {"id":"ltc-eligibility","title":"장기요양 인정신청 자격부터 확인","summary":"65세 이상 또는 65세 미만이면서 치매·뇌혈관질환 등 노인성 질병이 있는 경우 장기요양 인정신청 가능성을 확인합니다.","kind":"execute","priority":100,"conditions":{"ageStatus":["65plus","under65ElderlyDisease"],"grade":["none","rejected"]},"url":"https://www.nhis.or.kr/","sourceLabel":"국민건강보험공단"},
+      {"id":"under65-proof","title":"65세 미만은 노인성 질병 증빙 준비","summary":"65세 미만 신청자는 노인성 질병 확인을 위한 진단서 등 증빙이 필요할 수 있으므로 신청 전에 준비합니다.","kind":"risk","priority":98,"conditions":{"ageStatus":["under65ElderlyDisease"]}},
+      {"id":"other-under65-route","title":"65세 미만·노인성 질병이 아니면 다른 복지·돌봄제도 탐색","summary":"장기요양 대상과 맞지 않을 수 있으므로 장애인 활동지원, 지역 돌봄, 복지서비스 등 다른 경로를 복지로와 지자체에서 확인합니다.","kind":"execute","priority":96,"conditions":{"ageStatus":["under65Other"]},"url":"https://www.bokjiro.go.kr/","sourceLabel":"복지로"},
+      {"id":"family-hours","title":"가족별 실제 가능한 돌봄시간을 표로 확정","summary":"'도와줄 수 있다'가 아니라 평일 오전·오후·야간·주말별 담당자를 정합니다.","kind":"must","priority":95,"conditions":{"caregiver":["singleFamily","familyShared"]}},
+      {"id":"alone-risk","title":"혼자 있는 시간의 낙상·가스·배회·복약 위험 점검","summary":"혼자 있는 시간이 길면 출입, 화재, 약 복용, 비상연락, 낙상 위험을 먼저 줄입니다.","kind":"risk","priority":99,"conditions":{"daytime":["alone"]}},
+      {"id":"discharge-plan","title":"퇴원 전에 집에서 필요한 의료·재활·이동 지원 확정","summary":"퇴원 당일이 아니라 퇴원 전에 침대, 보행, 약, 식사, 통원, 방문간호 가능성을 확인합니다.","kind":"risk","priority":100,"conditions":{"need":["discharge","medical","mixed"]}}
     ]},
-    {"id":"care-14","label":"시작 14~3일 전","fromDays":14,"toDays":3,"actions":[
-      {"id":"care-home","title":"집 안 안전위험 확인","summary":"낙상 위험, 조명, 욕실, 이동 동선, 비상연락 수단을 확인합니다.","kind":"risk","priority":94},
-      {"id":"care-benefits","title":"장기요양·복지 지원 가능성 확인","summary":"현재 상태에서 이용 가능한 공적 지원과 신청 절차를 공식기관에서 확인합니다.","kind":"execute","priority":92,"url":"https://www.longtermcare.or.kr/","sourceLabel":"노인장기요양보험"},
-      {"id":"care-schedule","title":"주간 돌봄 일정표 만들기","summary":"방문·식사·약·병원·전화 확인을 요일별로 배치합니다.","kind":"must","priority":82}
+    {"id":"care-14","label":"돌봄 14~3일 전","fromDays":14,"toDays":3,"actions":[
+      {"id":"ltc-visit","title":"장기요양 방문조사 대비해 최근 한 달 기능상태 기록","summary":"공단 방문조사는 신체기능·인지·행동변화·간호처치·재활 등 실제 생활상태를 확인하므로 일상에서 필요한 도움을 구체적으로 기록합니다.","kind":"must","priority":100,"conditions":{"grade":["applying"]},"url":"https://www.nhis.or.kr/","sourceLabel":"국민건강보험공단"},
+      {"id":"doctor-opinion","title":"의사소견서 제출 시점과 발급절차 확인","summary":"장기요양 인정신청 시 의사소견서가 필요하며 신청상황에 따라 제출시점이 달라질 수 있으므로 공단 안내를 확인합니다.","kind":"execute","priority":98,"conditions":{"grade":["applying"]}},
+      {"id":"dementia-center","title":"치매·인지저하이면 치매안심센터와 진료체계 연결","summary":"진단·약물·인지검사·가족상담·배회예방 등 지역 치매지원과 의료기관을 함께 연결합니다.","kind":"execute","priority":96,"conditions":{"need":["dementia","mixed"]}},
+      {"id":"home-safety","title":"욕실·침실·현관·계단 안전개선","summary":"미끄럼, 문턱, 야간조명, 손잡이, 침대높이, 화장실 이동동선을 실제로 점검합니다.","kind":"execute","priority":94,"conditions":{"home":["stairs","unknown"]}},
+      {"id":"medication-list","title":"약·진단·병원·응급연락 정보를 한 장으로 정리","summary":"복용약, 알레르기, 진단명, 주치의, 보호자 연락처를 가족 모두가 같은 버전으로 공유합니다.","kind":"must","priority":98},
+      {"id":"caregiver-burnout","title":"가족 1인 전담이면 휴식·대체돌봄 계획을 먼저 만들기","summary":"한 사람이 모든 돌봄을 떠안지 않도록 대체인력, 주야간보호, 단기보호 등 쉬는 시간을 구조적으로 확보합니다.","kind":"risk","priority":99,"conditions":{"caregiver":["singleFamily"]}}
     ]},
-    {"id":"care-day","label":"돌봄 시작~7일","fromDays":2,"toDays":-7,"actions":[
-      {"id":"care-baseline","title":"첫 주 실제 상태 기록","summary":"식사, 수면, 이동, 약 복용, 기분 변화를 짧게 기록해 기준선을 만듭니다.","kind":"must","priority":94},
-      {"id":"care-overload","title":"돌봄자 과부하 신호 확인","summary":"혼자 감당해야 하는 업무가 계속 늘어나면 분담·외부서비스 필요성을 점검합니다.","kind":"risk","priority":90,"conditions":{"family":["solo"]}},
-      {"id":"care-admin","title":"필요한 행정·복지 신청 진행","summary":"확인한 지원제도 중 실제로 필요한 항목부터 신청합니다.","kind":"execute","priority":86,"conditions":{"need":["admin","mixed"]}}
+    {"id":"care-day","label":"돌봄 시작·전환일 전후","fromDays":2,"toDays":-2,"actions":[
+      {"id":"care-calendar","title":"투약·식사·병원·목욕·재활을 주간표로 고정","summary":"가족과 돌봄인력이 같은 일정을 보도록 한 장짜리 주간표를 만듭니다.","kind":"must","priority":100},
+      {"id":"grade-benefit-plan","title":"등급이 있으면 재가·시설·복지용구 조합을 비교","summary":"등급만 받는 것으로 끝내지 말고 방문요양, 방문목욕, 주야간보호, 시설, 복지용구 중 실제 생활에 필요한 조합을 선택합니다.","kind":"execute","priority":100,"conditions":{"grade":["grade12","grade35","cognitive"]},"url":"https://www.longtermcare.or.kr/","sourceLabel":"노인장기요양보험"},
+      {"id":"facility-compare","title":"시설은 거리보다 돌봄인력·의료연계·야간대응 비교","summary":"시설 이용 시 계약조건, 면회, 응급상황, 추가비용, 인력배치, 의료기관 연계를 직접 확인합니다.","kind":"risk","priority":98,"conditions":{"living":["facility"],"grade":["grade12","grade35"]}},
+      {"id":"paid-care-contract","title":"유급 돌봄인력의 업무범위·시간·비용·대체인력 확인","summary":"식사·목욕·병원동행·야간·가사 범위를 명확히 하고 결근 시 대체방법을 정합니다.","kind":"risk","priority":96,"conditions":{"caregiver":["paid"],"daytime":["paid"]}},
+      {"id":"emergency-route","title":"119·응급실·주치의·가족 호출 순서를 정하기","summary":"응급상황에서 누구에게 먼저 연락할지, 어느 병원으로 갈지, 필요한 서류를 어디에 둘지 정합니다.","kind":"must","priority":99}
     ]},
-    {"id":"care-after","label":"시작 후 8~30일","fromDays":-8,"toDays":-30,"actions":[
-      {"id":"care-review","title":"돌봄 계획이 실제로 작동하는지 점검","summary":"빠진 시간대, 반복되는 문제, 가족 간 부담 불균형을 확인합니다.","kind":"must","priority":92},
-      {"id":"care-medical","title":"건강 변화가 있으면 진료기록 갱신","summary":"새 증상이나 약 변경이 있으면 기존 기록을 바로 수정합니다.","kind":"risk","priority":88,"conditions":{"need":["medical","mixed"]}},
-      {"id":"care-backup","title":"대체 돌봄 경로 하나 확보","summary":"주 돌봄자가 움직일 수 없을 때 대신 연락하거나 방문할 사람·서비스를 정합니다.","kind":"execute","priority":80}
+    {"id":"care-after30","label":"돌봄 3~30일 후","fromDays":-3,"toDays":-30,"actions":[
+      {"id":"service-fit","title":"서비스 시간이 실제 공백시간을 메우는지 검토","summary":"방문요양·주야간보호 시간과 가족이 비는 시간이 맞지 않으면 조합을 다시 조정합니다.","kind":"must","priority":96},
+      {"id":"care-cost","title":"본인부담·간병·교통·의료·소모품 비용을 월 단위로 합산","summary":"공적급여 밖에서 실제로 빠져나가는 비용까지 포함해 가족별 부담을 확인합니다.","kind":"risk","priority":94},
+      {"id":"family-review","title":"가족회의는 감정이 아니라 업무·시간·비용으로 진행","summary":"누가 무엇을 맡는지, 못 맡는 부분은 어떤 서비스로 대체할지 월 1회 갱신합니다.","kind":"execute","priority":90,"conditions":{"caregiver":["singleFamily","familyShared"]}},
+      {"id":"grade-change","title":"상태 악화·호전 시 등급변경·서비스 재조정 검토","summary":"현재 등급과 실제 기능상태가 맞지 않으면 공단에 갱신·등급변경 절차를 확인합니다.","kind":"execute","priority":88,"conditions":{"grade":["grade12","grade35","cognitive","rejected"]}},
+      {"id":"care-log","title":"낙상·식사·수면·배변·인지변화를 짧게 기록","summary":"병원진료와 등급평가에서 기억에 의존하지 않도록 중요한 변화만 날짜별로 기록합니다.","kind":"must","priority":85}
+    ]},
+    {"id":"care-after90","label":"돌봄 31~90일 후","fromDays":-31,"toDays":-90,"actions":[
+      {"id":"long-term-plan","title":"재가 유지·동거·시설전환의 기준선을 가족이 합의","summary":"어떤 상태가 되면 돌봄방식을 바꿀지 미리 기준을 정해 위기 때 즉흥적으로 결정하지 않도록 합니다.","kind":"risk","priority":94},
+      {"id":"legal-financial","title":"금융·병원·행정 업무를 누가 처리할지 권한 정리","summary":"인지저하가 진행될 가능성이 있으면 계좌·보험·병원동의·행정서류 처리주체를 미리 확인합니다.","kind":"risk","priority":92,"conditions":{"need":["dementia","mixed"]}},
+      {"id":"caregiver-health","title":"주 돌봄자의 수면·통증·우울·직장문제도 함께 점검","summary":"돌봄 지속가능성은 부모님의 상태뿐 아니라 돌봄자의 건강과 직장유지 가능성에도 좌우됩니다.","kind":"must","priority":90}
     ]}
   ]
 }
