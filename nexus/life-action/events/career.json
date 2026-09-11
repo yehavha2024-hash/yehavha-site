@@ -1,0 +1,36 @@
+{
+  "version":"0.1.0","eventType":"career","title":"취업·이직","targetLabel":"목표일","subtitle":"지원·면접·입사 전후에 해야 할 일을 순서대로 정리합니다.","updatedAt":"2026-09-11",
+  "inputs":[
+    {"id":"targetDate","label":"입사·이직 목표일","type":"date","required":true},
+    {"id":"path","label":"구분","type":"select","default":"change","options":[{"value":"change","label":"이직"},{"value":"first","label":"첫 취업"},{"value":"return","label":"재취업"}]},
+    {"id":"status","label":"현재 상태","type":"select","default":"employed","options":[{"value":"employed","label":"재직 중"},{"value":"unemployed","label":"구직 중"}]},
+    {"id":"focus","label":"직무 방향","type":"select","default":"office","options":[{"value":"office","label":"사무·기획"},{"value":"technical","label":"기술·전문"},{"value":"public","label":"공공·기관"},{"value":"other","label":"기타"}]}
+  ],
+  "stages":[
+    {"id":"career-60","label":"목표 60~31일 전","fromDays":60,"toDays":31,"actions":[
+      {"id":"career-target","title":"지원 직무와 조건 한 줄로 고정","summary":"직무·지역·급여·근무형태 중 양보하지 않을 기준을 먼저 정합니다.","kind":"must","priority":100},
+      {"id":"career-resume","title":"이력서·경력기술서 기준본 만들기","summary":"공고마다 처음부터 다시 쓰지 않도록 공통 기준본을 먼저 완성합니다.","kind":"execute","priority":94},
+      {"id":"career-exit-risk","title":"퇴사 시점과 공백기간 계산","summary":"재직 중 이직이라면 사직 통보·인수인계·입사 가능일이 충돌하지 않는지 확인합니다.","kind":"risk","priority":92,"conditions":{"status":["employed"]}}
+    ]},
+    {"id":"career-30","label":"목표 30~15일 전","fromDays":30,"toDays":15,"actions":[
+      {"id":"career-list","title":"지원기업 우선순위 10곳 정리","summary":"지원 가능성보다 실제로 갈 의향이 있는 곳부터 순서를 정합니다.","kind":"must","priority":88},
+      {"id":"career-work24","title":"공식 채용·지원제도 확인","summary":"채용정보와 고용지원제도를 공식 경로에서 함께 확인합니다.","kind":"execute","priority":82,"url":"https://www.work24.go.kr/","sourceLabel":"고용24"},
+      {"id":"career-proof","title":"경력·자격 증빙파일 한 폴더로 정리","summary":"재직·경력·자격·포트폴리오 파일명을 통일해 즉시 제출 가능하게 만듭니다.","kind":"risk","priority":75}
+    ]},
+    {"id":"career-14","label":"목표 14~3일 전","fromDays":14,"toDays":3,"actions":[
+      {"id":"career-interview","title":"면접 질문 10개와 답변 근거 준비","summary":"자기소개보다 지원동기·성과·갈등·퇴사사유를 실제 사례 중심으로 준비합니다.","kind":"must","priority":96},
+      {"id":"career-company","title":"회사·직무 리스크 역질문 준비","summary":"업무범위, 평가방식, 계약조건, 조직문화에서 반드시 확인할 항목을 적습니다.","kind":"risk","priority":91},
+      {"id":"career-route","title":"면접 일정·이동·복장 확정","summary":"면접 직전 변수로 집중력이 떨어지지 않도록 실무 준비를 끝냅니다.","kind":"execute","priority":70}
+    ]},
+    {"id":"career-day","label":"입사·전환 시점","fromDays":2,"toDays":-7,"actions":[
+      {"id":"career-contract","title":"근로조건 서면 확인","summary":"임금·근무시간·계약기간·업무범위를 실제 문서 기준으로 확인합니다.","kind":"risk","priority":100},
+      {"id":"career-firstweek","title":"첫 주 업무목표 3개 설정","summary":"사람·업무·보고체계를 파악할 최소 목표를 정합니다.","kind":"must","priority":84},
+      {"id":"career-record","title":"초기 업무·질문 기록 시작","summary":"배운 내용과 확인할 사항을 매일 짧게 기록해 적응속도를 높입니다.","kind":"execute","priority":72}
+    ]},
+    {"id":"career-after","label":"입사 후 8~30일","fromDays":-8,"toDays":-30,"actions":[
+      {"id":"career-fit","title":"실제 업무와 채용조건 비교","summary":"면접 때 들은 역할과 실제 업무가 얼마나 일치하는지 점검합니다.","kind":"risk","priority":89},
+      {"id":"career-network","title":"핵심 협업자와 업무흐름 정리","summary":"누구에게 무엇을 물어보고 보고해야 하는지 구조를 정리합니다.","kind":"must","priority":77},
+      {"id":"career-review","title":"30일 적응 점검","summary":"계속 다닐 이유와 위험요인을 함께 기록해 감정이 아니라 근거로 판단합니다.","kind":"execute","priority":68}
+    ]}
+  ]
+}
