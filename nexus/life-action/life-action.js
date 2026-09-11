@@ -146,6 +146,29 @@
     $('moveDday').textContent = '미설정';
   }
 
+  function selectEvent(button) {
+    document.querySelectorAll('.life-event').forEach((item) => item.classList.remove('is-active'));
+    button.classList.add('is-active');
+
+    const eventKey = button.dataset.event;
+    const label = button.dataset.label || button.textContent.trim();
+    const notice = $('lifeEventNotice');
+    const isMove = eventKey === 'move';
+
+    $('configure').hidden = !isMove;
+    $('timelinePanel').hidden = !isMove;
+    if (!isMove) $('resultPanel').hidden = true;
+
+    if (isMove) {
+      notice.hidden = true;
+      $('configure').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      return;
+    }
+
+    notice.textContent = `${label} 실행 NEXUS는 준비 중입니다.`;
+    notice.hidden = false;
+  }
+
   async function init() {
     try {
       const response = await fetch('./events/move.json', { cache: 'no-store' });
@@ -157,7 +180,9 @@
       console.error(error);
     }
 
-    $('moveEvent').addEventListener('click', () => $('configure').scrollIntoView({ behavior: 'smooth', block: 'start' }));
+    document.querySelectorAll('.life-event').forEach((button) => {
+      button.addEventListener('click', () => selectEvent(button));
+    });
 
     $('lifeForm').addEventListener('submit', (event) => {
       event.preventDefault();
