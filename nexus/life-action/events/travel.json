@@ -1,36 +1,56 @@
 {
-  "version":"0.1.0","eventType":"travel","title":"여행","targetLabel":"출발일","subtitle":"예약·준비·이동·현지 행동을 출발일 기준으로 정리합니다.","updatedAt":"2026-09-11",
+  "version":"0.3.0","eventType":"travel","title":"여행·휴가","targetLabel":"출발일","subtitle":"국내·해외, 여권·비자, 건강, 동행자, 운전, 보험, 위험지역까지 실제 준비항목을 조건별로 나눕니다.","updatedAt":"2026-09-11",
   "inputs":[
     {"id":"targetDate","label":"출발일","type":"date","required":true},
-    {"id":"scope","label":"여행 범위","type":"select","default":"domestic","options":[{"value":"domestic","label":"국내"},{"value":"overseas","label":"해외"}]},
-    {"id":"party","label":"동행","type":"select","default":"solo","options":[{"value":"solo","label":"혼자"},{"value":"couple","label":"2인"},{"value":"family","label":"가족"}]},
-    {"id":"style","label":"여행 방식","type":"select","default":"free","options":[{"value":"free","label":"자유여행"},{"value":"package","label":"패키지"},{"value":"business","label":"출장"}]}
+    {"id":"scope","label":"여행 범위","type":"select","default":"overseas","options":[{"value":"domestic","label":"국내"},{"value":"overseas","label":"해외"}]},
+    {"id":"purpose","label":"목적","type":"select","default":"leisure","options":[{"value":"leisure","label":"휴가·관광"},{"value":"business","label":"출장"},{"value":"visit","label":"가족·지인 방문"},{"value":"longstay","label":"장기체류"}]},
+    {"id":"traveler","label":"동행","type":"select","default":"solo","options":[{"value":"solo","label":"혼자"},{"value":"couple","label":"2인"},{"value":"child","label":"아이 동반"},{"value":"elderly","label":"고령자 동반"},{"value":"pregnant","label":"임신부 동반"}]},
+    {"id":"passport","label":"여권 상태","type":"select","default":"valid6","options":[{"value":"valid6","label":"잔여 6개월 이상"},{"value":"under6","label":"잔여 6개월 미만"},{"value":"expired","label":"만료"},{"value":"none","label":"없음"},{"value":"domestic","label":"국내여행"}]},
+    {"id":"visa","label":"비자·입국요건","type":"select","default":"unknown","options":[{"value":"notNeeded","label":"확인 완료·불필요"},{"value":"required","label":"비자 필요"},{"value":"eta","label":"전자여행허가 필요"},{"value":"unknown","label":"모름"}]},
+    {"id":"health","label":"건강상태","type":"select","default":"none","options":[{"value":"none","label":"특이사항 없음"},{"value":"chronic","label":"만성질환"},{"value":"medication","label":"상시 복용약"},{"value":"pregnant","label":"임신"},{"value":"mobility","label":"이동 제약"}]},
+    {"id":"risk","label":"목적지 위험도","type":"select","default":"unknown","options":[{"value":"normal","label":"특별경보 없음"},{"value":"caution","label":"주의·경보 확인 필요"},{"value":"high","label":"고위험·출국권고 가능"},{"value":"unknown","label":"아직 확인 안 함"}]},
+    {"id":"drive","label":"현지 운전","type":"select","default":"no","options":[{"value":"no","label":"안 함"},{"value":"yes","label":"렌터카·운전 예정"}]},
+    {"id":"insurance","label":"여행보험","type":"select","default":"consider","options":[{"value":"yes","label":"가입 완료"},{"value":"consider","label":"검토 중"},{"value":"no","label":"미가입"}]}
   ],
   "stages":[
     {"id":"travel-60","label":"출발 60~31일 전","fromDays":60,"toDays":31,"actions":[
-      {"id":"travel-budget","title":"총예산 상한 먼저 정하기","summary":"교통·숙박·식비·현지교통·입장료까지 포함한 총예산을 먼저 정합니다.","kind":"must","priority":100},
-      {"id":"travel-book","title":"교통·숙박 핵심 예약","summary":"취소조건과 위치를 함께 보고 핵심 예약부터 확정합니다.","kind":"execute","priority":94},
-      {"id":"travel-passport","title":"여권·입국조건 확인","summary":"해외여행이면 여권 유효기간과 입국조건을 공식 경로에서 확인합니다.","kind":"risk","priority":98,"conditions":{"scope":["overseas"]},"url":"https://www.0404.go.kr/","sourceLabel":"외교부 해외안전여행"}
+      {"id":"passport-validity","title":"여권 잔여 유효기간을 목적국 기준으로 확인","summary":"외교부는 국가마다 입국요건이 다르고 여권 잔여 유효기간 6개월 이상을 권장하므로 목적국 공관 기준을 함께 확인하라고 안내합니다.","kind":"risk","priority":100,"conditions":{"scope":["overseas"],"passport":["under6","expired","none"]},"url":"https://www.passport.go.kr/","sourceLabel":"외교부 여권안내"},
+      {"id":"passport-reissue","title":"여권 발급·재발급 일정을 항공권보다 먼저 확정","summary":"여권이 없거나 만료·유효기간 부족이면 신청·수령기간을 고려해 출발일에서 역산합니다.","kind":"execute","priority":99,"conditions":{"scope":["overseas"],"passport":["under6","expired","none"]},"url":"https://www.passport.go.kr/","sourceLabel":"외교부 여권안내"},
+      {"id":"visa-entry","title":"비자·전자여행허가·입국요건을 공식 공관 기준으로 확인","summary":"무비자라고 기억에 의존하지 말고 체류기간, 목적, 여권종류, 전자허가 필요 여부를 확인합니다.","kind":"risk","priority":100,"conditions":{"scope":["overseas"],"visa":["required","eta","unknown"]}},
+      {"id":"travel-alert","title":"목적지 여행경보와 최근 안전공지를 확인","summary":"전쟁·시위·재난·범죄·영공폐쇄 등은 예약정보보다 먼저 확인해야 합니다.","kind":"risk","priority":100,"conditions":{"scope":["overseas"],"risk":["caution","high","unknown"]},"url":"https://www.0404.go.kr/","sourceLabel":"외교부 해외안전여행"},
+      {"id":"high-risk-cancel","title":"고위험 지역은 취소·연기 가능성까지 먼저 판단","summary":"3단계 출국권고·4단계 여행금지 등 경보수준이 높으면 항공·숙박 취소규정과 대체일정을 함께 확인합니다.","kind":"must","priority":100,"conditions":{"scope":["overseas"],"risk":["high"]},"url":"https://www.0404.go.kr/","sourceLabel":"외교부 해외안전여행"},
+      {"id":"health-country","title":"목적국 감염병·예방접종 정보를 출국 전에 확인","summary":"질병관리청의 국가별 감염병 정보와 예방수칙을 확인하고 필요한 예방접종·약을 출국 직전에 미루지 않습니다.","kind":"execute","priority":94,"conditions":{"scope":["overseas"]},"url":"https://www.kdca.go.kr/","sourceLabel":"질병관리청"},
+      {"id":"pregnancy-check","title":"임신 중 여행은 항공사·산부인과·목적지 의료 접근성을 함께 확인","summary":"임신 주수와 건강상태, 항공사 탑승조건, 여행지 의료체계와 감염병 위험을 확인합니다.","kind":"risk","priority":99,"conditions":{"traveler":["pregnant"],"scope":["overseas"]}}
     ]},
     {"id":"travel-30","label":"출발 30~15일 전","fromDays":30,"toDays":15,"actions":[
-      {"id":"travel-route","title":"하루 핵심 일정 1~2개만 확정","summary":"시간을 촘촘히 채우지 말고 이동시간을 포함해 핵심 일정만 고정합니다.","kind":"must","priority":88},
-      {"id":"travel-local","title":"현지 이동수단과 결제수단 확인","summary":"공항·역에서 숙소까지 이동과 카드·현금 사용방식을 미리 확인합니다.","kind":"risk","priority":86},
-      {"id":"travel-family","title":"가족별 필요물품 분리","summary":"아이·부모님과 함께라면 약, 식사, 이동보조 등 개인별 준비물을 따로 정리합니다.","kind":"execute","priority":78,"conditions":{"party":["family"]}}
+      {"id":"booking-audit","title":"항공·숙박·교통의 취소규정과 이름 표기 재확인","summary":"여권 영문명과 예약자명이 일치하는지, 변경·환불비용과 체크인 시간을 확인합니다.","kind":"risk","priority":96},
+      {"id":"insurance-coverage","title":"여행보험은 질병·상해·휴대품·항공지연 보장범위를 비교","summary":"가입 여부만 보지 말고 치료비 한도, 기존질환 제외, 자기부담, 지연·취소 조건을 확인합니다.","kind":"risk","priority":93,"conditions":{"insurance":["consider","no"],"scope":["overseas"]}},
+      {"id":"medication-docs","title":"상시복용약은 처방·성분명·반입제한 확인","summary":"여행기간보다 여유 있게 준비하고 국가별 반입제한 가능성이 있는 약은 영문 처방·성분명과 반입기준을 확인합니다.","kind":"risk","priority":99,"conditions":{"health":["chronic","medication"]}},
+      {"id":"elderly-mobility","title":"고령자 동반은 이동시간·계단·화장실·의료접근성을 먼저 줄이기","summary":"관광지 수보다 이동거리와 휴식시간을 줄이고 보험·복용약·응급연락을 동행자가 공유합니다.","kind":"must","priority":95,"conditions":{"traveler":["elderly"]}},
+      {"id":"child-documents","title":"아이 동반은 가족관계·여권·항공사 규정·카시트 등 확인","summary":"미성년자 여권과 동반자 관계, 항공·숙박의 아동 규정, 현지 이동수단의 안전장비를 확인합니다.","kind":"risk","priority":92,"conditions":{"traveler":["child"]}},
+      {"id":"driving-docs","title":"현지 운전은 면허·국제운전허가·보험·교통법규 확인","summary":"렌터카 예약조건, 운전자 연령, 보증금, 차량보험, 국제운전허가 인정 여부를 목적국 기준으로 확인합니다.","kind":"risk","priority":95,"conditions":{"drive":["yes"],"scope":["overseas"]}},
+      {"id":"domestic-weather-route","title":"국내여행은 교통·주차·날씨·숙박 체크인 동선을 먼저 연결","summary":"장거리 이동이면 운전시간, 휴게, 주차, 기상악화 시 대체동선을 같이 준비합니다.","kind":"execute","priority":82,"conditions":{"scope":["domestic"]}}
     ]},
     {"id":"travel-14","label":"출발 14~3일 전","fromDays":14,"toDays":3,"actions":[
-      {"id":"travel-weather","title":"날씨·운영시간 재확인","summary":"옷차림과 실내 대체일정을 정할 수 있도록 출발 직전 다시 확인합니다.","kind":"must","priority":92},
-      {"id":"travel-docs","title":"예약·신분·보험 정보 한곳에 저장","summary":"휴대폰이 안 되더라도 확인할 수 있도록 핵심 정보의 오프라인 사본을 준비합니다.","kind":"risk","priority":94},
-      {"id":"travel-roaming","title":"통신·로밍·충전 준비","summary":"해외라면 데이터 사용방식과 충전규격을 미리 준비합니다.","kind":"execute","priority":76,"conditions":{"scope":["overseas"]}}
+      {"id":"money-plan","title":"현금·카드·해외결제수수료·비상결제수단 분산","summary":"카드 한 장에 의존하지 말고 결제수단과 비상자금을 분리해 보관합니다.","kind":"must","priority":90,"conditions":{"scope":["overseas"]}},
+      {"id":"roaming","title":"로밍·eSIM·현지SIM 중 연결방식 확정","summary":"공항 도착 직후 지도·교통·인증문자를 쓸 수 있도록 개통방식을 정합니다.","kind":"execute","priority":85,"conditions":{"scope":["overseas"]}},
+      {"id":"emergency-info","title":"영사콜센터·보험사·가족·현지 숙소 연락처 오프라인 저장","summary":"휴대전화 분실이나 통신장애에도 확인할 수 있도록 종이·오프라인 파일로 남깁니다.","kind":"must","priority":94,"conditions":{"scope":["overseas"]}},
+      {"id":"document-copies","title":"여권·비자·보험·예약서류 사본 분리보관","summary":"원본과 같은 가방에 두지 말고 암호화된 온라인 사본과 오프라인 사본을 분리합니다.","kind":"risk","priority":92,"conditions":{"scope":["overseas"]}},
+      {"id":"itinerary-share","title":"혼자 여행이면 숙소·이동일정을 가족 1명에게 공유","summary":"연락두절 시 확인할 수 있도록 항공편, 숙소, 도시 이동일을 최소한 공유합니다.","kind":"risk","priority":96,"conditions":{"traveler":["solo"],"scope":["overseas"]}},
+      {"id":"business-backup","title":"출장은 업무자료·인증수단·발표파일을 이중화","summary":"노트북 고장·분실에 대비해 발표본, 계약자료, 인증수단의 백업을 준비합니다.","kind":"risk","priority":93,"conditions":{"purpose":["business"]}}
     ]},
     {"id":"travel-day","label":"출발 당일~여행 중","fromDays":2,"toDays":-7,"actions":[
-      {"id":"travel-check","title":"출발 전 핵심 5개 확인","summary":"신분증·결제수단·휴대폰·충전·예약정보만 마지막으로 확인합니다.","kind":"must","priority":100},
-      {"id":"travel-safety","title":"일정 변경 시 안전·공식정보 우선","summary":"교통·기상·현지상황이 바뀌면 계획보다 공식 안내를 우선합니다.","kind":"risk","priority":92},
-      {"id":"travel-expense","title":"큰 지출만 바로 기록","summary":"세부 가계부보다 교통·숙박·쇼핑 등 큰 지출만 기록해 예산이탈을 막습니다.","kind":"execute","priority":68}
+      {"id":"airport-final","title":"여권·항공권·비자·수하물·터미널 최종 확인","summary":"공항 이동 전 여권 실물, 출발 터미널, 수하물 규정, 체크인 가능시간을 확인합니다.","kind":"must","priority":100,"conditions":{"scope":["overseas"]}},
+      {"id":"local-alerts","title":"현지에서는 안전공지·기상·교통 변동을 다시 확인","summary":"출국 전 정보와 현지 상황은 달라질 수 있으므로 이동일마다 안전·교통 변동을 확인합니다.","kind":"risk","priority":98,"conditions":{"scope":["overseas"]},"url":"https://www.0404.go.kr/","sourceLabel":"외교부 해외안전여행"},
+      {"id":"health-symptom","title":"발열·발진·호흡기·위장 증상 발생 시 이동보다 진료 우선","summary":"여행 중 감염병 의심증상이 생기면 무리한 일정 진행을 중단하고 현지 의료·보험 연락망을 이용합니다.","kind":"risk","priority":99,"conditions":{"scope":["overseas"]}},
+      {"id":"loss-response","title":"여권·휴대전화·카드 분실 시 대응순서 실행","summary":"카드정지, 경찰신고, 재외공관·여권민원, 계정잠금 순서를 사전에 저장한 연락처로 처리합니다.","kind":"execute","priority":100,"conditions":{"scope":["overseas"]}},
+      {"id":"expense-log","title":"공금·출장비·여행예산은 하루 1회만 정리","summary":"영수증을 쌓아두지 말고 사진과 금액을 짧게 기록해 귀국 후 정산시간을 줄입니다.","kind":"execute","priority":70}
     ]},
-    {"id":"travel-after","label":"귀환 후 1~14일","fromDays":-8,"toDays":-14,"actions":[
-      {"id":"travel-settle","title":"카드·환전·공동비용 정산","summary":"미결제 금액과 공동비용을 바로 정리합니다.","kind":"must","priority":86},
-      {"id":"travel-review","title":"좋았던 것과 낭비한 것 기록","summary":"다음 여행에서 재사용할 숙소·동선·비용 정보를 짧게 남깁니다.","kind":"execute","priority":70},
-      {"id":"travel-security","title":"공용기기·임시계정 점검","summary":"해외나 공용기기를 사용했다면 로그인 상태와 보안설정을 확인합니다.","kind":"risk","priority":74,"conditions":{"scope":["overseas"]}}
+    {"id":"travel-after","label":"귀국·종료 후 1~14일","fromDays":-8,"toDays":-14,"actions":[
+      {"id":"post-health","title":"귀국 후 이상증상과 방문국 정보를 함께 기억","summary":"발열·발진·근육통 등 이상증상이 있으면 방문국과 여행기간을 의료진·검역기관에 알립니다.","kind":"risk","priority":96,"conditions":{"scope":["overseas"]},"url":"https://www.kdca.go.kr/","sourceLabel":"질병관리청"},
+      {"id":"insurance-claim","title":"보험 청구가 있으면 진단서·영수증·사고증빙 즉시 정리","summary":"현지 진료나 분실·지연 사고가 있었다면 청구기한 전에 필요한 서류를 확인합니다.","kind":"execute","priority":90,"conditions":{"insurance":["yes"]}},
+      {"id":"refund-check","title":"보증금·렌터카·호텔·해외결제 취소금액 확인","summary":"해외결제 승인취소와 보증금 반환은 시간이 걸릴 수 있으므로 카드내역을 확인합니다.","kind":"risk","priority":85},
+      {"id":"trip-review","title":"좋았던 장소보다 실패한 동선·비용·예약을 기록","summary":"다음 여행에서 재사용할 수 있도록 실제 이동시간, 예상 밖 비용, 취소원인을 짧게 남깁니다.","kind":"must","priority":70}
     ]}
   ]
 }
