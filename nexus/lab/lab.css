@@ -80,13 +80,13 @@
 .lab-choice-selected{border-color:var(--lab-blue);background:#f4f9fd}
 .lab-discovery{margin-top:10px;padding:12px;border:1px solid #bad3c5;border-radius:9px;background:#f1f8f4}
 .lab-discovery p{margin:0 0 9px;color:#111;font-size:13px;line-height:1.58}
-.lab-result{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px 14px;align-items:start;min-height:0}
-.lab-result .lab-case-label{grid-column:1/-1}
-.lab-result h3{grid-column:1;margin:0}
-.lab-result>p:not(.lab-case-label){grid-column:1}
-.lab-result-score{grid-column:2;grid-row:2/4;align-self:start;width:max-content;min-width:126px;margin:0;padding:10px 12px;border:1px solid var(--lab-line);border-radius:9px;background:var(--lab-soft)}
-.lab-result-score strong{display:block;margin-top:3px;font-size:25px;line-height:1;font-variant-numeric:tabular-nums}
-.lab-result-actions{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+.lab-result{display:grid;gap:7px;align-items:start;min-height:0}
+.lab-result .lab-case-label{margin:0}
+.lab-result h3{margin:0}
+.lab-result>p:not(.lab-case-label){margin:0}
+.lab-result-score{display:inline-flex;align-items:center;gap:9px;width:max-content;margin:5px 0 2px;padding:8px 11px;border:1px solid var(--lab-line);border-radius:9px;background:var(--lab-soft)}
+.lab-result-score strong{display:block;margin:0;font-size:23px;line-height:1;font-variant-numeric:tabular-nums}
+.lab-result-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:3px}
 .lab-reuse-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
 .lab-reuse-grid>div{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;align-items:baseline;padding:10px 11px;border:1px solid var(--lab-line);border-radius:9px;background:#fff}
 .lab-reuse-grid strong{display:block;margin:0;font-size:13.5px;white-space:nowrap}
@@ -124,8 +124,7 @@
   .lab-stage-head h3{font-size:1.32rem}
   .lab-choice{grid-template-columns:28px minmax(0,1fr);padding:10px}
   .lab-choice-index{width:28px;height:28px}
-  .lab-result{grid-template-columns:minmax(0,1fr) auto;gap:6px 8px}
-  .lab-result-score{min-width:105px;padding:8px 9px}
+  .lab-result-score{padding:8px 9px}
   .lab-result-score strong{font-size:21px}
   .lab-reuse-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
   .lab-reuse-grid>div{display:block;padding:9px}
