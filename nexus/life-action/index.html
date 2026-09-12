@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="NEXUS 2는 매일의 선택과 이사·취업·이직·퇴직·휴직·창업·부모님 돌봄·여행·휴가의 실제 조건을 실행순서로 연결하는 생활 실행 서비스입니다."/>
+<meta name="description" content="NEXUS 2는 매일 선별한 핵심 정보와 이사·취업·이직·퇴직·휴직·창업·부모님 돌봄·여행·휴가의 실행순서를 연결하는 생활 실행 서비스입니다."/>
 <meta name="theme-color" content="#ffffff"/>
 <title>NEXUS 2 · 생활사건 실행 NEXUS | YEHAVHA NEXUS</title>
 <link href="../portal-v2.css?v=20260911-nexus2-1" rel="stylesheet"/>
-<link href="./life-action.css?v=20260912-6" rel="stylesheet"/>
+<link href="./life-action.css?v=20260912-7" rel="stylesheet"/>
 </head>
 <body>
 <a class="skip-link" href="#lifeMain">NEXUS 2 실행화면으로 이동</a>
@@ -16,8 +16,8 @@
     <a class="back-link" href="../">← YEHAVHA NEXUS</a>
     <section class="hero-card life-hero-card">
       <p class="eyebrow">NEXUS 2 · LIFE ACTION</p>
-      <h1>NEXUS 2 <span>매일의 선택부터 중요한 생활사건의 실행까지 연결합니다.</span></h1>
-      <p class="description">오늘 필요한 것을 빠르게 고르고, 큰 생활사건이 생기면 실제 조건에 맞는 실행순서로 이어갑니다.</p>
+      <h1>NEXUS 2 <span>정보를 고르고, 중요한 생활사건은 실행순서로 연결합니다.</span></h1>
+      <p class="description">너무 많은 정보 중 오늘 확인할 가치가 있는 것만 선별하고, 큰 일이 생기면 실제 조건에 맞는 실행순서로 이어갑니다.</p>
     </section>
   </div>
 </header>
@@ -25,21 +25,11 @@
 <main class="main" id="lifeMain">
   <div class="container life-shell">
     <section class="life-panel life-daily-panel" aria-labelledby="dailyTitle">
-      <div class="life-heading life-heading-compact"><span class="life-number">01</span><div><h2 id="dailyTitle">DAILY NEXUS</h2></div></div>
-      <div class="life-daily-grid">
-        <a class="life-daily-card" href="../culture-events/" aria-label="오늘 뭐 볼까?">
-          <span class="life-daily-image"><img src="../assets/cards/culture-media.webp" alt="" width="960" height="720" loading="eager" decoding="async"/></span>
-          <span class="life-daily-copy"><strong>오늘 뭐 볼까?</strong><span>문화·영상·이슈 중 지금 확인할 콘텐츠를 고릅니다.</span></span>
-        </a>
-        <a class="life-daily-card" href="?event=travel#configure" aria-label="오늘 뭐 할까?">
-          <span class="life-daily-image"><img src="../assets/cards/strategy.webp" alt="" width="960" height="720" loading="eager" decoding="async"/></span>
-          <span class="life-daily-copy"><strong>오늘 뭐 할까?</strong><span>오늘과 가까운 일정에 실제로 할 일을 정합니다.</span></span>
-        </a>
-        <a class="life-daily-card" href="?event=career#configure" aria-label="오늘의 기회">
-          <span class="life-daily-image"><img src="../assets/cards/learning.webp" alt="" width="960" height="720" loading="eager" decoding="async"/></span>
-          <span class="life-daily-copy"><strong>오늘의 기회</strong><span>채용·지원·교육 등 확인할 기회를 실행으로 연결합니다.</span></span>
-        </a>
+      <div class="life-heading life-heading-compact">
+        <span class="life-number">01</span>
+        <div class="life-daily-heading"><h2 id="dailyTitle">DAILY NEXUS</h2><span id="dailyDate"></span></div>
       </div>
+      <div class="life-daily-sections" id="dailyNexus"><p class="life-empty">오늘의 선별 정보를 불러오는 중입니다.</p></div>
     </section>
 
     <section class="life-panel life-event-panel" aria-labelledby="eventTitle">
@@ -95,6 +85,6 @@
     </div>
   </div></div>
 </footer>
-<script src="./life-action.js?v=20260912-6"></script>
+<script src="./life-action.js?v=20260912-7"></script>
 </body>
 </html>
