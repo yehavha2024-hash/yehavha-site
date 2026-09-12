@@ -82,6 +82,10 @@ function auditWorkflowPermissions() {
       required: ['git add nexus/project-status.json nexus/sitemap.xml'],
       allowedPathTokens: ['nexus/project-status.json', 'nexus/sitemap.xml']
     }],
+    ['refresh-ai-trends.yml', {
+      required: ['git add nexus/ai-trends/data.json'],
+      allowedPathTokens: ['nexus/ai-trends/data.json']
+    }],
     ['refresh-investment-strategy.yml', {
       required: ['git add nexus/investment-strategy/index.html'],
       allowedPathTokens: ['nexus/investment-strategy/index.html']
