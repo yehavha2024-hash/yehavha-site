@@ -20,6 +20,21 @@ function cleanId(value, required = false) {
   return SAFE_ID.test(text) ? text : null;
 }
 
+function clampScore(value) {
+  return Math.max(0, Math.min(100, Math.round(Number(value) || 0)));
+}
+
+function normalizeEventScore(eventType, bodyScore, state) {
+  if (eventType === 'complete') return clampScore(bodyScore);
+
+  const rawScore = Number(state?.score);
+  const possibleScore = Number(state?.decisionPossible);
+  if (Number.isFinite(rawScore) && Number.isFinite(possibleScore) && possibleScore > 0) {
+    return clampScore((rawScore / possibleScore) * 100);
+  }
+  return clampScore(bodyScore);
+}
+
 export async function onRequestGet({ env }) {
   if (!env?.NEXUS_DB) {
     return json({ ok: false, error: 'nexus_db_binding_missing' }, 500);
@@ -52,7 +67,6 @@ export async function onRequestPost({ request, env }) {
   const stepId = cleanId(body?.stepId) ?? null;
   const choiceId = cleanId(body?.choiceId) ?? null;
   const resultCode = cleanId(body?.resultCode) ?? null;
-  const score = Math.max(0, Math.min(100, Math.round(Number(body?.score) || 0)));
   const state = body?.state && typeof body.state === 'object' && !Array.isArray(body.state) ? body.state : {};
 
   if (!eventType || !ALLOWED_EVENTS.has(eventType)) {
@@ -62,6 +76,7 @@ export async function onRequestPost({ request, env }) {
     return json({ ok: false, error: 'invalid_identifier' }, 400);
   }
 
+  const score = normalizeEventScore(eventType, body?.score, state);
   const stateJson = JSON.stringify(state);
   if (stateJson.length > 24000) {
     return json({ ok: false, error: 'state_too_large' }, 413);
