@@ -32,10 +32,9 @@
 <p class="eyebrow">AI · AX STRATEGIC INTELLIGENCE &amp; RESPONSE SYSTEM</p>
 <h1>YEHAVHA NEXUS <span>AI·AX 전략정보·지식·대응 시스템</span></h1>
 <img alt="지식에서 전략으로, 전략에서 대응으로 이어지는 YEHAVHA NEXUS AI·AX 전략 시스템" src="./assets/nexus-strategy-map.svg"/>
-<video id="nexusIntroVideo" class="nexus-intro-video" autoplay muted loop playsinline preload="metadata" aria-label="YEHAVHA NEXUS 15초 광고 인트로">
+<video class="nexus-intro-video" autoplay muted loop playsinline preload="metadata" aria-label="YEHAVHA NEXUS 15초 광고 인트로">
 <source src="./assets/yehavha-nexus-intro.mp4" type="video/mp4" onerror="this.parentElement.hidden=true"/>
 </video>
-<button id="nexusSoundToggle" class="copy-btn" type="button" aria-pressed="false" aria-label="인트로 영상 소리 켜기">🔇 소리 켜기</button>
 <section class="nexus-frontline" id="nexusEntry" aria-label="NEXUS 선택">
 <section class="frontline-panel" aria-labelledby="nexusEntryTitle">
 <div class="frontline-headingline">
@@ -181,45 +180,5 @@
 </footer>
 <div aria-live="polite" class="toast" id="toast" role="status"></div>
 <script defer src="./portal-v2.js?v=20260906-canonical-1"></script>
-<script>
-(() => {
-  const video = document.getElementById('nexusIntroVideo');
-  const soundToggle = document.getElementById('nexusSoundToggle');
-  if (!video || !soundToggle) return;
-
-  video.muted = true;
-  video.loop = true;
-  video.playsInline = true;
-
-  const ensurePlay = () => {
-    const playPromise = video.play();
-    if (playPromise && typeof playPromise.catch === 'function') playPromise.catch(() => {});
-  };
-
-  video.addEventListener('ended', () => {
-    video.currentTime = 0;
-    ensurePlay();
-  });
-
-  video.addEventListener('pause', () => {
-    if (!document.hidden) window.setTimeout(ensurePlay, 120);
-  });
-
-  document.addEventListener('visibilitychange', () => {
-    if (!document.hidden && video.paused) ensurePlay();
-  });
-
-  soundToggle.addEventListener('click', () => {
-    video.muted = !video.muted;
-    const soundOn = !video.muted;
-    soundToggle.textContent = soundOn ? '🔊 소리 끄기' : '🔇 소리 켜기';
-    soundToggle.setAttribute('aria-pressed', String(soundOn));
-    soundToggle.setAttribute('aria-label', soundOn ? '인트로 영상 소리 끄기' : '인트로 영상 소리 켜기');
-    ensurePlay();
-  });
-
-  ensurePlay();
-})();
-</script>
 </body>
 </html>
