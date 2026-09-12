@@ -64,9 +64,7 @@ const refs = {
   studioChoice1: document.getElementById('studioChoice1'),
   studioChoice2: document.getElementById('studioChoice2'),
   studioChoice3: document.getElementById('studioChoice3'),
-  studioJson: document.getElementById('studioJson'),
   saveScenario: document.getElementById('saveScenarioButton'),
-  copyScenario: document.getElementById('copyScenarioButton'),
   publicRuns: document.getElementById('publicRuns'),
   publicCompletions: document.getElementById('publicCompletions'),
   publicAverage: document.getElementById('publicAverage'),
@@ -89,6 +87,7 @@ let runId = null;
 let choiceLog = [];
 let finishedResult = null;
 let builderText = '';
+let studioDraft = null;
 
 const BUILDER_TEMPLATES = {
   'ai-adoption': {title:'AI 도입 검토서',checks:['업무범위와 자동화 대상','데이터·개인정보 처리','사람의 승인·개입 지점','공급자·로그·장애대응','파일럿 성과지표와 중단조건']},
@@ -251,10 +250,12 @@ function renderScenarioControls() {
   refs.library.replaceChildren(); const customIds = new Set(readLocal(CUSTOM_SCENARIOS_KEY,[]).map(item => item.id));
   list.forEach((item,index) => {
     const card = make('article','lab-library-card'); const top = make('div','lab-library-top');
-    top.append(make('span','lab-library-number',String(index+1).padStart(2,'0')),make('span','lab-library-category',customIds.has(item.id) ? '직접 제작' : (item.category || '업무 판단')));
-    card.append(top,make('h3','',item.title),make('p','',item.subtitle || ''));
-    const meta = make('div','lab-library-meta'); meta.append(make('span','',`${item.durationMinutes || 10}분`),make('span','',item.role || '의사결정 책임자'),make('span','',`${Object.keys(item.nodes || {}).length}단계`)); card.append(meta);
-    const button = make('button','lab-secondary-button','이 시나리오 실행'); button.type = 'button'; button.addEventListener('click',() => prepareScenario(item.id,{scroll:true})); card.append(button); refs.library.append(card);
+    top.append(make('span','lab-library-number',String(index+1).padStart(2,'0')),make('h3','',item.title),make('span','lab-library-category',customIds.has(item.id) ? '직접 제작' : (item.category || '업무 판단')));
+    card.append(top,make('p','',item.subtitle || ''));
+    const footer = make('div','lab-library-footer');
+    const meta = make('div','lab-library-meta'); meta.append(make('span','',`${item.durationMinutes || 10}분`),make('span','',item.role || '의사결정 책임자'),make('span','',`${Object.keys(item.nodes || {}).length}단계`));
+    const button = make('button','lab-secondary-button','이 시나리오 실행'); button.type = 'button'; button.addEventListener('click',() => prepareScenario(item.id,{scroll:true}));
+    footer.append(meta,button); card.append(footer); refs.library.append(card);
   });
   if (!scenario && list[0]) scenario = list[0]; if (scenario) prepareScenario(scenario.id);
 }
@@ -303,7 +304,7 @@ function renderInteractiveModel() {
 
 function renderWorkspace() {
   const runs = readLocal(HISTORY_KEY,[]), docs = readLocal(DOCS_KEY,[]), custom = readLocal(CUSTOM_SCENARIOS_KEY,[]); refs.workspaceStats.replaceChildren();
-  [['시뮬레이션',runs.length],['저장 문서',docs.length],['직접 만든 시나리오',custom.length]].forEach(([label,value]) => { const stat = make('div','lab-workspace-stat'); stat.append(make('strong','',String(value)),make('span','',label)); refs.workspaceStats.append(stat); });
+  [['시뮬레이션',runs.length],['저장 문서',docs.length],['직접 만든 시나리오',custom.length]].forEach(([label,value]) => { const stat = make('div','lab-workspace-stat'); stat.append(make('span','',label),make('strong','',String(value))); refs.workspaceStats.append(stat); });
   function renderItems(host,items,formatter,empty) { host.replaceChildren(); if (!items.length) {host.append(make('p','lab-empty',empty)); return;} items.slice(0,5).forEach(item => { const row = make('div','lab-workspace-row'); const [title,meta] = formatter(item); row.append(make('strong','',title),make('span','',meta)); host.append(row); }); }
   renderItems(refs.workspaceRuns,runs,run => [run.scenarioTitle,`${run.finalScore}점 · ${formatWhen(run.completedAt)}`],'아직 실행기록이 없습니다.');
   renderItems(refs.workspaceDocs,docs,doc => [doc.title,`${doc.template} · ${formatWhen(doc.savedAt)}`],'저장한 문서가 없습니다.');
@@ -313,13 +314,23 @@ function renderWorkspace() {
 function studioScenarioFromForm() {
   const title = builderValue(refs.studioTitle,'직접 만든 의사결정 시나리오'); const role = builderValue(refs.studioRole,'의사결정 책임자'); const situation = builderValue(refs.studioSituation,'현재 상황을 확인하고 가장 적절한 대응을 선택하십시오.');
   const choices = [builderValue(refs.studioChoice1,'확인 가능한 사실과 위험을 먼저 정리한다'),builderValue(refs.studioChoice2,'일부 조건만 확인하고 바로 실행한다'),builderValue(refs.studioChoice3,'추가 확인 없이 즉시 결정한다')];
-  return {id:`custom-${Date.now()}`,title,subtitle:situation.slice(0,120),durationMinutes:8,role,category:'직접 제작',startNode:'decision',initialMetrics:{quality:45,control:45,speed:55,trust:50},metricLabels:{quality:'판단 품질',control:'위험 통제',speed:'실행 속도',trust:'신뢰'},nodes:{decision:{phase:'1. 핵심 판단',title,situation,evidence:['입력된 상황을 기준으로 선택의 효과를 비교합니다.','필요하면 아래 JSON을 직접 편집해 단계와 지표를 확장할 수 있습니다.'],options:[{id:'choice-1',label:choices[0],detail:'근거와 통제를 먼저 확보하는 선택입니다.',effects:{quality:25,control:22,speed:-5,trust:15},score:25,facts:['판단근거와 후속조치가 명확해집니다.'],next:null},{id:'choice-2',label:choices[1],detail:'속도와 검증을 절충하는 선택입니다.',effects:{quality:8,control:5,speed:12,trust:3},score:15,facts:['일부 위험은 관리되지만 추가 확인이 필요합니다.'],next:null},{id:'choice-3',label:choices[2],detail:'속도를 우선하지만 검증이 부족한 선택입니다.',effects:{quality:-15,control:-18,speed:20,trust:-12},score:5,facts:['빠르게 진행되지만 오류와 재작업 가능성이 커집니다.'],next:null}]}},results:[{min:80,code:'strong',title:'구조화된 판단',message:'근거·통제·실행의 균형이 좋습니다.'},{min:55,code:'mixed',title:'보완 가능한 판단',message:'일부 조건을 더 확인하면 안정성이 높아집니다.'},{min:0,code:'weak',title:'재검토가 필요한 판단',message:'속도보다 근거와 통제조건을 먼저 보완할 필요가 있습니다.'}]};
+  return {id:`custom-${Date.now()}`,title,subtitle:situation.slice(0,120),durationMinutes:8,role,category:'직접 제작',startNode:'decision',initialMetrics:{quality:45,control:45,speed:55,trust:50},metricLabels:{quality:'판단 품질',control:'위험 통제',speed:'실행 속도',trust:'신뢰'},nodes:{decision:{phase:'1. 핵심 판단',title,situation,evidence:['입력된 상황을 기준으로 선택의 효과를 비교합니다.','입력된 조건을 바탕으로 선택과 지표를 같은 엔진에서 실행합니다.'],options:[{id:'choice-1',label:choices[0],detail:'근거와 통제를 먼저 확보하는 선택입니다.',effects:{quality:25,control:22,speed:-5,trust:15},score:25,facts:['판단근거와 후속조치가 명확해집니다.'],next:null},{id:'choice-2',label:choices[1],detail:'속도와 검증을 절충하는 선택입니다.',effects:{quality:8,control:5,speed:12,trust:3},score:15,facts:['일부 위험은 관리되지만 추가 확인이 필요합니다.'],next:null},{id:'choice-3',label:choices[2],detail:'속도를 우선하지만 검증이 부족한 선택입니다.',effects:{quality:-15,control:-18,speed:20,trust:-12},score:5,facts:['빠르게 진행되지만 오류와 재작업 가능성이 커집니다.'],next:null}]}},results:[{min:80,code:'strong',title:'구조화된 판단',message:'근거·통제·실행의 균형이 좋습니다.'},{min:55,code:'mixed',title:'보완 가능한 판단',message:'일부 조건을 더 확인하면 안정성이 높아집니다.'},{min:0,code:'weak',title:'재검토가 필요한 판단',message:'속도보다 근거와 통제조건을 먼저 보완할 필요가 있습니다.'}]};
 }
-function buildStudioJson(event) { event?.preventDefault(); refs.studioJson.value = JSON.stringify(studioScenarioFromForm(),null,2); }
+function buildStudioScenario(event) {
+  event?.preventDefault();
+  studioDraft = studioScenarioFromForm();
+  const submit = refs.studioForm.querySelector('button[type="submit"]');
+  if (submit) {
+    submit.textContent = '시나리오 생성 완료';
+    setTimeout(() => { submit.textContent = '시나리오 만들기'; },1200);
+  }
+}
 function saveStudioScenario() {
-  let item; try {item = JSON.parse(refs.studioJson.value);} catch (_) {refs.saveScenario.textContent = 'JSON 오류'; return;}
-  if (!isScenarioValid(item)) {refs.saveScenario.textContent = '구조 확인 필요'; return;} if (!/^[A-Za-z0-9._:-]{1,120}$/.test(item.id || '')) item.id = `custom-${Date.now()}`; item.category = item.category || '직접 제작';
-  const custom = readLocal(CUSTOM_SCENARIOS_KEY,[]); writeLocal(CUSTOM_SCENARIOS_KEY,[item,...custom.filter(existing => existing.id !== item.id)].slice(0,40)); refs.saveScenario.textContent = '저장 완료'; setTimeout(() => {refs.saveScenario.textContent = '라이브러리에 저장';},1200); renderScenarioControls(); renderWorkspace(); prepareScenario(item.id,{scroll:true});
+  const item = studioDraft || studioScenarioFromForm();
+  if (!isScenarioValid(item)) {refs.saveScenario.textContent = '구조 확인 필요'; return;}
+  if (!/^[A-Za-z0-9._:-]{1,120}$/.test(item.id || '')) item.id = `custom-${Date.now()}`;
+  item.category = item.category || '직접 제작';
+  const custom = readLocal(CUSTOM_SCENARIOS_KEY,[]); writeLocal(CUSTOM_SCENARIOS_KEY,[item,...custom.filter(existing => existing.id !== item.id)].slice(0,40)); refs.saveScenario.textContent = '저장 완료'; setTimeout(() => {refs.saveScenario.textContent = '라이브러리에 저장';},1200); studioDraft = null; renderScenarioControls(); renderWorkspace(); prepareScenario(item.id,{scroll:true});
 }
 
 function exportLabData() {
@@ -359,14 +370,13 @@ refs.builderForm.addEventListener('submit',generateBuilderDocument);
 refs.saveBuilder.addEventListener('click',saveBuilderDocument);
 refs.copyBuilder.addEventListener('click',() => copyText(builderText || refs.builderOutput.textContent,refs.copyBuilder,'복사'));
 refs.modelControls.addEventListener('change',renderInteractiveModel);
-refs.studioForm.addEventListener('submit',buildStudioJson);
+refs.studioForm.addEventListener('submit',buildStudioScenario);
+refs.studioForm.addEventListener('input',() => { studioDraft = null; });
 refs.saveScenario.addEventListener('click',saveStudioScenario);
-refs.copyScenario.addEventListener('click',() => copyText(refs.studioJson.value,refs.copyScenario,'복사'));
 refs.exportLab.addEventListener('click',exportLabData);
 refs.importLab.addEventListener('change',() => importLabData(refs.importLab.files?.[0]));
 refs.clearWorkspace.addEventListener('click',clearWorkspace);
 
-buildStudioJson();
 renderInteractiveModel();
 void loadScenarios();
 void loadPublicSummary();

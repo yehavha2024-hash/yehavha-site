@@ -8,7 +8,7 @@
 <meta content="#ffffff" name="theme-color"/>
 <link rel="canonical" href="https://yehavha.com/lab/"/>
 <link href="../portal-v2.css?v=20260906-canonical-1" rel="stylesheet"/>
-<link href="./lab.css?v=20260912-5" rel="stylesheet"/>
+<link href="./lab.css?v=20260912-6" rel="stylesheet"/>
 <title>NEXUS LAB | 시뮬레이션·빌더·인터랙티브 작업공간</title>
 </head>
 <body id="top">
@@ -165,7 +165,7 @@
 <section class="lab-section" id="studio" aria-labelledby="studioTitle">
 <div class="lab-section-head">
 <div><p class="lab-section-kicker">07 · SCENARIO STUDIO</p><h2 id="studioTitle">시나리오 제작기</h2></div>
-<p>상황과 선택지를 입력해 실행 가능한 시나리오 JSON을 만들고 같은 시뮬레이션 엔진에서 바로 실행합니다.</p>
+<p>상황과 선택지를 입력해 실행 가능한 시나리오를 만들고 같은 시뮬레이션 엔진에서 바로 실행합니다.</p>
 </div>
 <div class="lab-studio-shell">
 <form class="lab-form" id="studioForm">
@@ -175,12 +175,8 @@
 <label>선택 1<input id="studioChoice1" type="text" maxlength="180" placeholder="가장 적절한 선택"/></label>
 <label>선택 2<input id="studioChoice2" type="text" maxlength="180" placeholder="대안 선택"/></label>
 <label>선택 3<input id="studioChoice3" type="text" maxlength="180" placeholder="위험한 선택"/></label>
-<div class="lab-form-actions"><button class="lab-primary-button" type="submit">JSON 만들기</button><button class="lab-secondary-button" id="saveScenarioButton" type="button">라이브러리에 저장</button></div>
+<div class="lab-form-actions"><button class="lab-primary-button" type="submit">시나리오 만들기</button><button class="lab-secondary-button" id="saveScenarioButton" type="button">라이브러리에 저장</button></div>
 </form>
-<section class="lab-output-panel">
-<div class="lab-output-head"><h3>시나리오 JSON</h3><button class="lab-secondary-button" id="copyScenarioButton" type="button">복사</button></div>
-<textarea id="studioJson" rows="18" spellcheck="false" aria-label="시나리오 JSON 편집"></textarea>
-</section>
 </div>
 </section>
 <section class="lab-section" id="operations" aria-labelledby="operationsTitle">
@@ -216,6 +212,6 @@
 </div>
 </div></div>
 </footer>
-<script defer src="./lab.js?v=20260912-2"></script>
+<script defer src="./lab.js?v=20260912-3"></script>
 </body>
 </html>
