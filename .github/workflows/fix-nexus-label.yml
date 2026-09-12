@@ -1,0 +1,25 @@
+name: One-time NEXUS label correction
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-nexus-label.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix-label:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore NEXUS 2 label
+        run: |
+          sed -i 's/NEXUS 2 · 연구·지식 포털/NEXUS 2 · 생활 선택·실행/' nexus/index.html
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet; then
+            git add nexus/index.html
+            git commit -m "Restore NEXUS 2 label"
+            git push
+          fi
