@@ -3,25 +3,25 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="NEXUS LAB은 실제 업무 상황을 가상으로 경험하고 선택에 따른 결과를 비교하는 의사결정 훈련·작동형 서비스 공간입니다." name="description"/>
+<meta content="NEXUS LAB은 시뮬레이션, 결과 비교, 문서 생성, 인터랙티브 모델, 작업공간, 시나리오 제작과 공개형 확장 기능을 하나의 작업공간에서 제공하는 실전형 응용 연구실입니다." name="description"/>
 <meta content="index,follow" name="robots"/>
 <meta content="#ffffff" name="theme-color"/>
 <link rel="canonical" href="https://yehavha.com/lab/"/>
 <link href="../portal-v2.css?v=20260906-canonical-1" rel="stylesheet"/>
-<link href="./lab.css?v=20260912-4" rel="stylesheet"/>
-<title>NEXUS LAB | 업무 의사결정 시뮬레이션</title>
+<link href="./lab.css?v=20260912-5" rel="stylesheet"/>
+<title>NEXUS LAB | 시뮬레이션·빌더·인터랙티브 작업공간</title>
 </head>
 <body id="top">
 <header class="lab-header">
 <div class="container">
 <a class="back-link" href="../">← YEHAVHA NEXUS</a>
 <div class="lab-hero">
-<p class="lab-eyebrow">DECISION SIMULATION · APPLICATION LAB</p>
+<p class="lab-eyebrow">SIMULATION · BUILDER · INTERACTIVE WORKSPACE</p>
 <h1>NEXUS LAB</h1>
-<p class="lab-lead">실제 업무 상황을 가상으로 경험하고, 내가 내린 선택이 사고 통제·증거 보전·업무 연속성·신뢰에 어떤 결과를 만드는지 직접 확인하는 의사결정 훈련 공간입니다.</p>
-<div class="lab-flow" aria-label="NEXUS LAB 작동 흐름">
-<span>상황 확인</span><span aria-hidden="true">→</span><span>대응 선택</span><span aria-hidden="true">→</span><span>상태 변화</span><span aria-hidden="true">→</span><span>결과 확인</span><span aria-hidden="true">→</span><span>다시 비교</span>
-</div>
+<p class="lab-lead">실제 업무 상황을 가상으로 판단하고, 실행 결과를 비교하고, 구조화된 문서를 만들고, 관계와 위험을 직접 조작하며 확인하는 공개형 작동 공간입니다.</p>
+<nav class="lab-feature-nav" aria-label="NEXUS LAB 기능 바로가기">
+<a href="#simulation">01 시뮬레이션</a><a href="#scenarioLibrary">02 시나리오</a><a href="#comparison">03 결과 비교</a><a href="#builder">04 빌더</a><a href="#interactive">05 인터랙티브</a><a href="#workspace">06 작업공간</a><a href="#studio">07 제작기</a><a href="#operations">08 공개 운영</a>
+</nav>
 </div>
 </div>
 </header>
@@ -29,39 +29,38 @@
 <div class="container">
 <section class="lab-section" id="simulation" aria-labelledby="simulationTitle">
 <div class="lab-section-head">
-<div>
-<p class="lab-section-kicker">15-MINUTE DECISION SIMULATION</p>
-<h2 id="simulationTitle">AI 업무사고 대응 시뮬레이션</h2>
+<div><p class="lab-section-kicker">01 · SIMULATION ENGINE</p><h2 id="simulationTitle">업무 의사결정 시뮬레이션</h2></div>
+<p>시나리오를 선택하고 실제 업무처럼 판단 순서를 결정합니다. 선택에 따라 상태지표와 최종 결과가 달라집니다.</p>
 </div>
-<p>당신은 AI 고객상담 서비스의 운영 책임자입니다. 개인정보 노출 신고가 접수됐습니다. 실제 업무처럼 대응 순서를 결정해 보십시오.</p>
+<div class="lab-scenario-picker">
+<label for="scenarioSelect">훈련 선택</label>
+<select id="scenarioSelect" aria-label="훈련 시나리오 선택"></select>
+<span id="scenarioCategory">시나리오 준비 중</span>
 </div>
 <div class="lab-sim-shell">
 <aside class="lab-sim-sidebar" aria-label="훈련 상태">
 <div class="lab-scenario-meta">
-<span id="scenarioDuration">15분</span>
-<strong id="scenarioRole">서비스 운영 책임자</strong>
+<span id="scenarioDuration">훈련 시간</span>
+<strong id="scenarioRole">역할</strong>
 </div>
 <div class="lab-metrics" id="metricPanel" aria-label="현재 상태 지표"></div>
-<div class="lab-storage-state" id="storageState" aria-live="polite">저장 상태 확인 중</div>
+<div class="lab-storage-state" id="storageState" aria-live="polite">시나리오 확인 중</div>
 <button class="lab-secondary-button" id="restartButton" type="button" hidden>처음부터 다시 실행</button>
 </aside>
 <section class="lab-stage" aria-live="polite">
 <div id="simulationIntro" class="lab-intro-panel">
-<p class="lab-case-label">CASE 001</p>
-<h3 id="scenarioTitle">AI 고객상담 시스템 정보 노출 사고</h3>
-<p id="scenarioSubtitle">AI 고객상담 시스템이 다른 고객의 정보를 답변했다는 신고가 들어왔습니다. 어떤 순서로 대응할지 직접 선택하십시오.</p>
+<p class="lab-case-label" id="scenarioCaseLabel">SCENARIO</p>
+<h3 id="scenarioTitle">시나리오를 불러오는 중입니다</h3>
+<p id="scenarioSubtitle"></p>
 <div class="lab-brief-grid">
-<div><span>목표</span><strong>15분 안에 사고를 통제하고 판단근거를 남기기</strong></div>
-<div><span>평가</span><strong>선택에 따른 사고 범위·증거·업무·신뢰 변화 비교</strong></div>
+<div><span>목표</span><strong>조건을 읽고 판단 순서를 직접 결정하기</strong></div>
+<div><span>평가</span><strong>선택에 따른 상태 변화와 최종 판단 결과 비교</strong></div>
 </div>
-<button class="lab-primary-button" id="startButton" type="button">15분 훈련 시작</button>
+<button class="lab-primary-button" id="startButton" type="button">훈련 시작</button>
 </div>
 <div id="simulationStage" hidden>
 <div class="lab-stage-head">
-<div>
-<p class="lab-phase" id="phaseLabel"></p>
-<h3 id="stepTitle"></h3>
-</div>
+<div><p class="lab-phase" id="phaseLabel"></p><h3 id="stepTitle"></h3></div>
 <div class="lab-score" aria-label="현재 판단 점수"><span>판단점수</span><strong id="scoreValue">0</strong></div>
 </div>
 <p class="lab-situation" id="situationText"></p>
@@ -89,64 +88,122 @@
 </section>
 </div>
 </section>
-<section class="lab-section" aria-labelledby="labEnginesTitle">
+<section class="lab-section" id="scenarioLibrary" aria-labelledby="scenarioLibraryTitle">
 <div class="lab-section-head">
-<div>
-<p class="lab-section-kicker">NEXUS LAB FUNCTIONS</p>
-<h2 id="labEnginesTitle">현재 기능과 다음 단계</h2>
+<div><p class="lab-section-kicker">02 · SCENARIO LIBRARY</p><h2 id="scenarioLibraryTitle">시나리오 라이브러리</h2></div>
+<p>AI 사고, 도입, 계약, 민원, 품질관리 등 서로 다른 판단문제를 같은 공통 엔진에서 실행합니다.</p>
 </div>
-<p>현재는 업무 의사결정 시뮬레이션을 사용할 수 있으며, 같은 구조 위에 생성과 인터랙티브 기능을 순차적으로 확장합니다.</p>
+<div class="lab-library-grid" id="scenarioLibraryGrid"></div>
+</section>
+<section class="lab-section" id="comparison" aria-labelledby="comparisonTitle">
+<div class="lab-section-head">
+<div><p class="lab-section-kicker">03 · RUN HISTORY &amp; COMPARE</p><h2 id="comparisonTitle">실행기록과 결과 비교</h2></div>
+<p>완료한 실행을 브라우저에 기록하고 두 번의 판단 결과를 나란히 비교합니다.</p>
 </div>
-<div class="lab-engine-grid">
-<article class="lab-engine-card lab-engine-card-active">
-<div class="lab-engine-number">01</div>
-<div>
-<span class="lab-status lab-status-live">작동 중</span>
-<h3>시뮬레이션</h3>
-<p>실제 상황에서 선택을 내리고, 그 선택이 상태와 최종 결과를 어떻게 바꾸는지 비교합니다.</p>
+<div class="lab-compare-controls">
+<label>비교 A<select id="compareA"></select></label>
+<label>비교 B<select id="compareB"></select></label>
+<button class="lab-secondary-button" id="compareButton" type="button">비교하기</button>
 </div>
-<a class="lab-primary-link" href="#simulation">첫 훈련 시작 →</a>
-</article>
-<article class="lab-engine-card">
-<div class="lab-engine-number">02</div>
-<div>
-<span class="lab-status">엔진 골격</span>
-<h3>만들기</h3>
-<p>조건과 자료를 입력해 보고서·전략안·비교표·실행문서를 만드는 기능으로 확장합니다.</p>
+<div class="lab-compare-view" id="compareView"><p class="lab-empty">완료된 실행이 2개 이상이면 비교할 수 있습니다.</p></div>
+<div class="lab-history-list" id="historyList"></div>
+</section>
+<section class="lab-section" id="builder" aria-labelledby="builderTitle">
+<div class="lab-section-head">
+<div><p class="lab-section-kicker">04 · BUILDER ENGINE</p><h2 id="builderTitle">업무 문서 빌더</h2></div>
+<p>목적, 상황, 제약, 판단기준과 후속조치를 입력해 구조화된 업무 문서를 만듭니다.</p>
 </div>
-<span class="lab-muted-action">다음 적용 단계</span>
-</article>
-<article class="lab-engine-card">
-<div class="lab-engine-number">03</div>
-<div>
-<span class="lab-status">엔진 골격</span>
-<h3>인터랙티브 모델</h3>
-<p>관계·시간축·책임구조·정책 영향을 직접 조작하며 변화와 연결을 확인하는 기능으로 확장합니다.</p>
-</div>
-<span class="lab-muted-action">다음 적용 단계</span>
-</article>
+<div class="lab-builder-shell">
+<form class="lab-form" id="builderForm">
+<label>문서 유형<select id="builderTemplate"><option value="ai-adoption">AI 도입 검토서</option><option value="incident">사고 대응 보고서</option><option value="contract">계약 위험 검토표</option><option value="decision">의사결정 메모</option></select></label>
+<label>목적<input id="builderPurpose" type="text" maxlength="180" placeholder="예: 고객지원 AI 도입 여부 검토"/></label>
+<label>상황·자료<textarea id="builderContext" rows="4" maxlength="2500" placeholder="현재 상황, 확인된 자료, 전제조건을 입력"></textarea></label>
+<label>제약조건<textarea id="builderConstraints" rows="3" maxlength="1500" placeholder="예산, 일정, 보안, 법적·운영상 제한"></textarea></label>
+<label>판단기준<textarea id="builderCriteria" rows="3" maxlength="1500" placeholder="비용, 위험, 효과, 책임, 실행가능성 등"></textarea></label>
+<label>결정·후속조치<textarea id="builderAction" rows="3" maxlength="1500" placeholder="현재 판단 또는 다음 행동"></textarea></label>
+<div class="lab-form-actions"><button class="lab-primary-button" type="submit">문서 생성</button><button class="lab-secondary-button" id="saveBuilderButton" type="button">작업공간에 저장</button></div>
+</form>
+<section class="lab-output-panel" aria-labelledby="builderOutputTitle">
+<div class="lab-output-head"><h3 id="builderOutputTitle">생성 결과</h3><button class="lab-secondary-button" id="copyBuilderButton" type="button">복사</button></div>
+<pre id="builderOutput">입력 내용을 바탕으로 구조화된 결과가 여기에 생성됩니다.</pre>
+</section>
 </div>
 </section>
-<section class="lab-section" aria-labelledby="architectureTitle">
+<section class="lab-section" id="interactive" aria-labelledby="interactiveTitle">
 <div class="lab-section-head">
-<div>
-<p class="lab-section-kicker">NEXT SCENARIOS</p>
-<h2 id="architectureTitle">같은 방식으로 확장할 훈련</h2>
+<div><p class="lab-section-kicker">05 · INTERACTIVE MODEL ENGINE</p><h2 id="interactiveTitle">AI 업무 책임·통제 모델</h2></div>
+<p>조건을 직접 바꾸면 위험도와 주요 책임·통제 지점이 어떻게 달라지는지 즉시 확인합니다.</p>
 </div>
-<p>한 번 만든 훈련 구조에 사건과 판단기준만 바꿔 다양한 업무 상황을 직접 연습할 수 있게 확장합니다.</p>
+<div class="lab-model-shell">
+<div class="lab-model-controls" id="modelControls">
+<label><input type="checkbox" data-model="external" checked/> 외부 AI 서비스 사용</label>
+<label><input type="checkbox" data-model="personal" checked/> 개인정보 처리</label>
+<label><input type="checkbox" data-model="automation" checked/> 외부행위 자동 실행</label>
+<label><input type="checkbox" data-model="human"/> 사람의 사전 승인</label>
+<label><input type="checkbox" data-model="logs"/> 상세 로그·버전 보존</label>
 </div>
-<div class="lab-reuse-grid">
-<div><strong>계약 협상</strong><span>조건·양보·위험·합의결과</span></div>
-<div><strong>민원 대응</strong><span>사실확인·우선순위·커뮤니케이션</span></div>
-<div><strong>AI 도입 의사결정</strong><span>비용·위험·통제·성과 비교</span></div>
-<div><strong>법률 사례 훈련</strong><span>사실관계·쟁점·증거·판단</span></div>
+<div class="lab-model-flow" aria-label="AI 업무 관계 모델"><span>사용자</span><b>→</b><span>운영조직</span><b>→</b><span>AI 에이전트</span><b>→</b><span>외부도구·데이터</span><b>→</b><span>영향대상</span></div>
+<div class="lab-model-result">
+<div class="lab-risk-score"><span>현재 위험도</span><strong id="modelRisk">0</strong></div>
+<div class="lab-responsibility-grid" id="responsibilityGrid"></div>
+<p id="modelNote"></p>
 </div>
+</div>
+</section>
+<section class="lab-section" id="workspace" aria-labelledby="workspaceTitle">
+<div class="lab-section-head">
+<div><p class="lab-section-kicker">06 · PERSONAL WORKSPACE</p><h2 id="workspaceTitle">내 작업공간</h2></div>
+<p>로그인 없이 현재 브라우저에 시뮬레이션 기록, 생성 문서와 직접 만든 시나리오를 저장합니다.</p>
+</div>
+<div class="lab-workspace-stats" id="workspaceStats"></div>
+<div class="lab-workspace-grid">
+<section><h3>최근 시뮬레이션</h3><div id="workspaceRuns"></div></section>
+<section><h3>저장 문서</h3><div id="workspaceDocs"></div></section>
+<section><h3>직접 만든 시나리오</h3><div id="workspaceScenarios"></div></section>
+</div>
+</section>
+<section class="lab-section" id="studio" aria-labelledby="studioTitle">
+<div class="lab-section-head">
+<div><p class="lab-section-kicker">07 · SCENARIO STUDIO</p><h2 id="studioTitle">시나리오 제작기</h2></div>
+<p>상황과 선택지를 입력해 실행 가능한 시나리오 JSON을 만들고 같은 시뮬레이션 엔진에서 바로 실행합니다.</p>
+</div>
+<div class="lab-studio-shell">
+<form class="lab-form" id="studioForm">
+<label>시나리오 제목<input id="studioTitleInput" type="text" maxlength="100" placeholder="예: 신규 AI 서비스 장애 대응"/></label>
+<label>역할<input id="studioRole" type="text" maxlength="100" placeholder="예: 서비스 운영 책임자"/></label>
+<label>상황<textarea id="studioSituation" rows="4" maxlength="1600" placeholder="판단해야 할 실제 상황을 입력"></textarea></label>
+<label>선택 1<input id="studioChoice1" type="text" maxlength="180" placeholder="가장 적절한 선택"/></label>
+<label>선택 2<input id="studioChoice2" type="text" maxlength="180" placeholder="대안 선택"/></label>
+<label>선택 3<input id="studioChoice3" type="text" maxlength="180" placeholder="위험한 선택"/></label>
+<div class="lab-form-actions"><button class="lab-primary-button" type="submit">JSON 만들기</button><button class="lab-secondary-button" id="saveScenarioButton" type="button">라이브러리에 저장</button></div>
+</form>
+<section class="lab-output-panel">
+<div class="lab-output-head"><h3>시나리오 JSON</h3><button class="lab-secondary-button" id="copyScenarioButton" type="button">복사</button></div>
+<textarea id="studioJson" rows="18" spellcheck="false" aria-label="시나리오 JSON 편집"></textarea>
+</section>
+</div>
+</section>
+<section class="lab-section" id="operations" aria-labelledby="operationsTitle">
+<div class="lab-section-head">
+<div><p class="lab-section-kicker">08 · OPEN LAB OPERATIONS</p><h2 id="operationsTitle">공개형 확장·운영</h2></div>
+<p>LAB 데이터를 내보내고 가져오며, 공개 실행 통계와 현재 브라우저의 작업상태를 한곳에서 확인합니다.</p>
+</div>
+<div class="lab-operations-grid">
+<div class="lab-operation-card"><span>공개 실행</span><strong id="publicRuns">-</strong><p>서버에 기록된 전체 시뮬레이션 실행 수</p></div>
+<div class="lab-operation-card"><span>완료 실행</span><strong id="publicCompletions">-</strong><p>끝까지 완료된 시뮬레이션 수</p></div>
+<div class="lab-operation-card"><span>평균 점수</span><strong id="publicAverage">-</strong><p>완료 실행의 평균 최종 판단점수</p></div>
+</div>
+<div class="lab-operation-actions">
+<button class="lab-primary-button" id="exportLabButton" type="button">LAB 데이터 내보내기</button>
+<label class="lab-file-button">LAB 데이터 가져오기<input id="importLabInput" type="file" accept="application/json" hidden/></label>
+<button class="lab-secondary-button" id="clearWorkspaceButton" type="button">브라우저 작업공간 비우기</button>
+</div>
+<p class="lab-operation-status" id="operationStatus">모든 기능은 공개형으로 작동하며, 브라우저 저장 데이터는 사용자가 직접 내보내거나 가져올 수 있습니다.</p>
 </section>
 </div>
 </main>
 <footer class="footer" data-footer-standard="v2">
-<div class="container">
-<div class="footer-card">
+<div class="container"><div class="footer-card">
 <strong>YEHAVHA NEXUS</strong>
 <p>AI·AX 기반 전략정보와 전문지식을 연구·출판·교육·콘텐츠·웹서비스로 전환하고,<br/>축적된 결과물을 재사용·사업화하는 통합 지식사업 플랫폼입니다.</p>
 <div aria-label="사업자정보·저작권 및 문의" class="footer-meta">
@@ -157,9 +214,8 @@
 <p class="ai-disclosure">AI 활용 안내: 일부 프로젝트의 콘텐츠·문안·연구자료 제작과 정리에 생성형 AI를 활용하며, 각 프로젝트의 기획·검토·편집·운영은 운영자가 관리합니다.</p>
 <a href="#top">맨 위로 이동 ↑</a>
 </div>
-</div>
-</div>
+</div></div>
 </footer>
-<script defer src="./lab.js?v=20260912-1"></script>
+<script defer src="./lab.js?v=20260912-2"></script>
 </body>
 </html>
