@@ -32,6 +32,7 @@ let currentNodeId = null;
 let pendingNext = null;
 let metrics = {};
 let score = 0;
+let finalScore = 0;
 let runId = null;
 let choiceLog = [];
 let finishedResult = null;
@@ -53,6 +54,7 @@ function snapshot(extra = {}) {
     pendingNext,
     metrics,
     score: clamp(score),
+    finalScore: clamp(finalScore),
     choices: choiceLog,
     updatedAt: new Date().toISOString(),
     ...extra
@@ -79,7 +81,7 @@ async function apiEvent(eventType, payload = {}) {
         scenarioId: scenario.id,
         stepId: payload.stepId || currentNodeId || '',
         choiceId: payload.choiceId || '',
-        score: clamp(score),
+        score: clamp(payload.score ?? score),
         resultCode: payload.resultCode || '',
         state: snapshot(payload.state || {})
       })
@@ -154,7 +156,6 @@ function renderNode(nodeId) {
 
   renderMetrics();
   saveLocal({status: 'running'});
-  window.requestAnimationFrame(() => refs.stepTitle.focus?.({preventScroll: true}));
 }
 
 function chooseOption(node, option, selectedButton) {
@@ -190,19 +191,37 @@ function chooseOption(node, option, selectedButton) {
   refs.discovery.scrollIntoView({behavior: 'smooth', block: 'nearest'});
 }
 
-function pickResult() {
-  const normalizedScore = clamp(score);
-  return scenario.results.find(item => normalizedScore >= item.min) || scenario.results.at(-1);
+function calculateFinalScore() {
+  const metricKeys = Object.keys(scenario?.metricLabels || {});
+  const metricAverage = metricKeys.length
+    ? metricKeys.reduce((sum, key) => sum + clamp(metrics[key]), 0) / metricKeys.length
+    : 0;
+  const escalationPenalty = choiceLog.some(item => item.stepId === 'escalation') ? 12 : 0;
+  return clamp((clamp(score) * 0.55) + (metricAverage * 0.45) - escalationPenalty);
+}
+
+function pickResult(resultScore) {
+  return scenario.results.find(item => resultScore >= item.min) || scenario.results.at(-1);
 }
 
 function finishSimulation() {
-  finishedResult = pickResult();
+  finalScore = calculateFinalScore();
+  finishedResult = pickResult(finalScore);
   refs.resultTitle.textContent = finishedResult.title;
   refs.resultMessage.textContent = finishedResult.message;
-  refs.resultScore.textContent = `${clamp(score)} / 100`;
+  refs.resultScore.textContent = `${finalScore} / 100`;
   setView('result');
-  saveLocal({status: 'completed', resultCode: finishedResult.code});
-  void apiEvent('complete', {resultCode: finishedResult.code, state: {status: 'completed'}});
+  saveLocal({
+    status: 'completed',
+    resultCode: finishedResult.code,
+    decisionScore: clamp(score),
+    finalScore
+  });
+  void apiEvent('complete', {
+    score: finalScore,
+    resultCode: finishedResult.code,
+    state: {status: 'completed', decisionScore: clamp(score), finalScore}
+  });
 }
 
 function startSimulation() {
@@ -211,6 +230,7 @@ function startSimulation() {
   pendingNext = null;
   metrics = {...scenario.initialMetrics};
   score = 0;
+  finalScore = 0;
   choiceLog = [];
   finishedResult = null;
   refs.storage.textContent = '훈련 기록 연결 중';
@@ -231,7 +251,7 @@ function buildResultText() {
     .map(([key, label]) => `${label} ${clamp(metrics[key])}`)
     .join(' · ');
   const pathText = choiceLog.map((item, index) => `${index + 1}. ${item.label}`).join('\n');
-  return `${scenario.title}\n${finishedResult.title} · ${clamp(score)}/100\n${metricsText}\n\n선택 경로\n${pathText}`;
+  return `${scenario.title}\n${finishedResult.title} · ${finalScore}/100\n${metricsText}\n\n선택 경로\n${pathText}`;
 }
 
 async function copyResult() {
