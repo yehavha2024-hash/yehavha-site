@@ -1,0 +1,238 @@
+{
+  "version": "1.0",
+  "scenarios": [
+    {
+      "id": "ai-data-leak-001",
+      "title": "AI 업무사고 대응",
+      "subtitle": "AI 고객상담 시스템이 다른 고객의 정보를 답변했다",
+      "durationMinutes": 15,
+      "role": "서비스 운영 책임자",
+      "startNode": "report",
+      "initialMetrics": {
+        "containment": 30,
+        "evidence": 35,
+        "continuity": 82,
+        "trust": 55
+      },
+      "metricLabels": {
+        "containment": "노출 통제",
+        "evidence": "증거 보전",
+        "continuity": "업무 연속성",
+        "trust": "이해관계자 신뢰"
+      },
+      "nodes": {
+        "report": {
+          "phase": "1. 신고 접수",
+          "title": "첫 5분, 시스템을 어떻게 다룰 것인가",
+          "situation": "오전 10시 12분. 고객 한 명이 AI 상담창에서 자신의 질문과 무관한 다른 고객의 이름, 주문번호 일부, 상담 요약이 표시됐다고 신고했습니다. 상담 시스템은 현재도 운영 중입니다.",
+          "evidence": [
+            "고객이 화면 캡처 1장을 첨부했습니다.",
+            "현재까지 접수된 동일 신고는 1건입니다.",
+            "AI 상담은 외부 LLM과 사내 검색 시스템을 함께 사용합니다."
+          ],
+          "options": [
+            {
+              "id": "isolate",
+              "label": "문제 기능만 즉시 격리하고 관련 로그를 보존한다",
+              "detail": "AI 답변 기능을 제한하고 원본 로그·프롬프트·검색기록을 별도 보존합니다.",
+              "effects": {"containment": 28, "evidence": 24, "continuity": -10, "trust": 9},
+              "score": 25,
+              "facts": ["오류는 전체 상담이 아니라 사내 검색 결과를 결합하는 경로에서 재현됩니다."],
+              "next": "scope"
+            },
+            {
+              "id": "shutdown",
+              "label": "상담 시스템 전체를 즉시 중단한다",
+              "detail": "추가 노출 가능성은 낮추지만 일반 상담 업무도 함께 멈춥니다.",
+              "effects": {"containment": 32, "evidence": 10, "continuity": -30, "trust": 4},
+              "score": 18,
+              "facts": ["추가 AI 답변은 차단됐지만 일반 고객상담 대기열이 빠르게 증가합니다."],
+              "next": "scope"
+            },
+            {
+              "id": "observe",
+              "label": "재현 여부를 더 확인한 뒤 중단 여부를 결정한다",
+              "detail": "현재 서비스를 유지하면서 동일 현상이 다시 발생하는지 관찰합니다.",
+              "effects": {"containment": -22, "evidence": 5, "continuity": 3, "trust": -12},
+              "score": 5,
+              "facts": ["7분 뒤 두 번째 고객이 유사한 정보 노출을 신고합니다."],
+              "next": "escalation"
+            }
+          ]
+        },
+        "escalation": {
+          "phase": "1-A. 상황 악화",
+          "title": "두 번째 신고가 들어왔다",
+          "situation": "동일 유형의 두 번째 신고가 접수됐습니다. 이제 단일 사용자 오류보다 시스템성 사고 가능성이 높아졌습니다.",
+          "evidence": [
+            "두 번째 신고는 첫 신고와 다른 고객 계정에서 발생했습니다.",
+            "노출된 정보 유형도 일부 다릅니다."
+          ],
+          "options": [
+            {
+              "id": "contain-now",
+              "label": "AI 검색 결합 기능을 즉시 격리하고 사고 대응으로 전환한다",
+              "detail": "서비스 범위를 제한하고 사고시점을 기준으로 로그를 동결합니다.",
+              "effects": {"containment": 24, "evidence": 18, "continuity": -12, "trust": 5},
+              "score": 15,
+              "facts": ["추가 노출은 중단됐지만 초기 7분 동안의 추가 영향 범위를 확인해야 합니다."],
+              "next": "scope"
+            },
+            {
+              "id": "full-stop-late",
+              "label": "전체 시스템을 중단하고 전면 점검으로 전환한다",
+              "detail": "추가 노출을 차단하지만 업무 중단 범위가 확대됩니다.",
+              "effects": {"containment": 28, "evidence": 10, "continuity": -28, "trust": 2},
+              "score": 10,
+              "facts": ["전체 상담 업무가 중단되면서 별도의 운영 복구 계획이 필요해졌습니다."],
+              "next": "scope"
+            }
+          ]
+        },
+        "scope": {
+          "phase": "2. 범위 확인",
+          "title": "무엇부터 확보해야 사고 범위를 판단할 수 있는가",
+          "situation": "개발팀은 'LLM이 이상한 답을 한 것 같다'고 말하고, 외주업체는 아직 원인을 특정할 수 없다고 답합니다. 지금 확보하는 자료에 따라 이후 판단의 정확도가 달라집니다.",
+          "evidence": [
+            "사내 검색 시스템에는 사용자별 접근권한 필터가 있습니다.",
+            "최근 24시간 동안 검색 커넥터가 두 차례 배포됐습니다.",
+            "LLM 제공업체는 사내 원본 DB에 직접 접근하지 않습니다."
+          ],
+          "options": [
+            {
+              "id": "freeze-logs",
+              "label": "프롬프트·검색쿼리·권한필터·응답 로그를 같은 시각축으로 보존한다",
+              "detail": "원인 추정 전에 실제 데이터 흐름을 재구성할 자료를 먼저 고정합니다.",
+              "effects": {"containment": 8, "evidence": 34, "continuity": -4, "trust": 6},
+              "score": 25,
+              "facts": ["권한필터 자체는 정상이나 신규 검색 캐시가 사용자 구분키를 누락한 사실이 확인됩니다."],
+              "next": "coordination"
+            },
+            {
+              "id": "vendor-first",
+              "label": "외주업체에 원인분석 보고서를 먼저 요구한다",
+              "detail": "외부 설명을 기다리는 동안 내부 증거보전은 최소 수준으로 유지합니다.",
+              "effects": {"containment": 0, "evidence": 5, "continuity": 0, "trust": -4},
+              "score": 10,
+              "facts": ["외주업체 답변은 '추가 확인 필요'에 머물고 내부 로그 일부가 순환 삭제 시점에 가까워집니다."],
+              "next": "coordination"
+            },
+            {
+              "id": "customer-interview",
+              "label": "신고 고객과 통화해 노출 화면을 상세히 재구성한다",
+              "detail": "피해 내용 파악에는 도움이 되지만 시스템 원인자료 확보는 늦어집니다.",
+              "effects": {"containment": 1, "evidence": 13, "continuity": 0, "trust": 9},
+              "score": 15,
+              "facts": ["고객 진술로 노출 정보의 범위는 좁혀졌지만 기술적 발생범위는 아직 불명확합니다."],
+              "next": "coordination"
+            }
+          ]
+        },
+        "coordination": {
+          "phase": "3. 대응 조직",
+          "title": "누구를 먼저 묶어 하나의 사고 대응선으로 만들 것인가",
+          "situation": "원인이 검색 캐시 계층일 가능성이 높아졌습니다. 운영팀, 개인정보 담당자, 개발팀, 외주업체가 각자 별도로 움직이기 시작했습니다.",
+          "evidence": [
+            "기술팀은 패치를 바로 배포하자고 합니다.",
+            "개인정보 담당자는 영향대상과 정보항목 확정을 요구합니다.",
+            "외주업체는 자사 책임 여부 판단 전 공식 입장 표명을 꺼립니다."
+          ],
+          "options": [
+            {
+              "id": "single-command",
+              "label": "사고 타임라인과 역할을 하나로 묶고 기술복구와 영향평가를 병렬 진행한다",
+              "detail": "한 명이 판단기록을 관리하고 각 팀의 산출물과 시점을 통합합니다.",
+              "effects": {"containment": 10, "evidence": 14, "continuity": 8, "trust": 17},
+              "score": 25,
+              "facts": ["패치 검증, 영향대상 산출, 고객 대응 문안이 같은 사고번호 아래 연결됩니다."],
+              "next": "closure"
+            },
+            {
+              "id": "patch-first",
+              "label": "기술팀에 패치를 먼저 배포하게 하고 나머지는 이후 정리한다",
+              "detail": "복구는 빨라질 수 있지만 변경 전 상태와 판단과정이 흐려질 수 있습니다.",
+              "effects": {"containment": 15, "evidence": -14, "continuity": 12, "trust": -7},
+              "score": 10,
+              "facts": ["서비스는 빨리 복구됐지만 패치 전후 비교에 필요한 일부 상태값을 다시 구성해야 합니다."],
+              "next": "closure"
+            },
+            {
+              "id": "legal-first",
+              "label": "법적 신고 여부가 확정될 때까지 기술조치 외 커뮤니케이션을 보류한다",
+              "detail": "대외 발언은 줄지만 내부 의사결정과 고객 안내가 지연됩니다.",
+              "effects": {"containment": 4, "evidence": 4, "continuity": -5, "trust": -13},
+              "score": 8,
+              "facts": ["내부 팀마다 서로 다른 사고상태를 공유하면서 고객 문의 대응이 일관되지 않게 됩니다."],
+              "next": "closure"
+            }
+          ]
+        },
+        "closure": {
+          "phase": "4. 종료 판단",
+          "title": "복구 직전 무엇을 확인하고 종료할 것인가",
+          "situation": "원인 패치가 준비됐고 영향대상 후보도 추출됐습니다. 이제 서비스를 정상화하면서 사고를 어떤 상태로 종료할지 결정해야 합니다.",
+          "evidence": [
+            "패치 후 재현 테스트에서는 동일 오류가 발생하지 않았습니다.",
+            "영향대상 후보와 노출정보 항목은 별도 목록으로 정리됐습니다.",
+            "추가 모니터링 규칙을 배포할 수 있습니다."
+          ],
+          "options": [
+            {
+              "id": "controlled-reopen",
+              "label": "재현 테스트·영향대상 검증·모니터링·후속조치 책임자를 확정한 뒤 단계적으로 재개한다",
+              "detail": "복구와 사고 종료를 분리해 후속 검증이 남도록 합니다.",
+              "effects": {"containment": 18, "evidence": 12, "continuity": 14, "trust": 18},
+              "score": 25,
+              "facts": ["서비스 재개 후에도 사고번호와 후속조치가 유지돼 재발 여부를 추적할 수 있습니다."],
+              "next": null
+            },
+            {
+              "id": "reopen-now",
+              "label": "패치 성공을 확인했으므로 즉시 정상 운영으로 복귀한다",
+              "detail": "업무는 빨리 정상화되지만 영향대상 검증과 사후 책임이 흐려질 수 있습니다.",
+              "effects": {"containment": 8, "evidence": -5, "continuity": 23, "trust": -5},
+              "score": 12,
+              "facts": ["운영은 정상화됐지만 후속 검증 업무가 일반 업무에 섞이면서 우선순위가 낮아집니다."],
+              "next": null
+            },
+            {
+              "id": "stay-offline",
+              "label": "모든 원인과 법적 평가가 끝날 때까지 서비스를 중단 상태로 유지한다",
+              "detail": "위험회피는 강하지만 서비스 중단 비용과 고객 불편이 크게 증가합니다.",
+              "effects": {"containment": 20, "evidence": 8, "continuity": -28, "trust": -4},
+              "score": 14,
+              "facts": ["추가 노출 위험은 낮지만 장시간 중단으로 별도의 고객 이탈과 운영비용이 발생합니다."],
+              "next": null
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "min": 85,
+          "code": "controlled-response",
+          "title": "통제된 사고 대응",
+          "message": "노출 통제, 증거 보전, 업무 연속성, 이해관계자 조정을 균형 있게 유지했습니다. 특히 원인 추정보다 로그 보전과 단일 사고 타임라인을 우선한 점이 강점입니다."
+        },
+        {
+          "min": 65,
+          "code": "workable-response",
+          "title": "실행 가능한 대응",
+          "message": "사고는 통제했지만 일부 판단에서 증거, 연속성 또는 커뮤니케이션 비용이 커졌습니다. 선택 순서를 바꾸면 더 안정적인 결과를 만들 수 있습니다."
+        },
+        {
+          "min": 40,
+          "code": "fragile-response",
+          "title": "취약한 대응",
+          "message": "개별 조치는 있었지만 사고 전체를 하나의 지휘선과 증거체계로 묶지 못했습니다. 같은 사건을 다시 실행해 초기 통제와 증거 보전 순서를 비교해 보십시오."
+        },
+        {
+          "min": 0,
+          "code": "high-risk-response",
+          "title": "고위험 대응",
+          "message": "서비스 유지 또는 단일 조치에 치우쳐 노출확대, 증거 손실, 이해관계자 혼선 위험이 높아졌습니다. 첫 단계부터 다른 선택으로 다시 실행해 결과 차이를 확인하는 것이 좋습니다."
+        }
+      ]
+    }
+  ]
+}
