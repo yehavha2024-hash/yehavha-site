@@ -1,4 +1,4 @@
-/* NEXUS 2 · Life-Event Action canonical local owner v0.7
+/* NEXUS 2 · Life-Event Action canonical local owner v0.8
    Shared shell: ../portal-v2.css
    Scope: .life-* only. */
 .life-hero{padding:10px 0 4px}
@@ -31,6 +31,7 @@
 .life-daily-item:only-child{grid-column:1/-1}
 .life-daily-item:nth-child(odd){border-right:1px solid #eef1f4}
 .life-daily-item:only-child{border-right:0}
+.life-daily-item:last-child:nth-child(odd){grid-column:1/-1;border-right:0}
 .life-daily-item:hover,.life-daily-item:focus-visible{background:#f8fbfe;outline:none}
 .life-daily-thumb{display:block;width:128px;aspect-ratio:16/9;overflow:hidden;border-radius:7px;background:#eef4f8}
 .life-daily-thumb img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
@@ -86,6 +87,7 @@
 
 @media (max-width:900px){
   .life-daily-items{grid-template-columns:1fr}
+  .life-daily-item,.life-daily-item:last-child:nth-child(odd){grid-column:auto}
   .life-daily-item:nth-child(odd){border-right:0}
   .life-daily-items>.life-daily-item:nth-last-child(2):nth-child(odd){border-bottom:1px solid #eef1f4}
   .life-event-panel{width:100%}
