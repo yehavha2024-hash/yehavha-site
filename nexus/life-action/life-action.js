@@ -36,7 +36,7 @@
     link.href = item.url;
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
-    link.setAttribute('aria-label', `${item.title} 바로 보기`);
+    link.setAttribute('aria-label', item.title);
 
     const thumbnail = dailyThumbnail(item);
     if (thumbnail) {
@@ -51,6 +51,12 @@
       image.decoding = 'async';
       thumb.append(image);
       link.append(thumb);
+    } else if (item.icon) {
+      const icon = document.createElement('span');
+      icon.className = 'life-daily-icon';
+      icon.setAttribute('aria-hidden', 'true');
+      icon.textContent = item.icon;
+      link.append(icon);
     } else {
       link.classList.add('is-text-only');
     }
@@ -72,10 +78,7 @@
     const reason = document.createElement('span');
     reason.className = 'life-daily-reason';
     reason.textContent = item.reason || '';
-    const sourceLink = document.createElement('span');
-    sourceLink.className = 'life-daily-source';
-    sourceLink.textContent = item.action || (item.youtubeId ? '영상 보기 →' : '바로 보기 →');
-    body.append(meta, title, reason, sourceLink);
+    body.append(meta, title, reason);
     link.append(body);
     return link;
   }
