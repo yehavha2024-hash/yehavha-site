@@ -29,7 +29,7 @@
         <span class="life-number">01</span>
         <div class="life-daily-heading"><h2 id="dailyTitle">DAILY NEXUS</h2><span id="dailyDate"></span></div>
       </div>
-      <div class="life-daily-sections" id="dailyNexus"><p class="life-empty">오늘의 선별 정보를 불러오는 중입니다.</p></div>
+      <div class="life-daily-sections" id="dailyNexus"></div>
     </section>
 
     <section class="life-panel life-event-panel" aria-labelledby="eventTitle">
@@ -85,6 +85,72 @@
     </div>
   </div></div>
 </footer>
-<script src="./life-action.js?v=20260912-7"></script>
+
+<script type="application/json" id="dailyNexusData">
+{
+  "date":"2026-09-12",
+  "sections":[
+    {
+      "id":"watch",
+      "title":"오늘 뭐 볼까?",
+      "items":[
+        {
+          "title":"이제 AI한테 컴퓨터를 맡겨도 될까? 우리가 알던 챗GPT와 완전히 달라진 이유",
+          "source":"안될과학 Unrealscience",
+          "meta":"9월 10일 · 13분",
+          "url":"https://www.youtube.com/watch?v=viemdZ0JNhM",
+          "youtubeId":"viemdZ0JNhM",
+          "reason":"GPT-6 Astra의 핵심인 컴퓨터 직접 조작과 에이전트 능력을 한국어로 가장 빠르게 이해할 수 있는 영상입니다. 단순 홍보보다 실제 변화와 한계를 함께 짚어 오늘 한 편만 본다면 우선 추천합니다."
+        }
+      ]
+    },
+    {
+      "id":"do",
+      "title":"오늘 뭐 할까?",
+      "items":[
+        {
+          "title":"한강불빛공연 드론라이트쇼",
+          "source":"서울특별시",
+          "meta":"오늘 저녁 · 뚝섬한강공원",
+          "url":"https://www.seoul.go.kr/realmnews/culture/calendar.do",
+          "image":"../assets/cards/culture-media.webp",
+          "reason":"오늘 저녁 바로 선택할 수 있는 야간 일정입니다. 멀리 계획하지 않아도 당일 움직일 수 있는 일정이라 우선 추천합니다."
+        },
+        {
+          "title":"2026 서울무형문화축제",
+          "source":"서울특별시",
+          "meta":"오늘 · 남산골한옥마을",
+          "url":"https://english.seoul.go.kr/september-2026-cultural-events/",
+          "image":"../assets/cards/strategy.webp",
+          "reason":"공연과 전통문화 체험을 함께 볼 수 있어 낮 시간 일정으로 선택하기 좋습니다."
+        }
+      ]
+    },
+    {
+      "id":"opportunity",
+      "title":"오늘의 기회",
+      "items":[
+        {
+          "title":"OpenAI Codex로 입문하는 바이브 코딩",
+          "source":"서울AI스마트시티센터",
+          "meta":"9월 14~15일 · 신청 확인",
+          "url":"https://youth.seoul.go.kr/infoData/sprtInfo/view.do?key=2309130006&sprtInfoId=73126",
+          "image":"../assets/cards/ai-work.svg?v=20260906-vivid-2",
+          "reason":"Codex를 실제 업무와 서비스 제작에 적용하는 실습형 과정이라 단순 AI 소개보다 바로 써먹을 수 있는 기회입니다."
+        },
+        {
+          "title":"비개발자도 할 수 있는 바이브 코딩 업무 자동화",
+          "source":"고용24",
+          "meta":"모집 여부 확인",
+          "url":"https://www.work24.go.kr/",
+          "image":"../assets/cards/learning.webp",
+          "reason":"개발 전공 없이도 AI를 업무 자동화에 연결하려는 사람에게 직접적인 활용성이 있는 교육 기회입니다."
+        }
+      ]
+    }
+  ]
+}
+</script>
+<script src="./life-action.js?v=20260912-8"></script>
 </body>
 </html>
