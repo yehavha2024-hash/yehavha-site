@@ -193,8 +193,10 @@
       renderDashboard(profile);
       $('resultPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
+    const requestedEvent = new URLSearchParams(window.location.search).get('event');
     const savedEvent = localStorage.getItem(SELECTED_EVENT_KEY);
-    await loadEvent(EVENT_FILES[savedEvent] ? savedEvent : 'move', false);
+    const initialEvent = EVENT_FILES[requestedEvent] ? requestedEvent : EVENT_FILES[savedEvent] ? savedEvent : 'move';
+    await loadEvent(initialEvent, Boolean(EVENT_FILES[requestedEvent]));
   }
 
   document.addEventListener('DOMContentLoaded', init);
