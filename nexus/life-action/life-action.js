@@ -27,7 +27,7 @@
 
   function dailyThumbnail(item) {
     if (item.youtubeId) return `https://i.ytimg.com/vi/${encodeURIComponent(item.youtubeId)}/hqdefault.jpg`;
-    return item.image || '../assets/cards/strategy.webp';
+    return item.image || '';
   }
 
   function renderDailyItem(item) {
@@ -36,17 +36,24 @@
     link.href = item.url;
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
+    link.setAttribute('aria-label', `${item.title} 바로 보기`);
 
-    const thumb = document.createElement('span');
-    thumb.className = 'life-daily-thumb';
-    const image = document.createElement('img');
-    image.src = dailyThumbnail(item);
-    image.alt = '';
-    image.width = 640;
-    image.height = 360;
-    image.loading = 'lazy';
-    image.decoding = 'async';
-    thumb.append(image);
+    const thumbnail = dailyThumbnail(item);
+    if (thumbnail) {
+      const thumb = document.createElement('span');
+      thumb.className = 'life-daily-thumb';
+      const image = document.createElement('img');
+      image.src = thumbnail;
+      image.alt = '';
+      image.width = 640;
+      image.height = 360;
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      thumb.append(image);
+      link.append(thumb);
+    } else {
+      link.classList.add('is-text-only');
+    }
 
     const body = document.createElement('span');
     body.className = 'life-daily-body';
@@ -67,15 +74,15 @@
     reason.textContent = item.reason || '';
     const sourceLink = document.createElement('span');
     sourceLink.className = 'life-daily-source';
-    sourceLink.textContent = item.youtubeId ? '영상 바로 보기 →' : '선정 정보 바로 보기 →';
+    sourceLink.textContent = item.action || (item.youtubeId ? '영상 보기 →' : '바로 보기 →');
     body.append(meta, title, reason, sourceLink);
-    link.append(thumb, body);
+    link.append(body);
     return link;
   }
 
   function renderDailySection(section) {
     const wrapper = document.createElement('section');
-    wrapper.className = 'life-daily-section';
+    wrapper.className = `life-daily-section life-daily-section-${section.id || 'general'}`;
     const head = document.createElement('div');
     head.className = 'life-daily-section-title';
     const title = document.createElement('h3');
