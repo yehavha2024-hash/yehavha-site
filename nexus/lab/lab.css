@@ -10,8 +10,6 @@
   --lab-warning:#8a6c46;
 }
 .lab-header{padding:26px 0 12px;background:#fff}
-.back-link{display:inline-flex;align-items:center;min-height:36px;margin-bottom:14px;color:#111;text-decoration:none;font-size:14px;font-weight:800}
-.back-link:hover{text-decoration:underline}
 .lab-hero{padding:28px;border:1px solid var(--lab-line);border-left:4px solid var(--lab-blue);border-radius:16px;background:linear-gradient(135deg,#fff 0%,#f7fbff 100%);box-shadow:0 5px 18px rgba(0,0,0,.05)}
 .lab-eyebrow,.lab-section-kicker,.lab-case-label,.lab-phase{margin:0;color:var(--lab-blue);font-size:11.5px;font-weight:850;letter-spacing:.12em}
 .lab-hero h1{margin:8px 0 10px;color:var(--lab-text);font-size:clamp(2.45rem,6vw,4.8rem);line-height:1.02;letter-spacing:-.055em}
