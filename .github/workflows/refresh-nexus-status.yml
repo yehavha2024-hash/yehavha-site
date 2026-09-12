@@ -15,6 +15,7 @@ on:
       - '!nexus/README.md'
       - '!nexus/assets/**'
       - '!nexus/scripts/**'
+      - 'nexus/scripts/update-sitemap.mjs'
       - '!nexus/functions/**'
       - 'nexus.project.json'
       - 'three-minute-break/**'
