@@ -6,6 +6,7 @@ const SITE_URL = 'https://yehavha.com';
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const nexusDir = path.resolve(scriptDir, '..');
 const articlesDir = path.join(nexusDir, 'articles');
+const commentaryDir = path.join(nexusDir, 'commentary');
 
 function xmlEscape(value) {
   return String(value)
@@ -79,6 +80,17 @@ for (const fileName of staticArticleFiles) {
   urls.push({
     loc: `${SITE_URL}/articles/${encodeURIComponent(fileName)}`,
     lastmod: archiveUpdatedAt
+  });
+}
+
+const staticCommentaryFiles = (await fs.readdir(commentaryDir, { withFileTypes: true }))
+  .filter((entry) => entry.isFile() && entry.name.endsWith('.html') && entry.name !== 'index.html')
+  .map((entry) => entry.name)
+  .sort();
+
+for (const fileName of staticCommentaryFiles) {
+  urls.push({
+    loc: `${SITE_URL}/commentary/${encodeURIComponent(fileName)}`
   });
 }
 
