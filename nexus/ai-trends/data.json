@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-09-11",
-  "edition": "2026-09-11",
+  "updatedAt": "2026-09-12",
+  "edition": "2026-09-12",
   "updateCadence": "6시간마다 자동 수집 · 중요 변화 발생 시 수시 반영",
   "filters": [
     {
@@ -922,7 +922,7 @@
     "sourceCount": 7,
     "deduplication": "normalized URL + normalized title",
     "lookbackDays": 3,
-    "lastSuccessfulUpdateAt": "2026-09-11T20:57:46.670Z",
+    "lastSuccessfulUpdateAt": "2026-09-12T04:33:52.007Z",
     "lastAddedCount": 17,
     "relevanceFilter": "source-specific strict filter",
     "lastCleanupCount": 0,
