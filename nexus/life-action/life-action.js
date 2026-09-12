@@ -5,7 +5,6 @@
     move: 'move.json', career: 'career.json', retire: 'retire.json',
     startup: 'startup.json', care: 'care.json', travel: 'travel.json'
   };
-  const DAILY_DATA_URL = './daily-nexus.json';
   const kindLabel = { must: '해야 하는 것', risk: '놓치면 손해', execute: '지금 실행' };
   let graph = null;
   let currentEvent = 'move';
@@ -68,7 +67,7 @@
     reason.textContent = item.reason || '';
     const sourceLink = document.createElement('span');
     sourceLink.className = 'life-daily-source';
-    sourceLink.textContent = item.youtubeId ? '영상 바로 보기 →' : '선정 자료 바로 보기 →';
+    sourceLink.textContent = item.youtubeId ? '영상 바로 보기 →' : '선정 정보 바로 보기 →';
     body.append(meta, title, reason, sourceLink);
     link.append(thumb, body);
     return link;
@@ -91,19 +90,18 @@
     return wrapper;
   }
 
-  async function loadDailyNexus() {
+  function loadDailyNexus() {
     const host = $('dailyNexus');
-    if (!host) return;
+    const source = $('dailyNexusData');
+    if (!host || !source) return;
     try {
-      const response = await fetch(DAILY_DATA_URL, { cache: 'no-store' });
-      if (!response.ok) throw new Error(`DAILY NEXUS load failed: ${response.status}`);
-      const data = await response.json();
+      const data = JSON.parse(source.textContent);
       host.replaceChildren();
       (data.sections || []).forEach((section) => host.append(renderDailySection(section)));
       if (!host.childElementCount) host.innerHTML = '<p class="life-empty">오늘 선정된 항목이 없습니다.</p>';
       if ($('dailyDate')) $('dailyDate').textContent = formatDailyDate(data.date);
     } catch (error) {
-      host.innerHTML = '<p class="life-empty">오늘의 선별 정보를 불러오지 못했습니다.</p>';
+      host.innerHTML = '<p class="life-empty">오늘의 선별 정보를 표시하지 못했습니다.</p>';
       console.error(error);
     }
   }
