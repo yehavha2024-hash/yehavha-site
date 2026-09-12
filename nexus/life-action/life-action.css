@@ -1,4 +1,4 @@
-/* NEXUS 2 · Life-Event Action canonical local owner v0.8
+/* NEXUS 2 · Life-Event Action canonical local owner v0.9
    Shared shell: ../portal-v2.css
    Scope: .life-* only. */
 .life-hero{padding:10px 0 4px}
@@ -33,13 +33,15 @@
 .life-daily-item:only-child{border-right:0}
 .life-daily-item:last-child:nth-child(odd){grid-column:1/-1;border-right:0}
 .life-daily-item:hover,.life-daily-item:focus-visible{background:#f8fbfe;outline:none}
-.life-daily-thumb{display:block;width:128px;aspect-ratio:16/9;overflow:hidden;border-radius:7px;background:#eef4f8}
+.life-daily-thumb,.life-daily-icon{width:128px;aspect-ratio:16/9;overflow:hidden;border-radius:9px}
+.life-daily-thumb{display:block;background:#eef4f8}
 .life-daily-thumb img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.life-daily-icon{display:grid;place-items:center;border:1px solid #c8d5e1;background:linear-gradient(145deg,#edf6fb,#dcebf6);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 4px 12px rgba(50,109,168,.08);font-size:34px;line-height:1}
+.life-daily-section-opportunity .life-daily-icon{background:linear-gradient(145deg,#f1f7f4,#e1efe8);border-color:#c8d8d0}
 .life-daily-body{display:flex;flex-direction:column;min-width:0}
 .life-daily-meta{display:flex;flex-wrap:wrap;gap:5px;color:#68717b;font-size:10.5px;font-weight:760;line-height:1.25}
 .life-daily-body strong{display:block;margin-top:3px;color:#111;font-size:14px;line-height:1.35;letter-spacing:-.02em}
 .life-daily-reason{display:block;margin-top:4px;color:#333;font-size:11.5px;line-height:1.45}
-.life-daily-source{align-self:flex-start;display:inline-flex;align-items:center;min-height:28px;margin-top:7px;padding:0 9px;border:1px solid #b9c7d5;border-radius:7px;background:#f7f9fc;color:#174f82;font-size:10.8px;font-weight:850;line-height:1.2;text-decoration:none}
 .life-daily-items>.life-daily-item:last-child,.life-daily-items>.life-daily-item:nth-last-child(2):nth-child(odd){border-bottom:0}
 
 .life-event-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
@@ -110,10 +112,11 @@
   .life-daily-section-title span{font-size:9.8px}
   .life-daily-item{grid-template-columns:102px minmax(0,1fr);gap:8px;padding:8px}
   .life-daily-item.is-text-only{grid-template-columns:1fr}
-  .life-daily-thumb{width:102px}
+  .life-daily-thumb,.life-daily-icon{width:102px}
+  .life-daily-icon{font-size:29px}
   .life-daily-body strong{font-size:13px}
   .life-daily-reason{font-size:10.8px;line-height:1.4}
-  .life-daily-meta,.life-daily-source{font-size:9.8px}
+  .life-daily-meta{font-size:9.8px}
   .life-event-panel{padding:7px}
   .life-heading{margin-bottom:6px}
   .life-number{width:23px;height:23px;font-size:10px}
