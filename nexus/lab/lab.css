@@ -92,6 +92,8 @@
 .lab-reuse-grid strong{display:block;margin:0;font-size:13.5px;white-space:nowrap}
 .lab-reuse-grid span{display:block;color:#555;font-size:12px;line-height:1.45}
 @media(max-width:920px){
+  .lab-section-head{grid-template-columns:1fr;gap:6px;align-items:start;margin-bottom:11px;padding-bottom:9px}
+  .lab-section-head>p{text-align:left}
   .lab-engine-grid{grid-template-columns:1fr}
   .lab-sim-shell{grid-template-columns:1fr}
   .lab-sim-sidebar{position:static}
@@ -100,8 +102,6 @@
 @media(max-width:700px){
   .lab-header{padding-top:18px}
   .lab-hero,.lab-section{padding:18px}
-  .lab-section-head{grid-template-columns:1fr;gap:6px;align-items:start;margin-bottom:11px;padding-bottom:9px}
-  .lab-section-head>p{text-align:left}
   .lab-stage{padding:14px}
   .lab-brief-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .lab-stage-head{gap:8px}
