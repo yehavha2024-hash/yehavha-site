@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="NEXUS LAB은 시뮬레이션, 생성, 인터랙티브 모델을 통해 지식을 실제 판단과 실행 경험으로 전환하는 실험·훈련 공간입니다." name="description"/>
+<meta content="index,follow" name="robots"/>
+<meta content="#ffffff" name="theme-color"/>
+<link rel="canonical" href="https://yehavha.com/lab/"/>
+<link href="../portal-v2.css?v=20260906-canonical-1" rel="stylesheet"/>
+<link href="./lab.css?v=20260912-1" rel="stylesheet"/>
+<title>NEXUS LAB | 시뮬레이션·생성·인터랙티브 모델</title>
+</head>
+<body id="top">
+<header class="lab-header">
+<div class="container">
+<a class="back-link" href="../">← YEHAVHA NEXUS</a>
+<div class="lab-hero">
+<p class="lab-eyebrow">NEXUS APPLICATION LAYER</p>
+<h1>NEXUS LAB</h1>
+<p class="lab-lead">읽는 정보에서 끝나지 않고 직접 판단하고 조작하고 결과를 비교하는 작동형 NEXUS입니다. 공통 엔진을 재사용해 시나리오와 서비스만 교체할 수 있도록 설계합니다.</p>
+<div class="lab-flow" aria-label="NEXUS LAB 작동 흐름">
+<span>상황</span><span aria-hidden="true">→</span><span>선택</span><span aria-hidden="true">→</span><span>상태 변화</span><span aria-hidden="true">→</span><span>결과</span><span aria-hidden="true">→</span><span>저장·비교</span>
+</div>
+</div>
+</div>
+</header>
+<main class="lab-main">
+<div class="container">
+<section class="lab-section" aria-labelledby="labEnginesTitle">
+<div class="lab-section-head">
+<div>
+<p class="lab-section-kicker">COMMON ENGINES</p>
+<h2 id="labEnginesTitle">공통 엔진</h2>
+</div>
+<p>기능별 사이트를 계속 새로 만드는 대신 같은 엔진에 데이터와 규칙을 교체합니다.</p>
+</div>
+<div class="lab-engine-grid">
+<article class="lab-engine-card lab-engine-card-active">
+<div class="lab-engine-number">01</div>
+<div>
+<span class="lab-status lab-status-live">작동 중</span>
+<h3>시뮬레이션</h3>
+<p>상황, 정보, 선택, 분기, 상태 변화, 평가를 하나의 데이터 구조로 실행합니다.</p>
+</div>
+<a class="lab-primary-link" href="#simulation">첫 훈련 시작 →</a>
+</article>
+<article class="lab-engine-card">
+<div class="lab-engine-number">02</div>
+<div>
+<span class="lab-status">엔진 골격</span>
+<h3>만들기</h3>
+<p>입력 조건과 자료를 받아 보고서, 전략안, 비교표, 실행문서 등 재사용 가능한 결과물로 전환하는 생성 계층입니다.</p>
+</div>
+<span class="lab-muted-action">다음 적용 단계</span>
+</article>
+<article class="lab-engine-card">
+<div class="lab-engine-number">03</div>
+<div>
+<span class="lab-status">엔진 골격</span>
+<h3>인터랙티브 모델</h3>
+<p>관계도, 시간축, 책임구조, 정책 영향, AI 시스템 연결구조를 직접 조작하며 변화와 연결을 확인하는 계층입니다.</p>
+</div>
+<span class="lab-muted-action">다음 적용 단계</span>
+</article>
+</div>
+</section>
+<section class="lab-section" id="simulation" aria-labelledby="simulationTitle">
+<div class="lab-section-head">
+<div>
+<p class="lab-section-kicker">SIMULATION ENGINE · SCENARIO 001</p>
+<h2 id="simulationTitle">AI 업무사고 대응 훈련실</h2>
+</div>
+<p>첫 시나리오는 공통 엔진 검증용입니다. 선택에 따라 사고 범위, 증거, 업무 연속성, 신뢰 상태가 실제로 달라집니다.</p>
+</div>
+<div class="lab-sim-shell">
+<aside class="lab-sim-sidebar" aria-label="훈련 상태">
+<div class="lab-scenario-meta">
+<span id="scenarioDuration">15분</span>
+<strong id="scenarioRole">서비스 운영 책임자</strong>
+</div>
+<div class="lab-metrics" id="metricPanel" aria-label="현재 상태 지표"></div>
+<div class="lab-storage-state" id="storageState" aria-live="polite">저장 상태 확인 중</div>
+<button class="lab-secondary-button" id="restartButton" type="button" hidden>처음부터 다시 실행</button>
+</aside>
+<section class="lab-stage" aria-live="polite">
+<div id="simulationIntro" class="lab-intro-panel">
+<p class="lab-case-label">CASE 001</p>
+<h3 id="scenarioTitle">AI 고객상담 시스템 정보 노출 사고</h3>
+<p id="scenarioSubtitle">AI 고객상담 시스템이 다른 고객의 정보를 답변했다는 신고가 들어왔습니다.</p>
+<div class="lab-brief-grid">
+<div><span>목표</span><strong>15분 안에 사고를 통제하고 판단근거를 남기기</strong></div>
+<div><span>방식</span><strong>정답 맞히기보다 선택 결과 비교</strong></div>
+</div>
+<button class="lab-primary-button" id="startButton" type="button">15분 훈련 시작</button>
+</div>
+<div id="simulationStage" hidden>
+<div class="lab-stage-head">
+<div>
+<p class="lab-phase" id="phaseLabel"></p>
+<h3 id="stepTitle"></h3>
+</div>
+<div class="lab-score" aria-label="현재 판단 점수"><span>판단점수</span><strong id="scoreValue">0</strong></div>
+</div>
+<p class="lab-situation" id="situationText"></p>
+<section class="lab-evidence-box" aria-labelledby="evidenceTitle">
+<h4 id="evidenceTitle">현재 확인된 정보</h4>
+<ul id="evidenceList"></ul>
+</section>
+<div class="lab-choice-grid" id="choiceGrid"></div>
+<section class="lab-discovery" id="discoveryPanel" hidden>
+<h4>선택 후 확인된 사실</h4>
+<p id="discoveryText"></p>
+<button class="lab-primary-button" id="continueButton" type="button">다음 단계</button>
+</section>
+</div>
+<div id="simulationResult" class="lab-result" hidden>
+<p class="lab-case-label">SIMULATION COMPLETE</p>
+<h3 id="resultTitle"></h3>
+<p id="resultMessage"></p>
+<div class="lab-result-score"><span>최종 판단점수</span><strong id="resultScore"></strong></div>
+<div class="lab-result-actions">
+<button class="lab-primary-button" id="retryButton" type="button">다른 선택으로 다시 실행</button>
+<button class="lab-secondary-button" id="copyResultButton" type="button">결과 요약 복사</button>
+</div>
+</div>
+</section>
+</div>
+</section>
+<section class="lab-section" aria-labelledby="architectureTitle">
+<div class="lab-section-head">
+<div>
+<p class="lab-section-kicker">REUSABLE APPLICATION LAYER</p>
+<h2 id="architectureTitle">같은 엔진에 다음 시나리오를 얹는 구조</h2>
+</div>
+<p>사건 내용은 데이터로 분리하고 엔진은 선택, 분기, 상태값, 결과, 저장만 담당합니다.</p>
+</div>
+<div class="lab-reuse-grid">
+<div><strong>계약 협상</strong><span>조건·양보·위험·합의결과</span></div>
+<div><strong>민원 대응</strong><span>사실확인·우선순위·커뮤니케이션</span></div>
+<div><strong>AI 도입 의사결정</strong><span>비용·위험·통제·성과 비교</span></div>
+<div><strong>법률 사례 훈련</strong><span>사실관계·쟁점·증거·판단</span></div>
+</div>
+</section>
+</div>
+</main>
+<footer class="footer" data-footer-standard="v2">
+<div class="container">
+<div class="footer-card">
+<strong>YEHAVHA NEXUS</strong>
+<p>AI·AX 기반 전략정보와 전문지식을 연구·출판·교육·콘텐츠·웹서비스로 전환하고,<br/>축적된 결과물을 재사용·사업화하는 통합 지식사업 플랫폼입니다.</p>
+<div aria-label="사업자정보·저작권 및 문의" class="footer-meta">
+<p class="business-meta">스카이예슈아 · 사업자등록번호 536-38-01234<br />통신판매번호 : 2025-서울서초-2352 · 대표 이명훈</p>
+<p class="research-identifiers">국가연구자번호 13169680 · ISNI 0000000513760591<br />ORCID 0009-0000-6095-8067</p>
+<p class="copyright">Copyright © 이명훈 2026. All rights reserved.</p>
+<p class="contact">문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p>
+<p class="ai-disclosure">AI 활용 안내: 일부 프로젝트의 콘텐츠·문안·연구자료 제작과 정리에 생성형 AI를 활용하며, 각 프로젝트의 기획·검토·편집·운영은 운영자가 관리합니다.</p>
+<a href="#top">맨 위로 이동 ↑</a>
+</div>
+</div>
+</div>
+</footer>
+<script defer src="./lab.js?v=20260912-1"></script>
+</body>
+</html>
