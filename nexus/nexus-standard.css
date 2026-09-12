@@ -41,6 +41,8 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
 .hero-card h1{font-size:clamp(2.35rem,5vw,4rem);text-transform:uppercase;line-height:1.12}
 .hero-main>h1>span{color:var(--portal-text);font-weight:700}
 .hero-main>img{display:block;width:100%;height:auto;margin:20px 0 16px;border:1px solid var(--portal-line);border-radius:18px;background:#071426;box-shadow:0 12px 28px rgba(0,0,0,.12);filter:saturate(.92) contrast(1.02)}
+.nexus-intro-video{display:block;width:100%;height:auto;aspect-ratio:16/9;margin:0 0 16px;border:1px solid var(--portal-line);border-radius:18px;background:#071426;box-shadow:0 12px 28px rgba(0,0,0,.12);object-fit:cover}
+.nexus-intro-video[hidden]{display:none}
 .hero-main>.description{max-width:none;color:#111111;font-size:18px;line-height:1.78}
 .quick-links{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px!important;margin-top:16px!important;justify-content:flex-start}
 .quick-link{display:grid!important;grid-template-columns:26px minmax(0,1fr) auto;gap:7px!important;align-items:center;min-width:0;min-height:34px!important;padding:2px 10px!important;border:1px solid var(--portal-line)!important;border-radius:9px!important;background:#fff!important;color:var(--portal-text)!important;text-decoration:none;text-align:left}
@@ -137,7 +139,6 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
 .category-card::before{width:4px;background:var(--category-accent,var(--nxs-accent-system))}
 .category-card:has(>.items-grid.one-item):not(.category-research)>.items-grid.one-item>.item-card{border-left:4px solid var(--category-accent,var(--nxs-accent-system))!important}
 .portal-search,.frontline-panel{border-left:4px solid var(--nxs-accent-system)}
-
 /* Main portal search rows. */
 .nexus-legal-searchbar,.nexus-google-searchbar{padding:0 0 12px}
 .nexus-legal-searchbar .portal-search{border-left-color:var(--nxs-accent-legal)}
