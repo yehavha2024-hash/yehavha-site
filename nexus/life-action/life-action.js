@@ -33,18 +33,48 @@
     return Math.floor(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3])) / 86400000);
   }
 
+  function youtubeVideoId(value) {
+    try {
+      const url = new URL(String(value || '').trim());
+      const host = url.hostname.toLowerCase().replace(/^www\./, '').replace(/^m\./, '');
+      let id = '';
+      if (host === 'youtu.be') {
+        id = url.pathname.split('/').filter(Boolean)[0] || '';
+      } else if (host === 'youtube.com') {
+        if (url.pathname === '/watch') {
+          id = url.searchParams.get('v') || '';
+        } else {
+          const [type, candidate] = url.pathname.split('/').filter(Boolean);
+          if (['shorts', 'live', 'embed'].includes(type)) id = candidate || '';
+        }
+      }
+      return /^[A-Za-z0-9_-]{11}$/.test(id) ? id : '';
+    } catch (_) {
+      return '';
+    }
+  }
+
   function normalizeWatchItems(items, dataDate) {
     const dataDay = isoDayNumber(dataDate);
     if (dataDay === null) return [];
     const seen = new Set();
     return (items || [])
+      .map((item) => {
+        const youtubeId = youtubeVideoId(item.url);
+        if (!youtubeId) return null;
+        return {
+          ...item,
+          youtubeId,
+          url: `https://www.youtube.com/watch?v=${youtubeId}`
+        };
+      })
       .filter((item) => {
+        if (!item) return false;
         const itemDay = isoDayNumber(item.publishedDate);
-        const key = item.youtubeId || item.url;
-        if (!key || seen.has(key) || itemDay === null) return false;
+        if (itemDay === null || seen.has(item.youtubeId)) return false;
         const age = dataDay - itemDay;
         if (age < 0 || age > DAILY_WATCH_MAX_AGE_DAYS) return false;
-        seen.add(key);
+        seen.add(item.youtubeId);
         return true;
       })
       .sort((a, b) => String(b.publishedDate).localeCompare(String(a.publishedDate)))
@@ -58,7 +88,8 @@
   }
 
   function dailyThumbnail(item) {
-    if (item.youtubeId) return `https://i.ytimg.com/vi/${encodeURIComponent(item.youtubeId)}/hqdefault.jpg`;
+    const youtubeId = item.youtubeId || youtubeVideoId(item.url);
+    if (youtubeId) return `https://i.ytimg.com/vi/${encodeURIComponent(youtubeId)}/hqdefault.jpg`;
     return item.image || '';
   }
 
