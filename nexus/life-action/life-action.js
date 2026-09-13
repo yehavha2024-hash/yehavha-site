@@ -5,6 +5,8 @@
     move: 'move.json', career: 'career.json', retire: 'retire.json',
     startup: 'startup.json', care: 'care.json', travel: 'travel.json'
   };
+  const DAILY_WATCH_LIMIT = 10;
+  const DAILY_WATCH_MAX_AGE_DAYS = 1;
   const kindLabel = { must: '해야 하는 것', risk: '놓치면 손해', execute: '지금 실행' };
   let graph = null;
   let currentEvent = 'move';
@@ -23,6 +25,36 @@
     if (!value) return '';
     const [year, month, day] = String(value).split('-');
     return `${year}.${month}.${day}`;
+  }
+
+  function isoDayNumber(value) {
+    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value || ''));
+    if (!match) return null;
+    return Math.floor(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3])) / 86400000);
+  }
+
+  function normalizeWatchItems(items, dataDate) {
+    const dataDay = isoDayNumber(dataDate);
+    if (dataDay === null) return [];
+    const seen = new Set();
+    return (items || [])
+      .filter((item) => {
+        const itemDay = isoDayNumber(item.publishedDate);
+        const key = item.youtubeId || item.url;
+        if (!key || seen.has(key) || itemDay === null) return false;
+        const age = dataDay - itemDay;
+        if (age < 0 || age > DAILY_WATCH_MAX_AGE_DAYS) return false;
+        seen.add(key);
+        return true;
+      })
+      .sort((a, b) => String(b.publishedDate).localeCompare(String(a.publishedDate)))
+      .slice(0, DAILY_WATCH_LIMIT);
+  }
+
+  function normalizeDailySections(data) {
+    return (data.sections || []).map((section) => section.id === 'watch'
+      ? { ...section, items: normalizeWatchItems(section.items, data.date) }
+      : section);
   }
 
   function dailyThumbnail(item) {
@@ -106,8 +138,9 @@
     if (!host || !source) return;
     try {
       const data = JSON.parse(source.textContent);
+      const sections = normalizeDailySections(data);
       host.replaceChildren();
-      (data.sections || []).forEach((section) => host.append(renderDailySection(section)));
+      sections.forEach((section) => host.append(renderDailySection(section)));
       if (!host.childElementCount) host.innerHTML = '<p class="life-empty">오늘 선정된 항목이 없습니다.</p>';
       if ($('dailyDate')) $('dailyDate').textContent = formatDailyDate(data.date);
     } catch (error) {
