@@ -1,0 +1,85 @@
+name: One-off Daily Nexus YouTube metadata refresh
+
+on:
+  push:
+    paths:
+      - '.github/youtube-refresh-trigger.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch exact YouTube titles and channels and update Daily Nexus
+        shell: python
+        run: |
+          import json
+          import re
+          import urllib.parse
+          import urllib.request
+          from pathlib import Path
+
+          urls = [
+              'https://www.youtube.com/watch?v=jdwsZ0YT2cc',
+              'https://www.youtube.com/watch?v=UToIAz8DrEM',
+              'https://www.youtube.com/watch?v=EVMmvrdHoJQ',
+              'https://www.youtube.com/watch?v=YYE-cxgwOw4',
+              'https://www.youtube.com/watch?v=wLkh7VVBNbg',
+              'https://www.youtube.com/watch?v=wB1qGG6dY4A',
+              'https://www.youtube.com/watch?v=7N1jZZ13kTA',
+              'https://www.youtube.com/watch?v=j5JKW0j-cv0',
+              'https://www.youtube.com/watch?v=XcQGG7nXh-o',
+              'https://www.youtube.com/watch?v=aaS2sVh-F10',
+          ]
+
+          items = []
+          for url in urls:
+              endpoint = 'https://www.youtube.com/oembed?' + urllib.parse.urlencode({
+                  'url': url,
+                  'format': 'json',
+              })
+              req = urllib.request.Request(endpoint, headers={'User-Agent': 'Mozilla/5.0'})
+              with urllib.request.urlopen(req, timeout=30) as response:
+                  info = json.loads(response.read().decode('utf-8'))
+              video_id = urllib.parse.parse_qs(urllib.parse.urlparse(url).query)['v'][0]
+              items.append({
+                  'title': info['title'],
+                  'source': info.get('author_name', 'YouTube'),
+                  'publishedDate': '2026-09-13',
+                  'url': f'https://www.youtube.com/watch?v={video_id}',
+                  'youtubeId': video_id,
+              })
+
+          path = Path('nexus/life-action/index.html')
+          text = path.read_text(encoding='utf-8')
+          pattern = re.compile(r'(<script type="application/json" id="dailyNexusData">\s*)(\{.*?\})(\s*</script>)', re.S)
+          match = pattern.search(text)
+          if not match:
+              raise RuntimeError('dailyNexusData block not found')
+
+          data = json.loads(match.group(2))
+          watch = next(section for section in data['sections'] if section.get('id') == 'watch')
+          watch['items'] = items
+          new_json = json.dumps(data, ensure_ascii=False, indent=2)
+          updated = text[:match.start(2)] + new_json + text[match.end(2):]
+          path.write_text(updated, encoding='utf-8')
+
+      - name: Commit exact YouTube metadata
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add nexus/life-action/index.html
+          if ! git diff --cached --quiet; then
+            git commit -m 'Use exact YouTube titles for Daily Nexus'
+            git push
+          fi
