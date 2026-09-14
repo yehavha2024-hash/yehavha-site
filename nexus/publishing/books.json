@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-14",
+  "updatedAt": "2026-09-15",
   "books": [
     {
       "id": "upaper-toeic-day001",
@@ -71,7 +71,7 @@
       "platform": "유페이퍼",
       "title": "사해사본이 밝혀낸 예슈아 시대의 성경과 메시아 기대",
       "description": "사해사본의 본문 다원성과 4Q521·11Q13의 종말론 자료를 중심으로 예슈아 시대의 성경 전승과 메시아 기대를 검토한 전자책입니다.",
-      "bibliography": "ISBN 979-11-444-0579-0 · 유페이퍼 · 교보문고·YES24 상용 유통",
+      "bibliography": "ISBN 979-11-444-0579-0 · 유페이퍼 · 교보문고·알라딘·YES24 상용 유통",
       "coverImage": null,
       "url": "https://yehavha.upaper.kr/content/1222579",
       "actionLabel": "유페이퍼에서 보기",
@@ -79,6 +79,10 @@
         {
           "url": "https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000013560000",
           "label": "교보문고에서 보기"
+        },
+        {
+          "url": "https://www.aladin.co.kr/m/mproduct.aspx?ISBN=9791144405790",
+          "label": "알라딘에서 보기"
         }
       ]
     },
@@ -87,7 +91,7 @@
       "platform": "유페이퍼",
       "title": "하나님이 사람으로 오셨을 때 왜 알아보지 못했는가",
       "description": "요한복음에 나타난 성육신과 하나님의 자기계시, 표적, 불신, 십자가의 구조와 의미를 살펴보는 전자책입니다.",
-      "bibliography": "ISBN 979-11-444-0593-6 · 유페이퍼 · YES24·교보문고 상용 유통",
+      "bibliography": "ISBN 979-11-444-0593-6 · 유페이퍼 · YES24·교보문고·알라딘 상용 유통",
       "coverImage": "https://image.yes24.com/goods/195767587/XL",
       "url": "https://yehavha.upaper.kr/content/1222444",
       "actionLabel": "유페이퍼에서 보기",
@@ -99,6 +103,10 @@
         {
           "url": "https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000013559925",
           "label": "교보문고에서 보기"
+        },
+        {
+          "url": "https://www.aladin.co.kr/m/mproduct.aspx?ISBN=9791144405936",
+          "label": "알라딘에서 보기"
         }
       ]
     },
