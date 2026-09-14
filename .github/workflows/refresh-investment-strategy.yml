@@ -1,4 +1,4 @@
-name: Refresh Nexus investment strategy
+name: Validate Nexus investment strategy refresh
 
 on:
   push:
@@ -7,26 +7,21 @@ on:
       - 'scripts/refresh-investment-strategy.mjs'
       - 'scripts/report-airtable-status.mjs'
       - '.github/workflows/refresh-investment-strategy.yml'
-  schedule:
-    # GitHub Actions cron uses UTC. 11:30 UTC = 20:30 KST.
-    - cron: '30 11 * * 1-5'
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
-  group: nexus-investment-strategy-refresh
+  group: nexus-investment-strategy-validation
   cancel-in-progress: true
 
 jobs:
-  refresh:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v7
@@ -38,28 +33,5 @@ jobs:
           node --check scripts/refresh-investment-strategy.mjs
           node --check scripts/report-airtable-status.mjs
 
-      - name: Refresh existing investment strategy content
-        run: node scripts/refresh-investment-strategy.mjs
-
-      - name: Commit refreshed investment strategy when changed
-        shell: bash
-        run: |
-          if git diff --quiet -- nexus/investment-strategy/index.html; then
-            echo "Investment strategy is already current."
-            exit 0
-          fi
-
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add nexus/investment-strategy/index.html
-          git commit -m "Refresh Nexus investment strategy"
-          git push
-
-      - name: Report refresh status to Airtable
-        if: always()
-        continue-on-error: true
-        env:
-          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_NEXUS_TOKEN }}
-          NEXUS_REFRESH_STATUS: ${{ job.status }}
-          GITHUB_RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        run: node scripts/report-airtable-status.mjs
+      - name: Confirm canonical investment page exists
+        run: test -f nexus/investment-strategy/index.html
