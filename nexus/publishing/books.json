@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-10",
+  "updatedAt": "2026-09-14",
   "books": [
     {
       "id": "upaper-toeic-day001",
@@ -7,6 +7,7 @@
       "title": "토익 인간 100일 프로젝트 DAY 001",
       "description": "100일 동안 장문 독해와 핵심 어휘·숙어·문법·문장구조를 반복하며 TOEIC 영어 문해력을 단계적으로 높이는 학습 프로젝트의 첫 번째 전자책입니다.",
       "bibliography": "ISBN 979-11-444-0290-4 · YES24 상용 유통",
+      "coverImage": "https://image.yes24.com/goods/195116965/XL",
       "url": "https://m.yes24.com/goods/detail/195116965",
       "actionLabel": "YES24에서 보기",
       "additionalLinks": [
@@ -26,6 +27,7 @@
       "title": "사람으로 오신 YHWH, 다시 오실 예슈아",
       "description": "이스라엘 언약의 성취와 부활·성도 집결·천년 왕국을 하나의 흐름으로 연결하여 예슈아의 재림과 언약 성취를 살펴보는 신앙 연구 전자책입니다.",
       "bibliography": "ISBN 979-11-444-1317-7 · 유페이퍼 · 교보문고·알라딘·YES24 상용 유통",
+      "coverImage": "https://image.yes24.com/goods/196182974/XL",
       "url": "https://yehavha.upaper.kr/content/1221622",
       "actionLabel": "유페이퍼에서 보기",
       "detailEnabled": true,
@@ -70,6 +72,7 @@
       "title": "사해사본이 밝혀낸 예슈아 시대의 성경과 메시아 기대",
       "description": "사해사본의 본문 다원성과 4Q521·11Q13의 종말론 자료를 중심으로 예슈아 시대의 성경 전승과 메시아 기대를 검토한 전자책입니다.",
       "bibliography": "ISBN 979-11-444-0579-0 · 유페이퍼 · 교보문고·YES24 상용 유통",
+      "coverImage": "https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791144405790.jpg",
       "url": "https://yehavha.upaper.kr/content/1222579",
       "actionLabel": "유페이퍼에서 보기",
       "additionalLinks": [
@@ -85,6 +88,7 @@
       "title": "하나님이 사람으로 오셨을 때 왜 알아보지 못했는가",
       "description": "요한복음에 나타난 성육신과 하나님의 자기계시, 표적, 불신, 십자가의 구조와 의미를 살펴보는 전자책입니다.",
       "bibliography": "ISBN 979-11-444-0593-6 · 유페이퍼 · YES24·교보문고 상용 유통",
+      "coverImage": "https://image.yes24.com/goods/195767587/XL",
       "url": "https://yehavha.upaper.kr/content/1222444",
       "actionLabel": "유페이퍼에서 보기",
       "additionalLinks": [
@@ -104,6 +108,7 @@
       "title": "Why Did They Fail to Recognize God When He Came as a Man",
       "description": "요한복음을 따라 성육신, 하나님의 자기계시, 표적, 불신과 십자가의 구조를 다룬 영문 전자책입니다.",
       "bibliography": "ISBN 979-11-444-0735-0 · 유페이퍼",
+      "coverImage": "https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791144407350.jpg",
       "url": "https://yehavha.com/articles/article.html?id=john-god-incarnate-recognition-en",
       "actionLabel": "웹에서 읽기"
     },
@@ -113,6 +118,7 @@
       "title": "말씀의 본질과 다시 오실 예슈아",
       "description": "율법과 말씀의 본질, 성육신, 교회의 자기성찰과 다시 오실 예슈아를 하나의 흐름으로 살펴보는 성경 연구 전자책입니다.",
       "bibliography": "ISBN 979-11-444-0725-1 · 유페이퍼",
+      "coverImage": "https://contents.kyobobook.co.kr/sih/fit-in/300x0/pdt/9791144407251.jpg",
       "url": "https://yehavha.com/articles/article.html?id=word-essence-returning-yeshua",
       "actionLabel": "웹에서 읽기"
     },
@@ -122,6 +128,7 @@
       "title": "십자가에 달리신 구원자 예슈아",
       "description": "예슈아의 십자가와 구원의 의미를 중심으로 성경의 핵심 신앙을 다루는 신앙 전자책입니다.",
       "bibliography": "ISBN 979-11-7069-671-1 · 유페이퍼 · 교보문고·알라딘·YES24 상용 유통",
+      "coverImage": "https://image.yes24.com/goods/119272006/XL",
       "url": "https://yehavha.upaper.kr/content/1161013",
       "actionLabel": "유페이퍼에서 보기",
       "additionalLinks": [
@@ -145,6 +152,7 @@
       "title": "Crucified Savior Yeshua",
       "description": "예슈아의 십자가와 구원의 의미를 다룬 Amazon Kindle 영어 신앙 전자책입니다.",
       "bibliography": "ISBN-13 979-8397471879 · Amazon",
+      "coverImage": "https://images-na.ssl-images-amazon.com/images/P/9798397471879.01.LZZZZZZZ.jpg",
       "url": "https://www.amazon.com/Crucified-Savior-Yeshua-Myounghun-Lee/dp/B0C7F59QR6",
       "actionLabel": "Amazon에서 보기"
     },
@@ -154,6 +162,7 @@
       "title": "Call on the Name of Yeshua",
       "description": "예슈아의 이름을 부르는 신앙 고백과 구원의 의미를 다룬 Amazon Kindle 영어 신앙 전자책입니다.",
       "bibliography": "ISBN-13 979-8397929127 · Amazon",
+      "coverImage": "https://images-na.ssl-images-amazon.com/images/P/9798397929127.01.LZZZZZZZ.jpg",
       "url": "https://www.amazon.com/gp/aw/d/B0C81DZLFF/ref=tmm_pap_swatch_0",
       "actionLabel": "Amazon에서 보기"
     }
