@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-07",
+  "updatedAt": "2026-09-14",
   "policy": {
     "description": "법원·검찰·헌법재판소·변호사단체·법률연구 현장의 공개 전문동향만 선별하며 경조사·가십은 제외한다.",
     "categories": [
@@ -189,31 +189,7 @@
       "active": true,
       "curated": true,
       "autoCollected": false
-    },
-    {
-      "recordKey": "legalpeople:scourt:20260710-registration-conference",
-      "category": "연구·학술",
-      "source": "대한민국 법원",
-      "title": "부진정등기로 인한 피해보상제도 설계 학술대회",
-      "publishedAt": "2026-07-10",
-      "summary": "법원행정처와 서강대 법학연구소가 피해보상 모델과 법령 정비 방안을 논의했으며 법관·변호사·법학교수·법무사 등 실무와 학계 전문가가 참여했습니다.",
-      "sourceUrl": "https://www.scourt.go.kr/portal/news/NewsViewAction.work?gubun=6&searchOption=&searchWord=&seqnum=3017",
-      "tags": [
-        "학술대회",
-        "등기",
-        "법제연구"
-      ],
-      "active": true
     }
   ],
-  "sourceFailures": [
-    {
-      "source": "scourt",
-      "message": "fetch failed"
-    },
-    {
-      "source": "moj",
-      "message": "fetch failed"
-    }
-  ]
+  "sourceFailures": []
 }
