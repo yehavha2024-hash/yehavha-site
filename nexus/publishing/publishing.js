@@ -32,14 +32,36 @@
     });
   }
 
+  function createBookCover(book, article) {
+    if (!book.coverImage) return null;
+    const link = make('a', 'book-cover');
+    link.href = book.url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.setAttribute('aria-label', `${book.title} 판매 페이지 열기`);
+
+    const image = make('img', 'book-cover-image');
+    image.src = book.coverImage;
+    image.alt = `${book.title} 표지`;
+    image.loading = 'lazy';
+    image.decoding = 'async';
+    image.addEventListener('error', () => {
+      link.remove();
+      article.classList.remove('has-cover');
+    }, { once: true });
+    link.append(image);
+    return link;
+  }
+
   function renderBook(book) {
     const article = make('article', 'book-card');
+    const body = make('div', 'book-card-body');
     const platform = make('span', 'book-platform', book.platform || 'eBook');
     const title = make('h3', '', book.title);
     const description = make('p', '', book.description || '');
     const actions = make('div', 'book-actions');
-    article.append(platform, title, description);
-    if (book.bibliography) article.append(make('div', 'book-bibliography', book.bibliography));
+    body.append(platform, title, description);
+    if (book.bibliography) body.append(make('div', 'book-bibliography', book.bibliography));
     if (book.detailEnabled && book.detail) {
       const detailLink = make('a', 'book-link book-link-secondary', '책 소개');
       detailLink.href = `./detail.html?id=${encodeURIComponent(book.id)}`;
@@ -47,7 +69,15 @@
     }
     actions.append(externalBookLink(book));
     appendAdditionalLinks(actions, book);
-    article.append(actions);
+    body.append(actions);
+
+    const cover = createBookCover(book, article);
+    if (cover) {
+      article.classList.add('has-cover');
+      article.append(cover, body);
+    } else {
+      article.append(body);
+    }
     return article;
   }
 
