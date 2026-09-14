@@ -5,16 +5,21 @@ body{background:#ffffff;font-size:16px;line-height:1.78}
 .publication-head{margin-bottom:14px}
 .publication-head h2{margin:0;font-size:1.55rem;line-height:1.35}
 .book-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;align-items:start}
-.book-card{display:grid;grid-template-columns:1fr;min-height:0;padding:18px;border:1px solid #cfd4dc;border-radius:16px;background:#ffffff}
-.book-card.has-cover{grid-template-columns:104px minmax(0,1fr);gap:16px;align-items:start}
-.book-card-body{min-width:0}
-.book-cover{display:block;width:104px;aspect-ratio:2/3;border:1px solid #cfd4dc;border-radius:10px;overflow:hidden;background:#f5f5f5;box-shadow:0 3px 10px rgba(0,0,0,.1)}
+.book-card{display:block;min-height:0;padding:18px;border:1px solid #cfd4dc;border-radius:16px;background:#ffffff}
+.book-card-intro{display:grid;grid-template-columns:104px minmax(0,1fr);gap:16px;align-items:start}
+.book-card-heading{min-width:0}
+.book-cover{display:block;width:104px;aspect-ratio:2/3;border:1px solid #cfd4dc;border-radius:10px;overflow:hidden;background:#f5f5f5;box-shadow:0 3px 10px rgba(0,0,0,.1);text-decoration:none}
 .book-cover-image{display:block;width:100%;height:100%;object-fit:cover}
+.book-cover.is-fallback{background:linear-gradient(155deg,#17202a 0%,#263b50 58%,#245f96 100%);border-color:#263b50;color:#fff}
+.book-cover-fallback{display:flex;width:100%;height:100%;padding:11px 9px;flex-direction:column;justify-content:space-between;gap:8px}
+.book-cover-mark{font-size:9px;font-weight:850;letter-spacing:.14em;opacity:.72}
+.book-cover-fallback-title{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:5;font-size:11px;font-weight:800;line-height:1.35;word-break:keep-all}
 .book-cover:focus-visible{outline:3px solid #111111;outline-offset:3px}
 .book-card:last-child:nth-child(odd){grid-column:1/-1}
 .book-platform{display:inline-flex;align-self:flex-start;padding:5px 8px;border:1px solid #cfd4dc;border-radius:999px;color:#111111;font-size:12.5px;font-weight:800;letter-spacing:.05em}
-.book-card h3{margin:14px 0 8px;font-size:1.25rem;line-height:1.45}
-.book-card p{margin:0;color:#111111;font-size:16px;line-height:1.78}
+.book-card h3{margin:14px 0 0;font-size:1.25rem;line-height:1.45}
+.book-description{margin:14px 0 0!important;color:#111111;font-size:16px;line-height:1.78}
+.book-card p{color:#111111;font-size:16px;line-height:1.78}
 .book-bibliography{margin-top:12px;padding-top:10px;border-top:1px solid #cfd4dc;color:#111111;font-size:13.5px;font-weight:700;line-height:1.65}
 .book-actions,.book-detail-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .book-link{display:inline-flex;align-items:center;justify-content:center;width:fit-content;min-height:42px;padding:0 14px;border:1px solid #cfd4dc;border-radius:10px;background:#ffffff;color:#111111;font-size:14px;font-weight:750;text-decoration:none}
@@ -31,4 +36,4 @@ body{background:#ffffff;font-size:16px;line-height:1.78}
 .book-topic{padding:6px 9px;border:1px solid #cfd4dc;border-radius:999px;background:#ffffff;color:#111111;font-size:13px}
 .empty-state{grid-column:1/-1;padding:18px;border:1px dashed #cfd4dc;border-radius:13px;color:#111111;font-size:15px;text-align:center}
 @media(max-width:760px){body{background-attachment:scroll;font-size:16px}.book-grid{grid-template-columns:1fr}.book-card:last-child:nth-child(odd){grid-column:auto}.book-card p{font-size:16px}.book-detail-lead,.book-detail-copy{font-size:16px}.book-detail-list{font-size:16px}}
-@media(max-width:560px){.publishing-hero{padding-top:18px}.publication-panel,.book-detail-panel{padding:18px}.book-card{min-height:0}.book-card.has-cover{grid-template-columns:84px minmax(0,1fr);gap:13px}.book-cover{width:84px}.book-actions .book-link,.book-detail-actions .book-link{flex:1 1 auto}}
+@media(max-width:560px){.publishing-hero{padding-top:18px}.publication-panel,.book-detail-panel{padding:18px}.book-card{min-height:0}.book-card-intro{grid-template-columns:84px minmax(0,1fr);gap:13px}.book-cover{width:84px}.book-cover-fallback{padding:9px 7px}.book-cover-fallback-title{font-size:10px}.book-actions .book-link,.book-detail-actions .book-link{flex:1 1 auto}}
