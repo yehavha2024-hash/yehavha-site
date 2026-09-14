@@ -32,36 +32,52 @@
     });
   }
 
-  function createBookCover(book, article) {
-    if (!book.coverImage) return null;
+  function setFallbackCover(link, book) {
+    link.classList.add('is-fallback');
+    const visual = make('span', 'book-cover-fallback');
+    visual.append(
+      make('span', 'book-cover-mark', 'EBOOK'),
+      make('span', 'book-cover-fallback-title', book.title)
+    );
+    link.replaceChildren(visual);
+  }
+
+  function createBookCover(book) {
     const link = make('a', 'book-cover');
     link.href = book.url;
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     link.setAttribute('aria-label', `${book.title} 판매 페이지 열기`);
 
+    if (!book.coverImage) {
+      setFallbackCover(link, book);
+      return link;
+    }
+
     const image = make('img', 'book-cover-image');
     image.src = book.coverImage;
     image.alt = `${book.title} 표지`;
     image.loading = 'lazy';
     image.decoding = 'async';
-    image.addEventListener('error', () => {
-      link.remove();
-      article.classList.remove('has-cover');
-    }, { once: true });
+    image.addEventListener('error', () => setFallbackCover(link, book), { once: true });
     link.append(image);
     return link;
   }
 
   function renderBook(book) {
-    const article = make('article', 'book-card');
-    const body = make('div', 'book-card-body');
+    const article = make('article', 'book-card has-cover');
+    const intro = make('div', 'book-card-intro');
+    const heading = make('div', 'book-card-heading');
     const platform = make('span', 'book-platform', book.platform || 'eBook');
     const title = make('h3', '', book.title);
-    const description = make('p', '', book.description || '');
+    const description = make('p', 'book-description', book.description || '');
     const actions = make('div', 'book-actions');
-    body.append(platform, title, description);
-    if (book.bibliography) body.append(make('div', 'book-bibliography', book.bibliography));
+
+    heading.append(platform, title);
+    intro.append(createBookCover(book), heading);
+    article.append(intro, description);
+
+    if (book.bibliography) article.append(make('div', 'book-bibliography', book.bibliography));
     if (book.detailEnabled && book.detail) {
       const detailLink = make('a', 'book-link book-link-secondary', '책 소개');
       detailLink.href = `./detail.html?id=${encodeURIComponent(book.id)}`;
@@ -69,15 +85,7 @@
     }
     actions.append(externalBookLink(book));
     appendAdditionalLinks(actions, book);
-    body.append(actions);
-
-    const cover = createBookCover(book, article);
-    if (cover) {
-      article.classList.add('has-cover');
-      article.append(cover, body);
-    } else {
-      article.append(body);
-    }
+    article.append(actions);
     return article;
   }
 
