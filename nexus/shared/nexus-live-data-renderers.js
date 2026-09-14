@@ -102,7 +102,7 @@
     const ND=await dataSystem();
     const payload=await ND.query('apt-trade',params);
     const rows=Array.isArray(payload.records)?payload.records:[];
-    ND.renderGrid(host,rows.slice(0,limit),{columns:2,emptyText:`${label||''} 실거래 자료가 아직 없거나 공표 전입니다.`,linkLabel:'국토교통부 원천 ↗'});
+    ND.renderGrid(host,rows.slice(0,limit),{columns:4,emptyText:`${label||''} 실거래 자료가 아직 없거나 공표 전입니다.`,linkLabel:'국토교통부 원천 ↗'});
     if(meta)meta.textContent=`서울 강남구 · ${label||''} · 실거래 ${rows.length}건 중 ${Math.min(rows.length,limit)}건 표시 · ${payload.cache?.status||'LIVE'}`;
     return payload;
   }
