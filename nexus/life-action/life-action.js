@@ -6,7 +6,7 @@
     startup: 'startup.json', care: 'care.json', travel: 'travel.json'
   };
   const DAILY_WATCH_LIMIT = 10;
-  const DAILY_WATCH_MAX_AGE_DAYS = 1;
+  const DAILY_WATCH_MAX_AGE_DAYS = 7;
   const kindLabel = { must: '해야 하는 것', risk: '놓치면 손해', execute: '지금 실행' };
   let graph = null;
   let currentEvent = 'move';
