@@ -37,6 +37,55 @@ function parseBingHtml(html,group){const items=[];const blocks=String(html||'').
 function decodeDdgUrl(href){const raw=decodeHtml(href);try{const u=new URL(raw,'https://html.duckduckgo.com');const uddg=u.searchParams.get('uddg');return uddg?decodeURIComponent(uddg):u.href}catch{return raw}}
 function parseDdgHtml(html,group){const items=[];const blocks=String(html||'').match(/<div[^>]+class="[^"]*result[^"]*"[\s\S]*?(?=<div[^>]+class="[^"]*result[^"]*"|$)/gi)||[];for(const block of blocks.slice(0,12)){const a=block.match(/<a[^>]+class="[^"]*result__a[^"]*"[^>]+href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/i)||block.match(/<a[^>]+href="([^"]+)"[^>]+class="[^"]*result__a[^"]*"[^>]*>([\s\S]*?)<\/a>/i);if(!a)continue;const s=block.match(/<(?:a|div)[^>]+class="[^"]*result__snippet[^"]*"[^>]*>([\s\S]*?)<\/(?:a|div)>/i);const url=decodeDdgUrl(a[1]);if(/^https?:\/\//i.test(url))items.push({title:stripTags(a[2]),url,snippet:s?stripTags(s[1]):'',publishedAt:null,provider:'DuckDuckGo',group,sourceName:''})}return items}
 
+function absoluteUrl(href,base){try{return new URL(decodeHtml(href),base).toString()}catch{return ''}}
+function classifyOrgLink(url,title,defaultGroup='기본정보'){
+  const text=`${url} ${title}`.toLowerCase();
+  if(/company-review|review|interview|salary|면접|리뷰|연봉|후기/.test(text)) return '재직·면접';
+  return defaultGroup;
+}
+function parseTargetAnchors(html,base,target,provider,defaultGroup='기본정보',requireTarget=true){
+  const out=[];
+  const anchors=String(html||'').match(/<a\b[^>]*href=["'][^"']+["'][^>]*>[\s\S]*?<\/a>/gi)||[];
+  for(const anchor of anchors){
+    const hm=anchor.match(/href=["']([^"']+)["']/i); if(!hm) continue;
+    const title=stripTags(anchor); const url=absoluteUrl(hm[1],base);
+    if(!url || !/^https?:\/\//i.test(url)) continue;
+    const item={title:title||target,url,snippet:title||'',publishedAt:null,provider,group:classifyOrgLink(url,title,defaultGroup),sourceName:provider};
+    if(requireTarget && !relevantToTarget('organization',target,item)) continue;
+    out.push(item);
+  }
+  return dedupe(out);
+}
+async function collectDirectOrganization(target){
+  const sources=[
+    {provider:'잡코리아',base:'https://www.jobkorea.co.kr/',url:`https://www.jobkorea.co.kr/Search/?stext=${encodeURIComponent(target)}`},
+    {provider:'사람인',base:'https://www.saramin.co.kr/',url:`https://www.saramin.co.kr/zf_user/search?searchword=${encodeURIComponent(target)}`}
+  ];
+  const out=[]; let successes=0, failures=0;
+  for(const source of sources){
+    try{
+      const html=await fetchText(source.url,8000); successes++;
+      const matched=parseTargetAnchors(html,source.base,target,source.provider,'기본정보',true)
+        .filter(item=>sourceHost(item.url).endsWith(new URL(source.base).hostname.replace(/^www\./,'')))
+        .slice(0,8);
+      out.push(...matched);
+      const landingUrls=[...new Set(matched.map(item=>item.url).filter(url=>/company|기업|csn=|co_read|corp|company-info/i.test(url)).slice(0,4))];
+      for(const landingUrl of landingUrls){
+        try{
+          const landing=await fetchText(landingUrl,6500); successes++;
+          const childAnchors=parseTargetAnchors(landing,landingUrl,target,source.provider,'기본정보',false)
+            .filter(item=>sourceHost(item.url).endsWith(new URL(source.base).hostname.replace(/^www\./,'')))
+            .filter(item=>item.group==='재직·면접' || /company-info|company-review|salary|interview|review|기업정보|연봉|면접|리뷰/i.test(`${item.url} ${item.title}`))
+            .map(item=>({...item,title: relevantToTarget('organization',target,item) ? item.title : `${target} ${item.title}`}))
+            .slice(0,10);
+          out.push(...childAnchors);
+        }catch{failures++;}
+      }
+    }catch{failures++;}
+  }
+  return {items:dedupe(out),successes,failures};
+}
+
 function searchPlan(type,target){const q=`"${target}"`;if(type==='organization')return [
   {group:'기본정보',queries:[q,`${q} 기업정보 회사소개`,`${q} 공식 홈페이지`]},
   {group:'기본정보',queries:[`site:jobkorea.co.kr ${q}`,`site:saramin.co.kr ${q}`]},
@@ -54,7 +103,7 @@ async function runQuery(query,group,news=false){const jobs=[
   fetchText(bingHtmlUrl(query)).then(x=>parseBingHtml(x,group)),
   fetchText(ddgHtmlUrl(query)).then(x=>parseDdgHtml(x,group))
 ];if(news)jobs.push(fetchText(googleNewsUrl(query)).then(x=>parseRss(x,'Google News',group)));const settled=await Promise.allSettled(jobs);return {items:settled.flatMap(r=>r.status==='fulfilled'?r.value:[]),successes:settled.filter(r=>r.status==='fulfilled').length,failures:settled.filter(r=>r.status==='rejected').length}}
-async function collect(type,target){const plan=searchPlan(type,target);const jobs=[];for(const bucket of plan)for(const query of bucket.queries)jobs.push(runQuery(query,bucket.group,bucket.news));const results=await Promise.all(jobs);const raw=dedupe(results.flatMap(r=>r.items));const relevant=raw.filter(item=>relevantToTarget(type,target,item));return {items:diversify(relevant,4,32),rawCount:raw.length,irrelevantCount:raw.length-relevant.length,providerSuccesses:results.reduce((n,r)=>n+r.successes,0),providerFailures:results.reduce((n,r)=>n+r.failures,0)}}
+async function collect(type,target){const plan=searchPlan(type,target);const jobs=[];for(const bucket of plan)for(const query of bucket.queries)jobs.push(runQuery(query,bucket.group,bucket.news));const results=await Promise.all(jobs);const direct=type==='organization'?await collectDirectOrganization(target):{items:[],successes:0,failures:0};const raw=dedupe([...results.flatMap(r=>r.items),...direct.items]);const relevant=raw.filter(item=>relevantToTarget(type,target,item));return {items:diversify(relevant,4,32),rawCount:raw.length,irrelevantCount:raw.length-relevant.length,providerSuccesses:results.reduce((n,r)=>n+r.successes,0)+direct.successes,providerFailures:results.reduce((n,r)=>n+r.failures,0)+direct.failures}}
 
 function scoreSentiment(text){const t=String(text||'').toLowerCase();let pos=0,neg=0;for(const k of POSITIVE)if(t.includes(k.toLowerCase()))pos++;for(const k of NEGATIVE)if(t.includes(k.toLowerCase()))neg++;return pos>neg?'positive':neg>pos?'negative':'neutral'}
 function highRisk(text){const t=String(text||'').toLowerCase();return HIGH_RISK.some(k=>t.includes(k.toLowerCase()))}
@@ -67,5 +116,5 @@ function buildProfile(type,target,evidence,reputationEvidence,signals,collection
 function reportSummary(target,signals,profile){const strong=signals.filter(isStrongSignal).slice(0,3);if(!strong.length)return `${profile.overview} ${profile.reputationMessage}`;const parts=strong.map(s=>s.state==='conflicted'?`${s.topic}에서 긍정·부정 평가가 함께 나타납니다`:s.state==='negative'?`${s.topic} 관련 부정적 신호가 복수 독립 출처에서 반복됩니다`:s.state==='positive'?`${s.topic} 관련 긍정적 신호가 복수 독립 출처에서 반복됩니다`:`${s.topic} 관련 언급이 복수 출처에서 반복됩니다`);return `${target}과 직접 연결되는 공개자료만 남겨 교차 확인했습니다. ${parts.join('. ')}. 아래 원문을 함께 확인하십시오.`}
 function searchLinks(type,target){const q=encodeURIComponent(target);const links=[{label:'Google 웹검색',url:`https://www.google.com/search?q=${q}`},{label:'네이버 통합검색',url:`https://search.naver.com/search.naver?query=${q}`},{label:'다음 검색',url:`https://search.daum.net/search?q=${q}`}];if(type==='organization')links.push({label:'잡코리아 관련검색',url:`https://www.google.com/search?q=site%3Ajobkorea.co.kr+${q}`},{label:'잡플래닛 관련검색',url:`https://www.google.com/search?q=site%3Ajobplanet.co.kr+${q}`},{label:'사람인 관련검색',url:`https://www.google.com/search?q=site%3Asaramin.co.kr+${q}`});return links}
 
-export async function onRequestPost({request}){let body;try{body=await request.json()}catch{return json({ok:false,error:'invalid_json'},400)}const type=clean(body?.type,24),target=clean(body?.target,120);if(!TARGET_TYPES[type])return json({ok:false,error:'invalid_type'},400);if(target.length<2)return json({ok:false,error:'target_too_short'},400);const collection=await collect(type,target);const evidence=annotateEvidence(type,collection.items);const safe=evidence.filter(e=>!e.highRisk);const held=evidence.filter(e=>e.highRisk).map(e=>({id:e.id,reason:'고위험 주장 키워드가 포함되어 자동 요약에서 제외',url:e.url,title:e.title}));const reputationEvidence=safe.filter(e=>!NON_REPUTATION_GROUPS.has(e.group));const signals=buildSignals(type,reputationEvidence);const profile=buildProfile(type,target,safe,reputationEvidence,signals,collection);return json({ok:true,schema:'nexus-reputation-analysis-v4',target:{type,typeLabel:TARGET_TYPES[type].label,name:target},generatedAt:new Date().toISOString(),methodology:{mode:'public-source-osint',stages:['다중 검색원 탐색','대상 직접일치 확인','기본정보 확인','평판자료 분리','중복 제거','출처 다양화','주제 분류','상반 평가 탐지','고위험 주장 분리','근거 연결'],note:'Bing RSS 한 종류에 의존하지 않고 Bing 웹 결과, DuckDuckGo HTML 결과, 필요한 경우 Google News RSS를 함께 탐색합니다. 회사·기관은 잡코리아·사람인·잡플래닛 등 주요 기업정보·평판 도메인을 별도 검색한 뒤 대상명이 직접 확인되는 결과만 남깁니다. 유료·로그인 제한 원문의 비공개 내용은 수집하지 않습니다.'},profile,executiveSummary:reportSummary(target,signals,profile),metrics:{sources:safe.length,profileSources:profile.sourceCount,reputationSources:reputationEvidence.length,independentHosts:new Set(safe.map(e=>e.host).filter(Boolean)).size,filteredIrrelevant:collection.irrelevantCount,rawCandidates:collection.rawCount,providerSuccesses:collection.providerSuccesses,providerFailures:collection.providerFailures,heldHighRisk:held.length,signals:signals.length},signals,evidence:safe,heldEvidence:held,searchLinks:searchLinks(type,target),disclaimer:'검색 공급원에서 후보가 없거나 직접 일치 결과가 없다는 사실을 대상에 관한 공개자료 부재로 단정하지 않습니다. 자동화된 1차 조사이므로 중요한 결정에는 원문과 공식자료를 직접 확인하십시오.'})}
-export async function onRequestGet(){return json({ok:true,service:'NEXUS 평판 분석',version:'4.0',providers:['Bing RSS','Bing Web','DuckDuckGo','Google News'],types:Object.entries(TARGET_TYPES).map(([id,v])=>({id,label:v.label}))})}
+export async function onRequestPost({request}){let body;try{body=await request.json()}catch{return json({ok:false,error:'invalid_json'},400)}const type=clean(body?.type,24),target=clean(body?.target,120);if(!TARGET_TYPES[type])return json({ok:false,error:'invalid_type'},400);if(target.length<2)return json({ok:false,error:'target_too_short'},400);const collection=await collect(type,target);const evidence=annotateEvidence(type,collection.items);const safe=evidence.filter(e=>!e.highRisk);const held=evidence.filter(e=>e.highRisk).map(e=>({id:e.id,reason:'고위험 주장 키워드가 포함되어 자동 요약에서 제외',url:e.url,title:e.title}));const reputationEvidence=safe.filter(e=>!NON_REPUTATION_GROUPS.has(e.group));const signals=buildSignals(type,reputationEvidence);const profile=buildProfile(type,target,safe,reputationEvidence,signals,collection);return json({ok:true,schema:'nexus-reputation-analysis-v4',target:{type,typeLabel:TARGET_TYPES[type].label,name:target},generatedAt:new Date().toISOString(),methodology:{mode:'public-source-osint',stages:['다중 검색원 탐색','대상 직접일치 확인','기본정보 확인','평판자료 분리','중복 제거','출처 다양화','주제 분류','상반 평가 탐지','고위험 주장 분리','근거 연결'],note:'Bing RSS 한 종류에 의존하지 않고 Bing 웹 결과, DuckDuckGo HTML 결과, 필요한 경우 Google News RSS를 함께 탐색합니다. 회사·기관은 잡코리아·사람인 자체 검색을 직접 확인하고, 잡플래닛 등 주요 평판 도메인은 검색엔진 결과를 병행한 뒤 대상명이 직접 확인되는 결과만 남깁니다. 유료·로그인 제한 원문의 비공개 내용은 수집하지 않습니다.'},profile,executiveSummary:reportSummary(target,signals,profile),metrics:{sources:safe.length,profileSources:profile.sourceCount,reputationSources:reputationEvidence.length,independentHosts:new Set(safe.map(e=>e.host).filter(Boolean)).size,filteredIrrelevant:collection.irrelevantCount,rawCandidates:collection.rawCount,providerSuccesses:collection.providerSuccesses,providerFailures:collection.providerFailures,heldHighRisk:held.length,signals:signals.length},signals,evidence:safe,heldEvidence:held,searchLinks:searchLinks(type,target),disclaimer:'검색 공급원에서 후보가 없거나 직접 일치 결과가 없다는 사실을 대상에 관한 공개자료 부재로 단정하지 않습니다. 자동화된 1차 조사이므로 중요한 결정에는 원문과 공식자료를 직접 확인하십시오.'})}
+export async function onRequestGet(){return json({ok:true,service:'NEXUS 평판 분석',version:'4.1',providers:['Bing RSS','Bing Web','DuckDuckGo','Google News','JobKorea direct','Saramin direct'],types:Object.entries(TARGET_TYPES).map(([id,v])=>({id,label:v.label}))})}
