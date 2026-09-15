@@ -66,6 +66,33 @@ async function check(project) {
   }
 }
 
+async function checkNewsRuntime() {
+  for (const pathname of ['/news/', '/news/about.html']) {
+    await check({ id: `yehavha-news${pathname === '/news/' ? '' : '-media-info'}`, url: `${NEXUS_ORIGIN}${pathname}` });
+  }
+  for (const pathname of ['/news/style.css', '/news/app.js', '/news/news-data.js']) {
+    const url = `${NEXUS_ORIGIN}${pathname}`;
+    try {
+      const response = await request(url);
+      const cache = response.headers.get('cache-control') || '';
+      if (!response.ok) {
+        errors += 1;
+        console.error(`ERROR ${pathname}: HTTP ${response.status}`);
+        continue;
+      }
+      if (!/no-cache/i.test(cache) || !/no-store/i.test(cache)) {
+        errors += 1;
+        console.error(`ERROR ${pathname}: news cache policy not deployed (${cache || '-'})`);
+        continue;
+      }
+      console.log(`OK ${pathname}: HTTP ${response.status}, cache=${cache}`);
+    } catch (error) {
+      errors += 1;
+      console.error(`ERROR ${pathname}: ${error.message}`);
+    }
+  }
+}
+
 async function checkJson(pathname, validator) {
   const url = `${NEXUS_ORIGIN}${pathname}`;
   try {
@@ -143,6 +170,7 @@ async function checkRetiredPaths() {
 }
 
 await check({ id: 'nexus-home', url: `${NEXUS_ORIGIN}/` });
+await checkNewsRuntime();
 for (const project of projects) await check(project);
 await check({ id: 'legal-mind-training', url: 'https://yehavha-legal-knowledge.danielie.workers.dev/legal-mind/' });
 await checkJson('/projects.json', data => Array.isArray(data?.projects) && data.projects.length > 0);
