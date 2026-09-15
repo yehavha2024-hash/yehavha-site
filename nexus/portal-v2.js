@@ -438,6 +438,91 @@
     }
   }
 
+  function compactText(value, maxLength = 170) {
+    const text = String(value || '').replace(/\s+/g, ' ').trim();
+    if (text.length <= maxLength) return text;
+    const clipped = text.slice(0, maxLength).replace(/\s+\S*$/, '').trim();
+    return `${clipped || text.slice(0, maxLength).trim()}…`;
+  }
+
+  function setText(id, value) {
+    const node = document.getElementById(id);
+    if (node && value) node.textContent = value;
+  }
+
+  function homeNewsHref(href) {
+    if (typeof href !== 'string') return './news/';
+    if (href.startsWith('./articles/')) return `./news/${href.slice(2)}`;
+    return href;
+  }
+
+  function renderHomeNews() {
+    const grid = document.getElementById('homeNewsGrid');
+    if (!grid) return;
+    grid.querySelectorAll('[data-home-news="article"]').forEach(node => node.remove());
+    const raw = Array.isArray(window.YEHAVHA_NEWS_DATA) ? window.YEHAVHA_NEWS_DATA : [];
+    const data = raw
+      .map((item, index) => ({...item, _sequence:index}))
+      .filter(item => item && typeof item.date === 'string' && typeof item.title === 'string' && typeof item.href === 'string')
+      .sort((a, b) => b.date.localeCompare(a.date) || a._sequence - b._sequence);
+    if (!data.length) return;
+    const latestDate = data[0].date;
+    const configuredLimit = Number(window.YEHAVHA_NEWS_CONFIG?.homeLatestLimit);
+    const limit = Number.isFinite(configuredLimit) && configuredLimit > 0 ? configuredLimit : 10;
+    setText('homeNewsDate', formatDate(latestDate));
+    data.filter(item => item.date === latestDate).slice(0, limit).forEach(item => {
+      const link = make('a', 'today-card');
+      link.href = homeNewsHref(item.href);
+      link.dataset.homeNews = 'article';
+      const titleLine = make('div', 'today-titleline');
+      titleLine.append(make('strong', '', item.title), make('span', 'today-meta', item.category || '뉴스'));
+      const bodyLine = make('div', 'today-bodyline');
+      bodyLine.append(make('p', '', compactText(item.summary, 155)), make('span', 'today-action', '기사 보기 →'));
+      link.append(titleLine, bodyLine);
+      grid.append(link);
+    });
+  }
+
+  function firstSocialItem(payload) {
+    const sections = Array.isArray(payload?.sections) ? payload.sections : [];
+    for (const section of sections) {
+      const items = Array.isArray(section?.items) ? section.items : [];
+      if (items.length) return items[0];
+    }
+    return null;
+  }
+
+  async function loadHomeEditorialFeeds() {
+    const [strategyResult, socialResult] = await Promise.allSettled([
+      fetchJson('./intelligence-briefing/latest.json'),
+      fetchJson('./korea-social-intelligence/latest.json')
+    ]);
+
+    if (strategyResult.status === 'fulfilled') {
+      const item = Array.isArray(strategyResult.value?.items) ? strategyResult.value.items[0] : null;
+      if (item?.headline) {
+        setText('homeStrategyTitle', item.headline);
+        setText('homeBriefStrategyHeadline', item.headline);
+      }
+      const summary = item?.signal || item?.fact || item?.assessment;
+      if (summary) setText('homeStrategySummary', compactText(summary));
+    } else {
+      console.warn('Nexus strategy briefing feed unavailable:', strategyResult.reason);
+    }
+
+    if (socialResult.status === 'fulfilled') {
+      const item = firstSocialItem(socialResult.value);
+      if (item?.headline) {
+        setText('homeSocialTitle', item.headline);
+        setText('homeBriefSocialHeadline', item.headline);
+      }
+      const summary = item?.fact || item?.why || item?.assessment;
+      if (summary) setText('homeSocialSummary', compactText(summary));
+    } else {
+      console.warn('Nexus social briefing feed unavailable:', socialResult.reason);
+    }
+  }
+
   document.addEventListener('click', async event => {
     const button = event.target.closest('.copy-btn');
     if (button) {
@@ -470,6 +555,8 @@
 
   updateTodayDate();
   installKoreaClock();
+  renderHomeNews();
+  void loadHomeEditorialFeeds();
   window.setTimeout(() => { void requestAccessCount(); }, 700);
   loadPortal();
 })();
