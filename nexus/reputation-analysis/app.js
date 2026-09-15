@@ -37,9 +37,15 @@
       ['확인 자료', `${data.metrics.sources}건`], ['독립 출처', `${data.metrics.independentHosts}곳`], ['분석 신호', `${data.metrics.signals}개`], ['자동 제외', `${data.metrics.heldHighRisk}건`]
     ].map(([a,b]) => `<div class="metric"><span>${a}</span><strong>${b}</strong></div>`).join('');
 
+    const evidenceById = new Map((data.evidence || []).map(item => [item.id, item]));
+    const countHosts = ids => new Set((ids || []).map(id => evidenceById.get(id)?.host).filter(Boolean)).size;
+
     document.getElementById('signalGrid').innerHTML = data.signals.length ? data.signals.map(s => {
       const refs = [...s.positive,...s.negative,...s.neutral].join(' · ');
-      const detail = `긍정 ${s.positive.length} · 부정 ${s.negative.length} · 중립 ${s.neutral.length} · 독립 출처 ${s.independentSources}`;
+      const positiveHosts = s.positiveIndependentSources ?? countHosts(s.positive);
+      const negativeHosts = s.negativeIndependentSources ?? countHosts(s.negative);
+      const neutralHosts = s.neutralIndependentSources ?? countHosts(s.neutral);
+      const detail = `긍정 ${s.positive.length}건/${positiveHosts}출처 · 부정 ${s.negative.length}건/${negativeHosts}출처 · 중립 ${s.neutral.length}건/${neutralHosts}출처 · 전체 독립 출처 ${s.independentSources}곳`;
       return `<article class="signal"><div class="signal-top"><h4>${esc(s.topic)}</h4><span class="signal-state ${esc(s.state)}">${stateLabel(s.state)}</span></div><p>${detail}<br><span class="refs">근거 ${esc(refs || '—')}</span></p></article>`;
     }).join('') : '<article class="signal"><h4>반복 신호 부족</h4><p>현재 자동 확인 범위에서는 복수 독립 출처에서 반복되는 주제가 충분하지 않습니다.</p></article>';
 
