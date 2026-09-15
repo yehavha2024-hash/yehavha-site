@@ -90,6 +90,31 @@ async function checkNoCache(pathname) {
   }
 }
 
+async function checkAsset(pathname) {
+  const url = `${NEXUS_ORIGIN}${pathname}`;
+  try {
+    const response = await request(url);
+    if (!response.ok) {
+      errors += 1;
+      console.error(`ERROR ${pathname}: HTTP ${response.status}`);
+      return null;
+    }
+    const body = await response.text();
+    if (body.trim().length < 50) {
+      errors += 1;
+      console.error(`ERROR ${pathname}: 응답 본문이 비정상적으로 짧음 (${body.length} bytes)`);
+      return null;
+    }
+    const cache = response.headers.get('cache-control') || '-';
+    console.log(`OK ${pathname}: HTTP ${response.status}, cache=${cache}`);
+    return response;
+  } catch (error) {
+    errors += 1;
+    console.error(`ERROR ${pathname}: ${error.message}`);
+    return null;
+  }
+}
+
 async function checkHomeRuntime() {
   const url = `${NEXUS_ORIGIN}/`;
   try {
@@ -150,7 +175,7 @@ async function checkReputationRuntime() {
     console.error(`ERROR reputation-analysis: ${error.message}`);
   }
 
-  for (const asset of ['/reputation-analysis/style.css', '/reputation-analysis/app.js']) await checkNoCache(asset);
+  for (const asset of ['/reputation-analysis/style.css', '/reputation-analysis/app.js']) await checkAsset(asset);
 
   const apiPath = '/api/reputation-analysis';
   try {
