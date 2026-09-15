@@ -28,6 +28,8 @@ jobs:
       - run: node scripts/audit-nexus-light-theme.mjs
       - name: Validate Nexus portal ownership
         run: node nexus/scripts/audit-portal-enhancements.mjs
+      - name: Validate YEHAVHA NEWS architecture
+        run: node nexus/scripts/audit-news-architecture.mjs
       - name: Validate legal philosophy citation coverage
         run: |
           node --input-type=module <<'NODE'
