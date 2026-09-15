@@ -8,33 +8,70 @@ const TARGET_TYPES = Object.freeze({
 
 const SOURCE_QUERIES = Object.freeze({
   person: [
-    { group: '기본정보', q: '"{target}" (프로필 OR 소개 OR 경력 OR 소속 OR 공식)' },
-    { group: '공식·언론', q: '"{target}" (공식 OR 인터뷰 OR 경력 OR 보도)' },
-    { group: '공개평가', q: '"{target}" (평가 OR 평판 OR 후기)' }
+    { group: '기본정보', q: '"{target}" (프로필 OR 소개 OR 경력 OR 소속 OR 공식)', rank: 4 },
+    { group: '공식·언론', q: '"{target}" (공식 OR 인터뷰 OR 경력 OR 보도)', rank: 3 },
+    { group: '공개평가', q: '"{target}" (평가 OR 평판 OR 후기)', rank: 3 }
   ],
   organization: [
-    { group: '기본정보', q: '"{target}" (회사소개 OR 기업소개 OR 기관소개 OR 사업 OR 서비스 OR 공식 홈페이지)' },
-    { group: '재직·면접', q: '"{target}" (재직 OR 면접 OR 조직문화 OR 복지 OR 퇴사) 후기' },
-    { group: '공개평가', q: '"{target}" (평판 OR 후기 OR 리뷰 OR 거래)' },
-    { group: '공식·언론', q: '"{target}" (공시 OR 보도자료 OR 행정처분 OR 판결 OR 뉴스)' }
+    { group: '기본정보', q: '"{target}" (회사소개 OR 기업소개 OR 기관소개 OR 사업 OR 서비스 OR 공식 홈페이지)', rank: 4 },
+    { group: '재직·면접', q: '"{target}" (재직 OR 면접 OR 조직문화 OR 복지 OR 퇴사) 후기', rank: 4 },
+    { group: '공개평가', q: '"{target}" (평판 OR 후기 OR 리뷰 OR 거래)', rank: 4 },
+    { group: '공식·언론', q: '"{target}" (공시 OR 보도자료 OR 행정처분 OR 판결 OR 뉴스)', rank: 3 }
   ],
   product: [
-    { group: '기본정보', q: '"{target}" (제품소개 OR 상품소개 OR 제조사 OR 사양 OR 공식)' },
-    { group: '구매·사용', q: '"{target}" (구매후기 OR 사용기 OR 리뷰 OR 단점 OR 장점)' },
-    { group: '문제·지원', q: '"{target}" (불량 OR 환불 OR AS OR 고객지원)' },
-    { group: '공식·언론', q: '"{target}" (공식 OR 출시 OR 리콜 OR 뉴스)' }
+    { group: '기본정보', q: '"{target}" (제품소개 OR 상품소개 OR 제조사 OR 사양 OR 공식)', rank: 4 },
+    { group: '구매·사용', q: '"{target}" (구매후기 OR 사용기 OR 리뷰 OR 단점 OR 장점)', rank: 4 },
+    { group: '문제·지원', q: '"{target}" (불량 OR 환불 OR AS OR 고객지원)', rank: 4 },
+    { group: '공식·언론', q: '"{target}" (공식 OR 출시 OR 리콜 OR 뉴스)', rank: 3 }
   ],
   service: [
-    { group: '기본정보', q: '"{target}" (서비스소개 OR 운영사 OR 이용방법 OR 공식 홈페이지)' },
-    { group: '이용경험', q: '"{target}" (이용후기 OR 리뷰 OR 사용후기)' },
-    { group: '문제·지원', q: '"{target}" (환불 OR 해지 OR 고객센터 OR 불만)' },
-    { group: '공식·언론', q: '"{target}" (공식 OR 공지 OR 뉴스)' }
+    { group: '기본정보', q: '"{target}" (서비스소개 OR 운영사 OR 이용방법 OR 공식 홈페이지)', rank: 4 },
+    { group: '이용경험', q: '"{target}" (이용후기 OR 리뷰 OR 사용후기)', rank: 4 },
+    { group: '문제·지원', q: '"{target}" (환불 OR 해지 OR 고객센터 OR 불만)', rank: 4 },
+    { group: '공식·언론', q: '"{target}" (공식 OR 공지 OR 뉴스)', rank: 3 }
   ],
   place: [
-    { group: '기본정보', q: '"{target}" (장소소개 OR 시설소개 OR 주소 OR 운영시간 OR 공식)' },
-    { group: '방문경험', q: '"{target}" (방문후기 OR 리뷰 OR 카카오맵 OR 네이버지도)' },
-    { group: '이용평가', q: '"{target}" (친절 OR 가격 OR 대기 OR 청결 OR 재방문)' },
-    { group: '공식·언론', q: '"{target}" (공식 OR 공지 OR 뉴스)' }
+    { group: '기본정보', q: '"{target}" (장소소개 OR 시설소개 OR 주소 OR 운영시간 OR 공식)', rank: 4 },
+    { group: '방문경험', q: '"{target}" (방문후기 OR 리뷰 OR 카카오맵 OR 네이버지도)', rank: 4 },
+    { group: '이용평가', q: '"{target}" (친절 OR 가격 OR 대기 OR 청결 OR 재방문)', rank: 4 },
+    { group: '공식·언론', q: '"{target}" (공식 OR 공지 OR 뉴스)', rank: 3 }
+  ]
+});
+
+const FALLBACK_QUERIES = Object.freeze({
+  person: [
+    { group: '기본정보', q: '"{target}"', rank: 7 },
+    { group: '기본정보', q: '{target} 프로필 경력', rank: 6 },
+    { group: '공개평가', q: '"{target}" 평가 후기', rank: 5 },
+    { group: '공식·언론', q: '"{target}" 뉴스 인터뷰', rank: 4 }
+  ],
+  organization: [
+    { group: '기본정보', q: '"{target}"', rank: 7 },
+    { group: '기본정보', q: '"{target}" 회사 기업정보', rank: 8 },
+    { group: '기본정보', q: '"{target}" 홈페이지 대표 사업', rank: 7 },
+    { group: '재직·면접', q: '"{target}" 잡플래닛', rank: 9 },
+    { group: '재직·면접', q: '"{target}" 잡코리아', rank: 8 },
+    { group: '재직·면접', q: '"{target}" 사람인', rank: 7 },
+    { group: '공개평가', q: '"{target}" 후기 리뷰 평판', rank: 7 },
+    { group: '공식·언론', q: '"{target}" 뉴스', rank: 5 }
+  ],
+  product: [
+    { group: '기본정보', q: '"{target}"', rank: 7 },
+    { group: '기본정보', q: '"{target}" 제조사 공식', rank: 7 },
+    { group: '구매·사용', q: '"{target}" 리뷰 후기', rank: 7 },
+    { group: '문제·지원', q: '"{target}" 환불 AS 불량', rank: 6 }
+  ],
+  service: [
+    { group: '기본정보', q: '"{target}"', rank: 7 },
+    { group: '기본정보', q: '"{target}" 운영사 공식', rank: 7 },
+    { group: '이용경험', q: '"{target}" 이용후기 리뷰', rank: 7 },
+    { group: '문제·지원', q: '"{target}" 환불 해지 고객센터', rank: 6 }
+  ],
+  place: [
+    { group: '기본정보', q: '"{target}"', rank: 7 },
+    { group: '기본정보', q: '"{target}" 주소 운영시간', rank: 7 },
+    { group: '방문경험', q: '"{target}" 방문후기 리뷰', rank: 7 },
+    { group: '이용평가', q: '"{target}" 친절 가격 청결', rank: 6 }
   ]
 });
 
@@ -91,6 +128,7 @@ function json(body, status = 200) {
     }
   });
 }
+
 function clean(value, max = 120) { return String(value || '').replace(/\s+/g,' ').trim().slice(0,max); }
 function stripTags(value) { return String(value || '').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim(); }
 function decodeXml(value) { return String(value || '').replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g,'$1').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;|&apos;/g,"'"); }
@@ -98,7 +136,7 @@ function tag(block, name) {
   const m = block.match(new RegExp(`<${name}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${name}>`,'i'));
   return m ? stripTags(decodeXml(m[1])) : '';
 }
-function parseRss(xml, provider, group) {
+function parseRss(xml, provider, spec) {
   const items = [];
   const blocks = String(xml || '').match(/<item\b[\s\S]*?<\/item>/gi) || [];
   for (const block of blocks.slice(0,12)) {
@@ -107,7 +145,16 @@ function parseRss(xml, provider, group) {
     const description = tag(block,'description');
     const pubDate = tag(block,'pubDate');
     const sourceName = tag(block,'source');
-    if (title && link) items.push({title,url:link,snippet:description,publishedAt:pubDate||null,provider,group,sourceName});
+    if (title && link) items.push({
+      title,
+      url:link,
+      snippet:description,
+      publishedAt:pubDate||null,
+      provider,
+      group:spec.group,
+      queryRank:Number(spec.rank || 0),
+      sourceName
+    });
   }
   return items;
 }
@@ -118,7 +165,7 @@ async function fetchText(url, timeoutMs = 5500) {
     const r = await fetch(url, {
       headers: {
         accept:'application/rss+xml, application/xml, text/xml;q=0.9, text/html;q=0.6',
-        'user-agent':'YEHAVHA-NEXUS-Reputation/1.1 (+https://yehavha.com/)'
+        'user-agent':'YEHAVHA-NEXUS-Reputation/1.2 (+https://yehavha.com/)'
       },
       signal:c.signal
     });
@@ -183,9 +230,12 @@ function relevantToTarget(type, target, item) {
 function sourceHost(url) {
   try { return new URL(url).hostname.replace(/^www\./,''); } catch { return ''; }
 }
+function sortByRelevance(items) {
+  return [...items].sort((a,b) => (b.queryRank || 0) - (a.queryRank || 0));
+}
 function diversify(items, perGroupHost = 3, max = 24) {
   const counts = new Map(), out = [];
-  for (const item of items) {
+  for (const item of sortByRelevance(items)) {
     const host = item.sourceName || sourceHost(item.url) || item.provider || 'unknown';
     const key = `${item.group}|${host}`;
     const count = counts.get(key) || 0;
@@ -267,12 +317,10 @@ function buildOverview(type, target, profileEvidence) {
     || profileEvidence.find(e => e.snippet)
     || profileEvidence[0];
   const snippet = clean(source.snippet, 360);
-  if (snippet && (!hasHangul(target) || hasHangul(snippet)) && relevantToTarget(type, target, source)) {
-    return snippet;
-  }
+  if (snippet && (!hasHangul(target) || hasHangul(snippet)) && relevantToTarget(type, target, source)) return snippet;
   return `${target}에 관한 기본·공식 공개자료 ${profileEvidence.length}건이 확인되었습니다. 대표 확인 자료는 “${clean(source.title,120)}”입니다.`;
 }
-function buildProfile(type, target, evidence, reputationEvidence, signals) {
+function buildProfile(type, target, evidence, reputationEvidence, signals, collection) {
   const profileEvidence = evidence.filter(e => NON_REPUTATION_GROUPS.has(e.group));
   const overview = buildOverview(type, target, profileEvidence);
   const strongSignals = signals.filter(isStrongSignal);
@@ -307,13 +355,31 @@ function buildProfile(type, target, evidence, reputationEvidence, signals) {
       reputationMessage
     };
   }
+
+  if (collection.successfulRequests === 0) {
+    return {
+      status:'search-unavailable',
+      overview:`${target}의 공개자료가 없다고 판단할 수 없습니다. 현재 자동 검색 공급원 연결이 정상적으로 완료되지 않아 결과를 수집하지 못했습니다.`,
+      sourceIds:[], sourceCount:0,
+      reputationStatus:'none',
+      reputationMessage:'검색 연결 실패 상태이므로 평판 자료의 존재 여부도 판단하지 않습니다.'
+    };
+  }
+  if (collection.rawCount > 0) {
+    return {
+      status:'unidentified',
+      overview:`검색 후보 ${collection.rawCount}건은 확인됐지만 ${target}과 직접 연결되는 자료로 검증되지 않아 보고서에서 제외했습니다. 대상명만으로 동명이 대상이 섞일 수 있으므로 회사명 전체, 지역, 홈페이지 등 식별정보를 함께 입력하면 정확도가 높아집니다.`,
+      sourceIds:[], sourceCount:0,
+      reputationStatus:'none',
+      reputationMessage:'직접 일치가 검증된 평판 자료가 없어 평판을 판단하지 않습니다.'
+    };
+  }
   return {
     status:'unidentified',
-    overview:`현재 자동 확인 범위에서는 ${target}과 직접 연결되는 기본정보나 공개 평판 자료를 확인하지 못했습니다. 신규·소규모 대상이거나 검색 노출이 적을 수 있습니다.`,
-    sourceIds:[],
-    sourceCount:0,
+    overview:`자동 검색 공급원은 정상 응답했지만 ${target}에 관한 검색 결과가 반환되지 않았습니다. 다른 표기, 회사명 전체, 지역, 홈페이지 등을 포함해 다시 확인할 수 있습니다.`,
+    sourceIds:[], sourceCount:0,
     reputationStatus:'none',
-    reputationMessage:`확인 가능한 평판 자료가 없습니다. 자료 부재는 신뢰성이나 품질에 대한 긍정·부정 판단 근거가 아닙니다.`
+    reputationMessage:'확인 가능한 평판 자료가 없습니다. 자료 부재는 신뢰성이나 품질에 대한 긍정·부정 판단 근거가 아닙니다.'
   };
 }
 function reportSummary(target, signals, profile) {
@@ -335,7 +401,8 @@ function searchLinks(type,target) {
     {label:'다음 검색',url:`https://search.daum.net/search?q=${q}`}
   ];
   if (type === 'organization') links.push(
-    {label:'잡코리아 관련검색',url:`https://www.google.com/search?q=site%3Ajobkorea.co.kr+${q}+후기`},
+    {label:'잡코리아 관련검색',url:`https://www.google.com/search?q=site%3Ajobkorea.co.kr+${q}`},
+    {label:'사람인 관련검색',url:`https://www.google.com/search?q=site%3Asaramin.co.kr+${q}`},
     {label:'잡플래닛 관련검색',url:`https://www.google.com/search?q=site%3Ajobplanet.co.kr+${q}`}
   );
   if (type === 'place') links.push(
@@ -345,31 +412,67 @@ function searchLinks(type,target) {
   if (type === 'product') links.push({label:'쿠팡 관련검색',url:`https://www.google.com/search?q=site%3Acoupang.com+${q}+상품평`});
   return links;
 }
-async function collect(type,target) {
-  const tasks = [];
-  for (const item of SOURCE_QUERIES[type] || []) {
-    const query = item.q.replaceAll('{target}',target);
-    tasks.push(fetchText(bingRssUrl(query)).then(x => parseRss(x,'Bing Web RSS',item.group)).catch(() => []));
-    if (item.group === '공식·언론') {
-      tasks.push(fetchText(googleNewsUrl(query)).then(x => parseRss(x,'Google News RSS',item.group)).catch(() => []));
-    }
+
+async function runQuery(spec, target, provider) {
+  const query = spec.q.replaceAll('{target}',target);
+  const url = provider === 'google-news' ? googleNewsUrl(query) : bingRssUrl(query);
+  try {
+    const xml = await fetchText(url);
+    return { ok:true, items:parseRss(xml,provider === 'google-news' ? 'Google News RSS' : 'Bing Web RSS',spec) };
+  } catch {
+    return { ok:false, items:[] };
   }
-  const raw = dedupe((await Promise.all(tasks)).flat());
-  const relevant = raw.filter(item => relevantToTarget(type,target,item));
+}
+async function collectBatch(specs, target) {
+  const tasks = [];
+  for (const spec of specs || []) {
+    tasks.push(runQuery(spec,target,'bing'));
+    if (spec.group === '공식·언론') tasks.push(runQuery(spec,target,'google-news'));
+  }
+  const results = await Promise.all(tasks);
+  return {
+    items:results.flatMap(r => r.items),
+    requests:results.length,
+    successful:results.filter(r => r.ok).length,
+    failed:results.filter(r => !r.ok).length
+  };
+}
+async function collect(type,target) {
+  const primary = await collectBatch(SOURCE_QUERIES[type] || [],target);
+  let combinedItems = primary.items;
+  let requests = primary.requests;
+  let successfulRequests = primary.successful;
+  let failedRequests = primary.failed;
+  let fallbackUsed = false;
+
+  let raw = dedupe(combinedItems);
+  let relevant = raw.filter(item => relevantToTarget(type,target,item));
+  const hasProfile = relevant.some(item => NON_REPUTATION_GROUPS.has(item.group));
+
+  if (relevant.length < 4 || !hasProfile) {
+    fallbackUsed = true;
+    const fallback = await collectBatch(FALLBACK_QUERIES[type] || [],target);
+    combinedItems = combinedItems.concat(fallback.items);
+    requests += fallback.requests;
+    successfulRequests += fallback.successful;
+    failedRequests += fallback.failed;
+    raw = dedupe(combinedItems);
+    relevant = raw.filter(item => relevantToTarget(type,target,item));
+  }
+
   return {
     items:diversify(relevant,3,24),
     rawCount:raw.length,
-    irrelevantCount:raw.length-relevant.length
+    relevantCount:relevant.length,
+    irrelevantCount:raw.length-relevant.length,
+    fallbackUsed,
+    requests,
+    successfulRequests,
+    failedRequests
   };
 }
 
-export async function onRequestPost({request}) {
-  let body;
-  try { body = await request.json(); } catch { return json({ok:false,error:'invalid_json'},400); }
-  const type = clean(body?.type,24), target = clean(body?.target,120);
-  if (!TARGET_TYPES[type]) return json({ok:false,error:'invalid_type'},400);
-  if (target.length < 2) return json({ok:false,error:'target_too_short'},400);
-
+async function analyze(type,target) {
   const collection = await collect(type,target);
   const evidence = annotateEvidence(type,collection.items);
   const safe = evidence.filter(e => !e.highRisk);
@@ -382,17 +485,17 @@ export async function onRequestPost({request}) {
   const reputationEvidence = safe.filter(e => !NON_REPUTATION_GROUPS.has(e.group));
   const signals = buildSignals(type,reputationEvidence);
   const generatedAt = new Date().toISOString();
-  const profile = buildProfile(type,target,safe,reputationEvidence,signals);
+  const profile = buildProfile(type,target,safe,reputationEvidence,signals,collection);
 
-  return json({
+  return {
     ok:true,
-    schema:'nexus-reputation-analysis-v3',
+    schema:'nexus-reputation-analysis-v3.1',
     target:{type,typeLabel:TARGET_TYPES[type].label,name:target},
     generatedAt,
     methodology:{
       mode:'public-source-osint',
-      stages:['대상명 직접일치 확인','기본정보 확인','평판자료 분리','중복 제거','출처 다양화','주제 분류','상반 평가 탐지','고위험 주장 분리','근거 연결'],
-      note:'검색 결과 중 대상명 또는 대상 식별 토큰이 실제 제목·본문·출처에 확인되는 자료만 남깁니다. 검색엔진이 반환한 무관 자료는 분석 전에 제외합니다. 공개 웹에서 자동 확인 가능한 범위의 1차 분석이며 유료·로그인 제한 자료, 비공개 정보, 접근 제한 원문은 포함하지 않습니다.'
+      stages:['정밀 검색','직접명 검색 보강','대상명 직접일치 확인','기본정보 확인','평판자료 분리','중복 제거','출처 다양화','주제 분류','상반 평가 탐지','고위험 주장 분리','근거 연결'],
+      note:`먼저 정밀 검색을 수행하고 결과가 적거나 기본정보가 없으면 대상명 직접검색과 유형별 보강검색을 자동으로 추가합니다. 검색 결과 중 대상명 또는 대상 식별 토큰이 실제 제목·본문·출처에 확인되는 자료만 남깁니다.${collection.fallbackUsed ? ' 이번 분석에는 직접검색 보강이 사용됐습니다.' : ''} 공개 웹에서 자동 확인 가능한 범위의 1차 분석이며 유료·로그인 제한 자료, 비공개 정보, 접근 제한 원문은 포함하지 않습니다.`
     },
     profile,
     executiveSummary:reportSummary(target,signals,profile),
@@ -403,6 +506,11 @@ export async function onRequestPost({request}) {
       independentHosts:new Set(safe.map(e => e.host).filter(Boolean)).size,
       filteredIrrelevant:collection.irrelevantCount,
       rawCandidates:collection.rawCount,
+      matchedCandidates:collection.relevantCount,
+      searchRequests:collection.requests,
+      searchSucceeded:collection.successfulRequests,
+      searchFailed:collection.failedRequests,
+      fallbackUsed:collection.fallbackUsed,
       heldHighRisk:held.length,
       signals:signals.length
     },
@@ -410,15 +518,32 @@ export async function onRequestPost({request}) {
     evidence:safe,
     heldEvidence:held,
     searchLinks:searchLinks(type,target),
-    disclaimer:'대상과 직접 연결되지 않는 검색 결과는 제외합니다. 공개 평판 자료가 없거나 적다는 사실은 대상의 신뢰성이나 품질에 대한 긍정·부정 판단을 의미하지 않습니다. 중요한 결정에는 원문과 공식자료를 직접 확인하십시오.'
-  });
+    disclaimer:'대상과 직접 연결되지 않는 검색 결과는 제외합니다. 자동 검색 공급원 장애와 실제 자료 부재를 구분합니다. 공개 평판 자료가 없거나 적다는 사실은 대상의 신뢰성이나 품질에 대한 긍정·부정 판단을 의미하지 않습니다. 중요한 결정에는 원문과 공식자료를 직접 확인하십시오.'
+  };
 }
 
-export async function onRequestGet() {
+export async function onRequestPost({request}) {
+  let body;
+  try { body = await request.json(); } catch { return json({ok:false,error:'invalid_json'},400); }
+  const type = clean(body?.type,24), target = clean(body?.target,120);
+  if (!TARGET_TYPES[type]) return json({ok:false,error:'invalid_type'},400);
+  if (target.length < 2) return json({ok:false,error:'target_too_short'},400);
+  return json(await analyze(type,target));
+}
+
+export async function onRequestGet({request}) {
+  const url = new URL(request.url);
+  const type = clean(url.searchParams.get('type'),24);
+  const target = clean(url.searchParams.get('target'),120);
+  if (type || target) {
+    if (!TARGET_TYPES[type]) return json({ok:false,error:'invalid_type'},400);
+    if (target.length < 2) return json({ok:false,error:'target_too_short'},400);
+    return json(await analyze(type,target));
+  }
   return json({
     ok:true,
     service:'NEXUS 평판 분석',
-    version:'3.0',
+    version:'3.1',
     types:Object.entries(TARGET_TYPES).map(([id,v]) => ({id,label:v.label}))
   });
 }
