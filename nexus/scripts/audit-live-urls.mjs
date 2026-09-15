@@ -123,6 +123,52 @@ async function checkNewsRuntime() {
   for (const pathname of ['/news/style.css', '/news/app.js']) await checkNoCache(pathname);
 }
 
+async function checkReputationRuntime() {
+  const pathname = '/reputation-analysis/';
+  const url = `${NEXUS_ORIGIN}${pathname}`;
+  try {
+    const response = await request(url);
+    const body = await response.text();
+    if (!response.ok) {
+      errors += 1;
+      console.error(`ERROR reputation-analysis: HTTP ${response.status} ${url}`);
+      return;
+    }
+    for (const marker of ['id="queryForm"','id="report"','./app.js','./style.css']) {
+      if (!body.includes(marker)) {
+        errors += 1;
+        console.error(`ERROR reputation-analysis: live marker missing: ${marker}`);
+      }
+    }
+    if (!body.includes('평판 분석')) {
+      errors += 1;
+      console.error('ERROR reputation-analysis: service title missing');
+    }
+    console.log(`OK reputation-analysis: HTTP ${response.status} ${response.url}`);
+  } catch (error) {
+    errors += 1;
+    console.error(`ERROR reputation-analysis: ${error.message}`);
+  }
+
+  for (const asset of ['/reputation-analysis/style.css', '/reputation-analysis/app.js']) await checkNoCache(asset);
+
+  const apiPath = '/api/reputation-analysis';
+  try {
+    const response = await request(`${NEXUS_ORIGIN}${apiPath}`);
+    const data = await response.json().catch(() => null);
+    const types = Array.isArray(data?.types) ? data.types.map(item => item?.id) : [];
+    if (!response.ok || data?.ok !== true || data?.service !== 'NEXUS 평판 분석' || !['person','organization','product','service','place'].every(type => types.includes(type))) {
+      errors += 1;
+      console.error(`ERROR ${apiPath}: HTTP ${response.status}, payload=${JSON.stringify(data)}`);
+      return;
+    }
+    console.log(`OK ${apiPath}: HTTP ${response.status}, service contract verified`);
+  } catch (error) {
+    errors += 1;
+    console.error(`ERROR ${apiPath}: ${error.message}`);
+  }
+}
+
 async function checkJson(pathname, validator, requireNoCache = false) {
   const url = `${NEXUS_ORIGIN}${pathname}`;
   try {
@@ -210,6 +256,7 @@ async function checkRetiredPaths() {
 await check({ id: 'nexus-home', url: `${NEXUS_ORIGIN}/` });
 await checkHomeRuntime();
 await checkNewsRuntime();
+await checkReputationRuntime();
 for (const project of projects) await check(project);
 await check({ id: 'legal-mind-training', url: 'https://yehavha-legal-knowledge.danielie.workers.dev/legal-mind/' });
 await checkJson('/projects.json', data => Array.isArray(data?.projects) && data.projects.length > 0);
