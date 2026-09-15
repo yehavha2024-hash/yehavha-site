@@ -23,11 +23,17 @@ export async function onRequest(context) {
     return Response.redirect(url.href, 301);
   }
 
-  if (shouldCount(context.request) && context.env?.NEXUS_DB) {
+  const response = await context.next();
+
+  if (
+    shouldCount(context.request) &&
+    response.status >= 200 && response.status < 400 &&
+    context.env?.NEXUS_DB
+  ) {
     context.waitUntil(
       incrementAccessCount(context.env.NEXUS_DB).catch(() => undefined)
     );
   }
 
-  return context.next();
+  return response;
 }
