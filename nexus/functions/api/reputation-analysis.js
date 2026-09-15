@@ -100,12 +100,44 @@ function highRisk(text){const t=text.toLowerCase();return HIGH_RISK.some(k=>t.in
 function topicMatches(type,text){const groups=TOPICS[type]||{},t=text.toLowerCase();return Object.entries(groups).filter(([,words])=>words.some(w=>t.includes(w.toLowerCase()))).map(([name])=>name);}
 function sourceHost(url){try{return new URL(url).hostname.replace(/^www\./,'');}catch{return '';}}
 function annotateEvidence(type,items){return items.map((item,index)=>{const text=`${item.title} ${item.snippet}`;return{id:`S${String(index+1).padStart(2,'0')}`,...item,host:item.sourceName||sourceHost(item.url),topics:topicMatches(type,text),sentiment:scoreSentiment(text).direction,highRisk:highRisk(text)};});}
-function buildSignals(type,evidence){const m=new Map();for(const e of evidence){if(e.highRisk)continue;for(const topic of e.topics){if(!m.has(topic))m.set(topic,{topic,positive:[],negative:[],neutral:[],hosts:new Set()});const r=m.get(topic);r[e.sentiment].push(e.id);if(e.host)r.hosts.add(e.host);}}return[...m.values()].map(r=>({topic:r.topic,positive:r.positive,negative:r.negative,neutral:r.neutral,independentSources:r.hosts.size,total:r.positive.length+r.negative.length+r.neutral.length,state:r.positive.length&&r.negative.length?'conflicted':r.negative.length>r.positive.length?'negative':r.positive.length>r.negative.length?'positive':'mixed'})).sort((a,b)=>b.independentSources-a.independentSources||b.total-a.total).slice(0,8);}
+function buildSignals(type,evidence){
+  const m=new Map();
+  for(const e of evidence){
+    if(e.highRisk)continue;
+    for(const topic of e.topics){
+      if(!m.has(topic))m.set(topic,{topic,positive:[],negative:[],neutral:[],hosts:new Set(),positiveHosts:new Set(),negativeHosts:new Set(),neutralHosts:new Set()});
+      const r=m.get(topic);
+      const sentiment=['positive','negative','neutral'].includes(e.sentiment)?e.sentiment:'neutral';
+      r[sentiment].push(e.id);
+      if(e.host){
+        r.hosts.add(e.host);
+        r[`${sentiment}Hosts`].add(e.host);
+      }
+    }
+  }
+  return[...m.values()].map(r=>({
+    topic:r.topic,
+    positive:r.positive,
+    negative:r.negative,
+    neutral:r.neutral,
+    independentSources:r.hosts.size,
+    positiveIndependentSources:r.positiveHosts.size,
+    negativeIndependentSources:r.negativeHosts.size,
+    neutralIndependentSources:r.neutralHosts.size,
+    total:r.positive.length+r.negative.length+r.neutral.length,
+    state:r.positive.length&&r.negative.length?'conflicted':r.negative.length>r.positive.length?'negative':r.positive.length>r.negative.length?'positive':'mixed'
+  })).sort((a,b)=>b.independentSources-a.independentSources||b.total-a.total).slice(0,8);
+}
 function reportSummary(target,signals,evidence){
   if(!evidence.length)return `${target}에 대해 자동으로 확인된 공개 출처가 충분하지 않습니다. 원문 출처를 추가 확인한 뒤 판단해야 합니다.`;
-  const strong=signals.filter(s=>{if(s.independentSources<2)return false;if(s.state==='negative')return s.negative.length>=2;if(s.state==='positive')return s.positive.length>=2;if(s.state==='conflicted')return s.positive.length>=1&&s.negative.length>=1;return s.total>=2;}).slice(0,3);
+  const strong=signals.filter(s=>{
+    if(s.state==='negative')return s.negativeIndependentSources>=2;
+    if(s.state==='positive')return s.positiveIndependentSources>=2;
+    if(s.state==='conflicted')return s.independentSources>=2&&s.positiveIndependentSources>=1&&s.negativeIndependentSources>=1;
+    return s.neutralIndependentSources>=2;
+  }).slice(0,3);
   if(!strong.length)return `${target}에 관한 공개자료는 확인됐지만 동일 방향의 평가가 복수의 독립 출처에서 충분히 반복되지는 않았습니다. 단일 후기나 단일 기사만으로 일반화하지 않는 것이 적절합니다.`;
-  const parts=strong.map(s=>s.state==='conflicted'?`${s.topic}에 대해서는 독립 출처에서 긍정·부정 평가가 함께 나타납니다`:s.state==='negative'?`${s.topic} 관련 부정적 신호가 복수의 독립 출처에서 확인됩니다`:s.state==='positive'?`${s.topic} 관련 긍정적 신호가 복수의 독립 출처에서 확인됩니다`:`${s.topic} 관련 언급이 복수의 독립 출처에서 반복됩니다`);
+  const parts=strong.map(s=>s.state==='conflicted'?`${s.topic}에 대해서는 서로 다른 독립 출처에서 긍정·부정 평가가 함께 나타납니다`:s.state==='negative'?`${s.topic} 관련 부정적 신호가 서로 다른 복수 출처에서 확인됩니다`:s.state==='positive'?`${s.topic} 관련 긍정적 신호가 서로 다른 복수 출처에서 확인됩니다`:`${s.topic} 관련 언급이 서로 다른 복수 출처에서 반복됩니다`);
   return `${target}에 대한 공개자료를 교차 확인한 결과, ${parts.join('. ')}. 아래 출처별 근거와 상반된 자료를 함께 확인해야 합니다.`;
 }
 function searchLinks(type,target){const q=encodeURIComponent(target);const links=[{label:'Google 웹검색',url:`https://www.google.com/search?q=${q}`},{label:'네이버 통합검색',url:`https://search.naver.com/search.naver?query=${q}`},{label:'다음 검색',url:`https://search.daum.net/search?q=${q}`}];if(type==='organization')links.push({label:'잡코리아 관련검색',url:`https://www.google.com/search?q=site%3Ajobkorea.co.kr+${q}+후기`},{label:'잡플래닛 관련검색',url:`https://www.google.com/search?q=site%3Ajobplanet.co.kr+${q}`});if(type==='place')links.push({label:'카카오맵 검색',url:`https://map.kakao.com/?q=${q}`},{label:'네이버지도 검색',url:`https://map.naver.com/p/search/${q}`});if(type==='product')links.push({label:'쿠팡 관련검색',url:`https://www.google.com/search?q=site%3Acoupang.com+${q}+상품평`});return links;}
