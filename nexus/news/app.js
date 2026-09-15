@@ -32,7 +32,7 @@
   const isoDate = /^\d{4}-\d{2}-\d{2}$/;
   const seenIds = new Set();
   const seenHrefs = new Set();
-  const data = rawData.filter((item, index) => {
+  const data = rawData.map((item, index) => ({...item, _sequence:index})).filter((item, index) => {
     const valid = item && typeof item === 'object'
       && typeof item.id === 'string' && item.id
       && typeof item.date === 'string' && isoDate.test(item.date)
@@ -51,7 +51,7 @@
     seenIds.add(item.id);
     seenHrefs.add(item.href);
     return true;
-  }).slice().sort((a, b) => b.date.localeCompare(a.date) || b.id.localeCompare(a.id));
+  }).sort((a, b) => b.date.localeCompare(a.date) || a._sequence - b._sequence);
 
   const params = new URLSearchParams(location.search);
   const requestedCategory = params.get('category');
@@ -81,6 +81,19 @@
     if (className) node.className = className;
     if (text !== undefined) node.textContent = text;
     return node;
+  }
+
+  function renderCategoryNav() {
+    if (!els.categoryNav) return;
+    const entries = [['all', '전체'], ...categories.map(category => [category, category])];
+    const buttons = entries.map(([value, label]) => {
+      const button = make('button', 'category-btn', label);
+      button.type = 'button';
+      button.dataset.category = value;
+      button.setAttribute('aria-pressed', 'false');
+      return button;
+    });
+    els.categoryNav.replaceChildren(...buttons);
   }
 
   function articleCard(item, compact = false) {
@@ -114,7 +127,11 @@
   }
 
   function renderLatest() {
-    if (!els.latestList || !data.length) return;
+    if (!els.latestList) return;
+    if (!data.length) {
+      els.latestList.replaceChildren(make('p', 'empty-state', '등록된 뉴스가 없습니다.'));
+      return;
+    }
     const latestDate = data[0].date;
     const latestItems = data.filter(item => item.date === latestDate).slice(0, homeLatestLimit);
     const isToday = latestDate === latestKstDate();
@@ -150,7 +167,11 @@
   function renderArchiveMonthOptions() {
     if (!els.archiveMonth) return;
     const months = monthList();
-    if (!months.length) return;
+    if (!months.length) {
+      els.archiveMonth.replaceChildren();
+      if (els.archiveDates) els.archiveDates.replaceChildren(make('p', 'empty-state', '지난 뉴스가 없습니다.'));
+      return;
+    }
     if (!months.includes(state.month)) state.month = months[0];
     const options = months.map(month => {
       const option = make('option', '', formatMonthKorean(month));
@@ -207,7 +228,7 @@
     });
   }
 
-  function resultsHeading(total) {
+  function resultsHeading() {
     if (state.category !== 'all' && state.query) return `${state.category} · “${state.query}” 검색`;
     if (state.category !== 'all') return `${state.category} 뉴스`;
     if (state.query) return `“${state.query}” 검색 결과`;
@@ -222,7 +243,8 @@
 
     const results = filteredData();
     const visible = results.slice(0, state.visible);
-    if (els.resultsTitle) els.resultsTitle.textContent = resultsHeading(results.length);
+    const heading = resultsHeading();
+    if (els.resultsTitle) els.resultsTitle.textContent = heading;
     if (els.resultsMeta) els.resultsMeta.textContent = `${results.length}건 · 최신순`;
     if (visible.length) {
       els.resultsList.replaceChildren(...visible.map(item => articleCard(item)));
@@ -233,7 +255,7 @@
       els.loadMore.hidden = visible.length >= results.length;
       els.loadMore.textContent = `더 보기 (${visible.length}/${results.length})`;
     }
-    announce(`${resultsHeading(results.length)} ${results.length}건`);
+    announce(`${heading} ${results.length}건`);
   }
 
   function updateCategoryButtons() {
@@ -250,12 +272,8 @@
     else next.searchParams.set('category', state.category);
     if (state.query) next.searchParams.set('q', state.query);
     else next.searchParams.delete('q');
-    if (!state.category || state.category === 'all') {
-      if (state.month && !state.query) next.searchParams.set('month', state.month);
-      else next.searchParams.delete('month');
-    } else {
-      next.searchParams.delete('month');
-    }
+    if (state.category === 'all' && !state.query && state.month) next.searchParams.set('month', state.month);
+    else next.searchParams.delete('month');
     const method = push ? 'pushState' : 'replaceState';
     history[method]({}, '', `${next.pathname}${next.search}${next.hash}`);
   }
@@ -265,7 +283,8 @@
     const category = current.get('category');
     state.category = category && categories.includes(category) ? category : 'all';
     state.query = (current.get('q') || '').trim();
-    state.month = current.get('month') || state.month;
+    const requestedMonth = current.get('month');
+    if (requestedMonth) state.month = requestedMonth;
     state.visible = pageSize;
     if (els.searchInput) els.searchInput.value = state.query;
     updateCategoryButtons();
@@ -276,6 +295,8 @@
   function announce(message) {
     if (els.status) els.status.textContent = message;
   }
+
+  renderCategoryNav();
 
   if (els.categoryNav) {
     els.categoryNav.addEventListener('click', event => {
