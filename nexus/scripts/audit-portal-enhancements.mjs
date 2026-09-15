@@ -83,7 +83,9 @@ requireFiles([
   'nexus/articles/articles.json',
   'nexus/articles/archive-index.js',
   'nexus/ai-trends/data.json',
-  'nexus/intelligence-briefing/latest.json'
+  'nexus/intelligence-briefing/latest.json',
+  'nexus/korea-social-intelligence/latest.json',
+  'nexus/news/news-data.js'
 ]);
 for (const retired of ['nexus/portal-enhancements.css', 'nexus/status.css']) {
   if (exists(retired)) fail(retired, '폐기된 전역 override 레이어가 다시 존재함');
@@ -130,12 +132,24 @@ if (!errors) {
 if (exists('nexus/portal-v2.js') && exists('nexus/index.html')) {
   const js = read('nexus/portal-v2.js');
   const html = read('nexus/index.html');
-  for (const token of ["fetchJson('./projects.json')", "fetchJson('./project-status.json')", "const KOREA_TIME_ZONE = 'Asia/Seoul'", "const COUNTER_ENDPOINT = '/api/access'"]) {
+  for (const token of [
+    "fetchJson('./projects.json')",
+    "fetchJson('./project-status.json')",
+    "fetchJson('./intelligence-briefing/latest.json')",
+    "fetchJson('./korea-social-intelligence/latest.json')",
+    'window.YEHAVHA_NEWS_DATA',
+    'renderHomeNews();',
+    "const KOREA_TIME_ZONE = 'Asia/Seoul'",
+    "const COUNTER_ENDPOINT = '/api/access'"
+  ]) {
     if (!js.includes(token)) fail('nexus/portal-v2.js', `런타임 소유권 누락: ${token}`);
   }
-  for (const marker of ['portal-runtime','portal-mark','accessCount','portalGrid']) {
+  for (const marker of ['portal-runtime','portal-mark','accessCount','portalGrid','homeNewsGrid','homeNewsDate','homeStrategyTitle','homeSocialTitle','homeBriefStrategyHeadline','homeBriefSocialHeadline']) {
     if (!html.includes(marker)) fail('nexus/index.html', `메인 DOM 누락: ${marker}`);
   }
+  if (!html.includes('./news/news-data.js')) fail('nexus/index.html', '메인 YEHAVHA NEWS가 canonical news-data.js를 로드하지 않음');
+  if (/\.\/news\/articles\/20\d{2}-\d{2}-\d{2}-/.test(html)) fail('nexus/index.html', '당일 뉴스 기사 카드가 메인 HTML에 정적으로 중복 저장됨');
+  if (/(?:portal-v2|nexus-standard)\.(?:css|js)\?v=/.test(html)) fail('nexus/index.html', 'no-cache 원소스와 중복되는 수동 cache-busting query가 남아 있음');
   if (js.includes('portal-enhancements.css') || js.includes('status.css')) fail('nexus/portal-v2.js', '폐기된 전역 스타일 동적 연결 잔존');
   if (html.includes('visitor-count.js') || exists('nexus/visitor-count.js')) fail('nexus/index.html', '방문자 조회·표시 소유자가 중복됨');
   if (!html.includes('rel="canonical" href="https://yehavha.com/"') || !js.includes("const canonicalUrl = 'https://yehavha.com/';")) fail('nexus/index.html', '대표 도메인 불일치');
@@ -173,6 +187,11 @@ if (exists('nexus/intelligence-briefing/latest.json')) {
   const data = json('nexus/intelligence-briefing/latest.json');
   const items = Array.isArray(data.items) ? data.items : (Array.isArray(data.briefs) ? data.briefs : []);
   if (!items.length) fail('nexus/intelligence-briefing/latest.json', '전략 브리핑 핵심정보가 비어 있음');
+}
+if (exists('nexus/korea-social-intelligence/latest.json')) {
+  const data = json('nexus/korea-social-intelligence/latest.json');
+  const sections = Array.isArray(data.sections) ? data.sections : [];
+  if (!sections.some(section => Array.isArray(section?.items) && section.items.length)) fail('nexus/korea-social-intelligence/latest.json', '사회동향 핵심정보가 비어 있음');
 }
 
 requireFiles([
