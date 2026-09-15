@@ -193,7 +193,7 @@
     "managedBy": "github",
     "status": "최근 업데이트",
     "statusTone": "fresh",
-    "lastUpdated": "2026-09-14",
+    "lastUpdated": "2026-09-15",
     "contentCount": 34,
     "contentLabel": "브리프",
     "contentReviewedAt": "2026-09-04",
@@ -245,8 +245,8 @@
   "culture-events-hub": {
     "id": "culture-events-hub",
     "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-09-11",
     "contentCount": 16,
     "contentLabel": "주요일정"
