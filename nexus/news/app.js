@@ -32,34 +32,35 @@
   const isoDate = /^\d{4}-\d{2}-\d{2}$/;
   const seenIds = new Set();
   const seenHrefs = new Set();
-  const data = rawData.map((item, index) => ({...item, _sequence:index})).filter((item, index) => {
-    const valid = item && typeof item === 'object'
-      && typeof item.id === 'string' && item.id
-      && typeof item.date === 'string' && isoDate.test(item.date)
-      && typeof item.category === 'string' && categories.includes(item.category)
-      && typeof item.title === 'string' && item.title
-      && typeof item.summary === 'string'
-      && typeof item.href === 'string' && item.href;
-    if (!valid) {
-      console.warn('[YEHAVHA NEWS] Invalid article record skipped:', index, item);
-      return false;
-    }
-    if (seenIds.has(item.id) || seenHrefs.has(item.href)) {
-      console.warn('[YEHAVHA NEWS] Duplicate article record skipped:', item.id, item.href);
-      return false;
-    }
-    seenIds.add(item.id);
-    seenHrefs.add(item.href);
-    return true;
-  }).sort((a, b) => b.date.localeCompare(a.date) || a._sequence - b._sequence);
+  const data = rawData
+    .map((item, index) => ({...item, _sequence:index}))
+    .filter((item, index) => {
+      const valid = item && typeof item === 'object'
+        && typeof item.id === 'string' && item.id
+        && typeof item.date === 'string' && isoDate.test(item.date)
+        && typeof item.category === 'string' && categories.includes(item.category)
+        && typeof item.title === 'string' && item.title
+        && typeof item.summary === 'string'
+        && typeof item.href === 'string' && item.href;
+      if (!valid) {
+        console.warn('[YEHAVHA NEWS] Invalid article record skipped:', index, item);
+        return false;
+      }
+      if (seenIds.has(item.id) || seenHrefs.has(item.href)) {
+        console.warn('[YEHAVHA NEWS] Duplicate article record skipped:', item.id, item.href);
+        return false;
+      }
+      seenIds.add(item.id);
+      seenHrefs.add(item.href);
+      return true;
+    })
+    .sort((a, b) => b.date.localeCompare(a.date) || a._sequence - b._sequence);
 
-  const params = new URLSearchParams(location.search);
-  const requestedCategory = params.get('category');
   const state = {
-    category: requestedCategory && categories.includes(requestedCategory) ? requestedCategory : 'all',
-    query: (params.get('q') || '').trim(),
+    category: 'all',
+    query: '',
     visible: pageSize,
-    month: params.get('month') || ''
+    month: ''
   };
 
   function formatDate(date) {
@@ -100,10 +101,13 @@
     const link = make('a', compact ? 'news-card news-card-compact' : 'news-card');
     link.href = item.href;
     const meta = make('div', 'news-card-meta');
-    [item.category, formatDate(item.date), item.author || 'YEHAVHA NEWS'].forEach(value => meta.append(make('span', '', value)));
-    const title = make('h3', '', item.title);
-    const summary = make('p', '', item.summary);
-    link.append(meta, title, summary);
+    [item.category, formatDate(item.date), item.author || 'YEHAVHA NEWS']
+      .forEach(value => meta.append(make('span', '', value)));
+    link.append(
+      meta,
+      make('h3', '', item.title),
+      make('p', '', item.summary)
+    );
     return link;
   }
 
@@ -120,7 +124,10 @@
 
   function latestKstDate() {
     const parts = new Intl.DateTimeFormat('en-CA', {
-      timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit'
+      timeZone: 'Asia/Seoul',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
     }).formatToParts(new Date());
     const value = Object.fromEntries(parts.map(part => [part.type, part.value]));
     return `${value.year}-${value.month}-${value.day}`;
@@ -148,10 +155,9 @@
       if (!items.length) return;
       const section = make('section', 'category-latest-block');
       const head = make('div', 'category-latest-head');
-      const title = make('h3', '', category);
       const more = make('a', 'category-more', '전체 보기 →');
       more.href = `?category=${encodeURIComponent(category)}`;
-      head.append(title, more);
+      head.append(make('h3', '', category), more);
       const list = make('div', 'category-latest-list');
       items.forEach(item => list.append(articleCard(item, true)));
       section.append(head, list);
@@ -188,35 +194,41 @@
     const monthItems = data.filter(item => item.date.startsWith(state.month));
     const dates = [...new Set(monthItems.map(item => item.date))].sort((a, b) => b.localeCompare(a));
     const fragment = document.createDocumentFragment();
+
     dates.forEach((date, index) => {
       const items = monthItems.filter(item => item.date === date);
       const details = make('details', 'archive-day');
-      if (index === 0) details.open = true;
       details.dataset.date = date;
+      details.open = index === 0;
+
       const summary = make('summary', 'archive-day-summary');
       summary.append(
         make('strong', '', formatDateKorean(date)),
         make('span', '', `${items.length}건`)
       );
+
       const list = make('div', 'archive-day-list');
-      if (details.open) {
+      const renderItems = () => {
+        if (list.dataset.rendered === 'true') return;
         items.forEach(item => list.append(archiveRow(item)));
         list.dataset.rendered = 'true';
-      }
+      };
+      if (details.open) renderItems();
       details.addEventListener('toggle', () => {
-        if (details.open && list.dataset.rendered !== 'true') {
-          items.forEach(item => list.append(archiveRow(item)));
-          list.dataset.rendered = 'true';
-        }
+        if (details.open) renderItems();
       });
       details.append(summary, list);
       fragment.append(details);
     });
+
     els.archiveDates.replaceChildren(fragment);
   }
 
   function searchableText(item) {
-    return [item.title, item.summary, item.category, item.author, item.keywords].filter(Boolean).join(' ').toLowerCase();
+    return [item.title, item.summary, item.category, item.author, item.keywords]
+      .filter(Boolean)
+      .join(' ')
+      .toLowerCase();
   }
 
   function filteredData() {
@@ -235,12 +247,12 @@
     return '전체 뉴스';
   }
 
-  function renderResults() {
-    const active = state.category !== 'all' || Boolean(state.query);
-    if (els.homeView) els.homeView.hidden = active;
-    if (els.resultsView) els.resultsView.hidden = !active;
-    if (!active || !els.resultsList) return;
+  function isResultsMode() {
+    return state.category !== 'all' || Boolean(state.query);
+  }
 
+  function renderResults() {
+    if (!els.resultsList) return;
     const results = filteredData();
     const visible = results.slice(0, state.visible);
     const heading = resultsHeading();
@@ -258,11 +270,24 @@
     announce(`${heading} ${results.length}건`);
   }
 
+  function renderHome() {
+    renderLatest();
+    renderCategoryLatest();
+    renderArchiveMonthOptions();
+  }
+
+  function renderView() {
+    const resultsMode = isResultsMode();
+    if (els.homeView) els.homeView.hidden = resultsMode;
+    if (els.resultsView) els.resultsView.hidden = !resultsMode;
+    if (resultsMode) renderResults();
+    else renderHome();
+  }
+
   function updateCategoryButtons() {
     if (!els.categoryNav) return;
     els.categoryNav.querySelectorAll('[data-category]').forEach(button => {
-      const selected = button.dataset.category === state.category;
-      button.setAttribute('aria-pressed', String(selected));
+      button.setAttribute('aria-pressed', String(button.dataset.category === state.category));
     });
   }
 
@@ -272,7 +297,7 @@
     else next.searchParams.set('category', state.category);
     if (state.query) next.searchParams.set('q', state.query);
     else next.searchParams.delete('q');
-    if (state.category === 'all' && !state.query && state.month) next.searchParams.set('month', state.month);
+    if (!isResultsMode() && state.month) next.searchParams.set('month', state.month);
     else next.searchParams.delete('month');
     const method = push ? 'pushState' : 'replaceState';
     history[method]({}, '', `${next.pathname}${next.search}${next.hash}`);
@@ -280,16 +305,14 @@
 
   function syncFromUrl() {
     const current = new URLSearchParams(location.search);
-    const category = current.get('category');
-    state.category = category && categories.includes(category) ? category : 'all';
+    const requestedCategory = current.get('category');
+    state.category = requestedCategory && categories.includes(requestedCategory) ? requestedCategory : 'all';
     state.query = (current.get('q') || '').trim();
-    const requestedMonth = current.get('month');
-    if (requestedMonth) state.month = requestedMonth;
+    state.month = current.get('month') || '';
     state.visible = pageSize;
     if (els.searchInput) els.searchInput.value = state.query;
     updateCategoryButtons();
-    renderResults();
-    if (state.category === 'all' && !state.query) renderArchiveMonthOptions();
+    renderView();
   }
 
   function announce(message) {
@@ -306,8 +329,7 @@
       state.visible = pageSize;
       updateCategoryButtons();
       updateUrl(true);
-      renderResults();
-      if (state.category === 'all' && !state.query) renderArchiveMonthOptions();
+      renderView();
     });
   }
 
@@ -317,7 +339,7 @@
       state.query = (els.searchInput?.value || '').trim();
       state.visible = pageSize;
       updateUrl(true);
-      renderResults();
+      renderView();
     });
   }
 
@@ -329,8 +351,7 @@
       if (els.searchInput) els.searchInput.value = '';
       updateCategoryButtons();
       updateUrl(true);
-      renderResults();
-      renderArchiveMonthOptions();
+      renderView();
       els.searchInput?.focus();
     });
   }
@@ -353,6 +374,7 @@
   window.addEventListener('popstate', syncFromUrl);
 
   const ptyText = {0:'강수 없음',1:'비',2:'비·눈',3:'눈',5:'빗방울',6:'빗방울·눈날림',7:'눈날림'};
+
   function kstBase(minutesBack) {
     const d = new Date(Date.now() + 9 * 60 * 60 * 1000 - minutesBack * 60 * 1000);
     const y = d.getUTCFullYear();
@@ -395,9 +417,6 @@
     }));
   }
 
-  renderLatest();
-  renderCategoryLatest();
-  renderArchiveMonthOptions();
   syncFromUrl();
   initWeather();
 })();
