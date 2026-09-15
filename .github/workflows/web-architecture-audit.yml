@@ -55,3 +55,6 @@ jobs:
       - name: Validate deployed live URLs
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: node nexus/scripts/audit-live-urls.mjs
+      - name: Validate live reputation analysis result
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: node nexus/scripts/audit-reputation-post.mjs
