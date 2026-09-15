@@ -24,18 +24,6 @@
   Cache-Control: no-cache, no-store, must-revalidate
 /layer-compact.css
   Cache-Control: no-cache, no-store, must-revalidate
-/life-action
-  Cache-Control: no-cache, no-store, must-revalidate
-  Pragma: no-cache
-  Expires: 0
-/life-action/
-  Cache-Control: no-cache, no-store, must-revalidate
-  Pragma: no-cache
-  Expires: 0
-/life-action/index.html
-  Cache-Control: no-cache, no-store, must-revalidate
-  Pragma: no-cache
-  Expires: 0
 /life-action/*
   Cache-Control: no-cache, no-store, must-revalidate
   Pragma: no-cache
