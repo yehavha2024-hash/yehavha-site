@@ -66,34 +66,64 @@ async function check(project) {
   }
 }
 
+async function checkNoCache(pathname) {
+  const url = `${NEXUS_ORIGIN}${pathname}`;
+  try {
+    const response = await request(url);
+    const cache = response.headers.get('cache-control') || '';
+    if (!response.ok) {
+      errors += 1;
+      console.error(`ERROR ${pathname}: HTTP ${response.status}`);
+      return null;
+    }
+    if (!/no-cache/i.test(cache) || !/no-store/i.test(cache)) {
+      errors += 1;
+      console.error(`ERROR ${pathname}: cache policy not deployed (${cache || '-'})`);
+      return null;
+    }
+    console.log(`OK ${pathname}: HTTP ${response.status}, cache=${cache}`);
+    return response;
+  } catch (error) {
+    errors += 1;
+    console.error(`ERROR ${pathname}: ${error.message}`);
+    return null;
+  }
+}
+
+async function checkHomeRuntime() {
+  const url = `${NEXUS_ORIGIN}/`;
+  try {
+    const response = await request(url);
+    const body = await response.text();
+    for (const marker of ['id="homeNewsGrid"','id="homeNewsDate"','id="homeStrategyTitle"','id="homeSocialTitle"','./news/news-data.js','./portal-v2.js']) {
+      if (!body.includes(marker)) {
+        errors += 1;
+        console.error(`ERROR /: canonical homepage feed marker missing: ${marker}`);
+      }
+    }
+    if (/\.\/news\/articles\/20\d{2}-\d{2}-\d{2}-/.test(body)) {
+      errors += 1;
+      console.error('ERROR /: live homepage still contains statically duplicated daily news cards');
+    }
+    if (/(?:portal-v2|nexus-standard)\.(?:css|js)\?v=/.test(body)) {
+      errors += 1;
+      console.error('ERROR /: live homepage still contains manual cache-busting query');
+    }
+  } catch (error) {
+    errors += 1;
+    console.error(`ERROR / canonical feed markers: ${error.message}`);
+  }
+  for (const pathname of ['/portal-v2.js', '/nexus-standard.css', '/news/news-data.js']) await checkNoCache(pathname);
+}
+
 async function checkNewsRuntime() {
   for (const pathname of ['/news/', '/news/about.html']) {
     await check({ id: `yehavha-news${pathname === '/news/' ? '' : '-media-info'}`, url: `${NEXUS_ORIGIN}${pathname}` });
   }
-  for (const pathname of ['/news/style.css', '/news/app.js', '/news/news-data.js']) {
-    const url = `${NEXUS_ORIGIN}${pathname}`;
-    try {
-      const response = await request(url);
-      const cache = response.headers.get('cache-control') || '';
-      if (!response.ok) {
-        errors += 1;
-        console.error(`ERROR ${pathname}: HTTP ${response.status}`);
-        continue;
-      }
-      if (!/no-cache/i.test(cache) || !/no-store/i.test(cache)) {
-        errors += 1;
-        console.error(`ERROR ${pathname}: news cache policy not deployed (${cache || '-'})`);
-        continue;
-      }
-      console.log(`OK ${pathname}: HTTP ${response.status}, cache=${cache}`);
-    } catch (error) {
-      errors += 1;
-      console.error(`ERROR ${pathname}: ${error.message}`);
-    }
-  }
+  for (const pathname of ['/news/style.css', '/news/app.js']) await checkNoCache(pathname);
 }
 
-async function checkJson(pathname, validator) {
+async function checkJson(pathname, validator, requireNoCache = false) {
   const url = `${NEXUS_ORIGIN}${pathname}`;
   try {
     const response = await request(url);
@@ -102,13 +132,21 @@ async function checkJson(pathname, validator) {
       console.error(`ERROR ${pathname}: HTTP ${response.status}`);
       return;
     }
+    if (requireNoCache) {
+      const cache = response.headers.get('cache-control') || '';
+      if (!/no-cache/i.test(cache) || !/no-store/i.test(cache)) {
+        errors += 1;
+        console.error(`ERROR ${pathname}: cache policy not deployed (${cache || '-'})`);
+        return;
+      }
+    }
     const data = await response.json();
     if (!validator(data)) {
       errors += 1;
       console.error(`ERROR ${pathname}: JSON 구조 검증 실패`);
       return;
     }
-    console.log(`OK ${pathname}: HTTP ${response.status}`);
+    console.log(`OK ${pathname}: HTTP ${response.status}${requireNoCache ? ', canonical feed fresh' : ''}`);
   } catch (error) {
     errors += 1;
     console.error(`ERROR ${pathname}: ${error.message}`);
@@ -170,11 +208,14 @@ async function checkRetiredPaths() {
 }
 
 await check({ id: 'nexus-home', url: `${NEXUS_ORIGIN}/` });
+await checkHomeRuntime();
 await checkNewsRuntime();
 for (const project of projects) await check(project);
 await check({ id: 'legal-mind-training', url: 'https://yehavha-legal-knowledge.danielie.workers.dev/legal-mind/' });
 await checkJson('/projects.json', data => Array.isArray(data?.projects) && data.projects.length > 0);
 await checkJson('/project-status.json', data => data && typeof data === 'object' && Object.keys(data).length >= 10);
+await checkJson('/intelligence-briefing/latest.json', data => Array.isArray(data?.items) && data.items.length > 0, true);
+await checkJson('/korea-social-intelligence/latest.json', data => Array.isArray(data?.sections) && data.sections.some(section => Array.isArray(section?.items) && section.items.length > 0), true);
 await checkAccessApi();
 await checkRedirect();
 await checkRetiredPaths();
