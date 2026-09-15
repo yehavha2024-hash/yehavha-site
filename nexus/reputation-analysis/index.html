@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="description" content="인물·회사·기관·상품·서비스·장소에 관한 공개 평가와 실제 경험을 출처 기반으로 교차 분석해 보고서로 제공합니다."/>
+<meta name="robots" content="index,follow,max-image-preview:large"/>
+<meta name="theme-color" content="#07111f"/>
+<link rel="canonical" href="https://yehavha.com/reputation-analysis/"/>
+<link rel="stylesheet" href="./style.css"/>
+<title>평판 분석 | YEHAVHA NEXUS</title>
+</head>
+<body>
+<a class="skip" href="#analysisForm">분석 입력으로 이동</a>
+<header class="topbar"><a class="brand" href="../">YEHAVHA NEXUS</a><span>PUBLIC OPINION INTELLIGENCE</span><a class="back" href="../">NEXUS 홈</a></header>
+<main>
+<section class="hero" aria-labelledby="pageTitle"><div class="hero-copy"><p class="eyebrow">PUBLIC SOURCE · CROSS ANALYSIS · EVIDENCE TRACE</p><h1 id="pageTitle">평판 분석</h1><p>인물·회사·기관·상품·서비스·장소에 흩어진 공개 평가와 실제 경험을 수집해, 반복되는 평가·엇갈리는 의견·공식자료를 출처와 함께 분석 보고서로 정리합니다.</p></div><div class="hero-mark" aria-hidden="true"><div class="radar"><span></span><span></span><span></span><i></i></div><strong>INTELLIGENCE DOSSIER</strong></div></section>
+<section class="workspace" id="analysisForm" aria-labelledby="taskTitle"><div class="section-head"><div><p class="step">01 · TASKING</p><h2 id="taskTitle">조사 대상을 지정합니다</h2></div><p>공개정보만 조사합니다. 사생활·비공개 개인정보·불법 취득 자료는 분석하지 않습니다.</p></div><div class="type-grid" role="group" aria-label="대상 유형"><button class="type-btn active" data-type="person" type="button"><span>01</span>인물</button><button class="type-btn" data-type="organization" type="button"><span>02</span>회사·기관</button><button class="type-btn" data-type="product" type="button"><span>03</span>상품</button><button class="type-btn" data-type="service" type="button"><span>04</span>서비스</button><button class="type-btn" data-type="place" type="button"><span>05</span>장소</button></div><form class="query-form" id="queryForm"><label for="targetInput">분석할 대상</label><div class="query-row"><input id="targetInput" name="target" type="search" maxlength="120" autocomplete="off" placeholder="예: 회사명, 인물명, 상품명, 서비스명, 장소명" required/><button id="submitBtn" type="submit">분석 실행</button></div><p class="form-note" id="formHint">공개 활동이 확인되는 인물의 공개 기록·평가를 중심으로 조사합니다.</p></form></section>
+<section class="process" aria-label="분석 절차"><article><b>1</b><strong>대상 식별</strong><span>동명이 대상과 유사 명칭을 구분합니다.</span></article><article><b>2</b><strong>공개자료 수집</strong><span>후기·커뮤니티·언론·공식자료를 탐색합니다.</span></article><article><b>3</b><strong>교차 분석</strong><span>중복을 제거하고 반복·상충 신호를 분리합니다.</span></article><article><b>4</b><strong>근거 보고서</strong><span>주요 분석마다 출처 ID와 원문을 연결합니다.</span></article></section>
+<section class="status-panel" id="statusPanel" hidden aria-live="polite"><div class="scanline"></div><p class="eyebrow">ANALYSIS IN PROGRESS</p><h2 id="statusTitle">공개 출처를 조사하고 있습니다.</h2><p id="statusText">출처 탐색 → 중복 제거 → 주제 분류 → 상반 평가 확인 → 근거 연결</p></section>
+<section class="report" id="report" hidden aria-labelledby="reportTitle"><div class="report-head"><div><p class="step">INTELLIGENCE REPORT</p><h2 id="reportTitle">평판 분석 보고서</h2><p id="reportMeta"></p></div><button type="button" id="printBtn">보고서 인쇄</button></div><div class="metric-grid" id="metricGrid"></div><article class="brief executive"><h3>핵심 분석</h3><p id="executiveSummary"></p></article><section class="report-section"><div class="section-title"><h3>반복·상충 신호</h3><span>독립 출처와 근거 ID 기준</span></div><div class="signal-grid" id="signalGrid"></div></section><section class="report-section"><div class="section-title"><h3>출처 및 근거자료</h3><span>주요 판단의 원문을 직접 확인할 수 있습니다.</span></div><div class="source-list" id="sourceList"></div></section><section class="report-section"><div class="section-title"><h3>추가 확인 경로</h3><span>자동 수집 범위를 넘어 원문을 직접 확인할 수 있습니다.</span></div><div class="search-links" id="searchLinks"></div></section><article class="method" id="methodBox"></article></section>
+</main>
+<footer><strong>YEHAVHA NEXUS</strong><span>공개정보를 근거로 연결하고, 판단에 필요한 맥락을 제공합니다.</span></footer>
+<script src="./app.js" defer></script>
+</body>
+</html>
