@@ -109,6 +109,9 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
 .project-thumbnail-caption{position:absolute;left:12px;top:12px;display:flex;flex-direction:column;gap:4px;max-width:65%;padding:7px 10px;border-radius:7px;background:rgba(255,255,255,.94);color:#16374c;overflow-wrap:anywhere}
 .project-thumbnail-label{font-size:11px;font-weight:800;letter-spacing:.06em;line-height:1.4}
 .project-thumbnail-caption strong{font-size:clamp(16px,1.8vw,22px);line-height:1.35}
+.news-entry-banner .project-thumbnail-caption{max-width:min(78%,760px);gap:5px;padding:9px 12px}
+.news-entry-banner .project-thumbnail-label{font-size:clamp(12px,1.2vw,15px);letter-spacing:.07em}
+.news-entry-banner .project-thumbnail-caption strong{font-size:clamp(18px,2.05vw,25px);line-height:1.32}
 .project-thumbnail:focus-visible{outline:3px solid var(--portal-blue);outline-offset:3px}
 .item-top{display:flex;align-items:center;justify-content:flex-start!important;flex-wrap:wrap;gap:8px;text-align:left}
 .item-meta,.item-domain,.project-status{color:#111111;font-size:12.5px!important;font-weight:760;text-align:left;background:#eef4f8}
