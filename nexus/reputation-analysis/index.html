@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<meta name="description" content="인물·회사·기관·상품·서비스·장소에 관한 공개 평판을 수집·분석하고, 대상자의 평판관리와 이용자의 실제 대응·의사결정 행동까지 제시합니다."/>
+<meta name="description" content="인물·회사·기관·상품·서비스·장소에 관한 공개 평판을 폭넓게 수집하고, 실제 의견 내용·반복 주제·상반 평가·출처 분포를 근거별로 분석합니다."/>
 <meta name="robots" content="index,follow,max-image-preview:large"/>
 <meta name="theme-color" content="#ffffff"/>
 <link rel="canonical" href="https://yehavha.com/reputation-analysis/"/>
 <link rel="stylesheet" href="../portal-v2.css"/>
 <link rel="stylesheet" href="../nexus-standard.css"/>
 <link rel="stylesheet" href="./style.css?v=20260916-3"/>
+<link rel="stylesheet" href="./deep-analysis.css?v=20260916-1"/>
 <title>평판 분석 | YEHAVHA NEXUS</title>
 </head>
 <body>
@@ -21,7 +22,7 @@
     <section class="reputation-hero">
       <p class="eyebrow">PUBLIC SOURCE REPUTATION INTELLIGENCE</p>
       <h1>평판 분석</h1>
-      <p>평판을 검색해 나열하는 데서 끝내지 않습니다. 공개된 긍정·부정·상반 의견을 먼저 취합하고, 반복 주제와 출처 분포를 분석한 뒤 대상자에게는 평판관리·운영개선 과제를, 구직자·고객·거래상대 등 이용자에게는 확인 질문·대안 비교·문서 확인·의사결정 행동까지 제시합니다.</p>
+      <p>검색 결과를 몇 건 나열하거나 긍정·부정 개수만 세는 방식이 아닙니다. 공개 웹·채용·평판·블로그·커뮤니티 검색면에서 대상과 연결되는 의견을 확장 수집하고, 실제로 어떤 내용이 반복되는지, 같은 주제에서 평가가 왜 엇갈리는지, 특정 플랫폼에 의견이 편중됐는지, 동명이름·동일 상호 오인 가능성이 있는지를 근거 번호와 원문으로 분석합니다.</p>
     </section>
   </div>
 </header>
@@ -56,16 +57,16 @@
     </section>
 
     <section class="process" aria-label="분석 절차">
-      <article><b>1</b><strong>공개 의견 수집</strong><span>긍정·부정·익명 여부와 관계없이 대상 관련 의견을 찾습니다.</span></article>
-      <article><b>2</b><strong>대상·중복 확인</strong><span>다른 대상의 결과와 동일 URL 중복만 제거합니다.</span></article>
-      <article><b>3</b><strong>의견 구조화</strong><span>출처·주제·긍정·부정·상충·반복 양상을 분석합니다.</span></article>
-      <article><b>4</b><strong>실행 제안</strong><span>대상자의 개선과 이용자의 실제 대응 행동으로 전환합니다.</span></article>
+      <article><b>1</b><strong>공개 의견 확장 수집</strong><span>일반 검색·평판·채용·블로그·커뮤니티 공개 결과를 함께 탐색합니다.</span></article>
+      <article><b>2</b><strong>대상 식별·중복 제거</strong><span>동명이름·동일 상호 가능성을 분리하고 동일 URL·중복 노출을 정리합니다.</span></article>
+      <article><b>3</b><strong>주제·상반평가 구조화</strong><span>긍정·부정 숫자가 아니라 실제 의견 내용을 주제별로 묶고 근거를 연결합니다.</span></article>
+      <article><b>4</b><strong>구체 내용 분석·검증</strong><span>반복 표현·출처 편중·상충 이유와 실제 확인해야 할 쟁점을 제시합니다.</span></article>
     </section>
 
     <section class="status-panel" id="statusPanel" hidden aria-live="polite">
       <p class="step">ANALYSIS IN PROGRESS</p>
-      <h2 id="statusTitle">공개 평판을 수집하고 있습니다.</h2>
-      <p id="statusText">공개 의견 수집 → 대상·중복 확인 → 긍정·부정·상충 분석 → 핵심 주제 도출 → 실행안 생성</p>
+      <h2 id="statusTitle">공개 평판을 확장 수집하고 있습니다.</h2>
+      <p id="statusText">다중 공개 출처 탐색 → 대상 식별 → 중복 제거 → 실제 의견 내용 추출 → 반복·상충 주제 분석 → 출처별 검증</p>
     </section>
 
     <section class="report" id="report" hidden aria-labelledby="reportTitle">
@@ -75,12 +76,12 @@
           <h2 id="reportTitle">평판 분석 보고서</h2>
           <p id="reportMeta"></p>
         </div>
-        <button type="button" id="printBtn">보고서 인쇄</button>
+        <button type="button" id="printBtn" hidden aria-hidden="true" tabindex="-1"></button>
       </div>
 
       <article class="report-definition">
         <strong>이 보고서의 목적</strong>
-        <p>평판은 그 자체가 결론이 아니라 행동을 위한 위험·강점 신호입니다. 온라인에 공개된 평가·경험·후기·비판·칭찬·주장을 취합하고, 내용의 진위를 이유로 자동 제외하지 않습니다. 대신 대상 직접일치·중복·출처·반복 주제·상충·플랫폼 집중도를 분석해 대상자에게는 평판관리와 운영개선 과제를, 이용자에게는 확인·비교·대응 행동을 제시합니다.</p>
+        <p>평판 자료를 단순 나열하지 않고, 공개된 평가·경험·후기·비판·칭찬·주장에서 반복되는 구체 내용을 추출합니다. 동일 대상 여부, 출처 분포, 주제별 긍정·부정·상반 평가, 반복 표현을 근거 번호와 함께 제시하고, 회사·기관 분석에서는 실제 구직·거래 단계에서 무엇을 확인해야 하는지까지 연결합니다.</p>
       </article>
 
       <div class="metric-grid" id="metricGrid"></div>
@@ -116,18 +117,55 @@
         </article>
       </section>
 
+      <section class="report-section deep-analysis" id="deepAnalysisSection" hidden>
+        <div class="section-title">
+          <h3>평판 심층 분석</h3>
+          <span>실제 공개 의견의 내용·반복·상충·출처를 근거별 분석</span>
+        </div>
+        <article class="deep-lead" id="deepAnalysisLead"></article>
+        <article class="identity-analysis" id="identityAnalysis"></article>
+
+        <div class="deep-subsection">
+          <div class="deep-subsection-head"><h4>주제별 구체 내용</h4><span>단순 건수보다 실제 어떤 평가가 있었는지 확인</span></div>
+          <div class="deep-theme-grid" id="deepThemeGrid"></div>
+        </div>
+
+        <div class="deep-subsection">
+          <div class="deep-subsection-head"><h4>긍정·부정 평가의 실제 내용</h4><span>대표 근거를 원문과 함께 확인</span></div>
+          <div class="deep-findings-grid">
+            <section class="deep-finding-column"><h5>긍정 평가에서 나온 내용</h5><div class="deep-finding-list" id="positiveFindingList"></div></section>
+            <section class="deep-finding-column"><h5>부정 평가에서 나온 내용</h5><div class="deep-finding-list" id="negativeFindingList"></div></section>
+          </div>
+        </div>
+
+        <div class="deep-subsection">
+          <div class="deep-subsection-head"><h4>상반 평가·쟁점</h4><span>같은 주제에서 평가가 엇갈리는 지점</span></div>
+          <div class="deep-conflict-list" id="conflictAnalysis"></div>
+        </div>
+
+        <div class="deep-subsection">
+          <div class="deep-subsection-head"><h4>출처·플랫폼별 분포</h4><span>특정 플랫폼 편중 여부 확인</span></div>
+          <div class="platform-breakdown" id="platformBreakdown"></div>
+        </div>
+
+        <div class="deep-subsection">
+          <div class="deep-subsection-head"><h4>반복 표현</h4><span>여러 공개 의견에서 반복된 핵심 단어</span></div>
+          <div class="repeated-terms" id="repeatedTerms"></div>
+        </div>
+      </section>
+
       <section class="report-section" id="signalSection">
         <div class="section-title">
-          <h3>주요 의견 주제</h3>
-          <span>긍정·부정·상충과 출처 수 기준</span>
+          <h3>주제별 근거 요약</h3>
+          <span>심층 분석의 주제 분포·근거번호 확인</span>
         </div>
         <div class="signal-grid" id="signalGrid"></div>
       </section>
 
       <section class="report-section action-section" id="actionSection">
         <div class="section-title">
-          <h3>실행 제안</h3>
-          <span>평판 신호를 실제 행동으로 전환</span>
+          <h3>검증·대응 포인트</h3>
+          <span>실제 반복 주제와 근거를 기준으로 정리</span>
         </div>
         <div class="action-grid">
           <article class="action-panel">
@@ -198,6 +236,7 @@
   </div>
 </footer>
 
-<script src="./app.js?v=20260916-4" defer></script>
+<script src="./deep-analysis.js?v=20260916-1" defer></script>
+<script src="./app.js?v=20260916-5" defer></script>
 </body>
 </html>
