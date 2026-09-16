@@ -22,7 +22,7 @@ async function request(url, options = {}) {
   return fetch(url, {
     method: options.method || 'GET',
     redirect: options.redirect || 'follow',
-    headers: { 'user-agent': 'YEHAVHA-Nexus-Smoke-Test/1.2', ...(options.headers || {}) },
+    headers: { 'user-agent': 'YEHAVHA-Nexus-Smoke-Test/1.3', ...(options.headers || {}) },
     signal: AbortSignal.timeout(15000)
   });
 }
@@ -159,15 +159,17 @@ async function checkReputationRuntime() {
       console.error(`ERROR reputation-analysis: HTTP ${response.status} ${url}`);
       return;
     }
-    for (const marker of ['id="queryForm"','id="report"','./app.js','./style.css']) {
+    for (const marker of ['id="queryForm"','id="report"','./app.js','./style.css','구직자를 위한 회사 평판 분석','회사 이름']) {
       if (!body.includes(marker)) {
         errors += 1;
         console.error(`ERROR reputation-analysis: live marker missing: ${marker}`);
       }
     }
-    if (!body.includes('평판 분석')) {
-      errors += 1;
-      console.error('ERROR reputation-analysis: service title missing');
+    for (const forbidden of ['data-type="person"','data-type="product"','data-type="service"','data-type="place"']) {
+      if (body.includes(forbidden)) {
+        errors += 1;
+        console.error(`ERROR reputation-analysis: retired category still live: ${forbidden}`);
+      }
     }
     console.log(`OK reputation-analysis: HTTP ${response.status} ${response.url}`);
   } catch (error) {
@@ -181,13 +183,17 @@ async function checkReputationRuntime() {
   try {
     const response = await request(`${NEXUS_ORIGIN}${apiPath}`);
     const data = await response.json().catch(() => null);
-    const types = Array.isArray(data?.types) ? data.types.map(item => item?.id) : [];
-    if (!response.ok || data?.ok !== true || data?.service !== 'NEXUS 평판 분석' || !['person','organization','product','service','place'].every(type => types.includes(type))) {
+    if (!response.ok || data?.ok !== true || data?.service !== 'NEXUS 구직자 회사 평판 분석' || data?.schema !== 'nexus-company-reputation-v1' || data?.scope !== 'company-only-public-experience-reviews') {
       errors += 1;
       console.error(`ERROR ${apiPath}: HTTP ${response.status}, payload=${JSON.stringify(data)}`);
       return;
     }
-    console.log(`OK ${apiPath}: HTTP ${response.status}, service contract verified`);
+    if (Array.isArray(data?.types)) {
+      errors += 1;
+      console.error(`ERROR ${apiPath}: retired multi-target types contract still present`);
+      return;
+    }
+    console.log(`OK ${apiPath}: HTTP ${response.status}, company-only service contract verified`);
   } catch (error) {
     errors += 1;
     console.error(`ERROR ${apiPath}: ${error.message}`);
