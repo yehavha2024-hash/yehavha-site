@@ -9,7 +9,7 @@
 <link rel="canonical" href="https://yehavha.com/reputation-analysis/"/>
 <link rel="stylesheet" href="../portal-v2.css"/>
 <link rel="stylesheet" href="../nexus-standard.css"/>
-<link rel="stylesheet" href="./style.css?v=20260916-1"/>
+<link rel="stylesheet" href="./style.css?v=20260916-2"/>
 <title>평판 분석 | YEHAVHA NEXUS</title>
 </head>
 <body>
@@ -21,7 +21,7 @@
     <section class="reputation-hero">
       <p class="eyebrow">PUBLIC SOURCE REPUTATION INTELLIGENCE</p>
       <h1>평판 분석</h1>
-      <p>대상을 먼저 정확히 식별한 뒤 기본·공식 정보와 실제 평판·후기 자료를 분리합니다. 대상과 직접 연결되지 않는 검색 결과는 제외하고, 확인된 근거만 보고서에 남깁니다.</p>
+      <p>단순 검색결과를 나열하는 기능이 아닙니다. 대상을 식별하는 공식·기본자료와 제3자의 실제 평가·경험자료를 분리하고, 서로 독립된 출처에서 같은 평가가 반복되는지 또는 상충하는지를 근거 ID와 함께 검증합니다.</p>
     </section>
   </div>
 </header>
@@ -56,10 +56,10 @@
     </section>
 
     <section class="process" aria-label="분석 절차">
-      <article><b>1</b><strong>대상 직접일치</strong><span>검색 결과에 실제 대상명이 확인되는 자료만 남깁니다.</span></article>
-      <article><b>2</b><strong>기본정보·평판 분리</strong><span>대상 소개와 실제 평가 자료를 구분합니다.</span></article>
-      <article><b>3</b><strong>교차 분석</strong><span>중복과 동일 출처 편중을 줄이고 반복·상충 신호를 봅니다.</span></article>
-      <article><b>4</b><strong>근거 보고서</strong><span>자료가 없을 때도 자료 부재와 판단 한계를 명시합니다.</span></article>
+      <article><b>1</b><strong>대상 직접일치</strong><span>실제 대상과 연결되는 자료만 남깁니다.</span></article>
+      <article><b>2</b><strong>자료 성격 분리</strong><span>공식 소개와 실제 평가·후기를 구분합니다.</span></article>
+      <article><b>3</b><strong>독립출처 교차검증</strong><span>한 사이트 여러 페이지를 여러 출처로 세지 않습니다.</span></article>
+      <article><b>4</b><strong>판단·한계 보고</strong><span>반복·상충·근거부족을 구분해 결론을 냅니다.</span></article>
     </section>
 
     <section class="status-panel" id="statusPanel" hidden aria-live="polite">
@@ -78,11 +78,21 @@
         <button type="button" id="printBtn">보고서 인쇄</button>
       </div>
 
+      <article class="report-definition">
+        <strong>이 보고서에서 말하는 ‘평판’</strong>
+        <p>공식 홈페이지·기업소개·채용공고 자체가 아니라, 직원·면접자·고객·거래상대·이용자 등 제3자의 공개된 평가와 경험을 뜻합니다. 한 도메인의 여러 페이지는 하나의 독립 출처로 보고, 단순 검색·광고·채용도구·연봉도구 페이지는 평판 근거에서 제외합니다.</p>
+      </article>
+
       <div class="metric-grid" id="metricGrid"></div>
 
       <article class="brief executive">
-        <h3>핵심 결과</h3>
+        <h3>판단 요약</h3>
         <p id="executiveSummary"></p>
+        <div class="analysis-facts">
+          <p><strong>현재 판정</strong><span id="verdictText"></span></p>
+          <p><strong>판정 근거</strong><span id="basisText"></span></p>
+          <p><strong>판단 한계</strong><span id="limitText"></span></p>
+        </div>
       </article>
 
       <section class="report-section">
@@ -98,7 +108,7 @@
 
       <section class="report-section">
         <div class="section-title">
-          <h3>평판 자료 상태</h3>
+          <h3>평판 근거 상태</h3>
           <span id="reputationState">확인 중</span>
         </div>
         <article class="brief">
@@ -117,15 +127,15 @@
       <section class="report-section">
         <div class="section-title">
           <h3>기본·공식 근거</h3>
-          <span>대상을 설명하는 공개자료</span>
+          <span>대상 식별·사업·활동 확인용</span>
         </div>
         <div class="source-list" id="profileSourceList"></div>
       </section>
 
       <section class="report-section">
         <div class="section-title">
-          <h3>평판·후기 근거</h3>
-          <span>평가·경험에 해당하는 공개자료</span>
+          <h3>검증된 평판·후기 근거</h3>
+          <span>실제 평가·경험에 해당하는 자료만</span>
         </div>
         <div class="source-list" id="reputationSourceList"></div>
       </section>
@@ -138,7 +148,10 @@
         <div class="search-links" id="searchLinks"></div>
       </section>
 
-      <article class="method" id="methodBox"></article>
+      <details class="method">
+        <summary>분석 기준·수집 범위·판단 한계 보기</summary>
+        <div id="methodBox"></div>
+      </details>
     </section>
   </div>
 </main>
@@ -160,6 +173,6 @@
   </div>
 </footer>
 
-<script src="./app.js?v=20260916-1" defer></script>
+<script src="./app.js?v=20260916-2" defer></script>
 </body>
 </html>
