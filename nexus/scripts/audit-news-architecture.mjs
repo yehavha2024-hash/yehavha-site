@@ -53,6 +53,13 @@ for (const filename of articleFiles) {
   if (!source.includes('../style.css')) fail(`${filename}: shared news stylesheet link missing`);
   if (!source.includes('<article')) fail(`${filename}: article element missing`);
   if (!source.includes('<link rel="canonical"')) fail(`${filename}: canonical link missing`);
+  if (!/<body\b[^>]*\bid\s*=\s*(["'])top\1/i.test(source)) fail(`${filename}: body #top anchor missing`);
+  if (!/class\s*=\s*(["'])[^"']*\bnews-head\b[^"']*\1/i.test(source)) fail(`${filename}: standard news header missing`);
+  if (!/data-footer-standard\s*=\s*(["'])v2\1/i.test(source)) fail(`${filename}: standard footer missing`);
+  for (const requiredClass of ['business-meta', 'research-identifiers', 'copyright', 'contact', 'ai-disclosure']) {
+    const pattern = new RegExp(`class\\s*=\\s*(["'])${requiredClass}\\1`, 'i');
+    if (!pattern.test(source)) fail(`${filename}: footer field ${requiredClass} missing`);
+  }
   for (const match of source.matchAll(/<h2\b[^>]*>([\s\S]*?)<\/h2>/gi)) {
     const heading = visible(match[1]);
     if (heading.length > 24) fail(`${filename}: subheading is too long (${heading})`);
@@ -92,4 +99,4 @@ if (!headers.includes('/news/*') || !headers.includes('Cache-Control: no-cache, 
 const robots = text(path.join(nexusDir, 'robots.txt'));
 if (!robots.includes('Sitemap: https://yehavha.com/news/sitemap.xml')) fail('news sitemap is not declared in robots.txt');
 
-console.log(`YEHAVHA NEWS audit passed: ${articleFiles.length} articles, ${config.categories.length} categories, compact layout/cache/subheadings synchronized.`);
+console.log(`YEHAVHA NEWS audit passed: ${articleFiles.length} articles, ${config.categories.length} categories, article shell/footer/layout/cache/subheadings synchronized.`);
