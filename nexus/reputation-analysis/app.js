@@ -35,8 +35,8 @@
     '&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'
   }[c]));
   const uniqueHosts = items => new Set(items.map(item => item.host || item.provider).filter(Boolean));
-  const isProfileEvidence = item => item.kind === 'profile' || ['기본정보','공식·언론'].includes(item.group);
-  const isOpinionEvidence = item => item.kind === 'opinion' || (!isProfileEvidence(item) && ['재직·면접','공개평가','구매·사용','문제·지원','이용경험','방문경험','이용평가'].includes(item.group));
+  const isProfileEvidence = item => item.kind ? item.kind === 'profile' : ['기본정보','공식·언론'].includes(item.group);
+  const isOpinionEvidence = item => item.kind ? item.kind === 'opinion' : (!isProfileEvidence(item) && ['재직·면접','공개평가','구매·사용','문제·지원','이용경험','방문경험','이용평가'].includes(item.group));
   const sentimentLabel = sentiment => ({positive:'긍정',negative:'부정',neutral:'중립·혼합'}[sentiment] || '중립·혼합');
   const stateLabel = state => ({positive:'긍정 의견',negative:'부정 의견',conflicted:'상반 의견',mixed:'중립·혼합'}[state] || '중립·혼합');
   const profileStateLabel = state => ({identified:'기본정보 확인',limited:'식별자료 제한',unidentified:'공개자료 없음'}[state] || '확인 제한');
