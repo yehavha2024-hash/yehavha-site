@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<meta name="description" content="구직자를 위한 회사 평판 분석. 회사 소개가 아니라 공개된 재직·퇴사·면접 경험과 실제 사용자 의견을 수집해 반복 주제와 확인 포인트를 정리합니다."/>
+<meta name="description" content="구직자를 위한 회사 평판 분석. 회사 소개가 아니라 공개된 재직·퇴사·면접 경험과 사용자 리뷰 통계를 분리해 분석합니다."/>
 <meta name="robots" content="index,follow,max-image-preview:large"/>
 <meta name="theme-color" content="#ffffff"/>
 <link rel="canonical" href="https://yehavha.com/reputation-analysis/"/>
 <link rel="stylesheet" href="../portal-v2.css"/>
 <link rel="stylesheet" href="../nexus-standard.css"/>
-<link rel="stylesheet" href="./style.css?v=20260916-6"/>
+<link rel="stylesheet" href="./style.css?v=20260916-7"/>
 <title>평판 분석 | YEHAVHA NEXUS</title>
 </head>
 <body>
@@ -21,7 +21,7 @@
     <section class="reputation-hero">
       <p class="eyebrow">JOBSEEKER COMPANY REPUTATION INTELLIGENCE</p>
       <h1>평판 분석</h1>
-      <p><strong>구직자를 위한 회사 평판 분석</strong>입니다. 회사 소개·채용공고·연봉정보를 평판으로 세지 않습니다. 공개된 재직자·전직자·면접 경험·퇴사 후기 등 실제 의견이 확인되는 자료만 수집해, 무엇이 반복해서 언급되는지와 면접·입사 전 확인해야 할 사항을 근거별로 정리합니다.</p>
+      <p><strong>구직자를 위한 회사 평판 분석</strong>입니다. 회사 소개·채용공고를 평판으로 세지 않습니다. 공개 평판 플랫폼의 사용자 리뷰 수·평점·면접후기 규모와, 실제 문장까지 공개된 재직·퇴사·면접 경험을 분리해 보여주고 구직자가 확인할 쟁점을 정리합니다.</p>
     </section>
   </div>
 </header>
@@ -34,7 +34,7 @@
           <p class="step">01 · 구직자를 위한 회사 평판 분석</p>
           <h2 id="taskTitle">회사 이름을 입력하세요</h2>
         </div>
-        <p>공개 웹에 게시된 실제 경험·후기만 조사합니다. 비공개 게시물·개인정보·로그인이 필요한 내용을 우회 수집하지 않습니다.</p>
+        <p>공개된 평판 자료만 조사합니다. 로그인·멤버십·비공개 영역은 우회하지 않으며 보이지 않는 후기 내용을 임의로 만들어내지 않습니다.</p>
       </div>
 
       <form class="query-form" id="queryForm">
@@ -43,21 +43,21 @@
           <input id="targetInput" name="target" type="search" maxlength="120" autocomplete="off" placeholder="예: 지방자치연구소(주)" required/>
           <button id="submitBtn" type="submit">평판 분석</button>
         </div>
-        <p class="form-note" id="formHint">같은 이름의 회사가 여러 곳이면 법인명·지역·대표 서비스 등을 함께 입력하면 오인 가능성을 줄일 수 있습니다.</p>
+        <p class="form-note" id="formHint">같은 이름의 회사가 여러 곳이면 법인명·지역 등을 함께 입력하면 오인 가능성을 줄일 수 있습니다.</p>
       </form>
     </section>
 
     <section class="process" aria-label="분석 절차">
-      <article><b>1</b><strong>실제 후기 탐색</strong><span>평판·채용·커뮤니티·블로그의 공개 검색 결과에서 재직·퇴사·면접 경험을 찾습니다.</span></article>
-      <article><b>2</b><strong>회사 식별·제외</strong><span>회사 소개·채용공고·연봉정보·일반 기업정보와 다른 회사 결과를 평판에서 제외합니다.</span></article>
-      <article><b>3</b><strong>내용 중심 분석</strong><span>긍정·부정 건수를 억지로 합산하지 않고 실제 의견 문장을 업무·문화·보상·면접·이직 주제로 묶습니다.</span></article>
-      <article><b>4</b><strong>구직 검증 포인트</strong><span>반복된 의견을 면접 질문·근로조건 확인·입사 전 검증사항으로 전환합니다.</span></article>
+      <article><b>1</b><strong>평판 출처 탐색</strong><span>잡플래닛·블라인드·채용 플랫폼·커뮤니티 등 공개 검색 결과를 폭넓게 찾습니다.</span></article>
+      <article><b>2</b><strong>회사 식별·분리</strong><span>동일 회사를 확인하고 회사소개·채용공고와 사용자 평판자료를 분리합니다.</span></article>
+      <article><b>3</b><strong>통계와 내용 구분</strong><span>리뷰 수·평점 같은 사용자 집계와 실제 공개 후기 문장을 서로 다른 근거로 분석합니다.</span></article>
+      <article><b>4</b><strong>구직 검증 포인트</strong><span>실제 공개 의견의 반복 주제를 면접·근로조건 확인 질문으로 전환합니다.</span></article>
     </section>
 
     <section class="status-panel" id="statusPanel" hidden aria-live="polite">
       <p class="step">ANALYSIS IN PROGRESS</p>
-      <h2 id="statusTitle">실제 회사 후기를 찾고 있습니다.</h2>
-      <p id="statusText">공개 후기 탐색 → 회사명 직접일치 확인 → 소개·채용정보 제외 → 실제 의견 문장 추출 → 반복 주제 분석</p>
+      <h2 id="statusTitle">회사 평판 자료를 찾고 있습니다.</h2>
+      <p id="statusText">평판 플랫폼 탐색 → 회사 직접일치 확인 → 회사소개·채용정보 분리 → 사용자 리뷰 통계 확인 → 실제 공개 의견 분석</p>
     </section>
 
     <section class="report" id="report" hidden aria-labelledby="reportTitle">
@@ -71,7 +71,7 @@
 
       <article class="report-definition">
         <strong>분석 기준</strong>
-        <p>회사 홈페이지·기업소개·채용공고·연봉 통계 자체는 평판 근거로 사용하지 않습니다. 검색 결과에 실제 재직·퇴사·면접·근무 경험 내용이 드러나는 자료만 평판 근거로 채택합니다. 자료가 적으면 억지로 긍정·부정 결론을 만들지 않고 부족하다고 표시합니다.</p>
+        <p>회사 홈페이지·기업소개·채용공고는 평판 내용으로 사용하지 않습니다. 공개 평판 플랫폼의 리뷰 수·평점은 실제 사용자 집계자료로 별도 표시하고, 후기 전문이 공개된 경우에만 그 문장을 내용 분석에 사용합니다.</p>
       </article>
 
       <div class="metric-grid" id="metricGrid"></div>
@@ -80,7 +80,7 @@
         <h3>평판 핵심 요약</h3>
         <p id="executiveSummary"></p>
         <div class="analysis-facts">
-          <p><strong>수집 상태</strong><span id="coverageText"></span></p>
+          <p><strong>평판 규모</strong><span id="coverageText"></span></p>
           <p><strong>주요 반복</strong><span id="themeText"></span></p>
           <p><strong>해석 주의</strong><span id="limitText"></span></p>
         </div>
@@ -94,10 +94,18 @@
         <article class="brief"><p id="identitySummary"></p></article>
       </section>
 
+      <section class="report-section">
+        <div class="section-title">
+          <h3>공개 플랫폼 평판 지표</h3>
+          <span>사용자 리뷰·면접후기 수와 공개 평점</span>
+        </div>
+        <div class="signal-grid" id="aggregateGrid"></div>
+      </section>
+
       <section class="report-section" id="themeSection">
         <div class="section-title">
           <h3>반복해서 나온 실제 의견</h3>
-          <span>실제 후기 문장을 주제별로 묶어 표시</span>
+          <span>문장까지 공개된 후기만 주제별 분석</span>
         </div>
         <div class="signal-grid" id="themeGrid"></div>
       </section>
@@ -105,15 +113,15 @@
       <section class="report-section">
         <div class="section-title">
           <h3>수집된 실제 후기·의견</h3>
-          <span>소개서가 아니라 실제 경험 내용만 표시</span>
+          <span>회사 소개가 아니라 공개 경험 내용만 표시</span>
         </div>
         <div class="source-list" id="opinionSourceList"></div>
       </section>
 
       <section class="report-section">
         <div class="section-title">
-          <h3>출처·플랫폼 분포</h3>
-          <span>한 플랫폼에만 몰렸는지 확인</span>
+          <h3>실제 내용 확인 출처</h3>
+          <span>후기 문장까지 확인된 플랫폼 분포</span>
         </div>
         <div class="signal-grid" id="platformGrid"></div>
       </section>
@@ -162,6 +170,6 @@
   </div>
 </footer>
 
-<script src="./app.js?v=20260916-6" defer></script>
+<script src="./app.js?v=20260916-7" defer></script>
 </body>
 </html>
