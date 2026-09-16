@@ -6,6 +6,17 @@
   const submit = document.getElementById('submitBtn');
 
   const esc = value => String(value ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+  const publicCopy = value => String(value ?? '')
+    .replace(/사용자가 제출한 잡플래닛 공개 화면에는/g, '잡플래닛 화면에는')
+    .replace(/사용자 제출 공개 페이지 캡처/g, '잡플래닛 공개 화면')
+    .replace(/사용자 제출/g, '')
+    .replace(/사용자가 제출한/g, '')
+    .replace(/추가로 제출된/g, '추가로 확인된')
+    .replace(/제출된 공개 화면/g, '공개 화면')
+    .replace(/제출 공개화면/g, '공개화면')
+    .replace(/제출 잡플래닛 공개화면/g, '잡플래닛 공개화면')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
   const formatDate = value => {
     if (!value) return '';
     const d = new Date(value);
@@ -13,7 +24,7 @@
   };
 
   function opinionMarkup(opinions) {
-    if (!opinions.length) return '<article class="source empty"><span class="source-id">—</span><div><strong>자동 검색에서 원문 문장까지 직접 확보된 후기는 없습니다.</strong><p>플랫폼의 공개 집계·사용자 제출 공개 화면과 자동 수집된 후기 원문은 서로 다른 근거로 분리합니다. 집계에 포함된 익명 후기 내용을 임의로 추정하지 않습니다.</p></div></article>';
+    if (!opinions.length) return '<article class="source empty"><span class="source-id">—</span><div><strong>자동 검색에서 원문 문장까지 직접 확보된 후기는 없습니다.</strong><p>플랫폼의 공개 집계와 자동 수집된 후기 원문은 서로 다른 근거로 분리합니다. 집계에 포함된 익명 후기 내용을 임의로 추정하지 않습니다.</p></div></article>';
     return opinions.map(item => {
       const meta = [item.platform, item.host, formatDate(item.publishedAt)].filter(Boolean).join(' · ');
       return `<article class="source">
@@ -43,7 +54,7 @@
   }
 
   function aggregateMarkup(signals) {
-    if (!signals.length) return '<article class="signal signal-empty"><h4>공개 플랫폼 집계 미확보</h4><p>현재 자동 검색 또는 제출 자료에서 회사와 직접 연결되는 사용자 리뷰 집계를 확인하지 못했습니다.</p></article>';
+    if (!signals.length) return '<article class="signal signal-empty"><h4>공개 플랫폼 집계 미확보</h4><p>현재 자동 검색 또는 공개자료에서 회사와 직접 연결되는 사용자 리뷰 집계를 확인하지 못했습니다.</p></article>';
     return signals.map(item => {
       const stats = [];
       if (Number.isFinite(Number(item.reviewCount))) stats.push(`기업리뷰 ${Number(item.reviewCount).toLocaleString('ko-KR')}건`);
@@ -57,13 +68,13 @@
       const cultureTags = Array.isArray(item.cultureTags) ? item.cultureTags : [];
       const positives = Array.isArray(item.positiveMentions) ? item.positiveMentions : [];
       return `<article class="signal">
-        <div class="signal-top"><h4>${esc(item.platform)}</h4><span class="signal-state mixed">${esc(item.sourceLabel || '사용자 집계')}</span></div>
+        <div class="signal-top"><h4>${esc(item.platform)}</h4><span class="signal-state mixed">${esc(publicCopy(item.sourceLabel || '공개 집계'))}</span></div>
         <p>${esc(stats.join(' · ') || '공개 집계 확인')}</p>
         ${categories.length ? `<p><strong>항목별 평점</strong><br>${esc(categories.join(' · '))}</p>` : ''}
         ${cultureTags.length ? `<p><strong>공개 기업문화 요약</strong><br>${esc(cultureTags.join(' · '))}</p>` : ''}
         ${positives.length ? `<p><strong>긍정적으로 언급된 요소</strong><br>${esc(positives.join(' · '))}</p>` : ''}
-        ${item.interpretation ? `<p><strong>해석 주의</strong><br>${esc(item.interpretation)}</p>` : ''}
-        ${item.note ? `<p>${esc(item.note)}</p>` : ''}
+        ${item.interpretation ? `<p><strong>해석 주의</strong><br>${esc(publicCopy(item.interpretation))}</p>` : ''}
+        ${item.note ? `<p>${esc(publicCopy(item.note))}</p>` : ''}
         ${item.url ? `<p><a href="${esc(item.url)}" target="_blank" rel="noopener noreferrer">평판 원문 페이지 ↗</a></p>` : ''}
       </article>`;
     }).join('');
@@ -117,19 +128,19 @@
       const excerpts = (theme.opinionIds || []).slice(0,4).map(id => byId.get(id)).filter(Boolean);
       const detail = excerpts.map(item => `<p><span class="refs">${esc(item.id)} · ${esc(item.platform)}</span><br>${esc(item.excerpt)}</p>`).join('');
       const label = theme.countLabel || (Number.isFinite(Number(theme.count)) ? `${theme.count}건` : '반복 신호');
-      const note = theme.note ? `<p>${esc(theme.note)}</p>` : '';
+      const note = theme.note ? `<p>${esc(publicCopy(theme.note))}</p>` : '';
       return `<article class="signal"><div class="signal-top"><h4>${esc(theme.topic)}</h4><span class="signal-state mixed">${esc(label)}</span></div>${note}${detail}</article>`;
     }).join('');
   }
 
   function platformMarkup(platforms) {
-    if (!platforms.length) return '<article class="signal signal-empty"><h4>자동 원문 확인 출처 없음</h4><p>플랫폼 집계 또는 제출된 공개 화면이 존재하더라도 자동 검색으로 개별 후기 원문까지 확보한 출처는 별도로 표시합니다.</p></article>';
+    if (!platforms.length) return '<article class="signal signal-empty"><h4>자동 원문 확인 출처 없음</h4><p>플랫폼 집계 또는 공개 화면이 존재하더라도 자동 검색으로 개별 후기 원문까지 확보한 출처는 별도로 표시합니다.</p></article>';
     return platforms.map(item => `<article class="signal"><div class="signal-top"><h4>${esc(item.name)}</h4><span class="signal-state mixed">${esc(item.count)}건</span></div><p>${esc(item.hosts.join(' · '))}</p></article>`).join('');
   }
 
   function actionMarkup(actions) {
     if (!actions.length) return '<article class="action-item"><span class="action-priority">확인</span><div><strong>입사 전 기본 검증</strong><p>실제 근무시간·보고라인·수습조건·급여일·공석 사유·전임자 근속기간·업무범위를 근로계약과 면접에서 직접 확인하십시오.</p></div></article>';
-    return actions.map((item,index) => `<article class="action-item"><span class="action-priority">${index === 0 ? '우선' : '확인'}</span><div><strong>${esc(item.title)}</strong><p>${esc(item.text)}</p>${item.refs?.length ? `<span class="action-refs">근거 ${esc(item.refs.join(' · '))}</span>` : ''}</div></article>`).join('');
+    return actions.map((item,index) => `<article class="action-item"><span class="action-priority">${index === 0 ? '우선' : '확인'}</span><div><strong>${esc(item.title)}</strong><p>${esc(publicCopy(item.text))}</p>${item.refs?.length ? `<span class="action-refs">근거 ${esc(publicCopy(item.refs.join(' · ')))}</span>` : ''}</div></article>`).join('');
   }
 
   function evidenceKinds(items) {
@@ -167,7 +178,7 @@
     const coverage = bundle.coverage || {};
     const sourceKinds = new Set(Array.isArray(coverage.kinds) ? coverage.kinds : []);
     if (platformSignals.length) sourceKinds.add('platform-aggregate');
-    if (bundle.snapshotMeta) sourceKinds.add('submitted-public-capture');
+    if (bundle.snapshotMeta) sourceKinds.add('public-capture');
 
     document.getElementById('reportTitle').textContent = `${data.company} 회사 평판 분석`;
     document.getElementById('reportMeta').textContent = `구직자용 · 기준 ${generated}`;
@@ -181,11 +192,11 @@
     const evidenceSummary = publicEvidence.length
       ? ` 평판 플랫폼 외에도 회사와 직접 연결되는 공개자료 ${publicEvidence.length}건을 근거 유형별로 확인했습니다.`
       : ' 추가 공개자료 신호는 확인 범위가 제한적이었습니다.';
-    const snapshotSummary = bundle.snapshotSummary ? ` ${bundle.snapshotSummary}` : '';
+    const snapshotSummary = bundle.snapshotSummary ? ` ${publicCopy(bundle.snapshotSummary)}` : '';
     document.getElementById('executiveSummary').textContent = `${snapshotSummary || data.summary || `${data.company}에 대한 공개 평판자료를 확인했습니다.`}${evidenceSummary}`;
 
     const snapshotMeta = bundle.snapshotMeta;
-    const snapshotText = snapshotMeta ? ` 사용자 제출 ${snapshotMeta.platform} 공개 화면(${snapshotMeta.capturedAt})에서 ${snapshotMeta.period} 작성 리뷰와 플랫폼 집계를 별도 보강자료로 반영했습니다.` : '';
+    const snapshotText = snapshotMeta ? ` ${snapshotMeta.platform} 화면(${snapshotMeta.capturedAt})에서 ${snapshotMeta.period} 작성 리뷰와 플랫폼 집계를 보강자료로 반영했습니다.` : '';
     document.getElementById('coverageText').textContent = `공개 평판 플랫폼 ${platformSignals.length}곳, 플랫폼 표시 리뷰 집계 ${indexedReviews || '확인 제한'}명, 자동 검색으로 원문 문장까지 직접 확보한 후기 ${opinions.length}건, 채용·공공·언론 등 추가 공개자료 ${publicEvidence.length}건을 서로 다른 근거로 분리했습니다.${snapshotText}${indexedInterviews ? ` 면접후기 집계 ${indexedInterviews}건도 별도 확인했습니다.` : ''}`;
     document.getElementById('themeText').textContent = themes.length
       ? themes.slice(0,6).map(t => `${t.topic} ${t.countLabel || (Number.isFinite(Number(t.count)) ? `${t.count}건` : '반복')}`).join(' · ')
@@ -195,10 +206,10 @@
     document.getElementById('limitText').textContent = bundle.snapshotMeta
       ? '익명 리뷰의 반복성은 조직문화 신호로 활용하되 개별 작성자의 주장 자체를 사실로 확정하지 않습니다. 근로시간·수당·폭언·인사 등 법적 쟁점은 근로계약서, 급여명세서, 출퇴근기록, 취업규칙 등 별도 자료가 있어야 판단할 수 있습니다.'
       : '리뷰·평점, 채용공고, 공공기관 자료, 언론자료는 서로 다른 성격의 근거입니다. 검색결과 제목·요약만으로 위법·부정행위를 확정하지 않으며 비공개 후기 내용은 추정하지 않습니다.';
-    document.getElementById('identitySummary').textContent = `${data.identity?.message || '회사명이 검색 결과에 직접 연결되는 자료만 채택했습니다.'}${bundle.snapshotMeta ? ` 추가로 제출된 ${bundle.snapshotMeta.platform} 공개 화면에서 회사명과 플랫폼 표시 내용을 확인해 집계·반복주제를 보강했습니다. 작성자 신원과 각 익명 주장의 사실 여부는 별도 검증하지 않았습니다.` : ''}${publicEvidence.length ? ` 추가 공개자료 ${publicEvidence.length}건도 회사명 직접일치 여부를 확인했습니다.` : ''}`;
+    document.getElementById('identitySummary').textContent = `${data.identity?.message || '회사명이 검색 결과에 직접 연결되는 자료만 채택했습니다.'}${bundle.snapshotMeta ? ` 추가로 ${bundle.snapshotMeta.platform} 화면에서 회사명과 플랫폼 표시 내용을 확인해 집계·반복주제를 보강했습니다. 작성자 신원과 각 익명 주장의 사실 여부는 별도 검증하지 않았습니다.` : ''}${publicEvidence.length ? ` 추가 공개자료 ${publicEvidence.length}건도 회사명 직접일치 여부를 확인했습니다.` : ''}`;
 
     document.getElementById('publicEvidenceList').innerHTML = evidenceMarkup(publicEvidence);
-    document.getElementById('aggregateGrid').innerHTML = aggregateMarkup(platformSignals);
+    if (document.getElementById('aggregateGrid')) document.getElementById('aggregateGrid').innerHTML = aggregateMarkup(platformSignals);
     document.getElementById('themeGrid').innerHTML = themeMarkup(themes, byId);
     document.getElementById('opinionSourceList').innerHTML = opinionMarkup(opinions);
     document.getElementById('platformGrid').innerHTML = platformMarkup(platforms);
@@ -211,8 +222,8 @@
       `<p><strong>채택 기준</strong> ${esc(data.methodology?.accepted || '')}</p>` +
       `<p><strong>제외 기준</strong> ${esc(data.methodology?.excluded || '')}</p>` +
       `<p><strong>검색 범위</strong> ${esc(data.methodology?.coverage || '')}</p>` +
-      `<p><strong>공개자료 보강</strong> ${esc(bundle.note || '평판 외 공개자료는 채용·공공·언론 등 근거 유형별로 분리해 제공합니다.')}</p>` +
-      `<p><strong>내부 처리</strong> 검색 후보 ${esc(data.metrics?.rawCandidates ?? 0)}건 중 회사 직접일치 자료를 분리하고, 회사 소개·채용정보는 평판 내용에서 제외했습니다. 플랫폼 집계, 자동 확보 후기 원문, 제출 공개화면, 기타 공개자료를 서로 다른 증거계층으로 처리합니다.</p>`;
+      `<p><strong>공개자료 보강</strong> ${esc(publicCopy(bundle.note || '평판 외 공개자료는 채용·공공·언론 등 근거 유형별로 분리해 제공합니다.'))}</p>` +
+      `<p><strong>내부 처리</strong> 검색 후보 ${esc(data.metrics?.rawCandidates ?? 0)}건 중 회사 직접일치 자료를 분리하고, 회사 소개·채용정보는 평판 내용에서 제외했습니다. 플랫폼 집계, 자동 확보 후기 원문, 공개화면, 기타 공개자료를 서로 다른 증거계층으로 처리합니다.</p>`;
 
     status.hidden = true;
     report.hidden = false;
