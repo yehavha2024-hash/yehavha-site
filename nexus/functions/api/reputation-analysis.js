@@ -27,11 +27,13 @@ function json(body,status=200){return new Response(JSON.stringify(body),{status,
 function clean(value,max=160){return String(value||'').replace(/\s+/g,' ').trim().slice(0,max)}
 function decodeHtml(value){return String(value||'').replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g,'$1').replace(/&#(\d+);/g,(_,n)=>String.fromCharCode(Number(n))).replace(/&#x([0-9a-f]+);/gi,(_,n)=>String.fromCharCode(parseInt(n,16))).replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;|&apos;/g,"'").replace(/&nbsp;/g,' ')}
 function stripTags(value){return decodeHtml(value).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim()}
+function pageText(value){return stripTags(String(value||'').replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi,' ').replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi,' ').replace(/<noscript\b[^>]*>[\s\S]*?<\/noscript>/gi,' '))}
 function entityText(value){return String(value||'').normalize('NFKC').toLowerCase().replace(/&[a-z0-9#]+;/gi,' ').replace(/[\s"'`’‘“”·ㆍ•:;,.!?()[\]{}<>/\\|_+=~^*-]+/g,'')}
 function sourceHost(url){try{return new URL(url).hostname.replace(/^www\./,'')}catch{return ''}}
 function normalizeUrl(url){try{const u=new URL(url);['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid'].forEach(k=>u.searchParams.delete(k));u.hash='';return u.toString()}catch{return url}}
 function tag(block,name){const m=String(block||'').match(new RegExp(`<${name}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${name}>`,'i'));return m?stripTags(m[1]):''}
 function targetAliases(type,target){const raw=String(target||'').normalize('NFKC').trim();const values=new Set([raw]);if(type==='organization'){values.add(raw.replace(/\(주\)|㈜|주식회사|유한회사|재단법인|사단법인/gi,'').trim());values.add(raw.replace(/\b(co\.?|corp\.?|corporation|inc\.?|ltd\.?|llc)\b/gi,'').trim())}return [...values].map(entityText).filter(v=>v.length>=2)}
+function textMatchesTarget(target,text){const hay=entityText(text);return targetAliases('organization',target).some(alias=>hay.includes(alias))}
 function relevantToTarget(type,target,item){let decoded=item.url||'';try{decoded=decodeURIComponent(decoded)}catch{}const hay=entityText(`${item.title} ${item.snippet} ${item.sourceName||''} ${decoded}`);const aliases=targetAliases(type,target);if(aliases.some(a=>hay.includes(a)))return true;const tokens=String(target||'').normalize('NFKC').toLowerCase().split(/[\s"'`’‘“”·ㆍ•:;,.!?()[\]{}<>/\\|_+=~^*-]+/).map(entityText).filter(t=>/[가-힣]/.test(t)?t.length>=2:t.length>=3);return tokens.length>=2&&tokens.every(t=>hay.includes(t))}
 function dedupe(items){const seen=new Set(),out=[];for(const item of items){const url=normalizeUrl(item.url);const key=`${url}|${entityText(item.title).slice(0,80)}`;if(!url||seen.has(key))continue;seen.add(key);out.push({...item,url})}return out}
 function sourceClass(host){const h=String(host||'').toLowerCase();if(/jobplanet|teamblind|blind/.test(h))return '평판·익명 커뮤니티';if(/saramin|jobkorea|wanted|remember/.test(h))return '채용·경력 플랫폼';if(/blog\.naver|tistory|brunch|medium/.test(h))return '블로그·개인 게시물';if(/cafe\.naver|dcinside|fmkorea|clien|ppomppu|theqoo|ruliweb/.test(h))return '커뮤니티';if(/news|yna|reuters|apnews|chosun|joongang|donga|hani|khan|mk\.co|hankyung|sedaily|etnews/.test(h))return '언론·보도';return '웹 공개자료'}
@@ -39,7 +41,7 @@ function evidenceKind(item){if(NON_REPUTATION_GROUPS.has(item.group))return 'pro
 function rankCollectedItems(items){return [...items].sort((a,b)=>{const ak=evidenceKind(a)==='opinion'?3:evidenceKind(a)==='mention'?2:evidenceKind(a)==='profile'?1:0;const bk=evidenceKind(b)==='opinion'?3:evidenceKind(b)==='mention'?2:evidenceKind(b)==='profile'?1:0;return bk-ak})}
 function diversify(items,perHostGroup=6,max=48){const counts=new Map(),out=[];for(const item of items){const host=sourceHost(item.url)||item.sourceName||item.provider||'unknown';const key=`${item.group}|${host}`;const count=counts.get(key)||0;if(count>=perHostGroup)continue;counts.set(key,count+1);out.push(item);if(out.length>=max)break}return out}
 
-async function fetchText(url,timeoutMs=6500){const c=new AbortController();const timer=setTimeout(()=>c.abort(),timeoutMs);try{const r=await fetch(url,{headers:{accept:'text/html,application/xhtml+xml,application/rss+xml,application/xml;q=0.9,*/*;q=0.7','user-agent':'Mozilla/5.0 (compatible; YEHAVHA-NEXUS-Reputation/5.0; +https://yehavha.com/)'},signal:c.signal});if(!r.ok)throw new Error(`upstream_${r.status}`);return await r.text()}finally{clearTimeout(timer)}}
+async function fetchText(url,timeoutMs=6500){const c=new AbortController();const timer=setTimeout(()=>c.abort(),timeoutMs);try{const r=await fetch(url,{headers:{accept:'text/html,application/xhtml+xml,application/rss+xml,application/xml;q=0.9,*/*;q=0.7','user-agent':'Mozilla/5.0 (compatible; YEHAVHA-NEXUS-Reputation/5.1; +https://yehavha.com/)'},signal:c.signal});if(!r.ok)throw new Error(`upstream_${r.status}`);return await r.text()}finally{clearTimeout(timer)}}
 function bingRssUrl(q){return `https://www.bing.com/search?format=rss&setlang=ko-KR&cc=KR&q=${encodeURIComponent(q)}`}
 function bingHtmlUrl(q){return `https://www.bing.com/search?setlang=ko-KR&cc=KR&count=15&q=${encodeURIComponent(q)}`}
 function ddgHtmlUrl(q){return `https://html.duckduckgo.com/html/?kl=kr-kr&q=${encodeURIComponent(q)}`}
@@ -70,6 +72,8 @@ function parseTargetAnchors(html,base,target,provider,defaultGroup='기본정보
   }
   return dedupe(out);
 }
+function urlParam(url,key){try{return new URL(url).searchParams.get(key)||''}catch{return ''}}
+function excerptAroundTarget(text,target,max=850){const flat=clean(text,20000);const idx=flat.indexOf(target);if(idx<0)return clean(flat,max);const start=Math.max(0,idx-120);return flat.slice(start,start+max)}
 async function collectDirectOrganization(target){
   const sources=[
     {provider:'잡코리아',base:'https://www.jobkorea.co.kr/',url:`https://www.jobkorea.co.kr/Search/?stext=${encodeURIComponent(target)}`},
@@ -79,20 +83,51 @@ async function collectDirectOrganization(target){
   for(const source of sources){
     try{
       const html=await fetchText(source.url,8000);successes++;
-      const matched=parseTargetAnchors(html,source.base,target,source.provider,'기본정보',true)
-        .filter(item=>sourceHost(item.url).endsWith(new URL(source.base).hostname.replace(/^www\./,'')))
-        .slice(0,8);
+      const allAnchors=parseTargetAnchors(html,source.base,target,source.provider,'기본정보',false)
+        .filter(item=>sourceHost(item.url).endsWith(new URL(source.base).hostname.replace(/^www\./,'')));
+      const strict=allAnchors.filter(item=>textMatchesTarget(target,item.title))
+        .filter(item=>!/[?&](?:searchword|stext)=/i.test(item.url));
+      const fallback=allAnchors.filter(item=>relevantToTarget('organization',target,item))
+        .filter(item=>!/\/(?:Search|search)(?:\/|\?)/.test(item.url))
+        .filter(item=>/company|기업|csn=|co_read|corp|company-info|company-review/i.test(item.url));
+      const matched=dedupe([...(strict.length?strict:fallback)]).slice(0,12);
       out.push(...matched);
-      const landingUrls=[...new Set(matched.map(item=>item.url).filter(url=>/company|기업|csn=|co_read|corp|company-info/i.test(url)).slice(0,4))];
+
+      const landingUrls=[...new Set(matched.map(item=>item.url).filter(url=>/company|기업|csn=|co_read|corp|company-info/i.test(url)).slice(0,6))];
+      const discovered=[];
       for(const landingUrl of landingUrls){
         try{
           const landing=await fetchText(landingUrl,6500);successes++;
           const childAnchors=parseTargetAnchors(landing,landingUrl,target,source.provider,'기본정보',false)
             .filter(item=>sourceHost(item.url).endsWith(new URL(source.base).hostname.replace(/^www\./,'')))
             .filter(item=>item.group==='재직·면접')
-            .slice(0,8);
+            .slice(0,10);
+          discovered.push(...childAnchors);
           out.push(...childAnchors);
         }catch{failures++;}
+      }
+
+      if(source.provider==='사람인'){
+        const csns=new Set([...matched,...discovered].map(item=>urlParam(item.url,'csn')).filter(Boolean));
+        for(const csn of [...csns].slice(0,4)){
+          const reviewUrl=`https://www.saramin.co.kr/zf_user/company-review/view?csn=${encodeURIComponent(csn)}`;
+          if(out.some(item=>normalizeUrl(item.url)===normalizeUrl(reviewUrl)))continue;
+          try{
+            const reviewHtml=await fetchText(reviewUrl,8000);successes++;
+            const text=pageText(reviewHtml);
+            if(!textMatchesTarget(target,text))continue;
+            if(!/(리뷰|기업문화|평점|재직|근속|출근|복지|급여|연봉|면접|직원)/i.test(text))continue;
+            out.push({
+              title:`${target} 사람인 기업리뷰`,
+              url:reviewUrl,
+              snippet:excerptAroundTarget(text,target,900),
+              publishedAt:null,
+              provider:'사람인',
+              group:'재직·면접',
+              sourceName:'사람인'
+            });
+          }catch{failures++;}
+        }
       }
     }catch{failures++;}
   }
@@ -192,4 +227,4 @@ export async function onRequestPost({request}){
     disclaimer:'이 보고서는 공개 웹에 게시된 평가·경험·주장을 취합한 평판 인텔리전스입니다. 개별 의견의 사실 여부를 자동으로 확정하지 않으며, 긍정·부정 의견 모두 게시 맥락과 출처를 함께 제시합니다. 중요한 의사결정에서는 원문, 공식자료, 당사자 설명 등 추가 확인이 필요합니다.'
   })
 }
-export async function onRequestGet(){return json({ok:true,service:'NEXUS 평판 분석',version:'5.0',providers:['Bing RSS','Bing Web','DuckDuckGo','Google News','JobKorea direct','Saramin direct'],types:Object.entries(TARGET_TYPES).map(([id,v])=>({id,label:v.label}))})}
+export async function onRequestGet(){return json({ok:true,service:'NEXUS 평판 분석',version:'5.1',providers:['Bing RSS','Bing Web','DuckDuckGo','Google News','JobKorea direct','Saramin direct'],types:Object.entries(TARGET_TYPES).map(([id,v])=>({id,label:v.label}))})}
