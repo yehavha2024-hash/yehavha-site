@@ -6,7 +6,7 @@ async function probe(label, probeUrl) {
   try {
     const response = await fetch(probeUrl, {
       redirect: 'follow',
-      headers: { 'user-agent': 'Mozilla/5.0 (compatible; YEHAVHA-Nexus-Reputation-Regression/2.0)' },
+      headers: { 'user-agent': 'Mozilla/5.0 (compatible; YEHAVHA-Nexus-Reputation-Regression/2.1)' },
       signal: controller.signal
     });
     const text = await response.text();
@@ -26,7 +26,7 @@ try {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
-      'user-agent': 'YEHAVHA-Nexus-Reputation-Regression/2.0'
+      'user-agent': 'YEHAVHA-Nexus-Reputation-Regression/2.1'
     },
     body: JSON.stringify({ type: 'organization', target: '지방자치연구소' }),
     signal: controller.signal
@@ -44,7 +44,7 @@ try {
   const expectedHost = [...hosts].some(host =>
     ['lgrc.co.kr', 'jobkorea.co.kr', 'saramin.co.kr', 'jobplanet.co.kr'].some(domain => host === domain || host.endsWith(`.${domain}`))
   );
-  const opinionSources = Number(data?.metrics?.opinionSources ?? data?.metrics?.reputationSources ?? 0);
+  const opinionSources = Number(data?.metrics?.opinionSources ?? 0);
   const opinionHosts = Number(data?.metrics?.opinionHosts ?? 0);
   const classifiedOpinions = evidence.filter(item => item?.kind === 'opinion').length;
 
@@ -55,7 +55,7 @@ try {
     await probe('jobplanet', `https://www.jobplanet.co.kr/search?query=${target}`);
     await probe('jobkorea', `https://www.jobkorea.co.kr/Search/?stext=${target}`);
     await probe('saramin', `https://www.saramin.co.kr/zf_user/search?searchword=${target}`);
-    console.warn('WARN reputation opinion sources are currently zero. Third-party search visibility is treated as a live-data warning, not an architecture failure.');
+    throw new Error(`public opinion collection regressed to zero; metrics=${JSON.stringify(data?.metrics)}`);
   }
 
   if (Number(data?.metrics?.sources || 0) < 1) {
@@ -64,8 +64,8 @@ try {
   if (Number(data?.metrics?.profileSources || 0) < 1) {
     throw new Error(`profile sources still zero; metrics=${JSON.stringify(data?.metrics)}`);
   }
-  if (!Number.isFinite(Number(data?.metrics?.opinionSources))) {
-    throw new Error(`opinionSources metric missing from v5 contract; metrics=${JSON.stringify(data?.metrics)}`);
+  if (classifiedOpinions < 1) {
+    throw new Error(`opinion evidence classification missing; metrics=${JSON.stringify(data?.metrics)}`);
   }
   if (!expectedHost) {
     throw new Error(`known public-source domains missing; hosts=${JSON.stringify([...hosts])}`);
