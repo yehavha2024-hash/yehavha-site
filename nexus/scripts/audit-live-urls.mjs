@@ -22,7 +22,7 @@ async function request(url, options = {}) {
   return fetch(url, {
     method: options.method || 'GET',
     redirect: options.redirect || 'follow',
-    headers: { 'user-agent': 'YEHAVHA-Nexus-Smoke-Test/1.3', ...(options.headers || {}) },
+    headers: { 'user-agent': 'YEHAVHA-Nexus-Smoke-Test/1.4', ...(options.headers || {}) },
     signal: AbortSignal.timeout(15000)
   });
 }
@@ -159,7 +159,7 @@ async function checkReputationRuntime() {
       console.error(`ERROR reputation-analysis: HTTP ${response.status} ${url}`);
       return;
     }
-    for (const marker of ['id="queryForm"','id="report"','./app.js','./style.css','구직자를 위한 회사 평판 분석','회사 이름']) {
+    for (const marker of ['id="queryForm"','id="report"','./app.js','./style.css','구직자를 위한 회사 평판 분석','회사 이름','공개 플랫폼 평판 지표']) {
       if (!body.includes(marker)) {
         errors += 1;
         console.error(`ERROR reputation-analysis: live marker missing: ${marker}`);
@@ -183,7 +183,7 @@ async function checkReputationRuntime() {
   try {
     const response = await request(`${NEXUS_ORIGIN}${apiPath}`);
     const data = await response.json().catch(() => null);
-    if (!response.ok || data?.ok !== true || data?.service !== 'NEXUS 구직자 회사 평판 분석' || data?.schema !== 'nexus-company-reputation-v1' || data?.scope !== 'company-only-public-experience-reviews') {
+    if (!response.ok || data?.ok !== true || data?.service !== 'NEXUS 구직자 회사 평판 분석' || data?.schema !== 'nexus-company-reputation-v2' || data?.scope !== 'company-only-public-experience-reviews') {
       errors += 1;
       console.error(`ERROR ${apiPath}: HTTP ${response.status}, payload=${JSON.stringify(data)}`);
       return;
@@ -193,7 +193,7 @@ async function checkReputationRuntime() {
       console.error(`ERROR ${apiPath}: retired multi-target types contract still present`);
       return;
     }
-    console.log(`OK ${apiPath}: HTTP ${response.status}, company-only service contract verified`);
+    console.log(`OK ${apiPath}: HTTP ${response.status}, company-only v2 service contract verified`);
   } catch (error) {
     errors += 1;
     console.error(`ERROR ${apiPath}: ${error.message}`);
