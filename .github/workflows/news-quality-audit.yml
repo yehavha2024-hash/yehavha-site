@@ -1,0 +1,38 @@
+name: YEHAVHA NEWS quality gate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'nexus/news/articles/**'
+      - 'nexus/news/news-data.js'
+      - 'nexus/news/sitemap.xml'
+      - 'nexus/news/index.html'
+      - 'nexus/news/about.html'
+      - 'nexus/news/app.js'
+      - 'nexus/news/style.css'
+      - 'nexus/scripts/audit-news-architecture.mjs'
+      - '.github/workflows/news-quality-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: yehavha-news-quality
+  cancel-in-progress: true
+
+jobs:
+  audit-news:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Validate YEHAVHA NEWS depth, structure and regression
+        run: node nexus/scripts/audit-news-architecture.mjs
