@@ -1,112 +1,43 @@
-const primaryUrl = 'https://yehavha.com/api/reputation-analysis';
-const deepUrl = 'https://yehavha.com/api/reputation-analysis-deep';
-const controller = new AbortController();
-const timer = setTimeout(() => controller.abort(), 45000);
-const requestBody = JSON.stringify({ type: 'organization', target: '지방자치연구소' });
+const apiUrl = 'https://yehavha.com/api/reputation-analysis';
+const pageUrl = 'https://yehavha.com/reputation-analysis/';
+const company = '지방자치연구소';
 
-async function probe(label, probeUrl) {
-  try {
-    const response = await fetch(probeUrl, {
-      redirect: 'follow',
-      headers: { 'user-agent': 'Mozilla/5.0 (compatible; YEHAVHA-Nexus-Reputation-Regression/3.0)' },
-      signal: controller.signal
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+async function fetchNewSchema() {
+  let last;
+  for (let attempt = 1; attempt <= 8; attempt++) {
+    const response = await fetch(apiUrl, {
+      method:'POST',
+      headers:{'content-type':'application/json','user-agent':'YEHAVHA-Nexus-Reputation-Audit/6.0'},
+      body:JSON.stringify({company})
     });
-    const text = await response.text();
-    const hasTarget = text.includes('지방자치연구소');
-    const links = [...text.matchAll(/href=["']([^"']+)["']/gi)]
-      .map(match => match[1])
-      .filter(href => /jobplanet|jobkorea|saramin|naver|daum|kakao|company|review|salary|interview|기업|리뷰|연봉|면접/i.test(href))
-      .slice(0, 12);
-    console.log(`PROBE ${label}: HTTP ${response.status}; final=${response.url}; bytes=${text.length}; target=${hasTarget}; links=${JSON.stringify(links)}`);
-  } catch (error) {
-    console.log(`PROBE ${label}: ERROR ${error.message}`);
+    const data = await response.json().catch(() => null);
+    last = {response,data};
+    if (response.ok && data?.schema === 'nexus-company-reputation-v1') return data;
+    if (attempt < 8) await sleep(10000);
   }
+  throw new Error(`new company-reputation schema not deployed; status=${last?.response?.status}; schema=${last?.data?.schema}`);
 }
 
-async function postJson(url, label) {
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-      'user-agent': 'YEHAVHA-Nexus-Reputation-Regression/3.0'
-    },
-    body: requestBody,
-    signal: controller.signal
-  });
-  const data = await response.json().catch(() => null);
-  if (!response.ok || data?.ok !== true) {
-    throw new Error(`${label} HTTP ${response.status}; payload=${JSON.stringify(data)}`);
-  }
-  return data;
+const page = await fetch(pageUrl, {headers:{'user-agent':'YEHAVHA-Nexus-Reputation-Audit/6.0'}}).then(r => r.text());
+if (!page.includes('구직자를 위한 회사 평판 분석')) throw new Error('jobseeker company reputation title missing');
+for (const forbidden of ['data-type="person"','data-type="product"','data-type="service"','data-type="place"']) {
+  if (page.includes(forbidden)) throw new Error(`removed reputation category still present: ${forbidden}`);
 }
+if (!page.includes('회사 이름')) throw new Error('company-only input label missing');
 
-try {
-  const [data, deep] = await Promise.all([
-    postJson(primaryUrl, 'primary'),
-    postJson(deepUrl, 'deep')
-  ]);
+const data = await fetchNewSchema();
+const opinions = Array.isArray(data.opinions) ? data.opinions : [];
+const themes = Array.isArray(data.themes) ? data.themes : [];
+const platforms = Array.isArray(data.platforms) ? data.platforms : [];
 
-  if (data?.schema !== 'nexus-reputation-analysis-v5') {
-    throw new Error(`unexpected reputation schema: ${data?.schema}`);
-  }
-  if (deep?.schema !== 'nexus-reputation-deep-v1') {
-    throw new Error(`unexpected deep reputation schema: ${deep?.schema}`);
-  }
+if (data.company !== company) throw new Error(`company mismatch: ${data.company}`);
+if ('positiveOpinions' in (data.metrics || {}) || 'negativeOpinions' in (data.metrics || {})) throw new Error('legacy positive/negative aggregate metrics still present');
+if (!Array.isArray(data.searchLinks) || data.searchLinks.length < 4) throw new Error('company review verification links missing');
+if (!data.methodology?.excluded?.includes('회사 소개')) throw new Error('non-opinion exclusion rule missing');
+if (opinions.some(item => !item.excerpt || item.excerpt.trim().length < 24)) throw new Error('opinion without concrete excerpt detected');
+if (opinions.some(item => /(회사소개|기업소개|채용공고|연봉정보|재무정보)/.test(item.excerpt) && !/(야근|퇴근|워라밸|상사|대표|분위기|면접|퇴사|이직|업무|복지|급여|연봉)/.test(item.excerpt))) throw new Error('generic company information leaked into opinion evidence');
+if (opinions.length && !themes.length) throw new Error('accepted opinions exist but no themes were produced');
 
-  const evidence = Array.isArray(data.evidence) ? data.evidence : [];
-  const opinions = evidence.filter(item => item?.kind === 'opinion');
-  const hosts = new Set(evidence.map(item => String(item?.host || '')).filter(Boolean));
-  const opinionHostsSet = new Set(opinions.map(item => String(item?.host || '')).filter(Boolean));
-  const expectedHost = [...hosts].some(host =>
-    ['lgrc.co.kr', 'jobkorea.co.kr', 'saramin.co.kr', 'jobplanet.co.kr'].some(domain => host === domain || host.endsWith(`.${domain}`))
-  );
-  const opinionSources = Number(data?.metrics?.opinionSources ?? opinions.length);
-  const opinionHosts = Number(data?.metrics?.opinionHosts ?? opinionHostsSet.size);
-
-  const deepEvidence = Array.isArray(deep.evidence) ? deep.evidence : [];
-  const deepHosts = new Set(deepEvidence.map(item => String(item?.host || '')).filter(Boolean));
-  const deepSignals = Array.isArray(deep.signals) ? deep.signals : [];
-  const concreteDeepItems = deepEvidence.filter(item => String(item?.snippet || '').replace(/\s+/g, ' ').trim().length >= 20);
-  const deepDirect = Number(deep?.metrics?.directLinked ?? deepEvidence.filter(item => item?.identityConfidence === 'direct').length);
-
-  const combinedKeys = new Set();
-  for (const item of [...opinions, ...deepEvidence]) {
-    const key = `${String(item?.url || '').replace(/#.*$/, '')}|${String(item?.title || '').trim().toLowerCase()}`;
-    if (key !== '|') combinedKeys.add(key);
-  }
-
-  console.log(`Reputation primary: sources=${data?.metrics?.sources}, profile=${data?.metrics?.profileSources}, opinions=${opinionSources}, opinionHosts=${opinionHosts}, hosts=${[...hosts].join(', ')}`);
-  console.log(`Reputation deep: opinions=${deepEvidence.length}, hosts=${deepHosts.size}, direct=${deepDirect}, signals=${deepSignals.length}, concrete=${concreteDeepItems.length}, hostsList=${[...deepHosts].join(', ')}`);
-  console.log(`Reputation combined distinct opinion records=${combinedKeys.size}`);
-
-  if (opinionSources < 5 || opinionHosts < 3) {
-    const target = encodeURIComponent('지방자치연구소');
-    await probe('jobplanet', `https://www.jobplanet.co.kr/search?query=${target}`);
-    await probe('jobkorea', `https://www.jobkorea.co.kr/Search/?stext=${target}`);
-    await probe('saramin', `https://www.saramin.co.kr/zf_user/search?searchword=${target}`);
-    throw new Error(`primary opinion coverage too shallow; opinions=${opinionSources}, hosts=${opinionHosts}, metrics=${JSON.stringify(data?.metrics)}`);
-  }
-  if (Number(data?.metrics?.sources || 0) < 1 || Number(data?.metrics?.profileSources || 0) < 1) {
-    throw new Error(`primary identification coverage missing; metrics=${JSON.stringify(data?.metrics)}`);
-  }
-  if (!expectedHost) {
-    throw new Error(`known public-source domains missing; hosts=${JSON.stringify([...hosts])}`);
-  }
-  if (deepEvidence.length < 3 || deepHosts.size < 2) {
-    const target = encodeURIComponent('지방자치연구소');
-    await probe('naver', `https://search.naver.com/search.naver?where=nexearch&query=${target}`);
-    await probe('daum', `https://search.daum.net/search?w=tot&q=${target}`);
-    await probe('jobplanet', `https://www.jobplanet.co.kr/search?query=${target}`);
-    throw new Error(`deep public-source expansion too shallow; opinions=${deepEvidence.length}, hosts=${deepHosts.size}, metrics=${JSON.stringify(deep?.metrics)}`);
-  }
-  if (deepSignals.length < 1 || concreteDeepItems.length < 2) {
-    throw new Error(`deep content analysis missing; signals=${deepSignals.length}, concreteItems=${concreteDeepItems.length}`);
-  }
-  if (combinedKeys.size < 12) {
-    throw new Error(`combined reputation evidence unexpectedly small; distinct=${combinedKeys.size}`);
-  }
-
-  console.log(`Reputation intelligence regression passed: primary=${opinionSources}/${opinionHosts}hosts, deep=${deepEvidence.length}/${deepHosts.size}hosts, combined=${combinedKeys.size}, signals=${deepSignals.length}`);
-} finally {
-  clearTimeout(timer);
-}
+console.log(`Company reputation audit passed: opinions=${opinions.length}, platforms=${platforms.length}, themes=${themes.length}, excluded=${data.metrics?.excludedNonOpinion ?? 0}`);
