@@ -1,0 +1,53 @@
+.deep-analysis{margin-top:13px}
+.deep-analysis .section-title{margin-bottom:7px}
+.deep-lead,.identity-analysis{padding:12px 13px;border:1px solid #cfd8e2;border-radius:9px;background:#fff}
+.deep-lead{font-size:13px;line-height:1.65;color:#26313b;border-left:4px solid var(--accent)}
+.deep-lead strong{color:#111}
+.identity-analysis{margin-top:6px;background:#f9fbfd}
+.identity-analysis strong{display:block;margin-bottom:4px;color:#17466f;font-size:12px}
+.identity-analysis p{margin:0;color:#4f5b67;font-size:11px;line-height:1.55}
+.deep-subsection{margin-top:11px}
+.deep-subsection-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:6px}
+.deep-subsection-head h4{margin:0;color:#111;font-size:15px}
+.deep-subsection-head span{color:#6c7783;font-size:10px;text-align:right}
+.deep-theme-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.deep-theme{padding:10px 11px;border:1px solid #d5dce4;border-radius:9px;background:#fff}
+.deep-theme-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.deep-theme h4{margin:0;font-size:13.5px;color:#111}
+.deep-state{font-size:9.5px;font-weight:800;white-space:nowrap}
+.deep-state.positive{color:#176447}.deep-state.negative{color:#9c1d28}.deep-state.conflicted{color:#8a5a00}.deep-state.mixed{color:#536170}
+.deep-theme-stats{margin:5px 0 7px;color:#66717d;font-size:10.5px;line-height:1.45}
+.deep-theme-evidence{display:grid;gap:6px}
+.deep-theme-evidence>div{padding-top:6px;border-top:1px solid #edf0f3}
+.deep-theme-evidence b{display:block;margin-bottom:3px;color:#334455;font-size:10.5px}
+.deep-theme-evidence p{display:grid;grid-template-columns:34px 1fr;gap:5px;margin:2px 0;color:#4f5b67;font-size:10.5px;line-height:1.45}
+.deep-theme-evidence p span{color:#225f96;font-weight:800}
+.deep-theme-refs{margin:6px 0 0;color:#225f96;font-size:9.5px;font-weight:800}
+.deep-findings-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.deep-finding-column{padding:9px 10px;border:1px solid #d5dce4;border-radius:9px;background:#fff}
+.deep-finding-column>h5{margin:0 0 6px;font-size:12px;color:#111}
+.deep-finding-list{display:grid;gap:5px}
+.deep-finding{padding:7px 0;border-top:1px solid #edf0f3}
+.deep-finding:first-child{padding-top:0;border-top:0}
+.deep-finding-meta{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:3px}
+.deep-finding-meta span{padding:2px 5px;border-radius:5px;background:#eef3f7;color:#536170;font-size:8.8px;font-weight:800}
+.deep-finding strong{display:block;color:#111;font-size:11.5px;line-height:1.35}
+.deep-finding p{margin:3px 0;color:#596572;font-size:10.5px;line-height:1.48}
+.deep-finding-foot{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.deep-finding-foot span{color:#6c7783;font-size:9px}
+.deep-finding-foot a{color:#225f96;font-size:9.5px;font-weight:800;text-decoration:none;white-space:nowrap}
+.deep-conflict-list{display:grid;gap:5px}
+.deep-conflict{padding:9px 10px;border:1px solid #d7dee6;border-radius:8px;background:#fff}
+.deep-conflict strong{font-size:11.5px;color:#111}
+.deep-conflict p{margin:3px 0;color:#596572;font-size:10.5px;line-height:1.48}
+.deep-conflict span{color:#225f96;font-size:9.5px;font-weight:800}
+.platform-breakdown{display:grid;gap:4px}
+.platform-row{display:grid;grid-template-columns:180px 1fr;gap:3px 10px;padding:7px 9px;border:1px solid #d7dee6;border-radius:8px;background:#fff}
+.platform-row strong{font-size:10.8px;color:#111;overflow-wrap:anywhere}
+.platform-row span{font-size:10.2px;color:#4f5b67}
+.platform-row small{grid-column:1/-1;color:#75808b;font-size:9.3px;line-height:1.4}
+.repeated-terms{display:flex;flex-wrap:wrap;gap:5px}
+.repeated-terms span{padding:5px 7px;border:1px solid #d3dbe3;border-radius:7px;background:#fff;color:#4f5b67;font-size:10px}
+.repeated-terms b{color:#225f96}
+.deep-empty{padding:10px;border:1px dashed #cfd8e2;border-radius:8px;background:#fff;color:#65717d;font-size:10.5px;line-height:1.5}
+@media(max-width:760px){.deep-theme-grid,.deep-findings-grid{grid-template-columns:1fr}.platform-row{grid-template-columns:1fr}.platform-row small{grid-column:1}.deep-theme{padding:9px 10px}}
