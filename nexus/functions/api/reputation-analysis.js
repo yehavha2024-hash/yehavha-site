@@ -30,26 +30,45 @@ function pageText(value){return stripTags(String(value||'').replace(/<script\b[^
 function tag(block,name){const m=String(block||'').match(new RegExp(`<${name}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${name}>`,'i'));return m?stripTags(m[1]):''}
 function sourceHost(url){try{return new URL(url).hostname.replace(/^www\./,'')}catch{return ''}}
 function normalizeUrl(url){try{const u=new URL(url);['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid'].forEach(k=>u.searchParams.delete(k));u.hash='';return u.toString()}catch{return String(url||'')}}
+function absoluteUrl(href,base){try{return new URL(decodeHtml(href),base).toString()}catch{return ''}}
 function entityText(value){return String(value||'').normalize('NFKC').toLowerCase().replace(/&[a-z0-9#]+;/gi,' ').replace(/[\s"'`’‘“”·ㆍ•:;,.!?()[\]{}<>/\\|_+=~^*-]+/g,'')}
 function companyAliases(company){const raw=String(company||'').normalize('NFKC').trim();return [...new Set([raw,raw.replace(/\(주\)|㈜|주식회사|유한회사|재단법인|사단법인/gi,'').trim()])].map(entityText).filter(v=>v.length>=2)}
 function relevantToCompany(company,item){let decoded=item.url||'';try{decoded=decodeURIComponent(decoded)}catch{}const hay=entityText(`${item.title||''} ${item.snippet||''} ${decoded}`);return companyAliases(company).some(alias=>hay.includes(alias))}
 function signalCount(text){const t=String(text||'').toLowerCase();return new Set(OPINION_SIGNAL_WORDS.filter(word=>t.includes(word.toLowerCase()))).size}
 function numberFrom(text,patterns){for(const pattern of patterns){const m=String(text||'').match(pattern);if(m){const n=Number(String(m[1]).replace(/,/g,''));if(Number.isFinite(n))return n}}return null}
 function decimalFrom(text,patterns){for(const pattern of patterns){const m=String(text||'').match(pattern);if(m){const n=Number(m[1]);if(Number.isFinite(n))return n}}return null}
+function decodeBase64Url(value){try{let raw=String(value||'').replace(/-/g,'+').replace(/_/g,'/');while(raw.length%4)raw+='=';return atob(raw)}catch{return ''}}
+function unwrapSearchUrl(value){
+  const raw=decodeHtml(value);
+  try{
+    const url=new URL(raw,'https://www.bing.com');
+    if(/(^|\.)bing\.com$/i.test(url.hostname)){
+      const u=url.searchParams.get('u');
+      if(u){
+        const encoded=u.startsWith('a1')?u.slice(2):u;
+        const decoded=decodeBase64Url(encoded);
+        if(/^https?:\/\//i.test(decoded))return decoded;
+      }
+    }
+    const uddg=url.searchParams.get('uddg');
+    if(uddg){const decoded=decodeURIComponent(uddg);if(/^https?:\/\//i.test(decoded))return decoded;}
+    return url.href;
+  }catch{return raw}
+}
 
-async function fetchText(url,timeoutMs=6500){const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),timeoutMs);try{const response=await fetch(url,{headers:{accept:'text/html,application/xhtml+xml,application/rss+xml,application/xml;q=0.9,*/*;q=0.7','user-agent':'Mozilla/5.0 (compatible; YEHAVHA-NEXUS-Jobseeker-Reputation/6.1; +https://yehavha.com/)'},signal:controller.signal});if(!response.ok)throw new Error(`upstream_${response.status}`);return await response.text()}finally{clearTimeout(timer)}}
+async function fetchText(url,timeoutMs=6500){const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),timeoutMs);try{const response=await fetch(url,{headers:{accept:'text/html,application/xhtml+xml,application/rss+xml,application/xml;q=0.9,*/*;q=0.7','user-agent':'Mozilla/5.0 (compatible; YEHAVHA-NEXUS-Jobseeker-Reputation/6.2; +https://yehavha.com/)'},signal:controller.signal});if(!response.ok)throw new Error(`upstream_${response.status}`);return await response.text()}finally{clearTimeout(timer)}}
 function bingRssUrl(q){return `https://www.bing.com/search?format=rss&setlang=ko-KR&cc=KR&q=${encodeURIComponent(q)}`}
 function bingHtmlUrl(q){return `https://www.bing.com/search?setlang=ko-KR&cc=KR&count=20&q=${encodeURIComponent(q)}`}
 function ddgHtmlUrl(q){return `https://html.duckduckgo.com/html/?kl=kr-kr&q=${encodeURIComponent(q)}`}
 
-function parseRss(xml,provider,query){const out=[];const blocks=String(xml||'').match(/<item\b[\s\S]*?<\/item>/gi)||[];for(const block of blocks.slice(0,20)){const title=tag(block,'title'),url=tag(block,'link'),snippet=tag(block,'description'),publishedAt=tag(block,'pubDate');if(title&&url)out.push({title,url,snippet,publishedAt:publishedAt||null,provider,query})}return out}
-function parseBingHtml(html,query){const out=[];const blocks=String(html||'').match(/<li[^>]+class="[^"]*b_algo[^"]*"[\s\S]*?<\/li>/gi)||[];for(const block of blocks.slice(0,20)){const a=block.match(/<h2[^>]*>\s*<a[^>]+href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/i);if(!a)continue;const p=block.match(/<p[^>]*>([\s\S]*?)<\/p>/i);const url=decodeHtml(a[1]);if(/^https?:\/\//i.test(url))out.push({title:stripTags(a[2]),url,snippet:p?stripTags(p[1]):'',publishedAt:null,provider:'Bing Web',query})}return out}
+function parseRss(xml,provider,query){const out=[];const blocks=String(xml||'').match(/<item\b[\s\S]*?<\/item>/gi)||[];for(const block of blocks.slice(0,20)){const title=tag(block,'title'),link=tag(block,'link'),snippet=tag(block,'description'),publishedAt=tag(block,'pubDate');const url=unwrapSearchUrl(link);if(title&&url)out.push({title,url,snippet,publishedAt:publishedAt||null,provider,query})}return out}
+function parseBingHtml(html,query){const out=[];const blocks=String(html||'').match(/<li[^>]+class="[^"]*b_algo[^"]*"[\s\S]*?<\/li>/gi)||[];for(const block of blocks.slice(0,20)){const a=block.match(/<h2[^>]*>\s*<a[^>]+href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/i);if(!a)continue;const p=block.match(/<p[^>]*>([\s\S]*?)<\/p>/i);const url=unwrapSearchUrl(a[1]);if(/^https?:\/\//i.test(url))out.push({title:stripTags(a[2]),url,snippet:p?stripTags(p[1]):'',publishedAt:null,provider:'Bing Web',query})}return out}
 function decodeDdgUrl(href){const raw=decodeHtml(href);try{const u=new URL(raw,'https://html.duckduckgo.com');const uddg=u.searchParams.get('uddg');return uddg?decodeURIComponent(uddg):u.href}catch{return raw}}
 function parseDdgHtml(html,query){const out=[];const blocks=String(html||'').match(/<div[^>]+class="[^"]*result[^"]*"[\s\S]*?(?=<div[^>]+class="[^"]*result[^"]*"|$)/gi)||[];for(const block of blocks.slice(0,20)){const a=block.match(/<a[^>]+class="[^"]*result__a[^"]*"[^>]+href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/i)||block.match(/<a[^>]+href="([^"]+)"[^>]+class="[^"]*result__a[^"]*"[^>]*>([\s\S]*?)<\/a>/i);if(!a)continue;const s=block.match(/<(?:a|div)[^>]+class="[^"]*result__snippet[^"]*"[^>]*>([\s\S]*?)<\/(?:a|div)>/i);const url=decodeDdgUrl(a[1]);if(/^https?:\/\//i.test(url))out.push({title:stripTags(a[2]),url,snippet:s?stripTags(s[1]):'',publishedAt:null,provider:'DuckDuckGo',query})}return out}
 
 function queryPlan(company){const q=`"${company}"`;return [
   `${q} 재직자 후기`,`${q} 전직자 후기`,`${q} 직원 후기`,`${q} 퇴사 후기`,`${q} 이직 후기`,`${q} 면접 후기`,`${q} 조직문화 워라밸`,`${q} 야근 업무량`,`${q} 대표 경영진 후기`,`${q} 급여 복지 후기`,
-  `site:jobplanet.co.kr ${q} 기업리뷰`, `site:jobplanet.co.kr ${q} 면접후기`, `site:jobplanet.co.kr ${q} reviews`, `site:teamblind.com ${q}`, `site:saramin.co.kr ${q} 기업리뷰`, `site:jobkorea.co.kr ${q} 기업리뷰 면접후기`, `site:incruit.com ${q} 기업리뷰`, `site:blog.naver.com ${q} 재직 후기`, `site:cafe.naver.com ${q} 면접 후기`
+  `site:jobplanet.co.kr/companies ${q} 기업리뷰`, `site:jobplanet.co.kr/companies ${q} 면접후기`, `site:jobplanet.co.kr/companies ${q} 리뷰평점`, `site:teamblind.com ${q}`, `site:saramin.co.kr ${q} 기업리뷰`, `site:jobkorea.co.kr ${q} 기업리뷰 면접후기`, `site:incruit.com ${q} 기업리뷰`, `site:blog.naver.com ${q} 재직 후기`, `site:cafe.naver.com ${q} 면접 후기`
 ]}
 async function runQuery(query){const settled=await Promise.allSettled([
   fetchText(bingRssUrl(query)).then(text=>parseRss(text,'Bing RSS',query)),
@@ -84,29 +103,84 @@ function buildPlatforms(opinions){const map=new Map();for(const o of opinions){i
 function buildActions(themes){return themes.filter(theme=>ACTIONS[theme.topic]).slice(0,6).map(theme=>({title:theme.topic,text:ACTIONS[theme.topic],refs:theme.opinionIds.slice(0,6)}))}
 
 function jobplanetCompanyId(url){const m=String(url||'').match(/jobplanet\.co\.kr\/companies\/(\d+)/i);return m?m[1]:''}
+function jobplanetCompanyUrl(id,kind='reviews'){return `https://www.jobplanet.co.kr/companies/${id}/${kind}`}
+function parseJobplanetCompanyAnchors(html,base,company){
+  const out=[];const source=String(html||'');const re=/<a\b[^>]*href=["']([^"']*\/companies\/(\d+)[^"']*)["'][^>]*>([\s\S]*?)<\/a>/gi;let m;
+  while((m=re.exec(source))){
+    const url=absoluteUrl(m[1],base);if(!jobplanetCompanyId(url))continue;
+    const around=stripTags(source.slice(Math.max(0,m.index-700),Math.min(source.length,re.lastIndex+1100)));
+    const title=stripTags(m[3]);
+    const item={title:title||company,url,snippet:around,publishedAt:null,provider:'JobPlanet public search',query:'direct'};
+    if(relevantToCompany(company,item))out.push(item);
+  }
+  return dedupeCandidates(out);
+}
+async function discoverJobplanetCompany(company,candidates){
+  const collected=[];
+  for(const item of candidates||[]){if(jobplanetCompanyId(item.url)&&/jobplanet\.co\.kr$/i.test(sourceHost(item.url))&&relevantToCompany(company,item))collected.push(item)}
+
+  const targeted=[
+    `site:jobplanet.co.kr/companies "${company}" 기업리뷰`,
+    `site:jobplanet.co.kr/companies "${company}" 면접후기`,
+    `site:jobplanet.co.kr/companies "${company}" 리뷰평점`
+  ];
+  const targetedResults=await Promise.all(targeted.map(runQuery));
+  for(const result of targetedResults){for(const item of result.items){if(jobplanetCompanyId(item.url)&&/jobplanet\.co\.kr$/i.test(sourceHost(item.url))&&relevantToCompany(company,item))collected.push(item)}}
+
+  const directUrls=[
+    `https://www.jobplanet.co.kr/search?query=${encodeURIComponent(company)}`,
+    `https://www.jobplanet.co.kr/search/companies?query=${encodeURIComponent(company)}`,
+    `https://www.jobplanet.co.kr/companies?query=${encodeURIComponent(company)}`
+  ];
+  for(const url of directUrls){
+    try{const html=await fetchText(url,8000);collected.push(...parseJobplanetCompanyAnchors(html,url,company));}catch{}
+  }
+
+  const unique=dedupeCandidates(collected);
+  if(!unique.length)return null;
+  const aliases=companyAliases(company);
+  unique.sort((a,b)=>{
+    const score=item=>{
+      const title=entityText(item.title);const snippet=entityText(item.snippet);let s=0;
+      if(aliases.some(alias=>title.includes(alias)))s+=8;
+      if(aliases.some(alias=>snippet.includes(alias)))s+=4;
+      if(/기업리뷰|리뷰평점|면접후기|전체 리뷰/i.test(`${item.title} ${item.snippet}`))s+=3;
+      if(/\/reviews/i.test(item.url))s+=2;
+      return s;
+    };
+    return score(b)-score(a);
+  });
+  const chosen=unique[0];
+  const id=jobplanetCompanyId(chosen.url);
+  const text=unique.filter(item=>jobplanetCompanyId(item.url)===id).map(item=>`${item.title} ${item.snippet}`).join(' ');
+  return {id,url:chosen.url,text,items:unique.filter(item=>jobplanetCompanyId(item.url)===id)};
+}
 function parseJobplanetAggregate(text,url){
-  const reviewCount=numberFrom(text,[/기업리뷰\s*([\d,]+)건/i,/리뷰\s*([\d,]+)건/i,/전체 리뷰 통계\s*\(([\d,]+)명\)/i]);
-  const interviewCount=numberFrom(text,[/면접후기\s*([\d,]+)건/i,/면접\s*([\d,]+)(?:건|\s)/i]);
-  const rating=decimalFrom(text,[/([0-5](?:\.\d+)?)\s*리뷰평점/i,/전체 리뷰 통계\s*\([\d,]+명\)\s*([0-5](?:\.\d+)?)/i]);
+  const reviewCount=numberFrom(text,[/전체 리뷰 통계\s*\(?([\d,]+)명\)?/i,/기업리뷰\s*([\d,]+)건/i,/리뷰\s*([\d,]+)건/i,/리뷰\s*([\d,]+)(?=\s|$)/i]);
+  const interviewCount=numberFrom(text,[/면접후기\s*([\d,]+)건/i,/면접\s*([\d,]+)건/i,/면접\s*([\d,]+)(?=\s|$)/i]);
+  const rating=decimalFrom(text,[/전체 리뷰 통계\s*\(?[\d,]+명\)?\s*([0-5](?:\.\d+)?)/i,/([0-5](?:\.\d+)?)\s*리뷰평점/i,/리뷰평점\s*([0-5](?:\.\d+)?)/i]);
   const recommendRate=numberFrom(text,[/([\d,]+)%\s*기업 추천율/i]);
   const ceoSupportRate=numberFrom(text,[/([\d,]+)%\s*CEO 지지율/i]);
   const growthRate=numberFrom(text,[/([\d,]+)%\s*성장 가능성/i]);
   const categories={};
-  const labels=[['복지·급여','복지\/급여'],['워라밸','워라밸'],['사내문화','사내문화'],['승진기회','승진 기회'],['경영진','경영진']];
+  const labels=[['복지·급여','복지[\\/·]?급여'],['워라밸','워라밸'],['사내문화','사내문화'],['승진기회','승진 기회'],['경영진','경영진']];
   for(const [key,label] of labels){const m=String(text||'').match(new RegExp(`${label}\\s*([0-5](?:\\.\\d+)?)`,'i'));if(m)categories[key]=Number(m[1]);}
   if(reviewCount===null&&interviewCount===null&&rating===null&&!Object.keys(categories).length)return null;
-  return {platform:'잡플래닛',host:'jobplanet.co.kr',url,reviewCount,interviewCount,rating,recommendRate,ceoSupportRate,growthRate,categories,note:'플랫폼에 공개된 사용자 리뷰·면접후기 집계와 공개 통계입니다. 개별 후기 전문이 비공개·로그인·멤버십 영역이면 우회 수집하지 않습니다.'};
+  return {platform:'잡플래닛',host:'jobplanet.co.kr',url,reviewCount,interviewCount,rating,recommendRate,ceoSupportRate,growthRate,categories,note:'잡플래닛 공개 페이지에 표시된 사용자 리뷰·면접후기 집계와 공개 통계입니다. 로그인·멤버십 영역의 개별 후기 전문은 우회 수집하지 않습니다.'};
 }
 async function buildPublicPlatformSignals(company,candidates){
-  const relevant=candidates.filter(item=>relevantToCompany(company,item));
-  const jobplanet=relevant.filter(item=>/jobplanet\.co\.kr/i.test(sourceHost(item.url))&&jobplanetCompanyId(item.url));
-  if(!jobplanet.length)return [];
-  const best=[...jobplanet].sort((a,b)=>clean(`${b.title} ${b.snippet}`,2000).length-clean(`${a.title} ${a.snippet}`,2000).length)[0];
-  const id=jobplanetCompanyId(best.url);
-  const aggregateUrl=`https://www.jobplanet.co.kr/companies/${id}/reviews`;
-  let combined=clean(`${best.title} ${best.snippet}`,3000);
-  try{const html=await fetchText(aggregateUrl,8000);const text=pageText(html);if(entityText(text).includes(companyAliases(company)[0]))combined=clean(`${combined} ${text}`,12000);}catch{}
-  const parsed=parseJobplanetAggregate(combined,aggregateUrl);
+  const discovery=await discoverJobplanetCompany(company,candidates);
+  if(!discovery)return [];
+  const reviewUrl=jobplanetCompanyUrl(discovery.id,'reviews');
+  const landingUrl=jobplanetCompanyUrl(discovery.id,'landing');
+  let combined=clean(discovery.text,12000);
+  for(const url of [reviewUrl,landingUrl]){
+    try{
+      const html=await fetchText(url,8500);const text=pageText(html);
+      if(companyAliases(company).some(alias=>entityText(text).includes(alias)))combined=clean(`${combined} ${text}`,40000);
+    }catch{}
+  }
+  const parsed=parseJobplanetAggregate(combined,reviewUrl);
   return parsed?[parsed]:[];
 }
 
@@ -131,7 +205,8 @@ async function collect(company){
   const results=await Promise.all(queryPlan(company).map(runQuery));
   const raw=dedupeCandidates(results.flatMap(r=>r.items));
   const companyMatched=raw.filter(item=>relevantToCompany(company,item));
-  const [platformSignals,opinions]=await Promise.all([buildPublicPlatformSignals(company,companyMatched),Promise.resolve(buildOpinions(company,companyMatched))]);
+  const platformSignals=await buildPublicPlatformSignals(company,raw);
+  const opinions=buildOpinions(company,companyMatched);
   return {raw,companyMatched,opinions,platformSignals,providerSuccesses:results.reduce((n,r)=>n+r.successes,0),providerFailures:results.reduce((n,r)=>n+r.failures,0)};
 }
 
@@ -152,19 +227,7 @@ export async function onRequestPost({request}){
     generatedAt:new Date().toISOString(),
     summary:buildSummary(company,collection.opinions,themes,collection.platformSignals),
     identity:{message:`회사명이 제목·검색요약·URL에 직접 연결되는 자료만 후보로 남겼습니다. 동일 상호가 존재할 수 있으므로 원문에서 법인명·지역·사업분야가 같은 회사인지 확인해야 합니다. 이번 검색에서 회사명 직접일치 후보 ${collection.companyMatched.length}건 중 회사소개·채용공고 등 비평판 자료를 분리하고 실제 경험 문장이 확인되는 ${collection.opinions.length}건만 내용 분석에 사용했습니다.`},
-    metrics:{
-      rawCandidates:collection.raw.length,
-      companyMatched:collection.companyMatched.length,
-      acceptedOpinions:collection.opinions.length,
-      excludedNonOpinion:Math.max(0,collection.companyMatched.length-collection.opinions.length),
-      platforms:platforms.length,
-      platformSignals:collection.platformSignals.length,
-      indexedReviewCount,
-      indexedInterviewCount,
-      themes:themes.length,
-      providerSuccesses:collection.providerSuccesses,
-      providerFailures:collection.providerFailures
-    },
+    metrics:{rawCandidates:collection.raw.length,companyMatched:collection.companyMatched.length,acceptedOpinions:collection.opinions.length,excludedNonOpinion:Math.max(0,collection.companyMatched.length-collection.opinions.length),platforms:platforms.length,platformSignals:collection.platformSignals.length,indexedReviewCount,indexedInterviewCount,themes:themes.length,providerSuccesses:collection.providerSuccesses,providerFailures:collection.providerFailures},
     platformSignals:collection.platformSignals,
     themes,
     platforms,
@@ -174,9 +237,9 @@ export async function onRequestPost({request}){
     methodology:{
       accepted:'회사명이 직접 일치하고, 검색요약에 재직·퇴사·면접·근무 경험 표현과 구체적인 평가·상황 단어가 함께 나타나는 공개 자료만 내용 분석에 채택합니다. 별도로 공개 평판 플랫폼이 제공하는 사용자 리뷰 수·면접후기 수·평점·항목별 통계는 플랫폼 집계자료로 표시합니다.',
       excluded:'회사 소개, 기업정보, 채용공고, 재무정보, 홍보문구는 평판 내용에서 제외합니다. 플랫폼의 리뷰 수·평점은 사용자 집계 통계로만 별도 표시하며, 읽을 수 없는 개별 후기 내용을 추정하거나 만들어내지 않습니다.',
-      coverage:'Bing·DuckDuckGo 공개 검색면을 이용해 잡플래닛·블라인드·사람인·잡코리아·인크루트·네이버 블로그·카페 등 공개적으로 색인된 후기와 일반 웹의 실제 경험 글을 병렬 탐색합니다. 공개된 잡플래닛 리뷰 집계 페이지는 사용자 리뷰 규모와 공개 통계 확인에 사용합니다. 로그인·유료벽·비공개 게시물은 우회 수집하지 않습니다.'
+      coverage:'Bing·DuckDuckGo 공개 검색과 잡플래닛 공개 회사검색 경로를 이용해 잡플래닛·블라인드·사람인·잡코리아·인크루트·네이버 블로그·카페 등 공개적으로 색인된 후기와 일반 웹의 실제 경험 글을 병렬 탐색합니다. 잡플래닛 공개 리뷰 집계 페이지는 사용자 리뷰 규모와 공개 통계 확인에 사용합니다. 로그인·유료벽·비공개 게시물은 우회 수집하지 않습니다.'
     }
   });
 }
 
-export async function onRequestGet(){return json({ok:true,service:'NEXUS 구직자 회사 평판 분석',version:'6.1',schema:'nexus-company-reputation-v2',scope:'company-only-public-experience-reviews'})}
+export async function onRequestGet(){return json({ok:true,service:'NEXUS 구직자 회사 평판 분석',version:'6.2',schema:'nexus-company-reputation-v2',scope:'company-only-public-experience-reviews'})}
