@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<meta name="description" content="인물·회사·기관·상품·서비스·장소에 관한 공개 평가와 실제 경험을 긍정·부정 구분 없이 수집하고 출처·주제·반복·상충 양상을 분석해 보고서로 제공합니다."/>
+<meta name="description" content="인물·회사·기관·상품·서비스·장소에 관한 공개 평판을 수집·분석하고, 대상자의 평판관리와 이용자의 실제 대응·의사결정 행동까지 제시합니다."/>
 <meta name="robots" content="index,follow,max-image-preview:large"/>
 <meta name="theme-color" content="#ffffff"/>
 <link rel="canonical" href="https://yehavha.com/reputation-analysis/"/>
 <link rel="stylesheet" href="../portal-v2.css"/>
 <link rel="stylesheet" href="../nexus-standard.css"/>
-<link rel="stylesheet" href="./style.css?v=20260916-2"/>
+<link rel="stylesheet" href="./style.css?v=20260916-3"/>
 <title>평판 분석 | YEHAVHA NEXUS</title>
 </head>
 <body>
@@ -21,7 +21,7 @@
     <section class="reputation-hero">
       <p class="eyebrow">PUBLIC SOURCE REPUTATION INTELLIGENCE</p>
       <h1>평판 분석</h1>
-      <p>검색된 공개 의견을 ‘검증되지 않았다’는 이유로 버리지 않습니다. 직원·면접자·고객·거래상대·이용자 등이 온라인에 남긴 긍정·부정·상반 의견을 먼저 수집하고, 대상 직접일치·중복·출처·반복 주제·특정 플랫폼 집중도를 내부적으로 확인해 보고서로 취합합니다.</p>
+      <p>평판을 검색해 나열하는 데서 끝내지 않습니다. 공개된 긍정·부정·상반 의견을 먼저 취합하고, 반복 주제와 출처 분포를 분석한 뒤 대상자에게는 평판관리·운영개선 과제를, 구직자·고객·거래상대 등 이용자에게는 확인 질문·대안 비교·문서 확인·의사결정 행동까지 제시합니다.</p>
     </section>
   </div>
 </header>
@@ -51,21 +51,21 @@
           <input id="targetInput" name="target" type="search" maxlength="120" autocomplete="off" placeholder="예: 회사명, 인물명, 상품명, 서비스명, 장소명" required/>
           <button id="submitBtn" type="submit">분석 실행</button>
         </div>
-        <p class="form-note" id="formHint">공개 활동과 함께 온라인에 게시된 평가·비판·칭찬·경험을 수집해 출처별로 취합합니다.</p>
+        <p class="form-note" id="formHint">공개 활동과 온라인 평가를 취합하고, 당사자의 평판관리와 이용자의 확인·대응 행동까지 제시합니다.</p>
       </form>
     </section>
 
     <section class="process" aria-label="분석 절차">
       <article><b>1</b><strong>공개 의견 수집</strong><span>긍정·부정·익명 여부와 관계없이 대상 관련 의견을 찾습니다.</span></article>
       <article><b>2</b><strong>대상·중복 확인</strong><span>다른 대상의 결과와 동일 URL 중복만 제거합니다.</span></article>
-      <article><b>3</b><strong>의견 구조화</strong><span>출처·주제·긍정·부정·상충·반복 양상을 분류합니다.</span></article>
-      <article><b>4</b><strong>평판 보고서</strong><span>의견 분포와 원문 근거를 함께 보여줍니다.</span></article>
+      <article><b>3</b><strong>의견 구조화</strong><span>출처·주제·긍정·부정·상충·반복 양상을 분석합니다.</span></article>
+      <article><b>4</b><strong>실행 제안</strong><span>대상자의 개선과 이용자의 실제 대응 행동으로 전환합니다.</span></article>
     </section>
 
     <section class="status-panel" id="statusPanel" hidden aria-live="polite">
       <p class="step">ANALYSIS IN PROGRESS</p>
       <h2 id="statusTitle">공개 평판을 수집하고 있습니다.</h2>
-      <p id="statusText">대상 직접일치 확인 → 후기·커뮤니티·평판플랫폼 탐색 → 긍정·부정 의견 수집 → 중복 제거 → 주제·출처별 취합</p>
+      <p id="statusText">공개 의견 수집 → 대상·중복 확인 → 긍정·부정·상충 분석 → 핵심 주제 도출 → 실행안 생성</p>
     </section>
 
     <section class="report" id="report" hidden aria-labelledby="reportTitle">
@@ -79,8 +79,8 @@
       </div>
 
       <article class="report-definition">
-        <strong>이 보고서에서 말하는 ‘평판’</strong>
-        <p>온라인에 공개된 평가·경험·후기·비판·칭찬·주장을 뜻합니다. 내용이 맞는지 틀린지를 자동으로 판정해 제외하지 않습니다. 대신 대상과의 직접 관련성, 중복 여부, 출처 도메인, 반복 주제, 긍정·부정의 상충, 특정 플랫폼 집중 여부를 내부적으로 확인합니다. 강한 의혹이나 비위 주장은 사실확정이 아니라 ‘게시된 주장’으로 표시합니다.</p>
+        <strong>이 보고서의 목적</strong>
+        <p>평판은 그 자체가 결론이 아니라 행동을 위한 위험·강점 신호입니다. 온라인에 공개된 평가·경험·후기·비판·칭찬·주장을 취합하고, 내용의 진위를 이유로 자동 제외하지 않습니다. 대신 대상 직접일치·중복·출처·반복 주제·상충·플랫폼 집중도를 분석해 대상자에게는 평판관리와 운영개선 과제를, 이용자에게는 확인·비교·대응 행동을 제시합니다.</p>
       </article>
 
       <div class="metric-grid" id="metricGrid"></div>
@@ -122,6 +122,31 @@
           <span>긍정·부정·상충과 출처 수 기준</span>
         </div>
         <div class="signal-grid" id="signalGrid"></div>
+      </section>
+
+      <section class="report-section action-section" id="actionSection">
+        <div class="section-title">
+          <h3>실행 제안</h3>
+          <span>평판 신호를 실제 행동으로 전환</span>
+        </div>
+        <div class="action-grid">
+          <article class="action-panel">
+            <div class="action-head">
+              <h4 id="subjectActionTitle">대상자 평판관리 실행안</h4>
+              <span>대상자 측</span>
+            </div>
+            <p class="action-summary" id="subjectActionSummary"></p>
+            <div class="action-list" id="subjectActionList"></div>
+          </article>
+          <article class="action-panel">
+            <div class="action-head">
+              <h4 id="userActionTitle">이용자 확인·대응안</h4>
+              <span>이용자 측</span>
+            </div>
+            <p class="action-summary" id="userActionSummary"></p>
+            <div class="action-list" id="userActionList"></div>
+          </article>
+        </div>
       </section>
 
       <section class="report-section">
@@ -173,6 +198,6 @@
   </div>
 </footer>
 
-<script src="./app.js?v=20260916-3" defer></script>
+<script src="./app.js?v=20260916-4" defer></script>
 </body>
 </html>
