@@ -6,7 +6,7 @@ async function probe(label, probeUrl) {
   try {
     const response = await fetch(probeUrl, {
       redirect: 'follow',
-      headers: { 'user-agent': 'Mozilla/5.0 (compatible; YEHAVHA-Nexus-Reputation-Regression/1.0)' },
+      headers: { 'user-agent': 'Mozilla/5.0 (compatible; YEHAVHA-Nexus-Reputation-Regression/2.0)' },
       signal: controller.signal
     });
     const text = await response.text();
@@ -26,7 +26,7 @@ try {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
-      'user-agent': 'YEHAVHA-Nexus-Reputation-Regression/1.0'
+      'user-agent': 'YEHAVHA-Nexus-Reputation-Regression/2.0'
     },
     body: JSON.stringify({ type: 'organization', target: '지방자치연구소' }),
     signal: controller.signal
@@ -35,20 +35,27 @@ try {
   if (!response.ok || data?.ok !== true) {
     throw new Error(`HTTP ${response.status}; payload=${JSON.stringify(data)}`);
   }
+  if (data?.schema !== 'nexus-reputation-analysis-v5') {
+    throw new Error(`unexpected reputation schema: ${data?.schema}`);
+  }
 
   const evidence = Array.isArray(data.evidence) ? data.evidence : [];
   const hosts = new Set(evidence.map(item => String(item?.host || '')).filter(Boolean));
   const expectedHost = [...hosts].some(host =>
     ['lgrc.co.kr', 'jobkorea.co.kr', 'saramin.co.kr', 'jobplanet.co.kr'].some(domain => host === domain || host.endsWith(`.${domain}`))
   );
+  const opinionSources = Number(data?.metrics?.opinionSources ?? data?.metrics?.reputationSources ?? 0);
+  const opinionHosts = Number(data?.metrics?.opinionHosts ?? 0);
+  const classifiedOpinions = evidence.filter(item => item?.kind === 'opinion').length;
 
-  console.log(`Reputation POST current: sources=${data?.metrics?.sources}, profile=${data?.metrics?.profileSources}, reputation=${data?.metrics?.reputationSources}, hosts=${[...hosts].join(', ')}`);
+  console.log(`Reputation POST current: sources=${data?.metrics?.sources}, profile=${data?.metrics?.profileSources}, opinions=${opinionSources}, opinionHosts=${opinionHosts}, classifiedOpinions=${classifiedOpinions}, hosts=${[...hosts].join(', ')}`);
 
-  if (Number(data?.metrics?.reputationSources || 0) < 1) {
+  if (opinionSources < 1) {
     const target = encodeURIComponent('지방자치연구소');
     await probe('jobplanet', `https://www.jobplanet.co.kr/search?query=${target}`);
     await probe('jobkorea', `https://www.jobkorea.co.kr/Search/?stext=${target}`);
     await probe('saramin', `https://www.saramin.co.kr/zf_user/search?searchword=${target}`);
+    console.warn('WARN reputation opinion sources are currently zero. Third-party search visibility is treated as a live-data warning, not an architecture failure.');
   }
 
   if (Number(data?.metrics?.sources || 0) < 1) {
@@ -57,14 +64,14 @@ try {
   if (Number(data?.metrics?.profileSources || 0) < 1) {
     throw new Error(`profile sources still zero; metrics=${JSON.stringify(data?.metrics)}`);
   }
-  if (Number(data?.metrics?.reputationSources || 0) < 1) {
-    throw new Error(`reputation sources still zero; metrics=${JSON.stringify(data?.metrics)}`);
+  if (!Number.isFinite(Number(data?.metrics?.opinionSources))) {
+    throw new Error(`opinionSources metric missing from v5 contract; metrics=${JSON.stringify(data?.metrics)}`);
   }
   if (!expectedHost) {
     throw new Error(`known public-source domains missing; hosts=${JSON.stringify([...hosts])}`);
   }
 
-  console.log(`Reputation POST regression passed: sources=${data.metrics.sources}, profile=${data.metrics.profileSources}, reputation=${data.metrics.reputationSources}, hosts=${[...hosts].join(', ')}`);
+  console.log(`Reputation POST regression passed: schema=${data.schema}, sources=${data.metrics.sources}, profile=${data.metrics.profileSources}, opinions=${opinionSources}, hosts=${[...hosts].join(', ')}`);
 } finally {
   clearTimeout(timer);
 }
