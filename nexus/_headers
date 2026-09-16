@@ -32,10 +32,6 @@
   Cache-Control: no-cache, no-store, must-revalidate
   Pragma: no-cache
   Expires: 0
-/reputation-analysis/*
-  Cache-Control: no-cache, no-store, must-revalidate
-  Pragma: no-cache
-  Expires: 0
 /commentary/*
   Cache-Control: no-cache, no-store, must-revalidate
   Pragma: no-cache

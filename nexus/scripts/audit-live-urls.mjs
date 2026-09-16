@@ -22,7 +22,7 @@ async function request(url, options = {}) {
   return fetch(url, {
     method: options.method || 'GET',
     redirect: options.redirect || 'follow',
-    headers: { 'user-agent': 'YEHAVHA-Nexus-Smoke-Test/1.4', ...(options.headers || {}) },
+    headers: { 'user-agent': 'YEHAVHA-Nexus-Smoke-Test/1.2', ...(options.headers || {}) },
     signal: AbortSignal.timeout(15000)
   });
 }
@@ -90,31 +90,6 @@ async function checkNoCache(pathname) {
   }
 }
 
-async function checkAsset(pathname) {
-  const url = `${NEXUS_ORIGIN}${pathname}`;
-  try {
-    const response = await request(url);
-    if (!response.ok) {
-      errors += 1;
-      console.error(`ERROR ${pathname}: HTTP ${response.status}`);
-      return null;
-    }
-    const body = await response.text();
-    if (body.trim().length < 50) {
-      errors += 1;
-      console.error(`ERROR ${pathname}: 응답 본문이 비정상적으로 짧음 (${body.length} bytes)`);
-      return null;
-    }
-    const cache = response.headers.get('cache-control') || '-';
-    console.log(`OK ${pathname}: HTTP ${response.status}, cache=${cache}`);
-    return response;
-  } catch (error) {
-    errors += 1;
-    console.error(`ERROR ${pathname}: ${error.message}`);
-    return null;
-  }
-}
-
 async function checkHomeRuntime() {
   const url = `${NEXUS_ORIGIN}/`;
   try {
@@ -146,58 +121,6 @@ async function checkNewsRuntime() {
     await check({ id: `yehavha-news${pathname === '/news/' ? '' : '-media-info'}`, url: `${NEXUS_ORIGIN}${pathname}` });
   }
   for (const pathname of ['/news/style.css', '/news/app.js']) await checkNoCache(pathname);
-}
-
-async function checkReputationRuntime() {
-  const pathname = '/reputation-analysis/';
-  const url = `${NEXUS_ORIGIN}${pathname}`;
-  try {
-    const response = await request(url);
-    const body = await response.text();
-    if (!response.ok) {
-      errors += 1;
-      console.error(`ERROR reputation-analysis: HTTP ${response.status} ${url}`);
-      return;
-    }
-    for (const marker of ['id="queryForm"','id="report"','./app.js','./style.css','구직자를 위한 회사 평판 분석','회사 이름','공개 플랫폼 평판 지표']) {
-      if (!body.includes(marker)) {
-        errors += 1;
-        console.error(`ERROR reputation-analysis: live marker missing: ${marker}`);
-      }
-    }
-    for (const forbidden of ['data-type="person"','data-type="product"','data-type="service"','data-type="place"']) {
-      if (body.includes(forbidden)) {
-        errors += 1;
-        console.error(`ERROR reputation-analysis: retired category still live: ${forbidden}`);
-      }
-    }
-    console.log(`OK reputation-analysis: HTTP ${response.status} ${response.url}`);
-  } catch (error) {
-    errors += 1;
-    console.error(`ERROR reputation-analysis: ${error.message}`);
-  }
-
-  for (const asset of ['/reputation-analysis/style.css', '/reputation-analysis/app.js']) await checkAsset(asset);
-
-  const apiPath = '/api/reputation-analysis';
-  try {
-    const response = await request(`${NEXUS_ORIGIN}${apiPath}`);
-    const data = await response.json().catch(() => null);
-    if (!response.ok || data?.ok !== true || data?.service !== 'NEXUS 구직자 회사 평판 분석' || data?.schema !== 'nexus-company-reputation-v2' || data?.scope !== 'company-only-public-experience-reviews') {
-      errors += 1;
-      console.error(`ERROR ${apiPath}: HTTP ${response.status}, payload=${JSON.stringify(data)}`);
-      return;
-    }
-    if (Array.isArray(data?.types)) {
-      errors += 1;
-      console.error(`ERROR ${apiPath}: retired multi-target types contract still present`);
-      return;
-    }
-    console.log(`OK ${apiPath}: HTTP ${response.status}, company-only v2 service contract verified`);
-  } catch (error) {
-    errors += 1;
-    console.error(`ERROR ${apiPath}: ${error.message}`);
-  }
 }
 
 async function checkJson(pathname, validator, requireNoCache = false) {
@@ -287,7 +210,6 @@ async function checkRetiredPaths() {
 await check({ id: 'nexus-home', url: `${NEXUS_ORIGIN}/` });
 await checkHomeRuntime();
 await checkNewsRuntime();
-await checkReputationRuntime();
 for (const project of projects) await check(project);
 await check({ id: 'legal-mind-training', url: 'https://yehavha-legal-knowledge.danielie.workers.dev/legal-mind/' });
 await checkJson('/projects.json', data => Array.isArray(data?.projects) && data.projects.length > 0);
