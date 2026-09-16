@@ -32,20 +32,35 @@
     return signals.map(item => {
       const stats = [];
       if (Number.isFinite(Number(item.reviewCount))) stats.push(`기업리뷰 ${Number(item.reviewCount).toLocaleString('ko-KR')}건`);
+      if (Number.isFinite(Number(item.participantCount))) stats.push(`기업리뷰 참여 ${Number(item.participantCount).toLocaleString('ko-KR')}명`);
       if (Number.isFinite(Number(item.interviewCount))) stats.push(`면접후기 ${Number(item.interviewCount).toLocaleString('ko-KR')}건`);
       if (Number.isFinite(Number(item.rating))) stats.push(`전체평점 ${Number(item.rating).toFixed(1)}/5`);
       if (Number.isFinite(Number(item.recommendRate))) stats.push(`기업추천율 ${Number(item.recommendRate)}%`);
       if (Number.isFinite(Number(item.ceoSupportRate))) stats.push(`CEO 지지율 ${Number(item.ceoSupportRate)}%`);
       if (Number.isFinite(Number(item.growthRate))) stats.push(`성장가능성 ${Number(item.growthRate)}%`);
       const categories = Object.entries(item.categories || {}).map(([key,value]) => `${key} ${Number(value).toFixed(1)}/5`);
+      const cultureTags = Array.isArray(item.cultureTags) ? item.cultureTags : [];
       return `<article class="signal">
         <div class="signal-top"><h4>${esc(item.platform)}</h4><span class="signal-state mixed">사용자 집계</span></div>
         <p>${esc(stats.join(' · ') || '공개 집계 확인')}</p>
         ${categories.length ? `<p>${esc(categories.join(' · '))}</p>` : ''}
+        ${cultureTags.length ? `<p><strong>공개 기업문화 요약</strong><br>${esc(cultureTags.join(' · '))}</p>` : ''}
         <p>${esc(item.note || '')}</p>
         ${item.url ? `<p><a href="${esc(item.url)}" target="_blank" rel="noopener noreferrer">평판 원문 페이지 ↗</a></p>` : ''}
       </article>`;
     }).join('');
+  }
+
+  function mergePlatformSignals(primary, additional) {
+    const out = [];
+    const seen = new Set();
+    for (const item of [...primary, ...additional]) {
+      const key = `${item.platform || ''}|${item.url || item.host || ''}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push(item);
+    }
+    return out;
   }
 
   function themeMarkup(themes, byId) {
@@ -67,46 +82,47 @@
     return actions.map((item,index) => `<article class="action-item"><span class="action-priority">${index === 0 ? '우선' : '확인'}</span><div><strong>${esc(item.title)}</strong><p>${esc(item.text)}</p>${item.refs?.length ? `<span class="action-refs">근거 ${esc(item.refs.join(' · '))}</span>` : ''}</div></article>`).join('');
   }
 
-  function render(data) {
+  function render(data, extraSignals = []) {
     const opinions = Array.isArray(data.opinions) ? data.opinions : [];
     const themes = Array.isArray(data.themes) ? data.themes : [];
     const platforms = Array.isArray(data.platforms) ? data.platforms : [];
-    const platformSignals = Array.isArray(data.platformSignals) ? data.platformSignals : [];
+    const platformSignals = mergePlatformSignals(Array.isArray(data.platformSignals) ? data.platformSignals : [], extraSignals);
     const actions = Array.isArray(data.actions) ? data.actions : [];
     const byId = new Map(opinions.map(item => [item.id, item]));
     const generated = new Date(data.generatedAt).toLocaleString('ko-KR');
     const indexedReviews = Number(data.metrics?.indexedReviewCount || 0);
     const indexedInterviews = Number(data.metrics?.indexedInterviewCount || 0);
+    const additionalReviewSources = extraSignals.filter(item => Number.isFinite(Number(item.participantCount))).length;
 
     document.getElementById('reportTitle').textContent = `${data.company} 회사 평판 분석`;
     document.getElementById('reportMeta').textContent = `구직자용 · 기준 ${generated}`;
     document.getElementById('metricGrid').innerHTML = [
-      ['플랫폼 사용자 리뷰', indexedReviews ? `${indexedReviews.toLocaleString('ko-KR')}건` : '확인 제한'],
-      ['플랫폼 면접후기', indexedInterviews ? `${indexedInterviews.toLocaleString('ko-KR')}건` : '확인 제한'],
+      ['잡플래닛 등록 리뷰', indexedReviews ? `${indexedReviews.toLocaleString('ko-KR')}건` : '확인 제한'],
+      ['공개 평판 플랫폼', `${platformSignals.length}곳`],
       ['내용까지 공개된 후기', `${opinions.length}건`],
       ['제외한 비평판 자료', `${data.metrics?.excludedNonOpinion ?? 0}건`]
     ].map(([label,value]) => `<div class="metric"><span>${label}</span><strong>${value}</strong></div>`).join('');
 
-    document.getElementById('executiveSummary').textContent = data.summary;
+    document.getElementById('executiveSummary').textContent = data.summary + (additionalReviewSources ? ` 추가로 다른 공개 평판 플랫폼 ${additionalReviewSources}곳의 사용자 집계·기업문화 요약을 교차 확인했습니다.` : '');
     document.getElementById('coverageText').textContent = indexedReviews || indexedInterviews
-      ? `공개 평판 플랫폼에서 사용자 리뷰 ${indexedReviews || '확인 제한'}건${indexedInterviews ? `, 면접후기 ${indexedInterviews}건` : ''}을 확인했습니다. 실제 문장까지 자동 확인된 자료는 ${opinions.length}건입니다.`
-      : `회사와 직접 연결되는 실제 공개 경험 문장은 ${opinions.length}건 확인했습니다.`;
+      ? `잡플래닛 공개 집계에서 사용자 리뷰 ${indexedReviews || '확인 제한'}건${indexedInterviews ? `, 면접후기 ${indexedInterviews}건` : ''}을 확인했습니다. 다른 플랫폼의 공개 사용자 집계도 아래에 별도로 병기합니다. 실제 문장까지 자동 확인된 자료는 ${opinions.length}건입니다.`
+      : `회사와 직접 연결되는 공개 평판 플랫폼 ${platformSignals.length}곳을 확인했습니다. 실제 공개 경험 문장은 ${opinions.length}건 확인했습니다.`;
     document.getElementById('themeText').textContent = themes.length ? themes.slice(0,5).map(t => `${t.topic} ${t.count}건`).join(' · ') : '공개된 개별 후기 문장 기준 반복 주제 확인 제한';
-    document.getElementById('limitText').textContent = '플랫폼의 리뷰 수·평점은 사용자 집계자료이고, 개별 후기 내용은 별도입니다. 멤버십·로그인이 필요한 후기 전문은 우회하지 않으며 보이지 않는 내용을 추정하지 않습니다.';
+    document.getElementById('limitText').textContent = '플랫폼의 리뷰 수·기업문화 요약과 개별 후기 전문은 서로 다른 근거입니다. 멤버십·로그인이 필요한 후기 전문은 우회하지 않으며 보이지 않는 내용을 추정하지 않습니다.';
     document.getElementById('identitySummary').textContent = data.identity?.message || '회사명이 검색 결과에 직접 연결되는 자료만 채택했습니다.';
 
     document.getElementById('aggregateGrid').innerHTML = aggregateMarkup(platformSignals);
     document.getElementById('themeGrid').innerHTML = themeMarkup(themes, byId);
     document.getElementById('opinionSourceList').innerHTML = opinionMarkup(opinions);
     document.getElementById('platformGrid').innerHTML = platformMarkup(platforms);
-    document.getElementById('actionSummary').textContent = actions.length ? '아래 질문은 실제 문장까지 공개된 후기에서 반복된 쟁점을 면접·입사 전 확인사항으로 바꾼 것입니다.' : '개별 후기 내용이 충분하지 않아 리뷰 집계만으로 행동 결론을 만들지 않습니다. 아래 기본 검증사항을 직접 확인하십시오.';
+    document.getElementById('actionSummary').textContent = actions.length ? '아래 질문은 실제 문장까지 공개된 후기에서 반복된 쟁점을 면접·입사 전 확인사항으로 바꾼 것입니다.' : '개별 후기 내용이 충분하지 않아 리뷰 집계만으로 행동 결론을 만들지 않습니다. 공개 기업문화 요약과 기본 검증사항을 함께 확인하십시오.';
     document.getElementById('actionList').innerHTML = actionMarkup(actions);
     document.getElementById('searchLinks').innerHTML = (data.searchLinks || []).map(link => `<a href="${esc(link.url)}" target="_blank" rel="noopener noreferrer">${esc(link.label)} ↗</a>`).join('');
     document.getElementById('methodBox').innerHTML =
       `<p><strong>채택 기준</strong> ${esc(data.methodology?.accepted || '')}</p>` +
       `<p><strong>제외 기준</strong> ${esc(data.methodology?.excluded || '')}</p>` +
       `<p><strong>검색 범위</strong> ${esc(data.methodology?.coverage || '')}</p>` +
-      `<p><strong>내부 처리</strong> 검색 후보 ${esc(data.metrics?.rawCandidates ?? 0)}건 중 회사 직접일치 자료를 분리하고, 사용자 집계 통계와 실제 공개 경험 문장을 서로 다른 근거로 처리했습니다.</p>`;
+      `<p><strong>내부 처리</strong> 검색 후보 ${esc(data.metrics?.rawCandidates ?? 0)}건 중 회사 직접일치 자료를 분리하고, 회사 소개·채용정보는 평판 내용에서 제외했습니다. 플랫폼 사용자 집계와 실제 공개 경험 문장을 서로 다른 근거로 처리합니다.</p>`;
 
     status.hidden = true;
     report.hidden = false;
@@ -127,16 +143,26 @@
     status.hidden = false;
     submit.disabled = true;
     document.getElementById('statusTitle').textContent = `${company}의 회사 평판 자료를 찾고 있습니다.`;
-    document.getElementById('statusText').textContent = '평판 플랫폼 탐색 → 회사 직접일치 확인 → 회사소개·채용정보 분리 → 사용자 리뷰 통계 확인 → 실제 공개 의견 분석';
+    document.getElementById('statusText').textContent = '평판 플랫폼 탐색 → 회사 직접일치 확인 → 회사소개·채용정보 분리 → 사용자 리뷰 집계 확인 → 실제 공개 의견 분석';
     try {
-      const response = await fetch('/api/reputation-analysis', {
-        method:'POST',
-        headers:{'content-type':'application/json'},
-        body:JSON.stringify({company})
-      });
-      const data = await response.json();
+      const [mainResult, platformResult] = await Promise.allSettled([
+        fetch('/api/reputation-analysis', {
+          method:'POST',
+          headers:{'content-type':'application/json'},
+          body:JSON.stringify({company})
+        }).then(async response => ({response,data:await response.json()})),
+        fetch(`/api/reputation-platforms?company=${encodeURIComponent(company)}`).then(async response => ({response,data:await response.json()}))
+      ]);
+
+      if (mainResult.status !== 'fulfilled') throw mainResult.reason;
+      const {response,data} = mainResult.value;
       if (!response.ok || !data.ok) throw new Error(data.error || '분석 API 오류');
-      render(data);
+
+      let extraSignals = [];
+      if (platformResult.status === 'fulfilled' && platformResult.value.response.ok && platformResult.value.data?.ok) {
+        extraSignals = Array.isArray(platformResult.value.data.signals) ? platformResult.value.data.signals : [];
+      }
+      render(data, extraSignals);
     } catch (error) {
       renderError(`공개 출처 연결 또는 분석 과정에서 오류가 발생했습니다. 잠시 후 다시 시도하십시오. (${error.message})`);
     } finally {
