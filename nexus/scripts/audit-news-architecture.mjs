@@ -12,6 +12,19 @@ const text = file => fs.readFileSync(file, 'utf8');
 const sorted = values => [...values].sort((a, b) => a.localeCompare(b));
 const sameSet = (left, right) => JSON.stringify(sorted(left)) === JSON.stringify(sorted(right));
 const visible = value => value.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+const median = values => {
+  if (!values.length) return 0;
+  const ordered = [...values].sort((a, b) => a - b);
+  const mid = Math.floor(ordered.length / 2);
+  return ordered.length % 2 ? ordered[mid] : Math.round((ordered[mid - 1] + ordered[mid]) / 2);
+};
+const bodySourceOf = source => {
+  const match = source.match(/<div\b[^>]*class\s*=\s*(["'])[^"']*\barticle-body\b[^"']*\1[^>]*>([\s\S]*?)<\/div>\s*<\/article>/i);
+  return match ? match[2] : '';
+};
+const paragraphCount = source => [...source.matchAll(/<p\b/gi)].length;
+const headingCount = source => [...source.matchAll(/<h2\b/gi)].length;
+const sentenceCount = value => (value.match(/[.!?。？！](?:\s|$)/g) || []).length;
 
 const dataSource = text(path.join(newsDir, 'news-data.js'));
 const dataSandbox = { window: {} };
@@ -48,6 +61,7 @@ if (!sameSet(articleFiles, dataFiles)) {
   fail(`article registry mismatch; missingInData=${missingInData.join(',') || '-'}; missingOnDisk=${missingOnDisk.join(',') || '-'}`);
 }
 
+const articleStats = new Map();
 for (const filename of articleFiles) {
   const source = text(path.join(articleDir, filename));
   if (!source.includes('../style.css')) fail(`${filename}: shared news stylesheet link missing`);
@@ -65,6 +79,46 @@ for (const filename of articleFiles) {
     if (heading.length > 24) fail(`${filename}: subheading is too long (${heading})`);
     if (/[.!?。？！]$/.test(heading) || /다$/.test(heading)) fail(`${filename}: subheading should be a compact phrase (${heading})`);
   }
+
+  const bodySource = bodySourceOf(source);
+  if (!bodySource) fail(`${filename}: article-body content missing`);
+  const bodyText = visible(bodySource);
+  articleStats.set(filename, {
+    chars: bodyText.length,
+    paragraphs: paragraphCount(bodySource),
+    headings: headingCount(bodySource),
+    sentences: sentenceCount(bodyText),
+    hasDecisionFrame: /(판단|판단기준|확인|지표|기준|점검|살펴|봐야)/.test(bodyText),
+    hasConditionalFrame: /(경우|조건|시나리오|여부|달라질|확정되지|불확실|다만)/.test(bodyText),
+    hasPoint: /class\s*=\s*(["'])[^"']*\barticle-point\b[^"']*\1/i.test(bodySource),
+    exposesInternalLabels: /\b(FACT|CONTEXT|STRATEGY|ACTION|WATCH|ASSESSMENT|IMPACT|NEXUS ACTION)\b/.test(bodyText)
+  });
+}
+
+const dates = sorted([...new Set(data.map(item => item.date))]);
+const latestDate = dates.at(-1);
+const previousDate = dates.length > 1 ? dates.at(-2) : null;
+const latestItems = data.filter(item => item.date === latestDate);
+const previousItems = previousDate ? data.filter(item => item.date === previousDate) : [];
+const previousLengths = previousItems
+  .map(item => articleStats.get(path.basename(item.href))?.chars || 0)
+  .filter(Boolean);
+const previousMedian = median(previousLengths);
+const densityFloor = Math.max(1800, previousMedian ? Math.round(previousMedian * 0.70) : 1800);
+
+if (latestItems.length < 4) fail(`${latestDate}: latest edition has too few articles (${latestItems.length}); expected at least 4 meaningful articles`);
+for (const item of latestItems) {
+  const filename = path.basename(item.href);
+  const stats = articleStats.get(filename);
+  if (!stats) fail(`${filename}: quality statistics missing`);
+  if (stats.chars < densityFloor) fail(`${filename}: article-body is too shallow (${stats.chars} chars; minimum ${densityFloor}, previous-date median ${previousMedian || 'n/a'})`);
+  if (stats.paragraphs < 8) fail(`${filename}: depth gate requires at least 8 body paragraphs (${stats.paragraphs})`);
+  if (stats.headings < 3) fail(`${filename}: depth gate requires at least 3 compact h2 sections (${stats.headings})`);
+  if (stats.sentences < 14) fail(`${filename}: depth gate requires at least 14 body sentences (${stats.sentences})`);
+  if (!stats.hasPoint) fail(`${filename}: article-point judgment dashboard is missing`);
+  if (!stats.hasDecisionFrame) fail(`${filename}: concrete judgment/monitoring criteria are missing`);
+  if (!stats.hasConditionalFrame) fail(`${filename}: uncertainty or conditional path analysis is missing`);
+  if (stats.exposesInternalLabels) fail(`${filename}: internal editorial labels must not appear in public article text`);
 }
 
 const sitemap = text(path.join(newsDir, 'sitemap.xml'));
@@ -88,7 +142,7 @@ for (const required of ['renderCategoryNav()', 'renderHome()', 'renderView()', "
 }
 
 const styleSource = text(path.join(newsDir, 'style.css'));
-for (const selector of ['.category-latest-grid', '.archive-day', '.article-page', '.article-body', '.news-accountability']) {
+for (const selector of ['.category-latest-grid', '.archive-day', '.article-page', '.article-body', '.news-accountability', '.article-point']) {
   if (!styleSource.includes(selector)) fail(`style.css missing selector: ${selector}`);
 }
 if (/\.news-head-tools\{[^}]*flex-direction:column/.test(styleSource)) fail('news header tools must not be forced into a vertical row');
@@ -99,4 +153,4 @@ if (!headers.includes('/news/*') || !headers.includes('Cache-Control: no-cache, 
 const robots = text(path.join(nexusDir, 'robots.txt'));
 if (!robots.includes('Sitemap: https://yehavha.com/news/sitemap.xml')) fail('news sitemap is not declared in robots.txt');
 
-console.log(`YEHAVHA NEWS audit passed: ${articleFiles.length} articles, ${config.categories.length} categories, article shell/footer/layout/cache/subheadings synchronized.`);
+console.log(`YEHAVHA NEWS audit passed: ${articleFiles.length} articles, latest=${latestDate}, latestDepthFloor=${densityFloor}, previousMedian=${previousMedian || 'n/a'}, ${config.categories.length} categories, article quality/shell/footer/layout/cache synchronized.`);
