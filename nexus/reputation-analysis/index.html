@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<meta name="description" content="인물·회사·기관·상품·서비스·장소에 관한 공개 평가와 실제 경험을 출처 기반으로 교차 분석해 보고서로 제공합니다."/>
+<meta name="description" content="인물·회사·기관·상품·서비스·장소에 관한 공개 평가와 실제 경험을 긍정·부정 구분 없이 수집하고 출처·주제·반복·상충 양상을 분석해 보고서로 제공합니다."/>
 <meta name="robots" content="index,follow,max-image-preview:large"/>
 <meta name="theme-color" content="#ffffff"/>
 <link rel="canonical" href="https://yehavha.com/reputation-analysis/"/>
@@ -21,7 +21,7 @@
     <section class="reputation-hero">
       <p class="eyebrow">PUBLIC SOURCE REPUTATION INTELLIGENCE</p>
       <h1>평판 분석</h1>
-      <p>단순 검색결과를 나열하는 기능이 아닙니다. 대상을 식별하는 공식·기본자료와 제3자의 실제 평가·경험자료를 분리하고, 서로 독립된 출처에서 같은 평가가 반복되는지 또는 상충하는지를 근거 ID와 함께 검증합니다.</p>
+      <p>검색된 공개 의견을 ‘검증되지 않았다’는 이유로 버리지 않습니다. 직원·면접자·고객·거래상대·이용자 등이 온라인에 남긴 긍정·부정·상반 의견을 먼저 수집하고, 대상 직접일치·중복·출처·반복 주제·특정 플랫폼 집중도를 내부적으로 확인해 보고서로 취합합니다.</p>
     </section>
   </div>
 </header>
@@ -51,21 +51,21 @@
           <input id="targetInput" name="target" type="search" maxlength="120" autocomplete="off" placeholder="예: 회사명, 인물명, 상품명, 서비스명, 장소명" required/>
           <button id="submitBtn" type="submit">분석 실행</button>
         </div>
-        <p class="form-note" id="formHint">공개 활동이 확인되는 인물의 기본정보와 공개 평가를 분리해 조사합니다.</p>
+        <p class="form-note" id="formHint">공개 활동과 함께 온라인에 게시된 평가·비판·칭찬·경험을 수집해 출처별로 취합합니다.</p>
       </form>
     </section>
 
     <section class="process" aria-label="분석 절차">
-      <article><b>1</b><strong>대상 직접일치</strong><span>실제 대상과 연결되는 자료만 남깁니다.</span></article>
-      <article><b>2</b><strong>자료 성격 분리</strong><span>공식 소개와 실제 평가·후기를 구분합니다.</span></article>
-      <article><b>3</b><strong>독립출처 교차검증</strong><span>한 사이트 여러 페이지를 여러 출처로 세지 않습니다.</span></article>
-      <article><b>4</b><strong>판단·한계 보고</strong><span>반복·상충·근거부족을 구분해 결론을 냅니다.</span></article>
+      <article><b>1</b><strong>공개 의견 수집</strong><span>긍정·부정·익명 여부와 관계없이 대상 관련 의견을 찾습니다.</span></article>
+      <article><b>2</b><strong>대상·중복 확인</strong><span>다른 대상의 결과와 동일 URL 중복만 제거합니다.</span></article>
+      <article><b>3</b><strong>의견 구조화</strong><span>출처·주제·긍정·부정·상충·반복 양상을 분류합니다.</span></article>
+      <article><b>4</b><strong>평판 보고서</strong><span>의견 분포와 원문 근거를 함께 보여줍니다.</span></article>
     </section>
 
     <section class="status-panel" id="statusPanel" hidden aria-live="polite">
       <p class="step">ANALYSIS IN PROGRESS</p>
-      <h2 id="statusTitle">공개 출처를 조사하고 있습니다.</h2>
-      <p id="statusText">대상 식별 → 무관 결과 제거 → 기본정보 확인 → 평판자료 분리 → 교차 분석</p>
+      <h2 id="statusTitle">공개 평판을 수집하고 있습니다.</h2>
+      <p id="statusText">대상 직접일치 확인 → 후기·커뮤니티·평판플랫폼 탐색 → 긍정·부정 의견 수집 → 중복 제거 → 주제·출처별 취합</p>
     </section>
 
     <section class="report" id="report" hidden aria-labelledby="reportTitle">
@@ -80,18 +80,18 @@
 
       <article class="report-definition">
         <strong>이 보고서에서 말하는 ‘평판’</strong>
-        <p>공식 홈페이지·기업소개·채용공고 자체가 아니라, 직원·면접자·고객·거래상대·이용자 등 제3자의 공개된 평가와 경험을 뜻합니다. 한 도메인의 여러 페이지는 하나의 독립 출처로 보고, 단순 검색·광고·채용도구·연봉도구 페이지는 평판 근거에서 제외합니다.</p>
+        <p>온라인에 공개된 평가·경험·후기·비판·칭찬·주장을 뜻합니다. 내용이 맞는지 틀린지를 자동으로 판정해 제외하지 않습니다. 대신 대상과의 직접 관련성, 중복 여부, 출처 도메인, 반복 주제, 긍정·부정의 상충, 특정 플랫폼 집중 여부를 내부적으로 확인합니다. 강한 의혹이나 비위 주장은 사실확정이 아니라 ‘게시된 주장’으로 표시합니다.</p>
       </article>
 
       <div class="metric-grid" id="metricGrid"></div>
 
       <article class="brief executive">
-        <h3>판단 요약</h3>
+        <h3>평판 요약</h3>
         <p id="executiveSummary"></p>
         <div class="analysis-facts">
-          <p><strong>현재 판정</strong><span id="verdictText"></span></p>
-          <p><strong>판정 근거</strong><span id="basisText"></span></p>
-          <p><strong>판단 한계</strong><span id="limitText"></span></p>
+          <p><strong>현재 흐름</strong><span id="verdictText"></span></p>
+          <p><strong>분석 근거</strong><span id="basisText"></span></p>
+          <p><strong>해석 주의</strong><span id="limitText"></span></p>
         </div>
       </article>
 
@@ -108,7 +108,7 @@
 
       <section class="report-section">
         <div class="section-title">
-          <h3>평판 근거 상태</h3>
+          <h3>공개 의견 현황</h3>
           <span id="reputationState">확인 중</span>
         </div>
         <article class="brief">
@@ -118,8 +118,8 @@
 
       <section class="report-section" id="signalSection">
         <div class="section-title">
-          <h3>반복·상충 신호</h3>
-          <span>독립 출처와 근거 ID 기준</span>
+          <h3>주요 의견 주제</h3>
+          <span>긍정·부정·상충과 출처 수 기준</span>
         </div>
         <div class="signal-grid" id="signalGrid"></div>
       </section>
@@ -134,8 +134,8 @@
 
       <section class="report-section">
         <div class="section-title">
-          <h3>검증된 평판·후기 근거</h3>
-          <span>실제 평가·경험에 해당하는 자료만</span>
+          <h3>수집된 공개 의견·후기</h3>
+          <span>원문과 게시 맥락을 함께 확인</span>
         </div>
         <div class="source-list" id="reputationSourceList"></div>
       </section>
@@ -149,7 +149,7 @@
       </section>
 
       <details class="method">
-        <summary>분석 기준·수집 범위·판단 한계 보기</summary>
+        <summary>분석 기준·수집 범위·해석 원칙 보기</summary>
         <div id="methodBox"></div>
       </details>
     </section>
@@ -173,6 +173,6 @@
   </div>
 </footer>
 
-<script src="./app.js?v=20260916-2" defer></script>
+<script src="./app.js?v=20260916-3" defer></script>
 </body>
 </html>
