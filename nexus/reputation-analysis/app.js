@@ -9,11 +9,11 @@
   let selectedType = 'person';
 
   const hints = {
-    person: '공개 활동과 함께 온라인에 게시된 평가·비판·칭찬·경험을 수집해 출처별로 취합합니다.',
-    organization: '회사·기관의 공식정보와 직원·면접자·거래상대·이용자의 공개 의견을 함께 수집해 분석합니다.',
-    product: '상품 설명과 실제 구매·사용·사후지원에 관한 공개 의견을 함께 수집합니다.',
-    service: '서비스 소개와 이용 경험·고객응대·비용에 관한 공개 의견을 함께 수집합니다.',
-    place: '장소 기본정보와 방문 경험·친절·가격·청결에 관한 공개 의견을 함께 수집합니다.'
+    person: '공개 활동과 온라인 평가를 취합하고, 당사자의 평판관리와 이용자의 확인·대응 행동까지 제시합니다.',
+    organization: '회사·기관의 공개 의견을 취합하고, 기업의 평판관리와 구직자·거래상대의 행동까지 제시합니다.',
+    product: '상품에 대한 공개 의견을 취합하고, 판매자 개선과 구매자의 의사결정 행동까지 제시합니다.',
+    service: '서비스 공개 의견을 취합하고, 운영자 개선과 이용자의 의사결정 행동까지 제시합니다.',
+    place: '장소 공개 의견을 취합하고, 운영자 개선과 방문자의 확인·대응 행동까지 제시합니다.'
   };
   const placeholders = {
     person: '예: 공개 활동이 있는 인물명',
@@ -21,6 +21,13 @@
     product: '예: 제조사와 상품명',
     service: '예: 서비스명',
     place: '예: 상호·시설·장소명'
+  };
+  const actionTitles = {
+    person:{subject:'당사자·소속조직 평판관리 실행안',user:'평판 이용자 확인·대응안'},
+    organization:{subject:'기업·기관 평판관리 실행안',user:'구직자·거래상대 행동안'},
+    product:{subject:'제조·판매자 개선 실행안',user:'구매자 의사결정·대응안'},
+    service:{subject:'서비스 운영자 개선 실행안',user:'이용자 의사결정·대응안'},
+    place:{subject:'운영자 평판관리 실행안',user:'방문자 확인·대응안'}
   };
 
   typeButtons.forEach(btn => btn.addEventListener('click', () => {
@@ -129,12 +136,108 @@
   }
 
   function executiveNarrative(target, opinions, signals) {
-    if (!opinions.length) return `${target}에 관한 기본·공식 자료는 확인할 수 있으나 현재 자동 탐색에서 공개 의견·후기 성격의 결과는 확보하지 못했습니다. 검색 범위를 넓힐 수 있도록 추가 확인 경로를 함께 제공합니다.`;
+    if (!opinions.length) return `${target}에 관한 기본·공식 자료는 확인할 수 있으나 현재 자동 탐색에서 공개 의견·후기 성격의 결과는 확보하지 못했습니다. 따라서 평판을 단정하지 않고, 대상 측에는 모니터링·정보공개 과제를, 이용자 측에는 직접 확인 질문과 비교 검토 행동을 제시합니다.`;
     const c = opinionCounts(opinions);
     const hosts = uniqueHosts(opinions).size;
     const top = signals.slice(0,4).map(s => `${s.topic} ${s.total}건`).join(', ');
     const dominant = c.positive > c.negative ? '긍정 의견이 더 많았고' : c.negative > c.positive ? '부정 의견이 더 많았고' : '긍정·부정 의견 수가 비슷하거나 혼재했고';
-    return `${target} 관련 공개 의견 ${opinions.length}건을 취합한 결과, ${dominant} 긍정 ${c.positive}건·부정 ${c.negative}건·중립/혼합 ${c.neutral}건으로 분류됐습니다. 의견 출처는 ${hosts}개 도메인입니다.${top ? ` 주요 언급 주제는 ${top}입니다.` : ''} 이는 온라인에 게시된 의견의 현재 표본을 요약한 것이며, 개별 의견의 진위나 전체 구성원의 대표성을 의미하지 않습니다.`;
+    return `${target} 관련 공개 의견 ${opinions.length}건을 취합한 결과, ${dominant} 긍정 ${c.positive}건·부정 ${c.negative}건·중립/혼합 ${c.neutral}건으로 분류됐습니다. 의견 출처는 ${hosts}개 도메인입니다.${top ? ` 주요 언급 주제는 ${top}입니다.` : ''} 아래 실행 제안은 이 평판 신호를 실제 운영개선과 의사결정 행동으로 전환한 것입니다.`;
+  }
+
+  const orgSubjectByTopic = {
+    '업무강도·워라밸':'실제 근무시간·초과근로·주말업무·휴가사용·업무배분을 팀별로 점검하고, 결원이나 상시 과부하가 확인되면 인력·업무량을 조정하십시오. 채용 단계에서도 실제 근무 기대치를 숨기지 말고 명시해야 합니다.',
+    '조직문화·경영진':'퇴사·재직자 면담과 익명 고충채널을 통해 반복되는 관리자·소통 문제를 확인하고, 관리자 행동기준·피드백·고충처리 절차를 운영지표로 관리하십시오.',
+    '보상·복지':'기본급·지급일·수습조건·성과급·복지의 기준과 실제 적용이 일치하는지 점검하고, 채용공고·오퍼·근로조건 안내가 서로 다르지 않도록 정리하십시오.',
+    '채용·면접':'직무범위·보고라인·팀인원·공석 사유·면접절차·근무조건을 표준화해 사전에 안내하고, 면접자 불만이 반복되는 질문·태도·절차를 수정하십시오.',
+    '퇴사·이직':'입사 90일 이내 퇴사와 반복 이직 사유를 별도로 집계하고, 온보딩·업무인수인계·관리자 문제·직무불일치를 원인별로 개선하십시오.',
+    '거래·신뢰':'계약·납기·정산·민원·대금 처리의 책임자와 응답기한을 정하고, 반복 불만이 생기는 지점을 SLA와 체크리스트로 관리하십시오.'
+  };
+  const orgUserByTopic = {
+    '업무강도·워라밸':'면접에서 최근 실제 퇴근시간, 주말근무 빈도, 결원 시 업무분담, 휴가 사용 방식, 긴급연락 기준을 구체적으로 확인하십시오. 답변이 추상적이면 다른 회사도 병행 검토하십시오.',
+    '조직문화·경영진':'직속 상사와 보고라인, 의사결정 방식, 팀 이직률, 갈등·고충 처리방식을 질문하십시오. 가능하면 같은 직무 재직자·퇴사자 의견을 시기별로 비교하십시오.',
+    '보상·복지':'연봉·수습급여·급여일·성과급·복지·야근수당 등 중요한 조건은 구두 설명만 믿지 말고 오퍼·근로계약서·공식 안내에서 확인하십시오.',
+    '채용·면접':'공석 발생 이유, 전임자 근속기간, 실제 담당업무, 팀 규모, 수습평가 기준을 면접에서 확인하십시오. 면접 과정에서 평판 신호와 같은 문제가 재현되는지도 관찰하십시오.',
+    '퇴사·이직':'평균 근속과 최근 퇴사 사유를 확인하고, 입사 결정을 서두르기보다 다른 지원처를 함께 유지하십시오. 입사 후에는 첫 2주·첫 급여일·수습 종료 시점을 재평가 지점으로 잡으십시오.',
+    '거래·신뢰':'거래 전 계약조건·정산일·납기·책임자·분쟁처리 절차를 문서로 확인하고, 가능하면 기존 거래처 사례나 공식 실적을 별도로 확인하십시오.'
+  };
+
+  function genericSubjectAction(type, topic, state) {
+    const base = state === 'positive'
+      ? '긍정 평가가 나온 이유를 실제 운영기준과 연결해 유지하고, 과장된 홍보보다 확인 가능한 근거와 개선 이력을 공개하십시오.'
+      : state === 'conflicted'
+        ? '긍정·부정이 엇갈리므로 원문을 시기·이용상황·담당부서별로 나눠 원인을 확인하고, 반복되는 불만부터 운영개선 과제로 전환하십시오.'
+        : '부정 의견의 삭제나 반박부터 시작하지 말고 원문을 원인별로 분류해 실제 운영·품질·응대 과정에서 재현되는 문제인지 먼저 점검하고 개선 결과를 기록하십시오.';
+    const prefix = type === 'person' ? '발언·활동·응대 과정에서' : type === 'product' ? '품질·배송·사용·사후지원 과정에서' : type === 'service' ? '이용·응대·비용·해지 과정에서' : type === 'place' ? '방문·응대·가격·시설 운영에서' : '';
+    return `${prefix} ${topic} 관련 신호를 별도 관리하십시오. ${base}`.trim();
+  }
+
+  function genericUserAction(type, topic, state) {
+    const caution = state === 'positive'
+      ? '긍정 의견도 자신의 이용조건·시기와 같은지 원문에서 확인하십시오.'
+      : '단일 후기를 사실로 확정하지 말고 같은 주제의 여러 원문과 최근 자료를 비교한 뒤 결정하십시오.';
+    if (type === 'person') return `${topic} 관련 공개평가의 작성 시점과 맥락을 확인하고, 중요한 판단은 당사자의 공식 기록·최근 활동과 함께 비교하십시오. ${caution}`;
+    if (type === 'product') return `${topic} 관련 의견을 실제 구매조건과 비교하고, 반품·교환·A/S 조건과 대체상품을 함께 확인하십시오. ${caution}`;
+    if (type === 'service') return `${topic} 관련 의견을 자신의 이용방식과 비교하고, 요금·해지·환불·고객지원 조건을 가입 전에 확인하십시오. ${caution}`;
+    if (type === 'place') return `${topic} 관련 최근 후기를 방문시간·가격·예약조건과 함께 확인하고, 중요한 일정이라면 대체 장소도 함께 검토하십시오. ${caution}`;
+    return `${topic} 관련 원문을 확인하고 다른 선택지와 비교하십시오. ${caution}`;
+  }
+
+  function actionItem(priority, title, text, refs='') {
+    return `<article class="action-item"><span class="action-priority">${esc(priority)}</span><div><strong>${esc(title)}</strong><p>${esc(text)}</p>${refs ? `<span class="action-refs">근거 ${esc(refs)}</span>` : ''}</div></article>`;
+  }
+
+  function buildActionPlan(type, target, opinions, signals) {
+    const counts = opinionCounts(opinions);
+    const priority = signals.filter(s => s.state === 'negative' || s.state === 'conflicted').slice(0,4);
+    const positive = signals.filter(s => s.state === 'positive').slice(0,2);
+    const selected = priority.length ? priority : positive.length ? positive : signals.slice(0,2);
+    const titles = actionTitles[type] || actionTitles.person;
+    const subject = [];
+    const user = [];
+
+    if (selected.length) {
+      selected.forEach((signal,index) => {
+        const refs = [...signal.positive,...signal.negative,...signal.neutral].join(' · ');
+        const urgency = index === 0 && (signal.state === 'negative' || signal.state === 'conflicted') ? '우선' : '점검';
+        const subjectText = type === 'organization' && orgSubjectByTopic[signal.topic]
+          ? orgSubjectByTopic[signal.topic]
+          : genericSubjectAction(type, signal.topic, signal.state);
+        const userText = type === 'organization' && orgUserByTopic[signal.topic]
+          ? orgUserByTopic[signal.topic]
+          : genericUserAction(type, signal.topic, signal.state);
+        subject.push(actionItem(urgency, signal.topic, subjectText, refs));
+        user.push(actionItem(urgency === '우선' ? '확인' : '비교', signal.topic, userText, refs));
+      });
+    } else {
+      subject.push(actionItem('기본', '평판 모니터링', `${target}에 관한 공개 의견이 적거나 주제화되지 않았습니다. 검색 노출·채용·고객·거래 접점에서 새 의견을 정기적으로 확인하고, 반복되는 표현이 생기면 원문과 실제 운영상태를 연결해 개선 과제로 전환하십시오.`));
+      user.push(actionItem('기본', '정보 부족 대응', `공개 평판이 적다는 사실을 좋은 신호로 간주하지 마십시오. 자신의 목적에 중요한 조건을 직접 질문하고 공식 문서·계약·최근 이용정보로 확인한 뒤 다른 선택지와 비교하십시오.`));
+    }
+
+    if (type === 'organization') {
+      if (counts.negative > 0 || priority.length) {
+        subject.push(actionItem('30일', '개선→설명→재측정', '부정 의견을 단순 홍보로 덮지 말고 반복 주제를 실제 운영지표와 연결해 개선한 뒤, 채용페이지·회사소개·응대문서에 바뀐 기준을 반영하고 30일 단위로 신규 의견 변화를 다시 측정하십시오.'));
+        user.push(actionItem('결정', '대안 병행·검증 후 결정', '부정·상충 평판이 확인되면 이 회사를 유일한 선택지로 두지 말고 다른 지원처나 거래처를 병행하십시오. 면접·오퍼·계약 단계에서 평판과 같은 문제가 실제로 확인되는지를 점검한 뒤 최종 결정하십시오.'));
+      } else {
+        subject.push(actionItem('유지', '긍정 평판의 원인 보존', '긍정 의견이 나온 운영방식·팀·서비스를 특정해 유지하고, 신규 인력·관리자 변경 후에도 같은 수준이 유지되는지 추적하십시오.'));
+        user.push(actionItem('확인', '긍정 평판도 적용범위 확인', '긍정 평판이 현재 지원 직무·팀·근무시기에도 적용되는지 확인하십시오. 회사 전체 평판과 특정 부서 경험은 다를 수 있습니다.'));
+      }
+    } else {
+      subject.push(actionItem('지속', '변화 추적', '개선 조치 후 같은 주제의 신규 의견이 줄거나 방향이 바뀌는지 정기적으로 확인하고, 반복되는 불만은 다시 원인분석 대상으로 올리십시오.'));
+      user.push(actionItem('결정', '대체 선택지 비교', '평판 신호가 자신의 핵심 조건과 충돌하면 대체 인물·상품·서비스·장소를 함께 비교하고, 중요한 조건을 직접 확인한 뒤 결정하십시오.'));
+    }
+
+    const subjectSummary = priority.length
+      ? `부정 또는 상충 신호가 ${priority.length}개 주제에서 확인됐습니다. 평판관리의 핵심은 반박이 아니라 원인 확인 → 운영개선 → 설명 → 재측정입니다.`
+      : positive.length
+        ? `현재는 긍정 신호가 상대적으로 두드러집니다. 강점의 실제 원인을 유지하고 변화가 생길 때 평판이 악화되지 않는지 추적해야 합니다.`
+        : `현재 뚜렷한 주제 신호가 적습니다. 평판 노출 자체를 모니터링하면서 새로운 반복 신호가 생기는지 확인해야 합니다.`;
+    const userSummary = type === 'organization'
+      ? (counts.negative > 0 || priority.length
+          ? '부정·상충 평판은 취업·거래의 자동 탈락 사유가 아니라 검증 질문입니다. 대안을 병행하고, 면접·오퍼·계약에서 해당 신호가 실제로 재현되는지 확인하십시오.'
+          : '현재 부정 신호가 두드러지지 않더라도 직무·팀·시기별 차이가 있으므로 핵심 근무·보상·조직조건은 직접 확인해야 합니다.')
+      : '평판은 선택을 대신하는 결론이 아니라 확인해야 할 위험·강점 신호입니다. 자신의 조건과 맞는지 원문과 실제 조건을 비교한 뒤 행동하십시오.';
+
+    return {titles,subject,user,subjectSummary,userSummary};
   }
 
   function render(data) {
@@ -146,6 +249,7 @@
     const counts = opinionCounts(opinions);
     const opinionHosts = uniqueHosts(opinions).size;
     const profile = data.profile || {status:'limited',sourceIds:[]};
+    const actions = buildActionPlan(data.target.type, data.target.name, opinions, signals);
 
     document.getElementById('reportTitle').textContent = `${data.target.name} 평판 분석`;
     document.getElementById('reportMeta').textContent = `${data.target.typeLabel} · 기준 ${generated}`;
@@ -182,6 +286,13 @@
       </article>`;
     }).join('') : `<article class="signal signal-empty"><h4>분류 가능한 의견 주제 없음</h4><p>${opinions.length ? '공개 의견은 수집됐지만 현재 키워드 기준으로 특정 주제에 묶이지 않았습니다. 아래 원문 목록에서 의견 내용을 확인할 수 있습니다.' : '현재 자동 탐색에서 대상과 직접 연결되는 공개 의견을 확보하지 못했습니다.'}</p></article>`;
 
+    document.getElementById('subjectActionTitle').textContent = actions.titles.subject;
+    document.getElementById('userActionTitle').textContent = actions.titles.user;
+    document.getElementById('subjectActionSummary').textContent = actions.subjectSummary;
+    document.getElementById('userActionSummary').textContent = actions.userSummary;
+    document.getElementById('subjectActionList').innerHTML = actions.subject.join('');
+    document.getElementById('userActionList').innerHTML = actions.user.join('');
+
     document.getElementById('profileSourceList').innerHTML = sourceMarkup(
       profileEvidence,
       '관련 기본·공식 자료가 확인되지 않았습니다.',
@@ -204,6 +315,7 @@
       `<p><strong>분석 절차</strong> ${esc((data.methodology?.stages || []).join(' → '))}</p>` +
       `<p><strong>수집 원칙</strong> ${esc(data.methodology?.note || '대상과 직접 연결되는 공개 의견을 긍정·부정 구분 없이 수집합니다.')}</p>` +
       `<p><strong>내부 검증</strong> 검색 후보 ${esc(raw)}건에서 대상과 직접 연결되지 않는 결과 ${esc(filtered)}건과 URL 중복을 제거했습니다. 의견의 내용이 맞다·틀리다는 이유로는 제외하지 않습니다. 강한 주장 표현 ${esc(claims)}건은 사실확정이 아니라 공개 주장으로 표시합니다.</p>` +
+      `<p><strong>실행 원칙</strong> 평판 신호를 단순 나열하지 않고 대상 측에는 운영·커뮤니케이션 개선과 재측정 과제를, 이용자 측에는 확인 질문·대안 비교·문서 확인·의사결정 행동으로 전환합니다.</p>` +
       `<p><strong>해석 원칙</strong> ${esc(data.disclaimer || '공개 의견의 분포와 반복 양상을 보여주며 사실확정과는 구분합니다.')}</p>`;
 
     status.hidden = true;
@@ -226,7 +338,7 @@
     status.hidden = false;
     submit.disabled = true;
     document.getElementById('statusTitle').textContent = `${target} 공개 평판을 수집하고 있습니다.`;
-    document.getElementById('statusText').textContent = '대상 직접일치 확인 → 후기·커뮤니티·평판플랫폼 탐색 → 긍정·부정 의견 모두 수집 → 중복 제거 → 주제·출처별 취합';
+    document.getElementById('statusText').textContent = '공개 의견 수집 → 대상·중복 확인 → 긍정·부정·상충 분석 → 핵심 주제 도출 → 대상자·이용자 실행안 생성';
 
     try {
       const response = await fetch('/api/reputation-analysis', {
