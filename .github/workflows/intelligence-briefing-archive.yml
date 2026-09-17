@@ -15,8 +15,8 @@ permissions:
   contents: write
 
 concurrency:
-  group: intelligence-briefing-archive
-  cancel-in-progress: true
+  group: yehavha-main-content-writer
+  cancel-in-progress: false
 
 jobs:
   archive:
