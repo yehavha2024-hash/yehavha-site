@@ -102,16 +102,14 @@
     const hasVideo = media
       && video
       && typeof video.url === 'string' && video.url
-      && typeof video.thumbnail === 'string' && video.thumbnail
-      && typeof video.source === 'string' && video.source;
+      && typeof video.thumbnail === 'string' && video.thumbnail;
 
     if (hasVideo) {
       const card = make('article', 'opinion-feature news-media-feature');
-      const videoLink = make('a', 'news-media-thumb-link');
-      videoLink.href = video.url;
-      videoLink.target = '_blank';
-      videoLink.rel = 'noopener noreferrer';
-      videoLink.setAttribute('aria-label', `${item.title} 관련 영상 보기`);
+      const visual = make('div', 'news-media-visual');
+      const articleThumbLink = make('a', 'news-media-thumb-link');
+      articleThumbLink.href = item.href;
+      articleThumbLink.setAttribute('aria-label', `${item.title} 기사 보기`);
 
       const image = make('img');
       image.src = video.thumbnail;
@@ -120,23 +118,33 @@
       image.height = 270;
       image.loading = 'lazy';
       image.decoding = 'async';
-      videoLink.append(image);
+      articleThumbLink.append(image);
 
-      const copy = make('div', 'opinion-copy');
-      const label = make('span', 'opinion-label', `${item.category} · 관련 영상`);
-      const title = make('strong', '', item.title);
-      const summary = make('span', '', item.summary);
-      const actions = make('b');
-      const articleLink = make('a', 'news-media-action', '기사 보기 →');
-      articleLink.href = item.href;
-      const sourceName = video.source.replace(/^YouTube\s*·\s*/i, '') || 'YouTube';
-      const relatedLink = make('a', 'news-media-action', `${sourceName} 영상 ↗`);
+      const relatedLink = make('a', 'news-media-related', `${item.category} 관련 영상 ↗`);
       relatedLink.href = video.url;
       relatedLink.target = '_blank';
       relatedLink.rel = 'noopener noreferrer';
-      actions.append(articleLink, document.createTextNode(' · '), relatedLink);
-      copy.append(label, title, summary, actions);
-      card.append(videoLink, copy);
+      relatedLink.setAttribute('aria-label', `${item.title} 관련 영상 새 창에서 보기`);
+      visual.append(articleThumbLink, relatedLink);
+
+      const copy = make('div', 'opinion-copy news-media-copy');
+      const meta = make('div', 'news-card-meta news-media-meta');
+      [item.category, formatDate(item.date), item.author || 'YEHAVHA NEWS']
+        .forEach(value => meta.append(make('span', '', value)));
+
+      const heading = make('h3', 'news-media-title');
+      const titleLink = make('a', '', item.title);
+      titleLink.href = item.href;
+      heading.append(titleLink);
+
+      const summary = make('span', 'news-media-summary', item.summary);
+      const actions = make('b', 'news-media-actions');
+      const articleLink = make('a', 'news-media-action', '기사 보기 →');
+      articleLink.href = item.href;
+      actions.append(articleLink);
+
+      copy.append(meta, heading, summary, actions);
+      card.append(visual, copy);
       return card;
     }
 
