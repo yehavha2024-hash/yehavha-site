@@ -2,8 +2,8 @@
 
 /* 2026-09-17: YEHAVHA SPECIAL visual layer.
    Keep the existing portal stylesheet intact in portal-v2-core.css and isolate
-   the new homepage presentation here so scheduled news refreshes cannot
-   overwrite or duplicate this section. */
+   the homepage presentation here so scheduled news refreshes cannot overwrite
+   or duplicate this section. */
 
 .hero-main > .news-entry-banner {
   overflow: visible;
@@ -11,14 +11,12 @@
 
 .hero-main > .news-entry-banner::before {
   content: "YEHAVHA SPECIAL\A기업 탐방  ·  인물 인터뷰  ·  제품·서비스·문화";
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  display: block;
   width: 100%;
   min-height: clamp(96px, 10vw, 124px);
   box-sizing: border-box;
   margin: 14px 0 12px;
-  padding: clamp(18px, 2.8vw, 30px) clamp(20px, 4vw, 46px);
+  padding: clamp(18px, 2.8vw, 28px) clamp(20px, 4vw, 46px);
   border: 1px solid rgba(17, 24, 39, .14);
   border-radius: 14px;
   background:
@@ -27,16 +25,16 @@
   box-shadow: 0 5px 18px rgba(0, 0, 0, .08);
   color: #fff;
   white-space: pre-line;
-  font-size: clamp(1.02rem, 1.65vw, 1.28rem);
-  font-weight: 700;
-  line-height: 1.75;
-  letter-spacing: -.015em;
+  font-size: clamp(1.04rem, 1.75vw, 1.34rem);
+  font-weight: 750;
+  line-height: 1.62;
+  letter-spacing: -.012em;
   text-shadow: 0 1px 10px rgba(0, 0, 0, .34);
   pointer-events: none;
 }
 
 .hero-main > .news-entry-banner::first-line {
-  font-size: clamp(1.6rem, 3.2vw, 2.35rem);
+  font-size: clamp(1.65rem, 3.35vw, 2.45rem);
   font-weight: 900;
   letter-spacing: .035em;
   line-height: 1.18;
@@ -68,13 +66,13 @@
   .hero-main > .news-entry-banner::before {
     min-height: 90px;
     margin: 11px 0 10px;
-    padding: 16px 18px;
-    font-size: .98rem;
-    line-height: 1.62;
+    padding: 15px 18px;
+    font-size: 1rem;
+    line-height: 1.5;
     background-position: 58% 46%;
   }
 
   .hero-main > .news-entry-banner::first-line {
-    font-size: clamp(1.42rem, 7.2vw, 1.9rem);
+    font-size: clamp(1.46rem, 7.4vw, 1.95rem);
   }
 }
