@@ -94,6 +94,28 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "keywords": "청문회 끝나자 보고서 채택 충돌…인사검증이 상임위 대치로 번졌다 정치"
   },
   {
+    "id": "2026-09-17-ppp-han-jang-after-yong-resignation",
+    "date": "2026-09-17",
+    "category": "정치",
+    "author": "이명훈",
+    "type": "기사",
+    "title": "용혜인 사퇴 뒤 국힘 지표 반등…한동훈·장동혁 관계는 별도 변수",
+    "summary": "용혜인 성평등가족부 장관 후보자 사퇴와 개각 논란 뒤 국민의힘 지지도가 오른 조사가 나왔지만, 조사별 정당 지지도는 크게 엇갈렸다. 단기 반사이익이 확인된 것과 한동훈 의원·장동혁 지도부의 관계가 안정된 것은 같은 문제가 아니다.",
+    "href": "./articles/2026-09-17-ppp-han-jang-after-yong-resignation.html",
+    "keywords": "용혜인 사퇴 뒤 국힘 지표 반등…한동훈·장동혁 관계는 별도 변수 정치"
+  },
+  {
+    "id": "2026-09-17-lee-approval-decline-drivers",
+    "date": "2026-09-17",
+    "category": "정치",
+    "author": "이명훈",
+    "type": "기사",
+    "title": "이재명 지지율 하락, 한 가지 악재가 아니다…부동산·인사·민생 동시 압박",
+    "summary": "최근 한국갤럽·NBS·리얼미터는 조사 방식과 절대 수치가 달라도 이재명 대통령 국정평가가 하락하는 방향을 공통적으로 보여줬다. 원인을 하나의 사건으로 단정하기보다 부동산 정책, 인사 논란, 경제·민생 평가가 서로 겹치는 구조로 보는 편이 데이터에 가깝다.",
+    "href": "./articles/2026-09-17-lee-approval-decline-drivers.html",
+    "keywords": "이재명 지지율 하락, 한 가지 악재가 아니다…부동산·인사·민생 동시 압박 정치"
+  },
+  {
     "id": "2026-09-16-cabinet-nominee-hearings",
     "date": "2026-09-16",
     "category": "정치",
