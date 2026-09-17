@@ -12,7 +12,7 @@ window.YEHAVHA_NEWS_CONFIG = Object.freeze({
     "글로벌·컬처"
   ],
   "resultsPageSize": 20,
-  "homeLatestLimit": 10,
+  "homeLatestLimit": 11,
   "categoryLatestLimit": 3
 });
 
