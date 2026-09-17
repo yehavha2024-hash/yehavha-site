@@ -83,6 +83,17 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "keywords": "유엔 EU 프런티어 AI 안전 데이터센터 Anthropic 규제"
   },
   {
+    "id": "2026-09-17-post-hearing-report-standoff",
+    "date": "2026-09-17",
+    "category": "정치",
+    "author": "이명훈",
+    "type": "기사",
+    "title": "청문회 끝나자 보고서 채택 충돌…인사검증이 상임위 대치로 번졌다",
+    "summary": "8·30 개각 인사청문회가 마무리되자 갈등의 초점이 후보자 개인 검증에서 청문보고서 채택과 상임위원회 운영으로 이동했다. 17일 국회에서 확인해야 할 것은 누가 더 강하게 공세하느냐보다 인사 갈등이 입법·국정감사 일정까지 전이되는지 여부다.",
+    "href": "./articles/2026-09-17-post-hearing-report-standoff.html",
+    "keywords": "청문회 끝나자 보고서 채택 충돌…인사검증이 상임위 대치로 번졌다 정치"
+  },
+  {
     "id": "2026-09-16-cabinet-nominee-hearings",
     "date": "2026-09-16",
     "category": "정치",
