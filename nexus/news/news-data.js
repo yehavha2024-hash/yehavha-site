@@ -1,5 +1,5 @@
 /* YEHAVHA NEWS generated article registry.
-   Display metadata is derived from article HTML. Keywords and non-display metadata are preserved from the previous registry.
+   Display metadata and observed categories are derived from article HTML. Keywords and non-display metadata are preserved from the previous registry.
    Do not hand-edit title, summary, date, category, author or href here; edit the article instead. */
 window.YEHAVHA_NEWS_CONFIG = Object.freeze({
   "categories": [
@@ -8,7 +8,8 @@ window.YEHAVHA_NEWS_CONFIG = Object.freeze({
     "경제·산업",
     "사회",
     "법·정책",
-    "AI·기술"
+    "AI·기술",
+    "글로벌·컬처"
   ],
   "resultsPageSize": 20,
   "homeLatestLimit": 10,
@@ -114,6 +115,28 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "summary": "최근 한국갤럽·NBS·리얼미터는 조사 방식과 절대 수치가 달라도 이재명 대통령 국정평가가 하락하는 방향을 공통적으로 보여줬다. 원인을 하나의 사건으로 단정하기보다 부동산 정책, 인사 논란, 경제·민생 평가가 서로 겹치는 구조로 보는 편이 데이터에 가깝다.",
     "href": "./articles/2026-09-17-lee-approval-decline-drivers.html",
     "keywords": "이재명 지지율 하락, 한 가지 악재가 아니다…부동산·인사·민생 동시 압박 정치"
+  },
+  {
+    "id": "2026-09-17-lisa-global-ip-expansion",
+    "date": "2026-09-17",
+    "category": "글로벌·컬처",
+    "author": "컬처",
+    "type": "기사",
+    "title": "리사 다큐 TIFF 공개…K-pop 스타가 글로벌 IP로 확장되는 경로",
+    "summary": "BLACKPINK 리사의 다큐멘터리 'Always Lalisa'가 TIFF에서 공개된 뒤 10월 글로벌 극장·IMAX 상영과 이후 YouTube Premium 공개를 앞두고 있다. 핵심은 한 K-pop 스타의 기록물이 아니라 음악·영화·연기·브랜드·플랫폼이 하나의 글로벌 IP 구조로 결합되는 방식이다.",
+    "href": "./articles/2026-09-17-lisa-global-ip-expansion.html",
+    "keywords": "리사 다큐 TIFF 공개…K-pop 스타가 글로벌 IP로 확장되는 경로 글로벌·컬처"
+  },
+  {
+    "id": "2026-09-17-aichi-nagoya-asian-games-culture",
+    "date": "2026-09-17",
+    "category": "글로벌·컬처",
+    "author": "컬처",
+    "type": "기사",
+    "title": "아이치·나고야 아시안게임 개막 임박…스포츠 축제와 종목 구조가 함께 바뀐다",
+    "summary": "2026 아이치·나고야 아시안게임은 9월 19일 개막을 앞두고 있다. 관중 없이 치러졌던 도쿄올림픽 이후 일본이 처음 맞는 대형 관중형 국제종합대회라는 점과 e스포츠·가상태권도·패들 등 종목 변화, 대규모 운영 실험이 핵심이다.",
+    "href": "./articles/2026-09-17-aichi-nagoya-asian-games-culture.html",
+    "keywords": "아이치·나고야 아시안게임 개막 임박…스포츠 축제와 종목 구조가 함께 바뀐다 글로벌·컬처"
   },
   {
     "id": "2026-09-16-cabinet-nominee-hearings",
