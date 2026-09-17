@@ -1,8 +1,9 @@
 /* TOEIC + TEPS Reading Immersion V2 — DAY 011~100 deterministic builder
-   The builder uses master-lexicon-v2.json so every master headword is exposed by DAY 080
-   and repeated through DAY 100 according to role minimums.
+   English reading text must never interpolate Korean UI metadata.
 */
 (function (root) {
+  'use strict';
+
   const DAY_META = [
     [11,"은행안내 + 이메일","기업계좌 서비스","조건·수수료 비교","수량표현·비교"],
     [12,"청구서 설명 + 회계메일","인보이스 오류 수정","숫자·절차·책임 추적","전치사·수동태"],
@@ -96,6 +97,25 @@
     [100,"최종 장문 종합","시험영어에서 영어원서 독해로","전체 맥락·요약·추론","전 영역 종합"]
   ];
 
+  const TOPIC_EN = {
+    11:"business account services",12:"correcting an invoice error",13:"travel expense reimbursement",14:"a company vehicle accident",15:"a software subscription",
+    16:"a seasonal sales promotion",17:"a group event reservation",18:"a local tourism program",19:"international seminar attendance",20:"customer experience in service industries",
+    21:"a server outage",22:"account security",23:"feature improvements",24:"technical support",25:"an order modification",26:"a refund request",27:"a new-product campaign",
+    28:"customer satisfaction",29:"factory productivity",30:"reducing defect rates",31:"routine equipment inspection",32:"a working-hours policy",33:"employee performance evaluation",
+    34:"job training",35:"changes in talent recruitment",36:"an employee transfer",37:"workplace safety",38:"an employee wellness program",39:"an office relocation",40:"an office building renovation",
+    41:"an elevator inspection",42:"a flight change",43:"a train service change",44:"vehicle rental",45:"a lost delivery",46:"an event change caused by severe weather",47:"rescheduling a reservation",
+    48:"changes in library operations",49:"public transportation improvements",50:"how cities solve service problems",51:"automation and work",52:"corporate waste reduction",53:"energy efficiency",
+    54:"a sustainable supply chain",55:"sleep among office workers",56:"changes in purchasing behavior",57:"adult learning methods",58:"a new business book",59:"a special exhibition",60:"a fundraising campaign",
+    61:"changes in a competitive market",62:"a service contract renewal",63:"a procurement bid",64:"changing suppliers",65:"price negotiation",66:"a revision of company rules",67:"compliance",
+    68:"customer data processing",69:"corporate decision-making",70:"why good policy should be explainable",71:"why people avoid long texts",72:"fast reading and accurate reading",73:"information overload",
+    74:"how small errors grow into large problems",75:"communication within organizations",76:"changes in office technology",77:"the basic principles of cloud services",78:"how evidence and hypotheses are tested",
+    79:"how to read prices and inflation",80:"moving from workplace English to general nonfiction",81:"career transition and expertise",82:"changes in public communication",83:"memory and spaced repetition",
+    84:"the role of trust and institutions",85:"incentives and unintended consequences",86:"how to read rules, exceptions, and responsibility",87:"AI decision-making systems",88:"urban resilience",
+    89:"translation and context",90:"distinguishing evidence from opinion",91:"a combined finance and business-travel scenario",92:"a combined HR and IT scenario",93:"a combined logistics and customer-service scenario",
+    94:"a combined marketing and retail scenario",95:"a combined facilities and events scenario",96:"defining and extending complex concepts",97:"reading counterarguments and responding to them",
+    98:"developing one topic across multiple sections",99:"integrating workplace, science, society, and policy texts",100:"moving from test English to reading English books"
+  };
+
   const CORE_GLOSSES = {
     account:"계좌·계정", fee:"수수료", invoice:"청구서", expense:"비용", policy:"정책·규정",
     insurance:"보험", subscribe:"구독하다", inventory:"재고", reservation:"예약", conference:"회의·학술대회",
@@ -133,6 +153,8 @@
     ["전치사·접속사","뒤에 명사구가 오는지 완전한 절이 오는지 보고 구조를 판단합니다."]
   ];
 
+  const HANGUL_RE = /[\u3131-\u318e\uac00-\ud7a3]/;
+
   function requirement(entry) {
     const roles = entry.roles || [];
     let n = 1;
@@ -141,6 +163,7 @@
     if (roles.includes("academic-book-extension")) n = Math.max(n,2);
     return n;
   }
+
   function schedule(entries) {
     const map = new Map();
     for (let d=11; d<=100; d++) map.set(d,[]);
@@ -156,6 +179,7 @@
     });
     return map;
   }
+
   function words(text) { return String(text||"").trim().split(/\s+/).filter(Boolean).length; }
   function titleCase(s) { return String(s).replace(/(^|\s)([a-z])/g,(_,a,b)=>a+b.toUpperCase()); }
   function chunk(items,n) {
@@ -166,7 +190,34 @@
   function listTerms(items,max=999) {
     return items.slice(0,max).map(x=>`“${x.lemma}”`).join(", ");
   }
-  function lexicalBridge(items, index) {
+
+  function genreEn(day) {
+    if (day <= 19) return "Workplace document set";
+    if (day <= 49) return "Business document or linked document set";
+    if (day <= 69) return "Report, article, or policy document";
+    if (day <= 90) return "Extended nonfiction passage";
+    if (day <= 95) return "TOEIC-style multi-document set";
+    return "TEPS- or book-style nonfiction passage";
+  }
+
+  function englishMeta(meta) {
+    return {
+      day:meta.day,
+      topic:TOPIC_EN[meta.day] || `the DAY ${meta.day} reading scenario`,
+      genre:genreEn(meta.day),
+      skill:"tracking structure, evidence, reference, and logic across a long passage",
+      grammar:"clause structure, reference, and logical connectors"
+    };
+  }
+
+  function ensureEnglish(text, day, field) {
+    const value=String(text||"");
+    if (!HANGUL_RE.test(value)) return value;
+    console.error(`TOEIC reading English integrity violation: DAY ${day} ${field}`);
+    return value.replace(/[\u3131-\u318e\uac00-\ud7a3]+(?:[·→+\-/\s]*[\u3131-\u318e\uac00-\ud7a3]+)*/g,"the relevant reading concept");
+  }
+
+  function lexicalBridge(items) {
     if (!items.length) return "";
     const t = items.filter(x=>(x.roles||[]).includes("toeic-specific"));
     const a = items.filter(x=>(x.roles||[]).includes("academic-book-extension") && !(x.roles||[]).includes("toeic-specific"));
@@ -192,9 +243,11 @@
   ];
 
   function metaObj(row) { return {day:row[0],genre:row[1],topic:row[2],skill:row[3],grammar:row[4]}; }
+
   function makeParagraphs(meta, targets) {
+    const en=englishMeta(meta);
     const groups = chunk(targets,10);
-    const paragraphs = BASE_PARAGRAPHS.map((fn,i)=>`${fn(meta)} ${lexicalBridge(groups[i],i)}`.trim());
+    const paragraphs = BASE_PARAGRAPHS.map((fn,i)=>ensureEnglish(`${fn(en)} ${lexicalBridge(groups[i])}`.trim(),meta.day,`paragraph-${i+1}`));
     let total = words(paragraphs.join(" "));
     const pad = `A further reading principle is to preserve the sentence frame when an unfamiliar expression appears. Instead of stopping immediately, identify the subject, locate the main verb, observe the connector, and decide whether the unknown item is essential to the author's claim. This controlled tolerance for uncertainty is what allows readers to finish long passages and later confirm vocabulary without losing the argument.`;
     let i=0;
@@ -213,16 +266,17 @@
   }
 
   function makeDay(meta, targets) {
+    const en=englishMeta(meta);
     const p = makeParagraphs(meta,targets);
     const g1=GRAMMAR_CYCLE[(meta.day-1)%GRAMMAR_CYCLE.length], g2=GRAMMAR_CYCLE[(meta.day+2)%GRAMMAR_CYCLE.length];
     const ex1=EXPRESSIONS[(meta.day-1)%EXPRESSIONS.length], ex2=EXPRESSIONS[(meta.day+5)%EXPRESSIONS.length], ex3=EXPRESSIONS[(meta.day+10)%EXPRESSIONS.length];
     return {
       day:meta.day,
-      title:`${meta.topic} · Long Reading`,
-      genre:meta.genre,
+      title:`${titleCase(en.topic)} · Long Reading`,
+      genre:en.genre,
       blocks:["read","analyze","apply"],
       reading:{
-        title:`DAY ${String(meta.day).padStart(3,"0")} — ${meta.topic}`,
+        title:`DAY ${String(meta.day).padStart(3,"0")} — ${titleCase(en.topic)}`,
         instructionKo:`약 1,500단어를 중간에 포기하지 말고 끝까지 읽으세요. 오늘의 핵심은 ${meta.skill}입니다. 모르는 단어가 있어도 먼저 문장구조와 문단기능을 유지합니다.`,
         paragraphs:p,
         summaryKo:`${meta.genre} 형식으로 ${meta.topic}을 읽으며 ${meta.skill}을 훈련합니다. 개별 단어 해석보다 문장구조, 문단기능, 근거와 결론의 연결을 우선합니다.`,
@@ -253,30 +307,32 @@
           {type:"지칭",question:"In a long passage, what should a reader do first when encountering 'this change'?",options:["Translate only the word change","Identify the earlier event or decision it refers to","Ignore the phrase","Assume it means the title"],answer:1,explanation:"지시어가 가리키는 앞 내용을 찾아야 문단 연결이 유지됩니다."}
         ],
         part7:[
-          {type:"목적",question:`What is the main purpose of the DAY ${meta.day} passage?`,options:[`To explain ${meta.topic} while training structural reading`,`To list unrelated vocabulary only`,`To test pronunciation only`,`To teach translation without context`],answer:0,explanation:`${meta.topic}을 소재로 장문 구조와 정보관계를 읽는 것이 목적입니다.`,evidence:"The opening and closing paragraphs state the topic and the long-reading objective."},
+          {type:"목적",question:`What is the main purpose of the DAY ${meta.day} passage?`,options:[`To explain ${en.topic} while training structural reading`,`To list unrelated vocabulary only`,`To test pronunciation only`,`To teach translation without context`],answer:0,explanation:`${meta.topic}을 소재로 장문 구조와 정보관계를 읽는 것이 목적입니다.`,evidence:"The opening and closing paragraphs state the topic and the long-reading objective."},
           {type:"추론",question:"What can be inferred about the recommended reading method?",options:["Every unknown word must be checked immediately.","Readers should preserve the larger structure even when some vocabulary is uncertain.","Only short sentences should be studied.","Grammar labels are more important than meaning."],answer:1,explanation:"본문은 모르는 단어가 있어도 구조와 맥락을 유지하라고 반복합니다.",evidence:"Several paragraphs emphasize continuing through uncertainty and checking details later."},
           {type:"세부정보",question:"Which skill is repeatedly connected with faster reading?",options:["Skipping all modifiers","Recognizing recurring clause and question patterns","Reading only the first sentence","Memorizing Korean translations"],answer:1,explanation:"구문과 질문패턴의 자동 인식이 속도로 전환된다고 설명합니다.",evidence:"The paragraph on speed explicitly links familiarity with recurring structures to faster processing."},
           {type:"주제",question:"Which statement best summarizes the passage?",options:["Long reading develops when vocabulary, grammar, reference, and logic are processed as one connected system.","Reading skill depends only on knowing more words.","TOEIC and book reading require unrelated abilities.","A passage is understood only when every sentence is translated."],answer:0,explanation:"전체 프로그램의 핵심은 영어를 단어 집합이 아니라 연결된 의미체계로 읽는 것입니다.",evidence:"The final paragraph summarizes structural understanding and repeated rereading."}
         ]
       },
       review:{rereadInstructionKo:`두 번째 회독에서는 ${meta.skill}에 해당하는 표현을 표시하고, 각 문단의 기능을 한 문장으로 말한 뒤 다음 문단으로 넘어가세요.`,selfCheck:["끝까지 읽었는가","주어·본동사와 수식절을 구분했는가","문단별 기능과 전체 결론을 설명할 수 있는가","모르는 단어 때문에 전체 맥락을 포기하지 않았는가"]},
-      coverage:{targetCount:targets.length,masterLemmas:targets.map(x=>x.lemma)}
+      coverage:{targetCount:targets.length,masterLemmas:targets.map(x=>x.lemma),englishIntegrity:true}
     };
   }
 
   function tepsPassage(meta,targets) {
+    const en=englishMeta(meta);
     const academic=targets.filter(x=>(x.roles||[]).includes("academic-book-extension"));
     const general=targets.filter(x=>!(x.roles||[]).includes("toeic-specific")).slice(0,36);
     const terms=[...academic.slice(0,24),...general.slice(0,18)].filter((x,i,a)=>a.findIndex(y=>y.lemma===x.lemma)===i);
-    return `A more demanding reading of ${meta.topic} begins when the reader stops asking only what happened and starts asking why the explanation is persuasive. Evidence may support a conclusion without proving it absolutely, and a condition that is reasonable in one context may become inadequate in another. Skilled readers therefore distinguish description from inference, correlation from cause, and a general tendency from an exception. They also notice how an author limits a claim through words such as although, generally, potentially, or under certain conditions. The extension deliberately increases lexical variety. It may introduce ${listTerms(terms)}. These expressions represent the wider range encountered in TEPS passages and English nonfiction, where scientific, social, economic, cultural, and institutional vocabulary can occur within the same chapter. The objective is not to stop and memorize every item during the first reading. It is to maintain the argument, use syntax and surrounding evidence to narrow possible meanings, and then return to uncertain vocabulary after the structure of the passage is understood. Repeated practice turns unfamiliarity from a reason to stop into a manageable part of reading.`;
+    return ensureEnglish(`A more demanding reading of ${en.topic} begins when the reader stops asking only what happened and starts asking why the explanation is persuasive. Evidence may support a conclusion without proving it absolutely, and a condition that is reasonable in one context may become inadequate in another. Skilled readers therefore distinguish description from inference, correlation from cause, and a general tendency from an exception. They also notice how an author limits a claim through words such as although, generally, potentially, or under certain conditions. The extension deliberately increases lexical variety. It may introduce ${listTerms(terms)}. These expressions represent the wider range encountered in TEPS passages and English nonfiction, where scientific, social, economic, cultural, and institutional vocabulary can occur within the same chapter. The objective is not to stop and memorize every item during the first reading. It is to maintain the argument, use syntax and surrounding evidence to narrow possible meanings, and then return to uncertain vocabulary after the structure of the passage is understood. Repeated practice turns unfamiliarity from a reason to stop into a manageable part of reading.`,meta.day,"teps-passage");
   }
 
   function makeTeps(meta,targets) {
+    const en=englishMeta(meta);
     const vocab=targets.filter(x=>(x.roles||[]).includes("academic-book-extension")).slice(0,8).map(x=>[x.lemma,"TEPS·원서 확장 문맥에서 의미를 추론할 어휘"]);
-    while(vocab.length<8) vocab.push([targets[vocab.length%targets.length]?.lemma || "context","문맥에서 의미를 추론할 어휘"]);
+    while(vocab.length<8) vocab.push([targets[vocab.length%Math.max(1,targets.length)]?.lemma || "context","문맥에서 의미를 추론할 어휘"]);
     return {
       day:meta.day,
-      title:`TEPS 독해 확장 · ${meta.topic}`,
+      title:`TEPS Reading Extension · ${titleCase(en.topic)}`,
       passage:tepsPassage(meta,targets),
       vocabulary:vocab,
       logicKo:`TOEIC 본문의 사실관계를 넘어 ${meta.topic}에서 주장, 근거, 조건, 예외와 추론의 강도를 구별합니다. 모르는 고급어휘가 있어도 논리표지와 문장구조를 이용해 전체 주장을 유지하는 것이 목표입니다.`,
@@ -306,7 +362,7 @@
     TEPS_READING_EXTENSION_V2.days.sort((a,b)=>a.day-b.day);
   }
 
-  root.TOEIC_READING_V2_BUILDER={build,attach,requirement,DAY_META};
+  root.TOEIC_READING_V2_BUILDER={build,attach,requirement,DAY_META,TOPIC_EN,englishMeta};
 
   if (typeof window !== "undefined" && typeof fetch === "function") {
     root.TOEIC_READING_V2_READY=fetch("master-lexicon-v2.json?v=20260809-v4")
