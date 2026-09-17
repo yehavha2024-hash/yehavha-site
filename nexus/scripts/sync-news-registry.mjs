@@ -10,6 +10,7 @@ const newsDir = path.join(nexusDir, 'news');
 const articleDir = path.join(newsDir, 'articles');
 const registryPath = path.join(newsDir, 'news-data.js');
 const sitemapPath = path.join(newsDir, 'sitemap.xml');
+const preferredCategoryOrder = ['정치', '정부', '경제·산업', '사회', '법·정책', 'AI·기술', '글로벌·컬처'];
 
 function decodeHtml(value = '') {
   return value
@@ -124,6 +125,14 @@ const records = articleFiles.map(filename => {
   return articleRecord(filename, source, previousById.get(id) || {});
 });
 
+const observedCategories = [...new Set(records.map(item => item.category).filter(Boolean))];
+const configuredCategories = Array.isArray(config.categories) ? config.categories : [];
+const allCategories = [...new Set([...configuredCategories, ...observedCategories])];
+config.categories = [
+  ...preferredCategoryOrder.filter(category => allCategories.includes(category)),
+  ...allCategories.filter(category => !preferredCategoryOrder.includes(category))
+];
+
 records.sort((a, b) => {
   const byDate = b.date.localeCompare(a.date);
   if (byDate) return byDate;
@@ -139,14 +148,14 @@ for (const record of records) {
   ids.add(record.id);
 }
 
-const output = `/* YEHAVHA NEWS generated article registry.\n   Display metadata is derived from article HTML. Keywords and non-display metadata are preserved from the previous registry.\n   Do not hand-edit title, summary, date, category, author or href here; edit the article instead. */\nwindow.YEHAVHA_NEWS_CONFIG = Object.freeze(${JSON.stringify(config, null, 2)});\n\nwindow.YEHAVHA_NEWS_DATA = Object.freeze(${JSON.stringify(records, null, 2)});\n`;
+const output = `/* YEHAVHA NEWS generated article registry.\n   Display metadata and observed categories are derived from article HTML. Keywords and non-display metadata are preserved from the previous registry.\n   Do not hand-edit title, summary, date, category, author or href here; edit the article instead. */\nwindow.YEHAVHA_NEWS_CONFIG = Object.freeze(${JSON.stringify(config, null, 2)});\n\nwindow.YEHAVHA_NEWS_DATA = Object.freeze(${JSON.stringify(records, null, 2)});\n`;
 
 const before = fs.readFileSync(registryPath, 'utf8');
 if (before !== output) {
   fs.writeFileSync(registryPath, output, 'utf8');
-  console.log(`YEHAVHA NEWS registry synchronized: ${records.length} article(s).`);
+  console.log(`YEHAVHA NEWS registry synchronized: ${records.length} article(s), ${config.categories.length} categor(ies).`);
 } else {
-  console.log(`YEHAVHA NEWS registry already synchronized: ${records.length} article(s).`);
+  console.log(`YEHAVHA NEWS registry already synchronized: ${records.length} article(s), ${config.categories.length} categor(ies).`);
 }
 
 const sitemap = buildSitemap(records);
