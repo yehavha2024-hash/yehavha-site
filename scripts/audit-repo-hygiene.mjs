@@ -76,15 +76,20 @@ function auditWorkflowPermissions() {
   if (!fs.existsSync(dir)) return;
 
   // Repository write access is exceptional. Each approved writer owns only the
-  // generated data paths listed here; UI shell/CSS/HTML are never workflow outputs.
+  // generated data or publication outputs listed here. Structural UI shell/CSS
+  // remains read-only to workflows; NEWS article shell normalization is explicit.
   const writePolicies = new Map([
     ['refresh-nexus-status.yml', {
-      required: ['git add nexus/project-status.json nexus/sitemap.xml'],
+      required: ['safe-content-commit.sh "Refresh Nexus generated metadata" nexus/project-status.json nexus/sitemap.xml'],
       allowedPathTokens: ['nexus/project-status.json', 'nexus/sitemap.xml']
     }],
     ['refresh-ai-trends.yml', {
-      required: ['git add nexus/ai-trends/data.json'],
+      required: ['safe-content-commit.sh "Refresh Nexus AI updates" nexus/ai-trends/data.json'],
       allowedPathTokens: ['nexus/ai-trends/data.json']
+    }],
+    ['normalize-news-articles.yml', {
+      required: ['safe-content-commit.sh "Normalize YEHAVHA NEWS article outputs" nexus/news/articles nexus/news/news-data.js nexus/news/sitemap.xml'],
+      allowedPathTokens: ['nexus/news/articles', 'nexus/news/news-data.js', 'nexus/news/sitemap.xml']
     }],
     ['refresh-investment-strategy.yml', {
       required: ['git add nexus/investment-strategy/index.html'],
@@ -95,7 +100,7 @@ function auditWorkflowPermissions() {
       allowedPathTokens: ['toeic-human-100/master-lexicon-v2.json']
     }],
     ['intelligence-briefing-archive.yml', {
-      required: ['git add -- nexus/intelligence-briefing/archive nexus/intelligence-briefing/archive-index.json'],
+      required: ['safe-content-commit.sh "Archive intelligence briefing snapshot" nexus/intelligence-briefing/archive nexus/intelligence-briefing/archive-index.json'],
       allowedPathTokens: ['nexus/intelligence-briefing/archive', 'nexus/intelligence-briefing/archive-index.json']
     }],
     ['korea-social-intelligence-archive.yml', {
@@ -144,6 +149,15 @@ function auditWorkflowPermissions() {
         if (token.startsWith('-')) continue;
         if (!policy.allowedPathTokens.some(allowed => token === allowed)) {
           error(`.github/workflows/${file}`, `승인 범위를 벗어난 git add 대상: ${token}`);
+        }
+      }
+    }
+
+    for (const match of source.matchAll(/safe-content-commit\.sh\s+"[^"]+"\s+([^\n]+)/g)) {
+      const tokens = match[1].trim().split(/\s+/).filter(Boolean);
+      for (const token of tokens) {
+        if (!policy.allowedPathTokens.some(allowed => token === allowed)) {
+          error(`.github/workflows/${file}`, `승인 범위를 벗어난 safe-content 대상: ${token}`);
         }
       }
     }
