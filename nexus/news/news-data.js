@@ -26,7 +26,14 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "title": "대미 3,500억달러 투자계획 국회 설명 연기…세부조건 협상 계속",
     "summary": "정부가 예정됐던 국회 설명 연기를 요청하면서 한미 투자합의는 총액보다 산업별 배분과 지배구조·손익분담을 확정하는 단계가 남았다. 이제 판단의 중심은 ‘얼마를 투자하느냐’보다 ‘어떤 권리와 위험을 조건으로 집행하느냐’에 있다.",
     "href": "./articles/2026-09-17-us-investment-briefing-delay.html",
-    "keywords": "대미 투자 3500억달러 국회 설명 조선 원전 한미 통상"
+    "keywords": "대미 투자 3500억달러 국회 설명 조선 원전 한미 통상",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=AdFKaNStsSM",
+      "youtubeId": "AdFKaNStsSM",
+      "title": "대미투자 발표 연기·한미 현안 관련 JTBC 뉴스룸 ↗",
+      "source": "YouTube · JTBC News",
+      "thumbnail": "https://i.ytimg.com/vi/AdFKaNStsSM/hqdefault.jpg"
+    }
   },
   {
     "id": "2026-09-17-terrorism-law-revision",
