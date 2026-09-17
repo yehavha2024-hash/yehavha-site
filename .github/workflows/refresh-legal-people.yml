@@ -19,8 +19,8 @@ permissions:
   contents: write
 
 concurrency:
-  group: legal-intelligence-people-refresh
-  cancel-in-progress: true
+  group: yehavha-main-content-writer
+  cancel-in-progress: false
 
 jobs:
   refresh:
@@ -62,8 +62,6 @@ jobs:
           const minimumRequiredSucceeded = Math.max(1, Math.ceil(requiredSources.length * 0.6));
           const quorumHealthy = requiredSucceeded >= minimumRequiredSucceeded;
 
-          // Airtable tracks the health of the refresh pipeline, not each transient upstream response.
-          // All raw source failures remain preserved in legal-people.json and the Actions summary.
           const health = {
             sourceFailures: quorumHealthy ? [] : requiredFailures,
             partialFailures: failures,
@@ -103,17 +101,21 @@ jobs:
           git add nexus/legal-intelligence/legal-people.json
           git commit -m "Refresh Legal Intelligence people data"
 
-          for attempt in 1 2 3; do
+          for attempt in 1 2 3 4; do
             git fetch origin main
-            git rebase origin/main
-            if git push origin main; then
+            if ! git rebase origin/main; then
+              echo "Legal-people output conflicts with a newer main update; refusing to overwrite it." >&2
+              git rebase --abort || true
+              exit 1
+            fi
+            if git push origin HEAD:main; then
               exit 0
             fi
-            echo "Push raced with another main update; retrying (${attempt}/3)."
+            echo "main moved during legal-people publish; retrying (${attempt}/4)."
             sleep $((attempt * 2))
           done
 
-          echo "Unable to push refreshed legal people data after 3 attempts."
+          echo "Unable to publish legal people data after 4 attempts."
           exit 1
 
       - name: Report legal people refresh status to Airtable
