@@ -1,18 +1,6 @@
 name: Reconcile and gate YEHAVHA NEWS articles
 
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - 'nexus/news/articles/**'
-      - 'nexus/news/news-data.js'
-      - 'nexus/news/sitemap.xml'
-      - 'nexus/scripts/normalize-news-articles.mjs'
-      - 'nexus/scripts/sync-news-registry.mjs'
-      - 'nexus/scripts/audit-news-architecture.mjs'
-      - 'nexus/scripts/audit-news-quality.mjs'
-      - 'scripts/ci/safe-content-commit.sh'
-      - '.github/workflows/normalize-news-articles.yml'
   push:
     branches: [main]
     paths:
@@ -74,6 +62,5 @@ jobs:
         run: node nexus/scripts/audit-news-quality.mjs
 
       - name: Publish validated article-owned outputs when needed
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         shell: bash
         run: bash scripts/ci/safe-content-commit.sh "Normalize YEHAVHA NEWS article outputs" nexus/news/articles nexus/news/news-data.js nexus/news/sitemap.xml
