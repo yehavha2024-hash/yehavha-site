@@ -12,7 +12,7 @@ window.YEHAVHA_NEWS_CONFIG = Object.freeze({
     "글로벌·컬처"
   ],
   "resultsPageSize": 20,
-  "homeLatestLimit": 11,
+  "homeLatestLimit": 10,
   "categoryLatestLimit": 3
 });
 
@@ -24,9 +24,16 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "author": "이명훈",
     "type": "기사",
     "title": "이 대통령 오늘 10시 기자회견…개헌·파병·부동산 등 현안 입장 주목",
-    "summary": "이재명 대통령이 18일 오전 10시 취임 후 일곱 번째 기자회견을 연다. 개헌·인사·사법부 관계·호르무즈 파병·부동산 등 여러 정책축의 방향을 한 자리에서 확인하는 분기점이다.",
+    "summary": "이재명 대통령이 18일 오전 10시 취임 후 일곱 번째 기자회견을 연다. 회견 전 단계에서는 일정과 의제 범위만 확정된 만큼, 개헌·공소취소·인사·호르무즈 파병·부동산 등 개별 현안의 최종 입장은 실제 발언 이후 구분해 확인해야 한다.",
     "href": "./articles/2026-09-18-president-press-conference-preview.html",
-    "keywords": "이재명 대통령 기자회견 연임 개헌 공소취소 호르무즈 파병 부동산"
+    "keywords": "이재명 대통령 기자회견 연임 개헌 공소취소 호르무즈 파병 부동산",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=WB6hE4H6iio",
+      "youtubeId": "WB6hE4H6iio",
+      "title": "이 대통령, 오늘 기자회견...개각·공소 취소·당내 갈등 언급 주목 ↗",
+      "source": "YouTube · YTN",
+      "thumbnail": "https://i.ytimg.com/vi/WB6hE4H6iio/hqdefault.jpg"
+    }
   },
   {
     "id": "2026-09-18-korea-us-foreign-ministers",
@@ -35,18 +42,25 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "author": "이명훈",
     "type": "기사",
     "title": "조현·루비오 회담 예정…대미투자·호르무즈·대북현안 동시 테이블",
-    "summary": "조현 외교부 장관이 마코 루비오 미 국무장관과 회담할 예정이다. 대미 투자계획의 세부조건이 남은 가운데 호르무즈·대북·통상 현안이 함께 논의될 가능성이 있다.",
+    "summary": "조현 외교부 장관이 미국을 방문해 마코 루비오 국무장관과 회담할 예정이다. 대미 투자계획의 세부조건이 남아 있는 가운데 호르무즈 해협, 한반도 정세, 통상 현안까지 여러 의제가 한 회담에 겹쳐 있다.",
     "href": "./articles/2026-09-18-korea-us-foreign-ministers.html",
-    "keywords": "조현 루비오 한미 외교장관 대미투자 호르무즈 대북 통상"
+    "keywords": "조현 루비오 한미 외교장관 대미투자 호르무즈 대북 통상",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=T6lRMuWoIjk",
+      "youtubeId": "T6lRMuWoIjk",
+      "title": "조현, 한미 외교장관 회담 위해 출국...파병 논의 주목 ↗",
+      "source": "YouTube · YTN",
+      "thumbnail": "https://i.ytimg.com/vi/T6lRMuWoIjk/hqdefault.jpg"
+    }
   },
   {
     "id": "2026-09-18-korea-credit-gap",
     "date": "2026-09-18",
     "category": "경제·산업",
-    "author": "이명훈",
+    "author": "산업",
     "type": "기사",
     "title": "한국 신용갭 -15.1%p, 20년 만의 최저…부채 위험 해소로 단정은 금물",
-    "summary": "BIS 통계에서 한국의 1분기 신용갭이 -15.1%포인트로 20년 만의 최저를 기록했다. 민간신용 비율 하락과 개별 차주의 상환부담은 구분해서 봐야 한다.",
+    "summary": "BIS 통계에서 한국의 2026년 1분기 말 신용갭이 -15.1%포인트로 20년 만의 최저를 기록했다. GDP 대비 민간신용 비율이 낮아진 것은 분명하지만 가계·기업의 상환 부담이 모두 해소됐다는 의미는 아니다.",
     "href": "./articles/2026-09-18-korea-credit-gap.html",
     "keywords": "한국 신용갭 BIS 민간신용 가계부채 기업부채 GDP"
   },
@@ -57,18 +71,25 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "author": "이명훈",
     "type": "기사",
     "title": "포스코 노조 부분파업 확대…참여범위 늘고 생산 정상 유지가 쟁점",
-    "summary": "포스코 노조가 18일 포항·광양의 추가 공정을 부분파업 대상에 포함했다. 노조는 참여 확대를 예고했고 회사는 대체인력으로 정상 생산을 유지하겠다고 밝혔다.",
+    "summary": "포스코 노조가 18일 오전부터 포항·광양의 추가 공정을 부분파업 대상에 포함했다. 노조는 참여 규모가 약 480명까지 늘 것으로 보고 있고, 회사는 대체인력과 비상대응체제로 정상 생산을 유지하겠다는 입장이다.",
     "href": "./articles/2026-09-18-posco-strike-expansion.html",
-    "keywords": "포스코 노조 부분파업 포항 광양 임금교섭 생산"
+    "keywords": "포스코 노조 부분파업 포항 광양 임금교섭 생산",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=kX_IeD91ZWI",
+      "youtubeId": "kX_IeD91ZWI",
+      "title": "포스코 노조 2차 부분 파업...생산 차질 없어 ↗",
+      "source": "YouTube · YTN",
+      "thumbnail": "https://i.ytimg.com/vi/kX_IeD91ZWI/hqdefault.jpg"
+    }
   },
   {
     "id": "2026-09-18-hydrogen-law-effective",
     "date": "2026-09-18",
     "category": "법·정책",
-    "author": "이명훈",
+    "author": "정책",
     "type": "기사",
     "title": "수소법 개정 오늘 시행…설비인증·보험·사업화 지원 기준 구체화",
-    "summary": "개정 수소경제법과 시행령·시행규칙이 18일부터 시행된다. 수소에너지 설비의 인증·보험과 기술사업화 지원 기준이 구체화됐다.",
+    "summary": "개정 「수소경제 육성 및 수소 안전관리에 관한 법률」과 시행령이 18일부터 시행된다. 수소에너지와 관련 설비의 정의, 사업비 사용, 인증·보험·공제, 기술사업화 지원이 제도 안에서 구체화됐다.",
     "href": "./articles/2026-09-18-hydrogen-law-effective.html",
     "keywords": "수소경제법 시행 수소에너지 설비 인증 보험 사업화"
   },
@@ -76,10 +97,10 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "id": "2026-09-18-ai-compute-price-pressure",
     "date": "2026-09-18",
     "category": "AI·기술",
-    "author": "이명훈",
+    "author": "기술",
     "type": "기사",
     "title": "AI 컴퓨트 가격 다시 오른다…Nebius GPU 임대료 3개월 내 두번째 인상",
-    "summary": "AI 클라우드 업체 Nebius가 일부 엔비디아 GPU 종량제 가격을 10월 1일부터 다시 올린다. 세 달 사이 두 번째 인상으로 AI 컴퓨트 수요 압력이 계속되고 있다.",
+    "summary": "AI 클라우드 업체 Nebius가 일부 Nvidia GPU의 종량제 가격을 10월 1일부터 17~21% 인상한다. 최근 3개월 사이 두 번째 인상으로, AI 학습·추론 수요가 컴퓨트 공급과 비용을 계속 압박하고 있다는 신호다.",
     "href": "./articles/2026-09-18-ai-compute-price-pressure.html",
     "keywords": "Nebius 엔비디아 GPU AI 컴퓨트 클라우드 가격 데이터센터"
   },
