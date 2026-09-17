@@ -24,6 +24,40 @@ jobs:
       - run: node scripts/audit-research-track-footer.mjs
       - run: node scripts/audit-nexus-footer-standard.mjs
       - run: node scripts/audit-repo-hygiene.mjs
+      - name: Validate serialized write workflows
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import path from 'node:path';
+
+          const dir = '.github/workflows';
+          const failures = [];
+          for (const name of fs.readdirSync(dir).filter(name => /\.ya?ml$/i.test(name))) {
+            const source = fs.readFileSync(path.join(dir, name), 'utf8');
+            if (!/^\s*contents:\s*write\s*$/m.test(source)) continue;
+
+            if (!/concurrency:\s*\n\s*group:\s*yehavha-main-content-writer\s*\n\s*cancel-in-progress:\s*false/m.test(source)) {
+              failures.push(`${name}: contents:write workflow must use shared yehavha-main-content-writer queue with cancel-in-progress:false`);
+            }
+
+            const usesSafeCommit = source.includes('scripts/ci/safe-content-commit.sh');
+            const usesGuardedRebase = /git\s+fetch\s+origin\s+(?:"?\$target_branch"?|main)/.test(source) && /git\s+rebase\s+(?:"?origin\/\$target_branch"?|origin\/main)/.test(source);
+            if (!usesSafeCommit && !usesGuardedRebase) {
+              failures.push(`${name}: writer must publish through safe-content-commit or guarded fetch/rebase/retry`);
+            }
+
+            if (/git\s+push[^\n]*(?:--force|-f)(?:\s|$)/.test(source)) {
+              failures.push(`${name}: force push is forbidden for automated content writers`);
+            }
+          }
+
+          if (failures.length) {
+            console.error(failures.join('\n'));
+            process.exit(1);
+          }
+          console.log('Automated repository writers are serialized and guarded.');
+          NODE
       - run: node scripts/audit-style-ownership.mjs
       - run: node scripts/audit-nexus-light-theme.mjs
       - name: Validate Nexus portal ownership
