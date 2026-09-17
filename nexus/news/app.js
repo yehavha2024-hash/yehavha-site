@@ -97,7 +97,49 @@
     els.categoryNav.replaceChildren(...buttons);
   }
 
-  function articleCard(item, compact = false) {
+  function articleCard(item, compact = false, media = false) {
+    const video = item?.video;
+    const hasVideo = media
+      && video
+      && typeof video.url === 'string' && video.url
+      && typeof video.thumbnail === 'string' && video.thumbnail
+      && typeof video.source === 'string' && video.source;
+
+    if (hasVideo) {
+      const card = make('article', 'opinion-feature news-media-feature');
+      const videoLink = make('a', 'news-media-thumb-link');
+      videoLink.href = video.url;
+      videoLink.target = '_blank';
+      videoLink.rel = 'noopener noreferrer';
+      videoLink.setAttribute('aria-label', `${item.title} 관련 영상 보기`);
+
+      const image = make('img');
+      image.src = video.thumbnail;
+      image.alt = `${item.title} 관련 YouTube 영상 썸네일`;
+      image.width = 480;
+      image.height = 270;
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      videoLink.append(image);
+
+      const copy = make('div', 'opinion-copy');
+      const label = make('span', 'opinion-label', `${item.category} · 관련 영상`);
+      const title = make('strong', '', item.title);
+      const summary = make('span', '', item.summary);
+      const actions = make('b');
+      const articleLink = make('a', 'news-media-action', '기사 보기 →');
+      articleLink.href = item.href;
+      const sourceName = video.source.replace(/^YouTube\s*·\s*/i, '') || 'YouTube';
+      const relatedLink = make('a', 'news-media-action', `${sourceName} 영상 ↗`);
+      relatedLink.href = video.url;
+      relatedLink.target = '_blank';
+      relatedLink.rel = 'noopener noreferrer';
+      actions.append(articleLink, document.createTextNode(' · '), relatedLink);
+      copy.append(label, title, summary, actions);
+      card.append(videoLink, copy);
+      return card;
+    }
+
     const link = make('a', compact ? 'news-card news-card-compact' : 'news-card');
     link.href = item.href;
     const meta = make('div', 'news-card-meta');
@@ -144,7 +186,7 @@
     const isToday = latestDate === latestKstDate();
     if (els.latestTitle) els.latestTitle.textContent = isToday ? '오늘의 주요뉴스' : '최신 주요뉴스';
     if (els.latestMeta) els.latestMeta.textContent = `${formatDate(latestDate)} · ${latestItems.length}건`;
-    els.latestList.replaceChildren(...latestItems.map(item => articleCard(item)));
+    els.latestList.replaceChildren(...latestItems.map(item => articleCard(item, false, true)));
   }
 
   function renderCategoryLatest() {
