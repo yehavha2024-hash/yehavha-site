@@ -6,6 +6,7 @@ on:
     paths:
       - 'scripts/refresh-ai-trends.mjs'
       - 'scripts/localize-ai-trends-ko.mjs'
+      - 'scripts/ci/safe-content-commit.sh'
       - '.github/workflows/refresh-ai-trends.yml'
   schedule:
     # GitHub Actions cron uses UTC. Runs every 6 hours; minute 17 avoids top-of-hour congestion.
@@ -47,16 +48,6 @@ jobs:
       - name: Localize public AI trends to Korean
         run: node scripts/localize-ai-trends-ko.mjs
 
-      - name: Commit AI trend data when changed
+      - name: Publish AI trend data when changed
         shell: bash
-        run: |
-          if git diff --quiet -- nexus/ai-trends/data.json; then
-            echo "AI trend data is already current."
-            exit 0
-          fi
-
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add nexus/ai-trends/data.json
-          git commit -m "Refresh Nexus AI updates"
-          git push
+        run: bash scripts/ci/safe-content-commit.sh "Refresh Nexus AI updates" nexus/ai-trends/data.json

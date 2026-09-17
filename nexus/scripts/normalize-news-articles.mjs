@@ -19,6 +19,15 @@ function addTopAnchor(source) {
   });
 }
 
+function replaceSingleton(source, pattern, replacement) {
+  let seen = false;
+  return source.replace(pattern, () => {
+    if (seen) return '';
+    seen = true;
+    return replacement;
+  });
+}
+
 function normalizeArticle(source, filename) {
   if (!/<body\b[^>]*>/i.test(source)) throw new Error(`${filename}: body element missing`);
   if (!/<\/body>/i.test(source)) throw new Error(`${filename}: closing body element missing`);
@@ -26,11 +35,19 @@ function normalizeArticle(source, filename) {
 
   let next = addTopAnchor(source);
 
-  if (!/class\s*=\s*(["'])[^"']*\bnews-head\b[^"']*\1/i.test(next)) {
+  const headerPattern = /<header\b(?=[^>]*class\s*=\s*(["'])[^"']*\bnews-head\b[^"']*\1)[^>]*>[\s\S]*?<\/header>/gi;
+  if (headerPattern.test(next)) {
+    headerPattern.lastIndex = 0;
+    next = replaceSingleton(next, headerPattern, STANDARD_HEADER);
+  } else {
     next = next.replace(/<body\b[^>]*>/i, match => `${match}${STANDARD_HEADER}`);
   }
 
-  if (!/data-footer-standard\s*=\s*(["'])v2\1/i.test(next)) {
+  const footerPattern = /<footer\b(?=[^>]*(?:data-footer-standard\s*=|class\s*=\s*(["'])[^"']*\bfooter\b[^"']*\1))[^>]*>[\s\S]*?<\/footer>/gi;
+  if (footerPattern.test(next)) {
+    footerPattern.lastIndex = 0;
+    next = replaceSingleton(next, footerPattern, STANDARD_FOOTER);
+  } else {
     next = next.replace(/<\/body>/i, `${STANDARD_FOOTER}</body>`);
   }
 
@@ -63,6 +80,11 @@ for (const filename of articleFiles) {
   for (const [label, pattern] of required) {
     if (!pattern.test(source)) throw new Error(`${filename}: ${label} missing after normalization`);
   }
+
+  const headerCount = (source.match(/class\s*=\s*(["'])[^"']*\bnews-head\b[^"']*\1/gi) || []).length;
+  const footerCount = (source.match(/data-footer-standard\s*=\s*(["'])v2\1/gi) || []).length;
+  if (headerCount !== 1) throw new Error(`${filename}: expected exactly one standard news header, found ${headerCount}`);
+  if (footerCount !== 1) throw new Error(`${filename}: expected exactly one standard footer, found ${footerCount}`);
 }
 
 console.log(`YEHAVHA NEWS shell normalization complete: ${changed} changed / ${articleFiles.length} checked.`);

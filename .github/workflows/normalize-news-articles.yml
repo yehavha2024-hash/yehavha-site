@@ -1,40 +1,45 @@
-name: Validate YEHAVHA NEWS article shell
+name: Normalize YEHAVHA NEWS article shell
 
 on:
   push:
     branches: [main]
     paths:
       - 'nexus/news/articles/**'
+      - 'nexus/news/news-data.js'
+      - 'nexus/news/sitemap.xml'
       - 'nexus/scripts/normalize-news-articles.mjs'
+      - 'nexus/scripts/sync-news-registry.mjs'
+      - 'scripts/ci/safe-content-commit.sh'
       - '.github/workflows/normalize-news-articles.yml'
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: yehavha-news-shell-normalize
   cancel-in-progress: true
 
 jobs:
-  validate:
+  normalize:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v7
         with:
           node-version: '22'
 
-      - name: Validate normalized article shell
+      - name: Normalize article shell
+        run: node nexus/scripts/normalize-news-articles.mjs
+
+      - name: Synchronize article registry and sitemap
+        run: node nexus/scripts/sync-news-registry.mjs
+
+      - name: Publish article-owned outputs when needed
         shell: bash
-        run: |
-          node nexus/scripts/normalize-news-articles.mjs
-          if ! git diff --quiet -- nexus/news/articles; then
-            echo "YEHAVHA NEWS article shell normalization is required."
-            git diff -- nexus/news/articles
-            exit 1
-          fi
-          echo "YEHAVHA NEWS article shells are normalized."
+        run: bash scripts/ci/safe-content-commit.sh "Normalize YEHAVHA NEWS article outputs" nexus/news/articles nexus/news/news-data.js nexus/news/sitemap.xml
