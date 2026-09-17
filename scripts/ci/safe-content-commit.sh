@@ -9,7 +9,7 @@ fi
 message="$1"
 shift
 owned_paths=("$@")
-target_branch="${NEXUS_TARGET_BRANCH:-main}"
+target_branch="${NEXUS_TARGET_BRANCH:-${GITHUB_REF_NAME:-main}}"
 
 if git diff --quiet -- "${owned_paths[@]}" && git diff --cached --quiet -- "${owned_paths[@]}"; then
   echo "No owned output changes detected."
@@ -41,7 +41,7 @@ for attempt in 1 2 3 4; do
     exit 0
   fi
 
-  echo "Main moved during publish; retrying safely (${attempt}/4)."
+  echo "${target_branch} moved during publish; retrying safely (${attempt}/4)."
   sleep $((attempt * 2))
 done
 
