@@ -338,6 +338,14 @@
   text-align: center;
 }
 
+/* Match NEWS handling for the unavailable/private MBC video: text-only card. */
+.home-news-mirror .news-media-feature:has(.news-media-thumb-link img[src*="Jl71VSt_Un4"]) {
+  grid-template-columns: 1fr;
+}
+.home-news-mirror .news-media-feature:has(.news-media-thumb-link img[src*="Jl71VSt_Un4"]) .news-media-visual {
+  display: none;
+}
+
 /* Old homepage-only media-card implementation must never reappear. */
 .home-news-media-card,
 .home-news-media-visual,
@@ -354,6 +362,17 @@
 #homeNewsGrid,
 .home-news-grid-legacy {
   display: none !important;
+}
+
+/* Keep the same side-by-side responsive geometry as /news/. Never stack the
+   thumbnail above the headline on the NEXUS home page. */
+@media (max-width: 760px) {
+  .home-news-mirror .opinion-feature {
+    grid-template-columns: minmax(128px,34%) minmax(0,1fr);
+  }
+  .home-news-mirror .news-media-thumb-link img {
+    min-height: 112px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -381,26 +400,55 @@
     font-size: 14px;
   }
   .home-news-mirror .opinion-feature {
-    grid-template-columns: minmax(122px,38%) minmax(0,1fr);
-    gap: 10px;
+    grid-template-columns: minmax(104px,34%) minmax(0,1fr);
+    gap: 9px;
+    padding: 9px;
   }
   .home-news-mirror .news-media-visual {
     padding-top: 17px;
   }
-}
-
-@media (max-width: 560px) {
-  .home-news-mirror .opinion-feature {
-    grid-template-columns: 1fr;
+  .home-news-mirror .news-media-thumb-link img {
+    min-height: 100px;
   }
-  .home-news-mirror .news-media-visual {
-    padding-top: 0;
+  .home-news-mirror .news-card {
+    padding: 10px 11px;
   }
-  .home-news-mirror .news-media-title,
-  .home-news-mirror .news-card h3 {
-    font-size: 16px;
+  .home-news-mirror .news-card-meta {
+    font-size: 10.5px;
+  }
+  .home-news-mirror .news-card-meta span + span::before {
+    margin: 0 5px;
+  }
+  .home-news-mirror .news-card h3,
+  .home-news-mirror .news-media-title {
+    font-size: 15.5px;
+    line-height: 1.37;
+  }
+  .home-news-mirror .news-card p {
+    font-size: 12.8px;
+    line-height: 1.52;
+  }
+  .home-news-mirror .news-media-summary {
+    margin-top: 4px;
+    font-size: 11.8px;
+    line-height: 1.45;
+  }
+  .home-news-mirror .news-media-related {
+    font-size: 9.5px;
+  }
+  .home-news-mirror .news-media-action {
+    font-size: 11.5px;
   }
   .home-news-section-head {
-    align-items: flex-end;
+    align-items: baseline;
+  }
+}
+
+@media (max-width: 360px) {
+  .home-news-mirror .opinion-feature {
+    grid-template-columns: 96px minmax(0,1fr);
+  }
+  .home-news-mirror .news-media-summary {
+    -webkit-line-clamp: 1;
   }
 }
