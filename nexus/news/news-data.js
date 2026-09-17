@@ -178,7 +178,14 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "title": "아이치·나고야 아시안게임 개막 임박…스포츠 축제와 종목 구조가 함께 바뀐다",
     "summary": "2026 아이치·나고야 아시안게임은 9월 19일 개막을 앞두고 있다. 관중 없이 치러졌던 도쿄올림픽 이후 일본이 처음 맞는 대형 관중형 국제종합대회라는 점과 e스포츠·가상태권도·패들 등 종목 변화, 대규모 운영 실험이 핵심이다.",
     "href": "./articles/2026-09-17-aichi-nagoya-asian-games-culture.html",
-    "keywords": "아이치·나고야 아시안게임 개막 임박…스포츠 축제와 종목 구조가 함께 바뀐다 글로벌·컬처"
+    "keywords": "아이치·나고야 아시안게임 개막 임박…스포츠 축제와 종목 구조가 함께 바뀐다 글로벌·컬처",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=ySR_MIHMgyk",
+      "youtubeId": "ySR_MIHMgyk",
+      "title": "Asian Games Aichi-Nagoya 2026 — ROAD TO THE GAMES ↗",
+      "source": "YouTube · AsianGames_2026",
+      "thumbnail": "https://i.ytimg.com/vi/ySR_MIHMgyk/hqdefault.jpg"
+    }
   },
   {
     "id": "2026-09-16-cabinet-nominee-hearings",
