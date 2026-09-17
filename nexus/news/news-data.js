@@ -163,7 +163,14 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "title": "이재명 지지율 하락, 한 가지 악재가 아니다…부동산·인사·민생 동시 압박",
     "summary": "최근 한국갤럽·NBS·리얼미터는 조사 방식과 절대 수치가 달라도 이재명 대통령 국정평가가 하락하는 방향을 공통적으로 보여줬다. 원인을 하나의 사건으로 단정하기보다 부동산 정책, 인사 논란, 경제·민생 평가가 서로 겹치는 구조로 보는 편이 데이터에 가깝다.",
     "href": "./articles/2026-09-17-lee-approval-decline-drivers.html",
-    "keywords": "이재명 지지율 하락, 한 가지 악재가 아니다…부동산·인사·민생 동시 압박 정치"
+    "keywords": "이재명 지지율 하락, 한 가지 악재가 아니다…부동산·인사·민생 동시 압박 정치",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=Jl71VSt_Un4",
+      "youtubeId": "Jl71VSt_Un4",
+      "title": "[100분토론] 잇단 악재·지지율 추락…위기의 본질은? ↗",
+      "source": "YouTube · MBCNEWS",
+      "thumbnail": "https://i.ytimg.com/vi/Jl71VSt_Un4/hqdefault.jpg"
+    }
   },
   {
     "id": "2026-09-17-lisa-global-ip-expansion",
