@@ -87,8 +87,8 @@ requireFiles([
   'nexus/korea-social-intelligence/latest.json',
   'nexus/news/news-data.js'
 ]);
-for (const retired of ['nexus/portal-enhancements.css', 'nexus/status.css']) {
-  if (exists(retired)) fail(retired, '폐기된 전역 override 레이어가 다시 존재함');
+for (const retired of ['nexus/portal-enhancements.css', 'nexus/status.css', 'nexus/portal-v2-core.css']) {
+  if (exists(retired)) fail(retired, '폐기된 전역 override 또는 중간 소유권 레이어가 다시 존재함');
 }
 
 if (!errors) {
@@ -144,13 +144,16 @@ if (exists('nexus/portal-v2.js') && exists('nexus/index.html')) {
   ]) {
     if (!js.includes(token)) fail('nexus/portal-v2.js', `런타임 소유권 누락: ${token}`);
   }
-  for (const marker of ['portal-runtime','portal-mark','accessCount','portalGrid','homeNewsGrid','homeNewsDate','homeStrategyTitle','homeSocialTitle','homeBriefStrategyHeadline','homeBriefSocialHeadline']) {
+  for (const marker of ['portal-runtime','portal-mark','accessCount','portalGrid','homeLatestNewsList','homeLatestNewsMeta','homeStrategyTitle','homeSocialTitle','homeBriefStrategyHeadline','homeBriefSocialHeadline']) {
     if (!html.includes(marker)) fail('nexus/index.html', `메인 DOM 누락: ${marker}`);
+  }
+  for (const retiredMarker of ['homeNewsGrid','homeNewsDate']) {
+    if (html.includes(retiredMarker)) fail('nexus/index.html', `폐기된 메인 뉴스 DOM이 다시 존재함: ${retiredMarker}`);
   }
   if (!html.includes('./news/news-data.js')) fail('nexus/index.html', '메인 YEHAVHA NEWS가 canonical news-data.js를 로드하지 않음');
   if (/\.\/news\/articles\/20\d{2}-\d{2}-\d{2}-/.test(html)) fail('nexus/index.html', '당일 뉴스 기사 카드가 메인 HTML에 정적으로 중복 저장됨');
   if (/(?:portal-v2|nexus-standard)\.(?:css|js)\?v=/.test(html)) fail('nexus/index.html', 'no-cache 원소스와 중복되는 수동 cache-busting query가 남아 있음');
-  if (js.includes('portal-enhancements.css') || js.includes('status.css')) fail('nexus/portal-v2.js', '폐기된 전역 스타일 동적 연결 잔존');
+  if (js.includes('portal-enhancements.css') || js.includes('status.css') || js.includes('portal-v2-core.css')) fail('nexus/portal-v2.js', '폐기된 전역 스타일 또는 중간 소유권 연결 잔존');
   if (html.includes('visitor-count.js') || exists('nexus/visitor-count.js')) fail('nexus/index.html', '방문자 조회·표시 소유자가 중복됨');
   if (!html.includes('rel="canonical" href="https://yehavha.com/"') || !js.includes("const canonicalUrl = 'https://yehavha.com/';")) fail('nexus/index.html', '대표 도메인 불일치');
 }
