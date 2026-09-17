@@ -55,7 +55,14 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "title": "미 연준 25bp 인상…3.75~4.00%, 자본비용 다시 높아졌다",
     "summary": "미 연방준비제도가 기준금리를 0.25%포인트 올려 3.75~4.00%로 조정했다. 중요한 것은 한 번의 인상보다 장기금리·달러·신용비용을 통해 기업투자와 한국 금융여건으로 전달되는 경로다.",
     "href": "./articles/2026-09-17-fed-rate-hike.html",
-    "keywords": "연준 FOMC 금리 인상 3.75 4.00 미국 국채 달러"
+    "keywords": "연준 FOMC 금리 인상 3.75 4.00 미국 국채 달러",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=2fvMzWCC7iM",
+      "youtubeId": "2fvMzWCC7iM",
+      "title": "Fed Chair speaks after interest-rate decision ↗",
+      "source": "YouTube · The Hill",
+      "thumbnail": "https://i.ytimg.com/vi/2fvMzWCC7iM/hqdefault.jpg"
+    }
   },
   {
     "id": "2026-09-17-abortion-medication-policy",
