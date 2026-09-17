@@ -71,7 +71,7 @@ for (const filename of articleFiles) {
   const source = fs.readFileSync(path.join(articleDir, filename), 'utf8');
   const required = [
     ['top anchor', /<body\b[^>]*\bid\s*=\s*(["'])top\1/i],
-    ['news header', /class\s*=\s*(["'])[^"']*\bnews-head\b[^"']*\1/i],
+    ['news header', /<header\b(?=[^>]*class\s*=\s*(["'])[^"']*\bnews-head\b[^"']*\1)[^>]*>/i],
     ['standard footer', /data-footer-standard\s*=\s*(["'])v2\1/i],
     ['standard slogan', new RegExp(STANDARD_SLOGAN)],
     ['business metadata', /class\s*=\s*(["'])business-meta\1/i],
@@ -83,7 +83,7 @@ for (const filename of articleFiles) {
     if (!pattern.test(source)) throw new Error(`${filename}: ${label} missing after normalization`);
   }
 
-  const headerCount = (source.match(/class\s*=\s*(["'])[^"']*\bnews-head\b[^"']*\1/gi) || []).length;
+  const headerCount = (source.match(/<header\b(?=[^>]*class\s*=\s*(["'])[^"']*\bnews-head\b[^"']*\1)[^>]*>/gi) || []).length;
   const footerCount = (source.match(/data-footer-standard\s*=\s*(["'])v2\1/gi) || []).length;
   const footerElementCount = (source.match(/<footer\b/gi) || []).length;
   if (headerCount !== 1) throw new Error(`${filename}: expected exactly one standard news header, found ${headerCount}`);
