@@ -1,21 +1,24 @@
-name: YEHAVHA NEWS quality gate
+name: YEHAVHA NEWS pre-merge quality gate
 
 on:
-  push:
-    branches: [main]
+  pull_request:
     paths:
       - 'nexus/news/articles/**'
       - 'nexus/news/news-data.js'
       - 'nexus/news/sitemap.xml'
+      - 'nexus/scripts/normalize-news-articles.mjs'
+      - 'nexus/scripts/sync-news-registry.mjs'
+      - 'nexus/scripts/audit-news-architecture.mjs'
       - 'nexus/scripts/audit-news-quality.mjs'
       - '.github/workflows/news-quality-audit.yml'
+      - '.github/workflows/normalize-news-articles.yml'
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: yehavha-news-quality
+  group: yehavha-news-premerge-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -30,5 +33,8 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Validate current YEHAVHA NEWS depth and regression
+      - name: Validate NEWS architecture
+        run: node nexus/scripts/audit-news-architecture.mjs
+
+      - name: Validate article quality
         run: node nexus/scripts/audit-news-quality.mjs
