@@ -40,11 +40,10 @@
 <section class="frontline-panel">
 <div class="frontline-headingline">
 <h2 id="yehavhaNewsTitle">YEHAVHA NEWS</h2>
-<p class="frontline-kicker">오늘의 주요기사</p>
-<p class="frontline-date" id="homeNewsDate">최신</p>
+<p class="frontline-kicker">논평 · 전략 브리핑 · 사회 브리핑</p>
 </div>
-<div class="today-grid" id="homeNewsGrid">
-<a class="today-card" href="./commentary/ai-jobs-generational-bridge.html" aria-label="AI가 신입의 일을 없앤다면, 경험을 다음 세대의 일자리로 바꿔야 한다 논평 보기">
+<div class="home-editorial-cell" aria-label="YEHAVHA NEWS 논평과 브리핑">
+<a class="home-editorial-row home-editorial-row-feature" href="./commentary/ai-jobs-generational-bridge.html" aria-label="AI가 신입의 일을 없앤다면, 경험을 다음 세대의 일자리로 바꿔야 한다 논평 보기">
 <div class="commentary-feature-layout">
 <img class="commentary-feature-thumb" src="https://i.ytimg.com/vi/S33X7MlXWfQ/mqdefault.jpg" alt="한국은행 AI 대혁신의 시대, 청년고용은 왜 감소하는가 유튜브 영상 썸네일" width="320" height="180" loading="eager" decoding="async"/>
 <div class="commentary-feature-copy">
@@ -55,15 +54,20 @@
 </div>
 </div>
 </a>
-<a class="today-card" href="./intelligence-briefing/">
+<a class="home-editorial-row" href="./intelligence-briefing/">
 <div class="today-titleline"><strong id="homeStrategyTitle">전략정보 최신 브리핑</strong><span class="today-meta">전략 브리핑</span></div>
 <div class="today-bodyline"><p id="homeStrategySummary">최신 전략정보 브리핑을 불러옵니다.</p><span class="today-action">전략 브리핑 보기 →</span></div>
 </a>
-<a class="today-card" href="./korea-social-intelligence/">
+<a class="home-editorial-row" href="./korea-social-intelligence/">
 <div class="today-titleline"><strong id="homeSocialTitle">국내 사회동향 최신 브리핑</strong><span class="today-meta">사회 브리핑</span></div>
 <div class="today-bodyline"><p id="homeSocialSummary">최신 국내 사회동향을 불러옵니다.</p><span class="today-action">사회 브리핑 보기 →</span></div>
 </a>
 </div>
+<section class="home-news-mirror" aria-labelledby="homeLatestNewsTitle">
+<div class="home-news-section-head"><h2 id="homeLatestNewsTitle">오늘의 뉴스</h2><span id="homeLatestNewsMeta">최신 기사</span></div>
+<div class="home-news-list" id="homeLatestNewsList" aria-live="polite"></div>
+<div class="home-news-moreline"><a href="./news/">YEHAVHA NEWS 전체 보기 →</a></div>
+</section>
 </section>
 </section>
 <section class="nexus-frontline" id="nexusEntry" aria-label="NEXUS 선택">
@@ -113,4 +117,111 @@
 <section class="nexus-google-searchbar" aria-labelledby="nexusGoogleSearchTitle"><div class="container"><section class="portal-search"><div class="portal-search-head"><h2 id="nexusGoogleSearchTitle">Google 검색</h2><p>웹 전체 검색</p></div><form class="portal-search-box" action="https://www.google.com/search" method="get" role="search"><input class="portal-search-input" type="search" name="q" autocomplete="off" placeholder="Google에서 검색할 내용을 입력하세요" aria-label="Google 검색"/><button class="portal-google-submit" type="submit">Google 검색</button></form></section></div></section>
 <main class="main" id="projects"><section class="nexus-frontline" id="nexusFrontline" aria-label="NEXUS 브리핑"><div class="container"><section class="frontline-panel" aria-labelledby="todayNexusTitle"><div class="frontline-headingline"><h2 id="todayNexusTitle">NEXUS 브리핑</h2><p class="frontline-kicker">TODAY IN NEXUS</p><p class="frontline-date" id="todayNexusDate">오늘</p></div><div class="today-grid"><a class="today-card" href="./intelligence-briefing/"><div class="today-titleline"><strong>오늘의 전략정보 브리핑</strong><span class="today-meta">STRATEGIC INTELLIGENCE</span></div><div class="today-bodyline"><p id="homeBriefStrategyHeadline">최신 전략정보를 불러옵니다.</p><span class="today-action">오늘 브리핑 보기 →</span></div></a><a class="today-card" href="./korea-social-intelligence/"><div class="today-titleline"><strong>국내 사회동향 브리핑</strong><span class="today-meta">DOMESTIC SOCIAL INTELLIGENCE</span></div><div class="today-bodyline"><p id="homeBriefSocialHeadline">최신 사회동향을 불러옵니다.</p><span class="today-action">사회동향 보기 →</span></div></a><a class="today-card" href="./legal-intelligence/"><div class="today-titleline"><strong>오늘의 법률정보</strong><span class="today-meta">LEGAL INTELLIGENCE</span></div><div class="today-bodyline"><p>개인정보 보호법 일부개정법률안</p><span class="today-action">법률정보 보기 →</span></div></a><a class="today-card" href="./ai-trends/"><div class="today-titleline"><strong>오늘의 AI 동향</strong><span class="today-meta">AI INTELLIGENCE</span></div><div class="today-bodyline"><p>프런티어 경쟁이 단순 모델 점수에서 장기 과업·컴퓨터 사용·전문영역 실행능력 경쟁으로 이동</p><span class="today-action">AI 동향 보기 →</span></div></a></div></section></div></section><div class="container portal-grid" id="portalGrid" aria-live="polite"></div></main>
 <footer class="footer" data-footer-standard="v2"><div class="container"><div class="footer-card"><strong>YEHAVHA NEXUS</strong><p>AI·AX 기반 전략정보와 전문지식을 연구·출판·교육·콘텐츠·웹서비스로 전환하고,<br/>축적된 결과물을 재사용·사업화하는 통합 지식사업 플랫폼입니다.</p><div aria-label="사업자정보·저작권 및 문의" class="footer-meta"><p class="business-meta">스카이예슈아 · 사업자등록번호 536-38-01234<br />통신판매번호 : 2025-서울서초-2352 · 대표 이명훈</p><p class="research-identifiers">국가연구자번호 13169680 · ISNI 0000000513760591<br />ORCID 0009-0000-6095-8067</p><p class="copyright">Copyright © 이명훈 2026. All rights reserved.</p><p class="contact">문의 <a href="mailto:kimbrighth@gmail.com">kimbrighth@gmail.com</a></p><p class="ai-disclosure">AI 활용 안내: 일부 프로젝트의 콘텐츠·문안·연구자료 제작과 정리에 생성형 AI를 활용하며, 각 프로젝트의 기획·검토·편집·운영은 운영자가 관리합니다.</p><a href="#top">맨 위로 이동 ↑</a></div></div></div></footer>
-<div aria-live="polite" class="toast" id="toast" role="status"></div><script defer src="./news/news-data.js"></script><script defer src="./portal-v2.js"></script></body></html>
+<div aria-live="polite" class="toast" id="toast" role="status"></div>
+<script defer src="./news/news-data.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  'use strict';
+  const list = document.getElementById('homeLatestNewsList');
+  const meta = document.getElementById('homeLatestNewsMeta');
+  if (!list) return;
+
+  const raw = Array.isArray(window.YEHAVHA_NEWS_DATA) ? window.YEHAVHA_NEWS_DATA : [];
+  const config = window.YEHAVHA_NEWS_CONFIG || {};
+  const categories = Array.isArray(config.categories) ? config.categories : [];
+  const seenIds = new Set();
+  const seenHrefs = new Set();
+  const data = raw
+    .map((item, index) => ({...item, _sequence:index}))
+    .filter(item => {
+      const valid = item && typeof item.id === 'string' && item.id
+        && typeof item.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(item.date)
+        && typeof item.category === 'string' && (!categories.length || categories.includes(item.category))
+        && typeof item.title === 'string' && item.title
+        && typeof item.summary === 'string'
+        && typeof item.href === 'string' && item.href;
+      if (!valid || seenIds.has(item.id) || seenHrefs.has(item.href)) return false;
+      seenIds.add(item.id);
+      seenHrefs.add(item.href);
+      return true;
+    })
+    .sort((a, b) => b.date.localeCompare(a.date) || a._sequence - b._sequence);
+
+  const make = (tag, className, text) => {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  };
+  const articleHref = href => href.startsWith('./articles/') ? `./news/${href.slice(2)}` : href;
+  const formatDate = value => value.replace(/-/g, '.');
+
+  const articleCard = item => {
+    const href = articleHref(item.href);
+    const video = item.video;
+    const hasVideo = video && typeof video.url === 'string' && video.url
+      && typeof video.thumbnail === 'string' && video.thumbnail;
+
+    if (hasVideo) {
+      const card = make('article', 'home-news-media-card');
+      const visual = make('div', 'home-news-media-visual');
+      const thumbLink = make('a', 'home-news-media-thumb');
+      thumbLink.href = href;
+      thumbLink.setAttribute('aria-label', `${item.title} 기사 보기`);
+      const image = make('img');
+      image.src = video.thumbnail;
+      image.alt = `${item.title} 관련 YouTube 영상 썸네일`;
+      image.width = 480;
+      image.height = 270;
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      thumbLink.append(image);
+      visual.append(thumbLink);
+      if (video.title && video.url) {
+        const videoLink = make('a', 'home-news-video-link', video.title);
+        videoLink.href = video.url;
+        videoLink.target = '_blank';
+        videoLink.rel = 'noopener noreferrer';
+        videoLink.setAttribute('aria-label', `${item.title} 관련 영상 새 창에서 보기`);
+        visual.append(videoLink);
+      }
+
+      const copy = make('div', 'home-news-media-copy');
+      const cardMeta = make('div', 'home-news-card-meta');
+      [item.category, formatDate(item.date), item.author || 'YEHAVHA NEWS'].forEach(value => cardMeta.append(make('span', '', value)));
+      const heading = make('h3', 'home-news-media-title');
+      const titleLink = make('a', '', item.title);
+      titleLink.href = href;
+      heading.append(titleLink);
+      const summary = make('span', 'home-news-media-summary', item.summary);
+      const action = make('a', 'home-news-action', '기사 보기 →');
+      action.href = href;
+      copy.append(cardMeta, heading, summary, action);
+      card.append(visual, copy);
+      return card;
+    }
+
+    const link = make('a', 'home-news-card');
+    link.href = href;
+    const cardMeta = make('div', 'home-news-card-meta');
+    [item.category, formatDate(item.date), item.author || 'YEHAVHA NEWS'].forEach(value => cardMeta.append(make('span', '', value)));
+    link.append(cardMeta, make('h3', '', item.title), make('p', '', item.summary), make('span', 'home-news-action', '기사 보기 →'));
+    return link;
+  };
+
+  if (!data.length) {
+    list.replaceChildren(make('p', 'home-news-empty', '등록된 뉴스가 없습니다.'));
+    if (meta) meta.textContent = '최신 기사';
+    return;
+  }
+
+  const latestDate = data[0].date;
+  const configuredLimit = Number(config.homeLatestLimit);
+  const limit = Number.isFinite(configuredLimit) && configuredLimit > 0 ? configuredLimit : 10;
+  const latestItems = data.filter(item => item.date === latestDate).slice(0, limit);
+  list.replaceChildren(...latestItems.map(articleCard));
+  if (meta) meta.textContent = `${formatDate(latestDate)} · ${latestItems.length}건`;
+});
+</script>
+<script defer src="./portal-v2.js"></script>
+</body></html>
