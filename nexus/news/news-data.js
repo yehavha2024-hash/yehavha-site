@@ -127,7 +127,14 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "title": "청문회 끝나자 보고서 채택 충돌…인사검증이 상임위 대치로 번졌다",
     "summary": "8·30 개각 인사청문회가 마무리되자 갈등의 초점이 후보자 개인 검증에서 청문보고서 채택과 상임위원회 운영으로 이동했다. 17일 국회에서 확인해야 할 것은 누가 더 강하게 공세하느냐보다 인사 갈등이 입법·국정감사 일정까지 전이되는지 여부다.",
     "href": "./articles/2026-09-17-post-hearing-report-standoff.html",
-    "keywords": "청문회 끝나자 보고서 채택 충돌…인사검증이 상임위 대치로 번졌다 정치"
+    "keywords": "청문회 끝나자 보고서 채택 충돌…인사검증이 상임위 대치로 번졌다 정치",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=ARx1r2HICYM",
+      "youtubeId": "ARx1r2HICYM",
+      "title": "김성수 대법관 후보자 인사청문 관련 국회 영상 ↗",
+      "source": "YouTube · NATV 국회방송",
+      "thumbnail": "https://i.ytimg.com/vi/ARx1r2HICYM/hqdefault.jpg"
+    }
   },
   {
     "id": "2026-09-17-ppp-han-jang-after-yong-resignation",
