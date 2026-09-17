@@ -113,8 +113,29 @@ for (const filename of articleFiles) {
     if (/[.!?。？！]$/.test(heading) || /다$/.test(heading)) fail(`${filename}: subheading should be a compact phrase (${heading})`);
   }
 
+  const registryRecord = dataByFile.get(filename);
+  const sourceTitle = visible(source.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || '');
+  const sourceSummary = textByClass(source, 'p', 'article-deck');
+  const sourceCategory = textByClass(source, 'p', 'article-kicker');
+  const sourceMeta = textByClass(source, 'p', 'article-meta');
+  const sourceMetaParts = sourceMeta.split(/\s+·\s+/).map(part => part.trim()).filter(Boolean);
+  const sourceDate = (sourceMetaParts[0] || '').replaceAll('.', '-');
+  const sourceAuthor = sourceMetaParts.length >= 3 ? sourceMetaParts.at(-1) : '';
+  const displayChecks = [
+    ['title', sourceTitle],
+    ['summary', sourceSummary],
+    ['category', sourceCategory],
+    ['date', sourceDate],
+    ['author', sourceAuthor]
+  ];
+  for (const [field, expected] of displayChecks) {
+    if (expected && registryRecord?.[field] !== expected) {
+      fail(`${filename}: article-owned ${field} and registry are not synchronized`);
+    }
+  }
+
   const canonicalVideo = articleVideoOf(filename, source);
-  const registryVideo = dataByFile.get(filename)?.video || null;
+  const registryVideo = registryRecord?.video || null;
   if (canonicalVideo) videoArticleCount += 1;
   if (JSON.stringify(canonicalVideo) !== JSON.stringify(registryVideo)) {
     fail(`${filename}: article-owned video metadata and registry are not synchronized`);
