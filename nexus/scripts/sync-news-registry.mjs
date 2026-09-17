@@ -33,6 +33,30 @@ function textByClass(source, tag, className) {
   return match ? decodeHtml(match[1]) : '';
 }
 
+function youtubeId(value = '') {
+  const match = value.match(/(?:youtube\.com\/(?:watch\?[^"'\s]*?v=|live\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/i);
+  return match?.[1] || '';
+}
+
+function articleVideo(filename, source) {
+  const links = [...source.matchAll(/<a\b(?=[^>]*class=["'][^"']*\barticle-video-link\b[^"']*["'])[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)];
+  if (links.length > 1) throw new Error(`${filename}: only one canonical article-video-link is allowed.`);
+  if (!links.length) return null;
+
+  const [, url, body] = links[0];
+  const id = youtubeId(url);
+  const thumbnail = body.match(/<img\b(?=[^>]*class=["'][^"']*\barticle-video-thumb\b[^"']*["'])[^>]*src=["']([^"']+)["'][^>]*>/i)?.[1] || '';
+  const sourceLabel = textByClass(body, 'span', 'article-video-meta');
+  const title = decodeHtml(body.match(/<strong\b[^>]*>([\s\S]*?)<\/strong>/i)?.[1] || '');
+
+  if (!id) throw new Error(`${filename}: article-video-link must use a supported YouTube URL.`);
+  if (!thumbnail.includes(`/vi/${id}/`)) throw new Error(`${filename}: article-video-thumb must match YouTube video ${id}.`);
+  if (!sourceLabel) throw new Error(`${filename}: article-video-meta source label is missing.`);
+  if (!title) throw new Error(`${filename}: article-video title is missing.`);
+
+  return { url, youtubeId: id, title, source: sourceLabel, thumbnail };
+}
+
 function loadRegistry() {
   const source = fs.readFileSync(registryPath, 'utf8');
   const context = { window: {} };
@@ -56,6 +80,8 @@ function articleRecord(filename, source, previous = {}) {
   const date = /^20\d{2}-\d{2}-\d{2}$/.test(metaDate) ? metaDate : filenameDate;
   const category = kicker || metaParts[1] || previous.category || '';
   const author = metaParts[2] || previous.author || '이명훈';
+  const video = articleVideo(filename, source);
+  const { video: _staleVideo, ...preserved } = previous;
 
   if (!title) throw new Error(`${filename}: article title is missing.`);
   if (!summary) throw new Error(`${filename}: article deck is missing.`);
@@ -63,7 +89,7 @@ function articleRecord(filename, source, previous = {}) {
   if (!category) throw new Error(`${filename}: article category is missing.`);
 
   return {
-    ...previous,
+    ...preserved,
     id,
     date,
     category,
@@ -72,7 +98,8 @@ function articleRecord(filename, source, previous = {}) {
     title,
     summary,
     href: `./articles/${filename}`,
-    keywords: previous.keywords || `${title} ${category}`
+    keywords: previous.keywords || `${title} ${category}`,
+    ...(video ? { video } : {})
   };
 }
 
@@ -157,7 +184,7 @@ for (const record of records) {
   ids.add(record.id);
 }
 
-const output = `/* YEHAVHA NEWS generated article registry.\n   Display metadata and observed categories are derived from article HTML. Keywords and non-display metadata are preserved from the previous registry.\n   Do not hand-edit title, summary, date, category, author or href here; edit the article instead. */\nwindow.YEHAVHA_NEWS_CONFIG = Object.freeze(${JSON.stringify(config, null, 2)});\n\nwindow.YEHAVHA_NEWS_DATA = Object.freeze(${JSON.stringify(records, null, 2)});\n`;
+const output = `/* YEHAVHA NEWS generated article registry.\n   Display metadata, observed categories, and optional related-video metadata are derived from article HTML. Keywords and non-display metadata are preserved from the previous registry.\n   Do not hand-edit title, summary, date, category, author, href or video here; edit the article instead. */\nwindow.YEHAVHA_NEWS_CONFIG = Object.freeze(${JSON.stringify(config, null, 2)});\n\nwindow.YEHAVHA_NEWS_DATA = Object.freeze(${JSON.stringify(records, null, 2)});\n`;
 
 const before = fs.readFileSync(registryPath, 'utf8');
 if (before !== output) {
