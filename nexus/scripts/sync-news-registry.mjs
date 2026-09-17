@@ -10,6 +10,7 @@ const newsDir = path.join(nexusDir, 'news');
 const articleDir = path.join(newsDir, 'articles');
 const registryPath = path.join(newsDir, 'news-data.js');
 const sitemapPath = path.join(newsDir, 'sitemap.xml');
+// Stable display order; actual categories are still discovered from article metadata below.
 const preferredCategoryOrder = ['정치', '정부', '경제·산업', '사회', '법·정책', 'AI·기술', '글로벌·컬처'];
 
 function decodeHtml(value = '') {
