@@ -74,12 +74,12 @@ function articleRecord(filename, source, previous = {}) {
   const summary = textByClass(source, 'p', 'article-deck');
   const kicker = textByClass(source, 'p', 'article-kicker');
   const meta = textByClass(source, 'p', 'article-meta');
-  const metaParts = meta.split('·').map(part => part.trim()).filter(Boolean);
+  const metaParts = meta.split(/\s+·\s+/).map(part => part.trim()).filter(Boolean);
   const filenameDate = id.match(/^(20\d{2}-\d{2}-\d{2})/)?.[1] || '';
   const metaDate = (metaParts[0] || '').replaceAll('.', '-');
   const date = /^20\d{2}-\d{2}-\d{2}$/.test(metaDate) ? metaDate : filenameDate;
   const category = kicker || metaParts[1] || previous.category || '';
-  const author = metaParts[2] || previous.author || '이명훈';
+  const author = metaParts.length >= 3 ? metaParts.at(-1) : (previous.author || '이명훈');
   const video = articleVideo(filename, source);
   const { video: _staleVideo, ...preserved } = previous;
 
