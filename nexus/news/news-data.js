@@ -91,7 +91,14 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "title": "법원, 북한에 연락사무소 폭파 446억원 배상 명령…집행은 별도 문제",
     "summary": "서울중앙지법이 남북공동연락사무소 폭파에 대해 북한의 손해배상 책임을 인정했다. 그러나 1심의 책임 인정, 판결 확정, 집행대상 재산의 특정, 실제 회수는 서로 다른 단계다. 이번 판결의 실질적 의미는 그 간극을 어떻게 다루는지에 있다.",
     "href": "./articles/2026-09-17-north-korea-liaison-damages.html",
-    "keywords": "북한 남북공동연락사무소 446억원 손해배상 서울중앙지법 1심"
+    "keywords": "북한 남북공동연락사무소 446억원 손해배상 서울중앙지법 1심",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=w-6IxnZ_R5s",
+      "youtubeId": "w-6IxnZ_R5s",
+      "title": "“연락사무소 폭파 北, 정부에 446억 배상해야” 관련 보도 ↗",
+      "source": "YouTube · MBCNEWS",
+      "thumbnail": "https://i.ytimg.com/vi/w-6IxnZ_R5s/hqdefault.jpg"
+    }
   },
   {
     "id": "2026-09-17-global-ai-safety",
