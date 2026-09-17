@@ -7,11 +7,7 @@ on:
       - 'nexus/news/articles/**'
       - 'nexus/news/news-data.js'
       - 'nexus/news/sitemap.xml'
-      - 'nexus/news/index.html'
-      - 'nexus/news/about.html'
-      - 'nexus/news/app.js'
-      - 'nexus/news/style.css'
-      - 'nexus/scripts/audit-news-architecture.mjs'
+      - 'nexus/scripts/audit-news-quality.mjs'
       - '.github/workflows/news-quality-audit.yml'
   workflow_dispatch:
 
@@ -34,5 +30,5 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Validate YEHAVHA NEWS depth, structure and regression
-        run: node nexus/scripts/audit-news-architecture.mjs
+      - name: Validate current YEHAVHA NEWS depth and regression
+        run: node nexus/scripts/audit-news-quality.mjs
