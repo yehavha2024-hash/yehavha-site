@@ -19,8 +19,8 @@ permissions:
   contents: write
 
 concurrency:
-  group: yehavha-news-reconcile-main
-  cancel-in-progress: true
+  group: yehavha-main-content-writer
+  cancel-in-progress: false
 
 jobs:
   reconcile:
