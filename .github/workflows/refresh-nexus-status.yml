@@ -23,6 +23,7 @@ on:
       - 'legal-knowledge/**'
       - 'ai-law-tech-foresight/**'
       - 'legal-philosophy/**'
+      - 'scripts/ci/safe-content-commit.sh'
       - '.github/workflows/refresh-nexus-status.yml'
   schedule:
     - cron: '15 15 * * *'
@@ -55,16 +56,6 @@ jobs:
       - name: Refresh Nexus sitemap
         run: node nexus/scripts/update-sitemap.mjs
 
-      - name: Commit Nexus generated metadata when changed
+      - name: Publish Nexus generated metadata when changed
         shell: bash
-        run: |
-          if git diff --quiet -- nexus/project-status.json nexus/sitemap.xml; then
-            echo "Nexus generated metadata is already current."
-            exit 0
-          fi
-
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add nexus/project-status.json nexus/sitemap.xml
-          git commit -m "Refresh Nexus generated metadata"
-          git push
+        run: bash scripts/ci/safe-content-commit.sh "Refresh Nexus generated metadata" nexus/project-status.json nexus/sitemap.xml
