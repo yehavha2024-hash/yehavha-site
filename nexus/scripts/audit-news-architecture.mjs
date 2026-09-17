@@ -25,6 +25,27 @@ const bodySourceOf = source => {
 const paragraphCount = source => [...source.matchAll(/<p\b/gi)].length;
 const headingCount = source => [...source.matchAll(/<h2\b/gi)].length;
 const sentenceCount = value => (value.match(/[.!?。？！](?:\s|$)/g) || []).length;
+const youtubeId = value => value.match(/(?:youtube\.com\/(?:watch\?[^"'\s]*?v=|live\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/i)?.[1] || '';
+const textByClass = (source, tag, className) => {
+  const pattern = new RegExp(`<${tag}\\b(?=[^>]*class=["'][^"']*\\b${className}\\b[^"']*["'])[^>]*>([\\s\\S]*?)<\\/${tag}>`, 'i');
+  const match = source.match(pattern);
+  return match ? visible(match[1]) : '';
+};
+const articleVideoOf = (filename, source) => {
+  const links = [...source.matchAll(/<a\b(?=[^>]*class=["'][^"']*\barticle-video-link\b[^"']*["'])[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)];
+  if (links.length > 1) fail(`${filename}: only one canonical article-video-link is allowed`);
+  if (!links.length) return null;
+  const [, url, body] = links[0];
+  const id = youtubeId(url);
+  const thumbnail = body.match(/<img\b(?=[^>]*class=["'][^"']*\barticle-video-thumb\b[^"']*["'])[^>]*src=["']([^"']+)["'][^>]*>/i)?.[1] || '';
+  const sourceLabel = textByClass(body, 'span', 'article-video-meta');
+  const title = visible(body.match(/<strong\b[^>]*>([\s\S]*?)<\/strong>/i)?.[1] || '');
+  if (!id) fail(`${filename}: article-video-link must use a supported YouTube URL`);
+  if (!thumbnail.includes(`/vi/${id}/`)) fail(`${filename}: article-video-thumb does not match video ${id}`);
+  if (!sourceLabel) fail(`${filename}: article-video-meta source label missing`);
+  if (!title) fail(`${filename}: article-video title missing`);
+  return { url, youtubeId: id, title, source: sourceLabel, thumbnail };
+};
 
 const dataSource = text(path.join(newsDir, 'news-data.js'));
 const dataSandbox = { window: {} };
@@ -37,6 +58,7 @@ if (!config || !Array.isArray(config.categories) || !config.categories.length) f
 const ids = new Set();
 const hrefs = new Set();
 const dataFiles = [];
+const dataByFile = new Map();
 for (const [index, item] of data.entries()) {
   if (!item || typeof item !== 'object') fail(`record ${index} is not an object`);
   for (const key of ['id', 'date', 'category', 'title', 'summary', 'href']) {
@@ -51,7 +73,17 @@ for (const [index, item] of data.entries()) {
   const expectedHref = `./articles/${item.id}.html`;
   if (item.href !== expectedHref) fail(`${item.id}: href must be ${expectedHref}`);
   if (!item.id.startsWith(item.date)) fail(`${item.id}: id/date mismatch (${item.date})`);
-  dataFiles.push(path.basename(item.href));
+  const filename = path.basename(item.href);
+  dataFiles.push(filename);
+  dataByFile.set(filename, item);
+  if (item.video !== undefined) {
+    if (!item.video || typeof item.video !== 'object') fail(`${item.id}: video metadata must be an object`);
+    for (const key of ['url', 'youtubeId', 'title', 'source', 'thumbnail']) {
+      if (typeof item.video[key] !== 'string' || !item.video[key].trim()) fail(`${item.id}: invalid video.${key}`);
+    }
+    if (youtubeId(item.video.url) !== item.video.youtubeId) fail(`${item.id}: video URL/id mismatch`);
+    if (!item.video.thumbnail.includes(`/vi/${item.video.youtubeId}/`)) fail(`${item.id}: video thumbnail/id mismatch`);
+  }
 }
 
 const articleFiles = fs.readdirSync(articleDir).filter(name => name.endsWith('.html'));
@@ -62,6 +94,7 @@ if (!sameSet(articleFiles, dataFiles)) {
 }
 
 const articleStats = new Map();
+let videoArticleCount = 0;
 for (const filename of articleFiles) {
   const source = text(path.join(articleDir, filename));
   if (!source.includes('../style.css')) fail(`${filename}: shared news stylesheet link missing`);
@@ -78,6 +111,13 @@ for (const filename of articleFiles) {
     const heading = visible(match[1]);
     if (heading.length > 24) fail(`${filename}: subheading is too long (${heading})`);
     if (/[.!?。？！]$/.test(heading) || /다$/.test(heading)) fail(`${filename}: subheading should be a compact phrase (${heading})`);
+  }
+
+  const canonicalVideo = articleVideoOf(filename, source);
+  const registryVideo = dataByFile.get(filename)?.video || null;
+  if (canonicalVideo) videoArticleCount += 1;
+  if (JSON.stringify(canonicalVideo) !== JSON.stringify(registryVideo)) {
+    fail(`${filename}: article-owned video metadata and registry are not synchronized`);
   }
 
   const bodySource = bodySourceOf(source);
@@ -139,12 +179,12 @@ if (/[?&]v=/.test(indexSource) || /[?&]v=/.test(aboutSource)) fail('manual cache
 
 const appSource = text(path.join(newsDir, 'app.js'));
 new vm.Script(appSource, { filename: 'app.js' });
-for (const required of ['renderCategoryNav()', 'renderHome()', 'renderView()', "addEventListener('popstate'"]) {
+for (const required of ['renderCategoryNav()', 'renderHome()', 'renderView()', "addEventListener('popstate'", 'news-media-feature', 'item?.video']) {
   if (!appSource.includes(required)) fail(`app.js missing required runtime path: ${required}`);
 }
 
 const styleSource = text(path.join(newsDir, 'style.css'));
-for (const selector of ['.category-latest-grid', '.archive-day', '.article-page', '.article-body', '.news-accountability', '.article-point']) {
+for (const selector of ['.category-latest-grid', '.archive-day', '.article-page', '.article-body', '.news-accountability', '.article-point', '.opinion-feature', '.article-video-link']) {
   if (!styleSource.includes(selector)) fail(`style.css missing selector: ${selector}`);
 }
 if (/\.news-head-tools\{[^}]*flex-direction:column/.test(styleSource)) fail('news header tools must not be forced into a vertical row');
@@ -155,4 +195,4 @@ if (!headers.includes('/news/*') || !headers.includes('Cache-Control: no-cache, 
 const robots = text(path.join(nexusDir, 'robots.txt'));
 if (!robots.includes('Sitemap: https://yehavha.com/news/sitemap.xml')) fail('news sitemap is not declared in robots.txt');
 
-console.log(`YEHAVHA NEWS audit passed: ${articleFiles.length} articles, latest=${latestDate}, latestEdition=${latestItems.length}/${homeLatestLimit} visible, latestDepthFloor=${densityFloor}, previousMedian=${previousMedian || 'n/a'}, ${config.categories.length} categories, article quality/shell/footer/layout/cache synchronized.`);
+console.log(`YEHAVHA NEWS audit passed: ${articleFiles.length} articles, latest=${latestDate}, latestEdition=${latestItems.length}/${homeLatestLimit} visible, videos=${videoArticleCount}, latestDepthFloor=${densityFloor}, previousMedian=${previousMedian || 'n/a'}, ${config.categories.length} categories, article quality/shell/footer/layout/cache synchronized.`);
