@@ -143,6 +143,14 @@ records.sort((a, b) => {
   return b.id.localeCompare(a.id);
 });
 
+// The latest edition must never hide a validated same-day article merely because
+// the edition grew past the historical 10-card default.
+const latestRecordDate = records[0]?.date || '';
+const latestEditionCount = latestRecordDate
+  ? records.filter(item => item.date === latestRecordDate).length
+  : 0;
+config.homeLatestLimit = Math.max(10, latestEditionCount);
+
 const ids = new Set();
 for (const record of records) {
   if (ids.has(record.id)) throw new Error(`Duplicate article id: ${record.id}`);
