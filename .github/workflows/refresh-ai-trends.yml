@@ -17,8 +17,8 @@ permissions:
   contents: write
 
 concurrency:
-  group: nexus-ai-trends-refresh
-  cancel-in-progress: true
+  group: yehavha-main-content-writer
+  cancel-in-progress: false
 
 jobs:
   refresh:
