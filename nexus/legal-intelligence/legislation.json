@@ -728,7 +728,7 @@
       "title": "고등교육법 일부개정법률안",
       "proposer": "이달희의원 등 10인",
       "proposedAt": "2026-09-16",
-      "committee": "",
+      "committee": "보건복지위원회",
       "statusCode": "introduced",
       "statusLabel": "발의·계류",
       "statusDate": "2026-09-16",
@@ -756,7 +756,7 @@
       "title": "법원조직법 일부개정법률안",
       "proposer": "최은석의원 등 11인",
       "proposedAt": "2026-09-16",
-      "committee": "",
+      "committee": "보건복지위원회",
       "statusCode": "introduced",
       "statusLabel": "발의·계류",
       "statusDate": "2026-09-16",
@@ -17109,6 +17109,26 @@
       "history": [],
       "recordKey": "government:2000000327582",
       "revisionType": "일부개정"
+    },
+    {
+      "sourceType": "government",
+      "sourceId": "2000000327838",
+      "officialLbicId": "2000000327838",
+      "title": "평생교육법 시행령",
+      "ministry": "교육부",
+      "lawType": "대통령령",
+      "statusCode": "government_process",
+      "statusLabel": "입법예고",
+      "statusDate": "",
+      "active": true,
+      "topics": [
+        "교육·에듀테크"
+      ],
+      "revisionType": "일부개정",
+      "summary": "법제처 정부입법 공식자료에서 자동 선별된 법령안입니다. 현재 추진단계는 입법예고이며 상세 API를 기준으로 내용을 보강합니다.",
+      "sourceUrl": "https://opinion.lawmaking.go.kr/lmSts/govLm/2000000327838/detailRP",
+      "history": [],
+      "recordKey": "government:2000000327838"
     },
     {
       "sourceType": "government",
