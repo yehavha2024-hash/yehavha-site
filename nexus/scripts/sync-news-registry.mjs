@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
+import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -8,6 +9,7 @@ const nexusDir = path.resolve(here, '..');
 const newsDir = path.join(nexusDir, 'news');
 const articleDir = path.join(newsDir, 'articles');
 const registryPath = path.join(newsDir, 'news-data.js');
+const sitemapPath = path.join(newsDir, 'sitemap.xml');
 
 function decodeHtml(value = '') {
   return value
@@ -42,7 +44,7 @@ function loadRegistry() {
 
 function articleRecord(filename, source, previous = {}) {
   const id = filename.replace(/\.html$/i, '');
-  const title = textByClass(source, 'h1', '') || decodeHtml(source.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || '');
+  const title = decodeHtml(source.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || '');
   const summary = textByClass(source, 'p', 'article-deck');
   const kicker = textByClass(source, 'p', 'article-kicker');
   const meta = textByClass(source, 'p', 'article-meta');
@@ -70,6 +72,45 @@ function articleRecord(filename, source, previous = {}) {
     href: `./articles/${filename}`,
     keywords: previous.keywords || `${title} ${category}`
   };
+}
+
+function gitDate(relativePath, fallback) {
+  try {
+    const value = execFileSync('git', ['log', '-1', '--format=%cs', '--', relativePath], {
+      cwd: path.resolve(nexusDir, '..'),
+      encoding: 'utf8'
+    }).trim();
+    return /^20\d{2}-\d{2}-\d{2}$/.test(value) ? value : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+function xmlEscape(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&apos;');
+}
+
+function buildSitemap(records) {
+  const latestDate = records.reduce((latest, item) => item.date > latest ? item.date : latest, '');
+  const aboutDate = gitDate('nexus/news/about.html', latestDate);
+  const lines = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    `  <url><loc>https://yehavha.com/news/</loc><lastmod>${xmlEscape(latestDate)}</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>`,
+    `  <url><loc>https://yehavha.com/news/about.html</loc><lastmod>${xmlEscape(aboutDate)}</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>`
+  ];
+
+  for (const record of records) {
+    const filename = path.basename(record.href);
+    lines.push(`  <url><loc>https://yehavha.com/news/articles/${xmlEscape(filename)}</loc><lastmod>${xmlEscape(record.date)}</lastmod></url>`);
+  }
+  lines.push('</urlset>', '');
+  return lines.join('\n');
 }
 
 const { config, data: previousData } = loadRegistry();
@@ -106,4 +147,13 @@ if (before !== output) {
   console.log(`YEHAVHA NEWS registry synchronized: ${records.length} article(s).`);
 } else {
   console.log(`YEHAVHA NEWS registry already synchronized: ${records.length} article(s).`);
+}
+
+const sitemap = buildSitemap(records);
+const beforeSitemap = fs.existsSync(sitemapPath) ? fs.readFileSync(sitemapPath, 'utf8') : '';
+if (beforeSitemap !== sitemap) {
+  fs.writeFileSync(sitemapPath, sitemap, 'utf8');
+  console.log(`YEHAVHA NEWS sitemap synchronized: ${records.length} article URL(s).`);
+} else {
+  console.log(`YEHAVHA NEWS sitemap already synchronized: ${records.length} article URL(s).`);
 }
