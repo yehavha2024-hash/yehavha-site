@@ -18,8 +18,8 @@ permissions:
   contents: write
 
 concurrency:
-  group: legal-intelligence-legislation-refresh
-  cancel-in-progress: true
+  group: yehavha-main-content-writer
+  cancel-in-progress: false
 
 env:
   OPEN_ASSEMBLY_API_KEY: ${{ secrets.OPEN_ASSEMBLY_API_KEY || secrets.OPEN_ASSEMBLY_SUBCOMMITTEE_API_KEY }}
@@ -102,8 +102,23 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add nexus/legal-intelligence/legislation.json
           git commit -m "Refresh Legal Intelligence legislation data"
-          git pull --rebase origin main
-          git push origin main
+
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            if ! git rebase origin/main; then
+              echo "Legislation output conflicts with a newer main update; refusing to overwrite it." >&2
+              git rebase --abort || true
+              exit 1
+            fi
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "main moved during legislation publish; retrying (${attempt}/4)."
+            sleep $((attempt * 2))
+          done
+
+          echo "Unable to publish legislation data after 4 attempts."
+          exit 1
 
       - name: Report legislation refresh status to Airtable
         if: always()
