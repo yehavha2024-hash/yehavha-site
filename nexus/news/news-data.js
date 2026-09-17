@@ -109,7 +109,14 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "title": "유엔·EU, 프런티어 AI 안전 국제조정 압박…인프라 경쟁과 규범 경쟁 동시 진행",
     "summary": "프런티어 AI 경쟁이 모델 성능만의 경쟁에서 안전평가·보안·전력·데이터센터·자본비용을 동시에 관리하는 경쟁으로 이동하고 있다. 국제 안전기준과 2GW급 인프라 투자가 같은 시기에 부각된 것은 규범과 컴퓨트가 하나의 산업조건으로 결합되고 있다는 신호다.",
     "href": "./articles/2026-09-17-global-ai-safety.html",
-    "keywords": "유엔 EU 프런티어 AI 안전 데이터센터 Anthropic 규제"
+    "keywords": "유엔 EU 프런티어 AI 안전 데이터센터 Anthropic 규제",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=pfkty58uZ1E",
+      "youtubeId": "pfkty58uZ1E",
+      "title": "Artificial Intelligence: “What we do with it is now up to all of us” ↗",
+      "source": "YouTube · United Nations",
+      "thumbnail": "https://i.ytimg.com/vi/pfkty58uZ1E/hqdefault.jpg"
+    }
   },
   {
     "id": "2026-09-17-post-hearing-report-standoff",
