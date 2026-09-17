@@ -145,7 +145,14 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "title": "용혜인 사퇴 뒤 국힘 지표 반등…한동훈·장동혁 관계는 별도 변수",
     "summary": "용혜인 성평등가족부 장관 후보자 사퇴와 개각 논란 뒤 국민의힘 지지도가 오른 조사가 나왔지만, 조사별 정당 지지도는 크게 엇갈렸다. 단기 반사이익이 확인된 것과 한동훈 의원·장동혁 지도부의 관계가 안정된 것은 같은 문제가 아니다.",
     "href": "./articles/2026-09-17-ppp-han-jang-after-yong-resignation.html",
-    "keywords": "용혜인 사퇴 뒤 국힘 지표 반등…한동훈·장동혁 관계는 별도 변수 정치"
+    "keywords": "용혜인 사퇴 뒤 국힘 지표 반등…한동훈·장동혁 관계는 별도 변수 정치",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=Fif_r8pnjlE",
+      "youtubeId": "Fif_r8pnjlE",
+      "title": "결국 고개숙인 용혜인…14일만에 성평등부 장관 후보 자진 사퇴 ↗",
+      "source": "YouTube · 연합뉴스 Yonhapnews",
+      "thumbnail": "https://i.ytimg.com/vi/Fif_r8pnjlE/hqdefault.jpg"
+    }
   },
   {
     "id": "2026-09-17-lee-approval-decline-drivers",
