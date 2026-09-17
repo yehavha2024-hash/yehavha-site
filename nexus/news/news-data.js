@@ -1,6 +1,6 @@
 /* YEHAVHA NEWS generated article registry.
-   Display metadata and observed categories are derived from article HTML. Keywords and non-display metadata are preserved from the previous registry.
-   Do not hand-edit title, summary, date, category, author or href here; edit the article instead. */
+   Display metadata, observed categories, and optional related-video metadata are derived from article HTML. Keywords and non-display metadata are preserved from the previous registry.
+   Do not hand-edit title, summary, date, category, author, href or video here; edit the article instead. */
 window.YEHAVHA_NEWS_CONFIG = Object.freeze({
   "categories": [
     "정치",
@@ -301,7 +301,14 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "title": "김성수 대법관 후보자 청문회 오늘 개최…공석 해소 절차 분기점",
     "summary": "국회가 9월 14일 김성수 대법관 후보자 인사청문회를 열었다. 청문회에서 제기된 개인 의혹과 사법정책 쟁점은 각각 사실확인과 정책입장으로 구분해 봐야 하며, 공석 해소 여부는 심사경과보고서와 본회의 임명동의 절차에서 결정된다.",
     "href": "./articles/2026-09-14-supreme-court-nominee-hearing.html",
-    "keywords": "김성수 대법관 후보자 국회 인사청문회 대법원 공석 정치"
+    "keywords": "김성수 대법관 후보자 국회 인사청문회 대법원 공석 정치",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=ARx1r2HICYM",
+      "youtubeId": "ARx1r2HICYM",
+      "title": "김성수 대법관 후보자 인사청문 관련 국회 영상 ↗",
+      "source": "YouTube · NATV 국회방송",
+      "thumbnail": "https://i.ytimg.com/vi/ARx1r2HICYM/hqdefault.jpg"
+    }
   },
   {
     "id": "2026-09-13-saudi-energy-route-risk",
@@ -312,7 +319,14 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "title": "사우디 동서 송유관 일시 폐쇄…중동 에너지 우회망까지 흔들린다",
     "summary": "호르무즈 위험을 우회하기 위한 사우디 동서 송유관이 공격 뒤 일시 폐쇄되고 홍해 입구 바브엘만데브의 긴장도 높아졌다. 핵심은 한 경로의 장애가 아니라 서로 대체해야 할 육상·해상 경로가 동시에 압박받는 ‘상관된 실패’ 가능성이다.",
     "href": "./articles/2026-09-13-saudi-energy-route-risk.html",
-    "keywords": "사우디 동서 송유관 중동 에너지 원유 홍해 호르무즈 공급망"
+    "keywords": "사우디 동서 송유관 중동 에너지 원유 홍해 호르무즈 공급망",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=vGN9dnO-iRk",
+      "youtubeId": "vGN9dnO-iRk",
+      "title": "호르무즈 선박 피격과 해상안보 위험 관련 영상 ↗",
+      "source": "YouTube · Reuters",
+      "thumbnail": "https://i.ytimg.com/vi/vGN9dnO-iRk/hqdefault.jpg"
+    }
   },
   {
     "id": "2026-09-13-fema-workforce-ruling",
