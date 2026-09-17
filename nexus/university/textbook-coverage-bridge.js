@@ -40,14 +40,14 @@ for(const c of (cur.all||[])){
   if(existing&&Array.isArray(existing.lessons)&&existing.lessons.length)continue;
   const plan=tracks[c.domain]||tracks.core;
   const method=domainMethod[c.domain]||domainMethod.core;
-  const summary=String(c.summary||`${c.title}의 핵심 문제와 방법을 학습한다`).trim();
+  const summary=String(c.summary||`${c.title}의 핵심 문제와 방법을 학습한다.`).trim();
   books[c.id]={
     provisional:true,
-    overview:`${c.title}은 ${summary} 이 과정에서는 ${method}. 기초 개념에서 출발해 전공의 핵심 방법, 사례 적용, 비판과 종합까지 12개 Lesson으로 단계적으로 학습한다.`,
+    overview:`${summary} 이 과정에서는 ${method}. 기초 개념에서 출발해 전공의 핵심 방법, 사례 적용, 비판과 종합까지 12개 Lesson으로 단계적으로 학습한다.`,
     texts:[],
     lessons:plan.map((topic,i)=>{
       const n=i+1;
-      const body=`${c.title}의 ${topic} 단계에서는 ${summary}라는 과목의 중심 문제를 ${method}. 단순 암기보다 개념의 정의, 전제, 적용범위와 실패조건을 확인하고, 앞선 Lesson의 내용을 다음 단계와 연결해 하나의 전공 지식구조로 재구성한다.`;
+      const body=`${c.title}의 ${topic} 단계에서는 ${method}. 과목 개요와 앞선 Lesson의 내용을 기준으로 개념의 정의, 전제, 적용범위와 실패조건을 확인하고, 다음 단계와 연결해 하나의 전공 지식구조로 재구성한다.`;
       const concepts=[`${c.title} 핵심개념`,topic,`${c.department||c.college||'전공'} 관점`,n<=4?'기초 구조':n<=8?'분석·적용':'비판·종합'];
       const application=`${c.title}과 관련된 실제 또는 가상 사례를 하나 선정하고 ${topic}의 기준으로 문제를 분해한 뒤, 필요한 근거와 누락된 변수를 확인하여 대안 설명을 제시한다.`;
       return [`${topic}`,body,concepts,'',application,[]];
