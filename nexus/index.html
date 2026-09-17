@@ -36,7 +36,18 @@
 <img src="./assets/cards/publishing.svg" alt="YEHAVHA NEWS 오늘의 뉴스와 분야별 뉴스를 보여주는 프리뷰 이미지" width="960" height="540" loading="eager" decoding="async"/>
 <span class="project-thumbnail-caption"><span class="project-thumbnail-label">YEHAVHA NEWS</span><strong>오늘의 뉴스 · 분야별 뉴스 · 지난 뉴스</strong></span>
 </a>
-<section class="nexus-frontline" aria-labelledby="yehavhaNewsTitle">
+<section class="yehavha-special" aria-labelledby="yehavhaSpecialTitle">
+<a class="yehavha-special-banner" href="./special/interview-myunghun-lee.html" aria-label="YEHAVHA SPECIAL 첫 인물 인터뷰 보기">
+<img src="./assets/cards/strategy.webp" alt="YEHAVHA SPECIAL 기업 탐방과 인물 인터뷰를 위한 특별기획 이미지" width="960" height="540" loading="eager" decoding="async"/>
+<span class="yehavha-special-caption"><span class="yehavha-special-label" id="yehavhaSpecialTitle">YEHAVHA SPECIAL</span><strong>기업 탐방 · 인물 인터뷰 · 제품·서비스·문화</strong></span>
+</a>
+<a class="yehavha-special-lead" href="./special/interview-myunghun-lee.html">
+<span class="yehavha-special-kind">인물 인터뷰 · 01</span>
+<strong>스카이예슈아와 YEHAVHA NEXUS를 만든 이명훈, 정보에서 실행까지 연결하는 이유</strong>
+<span class="yehavha-special-action">인터뷰 보기 →</span>
+</a>
+</section>
+<section class="nexus-frontline yehavha-news-zone" aria-labelledby="yehavhaNewsTitle">
 <section class="frontline-panel">
 <div class="frontline-headingline">
 <h2 id="yehavhaNewsTitle">YEHAVHA NEWS</h2>
@@ -63,11 +74,11 @@
 <div class="today-bodyline"><p id="homeSocialSummary">최신 국내 사회동향을 불러옵니다.</p><span class="today-action">사회 브리핑 보기 →</span></div>
 </a>
 </div>
+</section>
 <section class="home-news-mirror" aria-labelledby="homeLatestNewsTitle">
 <div class="home-news-section-head"><h2 id="homeLatestNewsTitle">오늘의 뉴스</h2><span id="homeLatestNewsMeta">최신 기사</span></div>
 <div class="home-news-list" id="homeLatestNewsList" aria-live="polite"></div>
 <div class="home-news-moreline"><a href="./news/">YEHAVHA NEWS 전체 보기 →</a></div>
-</section>
 </section>
 </section>
 <section class="nexus-frontline" id="nexusEntry" aria-label="NEXUS 선택">
@@ -163,9 +174,9 @@ document.addEventListener('DOMContentLoaded', () => {
       && typeof video.thumbnail === 'string' && video.thumbnail;
 
     if (hasVideo) {
-      const card = make('article', 'home-news-media-card');
-      const visual = make('div', 'home-news-media-visual');
-      const thumbLink = make('a', 'home-news-media-thumb');
+      const card = make('article', 'opinion-feature news-media-feature');
+      const visual = make('div', 'news-media-visual');
+      const thumbLink = make('a', 'news-media-thumb-link');
       thumbLink.href = href;
       thumbLink.setAttribute('aria-label', `${item.title} 기사 보기`);
       const image = make('img');
@@ -176,36 +187,38 @@ document.addEventListener('DOMContentLoaded', () => {
       image.loading = 'lazy';
       image.decoding = 'async';
       thumbLink.append(image);
-      visual.append(thumbLink);
-      if (video.title && video.url) {
-        const videoLink = make('a', 'home-news-video-link', video.title);
-        videoLink.href = video.url;
-        videoLink.target = '_blank';
-        videoLink.rel = 'noopener noreferrer';
-        videoLink.setAttribute('aria-label', `${item.title} 관련 영상 새 창에서 보기`);
-        visual.append(videoLink);
-      }
 
-      const copy = make('div', 'home-news-media-copy');
-      const cardMeta = make('div', 'home-news-card-meta');
-      [item.category, formatDate(item.date), item.author || 'YEHAVHA NEWS'].forEach(value => cardMeta.append(make('span', '', value)));
-      const heading = make('h3', 'home-news-media-title');
+      const relatedLink = make('a', 'news-media-related', `${item.category} 관련 영상 ↗`);
+      relatedLink.href = video.url;
+      relatedLink.target = '_blank';
+      relatedLink.rel = 'noopener noreferrer';
+      relatedLink.setAttribute('aria-label', `${item.title} 관련 영상 새 창에서 보기`);
+      visual.append(thumbLink, relatedLink);
+
+      const copy = make('div', 'opinion-copy news-media-copy');
+      const cardMeta = make('div', 'news-card-meta news-media-meta');
+      [item.category, formatDate(item.date), item.author || 'YEHAVHA NEWS']
+        .forEach(value => cardMeta.append(make('span', '', value)));
+      const heading = make('h3', 'news-media-title');
       const titleLink = make('a', '', item.title);
       titleLink.href = href;
       heading.append(titleLink);
-      const summary = make('span', 'home-news-media-summary', item.summary);
-      const action = make('a', 'home-news-action', '기사 보기 →');
+      const summary = make('span', 'news-media-summary', item.summary);
+      const actions = make('b', 'news-media-actions');
+      const action = make('a', 'news-media-action', '기사 보기 →');
       action.href = href;
-      copy.append(cardMeta, heading, summary, action);
+      actions.append(action);
+      copy.append(cardMeta, heading, summary, actions);
       card.append(visual, copy);
       return card;
     }
 
-    const link = make('a', 'home-news-card');
+    const link = make('a', 'news-card');
     link.href = href;
-    const cardMeta = make('div', 'home-news-card-meta');
-    [item.category, formatDate(item.date), item.author || 'YEHAVHA NEWS'].forEach(value => cardMeta.append(make('span', '', value)));
-    link.append(cardMeta, make('h3', '', item.title), make('p', '', item.summary), make('span', 'home-news-action', '기사 보기 →'));
+    const cardMeta = make('div', 'news-card-meta');
+    [item.category, formatDate(item.date), item.author || 'YEHAVHA NEWS']
+      .forEach(value => cardMeta.append(make('span', '', value)));
+    link.append(cardMeta, make('h3', '', item.title), make('p', '', item.summary));
     return link;
   };
 
