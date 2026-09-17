@@ -73,7 +73,14 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "title": "임신중지 약물 제도권 도입 추진…초기 2년 의료기관 처방·조제",
     "summary": "정부가 임신중지 약물을 공식 의료체계 안으로 들이는 방안을 추진한다. 초기 2년은 의료기관 처방·조제를 중심으로 운영하고 안전성을 확인한 뒤 확대 여부를 검토하는 방향이다. 핵심은 약물의 도입 자체보다 허가·처방·상담·응급대응·사후관리의 연결이다.",
     "href": "./articles/2026-09-17-abortion-medication-policy.html",
-    "keywords": "임신중지 약물 의료기관 처방 조제 보건복지부 식약처"
+    "keywords": "임신중지 약물 의료기관 처방 조제 보건복지부 식약처",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=TQyAfxt2PK8",
+      "youtubeId": "TQyAfxt2PK8",
+      "title": "임신중지 약물 허가 논의와 안전기준 관련 보도 ↗",
+      "source": "YouTube · KBS News",
+      "thumbnail": "https://i.ytimg.com/vi/TQyAfxt2PK8/hqdefault.jpg"
+    }
   },
   {
     "id": "2026-09-17-north-korea-liaison-damages",
