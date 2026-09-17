@@ -90,14 +90,16 @@
   border-color: #aeb8c5;
 }
 .yehavha-special-kind {
-  color: #7a3541;
+  color: #225f96;
   font-size: 0;
   font-weight: 850;
+  letter-spacing: .1em;
   white-space: nowrap;
 }
 .yehavha-special-kind::after {
-  content: "예하바 스페셜 인물 인터뷰 · 01";
-  font-size: 10.8px;
+  content: "YEHAVHA SPECIAL · 인물 인터뷰 01";
+  font-size: 12px;
+  line-height: 1.4;
 }
 .yehavha-special-lead strong {
   min-width: 0;
@@ -449,7 +451,7 @@
     grid-column: 1 / -1;
   }
   .yehavha-special-kind::after {
-    font-size: 10.3px;
+    font-size: 12px;
   }
   .yehavha-special-lead strong {
     font-size: 14px;
