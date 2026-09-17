@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-05",
+  "updatedAt": "2026-09-17",
   "selectionPolicy": {
     "mode": "selected",
     "description": "NEXUS 연구·실무 관심영역과 직접 연결되는 국회·정부 입법만 선별 추적하며 동일 식별자의 기존 레코드를 갱신한다.",
@@ -16,6 +16,1742 @@
     ]
   },
   "records": [
+    {
+      "sourceType": "assembly",
+      "sourceId": "2217190",
+      "title": "고등교육법 일부개정법률안",
+      "proposer": "박성훈의원 등 15인",
+      "proposedAt": "2026-03-03",
+      "committee": "교육위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "교육·에듀테크"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_X2V6V0D1E3C0D1B7B1A2I3I1H8H4F5&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-03-03",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-03-04",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2217190"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2217214",
+      "title": "고등교육법 일부개정법률안",
+      "proposer": "이종욱의원 등 10인",
+      "proposedAt": "2026-03-04",
+      "committee": "교육위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "교육·에듀테크"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_L2M6T0U2S2T5R1S1Q3R9N1L4L6K9K7&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-03-04",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-03-05",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2217214"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2217321",
+      "title": "교육기본법 일부개정법률안",
+      "proposer": "이춘석의원 등 11인",
+      "proposedAt": "2026-03-09",
+      "committee": "교육위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "교육·에듀테크",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Z2Y6Y0W2X2V4W1S0S4Q9R5P3O5O4W4&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-03-09",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-03-10",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2217321"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2217844",
+      "title": "고등교육법 일부개정법률안",
+      "proposer": "김선교의원 등 10인",
+      "proposedAt": "2026-03-30",
+      "committee": "교육위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "교육·에듀테크"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_V2U6T0R3U2T6S1S0R4Z5Y1X3V2W5E7&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-03-30",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-03-31",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2217844"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2217856",
+      "title": "고등교육법 일부개정법률안",
+      "proposer": "정희용의원 등 11인",
+      "proposedAt": "2026-03-30",
+      "committee": "교육위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "교육·에듀테크"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_J2I6H0P3N2M6L1M0T3T2R2P3Q6M3I8&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-03-30",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-03-31",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2217856"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2218283",
+      "title": "고등교육법 일부개정법률안",
+      "proposer": "김준혁의원 등 14인",
+      "proposedAt": "2026-04-13",
+      "committee": "교육위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "교육·에듀테크"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Q2O6O0X3V1V3T1U5S3T3B5B9A2A7Z5&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-04-13",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-04-14",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2218283"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2218611",
+      "title": "고등교육법 일부개정법률안",
+      "proposer": "서지영의원 등 17인",
+      "proposedAt": "2026-04-24",
+      "committee": "교육위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "교육·에듀테크"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_F2M6N0M4M1K6L1J1R2S4Q5R2P2O7O4&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-04-24",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-04-27",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2218611"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2218635",
+      "title": "고등교육법 일부개정법률안",
+      "proposer": "김문수의원 등 13인",
+      "proposedAt": "2026-04-27",
+      "committee": "교육위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "교육·에듀테크"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_K2T6T0R4S2R2P1P5F5G6E4D4D0B0C8&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-04-27",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-04-28",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2218635"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2218923",
+      "title": "교육기본법 일부개정법률안",
+      "proposer": "윤영석의원 등 10인",
+      "proposedAt": "2026-05-12",
+      "committee": "교육위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "교육·에듀테크",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_M2K6L0J4K2I8J2R0P4Q1O4O0N8O2D3&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-05-12",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-05-13",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2218923"
+    },
+    {
+      "recordKey": "assembly:2218943",
+      "sourceType": "assembly",
+      "sourceId": "2218943",
+      "title": "교육기본법 일부개정법률안",
+      "proposer": "김영호의원 등 10인",
+      "proposedAt": "2026-05-13",
+      "committee": "교육위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "교육·에듀테크",
+        "주요 법제 변화"
+      ],
+      "summary": "국가와 지방자치단체가 독서교육 시책을 수립·실시하도록 근거를 신설하여 문해력·창의성·비판적 사고 함양을 지원하려는 개정안.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_N2N6L0M4L2L9J1K1G3E2F3D9E7C1C7&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-05-13",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-05-14",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 상정·심사"
+        }
+      ]
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2219043",
+      "title": "고등교육법 일부개정법률안",
+      "proposer": "강경숙의원 등 11인",
+      "proposedAt": "2026-05-21",
+      "committee": "교육위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "교육·에듀테크"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Y2Z6Y0W5W1E4F1D5E0C6A1B7J7K6I2&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-05-21",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-05-22",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2219043"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2219385",
+      "title": "평생교육법 일부개정법률안",
+      "proposer": "김용태의원 등 12인",
+      "proposedAt": "2026-06-19",
+      "committee": "교육위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "교육·에듀테크"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_O2P6N0M6M1K8L1H0H1G4E5F0D5E7M4&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-06-19",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-23",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2219385"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2219396",
+      "title": "고등교육법 일부개정법률안",
+      "proposer": "김문수의원 등 13인",
+      "proposedAt": "2026-06-22",
+      "committee": "교육위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "교육·에듀테크"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Q2Q6M0N4L1L0K2I0J0Q5S4Q0Q9O0N8&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-06-22",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-23",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2219396"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2220018",
+      "title": "고등교육법 일부개정법률안",
+      "proposer": "강경숙의원 등 11인",
+      "proposedAt": "2026-07-16",
+      "committee": "교육위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "교육·에듀테크"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_C2Z6Y0G6H2F6P0O9M3N6M3U1S1R1S3&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-07-16",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-23",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2220018"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2220135",
+      "title": "교육기본법 일부개정법률안",
+      "proposer": "김장겸의원 등 10인",
+      "proposedAt": "2026-07-24",
+      "committee": "교육위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "교육·에듀테크",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_J2H6I0G5G1P1N1N5L1M9L3L5T9T2S4&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-07-24",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-27",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2220135"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2220219",
+      "title": "고등교육법 일부개정법률안",
+      "proposer": "최혁진의원 등 11인",
+      "proposedAt": "2026-07-29",
+      "committee": "교육위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "교육·에듀테크"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_D2K6J0H5Q2P9M1X6U1T9C1B8Y8L6J4&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-07-29",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-30",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2220219"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2220290",
+      "title": "고등교육법 일부개정법률안",
+      "proposer": "최은석의원 등 10인",
+      "proposedAt": "2026-07-30",
+      "committee": "교육위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "교육·에듀테크"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_U2T6U0S7A0B7Z1Z4X4Y7X5X6T2R0S2&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-07-30",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-31",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2220290"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2220307",
+      "title": "고등교육법 일부개정법률안",
+      "proposer": "곽규택의원 등 15인",
+      "proposedAt": "2026-07-30",
+      "committee": "교육위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "교육·에듀테크"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Z2X5Y1W2X2V9V1D6E5C2D2B6Z7A3V3&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-07-30",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-31",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2220307"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2220450",
+      "title": "고등교육법 일부개정법률안",
+      "proposer": "김준혁의원 등 11인",
+      "proposedAt": "2026-08-05",
+      "committee": "교육위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "교육·에듀테크"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_L2K6L0J7H2I8Q1Q5P4N3O2M9N0V6V7&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-08-05",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-08-06",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2220450"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2220452",
+      "title": "고등교육법 일부개정법률안",
+      "proposer": "김대식의원 등 14인",
+      "proposedAt": "2026-08-05",
+      "committee": "교육위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "교육·에듀테크"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_F2N6N0L7M2L0J1J6F3G3E3E2D6B8C5&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-08-05",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-08-06",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2220452"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2221357",
+      "title": "법원조직법 일부개정법률안",
+      "proposer": "김의겸의원 등 10인",
+      "proposedAt": "2026-09-14",
+      "committee": "법제사법위원회",
+      "statusCode": "committee_decision",
+      "statusLabel": "위원회 의결",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "법조·사법제도",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 의결이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_X2X6T0T9S1Q1R1P7Q1Y6Y0W4V6W9U7&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-09-14",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-09-14",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 의결"
+        }
+      ],
+      "recordKey": "assembly:2221357"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2221388",
+      "title": "법원조직법 일부개정법률안",
+      "proposer": "김형연의원 등 12인",
+      "proposedAt": "2026-09-15",
+      "committee": "법제사법위원회",
+      "statusCode": "committee_referral",
+      "statusLabel": "위원회 회부",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "법조·사법제도",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_R2S6R0P9P1N0P1K8K1J6H2I9G8H6P1&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-09-15",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 회부"
+        }
+      ],
+      "recordKey": "assembly:2221388"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2221392",
+      "title": "고등교육법 일부개정법률안",
+      "proposer": "이달희의원 등 10인",
+      "proposedAt": "2026-09-16",
+      "committee": "",
+      "statusCode": "introduced",
+      "statusLabel": "발의·계류",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "교육·에듀테크"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 발의·계류이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Z2Z6Y0Z9G0H4F1E4E1C0D4Z2A3Y6W4&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-09-16",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "발의·계류"
+        }
+      ],
+      "recordKey": "assembly:2221392"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2221393",
+      "title": "법원조직법 일부개정법률안",
+      "proposer": "최은석의원 등 11인",
+      "proposedAt": "2026-09-16",
+      "committee": "",
+      "statusCode": "introduced",
+      "statusLabel": "발의·계류",
+      "statusDate": "2026-09-16",
+      "active": true,
+      "topics": [
+        "법조·사법제도",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 발의·계류이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Q2Q6O0N9N0V2W1U3V4T1U0S4A9B6Z7&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-09-16",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "발의·계류"
+        }
+      ],
+      "recordKey": "assembly:2221393"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2221361",
+      "title": "법원조직법 일부개정법률안",
+      "proposer": "박용갑의원 등 11인",
+      "proposedAt": "2026-09-14",
+      "committee": "법제사법위원회",
+      "statusCode": "committee_referral",
+      "statusLabel": "위원회 회부",
+      "statusDate": "2026-09-15",
+      "active": true,
+      "topics": [
+        "법조·사법제도",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_J2K6I0J9H0H1G0O9O1N6N3M5M8L0T3&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-09-14",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-09-15",
+          "stage": "위원회 회부"
+        }
+      ],
+      "recordKey": "assembly:2221361"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2221374",
+      "title": "개인정보 보호법 일부개정법률안",
+      "proposer": "박민규의원 등 15인",
+      "proposedAt": "2026-09-14",
+      "committee": "정무위원회",
+      "statusCode": "committee_referral",
+      "statusLabel": "위원회 회부",
+      "statusDate": "2026-09-15",
+      "active": true,
+      "topics": [
+        "데이터·개인정보",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_K2J6K0I9Q0Q8P1P6O5O3N0N5C7B6B6&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-09-14",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-09-15",
+          "stage": "위원회 회부"
+        }
+      ],
+      "recordKey": "assembly:2221374"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2216906",
+      "title": "디지털의료제품법 일부개정법률안",
+      "proposer": "백혜련의원 등 10인",
+      "proposedAt": "2026-02-20",
+      "committee": "보건복지위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-11",
+      "active": true,
+      "topics": [
+        "AI·로봇·디지털"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_W2V6V0T2U0P5Q1P1N2O1M5M5U2V6T9&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-02-20",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-02-23",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-11",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2216906"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2219646",
+      "title": "디지털 헬스케어 진흥 및 보건의료정보 활용 지원에 관한 법률안",
+      "proposer": "권칠승의원 등 10인",
+      "proposedAt": "2026-06-30",
+      "committee": "보건복지위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-11",
+      "active": true,
+      "topics": [
+        "AI·로봇·디지털"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_C2C6B0Z4A2P2P1O3M4M5L4M2T2U1T6&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-06-30",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-23",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-11",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2219646"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2221299",
+      "title": "법원조직법 일부개정법률안",
+      "proposer": "송영길의원 등 10인",
+      "proposedAt": "2026-09-10",
+      "committee": "법제사법위원회",
+      "statusCode": "committee_referral",
+      "statusLabel": "위원회 회부",
+      "statusDate": "2026-09-11",
+      "active": true,
+      "topics": [
+        "법조·사법제도",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Z2B6Z0Z8Y2W8W1T6T4R3Q5Q2P8Q9X7&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-09-10",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-09-11",
+          "stage": "위원회 회부"
+        }
+      ],
+      "recordKey": "assembly:2221299"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2214426",
+      "title": "변호사법 일부개정법률안",
+      "proposer": "전현희의원 등 11인",
+      "proposedAt": "2025-11-20",
+      "committee": "법제사법위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-09",
+      "active": true,
+      "topics": [
+        "법조·사법제도"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Q2R5Q1Q1P0N5N1V8W4U7V0T1U8S2O5&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2025-11-20",
+          "stage": "발의"
+        },
+        {
+          "date": "2025-11-21",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-09",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2214426"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2214579",
+      "title": "법원조직법 일부개정법률안",
+      "proposer": "박상혁의원 등 10인",
+      "proposedAt": "2025-11-26",
+      "committee": "법제사법위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-09",
+      "active": true,
+      "topics": [
+        "법조·사법제도",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_E2A5A1Y1Z2Y6Y1W0X2F3F0E3C5C9B8&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2025-11-26",
+          "stage": "발의"
+        },
+        {
+          "date": "2025-11-27",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-09",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2214579"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2218569",
+      "title": "법원조직법 일부개정법률안",
+      "proposer": "이성윤의원 등 15인",
+      "proposedAt": "2026-04-23",
+      "committee": "법제사법위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-09",
+      "active": true,
+      "topics": [
+        "법조·사법제도",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_X2V6W0V4V2D0B0C9A3B6Z2A7I6G1H1&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-04-23",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-04-24",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-09",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2218569"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2219226",
+      "title": "지방재정법 일부개정법률안",
+      "proposer": "윤건영의원 등 10인",
+      "proposedAt": "2026-06-12",
+      "committee": "행정안전위원회",
+      "statusCode": "promulgated",
+      "statusLabel": "공포·원안가결",
+      "statusDate": "2026-09-09",
+      "active": false,
+      "topics": [
+        "행정·지방자치"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 의결이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_K2L6J0H4I2H7H1D1B1C0A0B3Z5H5I8&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-06-12",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-01",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-08-24",
+          "stage": "위원회 상정·심사"
+        },
+        {
+          "date": "2026-09-01",
+          "stage": "위원회 의결"
+        },
+        {
+          "date": "2026-09-09",
+          "stage": "공포"
+        },
+        {
+          "date": "2026-09-09",
+          "stage": "공포·원안가결"
+        },
+        {
+          "date": "2026-09-09",
+          "stage": "본회의 상정"
+        }
+      ],
+      "recordKey": "assembly:2219226"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2221183",
+      "title": "고등교육법 일부개정법률안",
+      "proposer": "고민정의원 등 10인",
+      "proposedAt": "2026-09-08",
+      "committee": "교육위원회",
+      "statusCode": "committee_referral",
+      "statusLabel": "위원회 회부",
+      "statusDate": "2026-09-09",
+      "active": true,
+      "topics": [
+        "교육·에듀테크"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_P2N6M0M8U1V8T1U4S2T3R2Z6A8Y4Z9&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-09-08",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-09-09",
+          "stage": "위원회 회부"
+        }
+      ],
+      "recordKey": "assembly:2221183"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2221188",
+      "title": "교육기본법 일부개정법률안",
+      "proposer": "강경숙의원 등 12인",
+      "proposedAt": "2026-09-08",
+      "committee": "교육위원회",
+      "statusCode": "committee_referral",
+      "statusLabel": "위원회 회부",
+      "statusDate": "2026-09-09",
+      "active": true,
+      "topics": [
+        "교육·에듀테크",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Q2Q6Y0W9X0V3W1U5V1D1D0C1A2B4Z4&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-09-08",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-09-09",
+          "stage": "위원회 회부"
+        }
+      ],
+      "recordKey": "assembly:2221188"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2217974",
+      "title": "데이터 산업진흥 및 이용촉진에 관한 기본법 일부개정법률안",
+      "proposer": "김현의원 등 14인",
+      "proposedAt": "2026-03-31",
+      "committee": "과학기술정보방송통신위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-08",
+      "active": true,
+      "topics": [
+        "데이터·개인정보",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_A2J6K0J3H2F7B1A2B3A5Y0G3F3G5F3&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-03-31",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-04-01",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-08",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2217974"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2218002",
+      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
+      "proposer": "김현의원 등 14인",
+      "proposedAt": "2026-03-31",
+      "committee": "과학기술정보방송통신위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-08",
+      "active": true,
+      "topics": [
+        "AI·로봇·디지털",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_G2F6N0L3M2L7K1S2Q3R4P3O8W8V9W8&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-03-31",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-04-01",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-08",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2218002"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2218145",
+      "title": "자동차손해배상 보장법 일부개정법률안",
+      "proposer": "박성훈의원 등 10인",
+      "proposedAt": "2026-04-07",
+      "committee": "국토교통위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-08",
+      "active": true,
+      "topics": [
+        "민사책임·손해배상"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_M2L6I0Q3P1P7V1Y5X4T5C3B9A4Z7T1&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-04-07",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-04-08",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-08",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2218145"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2218268",
+      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
+      "proposer": "정춘생의원 등 10인",
+      "proposedAt": "2026-04-13",
+      "committee": "과학기술정보방송통신위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-08",
+      "active": true,
+      "topics": [
+        "AI·로봇·디지털",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_K2I6J0I3G1H0O1P7N0N0M3N3L7L7H2&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-04-13",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-04-14",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-08",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2218268"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2218919",
+      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
+      "proposer": "김대식의원 등 10인",
+      "proposedAt": "2026-05-11",
+      "committee": "과학기술정보방송통신위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-08",
+      "active": true,
+      "topics": [
+        "AI·로봇·디지털",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_E2E6D0B4B0X6Y1W7X1V8U5U7C0C3B9&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-05-11",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-05-12",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-08",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2218919"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2218933",
+      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
+      "proposer": "조인철의원 등 10인",
+      "proposedAt": "2026-05-12",
+      "committee": "과학기술정보방송통신위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-08",
+      "active": true,
+      "topics": [
+        "AI·로봇·디지털",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_D2D6C0D5K1L1K1I7I4H4H1P6Q3O9M7&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-05-12",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-05-13",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-08",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2218933"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2219104",
+      "title": "피지컬 인공지능 개발 촉진 및 지원에 관한 특별법안",
+      "proposer": "황정아의원 등 10인",
+      "proposedAt": "2026-06-05",
+      "committee": "과학기술정보방송통신위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-08",
+      "active": true,
+      "topics": [
+        "AI·로봇·디지털"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_A2B6A0Y5Y1W4X1F1E1E2C0D3C1K6K7&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-06-05",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-08",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-08",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2219104"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2219406",
+      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
+      "proposer": "조인철의원 등 19인",
+      "proposedAt": "2026-06-22",
+      "committee": "과학기술정보방송통신위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-08",
+      "active": true,
+      "topics": [
+        "AI·로봇·디지털",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_H2I6G0F6F1E8E1M1N5L4K4K6I9J3Q6&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-06-22",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-01",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-08",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2219406"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2219436",
+      "title": "자동차손해배상 보장법 일부개정법률안",
+      "proposer": "남인순의원ㆍ김선민의원 등 11인",
+      "proposedAt": "2026-06-23",
+      "committee": "국토교통위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-08",
+      "active": true,
+      "topics": [
+        "민사책임·손해배상"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_J2I6I0G5H0G6G1O3M5N6M0M5K6S7T8&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-06-23",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-23",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-08",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2219436"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2219516",
+      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
+      "proposer": "김현의원 등 12인",
+      "proposedAt": "2026-06-25",
+      "committee": "과학기술정보방송통신위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-08",
+      "active": true,
+      "topics": [
+        "AI·로봇·디지털",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_G2O6M0N6M2L2S1R7S5R9P4L4M0L8J9&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-06-25",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-01",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-08",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2219516"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2219563",
+      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
+      "proposer": "이훈기의원 등 10인",
+      "proposedAt": "2026-06-26",
+      "committee": "과학기술정보방송통신위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-08",
+      "active": true,
+      "topics": [
+        "AI·로봇·디지털",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_K2J6J0H6G1G7O1P5N4O2M1L5L7T8T4&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-06-26",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-01",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-08",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2219563"
+    },
+    {
+      "recordKey": "assembly:2219835",
+      "sourceType": "assembly",
+      "sourceId": "2219835",
+      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
+      "proposer": "김우영의원 등 17인",
+      "proposedAt": "2026-07-08",
+      "committee": "과학기술정보방송통신위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-08",
+      "active": true,
+      "topics": [
+        "AI·로봇·디지털",
+        "주요 법제 변화"
+      ],
+      "summary": "AI 생성물 표시의무에서 예술·창의적 표현물과 단순 보조도구 사용에 대한 예외·완화 기준을 명확하게 하려는 개정안.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_S2Q6Q0O7P0X7Y1W5W0V6T2U2C8C3B9&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-07-08",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-09",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-08",
+          "stage": "위원회 상정·심사"
+        }
+      ]
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2220009",
+      "title": "자동차손해배상 보장법 일부개정법률안",
+      "proposer": "박상혁의원 등 11인",
+      "proposedAt": "2026-07-16",
+      "committee": "국토교통위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-08",
+      "active": true,
+      "topics": [
+        "민사책임·손해배상"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_F2F6D0E7M0K7L1J6K2I2J4Q9R6Q6O6&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-07-16",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-23",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-08",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2220009"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2220043",
+      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
+      "proposer": "전종덕의원 등 11인",
+      "proposedAt": "2026-07-20",
+      "committee": "과학기술정보방송통신위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-08",
+      "active": true,
+      "topics": [
+        "AI·로봇·디지털",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_J2K6S0S7R1S5Q0Q9P2X4X4V5W8V6V9&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-07-20",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-21",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-08",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2220043"
+    },
+    {
+      "recordKey": "assembly:2220058",
+      "sourceType": "assembly",
+      "sourceId": "2220058",
+      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
+      "proposer": "전종덕의원 등 11인",
+      "proposedAt": "2026-07-21",
+      "committee": "과학기술정보방송통신위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-08",
+      "active": true,
+      "topics": [
+        "AI·로봇·디지털",
+        "주요 법제 변화"
+      ],
+      "summary": "채용 이후 직무배치·업무할당·성과평가·인사관리 등에 중대한 영향을 미치는 인공지능을 고영향 인공지능 범위에 포함하려는 개정안.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Z2A6Y0Z7X1Y5W0E9E2D0E3C2C3B5J1&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-07-21",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-22",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-08",
+          "stage": "위원회 상정·심사"
+        }
+      ]
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2220070",
+      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
+      "proposer": "채현일의원 등 12인",
+      "proposedAt": "2026-07-21",
+      "committee": "과학기술정보방송통신위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-08",
+      "active": true,
+      "topics": [
+        "AI·로봇·디지털",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Y2V6U0D5B2Y2C1B3Z3V5U2R1A6X4W6&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-07-21",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-22",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-08",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2220070"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2220174",
+      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
+      "proposer": "안철수의원 등 11인",
+      "proposedAt": "2026-07-27",
+      "committee": "과학기술정보방송통신위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-08",
+      "active": true,
+      "topics": [
+        "AI·로봇·디지털",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_M2M6U0V7T0U8S1T2R3Z4A0Y6Z9X5X3&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-07-27",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-28",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-08",
+          "stage": "위원회 상정·심사"
+        }
+      ],
+      "recordKey": "assembly:2220174"
+    },
+    {
+      "recordKey": "assembly:2220395",
+      "sourceType": "assembly",
+      "sourceId": "2220395",
+      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
+      "proposer": "김성원의원 등 10인",
+      "proposedAt": "2026-08-03",
+      "committee": "과학기술정보방송통신위원회",
+      "statusCode": "committee_review",
+      "statusLabel": "위원회 상정·심사",
+      "statusDate": "2026-09-08",
+      "active": true,
+      "topics": [
+        "AI·로봇·디지털",
+        "주요 법제 변화"
+      ],
+      "summary": "국가안보·공공안전에 중대한 위험을 초래할 우려가 있는 고위험 인공지능 모델의 지정·관리와 범국가적 사이버위협 대응체계 구축 근거를 신설하려는 개정안.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_N2O6M0N7V2V7U1S0T2R6S1N9O5M6L0&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-08-03",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-08-04",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-08",
+          "stage": "위원회 상정·심사"
+        }
+      ]
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2221128",
+      "title": "개인정보 보호법 일부개정법률안",
+      "proposer": "박형수의원 등 10인",
+      "proposedAt": "2026-09-07",
+      "committee": "정무위원회",
+      "statusCode": "committee_referral",
+      "statusLabel": "위원회 회부",
+      "statusDate": "2026-09-08",
+      "active": true,
+      "topics": [
+        "데이터·개인정보",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Z2X6Y0W7X0V9D1E8C4C7B2B1A1I4I4&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-09-07",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-09-08",
+          "stage": "위원회 회부"
+        }
+      ],
+      "recordKey": "assembly:2221128"
+    },
     {
       "sourceType": "assembly",
       "sourceId": "2221044",
@@ -371,42 +2107,6 @@
         }
       ],
       "recordKey": "assembly:2219092"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2219226",
-      "title": "지방재정법 일부개정법률안",
-      "proposer": "윤건영의원 등 10인",
-      "proposedAt": "2026-06-12",
-      "committee": "행정안전위원회",
-      "statusCode": "committee_decision",
-      "statusLabel": "위원회 의결",
-      "statusDate": "2026-09-01",
-      "active": true,
-      "topics": [
-        "행정·지방자치"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 의결이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_K2L6J0H4I2H7H1D1B1C0A0B3Z5H5I8&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-06-12",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-07-01",
-          "stage": "위원회 회부"
-        },
-        {
-          "date": "2026-08-24",
-          "stage": "위원회 상정·심사"
-        },
-        {
-          "date": "2026-09-01",
-          "stage": "위원회 의결"
-        }
-      ],
-      "recordKey": "assembly:2219226"
     },
     {
       "sourceType": "assembly",
@@ -1917,62 +3617,6 @@
     },
     {
       "sourceType": "assembly",
-      "sourceId": "2220450",
-      "title": "고등교육법 일부개정법률안",
-      "proposer": "김준혁의원 등 11인",
-      "proposedAt": "2026-08-05",
-      "committee": "교육위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-08-06",
-      "active": true,
-      "topics": [
-        "교육·에듀테크"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_L2K6L0J7H2I8Q1Q5P4N3O2M9N0V6V7&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-08-05",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-08-06",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2220450"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2220452",
-      "title": "고등교육법 일부개정법률안",
-      "proposer": "김대식의원 등 14인",
-      "proposedAt": "2026-08-05",
-      "committee": "교육위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-08-06",
-      "active": true,
-      "topics": [
-        "교육·에듀테크"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_F2N6N0L7M2L0J1J6F3G3E3E2D6B8C5&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-08-05",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-08-06",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2220452"
-    },
-    {
-      "sourceType": "assembly",
       "sourceId": "2220410",
       "title": "지방재정법 일부개정법률안",
       "proposer": "조은희의원 등 10인",
@@ -1998,63 +3642,6 @@
         }
       ],
       "recordKey": "assembly:2220410"
-    },
-    {
-      "recordKey": "assembly:2220395",
-      "sourceType": "assembly",
-      "sourceId": "2220395",
-      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
-      "proposer": "김성원의원 등 10인",
-      "proposedAt": "2026-08-03",
-      "committee": "과학기술정보방송통신위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-08-04",
-      "active": true,
-      "topics": [
-        "AI·로봇·디지털",
-        "주요 법제 변화"
-      ],
-      "summary": "국가안보·공공안전에 중대한 위험을 초래할 우려가 있는 고위험 인공지능 모델의 지정·관리와 범국가적 사이버위협 대응체계 구축 근거를 신설하려는 개정안.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_N2O6M0N7V2V7U1S0T2R6S1N9O5M6L0&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-08-03",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-08-04",
-          "stage": "위원회 회부"
-        }
-      ]
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2220290",
-      "title": "고등교육법 일부개정법률안",
-      "proposer": "최은석의원 등 10인",
-      "proposedAt": "2026-07-30",
-      "committee": "교육위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-07-31",
-      "active": true,
-      "topics": [
-        "교육·에듀테크"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_U2T6U0S7A0B7Z1Z4X4Y7X5X6T2R0S2&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-07-30",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-07-31",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2220290"
     },
     {
       "sourceType": "assembly",
@@ -2083,62 +3670,6 @@
         }
       ],
       "recordKey": "assembly:2220296"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2220307",
-      "title": "고등교육법 일부개정법률안",
-      "proposer": "곽규택의원 등 15인",
-      "proposedAt": "2026-07-30",
-      "committee": "교육위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-07-31",
-      "active": true,
-      "topics": [
-        "교육·에듀테크"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Z2X5Y1W2X2V9V1D6E5C2D2B6Z7A3V3&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-07-30",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-07-31",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2220307"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2220219",
-      "title": "고등교육법 일부개정법률안",
-      "proposer": "최혁진의원 등 11인",
-      "proposedAt": "2026-07-29",
-      "committee": "교육위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-07-30",
-      "active": true,
-      "topics": [
-        "교육·에듀테크"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_D2K6J0H5Q2P9M1X6U1T9C1B8Y8L6J4&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-07-29",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-07-30",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2220219"
     },
     {
       "sourceType": "assembly",
@@ -2200,35 +3731,6 @@
         }
       ],
       "recordKey": "assembly:2220203"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2220174",
-      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
-      "proposer": "안철수의원 등 11인",
-      "proposedAt": "2026-07-27",
-      "committee": "과학기술정보방송통신위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-07-28",
-      "active": true,
-      "topics": [
-        "AI·로봇·디지털",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_M2M6U0V7T0U8S1T2R3Z4A0Y6Z9X5X3&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-07-27",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-07-28",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2220174"
     },
     {
       "sourceType": "assembly",
@@ -2326,35 +3828,6 @@
     },
     {
       "sourceType": "assembly",
-      "sourceId": "2220135",
-      "title": "교육기본법 일부개정법률안",
-      "proposer": "김장겸의원 등 10인",
-      "proposedAt": "2026-07-24",
-      "committee": "교육위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-07-27",
-      "active": true,
-      "topics": [
-        "교육·에듀테크",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_J2H6I0G5G1P1N1N5L1M9L3L5T9T2S4&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-07-24",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-07-27",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2220135"
-    },
-    {
-      "sourceType": "assembly",
       "sourceId": "2220137",
       "title": "개인정보 보호법 일부개정법률안",
       "proposer": "강명구의원 등 10인",
@@ -2409,232 +3882,6 @@
         }
       ],
       "recordKey": "assembly:2219171"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2219385",
-      "title": "평생교육법 일부개정법률안",
-      "proposer": "김용태의원 등 12인",
-      "proposedAt": "2026-06-19",
-      "committee": "교육위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-07-23",
-      "active": true,
-      "topics": [
-        "교육·에듀테크"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_O2P6N0M6M1K8L1H0H1G4E5F0D5E7M4&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-06-19",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-07-23",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2219385"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2219396",
-      "title": "고등교육법 일부개정법률안",
-      "proposer": "김문수의원 등 13인",
-      "proposedAt": "2026-06-22",
-      "committee": "교육위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-07-23",
-      "active": true,
-      "topics": [
-        "교육·에듀테크"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Q2Q6M0N4L1L0K2I0J0Q5S4Q0Q9O0N8&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-06-22",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-07-23",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2219396"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2219436",
-      "title": "자동차손해배상 보장법 일부개정법률안",
-      "proposer": "남인순의원ㆍ김선민의원 등 11인",
-      "proposedAt": "2026-06-23",
-      "committee": "국토교통위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-07-23",
-      "active": true,
-      "topics": [
-        "민사책임·손해배상"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_J2I6I0G5H0G6G1O3M5N6M0M5K6S7T8&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-06-23",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-07-23",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2219436"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2219646",
-      "title": "디지털 헬스케어 진흥 및 보건의료정보 활용 지원에 관한 법률안",
-      "proposer": "권칠승의원 등 10인",
-      "proposedAt": "2026-06-30",
-      "committee": "보건복지위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-07-23",
-      "active": true,
-      "topics": [
-        "AI·로봇·디지털"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_C2C6B0Z4A2P2P1O3M4M5L4M2T2U1T6&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-06-30",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-07-23",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2219646"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2220009",
-      "title": "자동차손해배상 보장법 일부개정법률안",
-      "proposer": "박상혁의원 등 11인",
-      "proposedAt": "2026-07-16",
-      "committee": "국토교통위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-07-23",
-      "active": true,
-      "topics": [
-        "민사책임·손해배상"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_F2F6D0E7M0K7L1J6K2I2J4Q9R6Q6O6&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-07-16",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-07-23",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2220009"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2220018",
-      "title": "고등교육법 일부개정법률안",
-      "proposer": "강경숙의원 등 11인",
-      "proposedAt": "2026-07-16",
-      "committee": "교육위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-07-23",
-      "active": true,
-      "topics": [
-        "교육·에듀테크"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_C2Z6Y0G6H2F6P0O9M3N6M3U1S1R1S3&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-07-16",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-07-23",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2220018"
-    },
-    {
-      "recordKey": "assembly:2220058",
-      "sourceType": "assembly",
-      "sourceId": "2220058",
-      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
-      "proposer": "전종덕의원 등 11인",
-      "proposedAt": "2026-07-21",
-      "committee": "과학기술정보방송통신위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-07-22",
-      "active": true,
-      "topics": [
-        "AI·로봇·디지털",
-        "주요 법제 변화"
-      ],
-      "summary": "채용 이후 직무배치·업무할당·성과평가·인사관리 등에 중대한 영향을 미치는 인공지능을 고영향 인공지능 범위에 포함하려는 개정안.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Z2A6Y0Z7X1Y5W0E9E2D0E3C2C3B5J1&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-07-21",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-07-22",
-          "stage": "위원회 회부"
-        }
-      ]
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2220070",
-      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
-      "proposer": "채현일의원 등 12인",
-      "proposedAt": "2026-07-21",
-      "committee": "과학기술정보방송통신위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-07-22",
-      "active": true,
-      "topics": [
-        "AI·로봇·디지털",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Y2V6U0D5B2Y2C1B3Z3V5U2R1A6X4W6&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-07-21",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-07-22",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2220070"
     },
     {
       "sourceType": "assembly",
@@ -2693,35 +3940,6 @@
         }
       ],
       "recordKey": "assembly:2220084"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2220043",
-      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
-      "proposer": "전종덕의원 등 11인",
-      "proposedAt": "2026-07-20",
-      "committee": "과학기술정보방송통신위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-07-21",
-      "active": true,
-      "topics": [
-        "AI·로봇·디지털",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_J2K6S0S7R1S5Q0Q9P2X4X4V5W8V6V9&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-07-20",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-07-21",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2220043"
     },
     {
       "sourceType": "assembly",
@@ -2886,35 +4104,6 @@
       ],
       "summary": "개인정보 관련 중대한 고의 위반행위의 징벌적 손해배상 기준을 강화하고 감액 사유의 입증구조를 조정하려는 개정안.",
       "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_W2X6V0T7U0S1T1B3B2A7A1Z3X6X1G4&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-07-08",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-07-09",
-          "stage": "위원회 회부"
-        }
-      ]
-    },
-    {
-      "recordKey": "assembly:2219835",
-      "sourceType": "assembly",
-      "sourceId": "2219835",
-      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
-      "proposer": "김우영의원 등 17인",
-      "proposedAt": "2026-07-08",
-      "committee": "과학기술정보방송통신위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-07-09",
-      "active": true,
-      "topics": [
-        "AI·로봇·디지털",
-        "주요 법제 변화"
-      ],
-      "summary": "AI 생성물 표시의무에서 예술·창의적 표현물과 단순 보조도구 사용에 대한 예외·완화 기준을 명확하게 하려는 개정안.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_S2Q6Q0O7P0X7Y1W5W0V6T2U2C8C3B9&ageFrom=22&ageTo=22",
       "history": [
         {
           "date": "2026-07-08",
@@ -3093,34 +4282,6 @@
     },
     {
       "sourceType": "assembly",
-      "sourceId": "2219104",
-      "title": "피지컬 인공지능 개발 촉진 및 지원에 관한 특별법안",
-      "proposer": "황정아의원 등 10인",
-      "proposedAt": "2026-06-05",
-      "committee": "과학기술정보방송통신위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-07-08",
-      "active": true,
-      "topics": [
-        "AI·로봇·디지털"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_A2B6A0Y5Y1W4X1F1E1E2C0D3C1K6K7&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-06-05",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-07-08",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2219104"
-    },
-    {
-      "sourceType": "assembly",
       "sourceId": "2219670",
       "title": "전자상거래 등에서의 소비자보호에 관한 법률 일부개정법률안",
       "proposer": "이양수의원 등 10인",
@@ -3235,64 +4396,6 @@
     },
     {
       "sourceType": "assembly",
-      "sourceId": "2219406",
-      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
-      "proposer": "조인철의원 등 19인",
-      "proposedAt": "2026-06-22",
-      "committee": "과학기술정보방송통신위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-07-01",
-      "active": true,
-      "topics": [
-        "AI·로봇·디지털",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_H2I6G0F6F1E8E1M1N5L4K4K6I9J3Q6&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-06-22",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-07-01",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2219406"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2219516",
-      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
-      "proposer": "김현의원 등 12인",
-      "proposedAt": "2026-06-25",
-      "committee": "과학기술정보방송통신위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-07-01",
-      "active": true,
-      "topics": [
-        "AI·로봇·디지털",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_G2O6M0N6M2L2S1R7S5R9P4L4M0L8J9&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-06-25",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-07-01",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2219516"
-    },
-    {
-      "sourceType": "assembly",
       "sourceId": "2219553",
       "title": "전자상거래 등에서의 소비자보호에 관한 법률 일부개정법률안",
       "proposer": "이강일의원 등 15인",
@@ -3318,63 +4421,6 @@
         }
       ],
       "recordKey": "assembly:2219553"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2219563",
-      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
-      "proposer": "이훈기의원 등 10인",
-      "proposedAt": "2026-06-26",
-      "committee": "과학기술정보방송통신위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-07-01",
-      "active": true,
-      "topics": [
-        "AI·로봇·디지털",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_K2J6J0H6G1G7O1P5N4O2M1L5L7T8T4&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-06-26",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-07-01",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2219563"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2219043",
-      "title": "고등교육법 일부개정법률안",
-      "proposer": "강경숙의원 등 11인",
-      "proposedAt": "2026-05-21",
-      "committee": "교육위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-05-22",
-      "active": true,
-      "topics": [
-        "교육·에듀테크"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Y2Z6Y0W5W1E4F1D5E0C6A1B7J7K6I2&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-05-21",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-05-22",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2219043"
     },
     {
       "sourceType": "assembly",
@@ -3439,122 +4485,6 @@
         }
       ],
       "recordKey": "assembly:2216670"
-    },
-    {
-      "recordKey": "assembly:2218943",
-      "sourceType": "assembly",
-      "sourceId": "2218943",
-      "title": "교육기본법 일부개정법률안",
-      "proposer": "김영호의원 등 10인",
-      "proposedAt": "2026-05-13",
-      "committee": "교육위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-05-14",
-      "active": true,
-      "topics": [
-        "교육·에듀테크",
-        "주요 법제 변화"
-      ],
-      "summary": "국가와 지방자치단체가 독서교육 시책을 수립·실시하도록 근거를 신설하여 문해력·창의성·비판적 사고 함양을 지원하려는 개정안.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_N2N6L0M4L2L9J1K1G3E2F3D9E7C1C7&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-05-13",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-05-14",
-          "stage": "위원회 회부"
-        }
-      ]
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2218923",
-      "title": "교육기본법 일부개정법률안",
-      "proposer": "윤영석의원 등 10인",
-      "proposedAt": "2026-05-12",
-      "committee": "교육위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-05-13",
-      "active": true,
-      "topics": [
-        "교육·에듀테크",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_M2K6L0J4K2I8J2R0P4Q1O4O0N8O2D3&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-05-12",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-05-13",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2218923"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2218933",
-      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
-      "proposer": "조인철의원 등 10인",
-      "proposedAt": "2026-05-12",
-      "committee": "과학기술정보방송통신위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-05-13",
-      "active": true,
-      "topics": [
-        "AI·로봇·디지털",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_D2D6C0D5K1L1K1I7I4H4H1P6Q3O9M7&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-05-12",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-05-13",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2218933"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2218919",
-      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
-      "proposer": "김대식의원 등 10인",
-      "proposedAt": "2026-05-11",
-      "committee": "과학기술정보방송통신위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-05-12",
-      "active": true,
-      "topics": [
-        "AI·로봇·디지털",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_E2E6D0B4B0X6Y1W7X1V8U5U7C0C3B9&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-05-11",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-05-12",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2218919"
     },
     {
       "sourceType": "assembly",
@@ -4351,91 +5281,6 @@
     },
     {
       "sourceType": "assembly",
-      "sourceId": "2218635",
-      "title": "고등교육법 일부개정법률안",
-      "proposer": "김문수의원 등 13인",
-      "proposedAt": "2026-04-27",
-      "committee": "교육위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-04-28",
-      "active": true,
-      "topics": [
-        "교육·에듀테크"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_K2T6T0R4S2R2P1P5F5G6E4D4D0B0C8&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-04-27",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-04-28",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2218635"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2218611",
-      "title": "고등교육법 일부개정법률안",
-      "proposer": "서지영의원 등 17인",
-      "proposedAt": "2026-04-24",
-      "committee": "교육위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-04-27",
-      "active": true,
-      "topics": [
-        "교육·에듀테크"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_F2M6N0M4M1K6L1J1R2S4Q5R2P2O7O4&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-04-24",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-04-27",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2218611"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2218569",
-      "title": "법원조직법 일부개정법률안",
-      "proposer": "이성윤의원 등 15인",
-      "proposedAt": "2026-04-23",
-      "committee": "법제사법위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-04-24",
-      "active": true,
-      "topics": [
-        "법조·사법제도",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_X2V6W0V4V2D0B0C9A3B6Z2A7I6G1H1&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-04-23",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-04-24",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2218569"
-    },
-    {
-      "sourceType": "assembly",
       "sourceId": "2204720",
       "title": "평생교육법 일부개정법률안",
       "proposer": "김대식의원 등 14인",
@@ -4803,63 +5648,6 @@
     },
     {
       "sourceType": "assembly",
-      "sourceId": "2218268",
-      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
-      "proposer": "정춘생의원 등 10인",
-      "proposedAt": "2026-04-13",
-      "committee": "과학기술정보방송통신위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-04-14",
-      "active": true,
-      "topics": [
-        "AI·로봇·디지털",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_K2I6J0I3G1H0O1P7N0N0M3N3L7L7H2&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-04-13",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-04-14",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2218268"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2218283",
-      "title": "고등교육법 일부개정법률안",
-      "proposer": "김준혁의원 등 14인",
-      "proposedAt": "2026-04-13",
-      "committee": "교육위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-04-14",
-      "active": true,
-      "topics": [
-        "교육·에듀테크"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Q2O6O0X3V1V3T1U5S3T3B5B9A2A7Z5&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-04-13",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-04-14",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2218283"
-    },
-    {
-      "sourceType": "assembly",
       "sourceId": "2218290",
       "title": "지방자치법 일부개정법률안",
       "proposer": "김석기의원 등 10인",
@@ -4947,34 +5735,6 @@
         }
       ],
       "recordKey": "assembly:2210328"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2218145",
-      "title": "자동차손해배상 보장법 일부개정법률안",
-      "proposer": "박성훈의원 등 10인",
-      "proposedAt": "2026-04-07",
-      "committee": "국토교통위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-04-08",
-      "active": true,
-      "topics": [
-        "민사책임·손해배상"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_M2L6I0Q3P1P7V1Y5X4T5C3B9A4Z7T1&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-04-07",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-04-08",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2218145"
     },
     {
       "sourceType": "assembly",
@@ -5289,35 +6049,6 @@
     },
     {
       "sourceType": "assembly",
-      "sourceId": "2217974",
-      "title": "데이터 산업진흥 및 이용촉진에 관한 기본법 일부개정법률안",
-      "proposer": "김현의원 등 14인",
-      "proposedAt": "2026-03-31",
-      "committee": "과학기술정보방송통신위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-04-01",
-      "active": true,
-      "topics": [
-        "데이터·개인정보",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_A2J6K0J3H2F7B1A2B3A5Y0G3F3G5F3&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-03-31",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-04-01",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2217974"
-    },
-    {
-      "sourceType": "assembly",
       "sourceId": "2217998",
       "title": "전자상거래 등에서의 소비자보호에 관한 법률 일부개정법률안",
       "proposer": "이주희의원 등 13인",
@@ -5343,35 +6074,6 @@
         }
       ],
       "recordKey": "assembly:2217998"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2218002",
-      "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
-      "proposer": "김현의원 등 14인",
-      "proposedAt": "2026-03-31",
-      "committee": "과학기술정보방송통신위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-04-01",
-      "active": true,
-      "topics": [
-        "AI·로봇·디지털",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_G2F6N0L3M2L7K1S2Q3R4P3O8W8V9W8&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-03-31",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-04-01",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2218002"
     },
     {
       "sourceType": "assembly",
@@ -5691,10 +6393,10 @@
     {
       "sourceType": "assembly",
       "sourceId": "2213410",
-      "title": "개인정보 보호법 일부개정법률안",
+      "title": "국민연금법 일부개정법률안",
       "proposer": "박민규의원 등 10인",
-      "proposedAt": "2025-10-01",
-      "committee": "정무위원회",
+      "proposedAt": "2024-06-05",
+      "committee": "보건복지위원회",
       "statusCode": "committee_review",
       "statusLabel": "위원회 상정·심사",
       "statusDate": "2026-03-31",
@@ -5704,8 +6406,12 @@
         "주요 법제 변화"
       ],
       "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 상정·심사이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_K2I5J0H9I2G2H1O5N0O3M4N4L7L6T9&ageFrom=22&ageTo=22",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_O2N4L0T5S3T0R2Z0A5Y3X2T1S3Q3R7",
       "history": [
+        {
+          "date": "2024-06-05",
+          "stage": "발의"
+        },
         {
           "date": "2025-10-01",
           "stage": "발의"
@@ -6564,62 +7270,6 @@
     },
     {
       "sourceType": "assembly",
-      "sourceId": "2217844",
-      "title": "고등교육법 일부개정법률안",
-      "proposer": "김선교의원 등 10인",
-      "proposedAt": "2026-03-30",
-      "committee": "교육위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-03-31",
-      "active": true,
-      "topics": [
-        "교육·에듀테크"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_V2U6T0R3U2T6S1S0R4Z5Y1X3V2W5E7&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-03-30",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-03-31",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2217844"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2217856",
-      "title": "고등교육법 일부개정법률안",
-      "proposer": "정희용의원 등 11인",
-      "proposedAt": "2026-03-30",
-      "committee": "교육위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-03-31",
-      "active": true,
-      "topics": [
-        "교육·에듀테크"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_J2I6H0P3N2M6L1M0T3T2R2P3Q6M3I8&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-03-30",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-03-31",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2217856"
-    },
-    {
-      "sourceType": "assembly",
       "sourceId": "2216516",
       "title": "인공지능 발전과 신뢰 기반 조성 등에 관한 기본법 일부개정법률안",
       "proposer": "최은석의원 등 11인",
@@ -7060,35 +7710,6 @@
     },
     {
       "sourceType": "assembly",
-      "sourceId": "2217321",
-      "title": "교육기본법 일부개정법률안",
-      "proposer": "이춘석의원 등 11인",
-      "proposedAt": "2026-03-09",
-      "committee": "교육위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-03-10",
-      "active": true,
-      "topics": [
-        "교육·에듀테크",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Z2Y6Y0W2X2V4W1S0S4Q9R5P3O5O4W4&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-03-09",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-03-10",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2217321"
-    },
-    {
-      "sourceType": "assembly",
       "sourceId": "2217339",
       "title": "변호사법 일부개정법률안",
       "proposer": "최혁진의원 등 10인",
@@ -7270,62 +7891,6 @@
         }
       ],
       "recordKey": "assembly:2217291"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2217214",
-      "title": "고등교육법 일부개정법률안",
-      "proposer": "이종욱의원 등 10인",
-      "proposedAt": "2026-03-04",
-      "committee": "교육위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-03-05",
-      "active": true,
-      "topics": [
-        "교육·에듀테크"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_L2M6T0U2S2T5R1S1Q3R9N1L4L6K9K7&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-03-04",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-03-05",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2217214"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2217190",
-      "title": "고등교육법 일부개정법률안",
-      "proposer": "박성훈의원 등 15인",
-      "proposedAt": "2026-03-03",
-      "committee": "교육위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-03-04",
-      "active": true,
-      "topics": [
-        "교육·에듀테크"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_X2V6V0D1E3C0D1B7B1A2I3I1H8H4F5&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-03-03",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-03-04",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2217190"
     },
     {
       "sourceType": "assembly",
@@ -8040,34 +8605,6 @@
     },
     {
       "sourceType": "assembly",
-      "sourceId": "2216906",
-      "title": "디지털의료제품법 일부개정법률안",
-      "proposer": "백혜련의원 등 10인",
-      "proposedAt": "2026-02-20",
-      "committee": "보건복지위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2026-02-23",
-      "active": true,
-      "topics": [
-        "AI·로봇·디지털"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_W2V6V0T2U0P5Q1P1N2O1M5M5U2V6T9&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-02-20",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-02-23",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2216906"
-    },
-    {
-      "sourceType": "assembly",
       "sourceId": "2208903",
       "title": "고등교육법 일부개정법률안",
       "proposer": "정을호의원 등 21인",
@@ -8113,10 +8650,10 @@
     {
       "sourceType": "assembly",
       "sourceId": "2209261",
-      "title": "법원조직법 일부개정법률안",
+      "title": "국민연금법 일부개정법률안",
       "proposer": "윤상현의원 등 10인",
-      "proposedAt": "2025-03-21",
-      "committee": "법제사법위원회",
+      "proposedAt": "2024-06-05",
+      "committee": "보건복지위원회",
       "statusCode": "plenary_result",
       "statusLabel": "대안반영폐기",
       "statusDate": "2026-02-12",
@@ -8126,8 +8663,12 @@
         "주요 법제 변화"
       ],
       "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 대안반영폐기이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Y2W5U0V2R1R4P1Q7O5P1N5O0W2U1V2&ageFrom=22&ageTo=22",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_O2N4L0T5S3T0R2Z0A5Y3X2T1S3Q3R7",
       "history": [
+        {
+          "date": "2024-06-05",
+          "stage": "발의"
+        },
         {
           "date": "2025-03-21",
           "stage": "발의"
@@ -8158,10 +8699,10 @@
     {
       "sourceType": "assembly",
       "sourceId": "2210123",
-      "title": "법원조직법 일부개정법률안",
+      "title": "국민연금법 일부개정법률안",
       "proposer": "정일영의원 등 12인",
-      "proposedAt": "2025-04-25",
-      "committee": "법제사법위원회",
+      "proposedAt": "2024-06-05",
+      "committee": "보건복지위원회",
       "statusCode": "plenary_result",
       "statusLabel": "대안반영폐기",
       "statusDate": "2026-02-12",
@@ -8171,8 +8712,12 @@
         "주요 법제 변화"
       ],
       "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 대안반영폐기이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_C2D5B0C4J1K4J1J3H1I7G0C9C2B5C4&ageFrom=22&ageTo=22",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_O2N4L0T5S3T0R2Z0A5Y3X2T1S3Q3R7",
       "history": [
+        {
+          "date": "2024-06-05",
+          "stage": "발의"
+        },
         {
           "date": "2025-04-25",
           "stage": "발의"
@@ -8293,10 +8838,10 @@
     {
       "sourceType": "assembly",
       "sourceId": "2213411",
-      "title": "개인정보 보호법 일부개정법률안",
+      "title": "국민연금법 일부개정법률안",
       "proposer": "이훈기의원 등 11인",
-      "proposedAt": "2025-10-01",
-      "committee": "정무위원회",
+      "proposedAt": "2024-06-05",
+      "committee": "보건복지위원회",
       "statusCode": "plenary_result",
       "statusLabel": "대안반영폐기",
       "statusDate": "2026-02-12",
@@ -8306,8 +8851,12 @@
         "주요 법제 변화"
       ],
       "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 대안반영폐기이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_I2G5H0P9N2O5M1N2L2M1U3U7S5T1S0&ageFrom=22&ageTo=22",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_O2N4L0T5S3T0R2Z0A5Y3X2T1S3Q3R7",
       "history": [
+        {
+          "date": "2024-06-05",
+          "stage": "발의"
+        },
         {
           "date": "2025-10-01",
           "stage": "발의"
@@ -10379,35 +10928,6 @@
     },
     {
       "sourceType": "assembly",
-      "sourceId": "2214579",
-      "title": "법원조직법 일부개정법률안",
-      "proposer": "박상혁의원 등 10인",
-      "proposedAt": "2025-11-26",
-      "committee": "법제사법위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2025-11-27",
-      "active": true,
-      "topics": [
-        "법조·사법제도",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_E2A5A1Y1Z2Y6Y1W0X2F3F0E3C5C9B8&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2025-11-26",
-          "stage": "발의"
-        },
-        {
-          "date": "2025-11-27",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2214579"
-    },
-    {
-      "sourceType": "assembly",
       "sourceId": "2211774",
       "title": "법원조직법 일부개정법률안",
       "proposer": "정청래의원 등 12인",
@@ -10825,34 +11345,6 @@
     },
     {
       "sourceType": "assembly",
-      "sourceId": "2214426",
-      "title": "변호사법 일부개정법률안",
-      "proposer": "전현희의원 등 11인",
-      "proposedAt": "2025-11-20",
-      "committee": "법제사법위원회",
-      "statusCode": "committee_referral",
-      "statusLabel": "위원회 회부",
-      "statusDate": "2025-11-21",
-      "active": true,
-      "topics": [
-        "법조·사법제도"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Q2R5Q1Q1P0N5N1V8W4U7V0T1U8S2O5&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2025-11-20",
-          "stage": "발의"
-        },
-        {
-          "date": "2025-11-21",
-          "stage": "위원회 회부"
-        }
-      ],
-      "recordKey": "assembly:2214426"
-    },
-    {
-      "sourceType": "assembly",
       "sourceId": "2214386",
       "title": "지방재정법 일부개정법률안",
       "proposer": "이해식의원 등 11인",
@@ -11248,10 +11740,10 @@
     {
       "sourceType": "assembly",
       "sourceId": "2208700",
-      "title": "법원조직법 일부개정법률안",
+      "title": "국민연금법 일부개정법률안",
       "proposer": "이용우의원 등 10인",
-      "proposedAt": "2025-03-06",
-      "committee": "법제사법위원회",
+      "proposedAt": "2024-06-05",
+      "committee": "보건복지위원회",
       "statusCode": "committee_review",
       "statusLabel": "위원회 상정·심사",
       "statusDate": "2025-11-12",
@@ -11261,8 +11753,12 @@
         "주요 법제 변화"
       ],
       "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 상정·심사이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_F2F5E0E2M2N5L0M9K2I4J3F8F0D9E9&ageFrom=22&ageTo=22",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_O2N4L0T5S3T0R2Z0A5Y3X2T1S3Q3R7",
       "history": [
+        {
+          "date": "2024-06-05",
+          "stage": "발의"
+        },
         {
           "date": "2025-03-06",
           "stage": "발의"
@@ -11281,10 +11777,10 @@
     {
       "sourceType": "assembly",
       "sourceId": "2208783",
-      "title": "법원조직법 일부개정법률안",
+      "title": "국민연금법 일부개정법률안",
       "proposer": "박희승의원 등 52인",
-      "proposedAt": "2025-03-11",
-      "committee": "법제사법위원회",
+      "proposedAt": "2024-06-05",
+      "committee": "보건복지위원회",
       "statusCode": "committee_review",
       "statusLabel": "위원회 상정·심사",
       "statusDate": "2025-11-12",
@@ -11294,8 +11790,12 @@
         "주요 법제 변화"
       ],
       "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 상정·심사이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_X2X5W0W2V2V7U1U1C4A2B1Z4A9Y9Z7&ageFrom=22&ageTo=22",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_O2N4L0T5S3T0R2Z0A5Y3X2T1S3Q3R7",
       "history": [
+        {
+          "date": "2024-06-05",
+          "stage": "발의"
+        },
         {
           "date": "2025-03-11",
           "stage": "발의"
@@ -13351,7 +13851,7 @@
       "title": "법원조직법 일부개정법률안",
       "proposer": "박범계의원 등 10인",
       "proposedAt": "2025-05-23",
-      "committee": "",
+      "committee": "보건복지위원회",
       "statusCode": "plenary_result",
       "statusLabel": "철회",
       "statusDate": "2025-05-26",
@@ -13696,10 +14196,10 @@
     {
       "sourceType": "assembly",
       "sourceId": "2208724",
-      "title": "법원조직법 일부개정법률안",
+      "title": "국민연금법 일부개정법률안",
       "proposer": "김승수의원 등 11인",
-      "proposedAt": "2025-03-07",
-      "committee": "법제사법위원회",
+      "proposedAt": "2024-06-05",
+      "committee": "보건복지위원회",
       "statusCode": "committee_referral",
       "statusLabel": "위원회 회부",
       "statusDate": "2025-03-10",
@@ -13709,8 +14209,12 @@
         "주요 법제 변화"
       ],
       "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_L2M5K0L2J2K7R1Q3R5P7P3O5P9K8L4&ageFrom=22&ageTo=22",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_O2N4L0T5S3T0R2Z0A5Y3X2T1S3Q3R7",
       "history": [
+        {
+          "date": "2024-06-05",
+          "stage": "발의"
+        },
         {
           "date": "2025-03-07",
           "stage": "발의"
@@ -14079,10 +14583,10 @@
     {
       "sourceType": "assembly",
       "sourceId": "2206532",
-      "title": "고등교육법 일부개정법률안",
+      "title": "국민연금법 일부개정법률안",
       "proposer": "고민정의원 등 11인",
-      "proposedAt": "2024-12-16",
-      "committee": "교육위원회",
+      "proposedAt": "2024-06-05",
+      "committee": "보건복지위원회",
       "statusCode": "committee_review",
       "statusLabel": "위원회 상정·심사",
       "statusDate": "2025-02-18",
@@ -14091,8 +14595,12 @@
         "교육·에듀테크"
       ],
       "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 상정·심사이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Q2R4P1P2O1P0N1N5J4I9I0H1H6F6G5&ageFrom=22&ageTo=22",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_O2N4L0T5S3T0R2Z0A5Y3X2T1S3Q3R7",
       "history": [
+        {
+          "date": "2024-06-05",
+          "stage": "발의"
+        },
         {
           "date": "2024-12-16",
           "stage": "발의"
@@ -14143,10 +14651,10 @@
     {
       "sourceType": "assembly",
       "sourceId": "2206562",
-      "title": "고등교육법 일부개정법률안",
+      "title": "국민연금법 일부개정법률안",
       "proposer": "김영호의원 등 15인",
-      "proposedAt": "2024-12-17",
-      "committee": "교육위원회",
+      "proposedAt": "2024-06-05",
+      "committee": "보건복지위원회",
       "statusCode": "committee_review",
       "statusLabel": "위원회 상정·심사",
       "statusDate": "2025-02-18",
@@ -14155,8 +14663,12 @@
         "교육·에듀테크"
       ],
       "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 상정·심사이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_R2Q4R1P1P2O2W1W7U0V7U2U5S2O3P7&ageFrom=22&ageTo=22",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_O2N4L0T5S3T0R2Z0A5Y3X2T1S3Q3R7",
       "history": [
+        {
+          "date": "2024-06-05",
+          "stage": "발의"
+        },
         {
           "date": "2024-12-17",
           "stage": "발의"
@@ -16526,7 +17038,7 @@
       "ministry": "국토교통부",
       "lawType": "부령",
       "statusCode": "promulgated",
-      "statusLabel": "공포대기",
+      "statusLabel": "공포",
       "statusDate": "",
       "active": false,
       "topics": [
@@ -16584,10 +17096,10 @@
       "title": "개인정보 보호법 시행령",
       "ministry": "개인정보보호위원...",
       "lawType": "대통령령",
-      "statusCode": "government_process",
-      "statusLabel": "차관회의",
+      "statusCode": "promulgated",
+      "statusLabel": "공포",
       "statusDate": "",
-      "active": true,
+      "active": false,
       "topics": [
         "데이터·개인정보",
         "주요 법제 변화"
