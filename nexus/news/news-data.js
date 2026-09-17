@@ -160,7 +160,14 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "title": "리사 다큐 TIFF 공개…K-pop 스타가 글로벌 IP로 확장되는 경로",
     "summary": "BLACKPINK 리사의 다큐멘터리 'Always Lalisa'가 TIFF에서 공개된 뒤 10월 글로벌 극장·IMAX 상영과 이후 YouTube Premium 공개를 앞두고 있다. 핵심은 한 K-pop 스타의 기록물이 아니라 음악·영화·연기·브랜드·플랫폼이 하나의 글로벌 IP 구조로 결합되는 방식이다.",
     "href": "./articles/2026-09-17-lisa-global-ip-expansion.html",
-    "keywords": "리사 다큐 TIFF 공개…K-pop 스타가 글로벌 IP로 확장되는 경로 글로벌·컬처"
+    "keywords": "리사 다큐 TIFF 공개…K-pop 스타가 글로벌 IP로 확장되는 경로 글로벌·컬처",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=i14VRcuBy9k",
+      "youtubeId": "i14VRcuBy9k",
+      "title": "ALWAYS LALISA with Sue Kim and Lalisa Manobal | TIFF 2026 ↗",
+      "source": "YouTube · TIFF",
+      "thumbnail": "https://i.ytimg.com/vi/i14VRcuBy9k/hqdefault.jpg"
+    }
   },
   {
     "id": "2026-09-17-aichi-nagoya-asian-games-culture",
