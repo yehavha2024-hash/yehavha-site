@@ -14,8 +14,8 @@ permissions:
   contents: write
 
 concurrency:
-  group: korea-social-intelligence-archive
-  cancel-in-progress: true
+  group: yehavha-main-content-writer
+  cancel-in-progress: false
 
 jobs:
   archive:
@@ -55,8 +55,12 @@ jobs:
 
           for attempt in 1 2 3; do
             git fetch origin main
-            git rebase origin/main
-            if git push origin main; then
+            if ! git rebase origin/main; then
+              echo "Archive output conflicts with a newer main update; refusing to overwrite it." >&2
+              git rebase --abort || true
+              exit 1
+            fi
+            if git push origin HEAD:main; then
               exit 0
             fi
             echo "Push raced with another main update; retrying (${attempt}/3)."
