@@ -105,8 +105,10 @@ const previousLengths = previousItems
   .filter(Boolean);
 const previousMedian = median(previousLengths);
 const densityFloor = Math.max(1800, previousMedian ? Math.round(previousMedian * 0.70) : 1800);
+const homeLatestLimit = Number(config.homeLatestLimit) || 0;
 
 if (latestItems.length < 4) fail(`${latestDate}: latest edition has too few articles (${latestItems.length}); expected at least 4 meaningful articles`);
+if (homeLatestLimit < latestItems.length) fail(`${latestDate}: homeLatestLimit ${homeLatestLimit} hides ${latestItems.length - homeLatestLimit} validated latest-edition article(s)`);
 for (const item of latestItems) {
   const filename = path.basename(item.href);
   const stats = articleStats.get(filename);
@@ -153,4 +155,4 @@ if (!headers.includes('/news/*') || !headers.includes('Cache-Control: no-cache, 
 const robots = text(path.join(nexusDir, 'robots.txt'));
 if (!robots.includes('Sitemap: https://yehavha.com/news/sitemap.xml')) fail('news sitemap is not declared in robots.txt');
 
-console.log(`YEHAVHA NEWS audit passed: ${articleFiles.length} articles, latest=${latestDate}, latestDepthFloor=${densityFloor}, previousMedian=${previousMedian || 'n/a'}, ${config.categories.length} categories, article quality/shell/footer/layout/cache synchronized.`);
+console.log(`YEHAVHA NEWS audit passed: ${articleFiles.length} articles, latest=${latestDate}, latestEdition=${latestItems.length}/${homeLatestLimit} visible, latestDepthFloor=${densityFloor}, previousMedian=${previousMedian || 'n/a'}, ${config.categories.length} categories, article quality/shell/footer/layout/cache synchronized.`);
