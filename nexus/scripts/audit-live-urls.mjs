@@ -95,10 +95,16 @@ async function checkHomeRuntime() {
   try {
     const response = await request(url);
     const body = await response.text();
-    for (const marker of ['id="homeNewsGrid"','id="homeNewsDate"','id="homeStrategyTitle"','id="homeSocialTitle"','./news/news-data.js','./portal-v2.js']) {
+    for (const marker of ['id="homeLatestNewsList"','id="homeLatestNewsMeta"','id="homeStrategyTitle"','id="homeSocialTitle"','./news/news-data.js','./portal-v2.js']) {
       if (!body.includes(marker)) {
         errors += 1;
         console.error(`ERROR /: canonical homepage feed marker missing: ${marker}`);
+      }
+    }
+    for (const retiredMarker of ['id="homeNewsGrid"','id="homeNewsDate"']) {
+      if (body.includes(retiredMarker)) {
+        errors += 1;
+        console.error(`ERROR /: retired homepage feed marker returned: ${retiredMarker}`);
       }
     }
     if (/\.\/news\/articles\/20\d{2}-\d{2}-\d{2}-/.test(body)) {
