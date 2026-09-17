@@ -1,4 +1,4 @@
-name: Normalize YEHAVHA NEWS article shell
+name: Validate YEHAVHA NEWS article shell
 
 on:
   push:
@@ -10,40 +10,31 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: yehavha-news-shell-normalize
   cancel-in-progress: true
 
 jobs:
-  normalize:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v7
         with:
           node-version: '22'
 
-      - name: Normalize and verify article shell
-        run: node nexus/scripts/normalize-news-articles.mjs
-
-      - name: Commit repaired article shell when changed
+      - name: Validate normalized article shell
         shell: bash
         run: |
-          if git diff --quiet -- nexus/news/articles; then
-            echo "YEHAVHA NEWS article shells are already normalized."
-            exit 0
+          node nexus/scripts/normalize-news-articles.mjs
+          if ! git diff --quiet -- nexus/news/articles; then
+            echo "YEHAVHA NEWS article shell normalization is required."
+            git diff -- nexus/news/articles
+            exit 1
           fi
-
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add nexus/news/articles
-          git commit -m "Normalize YEHAVHA NEWS article shell"
-          git pull --rebase origin main
-          git push
+          echo "YEHAVHA NEWS article shells are normalized."
