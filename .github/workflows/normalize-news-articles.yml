@@ -5,7 +5,9 @@ on:
     branches: [main]
     paths:
       - 'nexus/news/articles/**'
+      - 'nexus/news/news-data.js'
       - 'nexus/scripts/normalize-news-articles.mjs'
+      - 'nexus/scripts/sync-news-registry.mjs'
       - 'scripts/ci/safe-content-commit.sh'
       - '.github/workflows/normalize-news-articles.yml'
   workflow_dispatch:
@@ -34,6 +36,9 @@ jobs:
       - name: Normalize article shell
         run: node nexus/scripts/normalize-news-articles.mjs
 
-      - name: Publish shell repairs when needed
+      - name: Synchronize article registry
+        run: node nexus/scripts/sync-news-registry.mjs
+
+      - name: Publish article-owned repairs when needed
         shell: bash
-        run: bash scripts/ci/safe-content-commit.sh "Normalize YEHAVHA NEWS article shell" nexus/news/articles
+        run: bash scripts/ci/safe-content-commit.sh "Normalize YEHAVHA NEWS article outputs" nexus/news/articles nexus/news/news-data.js
