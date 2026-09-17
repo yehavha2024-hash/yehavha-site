@@ -45,6 +45,19 @@
   line-height:1.32;
 }
 
+/* Representative commentary cards use one fixed 16:9 media geometry.
+   Copy length must never stretch a thumbnail vertically. */
+.opinion-section .opinion-feature{
+  align-items:start;
+}
+.opinion-section .opinion-feature img{
+  width:100%;
+  height:auto;
+  min-height:0;
+  aspect-ratio:16/9;
+  object-fit:cover;
+}
+
 /* Media cards: reserve the metadata row above the thumbnail so the image begins
    on the same visual line as the article title rather than at the card top. */
 .news-media-feature{

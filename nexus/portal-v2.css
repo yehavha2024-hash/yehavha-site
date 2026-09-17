@@ -3,6 +3,9 @@
 /* 2026-09-17: homepage-only correction layer.
    SPECIAL is a real DOM section, not a pseudo-element attached to the NEWS banner.
    The main-page latest-news list intentionally mirrors the YEHAVHA NEWS list UI. */
+:root {
+  --nxs-home-section-gap: 14px;
+}
 
 .hero-main > .news-entry-banner {
   overflow: hidden;
@@ -12,11 +15,14 @@
   display: none !important;
   content: none !important;
 }
+.hero-main > .nexus-intro-video {
+  margin-bottom: var(--nxs-home-section-gap);
+}
 
 .yehavha-special {
   display: grid;
-  gap: 9px;
-  margin: 12px 0 14px;
+  gap: var(--nxs-home-section-gap);
+  margin: 0 0 var(--nxs-home-section-gap);
 }
 .yehavha-special-banner {
   position: relative;
@@ -85,9 +91,13 @@
 }
 .yehavha-special-kind {
   color: #7a3541;
-  font-size: 10.8px;
+  font-size: 0;
   font-weight: 850;
   white-space: nowrap;
+}
+.yehavha-special-kind::after {
+  content: "예하바 스페셜 인물 인터뷰 · 01";
+  font-size: 10.8px;
 }
 .yehavha-special-lead strong {
   min-width: 0;
@@ -102,8 +112,15 @@
   white-space: nowrap;
 }
 
-/* Editorial material is one bounded cell. Latest news is a separate borderless section. */
-.yehavha-news-zone > .frontline-panel {
+/* Editorial material is one bounded cell. Latest news is a separate borderless section.
+   All direct blocks in the NEWS zone share one spacing token to prevent drift. */
+.yehavha-news-zone {
+  display: grid;
+  gap: var(--nxs-home-section-gap);
+}
+.yehavha-news-zone > .frontline-panel,
+.yehavha-news-zone > .news-entry-banner,
+.yehavha-news-zone > .home-news-mirror {
   margin: 0;
 }
 .home-news-mirror {
@@ -147,6 +164,41 @@
   display: grid;
   gap: 7px;
   min-width: 0;
+}
+
+/* Main opinion preview uses the same 16:9 media grammar as YEHAVHA NEWS. */
+.yehavha-news-zone .commentary-feature-layout {
+  grid-template-rows: auto auto;
+  align-items: start;
+}
+.yehavha-news-zone .commentary-feature-thumb {
+  grid-column: 1;
+  grid-row: 1;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+.yehavha-news-zone .commentary-feature-copy {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+.yehavha-news-zone .commentary-feature-layout::after {
+  content: "드라마 관련 영상";
+  grid-column: 1;
+  grid-row: 2;
+  justify-self: start;
+  margin-top: 6px;
+  padding: 3px 7px;
+  border: 1px solid #b8c6d3;
+  border-radius: 999px;
+  background: #fff;
+  color: #38536b;
+  font-size: 10.5px;
+  font-weight: 850;
+  line-height: 1.35;
+  white-space: normal;
 }
 
 /* Exact visual grammar used by /news/ for today's stories. */
@@ -396,8 +448,14 @@
   .yehavha-special-kind {
     grid-column: 1 / -1;
   }
+  .yehavha-special-kind::after {
+    font-size: 10.3px;
+  }
   .yehavha-special-lead strong {
     font-size: 14px;
+  }
+  .yehavha-news-zone .commentary-feature-layout::after {
+    font-size: 9.5px;
   }
   .home-news-mirror .opinion-feature {
     grid-template-columns: minmax(104px,34%) minmax(0,1fr);
