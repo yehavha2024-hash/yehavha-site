@@ -14,8 +14,8 @@ permissions:
   contents: write
 
 concurrency:
-  group: legal-intelligence-materials-refresh
-  cancel-in-progress: true
+  group: yehavha-main-content-writer
+  cancel-in-progress: false
 
 jobs:
   refresh:
@@ -51,5 +51,20 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add nexus/legal-intelligence/legal-materials.json
           git commit -m "Refresh curated Legal Intelligence materials"
-          git pull --rebase origin main
-          git push origin main
+
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            if ! git rebase origin/main; then
+              echo "Legal material output conflicts with a newer main update; refusing to overwrite it." >&2
+              git rebase --abort || true
+              exit 1
+            fi
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "main moved during legal-material publish; retrying (${attempt}/4)."
+            sleep $((attempt * 2))
+          done
+
+          echo "Unable to publish legal material data after 4 attempts."
+          exit 1
