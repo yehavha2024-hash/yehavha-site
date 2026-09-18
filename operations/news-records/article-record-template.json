@@ -23,7 +23,14 @@
       "recordedAt": "",
       "revisionReason": "",
       "snapshot": "",
-      "evidenceSources": []
+      "evidenceSources": [],
+      "editorApproval": {
+        "requiredForSubstantiveRevision": true,
+        "approved": false,
+        "editor": "",
+        "approvedAt": "",
+        "summary": ""
+      }
     }
   ]
 }
