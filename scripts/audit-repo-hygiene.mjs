@@ -88,8 +88,8 @@ function auditWorkflowPermissions() {
       allowedPathTokens: ['nexus/ai-trends/data.json']
     }],
     ['normalize-news-articles.yml', {
-      required: ['safe-content-commit.sh "Normalize YEHAVHA NEWS article outputs" nexus/news/articles nexus/news/news-data.js nexus/news/sitemap.xml'],
-      allowedPathTokens: ['nexus/news/articles', 'nexus/news/news-data.js', 'nexus/news/sitemap.xml']
+      required: ['safe-content-commit.sh "Normalize YEHAVHA NEWS article outputs" nexus/news/articles nexus/news/news-data.js nexus/news/sitemap.xml operations/news-records'],
+      allowedPathTokens: ['nexus/news/articles', 'nexus/news/news-data.js', 'nexus/news/sitemap.xml', 'operations/news-records']
     }],
     ['refresh-investment-strategy.yml', {
       required: ['git add nexus/investment-strategy/index.html'],

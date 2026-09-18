@@ -7,6 +7,8 @@ on:
       - 'nexus/news/articles/**'
       - 'nexus/news/news-data.js'
       - 'nexus/news/sitemap.xml'
+      - 'nexus/news/index.html'
+      - 'nexus/news/style.css'
       - 'nexus/scripts/normalize-news-articles.mjs'
       - 'nexus/scripts/sync-news-registry.mjs'
       - 'nexus/scripts/audit-news-architecture.mjs'
