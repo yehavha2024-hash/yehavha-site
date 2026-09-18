@@ -94,10 +94,13 @@
       button.setAttribute('aria-pressed', 'false');
       return button;
     });
+    const specialLink = make('a', 'category-btn special-category-link', 'BIFF 특집');
+    specialLink.href = '#biffSpecial';
+    specialLink.setAttribute('aria-label', '부산국제영화제 특집 보기');
     const policyLink = make('a', 'category-btn policy-category-link', '운영규정');
     policyLink.href = './policies/';
     policyLink.setAttribute('aria-label', 'YEHAVHA NEWS 내부 운영규정 보기');
-    els.categoryNav.replaceChildren(...buttons, policyLink);
+    els.categoryNav.replaceChildren(...buttons, specialLink, policyLink);
   }
 
   function articleCard(item, compact = false, media = false) {
