@@ -18,6 +18,19 @@ window.YEHAVHA_NEWS_CONFIG = Object.freeze({
 
 window.YEHAVHA_NEWS_DATA = Object.freeze([
   {
+    "id": "2026-09-18-biff31-a-list-preview",
+    "date": "2026-09-18",
+    "category": "글로벌·컬처",
+    "author": "이명훈",
+    "type": "기사",
+    "series": "부산국제영화제 특집",
+    "title": "A-리스트 올라선 부산국제영화제, 제31회 BIFF 무엇이 달라졌나",
+    "summary": "제31회 부산국제영화제는 단순한 규모 확대보다 국제적 위상·경쟁 체계·관객 경험·산업 플랫폼의 동시 확장을 전면에 내세웠다. 10월 6일 개막을 앞두고 올해 영화제가 무엇을 바꿨고 무엇을 확인해야 하는지 짚는다.",
+    "href": "./articles/2026-09-18-biff31-a-list-preview.html",
+    "keywords": "부산국제영화제 BIFF 제31회 A-리스트 FIAPF 경쟁부문 부산 어워드 ACFM 애니메이션",
+    "publishedAt": "2026-09-18T23:32:00+09:00"
+  },
+  {
     "id": "2026-09-18-president-press-conference-preview",
     "date": "2026-09-18",
     "category": "정치",
