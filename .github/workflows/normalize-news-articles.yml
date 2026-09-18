@@ -11,6 +11,9 @@ on:
       - 'nexus/scripts/sync-news-registry.mjs'
       - 'nexus/scripts/audit-news-architecture.mjs'
       - 'nexus/scripts/audit-news-quality.mjs'
+      - 'nexus/scripts/archive-news-revisions.mjs'
+      - 'nexus/scripts/archive-news-arrangement.mjs'
+      - 'nexus/news/policies/**'
       - 'scripts/ci/safe-content-commit.sh'
       - '.github/workflows/normalize-news-articles.yml'
   workflow_dispatch:
@@ -36,11 +39,22 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Archive source article revisions
+        env:
+          NEWS_ARCHIVE_BEFORE: ${{ github.event.before }}
+          NEWS_ARCHIVE_HEAD: ${{ github.sha }}
+        run: node nexus/scripts/archive-news-revisions.mjs
+
       - name: Normalize article shell
         run: node nexus/scripts/normalize-news-articles.mjs
 
       - name: Synchronize article registry and sitemap
         run: node nexus/scripts/sync-news-registry.mjs
+
+      - name: Archive top-level NEWS arrangement when changed
+        env:
+          NEWS_ARCHIVE_HEAD: ${{ github.sha }}
+        run: node nexus/scripts/archive-news-arrangement.mjs
 
       - name: Verify reconciliation is idempotent
         shell: bash
@@ -63,4 +77,4 @@ jobs:
 
       - name: Publish validated article-owned outputs when needed
         shell: bash
-        run: bash scripts/ci/safe-content-commit.sh "Normalize YEHAVHA NEWS article outputs" nexus/news/articles nexus/news/news-data.js nexus/news/sitemap.xml
+        run: bash scripts/ci/safe-content-commit.sh "Normalize YEHAVHA NEWS article outputs" nexus/news/articles nexus/news/news-data.js nexus/news/sitemap.xml operations/news-records
