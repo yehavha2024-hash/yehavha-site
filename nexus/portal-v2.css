@@ -72,9 +72,6 @@ a{color:inherit}button,input,select,textarea{font:inherit}button,a{-webkit-tap-h
 .home-biff-logo{display:block;width:100%;max-width:280px;height:auto;object-fit:contain;filter:drop-shadow(0 4px 12px rgba(0,0,0,.3))}
 .home-biff-filmstrip{position:absolute;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(8,1fr);gap:8px;height:14px;padding:3px 10px;background:rgba(0,0,0,.44)}
 .home-biff-filmstrip i{display:block;border-radius:2px;background:rgba(255,255,255,.62)}
-.home-interview-slot{display:grid;gap:8px;padding:10px 12px 12px;border-bottom:1px solid var(--line-soft);background:#f8fafc}
-.home-interview-slot .home-interview-banner{height:clamp(90px,8.8vw,112px);margin:0}
-.home-interview-slot .yehavha-special-lead{margin:0}
 
 .yehavha-special-banner{position:relative;display:block;height:clamp(104px,10.5vw,132px);overflow:hidden;border:1px solid var(--line);border-radius:10px;background:#10192a;text-decoration:none}
 .yehavha-special-banner img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 46%}
@@ -164,9 +161,7 @@ a{color:inherit}button,input,select,textarea{font:inherit}button,a{-webkit-tap-h
   .home-biff-description{font-size:12.5px}
   .home-biff-logo-wrap{grid-column:2;justify-content:flex-start;margin-top:2px}
   .home-biff-logo{max-width:170px}
-  .home-interview-slot{padding:9px 10px 10px}
-  .home-interview-slot .home-interview-banner{height:clamp(88px,25vw,112px)}
-  .yehavha-special-banner{height:clamp(98px,26vw,122px)}
+      .yehavha-special-banner{height:clamp(98px,26vw,122px)}
   .yehavha-special-caption{left:16px;max-width:88%}
   .yehavha-special-label{font-size:clamp(1.3rem,6.7vw,1.72rem)}
   .yehavha-special-caption strong{font-size:.96rem}
