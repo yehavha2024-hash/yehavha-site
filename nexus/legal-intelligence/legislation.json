@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-17",
+  "updatedAt": "2026-09-18",
   "selectionPolicy": {
     "mode": "selected",
     "description": "NEXUS 연구·실무 관심영역과 직접 연결되는 국회·정부 입법만 선별 추적하며 동일 식별자의 기존 레코드를 갱신한다.",
@@ -16,6 +16,444 @@
     ]
   },
   "records": [
+    {
+      "sourceType": "assembly",
+      "sourceId": "2208553",
+      "title": "지방자치법 일부개정법률안",
+      "proposer": "이달희의원 등 11인",
+      "proposedAt": "2025-02-27",
+      "committee": "행정안전위원회",
+      "statusCode": "plenary_result",
+      "statusLabel": "대안반영폐기",
+      "statusDate": "2026-09-17",
+      "active": false,
+      "topics": [
+        "행정·지방자치",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 의결이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_A2A5Y0Z1X1F3G1E4E1D7E5C9C8Y1X3&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2025-02-27",
+          "stage": "발의"
+        },
+        {
+          "date": "2025-02-28",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2025-07-01",
+          "stage": "위원회 상정·심사"
+        },
+        {
+          "date": "2026-09-01",
+          "stage": "위원회 의결"
+        },
+        {
+          "date": "2026-09-17",
+          "stage": "대안반영폐기"
+        },
+        {
+          "date": "2026-09-17",
+          "stage": "본회의 처리"
+        }
+      ],
+      "recordKey": "assembly:2208553"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2212278",
+      "title": "지방자치법 일부개정법률안",
+      "proposer": "이광희의원 등 10인",
+      "proposedAt": "2025-08-21",
+      "committee": "행정안전위원회",
+      "statusCode": "plenary_result",
+      "statusLabel": "대안반영폐기",
+      "statusDate": "2026-09-17",
+      "active": false,
+      "topics": [
+        "행정·지방자치",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 의결이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_B2A5Y0X8Y1U8T1S0Q5Y5G2F6B5Z0Y5&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2025-08-21",
+          "stage": "발의"
+        },
+        {
+          "date": "2025-08-22",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-01",
+          "stage": "위원회 상정·심사"
+        },
+        {
+          "date": "2026-09-01",
+          "stage": "위원회 의결"
+        },
+        {
+          "date": "2026-09-17",
+          "stage": "대안반영폐기"
+        },
+        {
+          "date": "2026-09-17",
+          "stage": "본회의 처리"
+        }
+      ],
+      "recordKey": "assembly:2212278"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2214435",
+      "title": "지방자치법 일부개정법률안",
+      "proposer": "정점식의원 등 13인",
+      "proposedAt": "2025-11-20",
+      "committee": "행정안전위원회",
+      "statusCode": "plenary_result",
+      "statusLabel": "대안반영폐기",
+      "statusDate": "2026-09-17",
+      "active": false,
+      "topics": [
+        "행정·지방자치",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 의결이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_M2K5J1K1I0I4R1R4P0Q1P2N3N1V2W6&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2025-11-20",
+          "stage": "발의"
+        },
+        {
+          "date": "2025-11-21",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-01",
+          "stage": "위원회 상정·심사"
+        },
+        {
+          "date": "2026-09-01",
+          "stage": "위원회 의결"
+        },
+        {
+          "date": "2026-09-17",
+          "stage": "대안반영폐기"
+        },
+        {
+          "date": "2026-09-17",
+          "stage": "본회의 처리"
+        }
+      ],
+      "recordKey": "assembly:2214435"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2216562",
+      "title": "지방자치법 일부개정법률안",
+      "proposer": "이해식의원 등 10인",
+      "proposedAt": "2026-02-04",
+      "committee": "행정안전위원회",
+      "statusCode": "plenary_result",
+      "statusLabel": "대안반영폐기",
+      "statusDate": "2026-09-17",
+      "active": false,
+      "topics": [
+        "행정·지방자치",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 의결이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_S2T6A0Z2A0Y2Y1X0Y5F4G0E1F7D0D8&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-02-04",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-02-05",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-08-24",
+          "stage": "위원회 상정·심사"
+        },
+        {
+          "date": "2026-09-01",
+          "stage": "위원회 의결"
+        },
+        {
+          "date": "2026-09-17",
+          "stage": "대안반영폐기"
+        },
+        {
+          "date": "2026-09-17",
+          "stage": "본회의 처리"
+        }
+      ],
+      "recordKey": "assembly:2216562"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2219092",
+      "title": "지방자치법 일부개정법률안",
+      "proposer": "양부남의원 등 10인",
+      "proposedAt": "2026-06-02",
+      "committee": "행정안전위원회",
+      "statusCode": "plenary_result",
+      "statusLabel": "대안반영폐기",
+      "statusDate": "2026-09-17",
+      "active": false,
+      "topics": [
+        "행정·지방자치",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 의결이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_N2M6L0F5F1D8K0R9Q5N6K5J7R7P0O4&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-06-02",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-01",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-01",
+          "stage": "위원회 상정·심사"
+        },
+        {
+          "date": "2026-09-01",
+          "stage": "위원회 의결"
+        },
+        {
+          "date": "2026-09-17",
+          "stage": "대안반영폐기"
+        },
+        {
+          "date": "2026-09-17",
+          "stage": "본회의 처리"
+        }
+      ],
+      "recordKey": "assembly:2219092"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2219761",
+      "title": "지방자치법 일부개정법률안",
+      "proposer": "윤준병의원 등 11인",
+      "proposedAt": "2026-07-06",
+      "committee": "행정안전위원회",
+      "statusCode": "plenary_result",
+      "statusLabel": "대안반영폐기",
+      "statusDate": "2026-09-17",
+      "active": false,
+      "topics": [
+        "행정·지방자치",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 의결이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_R2P6Q0P6P2N3J1K5H2I4G4G0O6P0N2&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-07-06",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-07-07",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-01",
+          "stage": "위원회 상정·심사"
+        },
+        {
+          "date": "2026-09-01",
+          "stage": "위원회 의결"
+        },
+        {
+          "date": "2026-09-17",
+          "stage": "대안반영폐기"
+        },
+        {
+          "date": "2026-09-17",
+          "stage": "본회의 처리"
+        }
+      ],
+      "recordKey": "assembly:2219761"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2221357",
+      "title": "법원조직법 일부개정법률안",
+      "proposer": "김의겸의원 등 10인",
+      "proposedAt": "2026-09-14",
+      "committee": "법제사법위원회",
+      "statusCode": "plenary_result",
+      "statusLabel": "원안가결",
+      "statusDate": "2026-09-17",
+      "active": false,
+      "topics": [
+        "법조·사법제도",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 의결이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_X2X6T0T9S1Q1R1P7Q1Y6Y0W4V6W9U7&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-09-14",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-09-14",
+          "stage": "위원회 회부"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 상정·심사"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "위원회 의결"
+        },
+        {
+          "date": "2026-09-17",
+          "stage": "본회의 처리"
+        },
+        {
+          "date": "2026-09-17",
+          "stage": "원안가결"
+        }
+      ],
+      "recordKey": "assembly:2221357"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2221392",
+      "title": "고등교육법 일부개정법률안",
+      "proposer": "이달희의원 등 10인",
+      "proposedAt": "2026-09-16",
+      "committee": "교육위원회",
+      "statusCode": "committee_referral",
+      "statusLabel": "위원회 회부",
+      "statusDate": "2026-09-17",
+      "active": true,
+      "topics": [
+        "교육·에듀테크"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 발의·계류이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Z2Z6Y0Z9G0H4F1E4E1C0D4Z2A3Y6W4&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-09-16",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "발의·계류"
+        },
+        {
+          "date": "2026-09-17",
+          "stage": "위원회 회부"
+        }
+      ],
+      "recordKey": "assembly:2221392"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2221393",
+      "title": "법원조직법 일부개정법률안",
+      "proposer": "최은석의원 등 11인",
+      "proposedAt": "2026-09-16",
+      "committee": "법제사법위원회",
+      "statusCode": "committee_referral",
+      "statusLabel": "위원회 회부",
+      "statusDate": "2026-09-17",
+      "active": true,
+      "topics": [
+        "법조·사법제도",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 발의·계류이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Q2Q6O0N9N0V2W1U3V4T1U0S4A9B6Z7&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-09-16",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-09-16",
+          "stage": "발의·계류"
+        },
+        {
+          "date": "2026-09-17",
+          "stage": "위원회 회부"
+        }
+      ],
+      "recordKey": "assembly:2221393"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2221422",
+      "title": "개인정보 보호법 일부개정법률안",
+      "proposer": "박성훈의원 등 11인",
+      "proposedAt": "2026-09-17",
+      "committee": "",
+      "statusCode": "introduced",
+      "statusLabel": "발의·계류",
+      "statusDate": "2026-09-17",
+      "active": true,
+      "topics": [
+        "데이터·개인정보",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 발의·계류이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_V2W6U0T9T1R1S1A6A1Z2X4Y8W9X4F1&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-09-17",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-09-17",
+          "stage": "발의·계류"
+        }
+      ],
+      "recordKey": "assembly:2221422"
+    },
+    {
+      "sourceType": "assembly",
+      "sourceId": "2221438",
+      "title": "교육기본법 일부개정법률안",
+      "proposer": "최혁진의원 등 15인",
+      "proposedAt": "2026-09-17",
+      "committee": "",
+      "statusCode": "introduced",
+      "statusLabel": "발의·계류",
+      "statusDate": "2026-09-17",
+      "active": true,
+      "topics": [
+        "교육·에듀테크",
+        "주요 법제 변화"
+      ],
+      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 발의·계류이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Z2V6W0U2T2T0R1S3Y4Z9X5Y9W3W3E5&ageFrom=22&ageTo=22",
+      "history": [
+        {
+          "date": "2026-09-17",
+          "stage": "발의"
+        },
+        {
+          "date": "2026-09-17",
+          "stage": "발의·계류"
+        }
+      ],
+      "recordKey": "assembly:2221438"
+    },
     {
       "sourceType": "assembly",
       "sourceId": "2217190",
@@ -662,39 +1100,6 @@
     },
     {
       "sourceType": "assembly",
-      "sourceId": "2221357",
-      "title": "법원조직법 일부개정법률안",
-      "proposer": "김의겸의원 등 10인",
-      "proposedAt": "2026-09-14",
-      "committee": "법제사법위원회",
-      "statusCode": "committee_decision",
-      "statusLabel": "위원회 의결",
-      "statusDate": "2026-09-16",
-      "active": true,
-      "topics": [
-        "법조·사법제도",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 의결이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_X2X6T0T9S1Q1R1P7Q1Y6Y0W4V6W9U7&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-09-14",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-09-14",
-          "stage": "위원회 회부"
-        },
-        {
-          "date": "2026-09-16",
-          "stage": "위원회 의결"
-        }
-      ],
-      "recordKey": "assembly:2221357"
-    },
-    {
-      "sourceType": "assembly",
       "sourceId": "2221388",
       "title": "법원조직법 일부개정법률안",
       "proposer": "김형연의원 등 12인",
@@ -721,63 +1126,6 @@
         }
       ],
       "recordKey": "assembly:2221388"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2221392",
-      "title": "고등교육법 일부개정법률안",
-      "proposer": "이달희의원 등 10인",
-      "proposedAt": "2026-09-16",
-      "committee": "보건복지위원회",
-      "statusCode": "introduced",
-      "statusLabel": "발의·계류",
-      "statusDate": "2026-09-16",
-      "active": true,
-      "topics": [
-        "교육·에듀테크"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 발의·계류이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Z2Z6Y0Z9G0H4F1E4E1C0D4Z2A3Y6W4&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-09-16",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-09-16",
-          "stage": "발의·계류"
-        }
-      ],
-      "recordKey": "assembly:2221392"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2221393",
-      "title": "법원조직법 일부개정법률안",
-      "proposer": "최은석의원 등 11인",
-      "proposedAt": "2026-09-16",
-      "committee": "보건복지위원회",
-      "statusCode": "introduced",
-      "statusLabel": "발의·계류",
-      "statusDate": "2026-09-16",
-      "active": true,
-      "topics": [
-        "법조·사법제도",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 발의·계류이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_Q2Q6O0N9N0V2W1U3V4T1U0S4A9B6Z7&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-09-16",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-09-16",
-          "stage": "발의·계류"
-        }
-      ],
-      "recordKey": "assembly:2221393"
     },
     {
       "sourceType": "assembly",
@@ -1922,228 +2270,6 @@
         }
       ],
       "recordKey": "assembly:2220998"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2208553",
-      "title": "지방자치법 일부개정법률안",
-      "proposer": "이달희의원 등 11인",
-      "proposedAt": "2025-02-27",
-      "committee": "행정안전위원회",
-      "statusCode": "committee_decision",
-      "statusLabel": "위원회 의결",
-      "statusDate": "2026-09-01",
-      "active": true,
-      "topics": [
-        "행정·지방자치",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 의결이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_A2A5Y0Z1X1F3G1E4E1D7E5C9C8Y1X3&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2025-02-27",
-          "stage": "발의"
-        },
-        {
-          "date": "2025-02-28",
-          "stage": "위원회 회부"
-        },
-        {
-          "date": "2025-07-01",
-          "stage": "위원회 상정·심사"
-        },
-        {
-          "date": "2026-09-01",
-          "stage": "위원회 의결"
-        }
-      ],
-      "recordKey": "assembly:2208553"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2212278",
-      "title": "지방자치법 일부개정법률안",
-      "proposer": "이광희의원 등 10인",
-      "proposedAt": "2025-08-21",
-      "committee": "행정안전위원회",
-      "statusCode": "committee_decision",
-      "statusLabel": "위원회 의결",
-      "statusDate": "2026-09-01",
-      "active": true,
-      "topics": [
-        "행정·지방자치",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 의결이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_B2A5Y0X8Y1U8T1S0Q5Y5G2F6B5Z0Y5&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2025-08-21",
-          "stage": "발의"
-        },
-        {
-          "date": "2025-08-22",
-          "stage": "위원회 회부"
-        },
-        {
-          "date": "2026-09-01",
-          "stage": "위원회 상정·심사"
-        },
-        {
-          "date": "2026-09-01",
-          "stage": "위원회 의결"
-        }
-      ],
-      "recordKey": "assembly:2212278"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2214435",
-      "title": "지방자치법 일부개정법률안",
-      "proposer": "정점식의원 등 13인",
-      "proposedAt": "2025-11-20",
-      "committee": "행정안전위원회",
-      "statusCode": "committee_decision",
-      "statusLabel": "위원회 의결",
-      "statusDate": "2026-09-01",
-      "active": true,
-      "topics": [
-        "행정·지방자치",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 의결이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_M2K5J1K1I0I4R1R4P0Q1P2N3N1V2W6&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2025-11-20",
-          "stage": "발의"
-        },
-        {
-          "date": "2025-11-21",
-          "stage": "위원회 회부"
-        },
-        {
-          "date": "2026-09-01",
-          "stage": "위원회 상정·심사"
-        },
-        {
-          "date": "2026-09-01",
-          "stage": "위원회 의결"
-        }
-      ],
-      "recordKey": "assembly:2214435"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2216562",
-      "title": "지방자치법 일부개정법률안",
-      "proposer": "이해식의원 등 10인",
-      "proposedAt": "2026-02-04",
-      "committee": "행정안전위원회",
-      "statusCode": "committee_decision",
-      "statusLabel": "위원회 의결",
-      "statusDate": "2026-09-01",
-      "active": true,
-      "topics": [
-        "행정·지방자치",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 의결이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_S2T6A0Z2A0Y2Y1X0Y5F4G0E1F7D0D8&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-02-04",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-02-05",
-          "stage": "위원회 회부"
-        },
-        {
-          "date": "2026-08-24",
-          "stage": "위원회 상정·심사"
-        },
-        {
-          "date": "2026-09-01",
-          "stage": "위원회 의결"
-        }
-      ],
-      "recordKey": "assembly:2216562"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2219092",
-      "title": "지방자치법 일부개정법률안",
-      "proposer": "양부남의원 등 10인",
-      "proposedAt": "2026-06-02",
-      "committee": "행정안전위원회",
-      "statusCode": "committee_decision",
-      "statusLabel": "위원회 의결",
-      "statusDate": "2026-09-01",
-      "active": true,
-      "topics": [
-        "행정·지방자치",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 의결이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_N2M6L0F5F1D8K0R9Q5N6K5J7R7P0O4&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-06-02",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-07-01",
-          "stage": "위원회 회부"
-        },
-        {
-          "date": "2026-09-01",
-          "stage": "위원회 상정·심사"
-        },
-        {
-          "date": "2026-09-01",
-          "stage": "위원회 의결"
-        }
-      ],
-      "recordKey": "assembly:2219092"
-    },
-    {
-      "sourceType": "assembly",
-      "sourceId": "2219761",
-      "title": "지방자치법 일부개정법률안",
-      "proposer": "윤준병의원 등 11인",
-      "proposedAt": "2026-07-06",
-      "committee": "행정안전위원회",
-      "statusCode": "committee_decision",
-      "statusLabel": "위원회 의결",
-      "statusDate": "2026-09-01",
-      "active": true,
-      "topics": [
-        "행정·지방자치",
-        "주요 법제 변화"
-      ],
-      "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 의결이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_R2P6Q0P6P2N3J1K5H2I4G4G0O6P0N2&ageFrom=22&ageTo=22",
-      "history": [
-        {
-          "date": "2026-07-06",
-          "stage": "발의"
-        },
-        {
-          "date": "2026-07-07",
-          "stage": "위원회 회부"
-        },
-        {
-          "date": "2026-09-01",
-          "stage": "위원회 상정·심사"
-        },
-        {
-          "date": "2026-09-01",
-          "stage": "위원회 의결"
-        }
-      ],
-      "recordKey": "assembly:2219761"
     },
     {
       "sourceType": "assembly",
@@ -6393,9 +6519,9 @@
     {
       "sourceType": "assembly",
       "sourceId": "2213410",
-      "title": "국민연금법 일부개정법률안",
+      "title": "건강기능식품에 관한 법률 일부개정법률안",
       "proposer": "박민규의원 등 10인",
-      "proposedAt": "2024-06-05",
+      "proposedAt": "2022-08-17",
       "committee": "보건복지위원회",
       "statusCode": "committee_review",
       "statusLabel": "위원회 상정·심사",
@@ -6406,8 +6532,12 @@
         "주요 법제 변화"
       ],
       "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 상정·심사이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_O2N4L0T5S3T0R2Z0A5Y3X2T1S3Q3R7",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_J2D2D0J5A1X7P1Z4A0D8S0K7A9X7C0",
       "history": [
+        {
+          "date": "2022-08-17",
+          "stage": "발의"
+        },
         {
           "date": "2024-06-05",
           "stage": "발의"
@@ -6539,10 +6669,10 @@
     {
       "sourceType": "assembly",
       "sourceId": "2213854",
-      "title": "개인정보 보호법 일부개정법률안",
+      "title": "건강기능식품에 관한 법률 일부개정법률안",
       "proposer": "김승원의원 등 12인",
-      "proposedAt": "2025-11-03",
-      "committee": "정무위원회",
+      "proposedAt": "2022-08-17",
+      "committee": "보건복지위원회",
       "statusCode": "committee_review",
       "statusLabel": "위원회 상정·심사",
       "statusDate": "2026-03-31",
@@ -6552,8 +6682,12 @@
         "주요 법제 변화"
       ],
       "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 상정·심사이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_T2S5Q0P9X1Y1X1X3W5E2D0E0C8B7J0&ageFrom=22&ageTo=22",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_J2D2D0J5A1X7P1Z4A0D8S0K7A9X7C0",
       "history": [
+        {
+          "date": "2022-08-17",
+          "stage": "발의"
+        },
         {
           "date": "2025-11-03",
           "stage": "발의"
@@ -8650,9 +8784,9 @@
     {
       "sourceType": "assembly",
       "sourceId": "2209261",
-      "title": "국민연금법 일부개정법률안",
+      "title": "건강기능식품에 관한 법률 일부개정법률안",
       "proposer": "윤상현의원 등 10인",
-      "proposedAt": "2024-06-05",
+      "proposedAt": "2022-08-17",
       "committee": "보건복지위원회",
       "statusCode": "plenary_result",
       "statusLabel": "대안반영폐기",
@@ -8663,8 +8797,12 @@
         "주요 법제 변화"
       ],
       "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 대안반영폐기이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_O2N4L0T5S3T0R2Z0A5Y3X2T1S3Q3R7",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_J2D2D0J5A1X7P1Z4A0D8S0K7A9X7C0",
       "history": [
+        {
+          "date": "2022-08-17",
+          "stage": "발의"
+        },
         {
           "date": "2024-06-05",
           "stage": "발의"
@@ -8699,9 +8837,9 @@
     {
       "sourceType": "assembly",
       "sourceId": "2210123",
-      "title": "국민연금법 일부개정법률안",
+      "title": "건강기능식품에 관한 법률 일부개정법률안",
       "proposer": "정일영의원 등 12인",
-      "proposedAt": "2024-06-05",
+      "proposedAt": "2022-08-17",
       "committee": "보건복지위원회",
       "statusCode": "plenary_result",
       "statusLabel": "대안반영폐기",
@@ -8712,8 +8850,12 @@
         "주요 법제 변화"
       ],
       "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 대안반영폐기이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_O2N4L0T5S3T0R2Z0A5Y3X2T1S3Q3R7",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_J2D2D0J5A1X7P1Z4A0D8S0K7A9X7C0",
       "history": [
+        {
+          "date": "2022-08-17",
+          "stage": "발의"
+        },
         {
           "date": "2024-06-05",
           "stage": "발의"
@@ -8838,9 +8980,9 @@
     {
       "sourceType": "assembly",
       "sourceId": "2213411",
-      "title": "국민연금법 일부개정법률안",
+      "title": "건강기능식품에 관한 법률 일부개정법률안",
       "proposer": "이훈기의원 등 11인",
-      "proposedAt": "2024-06-05",
+      "proposedAt": "2022-08-17",
       "committee": "보건복지위원회",
       "statusCode": "plenary_result",
       "statusLabel": "대안반영폐기",
@@ -8851,8 +8993,12 @@
         "주요 법제 변화"
       ],
       "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 대안반영폐기이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_O2N4L0T5S3T0R2Z0A5Y3X2T1S3Q3R7",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_J2D2D0J5A1X7P1Z4A0D8S0K7A9X7C0",
       "history": [
+        {
+          "date": "2022-08-17",
+          "stage": "발의"
+        },
         {
           "date": "2024-06-05",
           "stage": "발의"
@@ -11740,9 +11886,9 @@
     {
       "sourceType": "assembly",
       "sourceId": "2208700",
-      "title": "국민연금법 일부개정법률안",
+      "title": "건강기능식품에 관한 법률 일부개정법률안",
       "proposer": "이용우의원 등 10인",
-      "proposedAt": "2024-06-05",
+      "proposedAt": "2022-08-17",
       "committee": "보건복지위원회",
       "statusCode": "committee_review",
       "statusLabel": "위원회 상정·심사",
@@ -11753,8 +11899,12 @@
         "주요 법제 변화"
       ],
       "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 상정·심사이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_O2N4L0T5S3T0R2Z0A5Y3X2T1S3Q3R7",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_J2D2D0J5A1X7P1Z4A0D8S0K7A9X7C0",
       "history": [
+        {
+          "date": "2022-08-17",
+          "stage": "발의"
+        },
         {
           "date": "2024-06-05",
           "stage": "발의"
@@ -11777,9 +11927,9 @@
     {
       "sourceType": "assembly",
       "sourceId": "2208783",
-      "title": "국민연금법 일부개정법률안",
+      "title": "건강기능식품에 관한 법률 일부개정법률안",
       "proposer": "박희승의원 등 52인",
-      "proposedAt": "2024-06-05",
+      "proposedAt": "2022-08-17",
       "committee": "보건복지위원회",
       "statusCode": "committee_review",
       "statusLabel": "위원회 상정·심사",
@@ -11790,8 +11940,12 @@
         "주요 법제 변화"
       ],
       "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 상정·심사이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_O2N4L0T5S3T0R2Z0A5Y3X2T1S3Q3R7",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_J2D2D0J5A1X7P1Z4A0D8S0K7A9X7C0",
       "history": [
+        {
+          "date": "2022-08-17",
+          "stage": "발의"
+        },
         {
           "date": "2024-06-05",
           "stage": "발의"
@@ -14196,9 +14350,9 @@
     {
       "sourceType": "assembly",
       "sourceId": "2208724",
-      "title": "국민연금법 일부개정법률안",
+      "title": "건강기능식품에 관한 법률 일부개정법률안",
       "proposer": "김승수의원 등 11인",
-      "proposedAt": "2024-06-05",
+      "proposedAt": "2022-08-17",
       "committee": "보건복지위원회",
       "statusCode": "committee_referral",
       "statusLabel": "위원회 회부",
@@ -14209,8 +14363,12 @@
         "주요 법제 변화"
       ],
       "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 회부이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_O2N4L0T5S3T0R2Z0A5Y3X2T1S3Q3R7",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_J2D2D0J5A1X7P1Z4A0D8S0K7A9X7C0",
       "history": [
+        {
+          "date": "2022-08-17",
+          "stage": "발의"
+        },
         {
           "date": "2024-06-05",
           "stage": "발의"
@@ -14583,9 +14741,9 @@
     {
       "sourceType": "assembly",
       "sourceId": "2206532",
-      "title": "국민연금법 일부개정법률안",
+      "title": "건강기능식품에 관한 법률 일부개정법률안",
       "proposer": "고민정의원 등 11인",
-      "proposedAt": "2024-06-05",
+      "proposedAt": "2022-08-17",
       "committee": "보건복지위원회",
       "statusCode": "committee_review",
       "statusLabel": "위원회 상정·심사",
@@ -14595,8 +14753,12 @@
         "교육·에듀테크"
       ],
       "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 상정·심사이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_O2N4L0T5S3T0R2Z0A5Y3X2T1S3Q3R7",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_J2D2D0J5A1X7P1Z4A0D8S0K7A9X7C0",
       "history": [
+        {
+          "date": "2022-08-17",
+          "stage": "발의"
+        },
         {
           "date": "2024-06-05",
           "stage": "발의"
@@ -14651,9 +14813,9 @@
     {
       "sourceType": "assembly",
       "sourceId": "2206562",
-      "title": "국민연금법 일부개정법률안",
+      "title": "건강기능식품에 관한 법률 일부개정법률안",
       "proposer": "김영호의원 등 15인",
-      "proposedAt": "2024-06-05",
+      "proposedAt": "2022-08-17",
       "committee": "보건복지위원회",
       "statusCode": "committee_review",
       "statusLabel": "위원회 상정·심사",
@@ -14663,8 +14825,12 @@
         "교육·에듀테크"
       ],
       "summary": "공식 국회 API에서 자동 선별된 법률안입니다. 현재 단계는 위원회 상정·심사이며 세부 제·개정 이유와 영향은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_O2N4L0T5S3T0R2Z0A5Y3X2T1S3Q3R7",
+      "sourceUrl": "https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_J2D2D0J5A1X7P1Z4A0D8S0K7A9X7C0",
       "history": [
+        {
+          "date": "2022-08-17",
+          "stage": "발의"
+        },
         {
           "date": "2024-06-05",
           "stage": "발의"
@@ -17092,20 +17258,20 @@
     {
       "sourceType": "government",
       "sourceId": "2000000327582",
-      "officialLbicId": "2000000327582",
+      "officialLbicId": "2000000330368",
       "title": "개인정보 보호법 시행령",
       "ministry": "개인정보보호위원...",
       "lawType": "대통령령",
-      "statusCode": "promulgated",
-      "statusLabel": "공포",
+      "statusCode": "government_process",
+      "statusLabel": "입법예고",
       "statusDate": "",
-      "active": false,
+      "active": true,
       "topics": [
         "데이터·개인정보",
         "주요 법제 변화"
       ],
       "summary": "법제처 정부입법 공식자료에서 자동 선별된 법령안입니다. 현재 추진단계는 법제처심사이며 세부 내용은 공식 원문을 기준으로 보강합니다.",
-      "sourceUrl": "https://opinion.lawmaking.go.kr/lmSts/govLm/2000000327582/detailRP",
+      "sourceUrl": "https://opinion.lawmaking.go.kr/lmSts/govLm/2000000330368/detailRP",
       "history": [],
       "recordKey": "government:2000000327582",
       "revisionType": "일부개정"
