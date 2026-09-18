@@ -28,11 +28,11 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "href": "./articles/2026-09-18-president-press-conference-preview.html",
     "keywords": "이재명 대통령 기자회견 연임 개헌 공소취소 호르무즈 파병 부동산",
     "video": {
-      "url": "https://www.youtube.com/watch?v=QILGJgiPooI",
-      "youtubeId": "QILGJgiPooI",
+      "url": "https://www.youtube.com/live/jYtTaCOJIlY?si=sJvTgkjRZ8kXDSOk",
+      "youtubeId": "jYtTaCOJIlY",
       "title": "이재명 대통령 기자회견 전체 영상 ↗",
-      "source": "YouTube · KBS News",
-      "thumbnail": "https://i.ytimg.com/vi/QILGJgiPooI/hqdefault.jpg"
+      "source": "YouTube · LIVE",
+      "thumbnail": "https://i.ytimg.com/vi/jYtTaCOJIlY/hqdefault.jpg"
     }
   },
   {
