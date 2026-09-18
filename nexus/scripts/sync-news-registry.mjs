@@ -73,6 +73,7 @@ function articleRecord(filename, source, previous = {}) {
   const title = decodeHtml(source.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || '');
   const summary = textByClass(source, 'p', 'article-deck');
   const kicker = textByClass(source, 'p', 'article-kicker');
+  const series = textByClass(source, 'p', 'article-series') || previous.series || '';
   const meta = textByClass(source, 'p', 'article-meta');
   const metaParts = meta.split(/\s+·\s+/).map(part => part.trim()).filter(Boolean);
   const filenameDate = id.match(/^(20\d{2}-\d{2}-\d{2})/)?.[1] || '';
@@ -96,6 +97,7 @@ function articleRecord(filename, source, previous = {}) {
     category,
     author,
     type: previous.type || '기사',
+    ...(series ? { series } : {}),
     title,
     summary,
     publishedAt,

@@ -39,7 +39,18 @@ const latestDate = dates.at(-1);
 const previousDate = dates.length > 1 ? dates.at(-2) : null;
 const latestItems = data.filter(item => item.date === latestDate);
 const previousItems = previousDate ? data.filter(item => item.date === previousDate) : [];
-if (latestItems.length < 4) fail(`${latestDate}: expected at least 4 meaningful articles, found ${latestItems.length}`);
+const seoulParts = new Intl.DateTimeFormat('en-CA', {
+  timeZone: 'Asia/Seoul',
+  year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit',
+  hourCycle: 'h23'
+}).formatToParts(new Date());
+const seoul = Object.fromEntries(seoulParts.map(part => [part.type, part.value]));
+const seoulToday = `${seoul.year}-${seoul.month}-${seoul.day}`;
+const seoulHour = Number(seoul.hour);
+const earlyEditionMinimum = latestDate === seoulToday && seoulHour < 6 ? 1 : 4;
+if (latestItems.length < earlyEditionMinimum) {
+  fail(`${latestDate}: expected at least ${earlyEditionMinimum} meaningful article(s), found ${latestItems.length}`);
+}
 
 const statsFor = item => {
   const filename = path.basename(item.href || '');
