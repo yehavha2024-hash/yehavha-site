@@ -82,7 +82,7 @@ function articleRecord(filename, source, previous = {}) {
   const category = kicker || previous.category || '';
   const author = metaParts.at(-1) || previous.author || '이명훈';
   const video = articleVideo(filename, source);
-  const { video: _staleVideo, ...preserved } = previous;
+  const { video: _staleVideo, publishedAt: _stalePublishedAt, modifiedAt: _staleModifiedAt, ...preserved } = previous;
 
   if (!title) throw new Error(`${filename}: article title is missing.`);
   if (!summary) throw new Error(`${filename}: article deck is missing.`);
