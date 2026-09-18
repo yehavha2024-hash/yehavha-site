@@ -32,15 +32,21 @@
 <video class="nexus-intro-video" autoplay muted loop playsinline preload="metadata" aria-label="YEHAVHA NEXUS 15초 광고 인트로">
 <source src="./assets/yehavha-nexus-intro.mp4" type="video/mp4" onerror="this.parentElement.hidden=true"/>
 </video>
-<section class="yehavha-special" aria-labelledby="yehavhaSpecialTitle">
-<a class="yehavha-special-banner" href="./special/interview-myunghun-lee.html" aria-label="YEHAVHA SPECIAL 첫 인물 인터뷰 보기">
-<img src="./assets/cards/strategy.webp?v=20260917-special" alt="YEHAVHA SPECIAL 기업 탐방과 인물 인터뷰를 위한 특별기획 이미지" width="960" height="540" loading="eager" decoding="async" onerror="this.onerror=null;this.src='./assets/portal-bg.webp';"/>
-<span class="yehavha-special-caption"><span class="yehavha-special-label" id="yehavhaSpecialTitle">YEHAVHA SPECIAL</span><strong>기업 탐방 · 인물 인터뷰 · 제품·서비스·문화</strong></span>
-</a>
-<a class="yehavha-special-lead" href="./special/interview-myunghun-lee.html">
-<span class="yehavha-special-kind">인물 인터뷰 · 01</span>
-<span style="display:flex;min-width:0;flex-direction:column;gap:2px"><strong>예하바 넥서스 운영자 이명훈</strong><span style="color:#5f6873;font-size:12px;font-weight:700;line-height:1.4">정보에서 전략으로, 전략을 실행으로</span></span>
-<span class="yehavha-special-action">인터뷰 보기 →</span>
+<!-- Fixed home slot: excluded from automated news/feed rendering. -->
+<section class="home-biff-special" id="homeBiffSpecial" data-fixed-slot="biff-special" aria-labelledby="homeBiffSpecialTitle">
+<a class="home-biff-special-banner" href="./news/#biffSpecial" aria-label="YEHAVHA NEWS 부산국제영화제 특집 보기">
+<span class="home-biff-reel" aria-hidden="true">
+<svg viewBox="0 0 96 96"><circle cx="48" cy="48" r="31" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="48" cy="48" r="7" fill="currentColor"/><circle cx="48" cy="27" r="8" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="69" cy="48" r="8" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="48" cy="69" r="8" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="27" cy="48" r="8" fill="none" stroke="currentColor" stroke-width="4"/></svg>
+</span>
+<span class="home-biff-copy">
+<span class="home-biff-eyebrow">YEHAVHA NEWS SPECIAL</span>
+<strong id="homeBiffSpecialTitle">제31회 부산국제영화제</strong>
+<span class="home-biff-description">2026.10.06–10.15 · 영화·인물·산업·AI·정책 특집</span>
+</span>
+<span class="home-biff-logo-wrap">
+<img class="home-biff-logo" src="https://www.biff.kr/kor/img/main/ft_logo.png" alt="BIFF 부산국제영화제 공식 로고" width="1000" height="231" loading="eager" decoding="async" referrerpolicy="no-referrer" onerror="this.parentElement.hidden=true"/>
+</span>
+<span class="home-biff-filmstrip" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
 </a>
 </section>
 <section class="nexus-frontline yehavha-news-zone" aria-labelledby="yehavhaNewsTitle">
@@ -62,6 +68,18 @@
 </div>
 </div>
 </a>
+<!-- Fixed interview slot: kept outside automated briefing/news rendering. -->
+<div class="home-interview-slot" id="homeInterviewFeature" data-fixed-slot="interview-feature" aria-label="YEHAVHA SPECIAL 인물 인터뷰">
+<a class="yehavha-special-banner home-interview-banner" href="./special/interview-myunghun-lee.html" aria-label="YEHAVHA SPECIAL 첫 인물 인터뷰 보기">
+<img src="./assets/cards/strategy.webp?v=20260917-special" alt="YEHAVHA SPECIAL 기업 탐방과 인물 인터뷰를 위한 특별기획 이미지" width="960" height="540" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='./assets/portal-bg.webp';"/>
+<span class="yehavha-special-caption"><span class="yehavha-special-label">YEHAVHA SPECIAL</span><strong>기업 탐방 · 인물 인터뷰 · 제품·서비스·문화</strong></span>
+</a>
+<a class="yehavha-special-lead" href="./special/interview-myunghun-lee.html">
+<span class="yehavha-special-kind">인물 인터뷰 · 01</span>
+<span style="display:flex;min-width:0;flex-direction:column;gap:2px"><strong>예하바 넥서스 운영자 이명훈</strong><span style="color:#5f6873;font-size:12px;font-weight:700;line-height:1.4">정보에서 전략으로, 전략을 실행으로</span></span>
+<span class="yehavha-special-action">인터뷰 보기 →</span>
+</a>
+</div>
 <a class="home-editorial-row" href="./intelligence-briefing/">
 <div class="today-titleline"><strong id="homeStrategyTitle">전략정보 최신 브리핑</strong><span class="today-meta">전략 브리핑</span></div>
 <div class="today-bodyline"><p id="homeStrategySummary">최신 전략정보 브리핑을 불러옵니다.</p><span class="today-action">전략 브리핑 보기 →</span></div>
