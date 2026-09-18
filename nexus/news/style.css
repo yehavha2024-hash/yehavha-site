@@ -111,7 +111,7 @@ button,input,select{font:inherit}
 .load-more{display:block;width:min(260px,100%);min-height:42px;margin:14px auto 0;border:1px solid var(--news-line);border-radius:8px;background:#fff;color:#111;font-size:13px;font-weight:850;cursor:pointer}
 .load-more:hover,.load-more:focus-visible{background:var(--news-soft)}
 .empty-state{display:block;margin:8px 0;padding:15px;border:1px dashed var(--news-line);border-radius:9px;color:#555;font-size:13.5px;text-align:center}
-.news-footer-links{display:flex;flex-wrap:wrap;gap:6px 12px;margin:8px 0}
+.news-footer-links{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;width:100%;gap:6px 12px;margin:8px auto;text-align:center}
 .news-footer-links a{font-size:12px;font-weight:780;text-underline-offset:3px}
 .policy-page{padding:30px 0 44px}
 .policy-hero{max-width:880px;padding-bottom:18px;border-bottom:2px solid #20252b}
