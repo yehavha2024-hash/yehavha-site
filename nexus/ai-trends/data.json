@@ -922,7 +922,7 @@
     "sourceCount": 7,
     "deduplication": "normalized URL + normalized title",
     "lookbackDays": 3,
-    "lastSuccessfulUpdateAt": "2026-09-18T04:43:15.468Z",
+    "lastSuccessfulUpdateAt": "2026-09-18T11:14:27.575Z",
     "lastAddedCount": 15,
     "relevanceFilter": "source-specific strict filter",
     "lastCleanupCount": 0,
