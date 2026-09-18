@@ -1,5 +1,5 @@
-# YEHAVHA NEXUS deployment cache policy
-# HTML and UI code must revalidate so structural fixes appear immediately.
+# YEHAVHA NEXUS UI cache policy
+# Structural HTML must not be served stale after a deployment.
 
 /index.html
   Cache-Control: no-cache, no-store, must-revalidate

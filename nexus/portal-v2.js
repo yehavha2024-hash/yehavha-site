@@ -591,36 +591,6 @@
     }
   }
 
-  function enforceCompactBiffHomeBanner() {
-    const root = document.getElementById('homeBiffSpecial');
-    if (!root) return;
-
-    root.querySelectorAll('.home-biff-logo-wrap,.home-biff-logo,.home-biff-filmstrip,img[src*="biff.kr"]')
-      .forEach(node => node.remove());
-
-    const banner = root.querySelector('.home-biff-special-banner');
-    if (banner) {
-      banner.dataset.layoutVersion = 'compact-no-biff-v3';
-      banner.style.setProperty('grid-template-columns', '44px minmax(0,1fr)', 'important');
-      banner.style.setProperty('gap', '11px', 'important');
-      banner.style.setProperty('min-height', '76px', 'important');
-      banner.style.setProperty('max-height', '92px', 'important');
-      banner.style.setProperty('padding', '9px 14px', 'important');
-    }
-
-    const reel = root.querySelector('.home-biff-reel');
-    if (reel) {
-      reel.style.setProperty('width', '40px', 'important');
-      reel.style.setProperty('height', '40px', 'important');
-    }
-    const reelSvg = root.querySelector('.home-biff-reel svg');
-    if (reelSvg) {
-      for (const [name, value] of [['width','30px'],['height','30px'],['max-width','30px'],['max-height','30px']]) {
-        reelSvg.style.setProperty(name, value, 'important');
-      }
-    }
-  }
-
   document.addEventListener('click', async event => {
     const button = event.target.closest('.copy-btn');
     if (button) {
@@ -651,7 +621,6 @@
     }
   });
 
-  enforceCompactBiffHomeBanner();
   updateTodayDate();
   installKoreaClock();
   renderHomeNews();

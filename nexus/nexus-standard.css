@@ -45,16 +45,6 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
 .nexus-intro-video[hidden]{display:none}
 
 /* BIFF fixed home feature — canonical main-page owner */
-.home-biff-special{display:block;margin:0 0 var(--nxs-home-section-gap,14px)}
-.home-biff-special-banner{position:relative;display:grid;grid-template-columns:52px minmax(0,1fr);gap:14px;align-items:center;min-height:84px;padding:11px 18px;overflow:hidden;border:1px solid #2b2d35;border-radius:14px;background:radial-gradient(circle at 14% 18%,rgba(255,255,255,.12),transparent 25%),radial-gradient(circle at 86% 18%,rgba(226,35,62,.38),transparent 30%),linear-gradient(128deg,#090a0d 0%,#171218 48%,#64121f 100%);color:#fff;box-shadow:0 6px 18px rgba(20,22,28,.13);text-decoration:none}
-.home-biff-special-banner:link,.home-biff-special-banner:visited,.home-biff-special-banner:hover,.home-biff-special-banner:active{color:#fff;text-decoration:none!important}
-.home-biff-special-banner::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 0 44%,rgba(255,255,255,.035) 44% 45%,transparent 45% 58%,rgba(255,255,255,.025) 58% 59%,transparent 59%)}
-.home-biff-reel{position:relative;z-index:1;display:grid;place-items:center;width:46px;height:46px;overflow:hidden;border:1px solid rgba(255,255,255,.24);border-radius:50%;background:rgba(255,255,255,.06);color:#fff}
-.home-biff-reel svg{display:block!important;width:36px!important;height:36px!important;max-width:36px!important;max-height:36px!important;flex:0 0 36px}
-.home-biff-copy{position:relative;z-index:1;display:flex;min-width:0;flex-direction:column;gap:5px}
-.home-biff-eyebrow{color:#ffdfe4;font-size:10.5px;font-weight:900;letter-spacing:.15em;line-height:1.3}
-.home-biff-copy strong{display:block;color:#fff;font-size:clamp(1.35rem,2.45vw,2rem);font-weight:900;line-height:1.08;letter-spacing:-.04em}
-.home-biff-description{display:block;color:rgba(255,255,255,.82);font-size:12.5px;font-weight:720;line-height:1.45}
 .hero-main>.description{max-width:none;color:#111111;font-size:18px;line-height:1.78}
 .quick-links{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px!important;margin-top:16px!important;justify-content:flex-start}
 .quick-link{display:grid!important;grid-template-columns:26px minmax(0,1fr) auto;gap:7px!important;align-items:center;min-width:0;min-height:34px!important;padding:2px 10px!important;border:1px solid var(--portal-line)!important;border-radius:9px!important;background:#fff!important;color:var(--portal-text)!important;text-decoration:none;text-align:left}
@@ -207,26 +197,24 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 /* BIFF fixed home feature mobile */
 @media(max-width:640px){
-  .home-biff-special-banner{grid-template-columns:42px minmax(0,1fr);gap:10px;min-height:76px;padding:9px 12px}
-  .home-biff-reel{width:38px;height:38px}
-  .home-biff-reel svg{width:30px!important;height:30px!important;max-width:30px!important;max-height:30px!important}
-  .home-biff-copy strong{font-size:clamp(1.22rem,6vw,1.55rem)}
-  .home-biff-description{font-size:11.5px}
-        }
+                  }
 
-
-/* Legacy BIFF mark cleanup: protects main banner from stale/regenerated markup. */
-.home-biff-special .home-biff-logo-wrap,
-.home-biff-special .home-biff-logo,
-.home-biff-special .home-biff-filmstrip,
-.home-biff-special img[src*="biff.kr"]{display:none!important}
-.home-biff-special-banner{min-height:76px!important;max-height:92px!important;padding:9px 14px!important;grid-template-columns:44px minmax(0,1fr)!important;gap:11px!important}
-.home-biff-reel{width:40px!important;height:40px!important}
-.home-biff-reel svg{width:30px!important;height:30px!important;max-width:30px!important;max-height:30px!important}
+/* NEXUS main 부산국제영화제 특집 — canonical owner.
+   External BIFF logo/wordmark images are intentionally not used here. */
+.home-biff-special{display:block;margin:0 0 var(--nxs-home-section-gap,14px)}
+.home-biff-special-banner{position:relative;display:grid;grid-template-columns:42px minmax(0,1fr);gap:11px;align-items:center;min-height:82px;padding:10px 15px;overflow:hidden;border:1px solid #2b2d35;border-radius:12px;background:radial-gradient(circle at 84% 20%,rgba(226,35,62,.34),transparent 30%),linear-gradient(128deg,#0a0b0e 0%,#171218 52%,#64121f 100%);color:#fff;box-shadow:0 5px 16px rgba(20,22,28,.12);text-decoration:none!important}
+.home-biff-special-banner:link,.home-biff-special-banner:visited,.home-biff-special-banner:hover,.home-biff-special-banner:active{color:#fff;text-decoration:none!important}
+.home-biff-reel{display:grid;place-items:center;width:38px;height:38px;border:1px solid rgba(255,255,255,.24);border-radius:50%;background:rgba(255,255,255,.06);color:#fff}
+.home-biff-reel svg{display:block;width:28px;height:28px;max-width:28px;max-height:28px}
+.home-biff-copy{display:flex;min-width:0;flex-direction:column;gap:2px}
+.home-biff-eyebrow{color:#ffdfe4;font-size:10px;font-weight:900;letter-spacing:.14em;line-height:1.25}
+.home-biff-copy strong{display:block;color:#fff;font-size:clamp(1.22rem,2.4vw,1.75rem);font-weight:900;line-height:1.08;letter-spacing:-.04em}
+.home-biff-description{display:block;color:rgba(255,255,255,.82);font-size:11.8px;font-weight:720;line-height:1.35}
 @media(max-width:640px){
-  .home-biff-special-banner{min-height:68px!important;max-height:82px!important;padding:8px 11px!important;grid-template-columns:36px minmax(0,1fr)!important;gap:9px!important}
-  .home-biff-reel{width:34px!important;height:34px!important}
-  .home-biff-reel svg{width:26px!important;height:26px!important;max-width:26px!important;max-height:26px!important}
-  .home-biff-copy strong{font-size:clamp(1.08rem,5.4vw,1.42rem)!important}
-  .home-biff-description{font-size:11px!important}
+  .home-biff-special-banner{grid-template-columns:35px minmax(0,1fr);gap:9px;min-height:72px;padding:8px 11px}
+  .home-biff-reel{width:32px;height:32px}
+  .home-biff-reel svg{width:24px;height:24px;max-width:24px;max-height:24px}
+  .home-biff-eyebrow{font-size:9.3px}
+  .home-biff-copy strong{font-size:clamp(1.08rem,5.4vw,1.4rem)}
+  .home-biff-description{font-size:10.8px}
 }
