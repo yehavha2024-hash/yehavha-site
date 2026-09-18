@@ -127,11 +127,23 @@ function xmlEscape(value) {
 function buildSitemap(records) {
   const latestDate = records.reduce((latest, item) => item.date > latest ? item.date : latest, '');
   const aboutDate = gitDate('nexus/news/about.html', latestDate);
+  const policyPages = [
+    ['policies/', 'nexus/news/policies/index.html', '0.6'],
+    ['policies/editorial-ethics.html', 'nexus/news/policies/editorial-ethics.html', '0.5'],
+    ['policies/anti-graft.html', 'nexus/news/policies/anti-graft.html', '0.5'],
+    ['policies/legal-review.html', 'nexus/news/policies/legal-review.html', '0.5'],
+    ['policies/ads-sponsorship.html', 'nexus/news/policies/ads-sponsorship.html', '0.5'],
+    ['policies/corrections-replies.html', 'nexus/news/policies/corrections-replies.html', '0.6']
+  ];
   const lines = [
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
     `  <url><loc>https://yehavha.com/news/</loc><lastmod>${xmlEscape(latestDate)}</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>`,
-    `  <url><loc>https://yehavha.com/news/about.html</loc><lastmod>${xmlEscape(aboutDate)}</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>`
+    `  <url><loc>https://yehavha.com/news/about.html</loc><lastmod>${xmlEscape(aboutDate)}</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>`,
+    ...policyPages.map(([url, file, priority]) => {
+      const changed = gitDate(file, latestDate);
+      return `  <url><loc>https://yehavha.com/news/${xmlEscape(url)}</loc><lastmod>${xmlEscape(changed)}</lastmod><changefreq>monthly</changefreq><priority>${priority}</priority></url>`;
+    })
   ];
 
   for (const record of records) {
