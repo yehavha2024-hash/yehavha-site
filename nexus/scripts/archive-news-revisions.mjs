@@ -62,8 +62,21 @@ if (before) {
 }
 
 if (!diff) {
-  console.log('YEHAVHA NEWS revision archive: no article changes.');
-  process.exit(0);
+  const seeded = fs.existsSync(archiveRoot)
+    && fs.readdirSync(archiveRoot, { withFileTypes: true })
+      .filter(entry => entry.isDirectory())
+      .some(entry => fs.existsSync(path.join(archiveRoot, entry.name, 'manifest.json')));
+  if (seeded) {
+    console.log('YEHAVHA NEWS revision archive: no article changes.');
+    process.exit(0);
+  }
+  const liveArticleDir = path.join(repoRoot, articlePrefix);
+  const currentFiles = fs.readdirSync(liveArticleDir)
+    .filter(name => name.endsWith('.html'))
+    .sort()
+    .map(name => `S\t${articlePrefix}${name}`);
+  diff = currentFiles.join('\n');
+  console.log(`YEHAVHA NEWS revision archive: seeding ${currentFiles.length} current article(s).`);
 }
 
 for (const line of diff.split('\n').filter(Boolean)) {
@@ -80,7 +93,7 @@ for (const line of diff.split('\n').filter(Boolean)) {
   const manifestPath = path.join(dir, 'manifest.json');
   const manifest = readManifest(manifestPath, articleId, sourcePath || previousPath);
 
-  if (before && previousPath && canShow(before, previousPath)) {
+  if (status !== 'S' && before && previousPath && canShow(before, previousPath)) {
     const previousHtml = show(before, previousPath);
     const previousMeta = commitMeta(before);
     const previousSnapshot = writeSnapshot(articleId, before, previousHtml);
@@ -111,10 +124,12 @@ for (const line of diff.split('\n').filter(Boolean)) {
     const meta = commitMeta(head);
     const snapshot = writeSnapshot(articleId, head, html);
     addVersion(manifest, {
-      stage: status.startsWith('A') ? 'published' : 'revised',
+      stage: status === 'S' ? 'baseline' : (status.startsWith('A') ? 'published' : 'revised'),
       commit: head,
       recordedAt: meta.recordedAt,
-      revisionReason: status.startsWith('A') ? '최초 발행 · ' + meta.message : meta.message,
+      revisionReason: status === 'S'
+        ? '보존체계 도입 시점 기준 발행본 스냅샷'
+        : (status.startsWith('A') ? '최초 발행 · ' + meta.message : meta.message),
       snapshot,
       evidenceSources: sourceLinks(html)
     });
