@@ -58,7 +58,24 @@ a{color:inherit}button,input,select,textarea{font:inherit}button,a{-webkit-tap-h
 .hero-main > .news-entry-banner::before,.hero-main > .news-entry-banner::after{display:none!important;content:none!important}
 .hero-main > .nexus-intro-video{margin-bottom:var(--nxs-home-section-gap)}
 
-.yehavha-special{display:grid;gap:var(--nxs-home-section-gap);margin:0 0 var(--nxs-home-section-gap)}
+/* Fixed home feature slots are deliberately separate from automated NEWS/feed render targets. */
+.home-biff-special{display:block;margin:0 0 var(--nxs-home-section-gap)}
+.home-biff-special-banner{position:relative;display:grid;grid-template-columns:82px minmax(0,1fr) minmax(150px,30%);gap:18px;align-items:center;min-height:164px;padding:24px 28px 30px;overflow:hidden;border:1px solid #2b2d35;border-radius:14px;background:radial-gradient(circle at 14% 18%,rgba(255,255,255,.12),transparent 25%),radial-gradient(circle at 86% 18%,rgba(226,35,62,.38),transparent 30%),linear-gradient(128deg,#090a0d 0%,#171218 48%,#64121f 100%);color:#fff;box-shadow:0 8px 24px rgba(20,22,28,.15);text-decoration:none}
+.home-biff-special-banner::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 0 44%,rgba(255,255,255,.035) 44% 45%,transparent 45% 58%,rgba(255,255,255,.025) 58% 59%,transparent 59%)}
+.home-biff-reel{position:relative;z-index:1;display:grid;place-items:center;width:74px;height:74px;border:1px solid rgba(255,255,255,.24);border-radius:50%;background:rgba(255,255,255,.06);color:#fff}
+.home-biff-reel svg{width:58px;height:58px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.3))}
+.home-biff-copy{position:relative;z-index:1;display:flex;min-width:0;flex-direction:column;gap:5px}
+.home-biff-eyebrow{color:#ffdfe4;font-size:11px;font-weight:900;letter-spacing:.16em;line-height:1.35}
+.home-biff-copy strong{font-size:clamp(1.65rem,3.2vw,2.45rem);font-weight:900;line-height:1.12;letter-spacing:-.045em}
+.home-biff-description{color:rgba(255,255,255,.82);font-size:14px;font-weight:720;line-height:1.55}
+.home-biff-logo-wrap{position:relative;z-index:1;display:flex;align-items:center;justify-content:flex-end;min-width:0}
+.home-biff-logo{display:block;width:100%;max-width:280px;height:auto;object-fit:contain;filter:drop-shadow(0 4px 12px rgba(0,0,0,.3))}
+.home-biff-filmstrip{position:absolute;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(8,1fr);gap:8px;height:14px;padding:3px 10px;background:rgba(0,0,0,.44)}
+.home-biff-filmstrip i{display:block;border-radius:2px;background:rgba(255,255,255,.62)}
+.home-interview-slot{display:grid;gap:8px;padding:10px 12px 12px;border-bottom:1px solid var(--line-soft);background:#f8fafc}
+.home-interview-slot .home-interview-banner{height:clamp(90px,8.8vw,112px);margin:0}
+.home-interview-slot .yehavha-special-lead{margin:0}
+
 .yehavha-special-banner{position:relative;display:block;height:clamp(104px,10.5vw,132px);overflow:hidden;border:1px solid var(--line);border-radius:10px;background:#10192a;text-decoration:none}
 .yehavha-special-banner img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 46%}
 .yehavha-special-banner::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,14,28,.78) 0%,rgba(10,22,40,.54) 48%,rgba(10,22,40,.12) 100%)}
@@ -141,6 +158,14 @@ a{color:inherit}button,input,select,textarea{font:inherit}button,a{-webkit-tap-h
 }
 
 @media(max-width:640px){
+  .home-biff-special-banner{grid-template-columns:54px minmax(0,1fr);gap:12px;min-height:142px;padding:18px 16px 26px}
+  .home-biff-reel{width:52px;height:52px}.home-biff-reel svg{width:40px;height:40px}
+  .home-biff-copy strong{font-size:clamp(1.35rem,7vw,1.8rem)}
+  .home-biff-description{font-size:12.5px}
+  .home-biff-logo-wrap{grid-column:2;justify-content:flex-start;margin-top:2px}
+  .home-biff-logo{max-width:170px}
+  .home-interview-slot{padding:9px 10px 10px}
+  .home-interview-slot .home-interview-banner{height:clamp(88px,25vw,112px)}
   .yehavha-special-banner{height:clamp(98px,26vw,122px)}
   .yehavha-special-caption{left:16px;max-width:88%}
   .yehavha-special-label{font-size:clamp(1.3rem,6.7vw,1.72rem)}
