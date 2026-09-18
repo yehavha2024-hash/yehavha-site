@@ -1,10 +1,10 @@
 # YEHAVHA NEXUS UI cache policy
-# Structural HTML must not be served stale after a deployment.
+# Structural HTML and NEWS routes must not be served stale after deployment.
 
 /index.html
   Cache-Control: no-cache, no-store, must-revalidate
 
-/news/index.html
+/news/*
   Cache-Control: no-cache, no-store, must-revalidate
 
 /*.html

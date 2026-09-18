@@ -9,6 +9,7 @@ on:
       - 'nexus/news/sitemap.xml'
       - 'nexus/news/index.html'
       - 'nexus/news/style.css'
+      - 'nexus/_headers'
       - 'nexus/scripts/normalize-news-articles.mjs'
       - 'nexus/scripts/sync-news-registry.mjs'
       - 'nexus/scripts/audit-news-architecture.mjs'
