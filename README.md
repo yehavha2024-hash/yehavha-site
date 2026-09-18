@@ -60,4 +60,15 @@ Nexus 자동갱신은 임의의 `nexus.project.json`을 재귀적으로 탐색�
 
 일반 감사 워크플로는 읽기 권한만 사용하며, 다른 프로젝트의 별도 검증 실패가 Nexus 상태 갱신 역할과 섞이지 않도록 자동화 책임을 분리합니다.
 
+## Nexus 배포 기준
+
+Nexus 운영 원본은 `nexus/`이며, `.github/workflows/deploy-nexus.yml`을 Cloudflare Pages 운영 배포의 기준 경로로 사용합니다.
+
+- 배포 대상: Cloudflare Pages 프로젝트 `yehavha-nexus-hub`
+- 운영 원본: `nexus/`
+- 운영 브랜치: `main`
+- 필요한 GitHub Actions Repository Secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`
+- 배포 후 `https://yehavha.com/`이 현재 Nexus 원본을 반영했는지 자동 검증합니다.
+- Cloudflare Git 연동의 Build watch path 설정과 무관하게 Nexus 변경사항을 직접 배포하도록 설계합니다.
+
 Copyright © 이명훈 2026. All rights reserved.
