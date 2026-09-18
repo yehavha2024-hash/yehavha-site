@@ -199,8 +199,17 @@ const previousLengths = previousItems
 const previousMedian = median(previousLengths);
 const densityFloor = Math.max(1800, previousMedian ? Math.round(previousMedian * 0.70) : 1800);
 const homeLatestLimit = Number(config.homeLatestLimit) || 0;
+const seoulParts = new Intl.DateTimeFormat('en-CA', {
+  timeZone: 'Asia/Seoul',
+  year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit',
+  hourCycle: 'h23'
+}).formatToParts(new Date());
+const seoul = Object.fromEntries(seoulParts.map(part => [part.type, part.value]));
+const seoulToday = `${seoul.year}-${seoul.month}-${seoul.day}`;
+const seoulHour = Number(seoul.hour);
+const latestEditionMinimum = latestDate === seoulToday && seoulHour < 6 ? 1 : 4;
 
-if (latestItems.length < 4) fail(`${latestDate}: latest edition has too few articles (${latestItems.length}); expected at least 4 meaningful articles`);
+if (latestItems.length < latestEditionMinimum) fail(`${latestDate}: latest edition has too few articles (${latestItems.length}); expected at least ${latestEditionMinimum} meaningful article(s)`);
 if (homeLatestLimit < latestItems.length) fail(`${latestDate}: homeLatestLimit ${homeLatestLimit} hides ${latestItems.length - homeLatestLimit} validated latest-edition article(s)`);
 for (const item of latestItems) {
   const filename = path.basename(item.href);
