@@ -35,7 +35,19 @@ const state = readState();
 state.schemaVersion = 1;
 state.items ||= {};
 
-const activeIds = new Set(top.map(item => item.id));
+const priorActive = Object.values(state.items)
+  .filter(item => item.currentPosition)
+  .sort((a, b) => a.currentPosition - b.currentPosition)
+  .map(item => item.id);
+const nextActive = top.map(item => item.id);
+const unchanged = priorActive.length === nextActive.length
+  && priorActive.every((id, index) => id === nextActive[index]);
+if (unchanged && fs.existsSync(statePath)) {
+  console.log('YEHAVHA NEWS arrangement archive: no ordering change.');
+  process.exit(0);
+}
+
+const activeIds = new Set(nextActive);
 for (const [id, item] of Object.entries(state.items)) {
   if (item.currentPosition && !activeIds.has(id)) {
     item.removedAt = capturedAt;
