@@ -94,7 +94,10 @@
       button.setAttribute('aria-pressed', 'false');
       return button;
     });
-    els.categoryNav.replaceChildren(...buttons);
+    const policyLink = make('a', 'category-btn policy-category-link', '운영규정');
+    policyLink.href = './policies/';
+    policyLink.setAttribute('aria-label', 'YEHAVHA NEWS 내부 운영규정 보기');
+    els.categoryNav.replaceChildren(...buttons, policyLink);
   }
 
   function articleCard(item, compact = false, media = false) {
