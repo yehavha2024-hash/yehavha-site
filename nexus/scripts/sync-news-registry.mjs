@@ -76,10 +76,11 @@ function articleRecord(filename, source, previous = {}) {
   const meta = textByClass(source, 'p', 'article-meta');
   const metaParts = meta.split(/\s+·\s+/).map(part => part.trim()).filter(Boolean);
   const filenameDate = id.match(/^(20\d{2}-\d{2}-\d{2})/)?.[1] || '';
-  const metaDate = (metaParts[0] || '').replaceAll('.', '-');
-  const date = /^20\d{2}-\d{2}-\d{2}$/.test(metaDate) ? metaDate : filenameDate;
-  const category = kicker || metaParts[1] || previous.category || '';
-  const author = metaParts.length >= 3 ? metaParts.at(-1) : (previous.author || '이명훈');
+  const publishedAt = source.match(/<time\\b(?=[^>]*class=["'][^"']*\\barticle-published\\b[^"']*["'])[^>]*datetime=["']([^"']+)["'][^>]*>/i)?.[1] || '';
+  const modifiedAt = source.match(/<time\\b(?=[^>]*class=["'][^"']*\\barticle-modified\\b[^"']*["'])[^>]*datetime=["']([^"']+)["'][^>]*>/i)?.[1] || '';
+  const date = /^20\d{2}-\d{2}-\d{2}T/.test(publishedAt) ? publishedAt.slice(0, 10) : filenameDate;
+  const category = kicker || previous.category || '';
+  const author = metaParts.at(-1) || previous.author || '이명훈';
   const video = articleVideo(filename, source);
   const { video: _staleVideo, ...preserved } = previous;
 
@@ -97,6 +98,8 @@ function articleRecord(filename, source, previous = {}) {
     type: previous.type || '기사',
     title,
     summary,
+    publishedAt,
+    ...(modifiedAt ? { modifiedAt } : {}),
     href: `./articles/${filename}`,
     keywords: previous.keywords || `${title} ${category}`,
     ...(video ? { video } : {})
@@ -148,7 +151,8 @@ function buildSitemap(records) {
 
   for (const record of records) {
     const filename = path.basename(record.href);
-    lines.push(`  <url><loc>https://yehavha.com/news/articles/${xmlEscape(filename)}</loc><lastmod>${xmlEscape(record.date)}</lastmod></url>`);
+    const lastmod = record.modifiedAt?.slice(0, 10) || record.date;
+    lines.push(`  <url><loc>https://yehavha.com/news/articles/${xmlEscape(filename)}</loc><lastmod>${xmlEscape(lastmod)}</lastmod></url>`);
   }
   lines.push('</urlset>', '');
   return lines.join('\n');
