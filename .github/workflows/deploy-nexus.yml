@@ -27,20 +27,41 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate NEXUS main BIFF banner source
+      - name: Validate NEXUS fixed-slot ownership
         shell: bash
         run: |
           set -euo pipefail
-          grep -q 'id="homeBiffSpecial"' nexus/index.html
-          grep -q 'data-fixed-slot="biff-special"' nexus/index.html
-          if grep -q 'home-biff-logo' nexus/index.html; then
-            echo "::error::Legacy BIFF logo markup returned to nexus/index.html"
+
+          # Main BIFF slot: exactly one static owner, no external BIFF logo/wordmark.
+          test "$(grep -c 'id="homeBiffSpecial"' nexus/index.html)" -eq 1
+          test "$(grep -c 'data-fixed-slot="biff-special"' nexus/index.html)" -eq 1
+          if grep -Eq 'home-biff-logo|biff\.kr' nexus/index.html; then
+            echo "::error::Legacy/external BIFF logo markup returned to nexus/index.html"
             exit 1
           fi
-          if grep -q 'biff.kr' nexus/index.html; then
-            echo "::error::External BIFF image dependency returned to NEXUS main"
+
+          # Main BIFF presentation belongs only to nexus-standard.css.
+          if grep -q '\.home-biff-special-banner{' nexus/portal-v2.css; then
+            echo "::error::BIFF main styles duplicated into portal-v2.css"
             exit 1
           fi
+          grep -q '\.home-biff-special-banner{' nexus/nexus-standard.css
+
+          # Runtime code must not rewrite the fixed BIFF slot.
+          if grep -Eq 'homeBiffSpecial|home-biff-' nexus/portal-v2.js; then
+            echo "::error::portal-v2.js must not mutate the fixed BIFF slot"
+            exit 1
+          fi
+
+          # Interview feature belongs to YEHAVHA NEWS only.
+          if grep -Eq 'homeInterviewFeature|newsInterviewFeature' nexus/index.html; then
+            echo "::error::Interview feature returned to NEXUS main"
+            exit 1
+          fi
+          test "$(grep -c 'id="newsInterviewFeature"' nexus/news/index.html)" -eq 1
+          test "$(grep -c 'data-fixed-slot="interview-feature"' nexus/news/index.html)" -eq 1
+
+          echo "NEXUS fixed-slot ownership validated."
 
       - name: Cloudflare credential status
         id: credentials
