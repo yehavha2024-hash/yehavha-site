@@ -77,13 +77,12 @@ function articleRecord(filename, source, previous = {}) {
   const meta = textByClass(source, 'p', 'article-meta');
   const metaParts = meta.split(/\s+·\s+/).map(part => part.trim()).filter(Boolean);
   const filenameDate = id.match(/^(20\d{2}-\d{2}-\d{2})/)?.[1] || '';
-  const publishedAt = source.match(/<time\\b(?=[^>]*class=["'][^"']*\\barticle-published\\b[^"']*["'])[^>]*datetime=["']([^"']+)["'][^>]*>/i)?.[1] || '';
-  const modifiedAt = source.match(/<time\\b(?=[^>]*class=["'][^"']*\\barticle-modified\\b[^"']*["'])[^>]*datetime=["']([^"']+)["'][^>]*>/i)?.[1] || '';
+  const publishedAt = source.match(/<time\b(?=[^>]*class=["'][^"']*\barticle-published\b[^"']*["'])[^>]*datetime=["']([^"']+)["'][^>]*>/i)?.[1] || '';
+  const modifiedAt = source.match(/<time\b(?=[^>]*class=["'][^"']*\barticle-modified\b[^"']*["'])[^>]*datetime=["']([^"']+)["'][^>]*>/i)?.[1] || '';
   const date = /^20\d{2}-\d{2}-\d{2}T/.test(publishedAt) ? publishedAt.slice(0, 10) : filenameDate;
   const category = kicker || previous.category || '';
   const author = metaParts.at(-1) || previous.author || '이명훈';
   const video = articleVideo(filename, source);
-  const { video: _staleVideo, publishedAt: _stalePublishedAt, modifiedAt: _staleModifiedAt, ...preserved } = previous;
 
   if (!title) throw new Error(`${filename}: article title is missing.`);
   if (!summary) throw new Error(`${filename}: article deck is missing.`);
@@ -91,7 +90,6 @@ function articleRecord(filename, source, previous = {}) {
   if (!category) throw new Error(`${filename}: article category is missing.`);
 
   return {
-    ...preserved,
     id,
     date,
     category,
@@ -100,10 +98,10 @@ function articleRecord(filename, source, previous = {}) {
     ...(series ? { series } : {}),
     title,
     summary,
-    publishedAt,
-    ...(modifiedAt ? { modifiedAt } : {}),
     href: `./articles/${filename}`,
     keywords: previous.keywords || `${title} ${category}`,
+    publishedAt,
+    ...(modifiedAt ? { modifiedAt } : {}),
     ...(video ? { video } : {})
   };
 }
