@@ -23,6 +23,18 @@ function sourceLinks(html = '') {
   const section = html.match(/<section\b(?=[^>]*class=["'][^"']*\barticle-sources\b[^"']*["'])[^>]*>[\s\S]*?<\/section>/i)?.[0] || '';
   return [...new Set([...section.matchAll(/href=["'](https?:\/\/[^"']+)["']/gi)].map(match => match[1]))];
 }
+function revisionApproval(html = '') {
+  const notice = html.match(/<aside\b(?=[^>]*class=["'][^"']*\barticle-revision-notice\b[^"']*["'])[^>]*>[\s\S]*?<\/aside>/i)?.[0] || '';
+  if (!notice) return null;
+  const editor = notice.match(/data-editor=["']([^"']+)["']/i)?.[1] || '';
+  const approvedAt = notice.match(/data-approved-at=["']([^"']+)["']/i)?.[1] || '';
+  const approved = /data-editor-approved=["']true["']/i.test(notice);
+  const summary = notice
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return { approved, editor, approvedAt, summary };
+}
 function readManifest(file, articleId, sourcePath) {
   if (fs.existsSync(file)) return JSON.parse(fs.readFileSync(file, 'utf8'));
   return {
@@ -131,7 +143,8 @@ for (const line of diff.split('\n').filter(Boolean)) {
         ? '보존체계 도입 시점 기준 발행본 스냅샷'
         : (status.startsWith('A') ? '최초 발행 · ' + meta.message : meta.message),
       snapshot,
-      evidenceSources: sourceLinks(html)
+      evidenceSources: sourceLinks(html),
+      ...(revisionApproval(html) ? { editorApproval: revisionApproval(html) } : {})
     });
   }
 
