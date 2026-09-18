@@ -23,16 +23,16 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "category": "정치",
     "author": "이명훈",
     "type": "기사",
-    "title": "이 대통령 오늘 10시 30분 기자회견…개헌·파병·부동산 등 현안 입장 주목",
-    "summary": "이재명 대통령이 18일 오전 10시 30분 취임 후 일곱 번째 기자회견을 연다. 회견 전 단계에서는 일정과 의제 범위만 확정된 만큼, 개헌·공소취소·인사·호르무즈 파병·부동산 등 개별 현안의 최종 입장은 실제 발언 이후 구분해 확인해야 한다.",
+    "title": "이 대통령 기자회견 분석…연임 선 긋고 민생·개혁·통합 재정렬",
+    "summary": "이재명 대통령은 18일 기자회견에서 최근 국정 지지 흐름과 관련해 소통·배려의 부족을 언급하고 민생을 더 세밀하게 살피겠다고 밝혔다. 연임 논란과 공소취소 논란에는 각각 선을 그었고, 검찰개혁·경찰 견제, 호르무즈 대응, 북미대화, 부동산, 대미투자까지 폭넓게 답했다. 앞으로의 판단 기준은 발언의 강도보다 관계부처·국회·외교 협상에서 실제 후속조치가 어떻게 연결되는지다.",
     "href": "./articles/2026-09-18-president-press-conference-preview.html",
     "keywords": "이재명 대통령 기자회견 연임 개헌 공소취소 호르무즈 파병 부동산",
     "video": {
-      "url": "https://www.youtube.com/watch?v=WB6hE4H6iio",
-      "youtubeId": "WB6hE4H6iio",
-      "title": "이 대통령, 오늘 기자회견...개각·공소 취소·당내 갈등 언급 주목 ↗",
-      "source": "YouTube · YTN",
-      "thumbnail": "https://i.ytimg.com/vi/WB6hE4H6iio/hqdefault.jpg"
+      "url": "https://www.youtube.com/watch?v=QILGJgiPooI",
+      "youtubeId": "QILGJgiPooI",
+      "title": "이재명 대통령 기자회견 전체 영상 ↗",
+      "source": "YouTube · KBS News",
+      "thumbnail": "https://i.ytimg.com/vi/QILGJgiPooI/hqdefault.jpg"
     }
   },
   {
