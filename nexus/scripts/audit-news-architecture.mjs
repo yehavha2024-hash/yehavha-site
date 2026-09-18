@@ -119,8 +119,8 @@ for (const filename of articleFiles) {
   const sourceCategory = textByClass(source, 'p', 'article-kicker');
   const sourceMeta = textByClass(source, 'p', 'article-meta');
   const sourceMetaParts = sourceMeta.split(/\s+·\s+/).map(part => part.trim()).filter(Boolean);
-  const publishedAt = source.match(/<time\\b(?=[^>]*class=["'][^"']*\\barticle-published\\b[^"']*["'])[^>]*datetime=["']([^"']+)["'][^>]*>/i)?.[1] || '';
-  const modifiedAt = source.match(/<time\\b(?=[^>]*class=["'][^"']*\\barticle-modified\\b[^"']*["'])[^>]*datetime=["']([^"']+)["'][^>]*>/i)?.[1] || '';
+  const publishedAt = source.match(/<time\b(?=[^>]*class=["'][^"']*\barticle-published\b[^"']*["'])[^>]*datetime=["']([^"']+)["'][^>]*>/i)?.[1] || '';
+  const modifiedAt = source.match(/<time\b(?=[^>]*class=["'][^"']*\barticle-modified\b[^"']*["'])[^>]*datetime=["']([^"']+)["'][^>]*>/i)?.[1] || '';
   if (!/^20\d{2}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+09:00$/.test(publishedAt)) fail(`${filename}: written timestamp missing or invalid`);
   if (modifiedAt && !/^20\d{2}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+09:00$/.test(modifiedAt)) fail(`${filename}: modified timestamp invalid`);
   if (modifiedAt && new Date(modifiedAt) <= new Date(publishedAt)) fail(`${filename}: modified timestamp must be later than written timestamp`);
