@@ -154,8 +154,10 @@ for (const filename of articleFiles) {
       const pattern = new RegExp(`class=["'][^"']*\\b${requiredClass}\\b[^"']*["']`, 'i');
       if (!pattern.test(notice)) fail(`${filename}: major revision notice missing ${requiredClass}`);
     }
-    const headEnd = source.indexOf('</header>');
+    const articleHeadMatch = source.match(/<header\b(?=[^>]*class=["'][^"']*\barticle-head\b[^"']*["'])[^>]*>[\s\S]*?<\/header>/i);
+    const headEnd = articleHeadMatch ? source.indexOf(articleHeadMatch[0]) + articleHeadMatch[0].length : -1;
     const noticeIndex = source.indexOf(revisionNoticeMatch[0]);
+    if (headEnd < 0) fail(`${filename}: article-head missing for revision notice placement`);
     const videoIndex = source.search(/<a\b(?=[^>]*class=["'][^"']*\barticle-video-link\b)/i);
     const bodyIndex = source.search(/<div\b(?=[^>]*class=["'][^"']*\barticle-body\b)/i);
     const firstContentIndex = [videoIndex, bodyIndex].filter(index => index >= 0).sort((a, b) => a - b)[0] ?? -1;
