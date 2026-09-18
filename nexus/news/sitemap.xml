@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://yehavha.com/news/</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
-  <url><loc>https://yehavha.com/news/about.html</loc><lastmod>2026-09-16</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://yehavha.com/news/about.html</loc><lastmod>2026-09-18</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://yehavha.com/news/policies/</loc><lastmod>2026-09-18</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://yehavha.com/news/policies/editorial-ethics.html</loc><lastmod>2026-09-18</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://yehavha.com/news/policies/anti-graft.html</loc><lastmod>2026-09-18</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://yehavha.com/news/policies/legal-review.html</loc><lastmod>2026-09-18</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://yehavha.com/news/policies/ads-sponsorship.html</loc><lastmod>2026-09-18</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://yehavha.com/news/policies/corrections-replies.html</loc><lastmod>2026-09-18</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://yehavha.com/news/articles/2026-09-18-president-press-conference-preview.html</loc><lastmod>2026-09-18</lastmod></url>
   <url><loc>https://yehavha.com/news/articles/2026-09-18-korea-us-foreign-ministers.html</loc><lastmod>2026-09-18</lastmod></url>
   <url><loc>https://yehavha.com/news/articles/2026-09-18-korea-credit-gap.html</loc><lastmod>2026-09-18</lastmod></url>
