@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "articleId": "2026-09-15-korea-central-asia-ai-science-ministers",
+  "sourcePath": "nexus/news/articles/2026-09-15-korea-central-asia-ai-science-ministers.html",
+  "draftRef": "",
+  "retention": {
+    "minimumMonths": 6,
+    "defaultPolicy": "indefinite-unless-lawful-disposal-approved"
+  },
+  "evidenceNotes": [],
+  "versions": [
+    {
+      "stage": "baseline",
+      "commit": "f23e283cb64d2efe4b98a4064ab26467eafc329c",
+      "recordedAt": "2026-09-18T15:50:23+09:00",
+      "revisionReason": "보존체계 도입 시점 기준 발행본 스냅샷",
+      "snapshot": "operations/news-records/articles/2026-09-15-korea-central-asia-ai-science-ministers/f23e283cb64d2efe4b98a4064ab26467eafc329c.html",
+      "evidenceSources": []
+    }
+  ]
+}
