@@ -213,3 +213,20 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
   .home-biff-copy strong{font-size:clamp(1.22rem,6vw,1.55rem)}
   .home-biff-description{font-size:11.5px}
         }
+
+
+/* Legacy BIFF mark cleanup: protects main banner from stale/regenerated markup. */
+.home-biff-special .home-biff-logo-wrap,
+.home-biff-special .home-biff-logo,
+.home-biff-special .home-biff-filmstrip,
+.home-biff-special img[src*="biff.kr"]{display:none!important}
+.home-biff-special-banner{min-height:76px!important;max-height:92px!important;padding:9px 14px!important;grid-template-columns:44px minmax(0,1fr)!important;gap:11px!important}
+.home-biff-reel{width:40px!important;height:40px!important}
+.home-biff-reel svg{width:30px!important;height:30px!important;max-width:30px!important;max-height:30px!important}
+@media(max-width:640px){
+  .home-biff-special-banner{min-height:68px!important;max-height:82px!important;padding:8px 11px!important;grid-template-columns:36px minmax(0,1fr)!important;gap:9px!important}
+  .home-biff-reel{width:34px!important;height:34px!important}
+  .home-biff-reel svg{width:26px!important;height:26px!important;max-width:26px!important;max-height:26px!important}
+  .home-biff-copy strong{font-size:clamp(1.08rem,5.4vw,1.42rem)!important}
+  .home-biff-description{font-size:11px!important}
+}
