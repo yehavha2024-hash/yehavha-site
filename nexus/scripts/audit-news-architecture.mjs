@@ -119,18 +119,48 @@ for (const filename of articleFiles) {
   const sourceCategory = textByClass(source, 'p', 'article-kicker');
   const sourceMeta = textByClass(source, 'p', 'article-meta');
   const sourceMetaParts = sourceMeta.split(/\s+·\s+/).map(part => part.trim()).filter(Boolean);
-  const sourceDate = (sourceMetaParts[0] || '').replaceAll('.', '-');
-  const sourceAuthor = sourceMetaParts.length >= 3 ? sourceMetaParts.at(-1) : '';
+  const publishedAt = source.match(/<time\\b(?=[^>]*class=["'][^"']*\\barticle-published\\b[^"']*["'])[^>]*datetime=["']([^"']+)["'][^>]*>/i)?.[1] || '';
+  const modifiedAt = source.match(/<time\\b(?=[^>]*class=["'][^"']*\\barticle-modified\\b[^"']*["'])[^>]*datetime=["']([^"']+)["'][^>]*>/i)?.[1] || '';
+  if (!/^20\d{2}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+09:00$/.test(publishedAt)) fail(`${filename}: written timestamp missing or invalid`);
+  if (modifiedAt && !/^20\d{2}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+09:00$/.test(modifiedAt)) fail(`${filename}: modified timestamp invalid`);
+  if (modifiedAt && new Date(modifiedAt) <= new Date(publishedAt)) fail(`${filename}: modified timestamp must be later than written timestamp`);
+  const sourceDate = publishedAt.slice(0, 10);
+  const sourceAuthor = sourceMetaParts.at(-1) || '';
   const displayChecks = [
     ['title', sourceTitle],
     ['summary', sourceSummary],
     ['category', sourceCategory],
     ['date', sourceDate],
-    ['author', sourceAuthor]
+    ['author', sourceAuthor],
+    ['publishedAt', publishedAt],
+    ['modifiedAt', modifiedAt]
   ];
   for (const [field, expected] of displayChecks) {
-    if (expected && registryRecord?.[field] !== expected) {
-      fail(`${filename}: article-owned ${field} and registry are not synchronized`);
+    const actual = registryRecord?.[field] || '';
+    if (actual !== expected) fail(`${filename}: article-owned ${field} and registry are not synchronized`);
+  }
+
+  const revisionNoticeMatch = source.match(/<aside\b(?=[^>]*class=["'][^"']*\barticle-revision-notice\b[^"']*["'])[^>]*>[\s\S]*?<\/aside>/i);
+  if (revisionNoticeMatch) {
+    const notice = revisionNoticeMatch[0];
+    if (!modifiedAt) fail(`${filename}: major revision notice requires modified timestamp`);
+    if (!/data-editor-approved=["']true["']/i.test(notice)) fail(`${filename}: major revision notice requires editor approval`);
+    const editor = notice.match(/data-editor=["']([^"']+)["']/i)?.[1] || '';
+    const approvedAt = notice.match(/data-approved-at=["']([^"']+)["']/i)?.[1] || '';
+    if (!editor) fail(`${filename}: major revision notice editor missing`);
+    if (!/^20\d{2}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+09:00$/.test(approvedAt)) fail(`${filename}: major revision approval timestamp missing or invalid`);
+    if (new Date(approvedAt) > new Date(modifiedAt)) fail(`${filename}: editor approval cannot be later than published modification timestamp`);
+    for (const requiredClass of ['revision-before', 'revision-after', 'revision-reason', 'revision-approval']) {
+      const pattern = new RegExp(`class=["'][^"']*\\b${requiredClass}\\b[^"']*["']`, 'i');
+      if (!pattern.test(notice)) fail(`${filename}: major revision notice missing ${requiredClass}`);
+    }
+    const headEnd = source.indexOf('</header>');
+    const noticeIndex = source.indexOf(revisionNoticeMatch[0]);
+    const videoIndex = source.search(/<a\b(?=[^>]*class=["'][^"']*\barticle-video-link\b)/i);
+    const bodyIndex = source.search(/<div\b(?=[^>]*class=["'][^"']*\barticle-body\b)/i);
+    const firstContentIndex = [videoIndex, bodyIndex].filter(index => index >= 0).sort((a, b) => a - b)[0] ?? -1;
+    if (noticeIndex <= headEnd || (firstContentIndex >= 0 && noticeIndex >= firstContentIndex)) {
+      fail(`${filename}: major revision notice must appear below the lead/meta and before article content`);
     }
   }
 
@@ -205,7 +235,7 @@ for (const required of ['renderCategoryNav()', 'renderHome()', 'renderView()', "
 }
 
 const styleSource = text(path.join(newsDir, 'style.css'));
-for (const selector of ['.category-latest-grid', '.archive-day', '.article-page', '.article-body', '.news-accountability', '.article-point', '.opinion-feature', '.article-video-link']) {
+for (const selector of ['.category-latest-grid', '.archive-day', '.article-page', '.article-body', '.news-accountability', '.article-point', '.opinion-feature', '.article-video-link', '.article-revision-notice']) {
   if (!styleSource.includes(selector)) fail(`style.css missing selector: ${selector}`);
 }
 if (/\.news-head-tools\{[^}]*flex-direction:column/.test(styleSource)) fail('news header tools must not be forced into a vertical row');
