@@ -59,9 +59,6 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
 .home-biff-logo{display:block;width:100%;max-width:280px;height:auto;object-fit:contain;filter:drop-shadow(0 4px 12px rgba(0,0,0,.3))}
 .home-biff-filmstrip{position:absolute;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(8,1fr);gap:8px;height:14px;padding:3px 10px;background:rgba(0,0,0,.44)}
 .home-biff-filmstrip i{display:block;border-radius:2px;background:rgba(255,255,255,.62)}
-.home-interview-slot{display:grid;gap:8px;padding:10px 12px 12px;border-bottom:1px solid var(--portal-line-soft,#e5e7eb);background:#f8fafc}
-.home-interview-slot .home-interview-banner{height:clamp(90px,8.8vw,112px);margin:0}
-.home-interview-slot .yehavha-special-lead{margin:0}
 .hero-main>.description{max-width:none;color:#111111;font-size:18px;line-height:1.78}
 .quick-links{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px!important;margin-top:16px!important;justify-content:flex-start}
 .quick-link{display:grid!important;grid-template-columns:26px minmax(0,1fr) auto;gap:7px!important;align-items:center;min-width:0;min-height:34px!important;padding:2px 10px!important;border:1px solid var(--portal-line)!important;border-radius:9px!important;background:#fff!important;color:var(--portal-text)!important;text-decoration:none;text-align:left}
@@ -221,6 +218,4 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
   .home-biff-description{font-size:12.5px}
   .home-biff-logo-wrap{grid-column:2;justify-content:flex-start;margin-top:2px}
   .home-biff-logo{max-width:170px}
-  .home-interview-slot{padding:9px 10px 10px}
-  .home-interview-slot .home-interview-banner{height:clamp(88px,25vw,112px)}
-}
+    }
