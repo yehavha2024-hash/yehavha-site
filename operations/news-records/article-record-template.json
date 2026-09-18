@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "articleId": "YYYY-MM-DD-slug",
+  "sourcePath": "nexus/news/articles/YYYY-MM-DD-slug.html",
+  "draftRef": "",
+  "retention": {
+    "minimumMonths": 6,
+    "defaultPolicy": "indefinite-unless-lawful-disposal-approved"
+  },
+  "evidenceNotes": [],
+  "versions": [
+    {
+      "stage": "published",
+      "commit": "",
+      "recordedAt": "",
+      "revisionReason": "최초 발행",
+      "snapshot": "",
+      "evidenceSources": []
+    },
+    {
+      "stage": "revised",
+      "commit": "",
+      "recordedAt": "",
+      "revisionReason": "",
+      "snapshot": "",
+      "evidenceSources": []
+    }
+  ]
+}
