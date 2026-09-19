@@ -1,13 +1,15 @@
 /* NEXUS 2 · Life-Event Action canonical local owner v0.9
    Shared shell: ../portal-v2.css
    Scope: .life-* only. */
-.life-hero{padding:10px 0 4px}
+.life-hero{padding:10px 0 0}
 .life-hero-card{padding:14px 16px}
 .life-hero-card .eyebrow{margin:0 0 3px;font-size:11.5px}
 .life-hero-card h1{margin:2px 0 4px;font-size:clamp(27px,3.7vw,40px);line-height:1.04;letter-spacing:-.035em}
 .life-hero-card h1 span{display:inline;margin-left:8px;font-size:clamp(14px,1.7vw,18px);font-weight:730;letter-spacing:-.02em}
 .life-hero-card .description{max-width:none;margin:0;color:#111;font-size:13px;line-height:1.35}
-.life-shell{display:grid;gap:10px;padding:2px 0 26px}
+.life-action-page .gate-lead{margin-top:var(--life-major-gap)}
+.life-action-page .main{padding-top:var(--life-major-gap)}
+.life-shell{display:grid;gap:10px;padding:0 0 26px}
 .life-panel{padding:14px;border:1px solid #cfd4dc;border-radius:12px;background:#fff}
 .life-event-panel{width:min(760px,100%);padding:9px 10px;justify-self:start}
 .life-heading{display:grid;grid-template-columns:auto minmax(0,1fr);gap:7px;align-items:start;margin-bottom:8px}
