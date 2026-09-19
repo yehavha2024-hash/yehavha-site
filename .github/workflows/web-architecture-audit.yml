@@ -36,6 +36,8 @@ jobs:
           node nexus/scripts/sync-news-registry.mjs
       - name: Validate YEHAVHA NEWS architecture
         run: node nexus/scripts/audit-news-architecture.mjs
+      - name: Validate YEHAVHA NEWS quality
+        run: node nexus/scripts/audit-news-quality.mjs
       - name: Validate legal philosophy citation coverage
         run: |
           node --input-type=module <<'NODE'
