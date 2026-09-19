@@ -89,7 +89,7 @@ a{color:inherit}button,input,select,textarea{font:inherit}button,a{-webkit-tap-h
 .yehavha-news-zone .commentary-feature-copy > :not(p):not(.today-action){grid-column:1/-1}
 .yehavha-news-zone .commentary-feature-copy p{grid-column:1;min-width:0}
 .yehavha-news-zone .commentary-feature-copy .today-action{grid-column:2;align-self:end;justify-self:end;margin-top:4px;text-align:right}
-.yehavha-news-zone .commentary-feature-layout::after{content:"드라마 관련 영상";grid-column:1;grid-row:2;justify-self:start;margin-top:6px;padding:3px 7px;border:1px solid #b8c6d3;border-radius:999px;background:#fff;color:#38536b;font-size:10.5px;font-weight:850;line-height:1.35;white-space:normal}
+.yehavha-news-zone .commentary-feature-layout::after{content:attr(data-video-label);grid-column:1;grid-row:2;justify-self:start;margin-top:6px;padding:3px 7px;border:1px solid #b8c6d3;border-radius:999px;background:#fff;color:#38536b;font-size:10.5px;font-weight:850;line-height:1.35;white-space:normal}
 
 /* Exact visual grammar used by /news/ for today's stories. */
 .home-news-mirror .news-card{display:block;padding:12px 14px;border:1px solid #cfd4dc;border-radius:9px;background:#fff;text-decoration:none}
