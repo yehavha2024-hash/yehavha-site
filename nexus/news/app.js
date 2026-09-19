@@ -7,6 +7,7 @@
   const pageSize = Number(config.resultsPageSize) || 20;
   const homeLatestLimit = Number(config.homeLatestLimit) || 10;
   const categoryLatestLimit = Number(config.categoryLatestLimit) || 3;
+  const categorySpecial = window.YEHAVHA_NEWS_CATEGORY_SPECIAL || null;
 
   const els = {
     categoryNav: document.getElementById('categoryNav'),
@@ -205,6 +206,28 @@
     els.latestList.replaceChildren(...latestItems.map(item => articleCard(item, false, true)));
   }
 
+  function specialLatestItems() {
+    if (!categorySpecial || typeof categorySpecial !== 'object') return [];
+    const manual = Array.isArray(categorySpecial.manualItems) ? categorySpecial.manualItems : [];
+    if (manual.length) {
+      return manual
+        .filter(item => item && item.title && item.href)
+        .slice(0, Math.max(1, Number(categorySpecial.maxItems) || categoryLatestLimit));
+    }
+    const terms = Array.isArray(categorySpecial.terms)
+      ? categorySpecial.terms.map(term => String(term).trim().toLowerCase()).filter(Boolean)
+      : [];
+    if (!terms.length) return [];
+    const matches = data.filter(item => {
+      const haystack = [item.series, item.title, item.summary, item.keywords]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
+      return terms.some(term => haystack.includes(term));
+    });
+    return matches.slice(0, Math.max(1, Number(categorySpecial.maxItems) || categoryLatestLimit));
+  }
+
   function renderCategoryLatest() {
     if (!els.categoryGrid) return;
     const fragment = document.createDocumentFragment();
@@ -221,6 +244,21 @@
       section.append(head, list);
       fragment.append(section);
     });
+
+    const specialItems = specialLatestItems();
+    if (categorySpecial && specialItems.length) {
+      const section = make('section', 'category-latest-block category-latest-special');
+      section.dataset.specialSlot = categorySpecial.id || 'special';
+      const head = make('div', 'category-latest-head');
+      const more = make('a', 'category-more', categorySpecial.actionLabel || '특집 보기 →');
+      more.href = categorySpecial.href || '#';
+      head.append(make('h3', '', categorySpecial.title || 'YEHAVHA SPECIAL'), more);
+      const list = make('div', 'category-latest-list');
+      specialItems.forEach(item => list.append(articleCard(item, true)));
+      section.append(head, list);
+      fragment.append(section);
+    }
+
     els.categoryGrid.replaceChildren(fragment);
   }
 
