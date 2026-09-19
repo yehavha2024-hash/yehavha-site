@@ -268,3 +268,113 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
   .nexus-gate-card{min-height:104px;padding:12px 13px}
   .nexus-gate-card>strong{font-size:18px}
 }
+
+
+/* NEXUS gate visual refinement and spacing normalization v2 */
+:root{
+  --nxs-tree-gap:14px;
+  --nxs-section-gap:18px;
+}
+
+/* Gate heading is intentionally unboxed: title + lead, then six independent entry cards. */
+.nexus-gate-zone{margin-top:4px;padding:0 0 var(--nxs-section-gap)}
+.nexus-gate-heading{padding:2px 2px 0}
+.nexus-gate-heading .frontline-headingline{margin-bottom:7px}
+.nexus-gate-intro{max-width:920px;margin:0;color:#4b5563;font-size:13.5px;line-height:1.62}
+.nexus-gate-grid{margin-top:13px;gap:var(--nxs-tree-gap)}
+.nexus-gate-card{
+  min-height:132px;
+  padding:15px 64px 15px 16px;
+  border:1px solid rgba(74,85,104,.18);
+  border-left-width:4px;
+  box-shadow:0 5px 14px rgba(32,45,58,.055);
+  transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,filter .16s ease;
+}
+.nexus-gate-card:hover,.nexus-gate-card:focus-visible{
+  transform:translateY(-1px);
+  box-shadow:0 8px 18px rgba(32,45,58,.08);
+  filter:saturate(1.03);
+}
+.nexus-gate-card>span:not(.nexus-gate-icon){position:relative;z-index:1}
+.nexus-gate-card>strong,.nexus-gate-card>p{position:relative;z-index:1}
+.nexus-gate-icon{
+  position:absolute;
+  top:14px;
+  right:14px;
+  display:grid;
+  place-items:center;
+  width:38px;
+  height:38px;
+  border:1px solid rgba(255,255,255,.72);
+  border-radius:11px;
+  background:rgba(255,255,255,.68);
+  box-shadow:0 4px 10px rgba(32,45,58,.08);
+}
+.nexus-gate-icon svg{
+  width:22px;
+  height:22px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.75;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.nexus-gate-card.gate-strategy{
+  color:#173f63;
+  border-left-color:#326da8;
+  background:linear-gradient(135deg,#eef7ff 0%,#f8fbfe 54%,#e7f4fb 100%);
+}
+.nexus-gate-card.gate-legal{
+  color:#6d3540;
+  border-left-color:#8a4f57;
+  background:linear-gradient(135deg,#fff2f4 0%,#fcf8f8 54%,#f4e8eb 100%);
+}
+.nexus-gate-card.gate-research{
+  color:#3f5f55;
+  border-left-color:#557369;
+  background:linear-gradient(135deg,#eef8f4 0%,#f8fbfa 54%,#e5f1ec 100%);
+}
+.nexus-gate-card.gate-life{
+  color:#725125;
+  border-left-color:#a1783e;
+  background:linear-gradient(135deg,#fff7e9 0%,#fdfaf4 54%,#f4ead6 100%);
+}
+.nexus-gate-card.gate-culture{
+  color:#55486c;
+  border-left-color:#6a627b;
+  background:linear-gradient(135deg,#f5f0fb 0%,#faf8fc 54%,#ece6f3 100%);
+}
+.nexus-gate-card.gate-resources{
+  color:#495a66;
+  border-left-color:#5a6f7d;
+  background:linear-gradient(135deg,#eef3f6 0%,#fafbfc 54%,#e6edf1 100%);
+}
+.nexus-gate-card>span:not(.nexus-gate-icon){color:currentColor;opacity:.75}
+.nexus-gate-card>p{color:currentColor;opacity:.82}
+.nexus-gate-more{margin-top:10px}
+
+/* One spacing system for NEXUS tree/card hierarchy. */
+.main{padding-top:var(--nxs-tree-gap)}
+.portal-grid{gap:var(--nxs-section-gap)!important}
+.portal-tier{gap:var(--nxs-tree-gap)}
+.portal-tier-head{padding-bottom:var(--nxs-tree-gap)}
+.portal-tier-grid{gap:var(--nxs-tree-gap)}
+.category-card{margin:0!important}
+.category-head,.category-compact .category-head{margin-bottom:var(--nxs-tree-gap)}
+.items-grid{gap:var(--nxs-tree-gap)}
+.nexus-about-bottom{margin-top:var(--nxs-section-gap)}
+
+@media(max-width:820px){
+  :root{--nxs-tree-gap:12px;--nxs-section-gap:16px}
+  .nexus-gate-grid{gap:var(--nxs-tree-gap)}
+  .nexus-gate-card{min-height:122px}
+}
+@media(max-width:560px){
+  :root{--nxs-tree-gap:10px;--nxs-section-gap:14px}
+  .nexus-gate-zone{padding-bottom:var(--nxs-section-gap)}
+  .nexus-gate-heading{padding-left:1px;padding-right:1px}
+  .nexus-gate-grid{margin-top:11px}
+  .nexus-gate-card{min-height:108px;padding:13px 55px 13px 13px}
+  .nexus-gate-icon{top:12px;right:12px;width:34px;height:34px;border-radius:10px}
+  .nexus-gate-icon svg{width:20px;height:20px}
+}
