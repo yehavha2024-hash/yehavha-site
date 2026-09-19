@@ -170,7 +170,7 @@ if (exists('nexus/life-action/life-action.css')) {
     '.life-action-page.gate-lead{margin-top:var(--life-major-gap)}',
     '.life-action-page.main{padding-top:var(--life-major-gap)}'
   ]) {
-    if (!lifeCss.includes(token)) fail('nexus/life-action/life-action.css', \`생활·실행 주요 여백 canonical 규칙 누락: \${token}\`);
+    if (!lifeCss.includes(token)) fail('nexus/life-action/life-action.css', `생활·실행 주요 여백 canonical 규칙 누락: ${token}`);
   }
 }
 
