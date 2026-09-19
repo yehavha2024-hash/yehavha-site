@@ -61,6 +61,14 @@ const statsFor = item => {
   if (!bodySource) fail(`${filename}: article-body content is missing`);
   const bodyText = visible(bodySource);
   const headings = [...bodySource.matchAll(/<h2\b[^>]*>([\s\S]*?)<\/h2>/gi)].map(match => visible(match[1]));
+  const paragraphTexts = [...bodySource.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)]
+    .map(match => visible(match[1]))
+    .filter(Boolean);
+  const substantialParagraphs = paragraphTexts.filter(text => text.length >= 80);
+  const normalizedParagraphs = substantialParagraphs.map(text =>
+    text.toLocaleLowerCase('ko-KR').replace(/[^0-9a-z가-힣]+/gi, ' ').replace(/\s+/g, ' ').trim()
+  );
+  const uniqueSubstantialParagraphs = new Set(normalizedParagraphs);
   return {
     filename,
     source,
@@ -68,7 +76,10 @@ const statsFor = item => {
     bodyText,
     chars: bodyText.length,
     paragraphs: count(bodySource, /<p\b/gi),
+    substantialParagraphs: substantialParagraphs.length,
+    uniqueSubstantialParagraphs: uniqueSubstantialParagraphs.size,
     headings,
+    uniqueHeadings: new Set(headings.map(text => text.toLocaleLowerCase('ko-KR').trim())).size,
     sentences: (bodyText.match(/[.!?。？！](?=\s|$)/g) || []).length,
     pointCount: count(bodySource, /class\s*=\s*(["'])[^"']*\barticle-point\b[^"']*\1/gi)
   };
@@ -86,7 +97,12 @@ for (const item of latestItems) {
   if (!/data-footer-standard\s*=\s*(["'])v2\1/i.test(source)) fail(`${filename}: standard v2 footer is missing`);
   if (stats.chars < densityFloor) fail(`${filename}: shallow body ${stats.chars} chars; minimum ${densityFloor} (previous-date median ${previousMedian || 'n/a'})`);
   if (stats.paragraphs < 8) fail(`${filename}: requires >=8 body paragraphs, found ${stats.paragraphs}`);
+  if (stats.substantialParagraphs < 6) fail(`${filename}: requires >=6 substantial body paragraphs (80+ chars), found ${stats.substantialParagraphs}`);
+  if (stats.uniqueSubstantialParagraphs < Math.ceil(stats.substantialParagraphs * 0.8)) {
+    fail(`${filename}: body paragraphs are too repetitive (${stats.uniqueSubstantialParagraphs}/${stats.substantialParagraphs} substantial paragraphs are unique)`);
+  }
   if (stats.headings.length < 3) fail(`${filename}: requires >=3 compact h2 sections, found ${stats.headings.length}`);
+  if (stats.uniqueHeadings !== stats.headings.length) fail(`${filename}: duplicate h2 section heading detected`);
   if (stats.sentences < 14) fail(`${filename}: requires >=14 complete sentences, found ${stats.sentences}`);
   if (stats.pointCount < 1) fail(`${filename}: article-point judgment dashboard is missing`);
   for (const heading of stats.headings) {
