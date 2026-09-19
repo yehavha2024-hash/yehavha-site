@@ -234,6 +234,10 @@ for (const [gate, file] of NEXUS_DEDICATED_GATES) {
     continue;
   }
   const page = read(file);
+  if (!page.includes('class="gate-lead-titleline"')) fail(file, 'Gate 번호·라벨·제목 병렬 표기 누락');
+  if (/기존 원본 페이지|원본 페이지로 연결/.test(page)) fail(file, '독자용 Gate 리드문에 내부 구현 표현이 노출됨');
+  if (!page.includes('class="portal-mark" aria-label="한국 표준시"')) fail(file, 'Gate 상단 날짜 영역이 공통 topbar 마크업과 다름');
+  if (!page.includes('class="access-count" id="accessCount" aria-label="방문자수" hidden')) fail(file, 'Gate 방문자수 영역이 공통 topbar 마크업과 다름');
   if (!page.includes(`data-gate="${gate}"`)) fail(file, `data-gate="${gate}" 누락`);
   if (!page.includes('../portal-v2.js')) fail(file, '공통 portal-v2.js 런타임 누락');
   if (page.includes('gate-page.js') || page.includes('gate-page.css')) fail(file, '폐기된 Gate 전용 중복 파일 참조');
