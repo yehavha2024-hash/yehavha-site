@@ -75,6 +75,7 @@ a{color:inherit}button,input,select,textarea{font:inherit}button,a{-webkit-tap-h
 
 /* Editorial material is one bounded cell. Latest news is a separate borderless section. */
 .yehavha-news-zone{display:grid;gap:var(--nxs-home-section-gap)}
+.yehavha-news-zone{--commentary-thumb-mobile-offset:18px}
 .yehavha-news-zone > .frontline-panel,.yehavha-news-zone > .news-entry-banner,.yehavha-news-zone > .home-news-mirror{margin:0}
 .home-news-mirror{width:100%;min-width:0;margin-top:16px;padding:0;border:0!important;border-left:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
 .home-news-section-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;min-width:0;margin:0 0 9px;padding-bottom:7px;border-bottom:2px solid #20252b}
@@ -150,6 +151,7 @@ a{color:inherit}button,input,select,textarea{font:inherit}button,a{-webkit-tap-h
   .yehavha-special-kind{grid-column:1/-1}
   .yehavha-special-kind::after{font-size:12px}
   .yehavha-special-lead strong{font-size:14px}
+  .yehavha-news-zone .commentary-feature-thumb{margin-top:var(--commentary-thumb-mobile-offset)!important}
   .yehavha-news-zone .commentary-feature-layout::after{font-size:9.5px}
   .yehavha-news-zone .commentary-feature-copy{column-gap:8px}
   .home-news-mirror .opinion-feature{grid-template-columns:minmax(104px,34%) minmax(0,1fr);gap:9px;padding:9px}
