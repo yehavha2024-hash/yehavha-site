@@ -92,21 +92,35 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy nexus --project-name=yehavha-nexus-hub --branch=main --commit-dirty=true
 
-      - name: Verify production reflects current NEXUS main
+      - name: Verify production reflects current NEXUS architecture
         if: steps.credentials.outputs.ready == 'true'
         shell: bash
         run: |
           set -euo pipefail
           for attempt in {1..18}; do
-            html="$(curl -fsSL --max-time 15 "https://yehavha.com/?deploy_check=${GITHUB_SHA}" || true)"
-            if printf '%s' "$html" | grep -q 'id="homeBiffSpecial"' \
-              && ! printf '%s' "$html" | grep -q 'home-biff-logo' \
-              && ! printf '%s' "$html" | grep -q 'biff.kr'; then
-              echo "Production NEXUS matches current main."
+            main_html="$(curl -fsSL --max-time 15 "https://yehavha.com/?deploy_check=${GITHUB_SHA}" || true)"
+            legal_html="$(curl -fsSL --max-time 15 "https://yehavha.com/legal-policy/?deploy_check=${GITHUB_SHA}" || true)"
+            research_html="$(curl -fsSL --max-time 15 "https://yehavha.com/research-education/?deploy_check=${GITHUB_SHA}" || true)"
+            life_html="$(curl -fsSL --max-time 15 "https://yehavha.com/life-action/?deploy_check=${GITHUB_SHA}" || true)"
+            resources_html="$(curl -fsSL --max-time 15 "https://yehavha.com/resources-services/?deploy_check=${GITHUB_SHA}" || true)"
+
+            if printf '%s' "$main_html" | grep -q 'data-nexus-architecture="gate-v1"' \
+              && printf '%s' "$main_html" | grep -q 'href="./legal-policy/"' \
+              && printf '%s' "$main_html" | grep -q 'href="./research-education/"' \
+              && printf '%s' "$main_html" | grep -q 'href="./life-action/"' \
+              && printf '%s' "$main_html" | grep -q 'href="./resources-services/"' \
+              && printf '%s' "$legal_html" | grep -q 'data-gate="legal-policy"' \
+              && printf '%s' "$research_html" | grep -q 'data-gate="research-education"' \
+              && printf '%s' "$life_html" | grep -q 'data-gate="life-action"' \
+              && printf '%s' "$resources_html" | grep -q 'data-gate="resources-services"' \
+              && ! printf '%s' "$main_html" | grep -q 'home-biff-logo' \
+              && ! printf '%s' "$main_html" | grep -q 'biff.kr'; then
+              echo "Production NEXUS main and dedicated Gates match the canonical architecture."
               exit 0
             fi
+
             echo "Waiting for production propagation... (${attempt}/18)"
             sleep 10
           done
-          echo "::error::Production yehavha.com did not reflect current NEXUS main within 3 minutes."
+          echo "::error::Production yehavha.com did not reflect the current NEXUS Gate architecture within 3 minutes."
           exit 1
