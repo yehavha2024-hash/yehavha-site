@@ -42,33 +42,7 @@ jobs:
 
       - name: Commit daily archive when changed
         shell: bash
-        run: |
-          if git diff --quiet -- nexus/korea-social-intelligence/archive nexus/korea-social-intelligence/archive-index.json; then
-            echo "No domestic social intelligence archive changes detected."
-            exit 0
-          fi
-
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- nexus/korea-social-intelligence/archive nexus/korea-social-intelligence/archive-index.json
-          git commit -m "Archive Korea social intelligence daily brief"
-
-          for attempt in 1 2 3; do
-            git fetch origin main
-            if ! git rebase origin/main; then
-              echo "Archive output conflicts with a newer main update; refusing to overwrite it." >&2
-              git rebase --abort || true
-              exit 1
-            fi
-            if git push origin HEAD:main; then
-              exit 0
-            fi
-            echo "Push raced with another main update; retrying (${attempt}/3)."
-            sleep $((attempt * 2))
-          done
-
-          echo "Unable to push domestic social intelligence archive after 3 attempts."
-          exit 1
+        run: bash scripts/ci/safe-content-commit.sh "Archive Korea social intelligence daily brief" nexus/korea-social-intelligence/archive nexus/korea-social-intelligence/archive-index.json
 
       - name: Report domestic social intelligence status to Airtable
         if: always()
