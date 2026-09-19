@@ -433,3 +433,16 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
   .nexus-gate-icon svg{width:22px;height:22px}
   .nexus-gate-card>strong{font-size:18px}
 }
+
+
+/* Dedicated Gate project-card layout — owned with NEXUS card presentation */
+.gate-projects{padding:18px 0 38px}
+.gate-projects .portal-grid{gap:18px!important}
+.gate-projects .portal-tier-head{display:none}
+.gate-projects .portal-tier{gap:14px}
+.gate-projects .portal-tier-grid{gap:14px}
+.gate-projects .category-card{box-shadow:0 4px 14px rgba(0,0,0,.035)}
+.gate-empty{padding:26px;border:1px solid var(--portal-line);border-radius:14px;background:#fff}
+.gate-empty h2{margin:0 0 7px;font-size:1.35rem}
+.gate-empty p{margin:0;color:#4b5563;line-height:1.65}
+@media(max-width:700px){.gate-projects{padding-top:14px}}
