@@ -29,7 +29,9 @@ const forbiddenLegacy = [
   'nexus/university/guided-practice-20260820.js',
   'nexus/intelligence-briefing/compact-top.css',
   'nexus/portal-enhancements.css',
-  'nexus/status.css'
+  'nexus/status.css',
+  'nexus/gate-page.css',
+  'nexus/gate-page.js'
 ];
 
 for (const file of forbiddenLegacy) {
@@ -124,6 +126,46 @@ if (!exists(mainPortalJs)) {
   const js = read(mainPortalJs);
   if (/MutationObserver/.test(js)) fail(mainPortalJs, 'MutationObserver로 정적 카테고리 순서를 보정하면 안 됨');
   if (/heroSubtitle|heroVisual/.test(js)) fail(mainPortalJs, '정적 Hero 문구/이미지 속성을 JS가 재작성하면 안 됨');
+}
+
+const dedicatedGatePages = [
+  'nexus/legal-policy/index.html',
+  'nexus/research-education/index.html',
+  'nexus/resources-services/index.html'
+];
+for (const page of dedicatedGatePages) {
+  if (!exists(page)) {
+    fail(page, '전용 NEXUS Gate 페이지 없음');
+    continue;
+  }
+  const html = read(page);
+  const cssRefs = [...html.matchAll(/<link\s+[^>]*href=["']([^"']+\.css(?:\?[^"']*)?)["']/gi)].map(match => match[1].split('?')[0]);
+  if (cssRefs.length !== 2 || !cssRefs.some(ref => ref.endsWith('portal-v2.css')) || !cssRefs.some(ref => ref.endsWith('nexus-standard.css'))) {
+    fail(page, `전용 Gate CSS는 공통 shell + nexus-standard.css 2개만 허용: ${cssRefs.join(', ') || '없음'}`);
+  }
+  if (!html.includes('../portal-v2.js')) fail(page, '전용 Gate가 canonical portal-v2.js를 사용하지 않음');
+  if (/gate-page\.(?:css|js)/.test(html)) fail(page, '폐기된 Gate 전용 중복 레이어 참조');
+}
+
+const lifeGatePage = 'nexus/life-action/index.html';
+if (exists(lifeGatePage)) {
+  const html = read(lifeGatePage);
+  const cssRefs = [...html.matchAll(/<link\s+[^>]*href=["']([^"']+\.css(?:\?[^"']*)?)["']/gi)].map(match => match[1].split('?')[0]);
+  if (cssRefs.length !== 2 || !cssRefs.some(ref => ref.endsWith('portal-v2.css')) || !cssRefs.some(ref => ref.endsWith('life-action.css'))) {
+    fail(lifeGatePage, `생활·실행 Gate CSS는 공통 shell + life-action.css 2개만 허용: ${cssRefs.join(', ') || '없음'}`);
+  }
+  if (!html.includes('../portal-v2.js')) fail(lifeGatePage, '생활·실행 Gate가 canonical portal-v2.js를 사용하지 않음');
+}
+
+if (exists('nexus/portal-v2.css')) {
+  const sharedCss = read('nexus/portal-v2.css');
+  for (const selector of ['.home-global-nav', '.gate-brandline', '.gate-lead']) {
+    if (!sharedCss.includes(selector)) fail('nexus/portal-v2.css', `공통 Gate shell 규칙 누락: ${selector}`);
+  }
+}
+if (exists('nexus/nexus-standard.css')) {
+  const mainCss = read('nexus/nexus-standard.css');
+  if (mainCss.includes('.home-global-nav')) fail('nexus/nexus-standard.css', '공통 상단 내비게이션이 메인 전용 CSS에 중복 소유됨');
 }
 
 if (exists('nexus/projects.json')) {
