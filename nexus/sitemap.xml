@@ -2,11 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://yehavha.com/</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-09-19</lastmod>
   </url>
   <url>
     <loc>https://yehavha.com/articles/</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-09-19</lastmod>
+  </url>
+  <url>
+    <loc>https://yehavha.com/articles/article.html?id=ai-superintelligence-human-control-research</loc>
+    <lastmod>2026-09-19</lastmod>
   </url>
   <url>
     <loc>https://yehavha.com/articles/article.html?id=ai-agent-functional-agency</loc>
@@ -142,11 +146,11 @@
   </url>
   <url>
     <loc>https://yehavha.com/articles/judicial-ai-prompt-injection.html</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-09-19</lastmod>
   </url>
   <url>
     <loc>https://yehavha.com/articles/nepal-disaster-repentance-warning-en.html</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-09-19</lastmod>
   </url>
   <url>
     <loc>https://yehavha.com/commentary/ai-jobs-generational-bridge.html</loc>
