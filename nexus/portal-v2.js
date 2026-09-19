@@ -4,6 +4,10 @@
   const toast = document.getElementById('toast');
   const quickLinks = document.getElementById('quickLinks');
   const portalGrid = document.getElementById('portalGrid');
+  const gatePortalGrid = document.getElementById('gatePortalGrid');
+  const activeGate = document.body?.dataset?.gate || '';
+  const isDedicatedGate = Boolean(activeGate);
+  const dataPrefix = isDedicatedGate ? '../' : './';
   const accessCount = document.getElementById('accessCount');
   const portalMarkText = document.querySelector('.portal-mark span:last-child');
   const todayNexusDate = document.getElementById('todayNexusDate');
@@ -291,7 +295,9 @@
       configureProjectLink(thumbnail, project);
       thumbnail.setAttribute('aria-label', `${project.title} 열기`);
       const image = make('img');
-      image.src = category.thumbnail;
+      image.src = isDedicatedGate
+        ? `${dataPrefix}${String(category.thumbnail).replace(/^\.\//, '')}`
+        : category.thumbnail;
       image.alt = '';
       image.width = 960;
       image.height = 540;
@@ -422,6 +428,25 @@
     const visibleCategories = categories.filter(category => projectsByCategory.has(category.id));
     renderQuickLinks(visibleCategories, projectsByCategory);
     renderSearch({categoriesById,projects});
+
+    if (gatePortalGrid && activeGate) {
+      gatePortalGrid.replaceChildren();
+      const gateCategories = visibleCategories.filter(category => category.tier === activeGate);
+      for (const category of gateCategories) {
+        const categoryProjects = projectsByCategory.get(category.id) || [];
+        if (categoryProjects.length) gatePortalGrid.append(renderCategory(category, categoryProjects, 'primary'));
+      }
+      if (!gatePortalGrid.childElementCount) {
+        const empty = make('section', 'gate-empty');
+        empty.append(
+          make('h2', '', '등록된 프로젝트가 없습니다.'),
+          make('p', '', '이 Gate에 연결된 프로젝트가 추가되면 이곳에 자동으로 표시됩니다.')
+        );
+        gatePortalGrid.append(empty);
+      }
+      return;
+    }
+
     installSeo({projects});
     if (!portalGrid) return;
     portalGrid.replaceChildren();
@@ -439,11 +464,12 @@
   }
 
   async function loadPortal() {
+    if (!portalGrid && !gatePortalGrid) return;
     try {
-      const data = await fetchJson('./projects.json');
+      const data = await fetchJson(`${dataPrefix}projects.json`);
       let statusMap = {};
       try {
-        statusMap = await fetchJson('./project-status.json');
+        statusMap = await fetchJson(`${dataPrefix}project-status.json`);
       } catch (error) {
         console.warn('Nexus project status unavailable; rendering canonical project data only.', error);
       }
@@ -640,8 +666,10 @@
 
   updateTodayDate();
   installKoreaClock();
-  renderHomeNews();
-  void loadHomeEditorialFeeds();
+  if (!isDedicatedGate) {
+    renderHomeNews();
+    void loadHomeEditorialFeeds();
+  }
   window.setTimeout(() => { void requestAccessCount(); }, 700);
-  loadPortal();
+  void loadPortal();
 })();
