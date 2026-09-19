@@ -27,7 +27,15 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "summary": "프랑스 배우 겸 뮤지션 샤를로트 갱스부르가 제31회 부산국제영화제를 찾는다. ‘멜랑콜리아’ 특별상영과 정은채와의 스페셜 토크, 씨네클래스로 관객과 만난다.",
     "href": "./articles/2026-09-19-charlotte-gainsbourg-biff.html",
     "keywords": "샤를로트 갱스부르 부산 온다…‘멜랑콜리아’ 특별상영·정은채와 토크 글로벌·컬처",
-    "publishedAt": "2026-09-19T09:25:55+09:00"
+    "publishedAt": "2026-09-19T09:25:55+09:00",
+    "modifiedAt": "2026-09-19T09:47:06+09:00",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=_hDTlD9ApP8",
+      "youtubeId": "_hDTlD9ApP8",
+      "title": "Charlotte Gainsbourg - Melancholia Interview ↗",
+      "source": "YouTube · cgainsbourgforever",
+      "thumbnail": "https://i.ytimg.com/vi/_hDTlD9ApP8/hqdefault.jpg"
+    }
   },
   {
     "id": "2026-09-19-autumn-festival-trip-picks",
@@ -40,7 +48,14 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "href": "./articles/2026-09-19-autumn-festival-trip-picks.html",
     "keywords": "이번 주말 어디 갈까…만화·갯골·홍삼, 취향 따라 고르는 가을 축제 3곳 글로벌·컬처",
     "publishedAt": "2026-09-19T09:25:53+09:00",
-    "modifiedAt": "2026-09-19T09:27:40+09:00"
+    "modifiedAt": "2026-09-19T09:47:06+09:00",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=85EwUBod5Ms",
+      "youtubeId": "85EwUBod5Ms",
+      "title": "이번엔 K-웹툰이다!…부천국제만화축제 현장 인터뷰 ↗",
+      "source": "YouTube · 연합뉴스TV",
+      "thumbnail": "https://i.ytimg.com/vi/85EwUBod5Ms/hqdefault.jpg"
+    }
   },
   {
     "id": "2026-09-19-ddp-entertech-maker-faire",
@@ -52,7 +67,15 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "summary": "DDP에서는 9월 18~20일 GES·엔터테크 서울 2026이 열리고, 19~20일에는 메이커페어 서울이 겹친다. K-POP·AI·XR·게임부터 직접 만든 로봇과 작품까지 한 번에 즐길 수 있는 주말이다.",
     "href": "./articles/2026-09-19-ddp-entertech-maker-faire.html",
     "keywords": "DDP가 놀이터가 된다…K-POP·AI·게임에 메이커페어까지 한곳에 글로벌·컬처",
-    "publishedAt": "2026-09-19T09:25:35+09:00"
+    "publishedAt": "2026-09-19T09:25:35+09:00",
+    "modifiedAt": "2026-09-19T09:47:06+09:00",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=0nKoF2ID45M",
+      "youtubeId": "0nKoF2ID45M",
+      "title": "메이커 페어 서울 2025 | Maker Faire Seoul ↗",
+      "source": "YouTube · Victor Joo (Vicbot)",
+      "thumbnail": "https://i.ytimg.com/vi/0nKoF2ID45M/hqdefault.jpg"
+    }
   },
   {
     "id": "2026-09-19-seoul-street-arts-weekend",
@@ -65,7 +88,14 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "href": "./articles/2026-09-19-seoul-street-arts-weekend.html",
     "keywords": "한강이 무대가 된다…오늘부터 서울거리예술축제, 서울숲은 뮤지컬 갈라 글로벌·컬처",
     "publishedAt": "2026-09-19T09:25:33+09:00",
-    "modifiedAt": "2026-09-19T09:27:37+09:00"
+    "modifiedAt": "2026-09-19T09:47:06+09:00",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=vqzfly06k1g",
+      "youtubeId": "vqzfly06k1g",
+      "title": "거리축제 끝판왕, 서울거리예술축제 ↗",
+      "source": "YouTube · 서울시",
+      "thumbnail": "https://i.ytimg.com/vi/vqzfly06k1g/hqdefault.jpg"
+    }
   },
   {
     "id": "2026-09-19-weekend-sports-asian-games-kbo",
@@ -77,7 +107,15 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "summary": "9월 19일 토요일은 아이치·나고야 아시안게임 개막식과 KBO리그 4경기가 겹치는 스포츠 데이다. 오늘 볼 경기와 주말 관전 포인트를 한 번에 정리한다.",
     "href": "./articles/2026-09-19-weekend-sports-asian-games-kbo.html",
     "keywords": "토요일 스포츠가 꽉 찼다…아시안게임 개막·KBO 4경기 오후 5시 글로벌·컬처",
-    "publishedAt": "2026-09-19T09:25:31+09:00"
+    "publishedAt": "2026-09-19T09:25:31+09:00",
+    "modifiedAt": "2026-09-19T09:47:06+09:00",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=ZcBY-HcPo7I",
+      "youtubeId": "ZcBY-HcPo7I",
+      "title": "첫 경기 산뜻한 출발…농구 남자 대한민국 vs 사우디아라비아 ↗",
+      "source": "YouTube · 올스",
+      "thumbnail": "https://i.ytimg.com/vi/ZcBY-HcPo7I/hqdefault.jpg"
+    }
   },
   {
     "id": "2026-09-19-us-uranium-ai-power",
