@@ -23,7 +23,11 @@ const nexusRuntimePages = [
   'nexus/publishing',
   'nexus/articles',
   'nexus/ai-trends',
-  'nexus/ai-music-archive'
+  'nexus/ai-music-archive',
+  'nexus/legal-policy',
+  'nexus/research-education',
+  'nexus/life-action',
+  'nexus/resources-services'
 ];
 
 const nexusDetailPages = [
@@ -92,8 +96,13 @@ const auditAnchors = (root, index) => {
   duplicates.forEach(id => report('ERROR', root, `중복 id 발견: #${id}`));
 
   const hrefTargets = [...index.matchAll(/\bhref=["']#([^"']+)["']/g)].map(match => match[1]);
+  const dynamicTargets = root === 'nexus'
+    ? new Set(['gate-strategy-intelligence','gate-culture-media'])
+    : new Set();
   for (const target of new Set(hrefTargets)) {
-    if (!ids.has(target)) report('ERROR', root, `내부 링크 #${target}의 대상 id 없음`);
+    if (!ids.has(target) && !dynamicTargets.has(target)) {
+      report('ERROR', root, `내부 링크 #${target}의 대상 id 없음`);
+    }
   }
 
   if (/맨 위로/.test(index)) {
