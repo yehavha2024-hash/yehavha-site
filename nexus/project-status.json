@@ -11,8 +11,8 @@
   "government-local-ax-manual": {
     "id": "government-local-ax-manual",
     "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-09-11",
     "contentCount": 12,
     "contentLabel": "실행 단계"
@@ -53,8 +53,8 @@
   "three-min-rest": {
     "id": "three-min-rest",
     "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-09-11",
     "contentCount": 4,
     "contentLabel": "학습 카테고리"
@@ -62,8 +62,8 @@
   "living-law-100": {
     "id": "living-law-100",
     "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-09-11",
     "contentCount": 100,
     "contentLabel": "생활법률 항목",
@@ -83,8 +83,8 @@
   "toeicman-v2": {
     "id": "toeicman-v2",
     "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-09-11",
     "contentCount": 100,
     "contentLabel": "심화 학습일"
@@ -110,8 +110,8 @@
   "legal-knowledge": {
     "id": "legal-knowledge",
     "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-09-11",
     "contentCount": 108,
     "contentLabel": "연구노트"
@@ -119,8 +119,8 @@
   "legal-mind-training": {
     "id": "legal-mind-training",
     "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-09-11",
     "contentCount": 16,
     "contentLabel": "훈련 사례"
@@ -128,8 +128,8 @@
   "ai-law-literature": {
     "id": "ai-law-literature",
     "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-09-11",
     "contentCount": 217,
     "contentLabel": "연구문헌"
@@ -137,8 +137,8 @@
   "ai-law-tech-foresight": {
     "id": "ai-law-tech-foresight",
     "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-09-11",
     "contentCount": 19,
     "contentLabel": "기술연구"
@@ -146,8 +146,8 @@
   "legal-philosophy": {
     "id": "legal-philosophy",
     "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-09-11",
     "contentCount": 56,
     "contentLabel": "핵심 연구"
@@ -155,8 +155,8 @@
   "ai-legal-glossary": {
     "id": "ai-legal-glossary",
     "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-09-11",
     "contentCount": 220,
     "contentLabel": "핵심 용어"
@@ -164,8 +164,8 @@
   "ai-law-visual": {
     "id": "ai-law-visual",
     "managedBy": "github",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-09-11",
     "contentCount": null,
     "contentLabel": "콘텐츠"
