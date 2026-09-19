@@ -133,8 +133,8 @@ if (exists('nexus/portal-v2.js') && exists('nexus/index.html')) {
   const js = read('nexus/portal-v2.js');
   const html = read('nexus/index.html');
   for (const token of [
-    "fetchJson('./projects.json')",
-    "fetchJson('./project-status.json')",
+    "fetchJson(`${dataPrefix}projects.json`)",
+    "fetchJson(`${dataPrefix}project-status.json`)",
     "fetchJson('./intelligence-briefing/latest.json')",
     "fetchJson('./korea-social-intelligence/latest.json')",
     'window.YEHAVHA_NEWS_DATA',
@@ -156,6 +156,86 @@ if (exists('nexus/portal-v2.js') && exists('nexus/index.html')) {
   if (js.includes('portal-enhancements.css') || js.includes('status.css') || js.includes('portal-v2-core.css')) fail('nexus/portal-v2.js', '폐기된 전역 스타일 또는 중간 소유권 연결 잔존');
   if (html.includes('visitor-count.js') || exists('nexus/visitor-count.js')) fail('nexus/index.html', '방문자 조회·표시 소유자가 중복됨');
   if (!html.includes('rel="canonical" href="https://yehavha.com/"') || !js.includes("const canonicalUrl = 'https://yehavha.com/';")) fail('nexus/index.html', '대표 도메인 불일치');
+}
+
+const NEXUS_GATE_IDS = [
+  'strategy-intelligence',
+  'legal-policy',
+  'research-education',
+  'life-action',
+  'culture-media',
+  'resources-services'
+];
+const NEXUS_DEDICATED_GATES = new Map([
+  ['legal-policy', 'nexus/legal-policy/index.html'],
+  ['research-education', 'nexus/research-education/index.html'],
+  ['life-action', 'nexus/life-action/index.html'],
+  ['resources-services', 'nexus/resources-services/index.html']
+]);
+
+if (exists('nexus/projects.json')) {
+  const gateData = json('nexus/projects.json');
+  const tierIds = (gateData.tiers || []).map(item => item.id);
+  if (tierIds.length !== NEXUS_GATE_IDS.length || NEXUS_GATE_IDS.some(id => !tierIds.includes(id))) {
+    fail('nexus/projects.json', `NEXUS 6개 Gate 구조 불일치: ${tierIds.join(', ')}`);
+  }
+  const categoriesById = new Map((gateData.categories || []).map(item => [item.id, item]));
+  for (const category of gateData.categories || []) {
+    if (!NEXUS_GATE_IDS.includes(category.tier)) {
+      fail('nexus/projects.json', `${category.id}: 허용되지 않은 Gate tier ${category.tier}`);
+    }
+  }
+  for (const project of gateData.projects || []) {
+    const category = categoriesById.get(project.category);
+    if (!NEXUS_GATE_IDS.includes(project.primaryGate)) {
+      fail('nexus/projects.json', `${project.id}: primaryGate 누락 또는 잘못된 값`);
+    } else if (category && project.primaryGate !== category.tier) {
+      fail('nexus/projects.json', `${project.id}: primaryGate(${project.primaryGate})와 category tier(${category.tier}) 불일치`);
+    }
+  }
+}
+
+if (exists('nexus/index.html') && exists('nexus/portal-v2.js')) {
+  const home = read('nexus/index.html');
+  const runtime = read('nexus/portal-v2.js');
+  const expectedRoutes = new Map([
+    ['legal-policy', './legal-policy/'],
+    ['research-education', './research-education/'],
+    ['life-action', './life-action/'],
+    ['resources-services', './resources-services/']
+  ]);
+  for (const [gate, href] of expectedRoutes) {
+    if (!home.includes(`href="${href}"`)) fail('nexus/index.html', `${gate}: 전용 Gate 페이지 링크 누락`);
+    if (home.includes(`href="#gate-${gate}"`)) fail('nexus/index.html', `${gate}: 구형 메인 내부앵커가 다시 존재함`);
+  }
+  for (const gate of ['strategy-intelligence','culture-media']) {
+    if (!home.includes(`href="#gate-${gate}"`)) fail('nexus/index.html', `${gate}: 메인 노출 Gate 앵커 누락`);
+  }
+  if (!runtime.includes("new Set(['strategy-intelligence','culture-media'])")) {
+    fail('nexus/portal-v2.js', '메인에 노출할 Gate가 전략·인텔리전스와 문화·미디어로 고정되지 않음');
+  }
+  if (!runtime.includes("const gatePortalGrid = document.getElementById('gatePortalGrid')")) {
+    fail('nexus/portal-v2.js', '전용 Gate 렌더링이 canonical portal runtime에 통합되지 않음');
+  }
+  if (exists('nexus/gate-page.js') || exists('nexus/gate-page.css')) {
+    fail('nexus', '폐기된 Gate 전용 중복 CSS/JS가 다시 존재함');
+  }
+}
+
+for (const [gate, file] of NEXUS_DEDICATED_GATES) {
+  if (!exists(file)) {
+    fail(file, `${gate}: 전용 Gate 페이지 없음`);
+    continue;
+  }
+  const page = read(file);
+  if (!page.includes(`data-gate="${gate}"`)) fail(file, `data-gate="${gate}" 누락`);
+  if (!page.includes('../portal-v2.js')) fail(file, '공통 portal-v2.js 런타임 누락');
+  if (page.includes('gate-page.js') || page.includes('gate-page.css')) fail(file, '폐기된 Gate 전용 중복 파일 참조');
+  if (page.includes('인터넷신문 「예하바」 창간 준비 중') || page.includes('뉴스에서 전략으로, 전략을 실행으로')) {
+    fail(file, '전용 NEXUS Gate에 뉴스 메인 전용 브랜드 문구가 혼입됨');
+  }
+  if (!page.includes('data-footer-standard="v2"')) fail(file, '표준 NEXUS Footer 누락');
+  if (gate !== 'life-action' && !page.includes('id="gatePortalGrid"')) fail(file, '프로젝트 Gate 렌더링 대상 누락');
 }
 
 const surfaces = [
