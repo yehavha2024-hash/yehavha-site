@@ -272,11 +272,15 @@
       input.focus();
     });
 
-    const initialQuery = new URL(window.location.href).searchParams.get('q');
+    const currentUrl = new URL(window.location.href);
+    const initialQuery = currentUrl.searchParams.get('q');
+    const openSearch = currentUrl.searchParams.get('search') === '1';
     if (initialQuery) {
       input.value = initialQuery;
       setOpen(true);
       renderResults();
+    } else if (openSearch) {
+      setOpen(true);
     }
   }
 
