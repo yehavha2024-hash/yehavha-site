@@ -18,6 +18,26 @@ window.YEHAVHA_NEWS_CONFIG = Object.freeze({
 
 window.YEHAVHA_NEWS_DATA = Object.freeze([
   {
+    "id": "2026-09-19-biff31-japanese-animation-special",
+    "date": "2026-09-19",
+    "category": "글로벌·컬처",
+    "author": "이명훈",
+    "type": "기사",
+    "series": "부산국제영화제 특집 03",
+    "title": "‘천사의 알’부터 ‘메트로폴리스’까지…부산서 다시 보는 일본 애니메이션 100년",
+    "summary": "제31회 부산국제영화제가 ‘일본 애니메이션 특별전: 광기의 걸작, 전율의 기대작 12+1’을 연다. 고전과 컬트, 디지털 리마스터링, 2026년 신작을 한자리에서 이어 붙이고 린타로와 차세대 감독 4인이 부산을 찾는다.",
+    "href": "./articles/2026-09-19-biff31-japanese-animation-special.html",
+    "keywords": "‘천사의 알’부터 ‘메트로폴리스’까지…부산서 다시 보는 일본 애니메이션 100년 글로벌·컬처",
+    "publishedAt": "2026-09-19T15:48:57+09:00",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=4X9LM3aTiyY",
+      "youtubeId": "4X9LM3aTiyY",
+      "title": "ANGEL'S EGG 4K Restoration | Official Trailer ↗",
+      "source": "YouTube · GKIDS Films",
+      "thumbnail": "https://i.ytimg.com/vi/4X9LM3aTiyY/hqdefault.jpg"
+    }
+  },
+  {
     "id": "2026-09-19-charlotte-gainsbourg-biff",
     "date": "2026-09-19",
     "category": "글로벌·컬처",
@@ -216,6 +236,26 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     }
   },
   {
+    "id": "2026-09-18-posco-strike-expansion",
+    "date": "2026-09-18",
+    "category": "사회",
+    "author": "이명훈",
+    "type": "기사",
+    "title": "포스코 노조 부분파업 확대…참여범위 늘고 생산 정상 유지가 쟁점",
+    "summary": "포스코 노조가 18일 오전부터 포항·광양의 추가 공정을 부분파업 대상에 포함했다. 노조는 참여 규모가 약 480명까지 늘 것으로 보고 있고, 회사는 대체인력과 비상대응체제로 정상 생산을 유지하겠다는 입장이다.",
+    "href": "./articles/2026-09-18-posco-strike-expansion.html",
+    "keywords": "포스코 노조 부분파업 포항 광양 임금교섭 생산",
+    "publishedAt": "2026-09-18T07:42:19+09:00",
+    "modifiedAt": "2026-09-18T07:58:11+09:00",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=kX_IeD91ZWI",
+      "youtubeId": "kX_IeD91ZWI",
+      "title": "포스코 노조 2차 부분 파업...생산 차질 없어 ↗",
+      "source": "YouTube · YTN",
+      "thumbnail": "https://i.ytimg.com/vi/kX_IeD91ZWI/hqdefault.jpg"
+    }
+  },
+  {
     "id": "2026-09-18-korea-us-foreign-ministers",
     "date": "2026-09-18",
     "category": "정부",
@@ -247,26 +287,6 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "keywords": "한국 신용갭 BIS 민간신용 가계부채 기업부채 GDP",
     "publishedAt": "2026-09-18T07:42:19+09:00",
     "modifiedAt": "2026-09-18T07:58:11+09:00"
-  },
-  {
-    "id": "2026-09-18-posco-strike-expansion",
-    "date": "2026-09-18",
-    "category": "사회",
-    "author": "이명훈",
-    "type": "기사",
-    "title": "포스코 노조 부분파업 확대…참여범위 늘고 생산 정상 유지가 쟁점",
-    "summary": "포스코 노조가 18일 오전부터 포항·광양의 추가 공정을 부분파업 대상에 포함했다. 노조는 참여 규모가 약 480명까지 늘 것으로 보고 있고, 회사는 대체인력과 비상대응체제로 정상 생산을 유지하겠다는 입장이다.",
-    "href": "./articles/2026-09-18-posco-strike-expansion.html",
-    "keywords": "포스코 노조 부분파업 포항 광양 임금교섭 생산",
-    "publishedAt": "2026-09-18T07:42:19+09:00",
-    "modifiedAt": "2026-09-18T07:58:11+09:00",
-    "video": {
-      "url": "https://www.youtube.com/watch?v=kX_IeD91ZWI",
-      "youtubeId": "kX_IeD91ZWI",
-      "title": "포스코 노조 2차 부분 파업...생산 차질 없어 ↗",
-      "source": "YouTube · YTN",
-      "thumbnail": "https://i.ytimg.com/vi/kX_IeD91ZWI/hqdefault.jpg"
-    }
   },
   {
     "id": "2026-09-18-hydrogen-law-effective",
@@ -501,19 +521,6 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     }
   },
   {
-    "id": "2026-09-16-cabinet-nominee-hearings",
-    "date": "2026-09-16",
-    "category": "정치",
-    "author": "이명훈",
-    "type": "기사",
-    "title": "2기 개각 인사청문회 본격화…장관 후보자 3명 국회 검증",
-    "summary": "이형일 경제부총리 겸 재정경제부 장관 후보자, 김승원 법무부 장관 후보자, 이소영 중소벤처기업부 장관 후보자에 대한 인사청문회가 15일 열렸다. 청문회의 의미는 공방 자체보다 후보자가 실제 임명될 경우 어떤 정책·예산·조직운영을 우선할지가 구체화되는 데 있다.",
-    "href": "./articles/2026-09-16-cabinet-nominee-hearings.html",
-    "keywords": "개각 인사청문회 이형일 김승원 이소영 국회 장관 후보자",
-    "publishedAt": "2026-09-16T06:36:44+09:00",
-    "modifiedAt": "2026-09-16T14:17:09+09:00"
-  },
-  {
     "id": "2026-09-16-korea-central-asia-summit",
     "date": "2026-09-16",
     "category": "정부",
@@ -525,6 +532,19 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "keywords": "한 중앙아시아 정상회의 핵심광물 공급망 AI 에너지 외교",
     "publishedAt": "2026-09-16T06:36:44+09:00",
     "modifiedAt": "2026-09-16T14:18:07+09:00"
+  },
+  {
+    "id": "2026-09-16-gtx-c-construction",
+    "date": "2026-09-16",
+    "category": "사회",
+    "author": "이명훈",
+    "type": "기사",
+    "title": "지연됐던 GTX-C 실제 착공…수도권 통근권 재편 시작",
+    "summary": "공사비 문제 등으로 지연됐던 GTX-C가 15일 실제 착공 단계에 들어갔다. 이제 판단해야 할 것은 ‘철도가 생긴다’는 사실이 아니라 60개월의 공사기간 동안 환승·주거·상권·기업 입지 전략을 어떻게 준비하느냐다.",
+    "href": "./articles/2026-09-16-gtx-c-construction.html",
+    "keywords": "GTX-C 착공 수원 청량리 덕정 삼성 수도권 교통",
+    "publishedAt": "2026-09-16T06:36:44+09:00",
+    "modifiedAt": "2026-09-16T14:17:47+09:00"
   },
   {
     "id": "2026-09-16-global-bond-yields",
@@ -540,17 +560,17 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "modifiedAt": "2026-09-16T14:17:29+09:00"
   },
   {
-    "id": "2026-09-16-gtx-c-construction",
+    "id": "2026-09-16-cabinet-nominee-hearings",
     "date": "2026-09-16",
-    "category": "사회",
+    "category": "정치",
     "author": "이명훈",
     "type": "기사",
-    "title": "지연됐던 GTX-C 실제 착공…수도권 통근권 재편 시작",
-    "summary": "공사비 문제 등으로 지연됐던 GTX-C가 15일 실제 착공 단계에 들어갔다. 이제 판단해야 할 것은 ‘철도가 생긴다’는 사실이 아니라 60개월의 공사기간 동안 환승·주거·상권·기업 입지 전략을 어떻게 준비하느냐다.",
-    "href": "./articles/2026-09-16-gtx-c-construction.html",
-    "keywords": "GTX-C 착공 수원 청량리 덕정 삼성 수도권 교통",
+    "title": "2기 개각 인사청문회 본격화…장관 후보자 3명 국회 검증",
+    "summary": "이형일 경제부총리 겸 재정경제부 장관 후보자, 김승원 법무부 장관 후보자, 이소영 중소벤처기업부 장관 후보자에 대한 인사청문회가 15일 열렸다. 청문회의 의미는 공방 자체보다 후보자가 실제 임명될 경우 어떤 정책·예산·조직운영을 우선할지가 구체화되는 데 있다.",
+    "href": "./articles/2026-09-16-cabinet-nominee-hearings.html",
+    "keywords": "개각 인사청문회 이형일 김승원 이소영 국회 장관 후보자",
     "publishedAt": "2026-09-16T06:36:44+09:00",
-    "modifiedAt": "2026-09-16T14:17:47+09:00"
+    "modifiedAt": "2026-09-16T14:17:09+09:00"
   },
   {
     "id": "2026-09-16-bipartisan-32-bills",
