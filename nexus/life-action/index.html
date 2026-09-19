@@ -5,10 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta name="description" content="YEHAVHA NEXUS 생활·실행 Gate는 매일의 선택과 이사·취업·이직·퇴직·휴직·창업·돌봄·여행의 실행순서를 연결하는 생활 실행 서비스입니다."/>
 <meta name="theme-color" content="#ffffff"/>
-<title>생활·실행 | YEHAVHA NEXUS</title>
+<title>생활·실행 | YEHAVHA NEXUS</title><link rel="canonical" href="https://yehavha.com/life-action/"/>
 <link href="../portal-v2.css" rel="stylesheet"/>
 <link href="../nexus-standard.css" rel="stylesheet"/>
-<link href="../gate-page.css" rel="stylesheet"/>
 <link href="./life-action.css?v=20260919-gate-1" rel="stylesheet"/>
 </head>
 <body class="gate-page life-action-page" data-gate="life-action">
@@ -16,8 +15,8 @@
 <header class="hero life-hero" id="top">
   <div class="container">
     <div class="topbar">
-      <div class="portal-mark"><span id="lifeGateClock">한국시간 확인 중</span></div>
-      <div class="portal-runtime"><strong class="access-count" id="lifeGateAccessCount"></strong></div>
+      <div class="portal-mark"><span>한국시간 확인 중</span></div>
+      <div class="portal-runtime"><strong class="access-count" id="accessCount"></strong></div>
     </div>
     <section class="hero-card">
       <p class="gate-brandline">AI·AX 전략정보·지식·대응 시스템</p>
@@ -277,23 +276,7 @@
   ]
 }
 </script>
+<script defer src="../portal-v2.js"></script>
 <script src="./life-action.js?v=20260914-watch-age-1"></script>
-<script>
-(() => {
-  const clock=document.getElementById('lifeGateClock');
-  const count=document.getElementById('lifeGateAccessCount');
-  const TZ='Asia/Seoul';
-  function tick(){
-    const now=new Date();
-    const d=new Intl.DateTimeFormat('en-CA',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit'}).format(now);
-    const t=new Intl.DateTimeFormat('en-GB',{timeZone:TZ,hour:'2-digit',minute:'2-digit',hour12:false}).format(now);
-    if(clock) clock.textContent=d+' · '+t+' KST';
-  }
-  tick(); setInterval(tick,30000);
-  fetch('/api/access?op=get',{cache:'no-store',credentials:'same-origin'}).then(r=>r.ok?r.json():Promise.reject()).then(v=>{
-    if(count&&v?.ok) count.textContent='오늘 '+Number(v.today||0).toLocaleString('ko-KR')+' | 누적 '+Number(v.count||0).toLocaleString('ko-KR');
-  }).catch(()=>{if(count) count.textContent='';});
-})();
-</script>
 </body>
 </html>
