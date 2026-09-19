@@ -2,7 +2,7 @@
 
 운영 주소: https://yehavha.com/
 
-운영 구조 기준일: 2026-09-06
+운영 구조 기준일: 2026-09-19
 
 YEHAVHA Nexus는 전략정보·대학·웹앱·연구·출판·미디어·교육·기획 프로젝트의 공식 진입점을 한곳에 모아 관리하는 통합 포털입니다.
 
@@ -11,10 +11,10 @@ YEHAVHA Nexus는 전략정보·대학·웹앱·연구·출판·미디어·교육
 Cloudflare Pages는 이 저장소의 `nexus/` 디렉터리를 Nexus 운영 원본으로 사용합니다.
 
 - `nexus/index.html` — 포털 화면 구조와 명시적 Footer의 유일한 HTML 소유 원본
-- `nexus/portal-v2.css` — 공통 shell 스타일
-- `nexus/nexus-standard.css` — 메인 포털 presentation의 유일한 전용 스타일 소유 원본. 카테고리 바로가기 크기·간격도 이 파일이 직접 소유합니다.
-- `nexus/portal-v2.js` — 카테고리·프로젝트 렌더링, 상태 병합, 통합검색·SEO·집계형 이용행동 연결의 유일한 메인 동작 소유 원본
-- `nexus/projects.json` — 카테고리·연구그룹·프로젝트 카드의 유일한 표시정보 원본
+- `nexus/portal-v2.css` — 메인과 전용 Gate가 함께 쓰는 공통 shell·상단 내비게이션·Gate 외곽 스타일
+- `nexus/nexus-standard.css` — 메인 포털과 데이터형 Gate의 카테고리·프로젝트 카드 presentation 소유 원본. 공통 shell과 상단 내비게이션은 소유하지 않습니다.
+- `nexus/portal-v2.js` — 메인과 전용 Gate의 카테고리·프로젝트 렌더링, 상태 병합, 통합검색·시계·방문자수·SEO·집계형 이용행동 연결의 canonical 런타임
+- `nexus/projects.json` — 6개 Gate, 카테고리, 프로젝트 카드와 각 프로젝트 `primaryGate`의 유일한 표시정보 원본
 - `nexus/approved-manifests.json` — 자동 상태 추적이 허용된 매니페스트 경로의 유일한 승인 레지스트리
 - 각 승인된 `nexus.project.json` — 프로젝트별 상태 추적·콘텐츠 집계 규칙과 필요한 경우 내용검토일·자료/법령 기준일의 소유 원본
 - `nexus/project-status.json` — 최근 운영수정일·콘텐츠 수·운영상태·검토 기준일을 병합한 자동 상태 출력물
@@ -33,14 +33,36 @@ Cloudflare Pages는 이 저장소의 `nexus/` 디렉터리를 Nexus 운영 원�
 
 `nexus/status.css`, `nexus/portal-enhancements.css` 같은 폐기된 전역 override와 메인 화면 전용 임시 보정 CSS는 운영 원본으로 다시 연결하지 않습니다. 메인 화면의 스타일 변경은 `nexus-standard.css`에서 직접 수정합니다.
 
+## 6개 Gate 정보구조
+
+NEXUS는 `NEXUS 1 / NEXUS 2` 방식이나 메인 전체 나열형 포털로 되돌리지 않습니다. 현재 최상위 정보구조는 다음 6개 Gate입니다.
+
+1. `strategy-intelligence` — 전략·인텔리전스
+2. `legal-policy` — 법률·정책
+3. `research-education` — 연구·교육
+4. `life-action` — 생활·실행
+5. `culture-media` — 문화·미디어
+6. `resources-services` — 자료·서비스
+
+메인에서는 뉴스 성격이 강한 `전략·인텔리전스`와 `문화·미디어`만 실제 프로젝트 카드까지 이어서 표시합니다. `법률·정책`, `연구·교육`, `생활·실행`, `자료·서비스`는 각각 전용 Gate 페이지로 이동합니다.
+
+- `/legal-policy/`
+- `/research-education/`
+- `/life-action/`
+- `/resources-services/`
+
+전용 Gate는 별도의 프로젝트 목록을 소유하지 않습니다. 모두 `projects.json`과 `project-status.json`을 `portal-v2.js`가 읽어 현재 Gate에 해당하는 카드만 렌더링합니다. `gate-page.js`, `gate-page.css`, 별도 검색 인덱스처럼 동일 정보를 다시 소유하는 중간 레이어를 만들지 않습니다.
+
+각 프로젝트는 `primaryGate`를 하나만 갖습니다. 다른 분야에서도 필요할 경우 원본을 복제하지 않고 기존 URL을 링크합니다. 카테고리의 `tier`와 프로젝트의 `primaryGate`는 일치해야 하며 `audit-portal-enhancements.mjs`가 이를 검증합니다.
+
 ## 데이터 역할과 소유권
 
 표시정보, 승인정보, 상태정보, 하위 프로젝트 데이터와 이용측정의 책임을 분리합니다.
 
-1. `projects.json`은 프로젝트 제목·설명·URL·카테고리·연구그룹만 관리합니다.
+1. `projects.json`은 Gate·프로젝트 제목·설명·URL·카테고리·`primaryGate`만 관리합니다.
 2. `approved-manifests.json`은 상태 추적이 승인된 매니페스트 경로만 관리합니다.
 3. 각 `nexus.project.json`은 프로젝트 ID, 상태 추적·콘텐츠 집계 규칙과 필요한 검토 기준일만 관리합니다.
-4. `update-status.mjs`는 승인 레지스트리에 등록된 매니페스트를 읽어 `project-status.json`만 갱신합니다.
+4. `update-status.mjs`는 승인 레지스트리에 등록된 매니페스트를 읽어 `project-status.json`만 갱신하며, 동일 워크플로에서 `update-sitemap.mjs`가 현재 디렉터리 구조를 기준으로 `sitemap.xml`을 갱신합니다.
 5. `portal-v2.js`는 `projects.json`을 먼저 읽고 동일 ID의 `project-status.json` 상태값만 병합합니다.
 6. Nexus 통합검색은 별도의 검색용 프로젝트 목록을 만들지 않고 위 두 원본을 병합한 현재 런타임 데이터만 검색합니다.
 7. 대표 진입점·최근 업데이트·성숙도·신뢰 레이어는 표시 로직이며 프로젝트 원본을 별도로 소유하지 않습니다.
@@ -145,7 +167,7 @@ Nexus 자체 측정은 개인 단위 분석보다 포털 개선에 필요한 최
 - TOEIC 마스터 어휘 빌드: canonical `master-lexicon-v2.json` 갱신에 한해 별도 write 권한 사용
 - 진단용 워크플로는 결과를 저장소에 재커밋하지 않습니다.
 
-`.github/workflows/refresh-nexus-status.yml`은 Nexus 상태 갱신만 담당하며 변경이 있을 때 `nexus/project-status.json`만 자동 커밋합니다.
+`.github/workflows/refresh-nexus-status.yml`은 승인된 생성물인 `nexus/project-status.json`과 `nexus/sitemap.xml`만 자동 커밋합니다. `index.html`, `projects.json`, CSS·JS 또는 Gate 페이지는 자동 쓰기 대상이 아닙니다.
 
 ## Cloudflare Pages
 
