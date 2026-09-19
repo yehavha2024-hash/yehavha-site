@@ -93,7 +93,6 @@ jobs:
           command: pages deploy nexus --project-name=yehavha-nexus-hub --branch=main --commit-dirty=true
 
       - name: Verify production reflects current NEXUS architecture
-        if: steps.credentials.outputs.ready == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -126,5 +125,4 @@ jobs:
           exit 1
 
       - name: Validate deployed live URLs and cache policy
-        if: steps.credentials.outputs.ready == 'true'
         run: node nexus/scripts/audit-live-urls.mjs
