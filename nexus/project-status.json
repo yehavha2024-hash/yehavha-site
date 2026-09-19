@@ -2,8 +2,8 @@
   "ai-law-institute": {
     "id": "ai-law-institute",
     "managedBy": "github-external",
-    "status": "최근 업데이트",
-    "statusTone": "fresh",
+    "status": "운영 중",
+    "statusTone": "active",
     "lastUpdated": "2026-09-11",
     "contentCount": 8,
     "contentLabel": "연구축"
