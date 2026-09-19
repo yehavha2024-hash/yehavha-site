@@ -43,6 +43,13 @@
 /*.js
   Cache-Control: no-cache, no-store, must-revalidate
 
+
+/projects.json
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/project-status.json
+  Cache-Control: no-cache, no-store, must-revalidate
+
 /intelligence-briefing/latest.json
   Cache-Control: no-cache, no-store, must-revalidate
 
