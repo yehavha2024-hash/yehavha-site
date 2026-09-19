@@ -124,3 +124,7 @@ jobs:
           done
           echo "::error::Production yehavha.com did not reflect the current NEXUS Gate architecture within 3 minutes."
           exit 1
+
+      - name: Validate deployed live URLs and cache policy
+        if: steps.credentials.outputs.ready == 'true'
+        run: node nexus/scripts/audit-live-urls.mjs
