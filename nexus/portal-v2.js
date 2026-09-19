@@ -421,7 +421,8 @@
     installSeo({projects});
     if (!portalGrid) return;
     portalGrid.replaceChildren();
-    for (const tier of tiers) {
+    const mainTierIds = new Set(['strategy-intelligence','culture-media']);
+    for (const tier of tiers.filter(item => mainTierIds.has(item.id))) {
       const section = renderTier(tier, visibleCategories, projectsByCategory);
       if (section) portalGrid.append(section);
     }
