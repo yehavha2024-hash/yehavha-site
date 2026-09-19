@@ -316,6 +316,33 @@ const auditNexusModel = () => {
   }
 };
 
+const auditWriterWorkflows = () => {
+  const workflowDir = '.github/workflows';
+  if (!fs.existsSync(workflowDir)) {
+    report('ERROR', workflowDir, 'GitHub Actions workflow 디렉터리 없음');
+    return;
+  }
+
+  for (const file of fs.readdirSync(workflowDir).filter(name => /\.ya?ml$/i.test(name))) {
+    const full = path.join(workflowDir, file);
+    const source = read(full);
+    if (!/^\s*contents:\s*write\s*$/m.test(source)) continue;
+
+    if (!/group:\s*yehavha-main-content-writer\b/.test(source)) {
+      report('ERROR', full, 'main 쓰기 workflow가 공통 writer queue를 사용하지 않음');
+    }
+    if (!source.includes('scripts/ci/safe-content-commit.sh')) {
+      report('ERROR', full, 'main 쓰기 workflow가 canonical safe-content-commit.sh를 사용하지 않음');
+    }
+    if (/git\s+push[^\n]*(?:--force|-f)(?:\s|$)/.test(source)) {
+      report('ERROR', full, 'force push 사용 금지');
+    }
+    if (/git\s+commit\b/.test(source)) {
+      report('ERROR', full, 'workflow 내부 개별 git commit 구현 금지: safe-content-commit.sh만 사용');
+    }
+  }
+};
+
 for (const project of projects) {
   const root = project.dir;
   const indexPath = path.join(root, 'index.html');
@@ -376,6 +403,7 @@ for (const project of projects) {
 
 auditNexusRuntimePages();
 auditNexusModel();
+auditWriterWorkflows();
 
 console.log(`\nArchitecture audit: ${errors} error(s), ${warnings} warning(s)`);
 if (errors) process.exit(1);
