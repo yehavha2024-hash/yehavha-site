@@ -21,6 +21,7 @@ on:
       - 'scripts/ci/safe-content-commit.sh'
       - '.github/workflows/normalize-news-articles.yml'
   workflow_dispatch:
+  # Scheduled passes are reconciliation safety nets for automated content-writer commits.
   schedule:
     # Fallback reconciliation after the 06:30 KST morning content writer.
     # GitHub-token commits do not reliably cascade into another push workflow.
