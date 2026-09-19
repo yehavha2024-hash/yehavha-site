@@ -91,12 +91,8 @@ function auditWorkflowPermissions() {
       required: ['safe-content-commit.sh "Normalize YEHAVHA NEWS article outputs" nexus/news/articles nexus/news/news-data.js nexus/news/sitemap.xml operations/news-records'],
       allowedPathTokens: ['nexus/news/articles', 'nexus/news/news-data.js', 'nexus/news/sitemap.xml', 'operations/news-records']
     }],
-    ['refresh-investment-strategy.yml', {
-      required: ['git add nexus/investment-strategy/index.html'],
-      allowedPathTokens: ['nexus/investment-strategy/index.html']
-    }],
     ['toeic-master-lexicon-build.yml', {
-      required: ['git add toeic-human-100/master-lexicon-v2.json'],
+      required: ['safe-content-commit.sh "Update TOEIC master lexicon v2" toeic-human-100/master-lexicon-v2.json'],
       allowedPathTokens: ['toeic-human-100/master-lexicon-v2.json']
     }],
     ['intelligence-briefing-archive.yml', {
@@ -104,19 +100,19 @@ function auditWorkflowPermissions() {
       allowedPathTokens: ['nexus/intelligence-briefing/archive', 'nexus/intelligence-briefing/archive-index.json']
     }],
     ['korea-social-intelligence-archive.yml', {
-      required: ['git add -- nexus/korea-social-intelligence/archive nexus/korea-social-intelligence/archive-index.json'],
+      required: ['safe-content-commit.sh "Archive Korea social intelligence daily brief" nexus/korea-social-intelligence/archive nexus/korea-social-intelligence/archive-index.json'],
       allowedPathTokens: ['nexus/korea-social-intelligence/archive', 'nexus/korea-social-intelligence/archive-index.json']
     }],
     ['refresh-legal-intelligence.yml', {
-      required: ['git add nexus/legal-intelligence/legislation.json'],
+      required: ['safe-content-commit.sh "Refresh Legal Intelligence legislation data" nexus/legal-intelligence/legislation.json'],
       allowedPathTokens: ['nexus/legal-intelligence/legislation.json']
     }],
     ['refresh-legal-materials.yml', {
-      required: ['git add nexus/legal-intelligence/legal-materials.json'],
+      required: ['safe-content-commit.sh "Refresh curated Legal Intelligence materials" nexus/legal-intelligence/legal-materials.json'],
       allowedPathTokens: ['nexus/legal-intelligence/legal-materials.json']
     }],
     ['refresh-legal-people.yml', {
-      required: ['git add nexus/legal-intelligence/legal-people.json'],
+      required: ['safe-content-commit.sh "Refresh Legal Intelligence people data" nexus/legal-intelligence/legal-people.json'],
       allowedPathTokens: ['nexus/legal-intelligence/legal-people.json']
     }]
   ]);
