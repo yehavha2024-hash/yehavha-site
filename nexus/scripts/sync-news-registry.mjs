@@ -180,6 +180,13 @@ config.categories = [
 records.sort((a, b) => {
   const byDate = b.date.localeCompare(a.date);
   if (byDate) return byDate;
+
+  // Within the same edition date, newest publication must surface first.
+  // Previous registry order is only a deterministic fallback for legacy/tied timestamps.
+  const aPublished = Date.parse(a.publishedAt || '') || 0;
+  const bPublished = Date.parse(b.publishedAt || '') || 0;
+  if (aPublished !== bPublished) return bPublished - aPublished;
+
   const aOrder = previousOrder.has(a.id) ? previousOrder.get(a.id) : Number.MAX_SAFE_INTEGER;
   const bOrder = previousOrder.has(b.id) ? previousOrder.get(b.id) : Number.MAX_SAFE_INTEGER;
   if (aOrder !== bOrder) return aOrder - bOrder;
