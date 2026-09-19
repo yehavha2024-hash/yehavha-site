@@ -21,6 +21,12 @@ on:
       - 'scripts/ci/safe-content-commit.sh'
       - '.github/workflows/normalize-news-articles.yml'
   workflow_dispatch:
+  schedule:
+    # Fallback reconciliation after the 06:30 KST morning content writer.
+    # GitHub-token commits do not reliably cascade into another push workflow.
+    - cron: '50 21 * * *'
+    # Second safety pass before the main morning readership window.
+    - cron: '5 0 * * *'
 
 permissions:
   contents: write
