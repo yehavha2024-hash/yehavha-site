@@ -1,10 +1,37 @@
 # YEHAVHA NEXUS UI cache policy
-# Structural HTML and NEWS routes must not be served stale after deployment.
+# Structural HTML and NEWS/Gate routes must not be served stale after deployment.
+
+/
+  Cache-Control: no-cache, no-store, must-revalidate
 
 /index.html
   Cache-Control: no-cache, no-store, must-revalidate
 
 /news/*
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/legal-policy/
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/legal-policy/*
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/research-education/
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/research-education/*
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/life-action/
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/life-action/*
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/resources-services/
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/resources-services/*
   Cache-Control: no-cache, no-store, must-revalidate
 
 /*.html
@@ -15,20 +42,3 @@
 
 /*.js
   Cache-Control: no-cache, must-revalidate
-
-# Dedicated NEXUS gate routes: directory URLs must never serve stale structural HTML.
-/legal-policy/
-/legal-policy/*
-  Cache-Control: no-cache, no-store, must-revalidate
-
-/research-education/
-/research-education/*
-  Cache-Control: no-cache, no-store, must-revalidate
-
-/life-action/
-/life-action/*
-  Cache-Control: no-cache, no-store, must-revalidate
-
-/resources-services/
-/resources-services/*
-  Cache-Control: no-cache, no-store, must-revalidate
