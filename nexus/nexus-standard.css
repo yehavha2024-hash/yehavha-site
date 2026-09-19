@@ -378,3 +378,64 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
   .nexus-gate-icon{top:12px;right:12px;width:34px;height:34px;border-radius:10px}
   .nexus-gate-icon svg{width:20px;height:20px}
 }
+
+
+/* NEXUS gate card icon layout v3 */
+/* Integrated icon/content layout: icon occupies a stable visual column instead of floating alone. */
+.nexus-gate-zone{padding-bottom:2px;margin-bottom:-8px}
+.nexus-gate-grid{align-items:stretch}
+.nexus-gate-card{
+  display:grid;
+  grid-template-columns:50px minmax(0,1fr);
+  grid-template-rows:auto auto auto;
+  column-gap:13px;
+  row-gap:3px;
+  align-content:center;
+  padding:15px 16px;
+}
+.nexus-gate-icon{
+  position:relative;
+  top:auto;
+  right:auto;
+  grid-column:1;
+  grid-row:1 / 4;
+  align-self:center;
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.82);
+  background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(255,255,255,.62));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 7px 16px rgba(31,45,61,.11);
+  overflow:hidden;
+}
+.nexus-gate-icon::before{
+  content:"";
+  position:absolute;
+  inset:-18px auto auto -18px;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:currentColor;
+  opacity:.08;
+}
+.nexus-gate-icon svg{position:relative;width:25px;height:25px;stroke-width:1.7}
+.nexus-gate-card>span:not(.nexus-gate-icon),
+.nexus-gate-card>strong,
+.nexus-gate-card>p{grid-column:2;margin-left:0}
+.nexus-gate-card>span:not(.nexus-gate-icon){grid-row:1;margin-bottom:0}
+.nexus-gate-card>strong{grid-row:2;font-size:19px}
+.nexus-gate-card>p{grid-row:3;margin-top:2px}
+.hero-card .nexus-gate-zone:last-child{margin-bottom:-12px}
+
+@media(min-width:1100px){
+  .nexus-gate-card{min-height:124px;grid-template-columns:52px minmax(0,1fr);column-gap:14px}
+  .nexus-gate-icon{width:50px;height:50px}
+  .nexus-gate-icon svg{width:26px;height:26px}
+}
+@media(max-width:560px){
+  .nexus-gate-zone{margin-bottom:-5px}
+  .nexus-gate-card{grid-template-columns:44px minmax(0,1fr);column-gap:11px;padding:13px}
+  .nexus-gate-icon{width:42px;height:42px;border-radius:12px}
+  .nexus-gate-icon svg{width:22px;height:22px}
+  .nexus-gate-card>strong{font-size:18px}
+}
