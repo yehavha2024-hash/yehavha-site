@@ -156,11 +156,22 @@ if (exists(lifeGatePage)) {
   }
   if (!html.includes('../portal-v2.js')) fail(lifeGatePage, '생활·실행 Gate가 canonical portal-v2.js를 사용하지 않음');
   if (!html.includes('./life-action.js')) fail(lifeGatePage, '생활·실행 Gate 로컬 동작 canonical owner 누락');
-  if (/<style[\\s>]/i.test(html)) fail(lifeGatePage, '생활·실행 Gate inline style 금지: life-action.css가 presentation canonical owner');
-  const inlineRuntimeScripts = [...html.matchAll(/<script\\b([^>]*)>/gi)]
-    .filter(match => !/\\bsrc\\s*=/.test(match[1]) && !/\\btype\\s*=\\s*(["'])application\\/(?:ld\\+)?json\\1/i.test(match[1]));
+  if (/<style[\s>]/i.test(html)) fail(lifeGatePage, '생활·실행 Gate inline style 금지: life-action.css가 presentation canonical owner');
+  const inlineRuntimeScripts = [...html.matchAll(/<script\b([^>]*)>/gi)]
+    .filter(match => !/\bsrc\s*=/.test(match[1]) && !/\btype\s*=\s*(["'])application\/(?:ld\+)?json\1/i.test(match[1]));
   if (inlineRuntimeScripts.length) fail(lifeGatePage, '생활·실행 Gate inline runtime script 금지: life-action.js가 behavior canonical owner');
   if (/MutationObserver/.test(html)) fail(lifeGatePage, '생활·실행 Gate 정적 구조를 MutationObserver로 재보정하면 안 됨');
+}
+
+if (exists('nexus/life-action/life-action.css')) {
+  const lifeCss = read('nexus/life-action/life-action.css').replace(/\s+/g, '');
+  for (const token of [
+    '.life-action-page{--life-major-gap:',
+    '.life-action-page.gate-lead{margin-top:var(--life-major-gap)}',
+    '.life-action-page.main{padding-top:var(--life-major-gap)}'
+  ]) {
+    if (!lifeCss.includes(token)) fail('nexus/life-action/life-action.css', \`생활·실행 주요 여백 canonical 규칙 누락: \${token}\`);
+  }
 }
 
 if (exists('nexus/portal-v2.css')) {
