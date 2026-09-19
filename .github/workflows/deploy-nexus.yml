@@ -27,6 +27,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Validate NEXUS architecture ownership
+        run: node nexus/scripts/audit-portal-enhancements.mjs
+
       - name: Validate NEXUS fixed-slot ownership
         shell: bash
         run: |
