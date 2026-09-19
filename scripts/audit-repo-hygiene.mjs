@@ -131,6 +131,19 @@ function auditWorkflowPermissions() {
     }
     if (!hasContentsWrite || !policy) continue;
 
+    if (!/group:\s*yehavha-main-content-writer\b/.test(source)) {
+      error(`.github/workflows/${file}`, '쓰기 workflow가 공통 writer queue를 사용하지 않음');
+    }
+    if (!/^\s*cancel-in-progress:\s*false\s*$/m.test(source)) {
+      error(`.github/workflows/${file}`, '쓰기 workflow는 실행 중 작업을 취소하면 안 됨');
+    }
+    if (!/^\s*queue:\s*max\s*$/m.test(source)) {
+      error(`.github/workflows/${file}`, '쓰기 workflow가 다중 pending queue를 보존하지 않음(queue: max 필요)');
+    }
+    if (/git\s+commit\b/.test(source) || /git\s+push\b/.test(source)) {
+      error(`.github/workflows/${file}`, 'workflow 내부 직접 git commit/push 금지: safe-content-commit.sh만 사용');
+    }
+
     for (const token of policy.required) {
       if (!source.includes(token)) error(`.github/workflows/${file}`, `승인된 write 대상 명령 누락: ${token}`);
     }
@@ -313,7 +326,8 @@ function auditStandardsDrift() {
       '한 기능에 한 소유자',
       '사이트 Footer를 소유하는 파일을 정확히 1개',
       '`pull_request`와 `main` push에서 자동 실행',
-      '자동 workflow는 자신이 명시적으로 소유하는 데이터·산출물만 수정'
+      '자동 workflow는 자신이 명시적으로 소유하는 데이터·산출물만 수정',
+      '`queue: max`'
     ]) {
       if (!source.includes(token)) error(webStandard, `최신 구조 규격 누락: ${token}`);
     }
