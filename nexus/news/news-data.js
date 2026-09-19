@@ -128,7 +128,7 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "href": "./articles/2026-09-19-weekend-sports-asian-games-kbo.html",
     "keywords": "토요일 스포츠가 꽉 찼다…아시안게임 개막·KBO 4경기 오후 5시 글로벌·컬처",
     "publishedAt": "2026-09-19T09:25:31+09:00",
-    "modifiedAt": "2026-09-19T09:47:06+09:00",
+    "modifiedAt": "2026-09-19T19:01:41+09:00",
     "video": {
       "url": "https://www.youtube.com/watch?v=ZcBY-HcPo7I",
       "youtubeId": "ZcBY-HcPo7I",

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "articleId": "2026-09-19-weekend-sports-asian-games-kbo",
+  "sourcePath": "nexus/news/articles/2026-09-19-weekend-sports-asian-games-kbo.html",
+  "draftRef": "",
+  "retention": {
+    "minimumMonths": 6,
+    "defaultPolicy": "indefinite-unless-lawful-disposal-approved"
+  },
+  "evidenceNotes": [],
+  "versions": [
+    {
+      "stage": "baseline",
+      "commit": "b6cfb3baf6f2688520bd6daa7509f1d40f4c79cf",
+      "recordedAt": "2026-09-19T19:01:38+09:00",
+      "revisionReason": "자동 기초 보존",
+      "snapshot": "operations/news-records/articles/2026-09-19-weekend-sports-asian-games-kbo/b6cfb3baf6f2688520bd6daa7509f1d40f4c79cf.html",
+      "evidenceSources": []
+    },
+    {
+      "stage": "revised",
+      "commit": "10ebceb2478308a3ba63ffe3f4687b583d7d5ba5",
+      "recordedAt": "2026-09-19T19:01:41+09:00",
+      "revisionReason": "Normalize NEWS subheading for quality gate",
+      "snapshot": "operations/news-records/articles/2026-09-19-weekend-sports-asian-games-kbo/10ebceb2478308a3ba63ffe3f4687b583d7d5ba5.html",
+      "evidenceSources": []
+    }
+  ]
+}

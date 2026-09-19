@@ -5,41 +5,41 @@
       "id": "2026-09-18-president-press-conference-preview",
       "title": "이 대통령 기자회견 분석…연임 선 긋고 민생·개혁·통합 재정렬",
       "firstExposedAt": "2026-09-18T14:18:12+09:00",
-      "removedAt": null,
+      "removedAt": "2026-09-19T19:01:41+09:00",
       "lastExposedAt": "2026-09-19T09:23:50+09:00",
-      "currentPosition": 6
+      "currentPosition": null
     },
     "2026-09-18-korea-us-foreign-ministers": {
       "id": "2026-09-18-korea-us-foreign-ministers",
       "title": "조현·루비오 회담 예정…대미투자·호르무즈·대북현안 동시 테이블",
       "firstExposedAt": "2026-09-18T14:18:12+09:00",
-      "removedAt": null,
+      "removedAt": "2026-09-19T19:01:41+09:00",
       "lastExposedAt": "2026-09-19T09:23:50+09:00",
-      "currentPosition": 7
+      "currentPosition": null
     },
     "2026-09-18-korea-credit-gap": {
       "id": "2026-09-18-korea-credit-gap",
       "title": "한국 신용갭 -15.1%p, 20년 만의 최저…부채 위험 해소로 단정은 금물",
       "firstExposedAt": "2026-09-18T14:18:12+09:00",
-      "removedAt": null,
+      "removedAt": "2026-09-19T19:01:41+09:00",
       "lastExposedAt": "2026-09-19T09:23:50+09:00",
-      "currentPosition": 8
+      "currentPosition": null
     },
     "2026-09-18-posco-strike-expansion": {
       "id": "2026-09-18-posco-strike-expansion",
       "title": "포스코 노조 부분파업 확대…참여범위 늘고 생산 정상 유지가 쟁점",
       "firstExposedAt": "2026-09-18T14:18:12+09:00",
-      "removedAt": null,
+      "removedAt": "2026-09-19T19:01:41+09:00",
       "lastExposedAt": "2026-09-19T09:23:50+09:00",
-      "currentPosition": 9
+      "currentPosition": null
     },
     "2026-09-18-hydrogen-law-effective": {
       "id": "2026-09-18-hydrogen-law-effective",
       "title": "수소법 개정 오늘 시행…설비인증·보험·사업화 지원 기준 구체화",
       "firstExposedAt": "2026-09-18T14:18:12+09:00",
-      "removedAt": null,
+      "removedAt": "2026-09-19T19:01:41+09:00",
       "lastExposedAt": "2026-09-19T09:23:50+09:00",
-      "currentPosition": 10
+      "currentPosition": null
     },
     "2026-09-18-ai-compute-price-pressure": {
       "id": "2026-09-18-ai-compute-price-pressure",
@@ -86,42 +86,90 @@
       "title": "부산영화제에 들어온 AI, ‘영화는 누가 만드는가’",
       "firstExposedAt": "2026-09-19T01:14:17+09:00",
       "removedAt": null,
-      "lastExposedAt": "2026-09-19T09:23:50+09:00",
-      "currentPosition": 1
+      "lastExposedAt": "2026-09-19T19:01:41+09:00",
+      "currentPosition": 10
     },
     "2026-09-18-biff31-a-list-preview": {
       "id": "2026-09-18-biff31-a-list-preview",
       "title": "A-리스트 올라선 부산국제영화제, 제31회 BIFF 무엇이 달라졌나",
       "firstExposedAt": "2026-09-19T01:14:17+09:00",
-      "removedAt": null,
+      "removedAt": "2026-09-19T19:01:41+09:00",
       "lastExposedAt": "2026-09-19T09:23:50+09:00",
-      "currentPosition": 5
+      "currentPosition": null
     },
     "2026-09-19-us-uranium-ai-power": {
       "id": "2026-09-19-us-uranium-ai-power",
       "title": "미국, 우라늄 농축능력 확대 서두른다…AI 전력수요가 핵연료망까지 압박",
       "firstExposedAt": "2026-09-19T09:23:50+09:00",
       "removedAt": null,
-      "lastExposedAt": "2026-09-19T09:23:50+09:00",
-      "currentPosition": 2
+      "lastExposedAt": "2026-09-19T19:01:41+09:00",
+      "currentPosition": 7
     },
     "2026-09-19-korea-us-investment-projects": {
       "id": "2026-09-19-korea-us-investment-projects",
       "title": "대미 3,500억달러 투자, 가스발전·원전까지 검토…관건은 상업성과 손익분담",
       "firstExposedAt": "2026-09-19T09:23:50+09:00",
       "removedAt": null,
-      "lastExposedAt": "2026-09-19T09:23:50+09:00",
-      "currentPosition": 3
+      "lastExposedAt": "2026-09-19T19:01:41+09:00",
+      "currentPosition": 8
     },
     "2026-09-19-korea-hormuz-security-policy": {
       "id": "2026-09-19-korea-hormuz-security-policy",
       "title": "한국, 중동전쟁 직접개입 선 긋고 해상안전 역할 검토…호르무즈 대응의 경계선",
       "firstExposedAt": "2026-09-19T09:23:50+09:00",
       "removedAt": null,
-      "lastExposedAt": "2026-09-19T09:23:50+09:00",
+      "lastExposedAt": "2026-09-19T19:01:41+09:00",
+      "currentPosition": 9
+    },
+    "2026-09-19-biff31-japanese-animation-special": {
+      "id": "2026-09-19-biff31-japanese-animation-special",
+      "title": "‘천사의 알’부터 ‘메트로폴리스’까지…부산서 다시 보는 일본 애니메이션 100년",
+      "firstExposedAt": "2026-09-19T19:01:41+09:00",
+      "removedAt": null,
+      "lastExposedAt": "2026-09-19T19:01:41+09:00",
+      "currentPosition": 1
+    },
+    "2026-09-19-charlotte-gainsbourg-biff": {
+      "id": "2026-09-19-charlotte-gainsbourg-biff",
+      "title": "샤를로트 갱스부르 부산 온다…‘멜랑콜리아’ 특별상영·정은채와 토크",
+      "firstExposedAt": "2026-09-19T19:01:41+09:00",
+      "removedAt": null,
+      "lastExposedAt": "2026-09-19T19:01:41+09:00",
+      "currentPosition": 2
+    },
+    "2026-09-19-autumn-festival-trip-picks": {
+      "id": "2026-09-19-autumn-festival-trip-picks",
+      "title": "이번 주말 어디 갈까…만화·갯골·홍삼, 취향 따라 고르는 가을 축제 3곳",
+      "firstExposedAt": "2026-09-19T19:01:41+09:00",
+      "removedAt": null,
+      "lastExposedAt": "2026-09-19T19:01:41+09:00",
+      "currentPosition": 3
+    },
+    "2026-09-19-ddp-entertech-maker-faire": {
+      "id": "2026-09-19-ddp-entertech-maker-faire",
+      "title": "DDP가 놀이터가 된다…K-POP·AI·게임에 메이커페어까지 한곳에",
+      "firstExposedAt": "2026-09-19T19:01:41+09:00",
+      "removedAt": null,
+      "lastExposedAt": "2026-09-19T19:01:41+09:00",
       "currentPosition": 4
+    },
+    "2026-09-19-seoul-street-arts-weekend": {
+      "id": "2026-09-19-seoul-street-arts-weekend",
+      "title": "한강이 무대가 된다…오늘부터 서울거리예술축제, 서울숲은 뮤지컬 갈라",
+      "firstExposedAt": "2026-09-19T19:01:41+09:00",
+      "removedAt": null,
+      "lastExposedAt": "2026-09-19T19:01:41+09:00",
+      "currentPosition": 5
+    },
+    "2026-09-19-weekend-sports-asian-games-kbo": {
+      "id": "2026-09-19-weekend-sports-asian-games-kbo",
+      "title": "토요일 스포츠가 꽉 찼다…아시안게임 개막·KBO 4경기 오후 5시",
+      "firstExposedAt": "2026-09-19T19:01:41+09:00",
+      "removedAt": null,
+      "lastExposedAt": "2026-09-19T19:01:41+09:00",
+      "currentPosition": 6
     }
   },
-  "updatedAt": "2026-09-19T09:23:50+09:00",
-  "sourceCommit": "2877777da865c793e966702f92320fa31b4c7910"
+  "updatedAt": "2026-09-19T19:01:41+09:00",
+  "sourceCommit": "10ebceb2478308a3ba63ffe3f4687b583d7d5ba5"
 }
