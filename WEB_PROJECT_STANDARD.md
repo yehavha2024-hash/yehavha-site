@@ -172,7 +172,7 @@ Nexus 배포영역의 캐시 정책은 `_headers`가 소유합니다. Service Wo
 - 정보전략 브리핑 archive workflow는 archive 데이터만 갱신합니다.
 - 데이터 생성 workflow가 `index.html`, `style(s).css`, `project-standard.css`, Footer DOM을 자동 커밋하지 않습니다.
 - 모든 `contents: write` workflow는 `yehavha-main-content-writer` 공통 그룹, `cancel-in-progress: false`, `queue: max`를 사용해 실행 중 작업과 대기 작업을 순차 보존합니다.
-- 자동 커밋은 `scripts/ci/safe-content-commit.sh`만 사용하며 workflow 내부에 별도 `git commit`·`git push` 구현을 만들지 않습니다.
+- 자동 커밋은 `scripts/ci/safe-content-commit.sh`만 사용하며 workflow 내부에 별도 `git add`·`git commit`·`git push` 구현을 만들지 않습니다.
 
 새로운 자동화가 UI 파일을 생성해야 하는 특별한 경우에는 별도의 명시적 검토 없이 main에 기존 shell을 덮어쓰지 않습니다.
 
