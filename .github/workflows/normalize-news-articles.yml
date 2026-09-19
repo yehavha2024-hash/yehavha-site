@@ -35,6 +35,7 @@ permissions:
 concurrency:
   group: yehavha-main-content-writer
   cancel-in-progress: false
+  queue: max
 
 jobs:
   reconcile:
