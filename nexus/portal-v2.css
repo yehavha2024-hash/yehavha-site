@@ -35,7 +35,6 @@ a{color:inherit}button,input,select,textarea{font:inherit}button,a{-webkit-tap-h
 .category-card:has(>.items-grid.one-item):not(.category-research){position:relative!important;overflow:visible!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
 .category-card:has(>.items-grid.one-item):not(.category-research)::before{display:none!important}
 .category-card:has(>.items-grid.one-item):not(.category-research)>.category-head{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip-path:inset(50%);white-space:nowrap}
-.category-card:has(>.items-grid.one-item):not(.category-research)>.items-grid.one-item>.item-card h3::before{display:none!important;content:none!important}
 
 /* Canonical NEXUS topbar: shared by main and all dedicated Gates. */
 .topbar{display:flex;width:100%;align-items:center;justify-content:flex-start;gap:12px;margin-bottom:14px;text-align:left}
