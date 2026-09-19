@@ -20,6 +20,7 @@ permissions:
 concurrency:
   group: yehavha-main-content-writer
   cancel-in-progress: false
+  queue: max
 
 env:
   OPEN_ASSEMBLY_API_KEY: ${{ secrets.OPEN_ASSEMBLY_API_KEY || secrets.OPEN_ASSEMBLY_SUBCOMMITTEE_API_KEY }}
