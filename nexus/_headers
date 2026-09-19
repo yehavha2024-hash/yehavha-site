@@ -15,3 +15,20 @@
 
 /*.js
   Cache-Control: no-cache, must-revalidate
+
+# Dedicated NEXUS gate routes: directory URLs must never serve stale structural HTML.
+/legal-policy/
+/legal-policy/*
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/research-education/
+/research-education/*
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/life-action/
+/life-action/*
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/resources-services/
+/resources-services/*
+  Cache-Control: no-cache, no-store, must-revalidate
