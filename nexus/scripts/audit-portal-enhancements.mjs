@@ -211,6 +211,12 @@ if (exists('nexus/index.html') && exists('nexus/portal-v2.js')) {
   for (const gate of ['strategy-intelligence','culture-media']) {
     if (!home.includes(`href="#gate-${gate}"`)) fail('nexus/index.html', `${gate}: 메인 노출 Gate 앵커 누락`);
   }
+  if (!home.includes('data-nexus-architecture="gate-v1"')) {
+    fail('nexus/index.html', 'NEXUS Gate 구조 버전 표식 누락');
+  }
+  if (!home.includes('./news/about.html#mediaInfoTitle')) {
+    fail('nexus/index.html', '매체정보 링크가 실제 about.html 원본을 가리키지 않음');
+  }
   if (!runtime.includes("new Set(['strategy-intelligence','culture-media'])")) {
     fail('nexus/portal-v2.js', '메인에 노출할 Gate가 전략·인텔리전스와 문화·미디어로 고정되지 않음');
   }
@@ -236,6 +242,16 @@ for (const [gate, file] of NEXUS_DEDICATED_GATES) {
   }
   if (!page.includes('data-footer-standard="v2"')) fail(file, '표준 NEXUS Footer 누락');
   if (gate !== 'life-action' && !page.includes('id="gatePortalGrid"')) fail(file, '프로젝트 Gate 렌더링 대상 누락');
+}
+
+if (exists('nexus/_headers')) {
+  const headers = read('nexus/_headers');
+  for (const route of ['/', '/legal-policy/', '/research-education/', '/life-action/', '/resources-services/']) {
+    const requiredBlock = route + '\n  Cache-Control: no-cache, no-store, must-revalidate';
+    if (!headers.includes(requiredBlock)) fail('nexus/_headers', route + ': 구조 HTML no-store 규칙 누락');
+  }
+} else {
+  fail('nexus/_headers', 'NEXUS 캐시 정책 파일 없음');
 }
 
 const surfaces = [
