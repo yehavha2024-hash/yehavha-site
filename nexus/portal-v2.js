@@ -36,6 +36,7 @@
     legalresearch: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h9.2a2.8 2.8 0 0 1 2.8 2.8v10.2H7.8A2.8 2.8 0 0 0 5 20.3V4.5Z"/><path d="M7.8 20.3H19V7.8M8.5 9h5M8.5 12h4"/></svg>',
     legalintelligence: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h14v15H5z"/><path d="M8 8h8M8 11.5h8M8 15h5"/><path d="M3 7.5h2M3 12h2M3 16.5h2"/></svg>',
     legalsearch: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="5.5"/><path d="m15 15 5 5"/><path d="M8 10.5h5M10.5 8v5"/></svg>',
+    lifeaction: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h14v15H5z"/><path d="m8 12 2.2 2.2L16.5 8M8 17h8"/></svg>',
     culture: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h16v13H4z"/><path d="M7 9h4M7 12h7M7 15h5"/><path d="M17 8.5v6M14 11.5h6"/></svg>',
     publishing: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5c3.3-.6 5.9.1 8 2.1v11c-2.1-2-4.7-2.7-8-2.1v-11Z"/><path d="M20 5.5c-3.3-.6-5.9.1-8 2.1v11c2.1-2 4.7-2.7 8-2.1v-11Z"/></svg>',
     media: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="m10 9 5 3-5 3V9Z"/></svg>'
@@ -53,6 +54,7 @@
     legalresearch: {label:'전문 연구',tone:'research'},
     legalintelligence: {label:'법률정보',tone:'research'},
     legalsearch: {label:'법률검색',tone:'research'},
+    lifeaction: {label:'생활·실행',tone:'operational'},
     culture: {label:'문화정보',tone:'operational'},
     legalpractice: {label:'실무·훈련',tone:'operational'},
     learningapps: {label:'학습',tone:'operational'},
@@ -200,22 +202,23 @@
   }
 
   function renderSearch(data) {
-    document.querySelector('.portal-discovery')?.remove();
-    const heroCard = document.querySelector('.hero-card');
-    if (!heroCard) return;
-    const host = make('div', 'portal-discovery');
+    const host = document.getElementById('globalSearchPanel');
+    const toggle = document.getElementById('nexusSearchToggle');
+    if (!host) return;
+    host.replaceChildren();
+
     const block = make('section', 'portal-search');
     block.setAttribute('aria-labelledby', 'nexus-search-title');
     const head = make('div', 'portal-search-head');
-    const title = make('h2', '', 'NEXUS 통합검색');
+    const title = make('h2', '', 'YEHAVHA 통합검색');
     title.id = 'nexus-search-title';
-    head.append(title, make('p', '', '현재 등록된 전체 프로젝트 검색'));
+    head.append(title, make('p', '', '뉴스 이후의 NEXUS 프로젝트와 서비스를 검색합니다.'));
     const box = make('div', 'portal-search-box');
     const input = make('input', 'portal-search-input');
     input.type = 'search';
     input.autocomplete = 'off';
-    input.placeholder = '예: Agentic AI, 책임귀속, 임대차, Suno, 성경';
-    input.setAttribute('aria-label', 'NEXUS 통합검색');
+    input.placeholder = '예: Agentic AI, 책임귀속, 임대차, 투자, 교육';
+    input.setAttribute('aria-label', 'YEHAVHA NEXUS 통합검색');
     const clear = make('button', 'portal-search-clear', '지우기');
     clear.type = 'button';
     const results = make('div', 'portal-search-results');
@@ -223,7 +226,12 @@
     box.append(input, clear);
     block.append(head, box, results);
     host.append(block);
-    heroCard.insertAdjacentElement('afterend', host);
+
+    const setOpen = open => {
+      host.hidden = !open;
+      if (toggle) toggle.setAttribute('aria-expanded', String(open));
+      if (open) window.setTimeout(() => input.focus(), 0);
+    };
 
     const renderResults = () => {
       const query = input.value.trim().toLocaleLowerCase('ko-KR');
@@ -246,6 +254,7 @@
       }
     };
 
+    toggle?.addEventListener('click', () => setOpen(host.hidden));
     input.addEventListener('input', renderResults);
     input.addEventListener('keydown', event => {
       if (event.key !== 'Enter' || !input.value.trim()) return;
@@ -262,9 +271,11 @@
       history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
       input.focus();
     });
+
     const initialQuery = new URL(window.location.href).searchParams.get('q');
     if (initialQuery) {
       input.value = initialQuery;
+      setOpen(true);
       renderResults();
     }
   }
@@ -346,6 +357,7 @@
 
   function renderTier(tier, categories, projectsByCategory) {
     const section = make('section', `portal-tier portal-tier-${tier.id}`);
+    section.id = `gate-${tier.id}`;
     section.setAttribute('aria-labelledby', `tier-${tier.id}-title`);
     const head = make('div', 'portal-tier-head');
     const number = make('span', 'tier-number', tier.number);
