@@ -18,25 +18,66 @@ window.YEHAVHA_NEWS_CONFIG = Object.freeze({
 
 window.YEHAVHA_NEWS_DATA = Object.freeze([
   {
-    "id": "2026-09-19-biff31-ai-cinema",
+    "id": "2026-09-19-charlotte-gainsbourg-biff",
     "date": "2026-09-19",
-    "category": "AI·기술",
+    "category": "글로벌·컬처",
     "author": "이명훈",
     "type": "기사",
-    "series": "부산국제영화제 특집 02",
-    "title": "부산영화제에 들어온 AI, ‘영화는 누가 만드는가’",
-    "summary": "제31회 부산국제영화제는 생성형 AI를 영화의 주변 기술이 아니라 창작·제작·산업 구조를 바꾸는 핵심 의제로 끌어올렸다. 포럼 비프와 ACFM 이노아시아를 중심으로 AI 이후 영화의 창작자, 제작공정, 권리와 산업의 변화를 짚는다.",
-    "href": "./articles/2026-09-19-biff31-ai-cinema.html",
-    "keywords": "부산영화제에 들어온 AI, ‘영화는 누가 만드는가’ AI·기술",
-    "publishedAt": "2026-09-19T01:04:34+09:00",
-    "modifiedAt": "2026-09-19T01:09:46+09:00",
-    "video": {
-      "url": "https://www.youtube.com/watch?v=COtBHG1MS-w",
-      "youtubeId": "COtBHG1MS-w",
-      "title": "RAPHAEL - Trailer 2 | 2026 마테오 스튜디오 장편 AI Film ↗",
-      "source": "YouTube · AI 장편영화",
-      "thumbnail": "https://i.ytimg.com/vi/COtBHG1MS-w/hqdefault.jpg"
-    }
+    "title": "샤를로트 갱스부르 부산 온다…‘멜랑콜리아’ 특별상영·정은채와 토크",
+    "summary": "프랑스 배우 겸 뮤지션 샤를로트 갱스부르가 제31회 부산국제영화제를 찾는다. ‘멜랑콜리아’ 특별상영과 정은채와의 스페셜 토크, 씨네클래스로 관객과 만난다.",
+    "href": "./articles/2026-09-19-charlotte-gainsbourg-biff.html",
+    "keywords": "샤를로트 갱스부르 부산 온다…‘멜랑콜리아’ 특별상영·정은채와 토크 글로벌·컬처",
+    "publishedAt": "2026-09-19T09:25:55+09:00"
+  },
+  {
+    "id": "2026-09-19-autumn-festival-trip-picks",
+    "date": "2026-09-19",
+    "category": "글로벌·컬처",
+    "author": "이명훈",
+    "type": "기사",
+    "title": "이번 주말 어디 갈까…만화·갯골·홍삼, 취향 따라 고르는 가을 축제 3곳",
+    "summary": "9월 18~20일 부천국제만화축제, 시흥갯골축제, 진안홍삼축제가 동시에 열린다. 수도권 당일치기부터 전북 먹거리 여행까지 취향별 가을 나들이 선택지를 정리했다.",
+    "href": "./articles/2026-09-19-autumn-festival-trip-picks.html",
+    "keywords": "이번 주말 어디 갈까…만화·갯골·홍삼, 취향 따라 고르는 가을 축제 3곳 글로벌·컬처",
+    "publishedAt": "2026-09-19T09:25:53+09:00",
+    "modifiedAt": "2026-09-19T09:27:40+09:00"
+  },
+  {
+    "id": "2026-09-19-ddp-entertech-maker-faire",
+    "date": "2026-09-19",
+    "category": "글로벌·컬처",
+    "author": "이명훈",
+    "type": "기사",
+    "title": "DDP가 놀이터가 된다…K-POP·AI·게임에 메이커페어까지 한곳에",
+    "summary": "DDP에서는 9월 18~20일 GES·엔터테크 서울 2026이 열리고, 19~20일에는 메이커페어 서울이 겹친다. K-POP·AI·XR·게임부터 직접 만든 로봇과 작품까지 한 번에 즐길 수 있는 주말이다.",
+    "href": "./articles/2026-09-19-ddp-entertech-maker-faire.html",
+    "keywords": "DDP가 놀이터가 된다…K-POP·AI·게임에 메이커페어까지 한곳에 글로벌·컬처",
+    "publishedAt": "2026-09-19T09:25:35+09:00"
+  },
+  {
+    "id": "2026-09-19-seoul-street-arts-weekend",
+    "date": "2026-09-19",
+    "category": "글로벌·컬처",
+    "author": "이명훈",
+    "type": "기사",
+    "title": "한강이 무대가 된다…오늘부터 서울거리예술축제, 서울숲은 뮤지컬 갈라",
+    "summary": "9월 19~20일 뚝섬한강공원과 서울숲에서 서울거리예술축제가 열리고, 서울숲 야외무대에서는 무료 뮤지컬 공연이 이어진다. 가을 토요일을 걷고 보고 듣는 문화 나들이로 즐길 수 있다.",
+    "href": "./articles/2026-09-19-seoul-street-arts-weekend.html",
+    "keywords": "한강이 무대가 된다…오늘부터 서울거리예술축제, 서울숲은 뮤지컬 갈라 글로벌·컬처",
+    "publishedAt": "2026-09-19T09:25:33+09:00",
+    "modifiedAt": "2026-09-19T09:27:37+09:00"
+  },
+  {
+    "id": "2026-09-19-weekend-sports-asian-games-kbo",
+    "date": "2026-09-19",
+    "category": "글로벌·컬처",
+    "author": "이명훈",
+    "type": "기사",
+    "title": "토요일 스포츠가 꽉 찼다…아시안게임 개막·KBO 4경기 오후 5시",
+    "summary": "9월 19일 토요일은 아이치·나고야 아시안게임 개막식과 KBO리그 4경기가 겹치는 스포츠 데이다. 오늘 볼 경기와 주말 관전 포인트를 한 번에 정리한다.",
+    "href": "./articles/2026-09-19-weekend-sports-asian-games-kbo.html",
+    "keywords": "토요일 스포츠가 꽉 찼다…아시안게임 개막·KBO 4경기 오후 5시 글로벌·컬처",
+    "publishedAt": "2026-09-19T09:25:31+09:00"
   },
   {
     "id": "2026-09-19-us-uranium-ai-power",
@@ -73,6 +114,27 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "href": "./articles/2026-09-19-korea-hormuz-security-policy.html",
     "keywords": "한국, 중동전쟁 직접개입 선 긋고 해상안전 역할 검토…호르무즈 대응의 경계선 정치",
     "publishedAt": "2026-09-19T06:30:00+09:00"
+  },
+  {
+    "id": "2026-09-19-biff31-ai-cinema",
+    "date": "2026-09-19",
+    "category": "AI·기술",
+    "author": "이명훈",
+    "type": "기사",
+    "series": "부산국제영화제 특집 02",
+    "title": "부산영화제에 들어온 AI, ‘영화는 누가 만드는가’",
+    "summary": "제31회 부산국제영화제는 생성형 AI를 영화의 주변 기술이 아니라 창작·제작·산업 구조를 바꾸는 핵심 의제로 끌어올렸다. 포럼 비프와 ACFM 이노아시아를 중심으로 AI 이후 영화의 창작자, 제작공정, 권리와 산업의 변화를 짚는다.",
+    "href": "./articles/2026-09-19-biff31-ai-cinema.html",
+    "keywords": "부산영화제에 들어온 AI, ‘영화는 누가 만드는가’ AI·기술",
+    "publishedAt": "2026-09-19T01:04:34+09:00",
+    "modifiedAt": "2026-09-19T01:09:46+09:00",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=COtBHG1MS-w",
+      "youtubeId": "COtBHG1MS-w",
+      "title": "RAPHAEL - Trailer 2 | 2026 마테오 스튜디오 장편 AI Film ↗",
+      "source": "YouTube · AI 장편영화",
+      "thumbnail": "https://i.ytimg.com/vi/COtBHG1MS-w/hqdefault.jpg"
+    }
   },
   {
     "id": "2026-09-18-biff31-a-list-preview",
@@ -195,116 +257,76 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "modifiedAt": "2026-09-18T07:58:11+09:00"
   },
   {
-    "id": "2026-09-17-us-investment-briefing-delay",
+    "id": "2026-09-17-aichi-nagoya-asian-games-culture",
+    "date": "2026-09-17",
+    "category": "글로벌·컬처",
+    "author": "이명훈",
+    "type": "기사",
+    "title": "아이치·나고야 아시안게임 개막 임박…스포츠 축제와 종목 구조가 함께 바뀐다",
+    "summary": "2026 아이치·나고야 아시안게임은 9월 19일 개막을 앞두고 있다. 관중 없이 치러졌던 도쿄올림픽 이후 일본이 처음 맞는 대형 관중형 국제종합대회라는 점과 e스포츠·가상태권도·패들 등 종목 변화, 대규모 운영 실험이 핵심이다.",
+    "href": "./articles/2026-09-17-aichi-nagoya-asian-games-culture.html",
+    "keywords": "아이치·나고야 아시안게임 개막 임박…스포츠 축제와 종목 구조가 함께 바뀐다 글로벌·컬처",
+    "publishedAt": "2026-09-17T12:46:49+09:00",
+    "modifiedAt": "2026-09-17T13:20:54+09:00",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=ySR_MIHMgyk",
+      "youtubeId": "ySR_MIHMgyk",
+      "title": "Asian Games Aichi-Nagoya 2026 — ROAD TO THE GAMES ↗",
+      "source": "YouTube · AsianGames_2026",
+      "thumbnail": "https://i.ytimg.com/vi/ySR_MIHMgyk/hqdefault.jpg"
+    }
+  },
+  {
+    "id": "2026-09-17-lisa-global-ip-expansion",
+    "date": "2026-09-17",
+    "category": "글로벌·컬처",
+    "author": "이명훈",
+    "type": "기사",
+    "title": "리사 다큐 TIFF 공개…K-pop 스타가 글로벌 IP로 확장되는 경로",
+    "summary": "BLACKPINK 리사의 다큐멘터리 'Always Lalisa'가 TIFF에서 공개된 뒤 10월 글로벌 극장·IMAX 상영과 이후 YouTube Premium 공개를 앞두고 있다. 핵심은 한 K-pop 스타의 기록물이 아니라 음악·영화·연기·브랜드·플랫폼이 하나의 글로벌 IP 구조로 결합되는 방식이다.",
+    "href": "./articles/2026-09-17-lisa-global-ip-expansion.html",
+    "keywords": "리사 다큐 TIFF 공개…K-pop 스타가 글로벌 IP로 확장되는 경로 글로벌·컬처",
+    "publishedAt": "2026-09-17T12:46:14+09:00",
+    "modifiedAt": "2026-09-17T13:20:23+09:00",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=i14VRcuBy9k",
+      "youtubeId": "i14VRcuBy9k",
+      "title": "ALWAYS LALISA with Sue Kim and Lalisa Manobal | TIFF 2026 ↗",
+      "source": "YouTube · TIFF",
+      "thumbnail": "https://i.ytimg.com/vi/i14VRcuBy9k/hqdefault.jpg"
+    }
+  },
+  {
+    "id": "2026-09-17-lee-approval-decline-drivers",
     "date": "2026-09-17",
     "category": "정치",
     "author": "이명훈",
     "type": "기사",
-    "title": "대미 3,500억달러 투자계획 국회 설명 연기…세부조건 협상 계속",
-    "summary": "정부가 예정됐던 국회 설명 연기를 요청하면서 한미 투자합의는 총액보다 산업별 배분과 지배구조·손익분담을 확정하는 단계가 남았다. 이제 판단의 중심은 ‘얼마를 투자하느냐’보다 ‘어떤 권리와 위험을 조건으로 집행하느냐’에 있다.",
-    "href": "./articles/2026-09-17-us-investment-briefing-delay.html",
-    "keywords": "대미 투자 3500억달러 국회 설명 조선 원전 한미 통상",
-    "publishedAt": "2026-09-17T06:32:20+09:00",
-    "modifiedAt": "2026-09-17T13:17:55+09:00",
-    "video": {
-      "url": "https://www.youtube.com/watch?v=AdFKaNStsSM",
-      "youtubeId": "AdFKaNStsSM",
-      "title": "대미투자 발표 연기·한미 현안 관련 JTBC 뉴스룸 ↗",
-      "source": "YouTube · JTBC News",
-      "thumbnail": "https://i.ytimg.com/vi/AdFKaNStsSM/hqdefault.jpg"
-    }
+    "title": "이재명 지지율 하락, 한 가지 악재가 아니다…부동산·인사·민생 동시 압박",
+    "summary": "최근 한국갤럽·NBS·리얼미터는 조사 방식과 절대 수치가 달라도 이재명 대통령 국정평가가 하락하는 방향을 공통적으로 보여줬다. 원인을 하나의 사건으로 단정하기보다 부동산 정책, 인사 논란, 경제·민생 평가가 서로 겹치는 구조로 보는 편이 데이터에 가깝다.",
+    "href": "./articles/2026-09-17-lee-approval-decline-drivers.html",
+    "keywords": "이재명 지지율 하락, 한 가지 악재가 아니다…부동산·인사·민생 동시 압박 정치",
+    "publishedAt": "2026-09-17T12:33:32+09:00",
+    "modifiedAt": "2026-09-17T21:41:52+09:00"
   },
   {
-    "id": "2026-09-17-terrorism-law-revision",
+    "id": "2026-09-17-ppp-han-jang-after-yong-resignation",
     "date": "2026-09-17",
-    "category": "정부",
+    "category": "정치",
     "author": "이명훈",
     "type": "기사",
-    "title": "정부, 테러방지법 개정 추진…신종테러 대응과 인권절차 함께 보강",
-    "summary": "정부가 테러·테러단체 지정절차와 기관 간 역할을 정비하는 법 개정을 추진한다. 핵심은 대응권한의 확대 자체가 아니라 신종 위협에 대한 집행력과 기본권 보호절차를 같은 제도 안에서 어떻게 결합하느냐다.",
-    "href": "./articles/2026-09-17-terrorism-law-revision.html",
-    "keywords": "테러방지법 국가테러대책위원회 인권보호관 신종테러 정부",
-    "publishedAt": "2026-09-17T06:32:34+09:00",
-    "modifiedAt": "2026-09-17T08:57:54+09:00"
-  },
-  {
-    "id": "2026-09-17-fed-rate-hike",
-    "date": "2026-09-17",
-    "category": "경제·산업",
-    "author": "이명훈",
-    "type": "기사",
-    "title": "미 연준 25bp 인상…3.75~4.00%, 자본비용 다시 높아졌다",
-    "summary": "미 연방준비제도가 기준금리를 0.25%포인트 올려 3.75~4.00%로 조정했다. 중요한 것은 한 번의 인상보다 장기금리·달러·신용비용을 통해 기업투자와 한국 금융여건으로 전달되는 경로다.",
-    "href": "./articles/2026-09-17-fed-rate-hike.html",
-    "keywords": "연준 FOMC 금리 인상 3.75 4.00 미국 국채 달러",
-    "publishedAt": "2026-09-17T06:32:48+09:00",
-    "modifiedAt": "2026-09-17T13:18:26+09:00",
+    "title": "용혜인 사퇴 뒤 국힘 지표 반등…한동훈·장동혁 관계는 별도 변수",
+    "summary": "용혜인 성평등가족부 장관 후보자 사퇴와 개각 논란 뒤 국민의힘 지지도가 오른 조사가 나왔지만, 조사별 정당 지지도는 크게 엇갈렸다. 단기 반사이익이 확인된 것과 한동훈 의원·장동혁 지도부의 관계가 안정된 것은 같은 문제가 아니다.",
+    "href": "./articles/2026-09-17-ppp-han-jang-after-yong-resignation.html",
+    "keywords": "용혜인 사퇴 뒤 국힘 지표 반등…한동훈·장동혁 관계는 별도 변수 정치",
+    "publishedAt": "2026-09-17T12:33:05+09:00",
+    "modifiedAt": "2026-09-17T13:26:49+09:00",
     "video": {
-      "url": "https://www.youtube.com/watch?v=2fvMzWCC7iM",
-      "youtubeId": "2fvMzWCC7iM",
-      "title": "Fed Chair speaks after interest-rate decision ↗",
-      "source": "YouTube · The Hill",
-      "thumbnail": "https://i.ytimg.com/vi/2fvMzWCC7iM/hqdefault.jpg"
-    }
-  },
-  {
-    "id": "2026-09-17-abortion-medication-policy",
-    "date": "2026-09-17",
-    "category": "사회",
-    "author": "이명훈",
-    "type": "기사",
-    "title": "임신중지 약물 제도권 도입 추진…초기 2년 의료기관 처방·조제",
-    "summary": "정부가 임신중지 약물을 공식 의료체계 안으로 들이는 방안을 추진한다. 초기 2년은 의료기관 처방·조제를 중심으로 운영하고 안전성을 확인한 뒤 확대 여부를 검토하는 방향이다. 핵심은 약물의 도입 자체보다 허가·처방·상담·응급대응·사후관리의 연결이다.",
-    "href": "./articles/2026-09-17-abortion-medication-policy.html",
-    "keywords": "임신중지 약물 의료기관 처방 조제 보건복지부 식약처",
-    "publishedAt": "2026-09-17T06:32:59+09:00",
-    "modifiedAt": "2026-09-17T13:18:54+09:00",
-    "video": {
-      "url": "https://www.youtube.com/watch?v=TQyAfxt2PK8",
-      "youtubeId": "TQyAfxt2PK8",
-      "title": "임신중지 약물 허가 논의와 안전기준 관련 보도 ↗",
-      "source": "YouTube · KBS News",
-      "thumbnail": "https://i.ytimg.com/vi/TQyAfxt2PK8/hqdefault.jpg"
-    }
-  },
-  {
-    "id": "2026-09-17-north-korea-liaison-damages",
-    "date": "2026-09-17",
-    "category": "법·정책",
-    "author": "이명훈",
-    "type": "기사",
-    "title": "법원, 북한에 연락사무소 폭파 446억원 배상 명령…집행은 별도 문제",
-    "summary": "서울중앙지법이 남북공동연락사무소 폭파에 대해 북한의 손해배상 책임을 인정했다. 그러나 1심의 책임 인정, 판결 확정, 집행대상 재산의 특정, 실제 회수는 서로 다른 단계다. 이번 판결의 실질적 의미는 그 간극을 어떻게 다루는지에 있다.",
-    "href": "./articles/2026-09-17-north-korea-liaison-damages.html",
-    "keywords": "북한 남북공동연락사무소 446억원 손해배상 서울중앙지법 1심",
-    "publishedAt": "2026-09-17T06:33:10+09:00",
-    "modifiedAt": "2026-09-17T13:19:25+09:00",
-    "video": {
-      "url": "https://www.youtube.com/watch?v=w-6IxnZ_R5s",
-      "youtubeId": "w-6IxnZ_R5s",
-      "title": "“연락사무소 폭파 北, 정부에 446억 배상해야” 관련 보도 ↗",
-      "source": "YouTube · MBCNEWS",
-      "thumbnail": "https://i.ytimg.com/vi/w-6IxnZ_R5s/hqdefault.jpg"
-    }
-  },
-  {
-    "id": "2026-09-17-global-ai-safety",
-    "date": "2026-09-17",
-    "category": "AI·기술",
-    "author": "이명훈",
-    "type": "기사",
-    "title": "유엔·EU, 프런티어 AI 안전 국제조정 압박…인프라 경쟁과 규범 경쟁 동시 진행",
-    "summary": "프런티어 AI 경쟁이 모델 성능만의 경쟁에서 안전평가·보안·전력·데이터센터·자본비용을 동시에 관리하는 경쟁으로 이동하고 있다. 국제 안전기준과 2GW급 인프라 투자가 같은 시기에 부각된 것은 규범과 컴퓨트가 하나의 산업조건으로 결합되고 있다는 신호다.",
-    "href": "./articles/2026-09-17-global-ai-safety.html",
-    "keywords": "유엔 EU 프런티어 AI 안전 데이터센터 Anthropic 규제",
-    "publishedAt": "2026-09-17T06:33:37+09:00",
-    "modifiedAt": "2026-09-17T13:19:53+09:00",
-    "video": {
-      "url": "https://www.youtube.com/watch?v=pfkty58uZ1E",
-      "youtubeId": "pfkty58uZ1E",
-      "title": "Artificial Intelligence: “What we do with it is now up to all of us” ↗",
-      "source": "YouTube · United Nations",
-      "thumbnail": "https://i.ytimg.com/vi/pfkty58uZ1E/hqdefault.jpg"
+      "url": "https://www.youtube.com/watch?v=Fif_r8pnjlE",
+      "youtubeId": "Fif_r8pnjlE",
+      "title": "결국 고개숙인 용혜인…14일만에 성평등부 장관 후보 자진 사퇴 ↗",
+      "source": "YouTube · 연합뉴스 Yonhapnews",
+      "thumbnail": "https://i.ytimg.com/vi/Fif_r8pnjlE/hqdefault.jpg"
     }
   },
   {
@@ -328,76 +350,116 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     }
   },
   {
-    "id": "2026-09-17-ppp-han-jang-after-yong-resignation",
+    "id": "2026-09-17-global-ai-safety",
+    "date": "2026-09-17",
+    "category": "AI·기술",
+    "author": "이명훈",
+    "type": "기사",
+    "title": "유엔·EU, 프런티어 AI 안전 국제조정 압박…인프라 경쟁과 규범 경쟁 동시 진행",
+    "summary": "프런티어 AI 경쟁이 모델 성능만의 경쟁에서 안전평가·보안·전력·데이터센터·자본비용을 동시에 관리하는 경쟁으로 이동하고 있다. 국제 안전기준과 2GW급 인프라 투자가 같은 시기에 부각된 것은 규범과 컴퓨트가 하나의 산업조건으로 결합되고 있다는 신호다.",
+    "href": "./articles/2026-09-17-global-ai-safety.html",
+    "keywords": "유엔 EU 프런티어 AI 안전 데이터센터 Anthropic 규제",
+    "publishedAt": "2026-09-17T06:33:37+09:00",
+    "modifiedAt": "2026-09-17T13:19:53+09:00",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=pfkty58uZ1E",
+      "youtubeId": "pfkty58uZ1E",
+      "title": "Artificial Intelligence: “What we do with it is now up to all of us” ↗",
+      "source": "YouTube · United Nations",
+      "thumbnail": "https://i.ytimg.com/vi/pfkty58uZ1E/hqdefault.jpg"
+    }
+  },
+  {
+    "id": "2026-09-17-north-korea-liaison-damages",
+    "date": "2026-09-17",
+    "category": "법·정책",
+    "author": "이명훈",
+    "type": "기사",
+    "title": "법원, 북한에 연락사무소 폭파 446억원 배상 명령…집행은 별도 문제",
+    "summary": "서울중앙지법이 남북공동연락사무소 폭파에 대해 북한의 손해배상 책임을 인정했다. 그러나 1심의 책임 인정, 판결 확정, 집행대상 재산의 특정, 실제 회수는 서로 다른 단계다. 이번 판결의 실질적 의미는 그 간극을 어떻게 다루는지에 있다.",
+    "href": "./articles/2026-09-17-north-korea-liaison-damages.html",
+    "keywords": "북한 남북공동연락사무소 446억원 손해배상 서울중앙지법 1심",
+    "publishedAt": "2026-09-17T06:33:10+09:00",
+    "modifiedAt": "2026-09-17T13:19:25+09:00",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=w-6IxnZ_R5s",
+      "youtubeId": "w-6IxnZ_R5s",
+      "title": "“연락사무소 폭파 北, 정부에 446억 배상해야” 관련 보도 ↗",
+      "source": "YouTube · MBCNEWS",
+      "thumbnail": "https://i.ytimg.com/vi/w-6IxnZ_R5s/hqdefault.jpg"
+    }
+  },
+  {
+    "id": "2026-09-17-abortion-medication-policy",
+    "date": "2026-09-17",
+    "category": "사회",
+    "author": "이명훈",
+    "type": "기사",
+    "title": "임신중지 약물 제도권 도입 추진…초기 2년 의료기관 처방·조제",
+    "summary": "정부가 임신중지 약물을 공식 의료체계 안으로 들이는 방안을 추진한다. 초기 2년은 의료기관 처방·조제를 중심으로 운영하고 안전성을 확인한 뒤 확대 여부를 검토하는 방향이다. 핵심은 약물의 도입 자체보다 허가·처방·상담·응급대응·사후관리의 연결이다.",
+    "href": "./articles/2026-09-17-abortion-medication-policy.html",
+    "keywords": "임신중지 약물 의료기관 처방 조제 보건복지부 식약처",
+    "publishedAt": "2026-09-17T06:32:59+09:00",
+    "modifiedAt": "2026-09-17T13:18:54+09:00",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=TQyAfxt2PK8",
+      "youtubeId": "TQyAfxt2PK8",
+      "title": "임신중지 약물 허가 논의와 안전기준 관련 보도 ↗",
+      "source": "YouTube · KBS News",
+      "thumbnail": "https://i.ytimg.com/vi/TQyAfxt2PK8/hqdefault.jpg"
+    }
+  },
+  {
+    "id": "2026-09-17-fed-rate-hike",
+    "date": "2026-09-17",
+    "category": "경제·산업",
+    "author": "이명훈",
+    "type": "기사",
+    "title": "미 연준 25bp 인상…3.75~4.00%, 자본비용 다시 높아졌다",
+    "summary": "미 연방준비제도가 기준금리를 0.25%포인트 올려 3.75~4.00%로 조정했다. 중요한 것은 한 번의 인상보다 장기금리·달러·신용비용을 통해 기업투자와 한국 금융여건으로 전달되는 경로다.",
+    "href": "./articles/2026-09-17-fed-rate-hike.html",
+    "keywords": "연준 FOMC 금리 인상 3.75 4.00 미국 국채 달러",
+    "publishedAt": "2026-09-17T06:32:48+09:00",
+    "modifiedAt": "2026-09-17T13:18:26+09:00",
+    "video": {
+      "url": "https://www.youtube.com/watch?v=2fvMzWCC7iM",
+      "youtubeId": "2fvMzWCC7iM",
+      "title": "Fed Chair speaks after interest-rate decision ↗",
+      "source": "YouTube · The Hill",
+      "thumbnail": "https://i.ytimg.com/vi/2fvMzWCC7iM/hqdefault.jpg"
+    }
+  },
+  {
+    "id": "2026-09-17-terrorism-law-revision",
+    "date": "2026-09-17",
+    "category": "정부",
+    "author": "이명훈",
+    "type": "기사",
+    "title": "정부, 테러방지법 개정 추진…신종테러 대응과 인권절차 함께 보강",
+    "summary": "정부가 테러·테러단체 지정절차와 기관 간 역할을 정비하는 법 개정을 추진한다. 핵심은 대응권한의 확대 자체가 아니라 신종 위협에 대한 집행력과 기본권 보호절차를 같은 제도 안에서 어떻게 결합하느냐다.",
+    "href": "./articles/2026-09-17-terrorism-law-revision.html",
+    "keywords": "테러방지법 국가테러대책위원회 인권보호관 신종테러 정부",
+    "publishedAt": "2026-09-17T06:32:34+09:00",
+    "modifiedAt": "2026-09-17T08:57:54+09:00"
+  },
+  {
+    "id": "2026-09-17-us-investment-briefing-delay",
     "date": "2026-09-17",
     "category": "정치",
     "author": "이명훈",
     "type": "기사",
-    "title": "용혜인 사퇴 뒤 국힘 지표 반등…한동훈·장동혁 관계는 별도 변수",
-    "summary": "용혜인 성평등가족부 장관 후보자 사퇴와 개각 논란 뒤 국민의힘 지지도가 오른 조사가 나왔지만, 조사별 정당 지지도는 크게 엇갈렸다. 단기 반사이익이 확인된 것과 한동훈 의원·장동혁 지도부의 관계가 안정된 것은 같은 문제가 아니다.",
-    "href": "./articles/2026-09-17-ppp-han-jang-after-yong-resignation.html",
-    "keywords": "용혜인 사퇴 뒤 국힘 지표 반등…한동훈·장동혁 관계는 별도 변수 정치",
-    "publishedAt": "2026-09-17T12:33:05+09:00",
-    "modifiedAt": "2026-09-17T13:26:49+09:00",
+    "title": "대미 3,500억달러 투자계획 국회 설명 연기…세부조건 협상 계속",
+    "summary": "정부가 예정됐던 국회 설명 연기를 요청하면서 한미 투자합의는 총액보다 산업별 배분과 지배구조·손익분담을 확정하는 단계가 남았다. 이제 판단의 중심은 ‘얼마를 투자하느냐’보다 ‘어떤 권리와 위험을 조건으로 집행하느냐’에 있다.",
+    "href": "./articles/2026-09-17-us-investment-briefing-delay.html",
+    "keywords": "대미 투자 3500억달러 국회 설명 조선 원전 한미 통상",
+    "publishedAt": "2026-09-17T06:32:20+09:00",
+    "modifiedAt": "2026-09-17T13:17:55+09:00",
     "video": {
-      "url": "https://www.youtube.com/watch?v=Fif_r8pnjlE",
-      "youtubeId": "Fif_r8pnjlE",
-      "title": "결국 고개숙인 용혜인…14일만에 성평등부 장관 후보 자진 사퇴 ↗",
-      "source": "YouTube · 연합뉴스 Yonhapnews",
-      "thumbnail": "https://i.ytimg.com/vi/Fif_r8pnjlE/hqdefault.jpg"
-    }
-  },
-  {
-    "id": "2026-09-17-lee-approval-decline-drivers",
-    "date": "2026-09-17",
-    "category": "정치",
-    "author": "이명훈",
-    "type": "기사",
-    "title": "이재명 지지율 하락, 한 가지 악재가 아니다…부동산·인사·민생 동시 압박",
-    "summary": "최근 한국갤럽·NBS·리얼미터는 조사 방식과 절대 수치가 달라도 이재명 대통령 국정평가가 하락하는 방향을 공통적으로 보여줬다. 원인을 하나의 사건으로 단정하기보다 부동산 정책, 인사 논란, 경제·민생 평가가 서로 겹치는 구조로 보는 편이 데이터에 가깝다.",
-    "href": "./articles/2026-09-17-lee-approval-decline-drivers.html",
-    "keywords": "이재명 지지율 하락, 한 가지 악재가 아니다…부동산·인사·민생 동시 압박 정치",
-    "publishedAt": "2026-09-17T12:33:32+09:00",
-    "modifiedAt": "2026-09-17T21:41:52+09:00"
-  },
-  {
-    "id": "2026-09-17-lisa-global-ip-expansion",
-    "date": "2026-09-17",
-    "category": "글로벌·컬처",
-    "author": "이명훈",
-    "type": "기사",
-    "title": "리사 다큐 TIFF 공개…K-pop 스타가 글로벌 IP로 확장되는 경로",
-    "summary": "BLACKPINK 리사의 다큐멘터리 'Always Lalisa'가 TIFF에서 공개된 뒤 10월 글로벌 극장·IMAX 상영과 이후 YouTube Premium 공개를 앞두고 있다. 핵심은 한 K-pop 스타의 기록물이 아니라 음악·영화·연기·브랜드·플랫폼이 하나의 글로벌 IP 구조로 결합되는 방식이다.",
-    "href": "./articles/2026-09-17-lisa-global-ip-expansion.html",
-    "keywords": "리사 다큐 TIFF 공개…K-pop 스타가 글로벌 IP로 확장되는 경로 글로벌·컬처",
-    "publishedAt": "2026-09-17T12:46:14+09:00",
-    "modifiedAt": "2026-09-17T13:20:23+09:00",
-    "video": {
-      "url": "https://www.youtube.com/watch?v=i14VRcuBy9k",
-      "youtubeId": "i14VRcuBy9k",
-      "title": "ALWAYS LALISA with Sue Kim and Lalisa Manobal | TIFF 2026 ↗",
-      "source": "YouTube · TIFF",
-      "thumbnail": "https://i.ytimg.com/vi/i14VRcuBy9k/hqdefault.jpg"
-    }
-  },
-  {
-    "id": "2026-09-17-aichi-nagoya-asian-games-culture",
-    "date": "2026-09-17",
-    "category": "글로벌·컬처",
-    "author": "이명훈",
-    "type": "기사",
-    "title": "아이치·나고야 아시안게임 개막 임박…스포츠 축제와 종목 구조가 함께 바뀐다",
-    "summary": "2026 아이치·나고야 아시안게임은 9월 19일 개막을 앞두고 있다. 관중 없이 치러졌던 도쿄올림픽 이후 일본이 처음 맞는 대형 관중형 국제종합대회라는 점과 e스포츠·가상태권도·패들 등 종목 변화, 대규모 운영 실험이 핵심이다.",
-    "href": "./articles/2026-09-17-aichi-nagoya-asian-games-culture.html",
-    "keywords": "아이치·나고야 아시안게임 개막 임박…스포츠 축제와 종목 구조가 함께 바뀐다 글로벌·컬처",
-    "publishedAt": "2026-09-17T12:46:49+09:00",
-    "modifiedAt": "2026-09-17T13:20:54+09:00",
-    "video": {
-      "url": "https://www.youtube.com/watch?v=ySR_MIHMgyk",
-      "youtubeId": "ySR_MIHMgyk",
-      "title": "Asian Games Aichi-Nagoya 2026 — ROAD TO THE GAMES ↗",
-      "source": "YouTube · AsianGames_2026",
-      "thumbnail": "https://i.ytimg.com/vi/ySR_MIHMgyk/hqdefault.jpg"
+      "url": "https://www.youtube.com/watch?v=AdFKaNStsSM",
+      "youtubeId": "AdFKaNStsSM",
+      "title": "대미투자 발표 연기·한미 현안 관련 JTBC 뉴스룸 ↗",
+      "source": "YouTube · JTBC News",
+      "thumbnail": "https://i.ytimg.com/vi/AdFKaNStsSM/hqdefault.jpg"
     }
   },
   {
@@ -479,56 +541,17 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "modifiedAt": "2026-09-16T14:16:33+09:00"
   },
   {
-    "id": "2026-09-15-nhrck-defense-rights-repeal-agenda",
+    "id": "2026-09-15-korea-central-asia-ai-science-ministers",
     "date": "2026-09-15",
-    "category": "정치",
+    "category": "AI·기술",
     "author": "이명훈",
     "type": "기사",
-    "title": "인권위, 윤 전 대통령 방어권 권고 폐기안 정식 상정…결론은 아직",
-    "summary": "국가인권위원회가 지난해 윤석열 전 대통령 탄핵 국면에서 의결한 방어권 보장 권고를 폐기하고 대국민 사과를 하자는 안건을 정식 상정했다. 다만 14일 회의에서는 최종 의결까지 가지 못해 현재 상태는 ‘재검토 절차 개시’에 가깝다.",
-    "href": "./articles/2026-09-15-nhrck-defense-rights-repeal-agenda.html",
-    "keywords": "국가인권위원회 윤석열 방어권 권고 폐기 대국민 사과 전원위원회",
-    "publishedAt": "2026-09-15T08:43:10+09:00",
-    "modifiedAt": "2026-09-16T14:16:14+09:00"
-  },
-  {
-    "id": "2026-09-15-korea-adb-critical-minerals-energy",
-    "date": "2026-09-15",
-    "category": "정부",
-    "author": "이명훈",
-    "type": "기사",
-    "title": "정부, ADB와 핵심광물·AI·원전 협력 확대…중앙아 사업 발굴 추진",
-    "summary": "한국 정부와 아시아개발은행이 중앙아시아를 포함한 아시아·태평양 지역의 핵심광물·AI·원전 및 에너지 인프라 협력을 논의했다. 외교적 협력 의제가 실제 사업이 되려면 기술보다 먼저 사업구조·금융·계약·현지 위험을 연결해야 한다.",
-    "href": "./articles/2026-09-15-korea-adb-critical-minerals-energy.html",
-    "keywords": "정부 ADB 중앙아시아 핵심광물 원전 에너지 AI 공급망 개발금융",
-    "publishedAt": "2026-09-15T08:43:24+09:00",
-    "modifiedAt": "2026-09-16T14:15:17+09:00"
-  },
-  {
-    "id": "2026-09-15-kospi-ai-mideast-selloff",
-    "date": "2026-09-15",
-    "category": "경제·산업",
-    "author": "이명훈",
-    "type": "기사",
-    "title": "코스피 3.26% 급락…중동 불안과 AI 투자 경계가 동시에 흔들었다",
-    "summary": "코스피가 14일 6,684.37로 3.26% 하락했다. 이번 급락은 단일 악재보다 유가·금리·환율·AI 투자 기대가 동시에 재가격된 결과에 가깝다. 하루의 낙폭보다 어떤 위험이 며칠 이상 지속되는지를 구분해 보는 것이 중요하다.",
-    "href": "./articles/2026-09-15-kospi-ai-mideast-selloff.html",
-    "keywords": "코스피 중동 유가 금리 AI 기술주 외국인 기관 환율 증시",
-    "publishedAt": "2026-09-15T08:43:38+09:00",
-    "modifiedAt": "2026-09-16T14:15:54+09:00"
-  },
-  {
-    "id": "2026-09-15-college-application-system-relief",
-    "date": "2026-09-15",
-    "category": "사회",
-    "author": "이명훈",
-    "type": "기사",
-    "title": "대입 수시 원서접수 장애 후속조치…미접수 수험생 구제절차 마련",
-    "summary": "2027학년도 수시 원서접수 장애는 단순한 웹서비스 오류가 아니라 마감시각·경쟁률·지원기회가 결합된 고위험 행정서비스 사고다. 구제의 공정성을 확보하는 동시에 다음 입시에서 같은 장애가 발생해도 지원권이 흔들리지 않는 복구체계를 만드는 것이 핵심이다.",
-    "href": "./articles/2026-09-15-college-application-system-relief.html",
-    "keywords": "수시 원서접수 장애 대교협 교육부 수험생 구제 대학 입시 교육",
-    "publishedAt": "2026-09-15T08:43:51+09:00",
-    "modifiedAt": "2026-09-16T14:14:40+09:00"
+    "title": "한·중앙아 5개국 첫 AI·과학기술 장관회의…협력축 넓어진다",
+    "summary": "한국과 중앙아시아 5개국이 처음으로 AI·과학기술 장관급 협력 틀을 만들었다. 회의의 전략적 가치는 선언보다 국가별 문제를 데이터·실증·재원·현지 운영체계와 연결해 반복 가능한 사업으로 만드는 데 있다.",
+    "href": "./articles/2026-09-15-korea-central-asia-ai-science-ministers.html",
+    "keywords": "한국 중앙아시아 AI 과학기술 장관회의 기후기술 GGGI 인공지능",
+    "publishedAt": "2026-09-15T08:44:16+09:00",
+    "modifiedAt": "2026-09-16T14:15:35+09:00"
   },
   {
     "id": "2026-09-15-itaewon-special-act-extension",
@@ -544,43 +567,56 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     "modifiedAt": "2026-09-16T14:14:58+09:00"
   },
   {
-    "id": "2026-09-15-korea-central-asia-ai-science-ministers",
+    "id": "2026-09-15-college-application-system-relief",
     "date": "2026-09-15",
-    "category": "AI·기술",
+    "category": "사회",
     "author": "이명훈",
     "type": "기사",
-    "title": "한·중앙아 5개국 첫 AI·과학기술 장관회의…협력축 넓어진다",
-    "summary": "한국과 중앙아시아 5개국이 처음으로 AI·과학기술 장관급 협력 틀을 만들었다. 회의의 전략적 가치는 선언보다 국가별 문제를 데이터·실증·재원·현지 운영체계와 연결해 반복 가능한 사업으로 만드는 데 있다.",
-    "href": "./articles/2026-09-15-korea-central-asia-ai-science-ministers.html",
-    "keywords": "한국 중앙아시아 AI 과학기술 장관회의 기후기술 GGGI 인공지능",
-    "publishedAt": "2026-09-15T08:44:16+09:00",
-    "modifiedAt": "2026-09-16T14:15:35+09:00"
+    "title": "대입 수시 원서접수 장애 후속조치…미접수 수험생 구제절차 마련",
+    "summary": "2027학년도 수시 원서접수 장애는 단순한 웹서비스 오류가 아니라 마감시각·경쟁률·지원기회가 결합된 고위험 행정서비스 사고다. 구제의 공정성을 확보하는 동시에 다음 입시에서 같은 장애가 발생해도 지원권이 흔들리지 않는 복구체계를 만드는 것이 핵심이다.",
+    "href": "./articles/2026-09-15-college-application-system-relief.html",
+    "keywords": "수시 원서접수 장애 대교협 교육부 수험생 구제 대학 입시 교육",
+    "publishedAt": "2026-09-15T08:43:51+09:00",
+    "modifiedAt": "2026-09-16T14:14:40+09:00"
   },
   {
-    "id": "2026-09-14-foreign-espionage-law",
-    "date": "2026-09-14",
-    "category": "법·정책",
+    "id": "2026-09-15-kospi-ai-mideast-selloff",
+    "date": "2026-09-15",
+    "category": "경제·산업",
     "author": "이명훈",
     "type": "기사",
-    "title": "형법에 ‘외국 등을 위한 간첩’ 신설…국가기밀 보호 범위 넓어졌다",
-    "summary": "9월 13일부터 형법 제98조의2가 시행되면서 외국 또는 이에 준하는 단체의 지령·사주·의사 연락 아래 국가기밀을 탐지·수집·누설·전달·중개하는 행위가 별도의 간첩죄 구성요건으로 규율된다. 기업과 연구기관에는 ‘무조건 보안을 강화하라’는 추상적 대응보다 정보 분류와 접근·반출 기록을 실제 증거체계로 만드는 일이 중요해졌다.",
-    "href": "./articles/2026-09-14-foreign-espionage-law.html",
-    "keywords": "형법 간첩 외국 국가기밀 산업기술 기술유출 형사법",
-    "publishedAt": "2026-09-14T09:07:35+09:00",
-    "modifiedAt": "2026-09-16T14:14:02+09:00"
+    "title": "코스피 3.26% 급락…중동 불안과 AI 투자 경계가 동시에 흔들었다",
+    "summary": "코스피가 14일 6,684.37로 3.26% 하락했다. 이번 급락은 단일 악재보다 유가·금리·환율·AI 투자 기대가 동시에 재가격된 결과에 가깝다. 하루의 낙폭보다 어떤 위험이 며칠 이상 지속되는지를 구분해 보는 것이 중요하다.",
+    "href": "./articles/2026-09-15-kospi-ai-mideast-selloff.html",
+    "keywords": "코스피 중동 유가 금리 AI 기술주 외국인 기관 환율 증시",
+    "publishedAt": "2026-09-15T08:43:38+09:00",
+    "modifiedAt": "2026-09-16T14:15:54+09:00"
   },
   {
-    "id": "2026-09-14-fengzhen-min-isds-win",
-    "date": "2026-09-14",
-    "category": "법·정책",
+    "id": "2026-09-15-korea-adb-critical-minerals-energy",
+    "date": "2026-09-15",
+    "category": "정부",
     "author": "이명훈",
     "type": "기사",
-    "title": "정부, 중국 투자자 ISDS 취소절차 승소…원 중재 승소 판정 확정",
-    "summary": "중국 투자자 펑전 민이 한국 정부를 상대로 제기한 ISDS 판정 취소신청이 전부 기각됐다. 약 2조 원에서 시작된 배상청구의 재정위험은 정리됐지만, 더 중요한 과제는 같은 유형의 분쟁을 정책 수립 단계에서 줄이는 체계를 만드는 것이다.",
-    "href": "./articles/2026-09-14-fengzhen-min-isds-win.html",
-    "keywords": "정부 중국 투자자 ISDS 국제투자분쟁 ICSID 중재 법무부",
-    "publishedAt": "2026-09-14T09:08:02+09:00",
-    "modifiedAt": "2026-09-16T14:13:45+09:00"
+    "title": "정부, ADB와 핵심광물·AI·원전 협력 확대…중앙아 사업 발굴 추진",
+    "summary": "한국 정부와 아시아개발은행이 중앙아시아를 포함한 아시아·태평양 지역의 핵심광물·AI·원전 및 에너지 인프라 협력을 논의했다. 외교적 협력 의제가 실제 사업이 되려면 기술보다 먼저 사업구조·금융·계약·현지 위험을 연결해야 한다.",
+    "href": "./articles/2026-09-15-korea-adb-critical-minerals-energy.html",
+    "keywords": "정부 ADB 중앙아시아 핵심광물 원전 에너지 AI 공급망 개발금융",
+    "publishedAt": "2026-09-15T08:43:24+09:00",
+    "modifiedAt": "2026-09-16T14:15:17+09:00"
+  },
+  {
+    "id": "2026-09-15-nhrck-defense-rights-repeal-agenda",
+    "date": "2026-09-15",
+    "category": "정치",
+    "author": "이명훈",
+    "type": "기사",
+    "title": "인권위, 윤 전 대통령 방어권 권고 폐기안 정식 상정…결론은 아직",
+    "summary": "국가인권위원회가 지난해 윤석열 전 대통령 탄핵 국면에서 의결한 방어권 보장 권고를 폐기하고 대국민 사과를 하자는 안건을 정식 상정했다. 다만 14일 회의에서는 최종 의결까지 가지 못해 현재 상태는 ‘재검토 절차 개시’에 가깝다.",
+    "href": "./articles/2026-09-15-nhrck-defense-rights-repeal-agenda.html",
+    "keywords": "국가인권위원회 윤석열 방어권 권고 폐기 대국민 사과 전원위원회",
+    "publishedAt": "2026-09-15T08:43:10+09:00",
+    "modifiedAt": "2026-09-16T14:16:14+09:00"
   },
   {
     "id": "2026-09-14-supreme-court-nominee-hearing",
@@ -603,6 +639,45 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
     }
   },
   {
+    "id": "2026-09-14-fengzhen-min-isds-win",
+    "date": "2026-09-14",
+    "category": "법·정책",
+    "author": "이명훈",
+    "type": "기사",
+    "title": "정부, 중국 투자자 ISDS 취소절차 승소…원 중재 승소 판정 확정",
+    "summary": "중국 투자자 펑전 민이 한국 정부를 상대로 제기한 ISDS 판정 취소신청이 전부 기각됐다. 약 2조 원에서 시작된 배상청구의 재정위험은 정리됐지만, 더 중요한 과제는 같은 유형의 분쟁을 정책 수립 단계에서 줄이는 체계를 만드는 것이다.",
+    "href": "./articles/2026-09-14-fengzhen-min-isds-win.html",
+    "keywords": "정부 중국 투자자 ISDS 국제투자분쟁 ICSID 중재 법무부",
+    "publishedAt": "2026-09-14T09:08:02+09:00",
+    "modifiedAt": "2026-09-16T14:13:45+09:00"
+  },
+  {
+    "id": "2026-09-14-foreign-espionage-law",
+    "date": "2026-09-14",
+    "category": "법·정책",
+    "author": "이명훈",
+    "type": "기사",
+    "title": "형법에 ‘외국 등을 위한 간첩’ 신설…국가기밀 보호 범위 넓어졌다",
+    "summary": "9월 13일부터 형법 제98조의2가 시행되면서 외국 또는 이에 준하는 단체의 지령·사주·의사 연락 아래 국가기밀을 탐지·수집·누설·전달·중개하는 행위가 별도의 간첩죄 구성요건으로 규율된다. 기업과 연구기관에는 ‘무조건 보안을 강화하라’는 추상적 대응보다 정보 분류와 접근·반출 기록을 실제 증거체계로 만드는 일이 중요해졌다.",
+    "href": "./articles/2026-09-14-foreign-espionage-law.html",
+    "keywords": "형법 간첩 외국 국가기밀 산업기술 기술유출 형사법",
+    "publishedAt": "2026-09-14T09:07:35+09:00",
+    "modifiedAt": "2026-09-16T14:14:02+09:00"
+  },
+  {
+    "id": "2026-09-13-fema-workforce-ruling",
+    "date": "2026-09-13",
+    "category": "정부",
+    "author": "이명훈",
+    "type": "기사",
+    "title": "미 연방법원, FEMA 인력 절반 감축 추진에 위법 판단",
+    "summary": "미 연방법원은 국토안보부가 FEMA 인력운영을 통제하며 대규모 감축을 추진한 과정이 연방법상 한계를 넘었다고 판단했다. 쟁점은 인력감축 자체의 찬반보다 법정 재난대응 기능을 어떤 최소역량으로 유지하면서 조직을 개편할 수 있는가에 있다.",
+    "href": "./articles/2026-09-13-fema-workforce-ruling.html",
+    "keywords": "미국 연방법원 FEMA 연방재난관리청 인력 감축 재난 대응 정부",
+    "publishedAt": "2026-09-13T20:38:00+09:00",
+    "modifiedAt": "2026-09-16T14:13:06+09:00"
+  },
+  {
     "id": "2026-09-13-saudi-energy-route-risk",
     "date": "2026-09-13",
     "category": "경제·산업",
@@ -621,18 +696,5 @@ window.YEHAVHA_NEWS_DATA = Object.freeze([
       "source": "YouTube · Reuters",
       "thumbnail": "https://i.ytimg.com/vi/vGN9dnO-iRk/hqdefault.jpg"
     }
-  },
-  {
-    "id": "2026-09-13-fema-workforce-ruling",
-    "date": "2026-09-13",
-    "category": "정부",
-    "author": "이명훈",
-    "type": "기사",
-    "title": "미 연방법원, FEMA 인력 절반 감축 추진에 위법 판단",
-    "summary": "미 연방법원은 국토안보부가 FEMA 인력운영을 통제하며 대규모 감축을 추진한 과정이 연방법상 한계를 넘었다고 판단했다. 쟁점은 인력감축 자체의 찬반보다 법정 재난대응 기능을 어떤 최소역량으로 유지하면서 조직을 개편할 수 있는가에 있다.",
-    "href": "./articles/2026-09-13-fema-workforce-ruling.html",
-    "keywords": "미국 연방법원 FEMA 연방재난관리청 인력 감축 재난 대응 정부",
-    "publishedAt": "2026-09-13T20:38:00+09:00",
-    "modifiedAt": "2026-09-16T14:13:06+09:00"
   }
 ]);
