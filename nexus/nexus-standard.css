@@ -219,11 +219,8 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
   .home-biff-description{font-size:10.8px}
 }
 
-
 /* NEXUS six-gate information architecture v1 */
-.home-global-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:12px 0 14px}
-.home-global-nav a,.home-global-nav button{display:flex;align-items:center;justify-content:center;min-height:42px;padding:0 12px;border:1px solid var(--portal-line);border-radius:9px;background:#fff;color:var(--portal-text);font:inherit;font-size:13.5px;font-weight:850;letter-spacing:.035em;text-decoration:none;cursor:pointer}
-.home-global-nav a:hover,.home-global-nav a:focus-visible,.home-global-nav button:hover,.home-global-nav button:focus-visible{background:var(--portal-soft);border-color:#aeb8c5;outline:none}
+
 .global-search-panel{margin:0 0 14px}
 .global-search-panel[hidden]{display:none!important}
 .global-search-panel .portal-search{border-left:4px solid var(--nxs-accent-system)}
@@ -262,13 +259,11 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
   .nexus-gate-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:560px){
-  .home-global-nav{gap:5px}
-  .home-global-nav a,.home-global-nav button{min-height:39px;padding:0 7px;font-size:12.2px;letter-spacing:0}
+
   .nexus-gate-grid{grid-template-columns:1fr}
   .nexus-gate-card{min-height:104px;padding:12px 13px}
   .nexus-gate-card>strong{font-size:18px}
 }
-
 
 /* NEXUS gate visual refinement and spacing normalization v2 */
 :root{
@@ -379,7 +374,6 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
   .nexus-gate-icon svg{width:20px;height:20px}
 }
 
-
 /* NEXUS gate card icon layout v3 */
 /* Integrated icon/content layout: icon occupies a stable visual column instead of floating alone. */
 .nexus-gate-zone{padding-bottom:2px;margin-bottom:-8px}
@@ -438,34 +432,4 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
   .nexus-gate-icon{width:42px;height:42px;border-radius:12px}
   .nexus-gate-icon svg{width:22px;height:22px}
   .nexus-gate-card>strong{font-size:18px}
-}
-
-
-/* Dedicated NEXUS gate pages — canonical styles consolidated here */
-.gate-page{background:#fff}
-.gate-page .hero{padding-bottom:10px}
-.gate-page .hero-card{padding:22px 24px 20px}
-.gate-brandline{margin:0;color:#225f96;font-size:13px;font-weight:850;letter-spacing:-.01em;line-height:1.35}
-.gate-brand-title{margin:3px 0 0;color:#111;font-size:clamp(2rem,4.5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.045em}
-.gate-page .home-global-nav{margin:14px 0 0}
-.gate-lead{width:min(1160px,calc(100% - 32px));margin:8px auto 0;padding:18px 20px;border:1px solid var(--portal-line);border-left:5px solid var(--nxs-accent-system);border-radius:14px;background:linear-gradient(135deg,#f7fafc 0%,#fff 65%)}
-.gate-lead-number{display:block;margin-bottom:5px;color:#6b7280;font-size:11px;font-weight:900;letter-spacing:.12em}
-.gate-lead h1{margin:0;color:#111;font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.15;letter-spacing:-.045em}
-.gate-lead p{max-width:880px;margin:8px 0 0;color:#4b5563;font-size:14px;line-height:1.65}
-.gate-projects{padding:18px 0 38px}
-.gate-projects .portal-grid{gap:18px!important}
-.gate-projects .portal-tier-head{display:none}
-.gate-projects .portal-tier{gap:14px}
-.gate-projects .portal-tier-grid{gap:14px}
-.gate-projects .category-card{box-shadow:0 4px 14px rgba(0,0,0,.035)}
-.gate-empty{padding:26px;border:1px solid var(--portal-line);border-radius:14px;background:#fff}
-.gate-empty h2{margin:0 0 7px;font-size:1.35rem}
-.gate-empty p{margin:0;color:#4b5563;line-height:1.65}
-.gate-page[data-gate="legal-policy"] .gate-lead{border-left-color:#8a4f57;background:linear-gradient(135deg,#fff4f5 0%,#fff 65%)}
-.gate-page[data-gate="research-education"] .gate-lead{border-left-color:#557369;background:linear-gradient(135deg,#eff8f4 0%,#fff 65%)}
-.gate-page[data-gate="resources-services"] .gate-lead{border-left-color:#5a6f7d;background:linear-gradient(135deg,#f1f5f7 0%,#fff 65%)}
-@media(max-width:700px){
-  .gate-page .hero-card{padding:18px 16px 16px}
-  .gate-lead{width:calc(100% - 20px);padding:15px 16px}
-  .gate-projects{padding-top:14px}
 }
