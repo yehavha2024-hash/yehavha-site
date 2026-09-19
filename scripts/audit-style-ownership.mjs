@@ -162,10 +162,19 @@ if (exists('nexus/portal-v2.css')) {
   for (const selector of ['.home-global-nav', '.gate-brandline', '.gate-lead']) {
     if (!sharedCss.includes(selector)) fail('nexus/portal-v2.css', `공통 Gate shell 규칙 누락: ${selector}`);
   }
+  if (/\.item-card\s+h3::before\s*\{[^}]*display\s*:\s*none/i.test(sharedCss)) {
+    fail('nexus/portal-v2.css', '단일 프로젝트 카드의 제목 마른모를 공통 shell에서 숨기면 안 됨');
+  }
 }
 if (exists('nexus/nexus-standard.css')) {
   const mainCss = read('nexus/nexus-standard.css');
   if (mainCss.includes('.home-global-nav')) fail('nexus/nexus-standard.css', '공통 상단 내비게이션이 메인 전용 CSS에 중복 소유됨');
+  for (const token of ['--nxs-card-gap:', '--nxs-section-gap:', '--nxs-card-pad:', '/* NEXUS card rhythm and typography standard v1 */']) {
+    if (!mainCss.includes(token)) fail('nexus/nexus-standard.css', `NEXUS 카드 규격 기준 누락: ${token}`);
+  }
+  if (!/\.item-card\s+h3::before\s*\{[^}]*display\s*:\s*block!important/i.test(mainCss)) {
+    fail('nexus/nexus-standard.css', '프로젝트 카드 제목 마른모 공통 규칙 누락');
+  }
 }
 
 if (exists('nexus/projects.json')) {
