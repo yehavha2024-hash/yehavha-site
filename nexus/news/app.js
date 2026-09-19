@@ -25,6 +25,8 @@
     categoryGrid: document.getElementById('categoryLatestGrid'),
     archiveMonth: document.getElementById('archiveMonth'),
     archiveDates: document.getElementById('archiveDates'),
+    opinionMeta: document.getElementById('opinionMeta'),
+    opinionList: document.getElementById('opinionList'),
     status: document.getElementById('newsStatus'),
     weather: document.getElementById('weatherContent')
   };
@@ -326,9 +328,23 @@
     announce(`${heading} ${results.length}건`);
   }
 
+  function renderOpinionList() {
+    if (!els.opinionList) return;
+    const maxItems = Math.max(1, Number(els.opinionList.dataset.maxItems) || 10);
+    const cards = [...els.opinionList.querySelectorAll(':scope > .opinion-feature')]
+      .sort((a, b) => String(b.dataset.published || '').localeCompare(String(a.dataset.published || '')));
+    cards.forEach((card, index) => {
+      card.hidden = index >= maxItems;
+      els.opinionList.append(card);
+    });
+    const visibleCount = Math.min(cards.length, maxItems);
+    if (els.opinionMeta) els.opinionMeta.textContent = `최신 논평 ${visibleCount}건`;
+  }
+
   function renderHome() {
     renderLatest();
     renderCategoryLatest();
+    renderOpinionList();
     renderArchiveMonthOptions();
   }
 
