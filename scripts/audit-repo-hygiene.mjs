@@ -140,26 +140,12 @@ function auditWorkflowPermissions() {
     if (!/^\s*queue:\s*max\s*$/m.test(source)) {
       error(`.github/workflows/${file}`, '쓰기 workflow가 다중 pending queue를 보존하지 않음(queue: max 필요)');
     }
-    if (/git\s+commit\b/.test(source) || /git\s+push\b/.test(source)) {
-      error(`.github/workflows/${file}`, 'workflow 내부 직접 git commit/push 금지: safe-content-commit.sh만 사용');
+    if (/git\s+(?:add|commit|push)\b/.test(source)) {
+      error(`.github/workflows/${file}`, 'workflow 내부 직접 git add/commit/push 금지: safe-content-commit.sh만 사용');
     }
 
     for (const token of policy.required) {
       if (!source.includes(token)) error(`.github/workflows/${file}`, `승인된 write 대상 명령 누락: ${token}`);
-    }
-    if (/git\s+add\s+(?:-A|--all|\.)\b/.test(source) || /git\s+commit\s+-a\b/.test(source) || /git\s+push\s+[^\n]*(?:--force|-f)\b/.test(source)) {
-      error(`.github/workflows/${file}`, 'write workflow가 광범위 add/commit 또는 force push를 사용함');
-    }
-
-    for (const match of source.matchAll(/git\s+add\s+(?:--\s+)?([^\n]+)/g)) {
-      const addArgs = match[1].trim();
-      const tokens = addArgs.split(/\s+/).filter(Boolean);
-      for (const token of tokens) {
-        if (token.startsWith('-')) continue;
-        if (!policy.allowedPathTokens.some(allowed => token === allowed)) {
-          error(`.github/workflows/${file}`, `승인 범위를 벗어난 git add 대상: ${token}`);
-        }
-      }
     }
 
     for (const match of source.matchAll(/safe-content-commit\.sh\s+"[^"]+"\s+([^\n]+)/g)) {
@@ -348,6 +334,7 @@ function auditStandardsDrift() {
     if (!source.includes('node scripts/audit-business-footer.mjs')) error(architectureWorkflow, 'Footer canonical 감사 실행 누락');
     if (!source.includes('node scripts/audit-repo-hygiene.mjs')) error(architectureWorkflow, '저장소 위생 감사 실행 누락');
     if (!source.includes('node scripts/audit-style-ownership.mjs')) error(architectureWorkflow, 'CSS 소유권 감사 실행 누락');
+    if (!source.includes('node nexus/scripts/audit-news-quality.mjs')) error(architectureWorkflow, 'NEWS 품질 감사 실행 누락');
   }
 }
 
