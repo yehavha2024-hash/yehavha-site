@@ -159,6 +159,9 @@ if (exists(lifeGatePage)) {
 
 if (exists('nexus/portal-v2.css')) {
   const sharedCss = read('nexus/portal-v2.css');
+  if (sharedCss.includes('Canonical dedicated Gate typography and compact lead')) {
+    fail('nexus/portal-v2.css', 'Gate shell 뒤에 별도 typography override layer가 다시 추가됨');
+  }
   for (const selector of ['.home-global-nav', '.gate-brandline', '.gate-lead']) {
     if (!sharedCss.includes(selector)) fail('nexus/portal-v2.css', `공통 Gate shell 규칙 누락: ${selector}`);
   }
@@ -169,6 +172,16 @@ if (exists('nexus/portal-v2.css')) {
 if (exists('nexus/nexus-standard.css')) {
   const mainCss = read('nexus/nexus-standard.css');
   if (mainCss.includes('.home-global-nav')) fail('nexus/nexus-standard.css', '공통 상단 내비게이션이 메인 전용 CSS에 중복 소유됨');
+  if (!mainCss.includes('/* Canonical NEXUS six-gate architecture and card rhythm v4 */')) {
+    fail('nexus/nexus-standard.css', '6 Gate canonical presentation marker 누락');
+  }
+  for (const legacyMarker of [
+    'NEXUS six-gate information architecture v1',
+    'NEXUS gate visual refinement and spacing normalization v2',
+    'NEXUS gate card icon layout v3'
+  ]) {
+    if (mainCss.includes(legacyMarker)) fail('nexus/nexus-standard.css', `누적 덮어쓰기용 구형 CSS layer 잔존: ${legacyMarker}`);
+  }
   for (const token of ['--nxs-card-gap:', '--nxs-section-gap:', '--nxs-card-pad:', '/* NEXUS card rhythm and typography standard v1 */']) {
     if (!mainCss.includes(token)) fail('nexus/nexus-standard.css', `NEXUS 카드 규격 기준 누락: ${token}`);
   }
