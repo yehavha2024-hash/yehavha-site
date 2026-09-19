@@ -218,3 +218,53 @@ body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-appl
   .home-biff-copy strong{font-size:clamp(1.08rem,5.4vw,1.4rem)}
   .home-biff-description{font-size:10.8px}
 }
+
+
+/* NEXUS six-gate information architecture v1 */
+.home-global-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:12px 0 14px}
+.home-global-nav a,.home-global-nav button{display:flex;align-items:center;justify-content:center;min-height:42px;padding:0 12px;border:1px solid var(--portal-line);border-radius:9px;background:#fff;color:var(--portal-text);font:inherit;font-size:13.5px;font-weight:850;letter-spacing:.035em;text-decoration:none;cursor:pointer}
+.home-global-nav a:hover,.home-global-nav a:focus-visible,.home-global-nav button:hover,.home-global-nav button:focus-visible{background:var(--portal-soft);border-color:#aeb8c5;outline:none}
+.global-search-panel{margin:0 0 14px}
+.global-search-panel[hidden]{display:none!important}
+.global-search-panel .portal-search{border-left:4px solid var(--nxs-accent-system)}
+
+.nexus-gate-zone{margin-top:2px}
+.nexus-gate-intro{margin:0 0 11px;color:#4b5563;font-size:13px;line-height:1.6}
+.nexus-gate-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.nexus-gate-card{position:relative;display:flex;min-width:0;min-height:126px;flex-direction:column;justify-content:center;padding:14px 15px;border:1px solid var(--portal-line);border-left:4px solid var(--nxs-accent-system);border-radius:11px;background:#fff;color:var(--portal-text);text-decoration:none}
+.nexus-gate-card:hover,.nexus-gate-card:focus-visible{background:var(--portal-soft);border-color:#aeb8c5;outline:none}
+.nexus-gate-card>span{display:block;margin-bottom:5px;color:#68717b;font-size:10.2px;font-weight:850;letter-spacing:.085em;line-height:1.35}
+.nexus-gate-card>strong{display:block;font-size:19px;line-height:1.28;letter-spacing:-.03em}
+.nexus-gate-card>p{margin:6px 0 0;color:#4b5563;font-size:12.2px;line-height:1.45}
+.nexus-gate-card.gate-strategy{border-left-color:var(--nxs-accent-strategy)}
+.nexus-gate-card.gate-legal{border-left-color:var(--nxs-accent-legal)}
+.nexus-gate-card.gate-research{border-left-color:var(--nxs-accent-knowledge)}
+.nexus-gate-card.gate-life{border-left-color:var(--nxs-accent-learning)}
+.nexus-gate-card.gate-culture{border-left-color:var(--nxs-accent-invest)}
+.nexus-gate-card.gate-resources{border-left-color:var(--nxs-accent-publish)}
+.nexus-gate-more{display:flex;justify-content:flex-end;margin-top:9px}
+.nexus-gate-more a{color:#174f82;font-size:12px;font-weight:850;text-decoration:none}
+.nexus-gate-more a:hover{text-decoration:underline}
+.nexus-about-bottom{margin-top:34px}
+.nexus-about-bottom .description{margin:0;color:#111;font-size:16px;line-height:1.78}
+
+.portal-tier{scroll-margin-top:12px}
+.portal-tier-strategy-intelligence .tier-number::before{content:"✦"}
+.portal-tier-legal-policy .tier-number::before{content:"§"}
+.portal-tier-research-education .tier-number::before{content:"▰"}
+.portal-tier-life-action .tier-number::before{content:"✓"}
+.portal-tier-culture-media .tier-number::before{content:"◇"}
+.portal-tier-resources-services .tier-number::before{content:"▤"}
+.category-lifeaction{--category-accent:var(--nxs-accent-learning)}
+.category-lifeaction .category-icon{background:linear-gradient(145deg,#557369,#6e9185);border-color:#557369}
+
+@media(max-width:820px){
+  .nexus-gate-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:560px){
+  .home-global-nav{gap:5px}
+  .home-global-nav a,.home-global-nav button{min-height:39px;padding:0 7px;font-size:12.2px;letter-spacing:0}
+  .nexus-gate-grid{grid-template-columns:1fr}
+  .nexus-gate-card{min-height:104px;padding:12px 13px}
+  .nexus-gate-card>strong{font-size:18px}
+}
